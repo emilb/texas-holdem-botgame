@@ -1,0 +1,220 @@
+option java_package = "se.cygni.texasholdem.communication";
+option java_outer_classname = "ClientServer";
+option optimize_for = SPEED;
+option java_generic_services = true;
+
+/*
+ * Common types
+ */
+message Void {}
+
+message Ping {}
+
+enum ExceptionType {
+	NOT_IN_CORRECT_PLAY_STATE = 1;
+
+}
+
+message ExceptionEvent {
+	required ExceptionType exceptionType = 1;
+	optional string message = 2;
+}
+
+message Message {
+	required string message = 1;
+}
+
+enum Rank {
+	DEUCE = 1;
+    THREE = 2;
+    FOUR = 3;
+    FIVE = 4;
+    SIX = 5;
+    SEVEN = 6;
+    EIGHT = 7;
+    NINE = 8;
+    TEN = 9;
+    JACK = 10;
+    QUEEN = 11;
+    KING = 12;
+    ACE = 13;
+}
+
+enum Suit {
+	CLUBS = 1;
+    DIAMONDS = 2;
+    HEARTS = 3;
+    SPADES = 4;
+}
+
+message Card {
+	required Rank rank = 1;
+	required Suit suit = 2;
+}
+
+enum ActionType {
+	CHECK = 1;
+	FOLD = 2;
+	CALL = 3;
+	RAISE = 4;
+}
+
+message Action {
+	required ActionType actionType = 1;
+	optional fixed64 amount = 2;
+}
+
+message PossibleActions {
+	repeated Action actions = 1;
+}
+
+message NumericValue {
+	enum ValueFor {
+		CHIPS = 1;
+		POT = 2;
+	}
+
+	required ValueFor valueFor = 1;
+	required fixed64 value = 2;
+}
+
+enum State {
+	PRE_FLOP = 1;
+	FLOP = 2;
+	TURN = 3;
+	RIVER = 4;
+	SHOWDOWN = 5;
+	NOT_IN_PLAY = 9;
+}
+
+message Player {
+	required string name = 1;
+	required bool inPlay = 2;
+	required fixed64 chipCount = 3;
+}
+
+message Players {
+	repeated Player players = 1;
+}
+
+message PlayerWinAmount {
+	required Player player = 1;
+	required fixed64 winAmount = 2;
+}
+
+message PlayersWinAmount {
+	repeated PlayerWinAmount playersWinAmount = 1;
+}
+
+/*
+ * GameServer
+ */
+message MyChipAmountResponse{
+	required fixed64 amount = 1;
+	optional ExceptionEvent exception = 9;
+}
+
+message PotAmountResponse{
+	required fixed64 amount = 1;
+	optional ExceptionEvent exception = 9;
+}
+
+message PlayStateResponse{
+	required State state = 1;
+	optional ExceptionEvent exception = 9;
+}
+
+message PlayersResponse{
+	required Players players = 1;
+	optional ExceptionEvent exception = 9;
+}
+
+message DealerPlayerResponse{
+	required Player player = 1;
+	optional ExceptionEvent exception = 9;
+}
+
+message SmallBlindPlayerResponse{
+	required Player player = 1;
+	optional ExceptionEvent exception = 9;
+}
+
+message BigBlindPlayerResponse{
+	required Player player = 1;
+	optional ExceptionEvent exception = 9;
+}
+
+message CommunityCardsResponse{
+	repeated Card cards = 1;
+	optional ExceptionEvent exception = 9;
+}
+
+message MyCardsResponse{
+	repeated Card cards = 1;
+	optional ExceptionEvent exception = 9;
+}
+
+/*
+ * Player
+ */
+message PlayerFoldedEvent {
+	required Player player = 1;
+	required fixed64 investmentInPot = 2;
+}
+
+message PlayerCalledEvent {
+	required Player player = 1;
+	required fixed64 callBet = 2;
+}
+
+message PlayerRaisedEvent {
+	required Player player = 1;
+	required fixed64 callBet = 2;
+	required fixed64 raiseBet = 3;
+	required bool allIn = 4;
+}
+
+message PlayerCheckedEvent {
+	required Player player = 1;
+}
+
+message ShowDownEvent {
+	required PlayersWinAmount playersWinAmount = 1;
+}
+
+message PlayerWithdrewEvent {
+	required Player player = 1;
+}
+
+service GameService {
+	rpc ping(Void) returns (Ping);
+
+	rpc getMyChipAmount(Void) returns (MyChipAmountResponse);
+	rpc getPotAmount(Void) returns (PotAmountResponse);
+	rpc getPlayState(Void) returns (PlayStateResponse);
+	rpc getPlayers(Void) returns (PlayersResponse);
+	rpc getDealerPlayer(Void) returns (DealerPlayerResponse);
+	rpc getSmallBlindPlayer(Void) returns (SmallBlindPlayerResponse);
+	rpc getBigBlindPlayer(Void) returns (BigBlindPlayerResponse);
+	rpc getCommunityCards(Void) returns (CommunityCardsResponse);
+	rpc getMyCards(Void) returns (MyCardsResponse);
+
+}
+
+service PlayerService {
+	rpc ping(Void) returns (Ping);
+	rpc serverIsShuttingDown(Message) returns (Void);
+
+	rpc onPlayIsStarted(Players) returns (Void);
+	rpc onYouHaveBeenDealtACard(Card) returns (Void);
+	rpc onCommunityHasBeenDealtACard(Card) returns (Void);
+	rpc onPlayerFolded(Player) returns (Void);
+	rpc onPlayerCalled(PlayerCalledEvent) returns (Void);
+	rpc onPlayerRaised(PlayerRaisedEvent) returns (Void);
+	rpc onPlayerChecked(PlayerCheckedEvent) returns (Void);
+	rpc onShowDown(ShowDownEvent) returns (Void);
+	rpc onYouWonAmount(NumericValue) returns (Void);
+	rpc onPlayerWithdrew(PlayerWithdrewEvent) returns (Void);
+
+	rpc onYouMustAct(PossibleActions) returns (Action);
+}

@@ -179,6 +179,12 @@
 				<groupId>com.googlecode.protobuf.pro</groupId>
 				<artifactId>protobuf-rpc-pro-duplex</artifactId>
 				<version>1.1.0</version>
+				<exclusions>
+					<exclusion>
+						<artifactId>commons-logging</artifactId>
+						<groupId>commons-logging</groupId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>org.jboss.netty</groupId>
