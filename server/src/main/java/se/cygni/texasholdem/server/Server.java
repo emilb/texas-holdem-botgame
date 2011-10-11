@@ -8,12 +8,6 @@ import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import se.cygni.texasholdem.communication.ClientServer;
-import se.cygni.texasholdem.communication.ClientServer.Client.BlockingInterface;
-import se.cygni.texasholdem.communication.ClientServer.Message;
-
-import com.google.protobuf.RpcController;
-import com.google.protobuf.Service;
 import com.google.protobuf.ServiceException;
 import com.googlecode.protobuf.pro.duplex.CleanShutdownHandler;
 import com.googlecode.protobuf.pro.duplex.PeerInfo;
@@ -102,10 +96,10 @@ public class Server {
         bootstrap.registerConnectionEventListener(rpcEventNotifier);
 
         // Register Texas Service
-        final Service texasService = ClientServer.TexasHoldemServer
-                .newReflectiveService(new TexasHoldemServerImpl());
+        // final Service texasService = ClientServer.TexasHoldemServer
+        // .newReflectiveService(new TexasHoldemServerImpl());
 
-        bootstrap.getRpcServiceRegistry().registerService(texasService);
+        // bootstrap.getRpcServiceRegistry().registerService(texasService);
     }
 
     public void startServer() {
@@ -122,15 +116,15 @@ public class Server {
             return;
 
         log.debug("Sending msg to all clients");
-        final Message message = Message.newBuilder().setMessage(msg).build();
-
-        for (final RpcClientChannel channel : clients) {
-            final BlockingInterface clientService = ClientServer.Client
-                    .newBlockingStub(channel);
-            final RpcController clientController = channel.newRpcController();
-
-            clientService.serverIsShuttingDown(clientController, message);
-        }
+        // final Message message = Message.newBuilder().setMessage(msg).build();
+        //
+        // for (final RpcClientChannel channel : clients) {
+        // final BlockingInterface clientService = ClientServer.Client
+        // .newBlockingStub(channel);
+        // final RpcController clientController = channel.newRpcController();
+        //
+        // clientService.serverIsShuttingDown(clientController, message);
+        // }
     }
 
     /**
