@@ -10,7 +10,7 @@ import org.apache.commons.lang.ArrayUtils;
 import se.cygni.texasholdem.game.Card;
 import se.cygni.texasholdem.game.definitions.Rank;
 import se.cygni.texasholdem.game.definitions.Suit;
-import se.cygni.texasholdem.util.PokerHandUtil;
+import se.cygni.texasholdem.game.util.PokerHandUtil;
 
 public class TestUtil {
 

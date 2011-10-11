@@ -1,4 +1,4 @@
-package se.cygni.texasholdem.util;
+package se.cygni.texasholdem.game.util;
 
 import java.util.ArrayList;
 import java.util.Collections;

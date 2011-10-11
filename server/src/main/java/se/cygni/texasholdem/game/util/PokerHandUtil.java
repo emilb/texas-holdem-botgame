@@ -1,12 +1,12 @@
-package se.cygni.texasholdem.util;
+package se.cygni.texasholdem.game.util;
 
-import static se.cygni.texasholdem.util.ListUtil.getHighestOfSameRank;
-import static se.cygni.texasholdem.util.ListUtil.getHighestOfSameRankExcluding;
-import static se.cygni.texasholdem.util.ListUtil.getHighestSortedAndExclude;
-import static se.cygni.texasholdem.util.ListUtil.getLongestConsecutiveSubset;
-import static se.cygni.texasholdem.util.ListUtil.getRankDistribution;
-import static se.cygni.texasholdem.util.ListUtil.getSuitDistribution;
-import static se.cygni.texasholdem.util.ListUtil.merge;
+import static se.cygni.texasholdem.game.util.ListUtil.getHighestOfSameRank;
+import static se.cygni.texasholdem.game.util.ListUtil.getHighestOfSameRankExcluding;
+import static se.cygni.texasholdem.game.util.ListUtil.getHighestSortedAndExclude;
+import static se.cygni.texasholdem.game.util.ListUtil.getLongestConsecutiveSubset;
+import static se.cygni.texasholdem.game.util.ListUtil.getRankDistribution;
+import static se.cygni.texasholdem.game.util.ListUtil.getSuitDistribution;
+import static se.cygni.texasholdem.game.util.ListUtil.merge;
 
 import java.util.ArrayList;
 import java.util.Collections;

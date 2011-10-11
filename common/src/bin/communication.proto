@@ -10,22 +10,28 @@ message Void {}
 
 message Ping {}
 
-enum ExceptionType {
-	NOT_IN_CORRECT_PLAY_STATE = 1;
+message VoidInSession {
+    required string sessionId = 1;
+}
 
+enum PBExceptionType {
+    INVALID_SESSION = 1;
+    PLAYER_NAME_ALREADY_TAKEN = 2;
+    NOT_IN_CORRECT_PLAY_STATE = 10;
+    INVALID_AMOUNT = 11;
 }
 
 message ExceptionEvent {
-	required ExceptionType exceptionType = 1;
-	optional string message = 2;
+    required PBExceptionType exceptionType = 1;
+    optional string message = 2;
 }
 
-message Message {
-	required string message = 1;
+message PBMessage {
+    required string message = 1;
 }
 
-enum Rank {
-	DEUCE = 1;
+enum PBRank {
+    DEUCE = 1;
     THREE = 2;
     FOUR = 3;
     FIVE = 4;
@@ -40,181 +46,220 @@ enum Rank {
     ACE = 13;
 }
 
-enum Suit {
-	CLUBS = 1;
+enum PBSuit {
+    CLUBS = 1;
     DIAMONDS = 2;
     HEARTS = 3;
     SPADES = 4;
 }
 
-message Card {
-	required Rank rank = 1;
-	required Suit suit = 2;
+message PBCard {
+    required PBRank rank = 1;
+    required PBSuit suit = 2;
 }
 
-enum ActionType {
-	CHECK = 1;
-	FOLD = 2;
-	CALL = 3;
-	RAISE = 4;
+enum PBActionType {
+    CHECK = 1;
+    FOLD = 2;
+    CALL = 3;
+    RAISE = 4;
+    ALL_IN = 5;
 }
 
-message Action {
-	required ActionType actionType = 1;
-	optional fixed64 amount = 2;
+message PBAction {
+    required PBActionType actionType = 1;
+    optional fixed64 amount = 2;
 }
 
-message PossibleActions {
-	repeated Action actions = 1;
+message PBPossibleActions {
+    repeated PBAction actions = 1;
 }
 
-message NumericValue {
-	enum ValueFor {
-		CHIPS = 1;
-		POT = 2;
-	}
-
-	required ValueFor valueFor = 1;
-	required fixed64 value = 2;
+enum PBState {
+    PRE_FLOP = 1;
+    FLOP = 2;
+    TURN = 3;
+    RIVER = 4;
+    SHOWDOWN = 5;
+    NOT_IN_PLAY = 9;
 }
 
-enum State {
-	PRE_FLOP = 1;
-	FLOP = 2;
-	TURN = 3;
-	RIVER = 4;
-	SHOWDOWN = 5;
-	NOT_IN_PLAY = 9;
+message PBPlayer {
+    required string name = 1;
+    required bool inPlay = 2;
+    required fixed64 chipCount = 3;
 }
 
-message Player {
-	required string name = 1;
-	required bool inPlay = 2;
-	required fixed64 chipCount = 3;
+message PBPlayers {
+    repeated PBPlayer players = 1;
 }
 
-message Players {
-	repeated Player players = 1;
+message PBPlayerWinAmount {
+    required PBPlayer player = 1;
+    required fixed64 winAmount = 2;
 }
 
-message PlayerWinAmount {
-	required Player player = 1;
-	required fixed64 winAmount = 2;
-}
-
-message PlayersWinAmount {
-	repeated PlayerWinAmount playersWinAmount = 1;
+message PBPlayersWinAmount {
+    repeated PBPlayerWinAmount playersWinAmount = 1;
 }
 
 /*
  * GameServer
  */
-message MyChipAmountResponse{
-	required fixed64 amount = 1;
-	optional ExceptionEvent exception = 9;
+
+message RegisterForPlayRequest {
+    required string playerName = 1;
+    optional string previousSessionId = 2;
 }
 
-message PotAmountResponse{
-	required fixed64 amount = 1;
-	optional ExceptionEvent exception = 9;
+message RegisterForPlayResponse {
+    required string sessionId = 1;
+    optional ExceptionEvent exception = 9;
 }
 
-message PlayStateResponse{
-	required State state = 1;
-	optional ExceptionEvent exception = 9;
+message MyChipAmountResponse {
+    required fixed64 amount = 1;
+    optional ExceptionEvent exception = 9;
 }
 
-message PlayersResponse{
-	required Players players = 1;
-	optional ExceptionEvent exception = 9;
+message PotAmountResponse {
+    required fixed64 amount = 1;
+    optional ExceptionEvent exception = 9;
 }
 
-message DealerPlayerResponse{
-	required Player player = 1;
-	optional ExceptionEvent exception = 9;
+message PlayStateResponse {
+    required PBState state = 1;
+    optional ExceptionEvent exception = 9;
 }
 
-message SmallBlindPlayerResponse{
-	required Player player = 1;
-	optional ExceptionEvent exception = 9;
+message PlayersResponse {
+    required PBPlayers players = 1;
+    optional ExceptionEvent exception = 9;
 }
 
-message BigBlindPlayerResponse{
-	required Player player = 1;
-	optional ExceptionEvent exception = 9;
+message DealerPlayerResponse {
+    required PBPlayer player = 1;
+    optional ExceptionEvent exception = 9;
 }
 
-message CommunityCardsResponse{
-	repeated Card cards = 1;
-	optional ExceptionEvent exception = 9;
+message SmallBlindPlayerResponse {
+    required PBPlayer player = 1;
+    optional ExceptionEvent exception = 9;
 }
 
-message MyCardsResponse{
-	repeated Card cards = 1;
-	optional ExceptionEvent exception = 9;
+message BigBlindPlayerResponse {
+    required PBPlayer player = 1;
+    optional ExceptionEvent exception = 9;
+}
+
+message CommunityCardsResponse {
+    repeated PBCard cards = 1;
+    optional ExceptionEvent exception = 9;
+}
+
+message MyCardsResponse {
+    repeated PBCard cards = 1;
+    optional ExceptionEvent exception = 9;
+}
+
+message SmallBlindAmountResponse {
+    required fixed64 amount = 1;
+    optional ExceptionEvent exception = 9;
+}
+
+message BigBlindAmountResponse {
+    required fixed64 amount = 1;
+    optional ExceptionEvent exception = 9;
 }
 
 /*
  * Player
  */
+message PlayIsStartedEvent {
+    required PBPlayers players = 1;
+    required fixed64 yourPotAmount = 2;
+}
+
+message YouHaveBeenDealtACardEvent {
+    required PBCard card = 1;
+}
+
+message CommunityHasBeenDealtACardEvent {
+    required PBCard card = 1;
+}
+
 message PlayerFoldedEvent {
-	required Player player = 1;
-	required fixed64 investmentInPot = 2;
+    required PBPlayer player = 1;
+    required fixed64 investmentInPot = 2;
 }
 
 message PlayerCalledEvent {
-	required Player player = 1;
-	required fixed64 callBet = 2;
+    required PBPlayer player = 1;
+    required fixed64 callBet = 2;
 }
 
 message PlayerRaisedEvent {
-	required Player player = 1;
-	required fixed64 callBet = 2;
-	required fixed64 raiseBet = 3;
-	required bool allIn = 4;
+    required PBPlayer player = 1;
+    required fixed64 callBet = 2;
+    required fixed64 raiseBet = 3;
+}
+
+message PlayerWentAllInEvent {
+    required PBPlayer player = 1;
+    required fixed64 callBet = 2;
+    required fixed64 raiseBet = 3;
 }
 
 message PlayerCheckedEvent {
-	required Player player = 1;
+    required PBPlayer player = 1;
 }
 
 message ShowDownEvent {
-	required PlayersWinAmount playersWinAmount = 1;
+    required PBPlayersWinAmount playersWinAmount = 1;
+}
+
+message YouWonAmountEvent {
+    required fixed64 amount = 1;
 }
 
 message PlayerWithdrewEvent {
-	required Player player = 1;
+    required PBPlayer player = 1;
 }
 
 service GameService {
-	rpc ping(Void) returns (Ping);
+    rpc ping(Void) returns (Ping);
 
-	rpc getMyChipAmount(Void) returns (MyChipAmountResponse);
-	rpc getPotAmount(Void) returns (PotAmountResponse);
-	rpc getPlayState(Void) returns (PlayStateResponse);
-	rpc getPlayers(Void) returns (PlayersResponse);
-	rpc getDealerPlayer(Void) returns (DealerPlayerResponse);
-	rpc getSmallBlindPlayer(Void) returns (SmallBlindPlayerResponse);
-	rpc getBigBlindPlayer(Void) returns (BigBlindPlayerResponse);
-	rpc getCommunityCards(Void) returns (CommunityCardsResponse);
-	rpc getMyCards(Void) returns (MyCardsResponse);
+    rpc registerForPlay(RegisterForPlayRequest) returns (RegisterForPlayResponse);
+    rpc withdraw(VoidInSession) returns (Void);
+    rpc getMyChipAmount(VoidInSession) returns (MyChipAmountResponse);
+    rpc getSmallBlindAmount(VoidInSession) returns (SmallBlindAmountResponse);
+    rpc getBigBlindAmount(VoidInSession) returns (BigBlindAmountResponse);
+    rpc getPotAmount(VoidInSession) returns (PotAmountResponse);
+    rpc getPlayState(VoidInSession) returns (PlayStateResponse);
+    rpc getPlayers(VoidInSession) returns (PlayersResponse);
+    rpc getDealerPlayer(VoidInSession) returns (DealerPlayerResponse);
+    rpc getSmallBlindPlayer(VoidInSession) returns (SmallBlindPlayerResponse);
+    rpc getBigBlindPlayer(VoidInSession) returns (BigBlindPlayerResponse);
+    rpc getCommunityCards(VoidInSession) returns (CommunityCardsResponse);
+    rpc getMyCards(VoidInSession) returns (MyCardsResponse);
 
 }
 
 service PlayerService {
-	rpc ping(Void) returns (Ping);
-	rpc serverIsShuttingDown(Message) returns (Void);
+    rpc ping(Void) returns (Ping);
+    rpc serverIsShuttingDown(PBMessage) returns (Void);
 
-	rpc onPlayIsStarted(Players) returns (Void);
-	rpc onYouHaveBeenDealtACard(Card) returns (Void);
-	rpc onCommunityHasBeenDealtACard(Card) returns (Void);
-	rpc onPlayerFolded(Player) returns (Void);
-	rpc onPlayerCalled(PlayerCalledEvent) returns (Void);
-	rpc onPlayerRaised(PlayerRaisedEvent) returns (Void);
-	rpc onPlayerChecked(PlayerCheckedEvent) returns (Void);
-	rpc onShowDown(ShowDownEvent) returns (Void);
-	rpc onYouWonAmount(NumericValue) returns (Void);
-	rpc onPlayerWithdrew(PlayerWithdrewEvent) returns (Void);
+    rpc onPlayIsStarted(PlayIsStartedEvent) returns (Void);
+    rpc onYouHaveBeenDealtACard(YouHaveBeenDealtACardEvent) returns (Void);
+    rpc onCommunityHasBeenDealtACard(CommunityHasBeenDealtACardEvent) returns (Void);
+    rpc onPlayerFolded(PlayerFoldedEvent) returns (Void);
+    rpc onPlayerCalled(PlayerCalledEvent) returns (Void);
+    rpc onPlayerRaised(PlayerRaisedEvent) returns (Void);
+    rpc onPlayerWentAllIn(PlayerWentAllInEvent) returns (Void);
+    rpc onPlayerChecked(PlayerCheckedEvent) returns (Void);
+    rpc onShowDown(ShowDownEvent) returns (Void);
+    rpc onYouWonAmount(YouWonAmountEvent) returns (Void);
+    rpc onPlayerWithdrew(PlayerWithdrewEvent) returns (Void);
 
-	rpc onYouMustAct(PossibleActions) returns (Action);
+    rpc onYouMustAct(PBPossibleActions) returns (PBAction);
 }
