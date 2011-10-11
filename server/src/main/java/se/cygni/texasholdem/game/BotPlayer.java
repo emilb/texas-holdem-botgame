@@ -1,11 +1,11 @@
 package se.cygni.texasholdem.game;
 
-public class Player {
+public class BotPlayer {
 
     private final String name;
     private final String sessionId;
 
-    public Player(final String name, final String sessionId) {
+    public BotPlayer(final String name, final String sessionId) {
 
         this.name = name;
         this.sessionId = sessionId;
@@ -46,7 +46,7 @@ public class Player {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        final Player other = (Player) obj;
+        final BotPlayer other = (BotPlayer) obj;
         if (sessionId == null) {
             if (other.sessionId != null)
                 return false;

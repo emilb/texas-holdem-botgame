@@ -1,14 +1,14 @@
 package se.cygni.texasholdem.game.pot;
 
-import se.cygni.texasholdem.game.Player;
+import se.cygni.texasholdem.game.BotPlayer;
 
 public class PotTransaction {
 
     private final long transactionNumber;
-    private final Player player;
+    private final BotPlayer player;
     private final long amount;
 
-    public PotTransaction(final long transactionNumber, final Player player,
+    public PotTransaction(final long transactionNumber, final BotPlayer player,
             final long amount) {
 
         this.transactionNumber = transactionNumber;
@@ -21,7 +21,7 @@ public class PotTransaction {
         return transactionNumber;
     }
 
-    public Player getPlayer() {
+    public BotPlayer getPlayer() {
 
         return player;
     }

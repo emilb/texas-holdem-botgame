@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.commons.collections.CollectionUtils;
 
-import se.cygni.texasholdem.game.Player;
+import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.game.definitions.PlayState;
 
 /**
@@ -26,12 +26,12 @@ public class Pot {
     private PlayState currentPlayState = PlayState.PRE_FLOP;
 
     private final Map<PlayState, List<PotTransaction>> transactionTable = new HashMap<PlayState, List<PotTransaction>>();
-    private final List<Player> allPlayers;
-    private final Set<Player> foldedPlayers = new HashSet<Player>();
+    private final List<BotPlayer> allPlayers;
+    private final Set<BotPlayer> foldedPlayers = new HashSet<BotPlayer>();
 
-    public Pot(final List<Player> players) {
+    public Pot(final List<BotPlayer> players) {
 
-        allPlayers = new ArrayList<Player>(players);
+        allPlayers = new ArrayList<BotPlayer>(players);
     }
 
     /**
@@ -41,7 +41,7 @@ public class Pot {
      * @param player
      * @return
      */
-    public long getMinimumBetForPlayerToCall(final Player player) {
+    public long getMinimumBetForPlayerToCall(final BotPlayer player) {
 
         if (hasFolded(player))
             return 0L;
@@ -64,7 +64,7 @@ public class Pot {
      * @param player
      * @param amount
      */
-    public void bet(final Player player, final long amount) {
+    public void bet(final BotPlayer player, final long amount) {
 
         if (!canPlaceBetInCurrentPlayState())
             throw new IllegalStateException("Pot is in state: "
@@ -96,7 +96,7 @@ public class Pot {
      * 
      * @param player
      */
-    public void fold(final Player player) {
+    public void fold(final BotPlayer player) {
 
         foldedPlayers.add(player);
     }
@@ -106,7 +106,7 @@ public class Pot {
      * @param player
      * @return TRUE if player has folded any time during this play.
      */
-    public boolean hasFolded(final Player player) {
+    public boolean hasFolded(final BotPlayer player) {
 
         return foldedPlayers.contains(player);
     }
@@ -164,7 +164,7 @@ public class Pot {
 
         long highest = 0;
 
-        for (final Player player : allPlayers) {
+        for (final BotPlayer player : allPlayers) {
             if (foldedPlayers.contains(player))
                 continue;
 
@@ -183,7 +183,7 @@ public class Pot {
      * @param player
      * @return
      */
-    public long getTotalBetAmountForPlayer(final Player player) {
+    public long getTotalBetAmountForPlayer(final BotPlayer player) {
 
         long total = 0;
         PlayState state = currentPlayState;
@@ -206,7 +206,7 @@ public class Pot {
      * @return
      */
     public long getTotalBetAmountForPlayerInPlayState(
-            final Player player,
+            final BotPlayer player,
             final PlayState playState) {
 
         final List<PotTransaction> transactions = transactionTable
@@ -232,7 +232,7 @@ public class Pot {
     public boolean isCurrentPlayStateBalanced() {
 
         Long lastTotal = null;
-        for (final Player player : allPlayers) {
+        for (final BotPlayer player : allPlayers) {
             if (foldedPlayers.contains(player))
                 continue;
 

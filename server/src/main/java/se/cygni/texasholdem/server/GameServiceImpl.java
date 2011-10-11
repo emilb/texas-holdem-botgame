@@ -27,6 +27,13 @@ import com.google.protobuf.RpcController;
 
 public class GameServiceImpl implements ClientServer.GameService.Interface {
 
+    private final GameServer gameServer;
+
+    public GameServiceImpl(final GameServer gameServer) {
+
+        this.gameServer = gameServer;
+    }
+
     @Override
     public void ping(
             final RpcController controller,
@@ -226,11 +233,14 @@ public class GameServiceImpl implements ClientServer.GameService.Interface {
 
     private ExceptionEvent checkForValidSession(final VoidInSession request) {
 
-        if (StringUtils.isEmpty(request.getSessionId()))
+        final String sessionId = request.getSessionId();
+
+        if (StringUtils.isEmpty(sessionId))
             return createInvalidSession("null");
 
         // Ask the GameServer to verify the session
-        // ...
+        if (!gameServer.isValidSession(sessionId))
+            return createInvalidSession(sessionId);
 
         // Valid sessionId!
         return null;

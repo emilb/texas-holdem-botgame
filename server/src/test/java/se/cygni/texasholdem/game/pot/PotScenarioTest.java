@@ -11,25 +11,25 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import se.cygni.texasholdem.game.Player;
+import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.game.definitions.PlayState;
 
 public class PotScenarioTest {
 
     private Pot pot;
-    private Player pA;
-    private Player pB;
-    private Player pC;
-    private Player pD;
+    private BotPlayer pA;
+    private BotPlayer pB;
+    private BotPlayer pC;
+    private BotPlayer pD;
 
     @Before
     public void setUp() throws Exception {
-        pA = new Player("A", "sessionA");
-        pB = new Player("B", "sessionB");
-        pC = new Player("C", "sessionC");
-        pD = new Player("D", "sessionD");
+        pA = new BotPlayer("A", "sessionA");
+        pB = new BotPlayer("B", "sessionB");
+        pC = new BotPlayer("C", "sessionC");
+        pD = new BotPlayer("D", "sessionD");
 
-        final List<Player> players = new ArrayList<Player>();
+        final List<BotPlayer> players = new ArrayList<BotPlayer>();
         players.add(pA);
         players.add(pB);
         players.add(pC);
@@ -163,7 +163,7 @@ public class PotScenarioTest {
         assertEquals(500L, pot.getTotalPotAmount());
     }
 
-    private void betButExpectError(final Player p, final long amount) {
+    private void betButExpectError(final BotPlayer p, final long amount) {
         try {
             pot.bet(p, amount);
             fail("Folder player: " + p + " was allowed to place a bet");
