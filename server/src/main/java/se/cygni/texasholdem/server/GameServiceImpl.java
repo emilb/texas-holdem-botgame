@@ -1,6 +1,10 @@
 package se.cygni.texasholdem.server;
 
+import java.lang.reflect.Method;
+
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import se.cygni.texasholdem.communication.ClientServer;
 import se.cygni.texasholdem.communication.ClientServer.BigBlindAmountResponse;
@@ -25,10 +29,12 @@ import se.cygni.texasholdem.communication.ClientServer.VoidInSession;
 import com.google.protobuf.RpcCallback;
 import com.google.protobuf.RpcController;
 
+@Component
 public class GameServiceImpl implements ClientServer.GameService.Interface {
 
     private final GameServer gameServer;
 
+    @Autowired
     public GameServiceImpl(final GameServer gameServer) {
 
         this.gameServer = gameServer;
@@ -49,6 +55,12 @@ public class GameServiceImpl implements ClientServer.GameService.Interface {
             final RegisterForPlayRequest request,
             final RpcCallback<RegisterForPlayResponse> done) {
 
+        gameServer.registerNewPlayer(request.getPlayerName(),
+                request.getSessionId());
+
+        final RegisterForPlayResponse response = RegisterForPlayResponse
+                .newBuilder().setSessionId(request.getSessionId()).build();
+        done.run(response);
     }
 
     @Override
@@ -65,13 +77,9 @@ public class GameServiceImpl implements ClientServer.GameService.Interface {
             final VoidInSession request,
             final RpcCallback<MyChipAmountResponse> done) {
 
-        final ExceptionEvent invalidSessionId = checkForValidSession(request);
-        if (invalidSessionId != null) {
-            final MyChipAmountResponse response = MyChipAmountResponse
-                    .newBuilder()
-                    .setException(invalidSessionId).build();
-            done.run(response);
-        }
+        if (returnExceptionIfInvalidSession(request,
+                MyChipAmountResponse.class, controller, done))
+            return;
 
     }
 
@@ -81,13 +89,10 @@ public class GameServiceImpl implements ClientServer.GameService.Interface {
             final VoidInSession request,
             final RpcCallback<SmallBlindAmountResponse> done) {
 
-        final ExceptionEvent invalidSessionId = checkForValidSession(request);
-        if (invalidSessionId != null) {
-            final SmallBlindAmountResponse response = SmallBlindAmountResponse
-                    .newBuilder()
-                    .setException(invalidSessionId).build();
-            done.run(response);
-        }
+        if (returnExceptionIfInvalidSession(request,
+                SmallBlindAmountResponse.class, controller,
+                done))
+            return;
 
     }
 
@@ -97,13 +102,9 @@ public class GameServiceImpl implements ClientServer.GameService.Interface {
             final VoidInSession request,
             final RpcCallback<BigBlindAmountResponse> done) {
 
-        final ExceptionEvent invalidSessionId = checkForValidSession(request);
-        if (invalidSessionId != null) {
-            final BigBlindAmountResponse response = BigBlindAmountResponse
-                    .newBuilder()
-                    .setException(invalidSessionId).build();
-            done.run(response);
-        }
+        if (returnExceptionIfInvalidSession(request,
+                BigBlindAmountResponse.class, controller, done))
+            return;
 
     }
 
@@ -113,12 +114,10 @@ public class GameServiceImpl implements ClientServer.GameService.Interface {
             final VoidInSession request,
             final RpcCallback<PotAmountResponse> done) {
 
-        final ExceptionEvent invalidSessionId = checkForValidSession(request);
-        if (invalidSessionId != null) {
-            final PotAmountResponse response = PotAmountResponse.newBuilder()
-                    .setException(invalidSessionId).build();
-            done.run(response);
-        }
+        if (returnExceptionIfInvalidSession(request, PotAmountResponse.class,
+                controller,
+                done))
+            return;
 
     }
 
@@ -128,12 +127,10 @@ public class GameServiceImpl implements ClientServer.GameService.Interface {
             final VoidInSession request,
             final RpcCallback<PlayStateResponse> done) {
 
-        final ExceptionEvent invalidSessionId = checkForValidSession(request);
-        if (invalidSessionId != null) {
-            final PlayStateResponse response = PlayStateResponse.newBuilder()
-                    .setException(invalidSessionId).build();
-            done.run(response);
-        }
+        if (returnExceptionIfInvalidSession(request, PlayStateResponse.class,
+                controller,
+                done))
+            return;
 
     }
 
@@ -143,12 +140,10 @@ public class GameServiceImpl implements ClientServer.GameService.Interface {
             final VoidInSession request,
             final RpcCallback<PlayersResponse> done) {
 
-        final ExceptionEvent invalidSessionId = checkForValidSession(request);
-        if (invalidSessionId != null) {
-            final PlayersResponse response = PlayersResponse.newBuilder()
-                    .setException(invalidSessionId).build();
-            done.run(response);
-        }
+        if (returnExceptionIfInvalidSession(request, PlayersResponse.class,
+                controller,
+                done))
+            return;
 
     }
 
@@ -158,13 +153,9 @@ public class GameServiceImpl implements ClientServer.GameService.Interface {
             final VoidInSession request,
             final RpcCallback<DealerPlayerResponse> done) {
 
-        final ExceptionEvent invalidSessionId = checkForValidSession(request);
-        if (invalidSessionId != null) {
-            final DealerPlayerResponse response = DealerPlayerResponse
-                    .newBuilder()
-                    .setException(invalidSessionId).build();
-            done.run(response);
-        }
+        if (returnExceptionIfInvalidSession(request,
+                DealerPlayerResponse.class, controller, done))
+            return;
 
     }
 
@@ -174,13 +165,10 @@ public class GameServiceImpl implements ClientServer.GameService.Interface {
             final VoidInSession request,
             final RpcCallback<SmallBlindPlayerResponse> done) {
 
-        final ExceptionEvent invalidSessionId = checkForValidSession(request);
-        if (invalidSessionId != null) {
-            final SmallBlindPlayerResponse response = SmallBlindPlayerResponse
-                    .newBuilder()
-                    .setException(invalidSessionId).build();
-            done.run(response);
-        }
+        if (returnExceptionIfInvalidSession(request,
+                SmallBlindPlayerResponse.class, controller,
+                done))
+            return;
 
     }
 
@@ -190,13 +178,9 @@ public class GameServiceImpl implements ClientServer.GameService.Interface {
             final VoidInSession request,
             final RpcCallback<BigBlindPlayerResponse> done) {
 
-        final ExceptionEvent invalidSessionId = checkForValidSession(request);
-        if (invalidSessionId != null) {
-            final BigBlindPlayerResponse response = BigBlindPlayerResponse
-                    .newBuilder()
-                    .setException(invalidSessionId).build();
-            done.run(response);
-        }
+        if (returnExceptionIfInvalidSession(request,
+                BigBlindPlayerResponse.class, controller, done))
+            return;
 
     }
 
@@ -206,13 +190,9 @@ public class GameServiceImpl implements ClientServer.GameService.Interface {
             final VoidInSession request,
             final RpcCallback<CommunityCardsResponse> done) {
 
-        final ExceptionEvent invalidSessionId = checkForValidSession(request);
-        if (invalidSessionId != null) {
-            final CommunityCardsResponse response = CommunityCardsResponse
-                    .newBuilder()
-                    .setException(invalidSessionId).build();
-            done.run(response);
-        }
+        if (returnExceptionIfInvalidSession(request,
+                CommunityCardsResponse.class, controller, done))
+            return;
 
     }
 
@@ -222,12 +202,9 @@ public class GameServiceImpl implements ClientServer.GameService.Interface {
             final VoidInSession request,
             final RpcCallback<MyCardsResponse> done) {
 
-        final ExceptionEvent invalidSessionId = checkForValidSession(request);
-        if (invalidSessionId != null) {
-            final MyCardsResponse response = MyCardsResponse.newBuilder()
-                    .setException(invalidSessionId).build();
-            done.run(response);
-        }
+        if (returnExceptionIfInvalidSession(request, MyCardsResponse.class,
+                controller, done))
+            return;
 
     }
 
@@ -236,21 +213,66 @@ public class GameServiceImpl implements ClientServer.GameService.Interface {
         final String sessionId = request.getSessionId();
 
         if (StringUtils.isEmpty(sessionId))
-            return createInvalidSession("null");
+            return createInvalidSessionException("null");
 
         // Ask the GameServer to verify the session
         if (!gameServer.isValidSession(sessionId))
-            return createInvalidSession(sessionId);
+            return createInvalidSessionException(sessionId);
 
         // Valid sessionId!
         return null;
     }
 
-    private ExceptionEvent createInvalidSession(final String sessionId) {
+    private ExceptionEvent createInvalidSessionException(final String sessionId) {
 
         return ExceptionEvent.newBuilder()
                 .setExceptionType(PBExceptionType.INVALID_SESSION)
                 .setMessage("The sessionId: [" + sessionId + "] is invalid")
                 .build();
+    }
+
+    private <T> boolean returnExceptionIfInvalidSession(
+            final VoidInSession request,
+            final Class<T> msgClazz,
+            final RpcController controller,
+            final RpcCallback<T> done) {
+
+        final ExceptionEvent invalidSessionEvent = checkForValidSession(request);
+        if (invalidSessionEvent == null)
+            return false;
+
+        buildAndReturnException(msgClazz, invalidSessionEvent, controller, done);
+
+        return true;
+    }
+
+    @SuppressWarnings("unchecked")
+    private <T> void buildAndReturnException(
+            final Class<T> msgClazz,
+            final ExceptionEvent ex,
+            final RpcController controller,
+            final RpcCallback<T> done) {
+
+        try {
+            final Method newBuilderMethod = msgClazz.getMethod("newBuilder");
+            Object builder = newBuilderMethod.invoke(null);
+
+            final Method setException = builder.getClass().getDeclaredMethod(
+                    "setException",
+                    ExceptionEvent.class);
+
+            builder = setException.invoke(builder, ex);
+
+            final Method build = builder.getClass()
+                    .getDeclaredMethod("build");
+            final T message = (T) build.invoke(builder);
+            done.run(message);
+
+        } catch (final Exception e) {
+            // TODO: Log error
+
+            // Cancel the reply
+            controller.setFailed(e.getMessage());
+        }
     }
 }

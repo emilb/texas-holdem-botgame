@@ -1,9 +1,13 @@
 package se.cygni.texasholdem.game;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BotPlayer {
 
     private final String name;
     private final String sessionId;
+    private final List<Card> cards = new ArrayList<Card>();
 
     public BotPlayer(final String name, final String sessionId) {
 
@@ -19,6 +23,21 @@ public class BotPlayer {
     public String getSessionId() {
 
         return sessionId;
+    }
+
+    public List<Card> getCards() {
+
+        return new ArrayList<Card>(cards);
+    }
+
+    public void receiveCard(final Card c) {
+
+        cards.add(c);
+    }
+
+    public void clearCards() {
+
+        cards.clear();
     }
 
     @Override

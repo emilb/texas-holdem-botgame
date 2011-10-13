@@ -10,14 +10,16 @@ public final class ClientServer {
   }
   public enum PBExceptionType
       implements com.google.protobuf.ProtocolMessageEnum {
-    INVALID_SESSION(0, 1),
-    PLAYER_NAME_ALREADY_TAKEN(1, 2),
-    NOT_IN_CORRECT_PLAY_STATE(2, 10),
-    INVALID_AMOUNT(3, 11),
+    NO_EXCEPTION(0, 1),
+    INVALID_SESSION(1, 2),
+    PLAYER_NAME_ALREADY_TAKEN(2, 3),
+    NOT_IN_CORRECT_PLAY_STATE(3, 10),
+    INVALID_AMOUNT(4, 11),
     ;
     
-    public static final int INVALID_SESSION_VALUE = 1;
-    public static final int PLAYER_NAME_ALREADY_TAKEN_VALUE = 2;
+    public static final int NO_EXCEPTION_VALUE = 1;
+    public static final int INVALID_SESSION_VALUE = 2;
+    public static final int PLAYER_NAME_ALREADY_TAKEN_VALUE = 3;
     public static final int NOT_IN_CORRECT_PLAY_STATE_VALUE = 10;
     public static final int INVALID_AMOUNT_VALUE = 11;
     
@@ -26,8 +28,9 @@ public final class ClientServer {
     
     public static PBExceptionType valueOf(int value) {
       switch (value) {
-        case 1: return INVALID_SESSION;
-        case 2: return PLAYER_NAME_ALREADY_TAKEN;
+        case 1: return NO_EXCEPTION;
+        case 2: return INVALID_SESSION;
+        case 3: return PLAYER_NAME_ALREADY_TAKEN;
         case 10: return NOT_IN_CORRECT_PLAY_STATE;
         case 11: return INVALID_AMOUNT;
         default: return null;
@@ -60,7 +63,7 @@ public final class ClientServer {
     }
     
     private static final PBExceptionType[] VALUES = {
-      INVALID_SESSION, PLAYER_NAME_ALREADY_TAKEN, NOT_IN_CORRECT_PLAY_STATE, INVALID_AMOUNT, 
+      NO_EXCEPTION, INVALID_SESSION, PLAYER_NAME_ALREADY_TAKEN, NOT_IN_CORRECT_PLAY_STATE, INVALID_AMOUNT, 
     };
     
     public static PBExceptionType valueOf(
@@ -1357,7 +1360,7 @@ public final class ClientServer {
   public interface ExceptionEventOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // required .PBExceptionType exceptionType = 1;
+    // optional .PBExceptionType exceptionType = 1 [default = NO_EXCEPTION];
     boolean hasExceptionType();
     se.cygni.texasholdem.communication.ClientServer.PBExceptionType getExceptionType();
     
@@ -1394,7 +1397,7 @@ public final class ClientServer {
     }
     
     private int bitField0_;
-    // required .PBExceptionType exceptionType = 1;
+    // optional .PBExceptionType exceptionType = 1 [default = NO_EXCEPTION];
     public static final int EXCEPTIONTYPE_FIELD_NUMBER = 1;
     private se.cygni.texasholdem.communication.ClientServer.PBExceptionType exceptionType_;
     public boolean hasExceptionType() {
@@ -1437,7 +1440,7 @@ public final class ClientServer {
     }
     
     private void initFields() {
-      exceptionType_ = se.cygni.texasholdem.communication.ClientServer.PBExceptionType.INVALID_SESSION;
+      exceptionType_ = se.cygni.texasholdem.communication.ClientServer.PBExceptionType.NO_EXCEPTION;
       message_ = "";
     }
     private byte memoizedIsInitialized = -1;
@@ -1445,10 +1448,6 @@ public final class ClientServer {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
       
-      if (!hasExceptionType()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -1603,7 +1602,7 @@ public final class ClientServer {
       
       public Builder clear() {
         super.clear();
-        exceptionType_ = se.cygni.texasholdem.communication.ClientServer.PBExceptionType.INVALID_SESSION;
+        exceptionType_ = se.cygni.texasholdem.communication.ClientServer.PBExceptionType.NO_EXCEPTION;
         bitField0_ = (bitField0_ & ~0x00000001);
         message_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -1680,10 +1679,6 @@ public final class ClientServer {
       }
       
       public final boolean isInitialized() {
-        if (!hasExceptionType()) {
-          
-          return false;
-        }
         return true;
       }
       
@@ -1732,8 +1727,8 @@ public final class ClientServer {
       
       private int bitField0_;
       
-      // required .PBExceptionType exceptionType = 1;
-      private se.cygni.texasholdem.communication.ClientServer.PBExceptionType exceptionType_ = se.cygni.texasholdem.communication.ClientServer.PBExceptionType.INVALID_SESSION;
+      // optional .PBExceptionType exceptionType = 1 [default = NO_EXCEPTION];
+      private se.cygni.texasholdem.communication.ClientServer.PBExceptionType exceptionType_ = se.cygni.texasholdem.communication.ClientServer.PBExceptionType.NO_EXCEPTION;
       public boolean hasExceptionType() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
@@ -1751,7 +1746,7 @@ public final class ClientServer {
       }
       public Builder clearExceptionType() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        exceptionType_ = se.cygni.texasholdem.communication.ClientServer.PBExceptionType.INVALID_SESSION;
+        exceptionType_ = se.cygni.texasholdem.communication.ClientServer.PBExceptionType.NO_EXCEPTION;
         onChanged();
         return this;
       }
@@ -5741,9 +5736,9 @@ public final class ClientServer {
     boolean hasPlayerName();
     String getPlayerName();
     
-    // optional string previousSessionId = 2;
-    boolean hasPreviousSessionId();
-    String getPreviousSessionId();
+    // optional string sessionId = 2;
+    boolean hasSessionId();
+    String getSessionId();
   }
   public static final class RegisterForPlayRequest extends
       com.google.protobuf.GeneratedMessage
@@ -5806,14 +5801,14 @@ public final class ClientServer {
       }
     }
     
-    // optional string previousSessionId = 2;
-    public static final int PREVIOUSSESSIONID_FIELD_NUMBER = 2;
-    private java.lang.Object previousSessionId_;
-    public boolean hasPreviousSessionId() {
+    // optional string sessionId = 2;
+    public static final int SESSIONID_FIELD_NUMBER = 2;
+    private java.lang.Object sessionId_;
+    public boolean hasSessionId() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public String getPreviousSessionId() {
-      java.lang.Object ref = previousSessionId_;
+    public String getSessionId() {
+      java.lang.Object ref = sessionId_;
       if (ref instanceof String) {
         return (String) ref;
       } else {
@@ -5821,17 +5816,17 @@ public final class ClientServer {
             (com.google.protobuf.ByteString) ref;
         String s = bs.toStringUtf8();
         if (com.google.protobuf.Internal.isValidUtf8(bs)) {
-          previousSessionId_ = s;
+          sessionId_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getPreviousSessionIdBytes() {
-      java.lang.Object ref = previousSessionId_;
+    private com.google.protobuf.ByteString getSessionIdBytes() {
+      java.lang.Object ref = sessionId_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8((String) ref);
-        previousSessionId_ = b;
+        sessionId_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -5840,7 +5835,7 @@ public final class ClientServer {
     
     private void initFields() {
       playerName_ = "";
-      previousSessionId_ = "";
+      sessionId_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5862,7 +5857,7 @@ public final class ClientServer {
         output.writeBytes(1, getPlayerNameBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getPreviousSessionIdBytes());
+        output.writeBytes(2, getSessionIdBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -5879,7 +5874,7 @@ public final class ClientServer {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getPreviousSessionIdBytes());
+          .computeBytesSize(2, getSessionIdBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6007,7 +6002,7 @@ public final class ClientServer {
         super.clear();
         playerName_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        previousSessionId_ = "";
+        sessionId_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -6054,7 +6049,7 @@ public final class ClientServer {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.previousSessionId_ = previousSessionId_;
+        result.sessionId_ = sessionId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -6074,8 +6069,8 @@ public final class ClientServer {
         if (other.hasPlayerName()) {
           setPlayerName(other.getPlayerName());
         }
-        if (other.hasPreviousSessionId()) {
-          setPreviousSessionId(other.getPreviousSessionId());
+        if (other.hasSessionId()) {
+          setSessionId(other.getSessionId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -6119,7 +6114,7 @@ public final class ClientServer {
             }
             case 18: {
               bitField0_ |= 0x00000002;
-              previousSessionId_ = input.readBytes();
+              sessionId_ = input.readBytes();
               break;
             }
           }
@@ -6164,39 +6159,39 @@ public final class ClientServer {
         onChanged();
       }
       
-      // optional string previousSessionId = 2;
-      private java.lang.Object previousSessionId_ = "";
-      public boolean hasPreviousSessionId() {
+      // optional string sessionId = 2;
+      private java.lang.Object sessionId_ = "";
+      public boolean hasSessionId() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public String getPreviousSessionId() {
-        java.lang.Object ref = previousSessionId_;
+      public String getSessionId() {
+        java.lang.Object ref = sessionId_;
         if (!(ref instanceof String)) {
           String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-          previousSessionId_ = s;
+          sessionId_ = s;
           return s;
         } else {
           return (String) ref;
         }
       }
-      public Builder setPreviousSessionId(String value) {
+      public Builder setSessionId(String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000002;
-        previousSessionId_ = value;
+        sessionId_ = value;
         onChanged();
         return this;
       }
-      public Builder clearPreviousSessionId() {
+      public Builder clearSessionId() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        previousSessionId_ = getDefaultInstance().getPreviousSessionId();
+        sessionId_ = getDefaultInstance().getSessionId();
         onChanged();
         return this;
       }
-      void setPreviousSessionId(com.google.protobuf.ByteString value) {
+      void setSessionId(com.google.protobuf.ByteString value) {
         bitField0_ |= 0x00000002;
-        previousSessionId_ = value;
+        sessionId_ = value;
         onChanged();
       }
       
@@ -6214,7 +6209,7 @@ public final class ClientServer {
   public interface RegisterForPlayResponseOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // required string sessionId = 1;
+    // optional string sessionId = 1;
     boolean hasSessionId();
     String getSessionId();
     
@@ -6252,7 +6247,7 @@ public final class ClientServer {
     }
     
     private int bitField0_;
-    // required string sessionId = 1;
+    // optional string sessionId = 1;
     public static final int SESSIONID_FIELD_NUMBER = 1;
     private java.lang.Object sessionId_;
     public boolean hasSessionId() {
@@ -6306,16 +6301,6 @@ public final class ClientServer {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
       
-      if (!hasSessionId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (hasException()) {
-        if (!getException().isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -6556,16 +6541,6 @@ public final class ClientServer {
       }
       
       public final boolean isInitialized() {
-        if (!hasSessionId()) {
-          
-          return false;
-        }
-        if (hasException()) {
-          if (!getException().isInitialized()) {
-            
-            return false;
-          }
-        }
         return true;
       }
       
@@ -6612,7 +6587,7 @@ public final class ClientServer {
       
       private int bitField0_;
       
-      // required string sessionId = 1;
+      // optional string sessionId = 1;
       private java.lang.Object sessionId_ = "";
       public boolean hasSessionId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
@@ -6752,7 +6727,7 @@ public final class ClientServer {
   public interface MyChipAmountResponseOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // required fixed64 amount = 1;
+    // optional fixed64 amount = 1;
     boolean hasAmount();
     long getAmount();
     
@@ -6790,7 +6765,7 @@ public final class ClientServer {
     }
     
     private int bitField0_;
-    // required fixed64 amount = 1;
+    // optional fixed64 amount = 1;
     public static final int AMOUNT_FIELD_NUMBER = 1;
     private long amount_;
     public boolean hasAmount() {
@@ -6822,16 +6797,6 @@ public final class ClientServer {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
       
-      if (!hasAmount()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (hasException()) {
-        if (!getException().isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -7072,16 +7037,6 @@ public final class ClientServer {
       }
       
       public final boolean isInitialized() {
-        if (!hasAmount()) {
-          
-          return false;
-        }
-        if (hasException()) {
-          if (!getException().isInitialized()) {
-            
-            return false;
-          }
-        }
         return true;
       }
       
@@ -7128,7 +7083,7 @@ public final class ClientServer {
       
       private int bitField0_;
       
-      // required fixed64 amount = 1;
+      // optional fixed64 amount = 1;
       private long amount_ ;
       public boolean hasAmount() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
@@ -7253,7 +7208,7 @@ public final class ClientServer {
   public interface PotAmountResponseOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // required fixed64 amount = 1;
+    // optional fixed64 amount = 1;
     boolean hasAmount();
     long getAmount();
     
@@ -7291,7 +7246,7 @@ public final class ClientServer {
     }
     
     private int bitField0_;
-    // required fixed64 amount = 1;
+    // optional fixed64 amount = 1;
     public static final int AMOUNT_FIELD_NUMBER = 1;
     private long amount_;
     public boolean hasAmount() {
@@ -7323,16 +7278,6 @@ public final class ClientServer {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
       
-      if (!hasAmount()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (hasException()) {
-        if (!getException().isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -7573,16 +7518,6 @@ public final class ClientServer {
       }
       
       public final boolean isInitialized() {
-        if (!hasAmount()) {
-          
-          return false;
-        }
-        if (hasException()) {
-          if (!getException().isInitialized()) {
-            
-            return false;
-          }
-        }
         return true;
       }
       
@@ -7629,7 +7564,7 @@ public final class ClientServer {
       
       private int bitField0_;
       
-      // required fixed64 amount = 1;
+      // optional fixed64 amount = 1;
       private long amount_ ;
       public boolean hasAmount() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
@@ -7754,7 +7689,7 @@ public final class ClientServer {
   public interface PlayStateResponseOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // required .PBState state = 1;
+    // optional .PBState state = 1;
     boolean hasState();
     se.cygni.texasholdem.communication.ClientServer.PBState getState();
     
@@ -7792,7 +7727,7 @@ public final class ClientServer {
     }
     
     private int bitField0_;
-    // required .PBState state = 1;
+    // optional .PBState state = 1;
     public static final int STATE_FIELD_NUMBER = 1;
     private se.cygni.texasholdem.communication.ClientServer.PBState state_;
     public boolean hasState() {
@@ -7824,16 +7759,6 @@ public final class ClientServer {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
       
-      if (!hasState()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (hasException()) {
-        if (!getException().isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -8074,16 +7999,6 @@ public final class ClientServer {
       }
       
       public final boolean isInitialized() {
-        if (!hasState()) {
-          
-          return false;
-        }
-        if (hasException()) {
-          if (!getException().isInitialized()) {
-            
-            return false;
-          }
-        }
         return true;
       }
       
@@ -8136,7 +8051,7 @@ public final class ClientServer {
       
       private int bitField0_;
       
-      // required .PBState state = 1;
+      // optional .PBState state = 1;
       private se.cygni.texasholdem.communication.ClientServer.PBState state_ = se.cygni.texasholdem.communication.ClientServer.PBState.PRE_FLOP;
       public boolean hasState() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
@@ -8264,7 +8179,7 @@ public final class ClientServer {
   public interface PlayersResponseOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // required .PBPlayers players = 1;
+    // optional .PBPlayers players = 1;
     boolean hasPlayers();
     se.cygni.texasholdem.communication.ClientServer.PBPlayers getPlayers();
     se.cygni.texasholdem.communication.ClientServer.PBPlayersOrBuilder getPlayersOrBuilder();
@@ -8303,7 +8218,7 @@ public final class ClientServer {
     }
     
     private int bitField0_;
-    // required .PBPlayers players = 1;
+    // optional .PBPlayers players = 1;
     public static final int PLAYERS_FIELD_NUMBER = 1;
     private se.cygni.texasholdem.communication.ClientServer.PBPlayers players_;
     public boolean hasPlayers() {
@@ -8338,16 +8253,8 @@ public final class ClientServer {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
       
-      if (!hasPlayers()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!getPlayers().isInitialized()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (hasException()) {
-        if (!getException().isInitialized()) {
+      if (hasPlayers()) {
+        if (!getPlayers().isInitialized()) {
           memoizedIsInitialized = 0;
           return false;
         }
@@ -8601,16 +8508,8 @@ public final class ClientServer {
       }
       
       public final boolean isInitialized() {
-        if (!hasPlayers()) {
-          
-          return false;
-        }
-        if (!getPlayers().isInitialized()) {
-          
-          return false;
-        }
-        if (hasException()) {
-          if (!getException().isInitialized()) {
+        if (hasPlayers()) {
+          if (!getPlayers().isInitialized()) {
             
             return false;
           }
@@ -8665,7 +8564,7 @@ public final class ClientServer {
       
       private int bitField0_;
       
-      // required .PBPlayers players = 1;
+      // optional .PBPlayers players = 1;
       private se.cygni.texasholdem.communication.ClientServer.PBPlayers players_ = se.cygni.texasholdem.communication.ClientServer.PBPlayers.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           se.cygni.texasholdem.communication.ClientServer.PBPlayers, se.cygni.texasholdem.communication.ClientServer.PBPlayers.Builder, se.cygni.texasholdem.communication.ClientServer.PBPlayersOrBuilder> playersBuilder_;
@@ -8859,7 +8758,7 @@ public final class ClientServer {
   public interface DealerPlayerResponseOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // required .PBPlayer player = 1;
+    // optional .PBPlayer player = 1;
     boolean hasPlayer();
     se.cygni.texasholdem.communication.ClientServer.PBPlayer getPlayer();
     se.cygni.texasholdem.communication.ClientServer.PBPlayerOrBuilder getPlayerOrBuilder();
@@ -8898,7 +8797,7 @@ public final class ClientServer {
     }
     
     private int bitField0_;
-    // required .PBPlayer player = 1;
+    // optional .PBPlayer player = 1;
     public static final int PLAYER_FIELD_NUMBER = 1;
     private se.cygni.texasholdem.communication.ClientServer.PBPlayer player_;
     public boolean hasPlayer() {
@@ -8933,16 +8832,8 @@ public final class ClientServer {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
       
-      if (!hasPlayer()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!getPlayer().isInitialized()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (hasException()) {
-        if (!getException().isInitialized()) {
+      if (hasPlayer()) {
+        if (!getPlayer().isInitialized()) {
           memoizedIsInitialized = 0;
           return false;
         }
@@ -9196,16 +9087,8 @@ public final class ClientServer {
       }
       
       public final boolean isInitialized() {
-        if (!hasPlayer()) {
-          
-          return false;
-        }
-        if (!getPlayer().isInitialized()) {
-          
-          return false;
-        }
-        if (hasException()) {
-          if (!getException().isInitialized()) {
+        if (hasPlayer()) {
+          if (!getPlayer().isInitialized()) {
             
             return false;
           }
@@ -9260,7 +9143,7 @@ public final class ClientServer {
       
       private int bitField0_;
       
-      // required .PBPlayer player = 1;
+      // optional .PBPlayer player = 1;
       private se.cygni.texasholdem.communication.ClientServer.PBPlayer player_ = se.cygni.texasholdem.communication.ClientServer.PBPlayer.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           se.cygni.texasholdem.communication.ClientServer.PBPlayer, se.cygni.texasholdem.communication.ClientServer.PBPlayer.Builder, se.cygni.texasholdem.communication.ClientServer.PBPlayerOrBuilder> playerBuilder_;
@@ -9454,7 +9337,7 @@ public final class ClientServer {
   public interface SmallBlindPlayerResponseOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // required .PBPlayer player = 1;
+    // optional .PBPlayer player = 1;
     boolean hasPlayer();
     se.cygni.texasholdem.communication.ClientServer.PBPlayer getPlayer();
     se.cygni.texasholdem.communication.ClientServer.PBPlayerOrBuilder getPlayerOrBuilder();
@@ -9493,7 +9376,7 @@ public final class ClientServer {
     }
     
     private int bitField0_;
-    // required .PBPlayer player = 1;
+    // optional .PBPlayer player = 1;
     public static final int PLAYER_FIELD_NUMBER = 1;
     private se.cygni.texasholdem.communication.ClientServer.PBPlayer player_;
     public boolean hasPlayer() {
@@ -9528,16 +9411,8 @@ public final class ClientServer {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
       
-      if (!hasPlayer()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!getPlayer().isInitialized()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (hasException()) {
-        if (!getException().isInitialized()) {
+      if (hasPlayer()) {
+        if (!getPlayer().isInitialized()) {
           memoizedIsInitialized = 0;
           return false;
         }
@@ -9791,16 +9666,8 @@ public final class ClientServer {
       }
       
       public final boolean isInitialized() {
-        if (!hasPlayer()) {
-          
-          return false;
-        }
-        if (!getPlayer().isInitialized()) {
-          
-          return false;
-        }
-        if (hasException()) {
-          if (!getException().isInitialized()) {
+        if (hasPlayer()) {
+          if (!getPlayer().isInitialized()) {
             
             return false;
           }
@@ -9855,7 +9722,7 @@ public final class ClientServer {
       
       private int bitField0_;
       
-      // required .PBPlayer player = 1;
+      // optional .PBPlayer player = 1;
       private se.cygni.texasholdem.communication.ClientServer.PBPlayer player_ = se.cygni.texasholdem.communication.ClientServer.PBPlayer.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           se.cygni.texasholdem.communication.ClientServer.PBPlayer, se.cygni.texasholdem.communication.ClientServer.PBPlayer.Builder, se.cygni.texasholdem.communication.ClientServer.PBPlayerOrBuilder> playerBuilder_;
@@ -10049,7 +9916,7 @@ public final class ClientServer {
   public interface BigBlindPlayerResponseOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // required .PBPlayer player = 1;
+    // optional .PBPlayer player = 1;
     boolean hasPlayer();
     se.cygni.texasholdem.communication.ClientServer.PBPlayer getPlayer();
     se.cygni.texasholdem.communication.ClientServer.PBPlayerOrBuilder getPlayerOrBuilder();
@@ -10088,7 +9955,7 @@ public final class ClientServer {
     }
     
     private int bitField0_;
-    // required .PBPlayer player = 1;
+    // optional .PBPlayer player = 1;
     public static final int PLAYER_FIELD_NUMBER = 1;
     private se.cygni.texasholdem.communication.ClientServer.PBPlayer player_;
     public boolean hasPlayer() {
@@ -10123,16 +9990,8 @@ public final class ClientServer {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
       
-      if (!hasPlayer()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!getPlayer().isInitialized()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (hasException()) {
-        if (!getException().isInitialized()) {
+      if (hasPlayer()) {
+        if (!getPlayer().isInitialized()) {
           memoizedIsInitialized = 0;
           return false;
         }
@@ -10386,16 +10245,8 @@ public final class ClientServer {
       }
       
       public final boolean isInitialized() {
-        if (!hasPlayer()) {
-          
-          return false;
-        }
-        if (!getPlayer().isInitialized()) {
-          
-          return false;
-        }
-        if (hasException()) {
-          if (!getException().isInitialized()) {
+        if (hasPlayer()) {
+          if (!getPlayer().isInitialized()) {
             
             return false;
           }
@@ -10450,7 +10301,7 @@ public final class ClientServer {
       
       private int bitField0_;
       
-      // required .PBPlayer player = 1;
+      // optional .PBPlayer player = 1;
       private se.cygni.texasholdem.communication.ClientServer.PBPlayer player_ = se.cygni.texasholdem.communication.ClientServer.PBPlayer.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           se.cygni.texasholdem.communication.ClientServer.PBPlayer, se.cygni.texasholdem.communication.ClientServer.PBPlayer.Builder, se.cygni.texasholdem.communication.ClientServer.PBPlayerOrBuilder> playerBuilder_;
@@ -10737,12 +10588,6 @@ public final class ClientServer {
           return false;
         }
       }
-      if (hasException()) {
-        if (!getException().isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -11018,12 +10863,6 @@ public final class ClientServer {
       public final boolean isInitialized() {
         for (int i = 0; i < getCardsCount(); i++) {
           if (!getCards(i).isInitialized()) {
-            
-            return false;
-          }
-        }
-        if (hasException()) {
-          if (!getException().isInitialized()) {
             
             return false;
           }
@@ -11458,12 +11297,6 @@ public final class ClientServer {
           return false;
         }
       }
-      if (hasException()) {
-        if (!getException().isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -11739,12 +11572,6 @@ public final class ClientServer {
       public final boolean isInitialized() {
         for (int i = 0; i < getCardsCount(); i++) {
           if (!getCards(i).isInitialized()) {
-            
-            return false;
-          }
-        }
-        if (hasException()) {
-          if (!getException().isInitialized()) {
             
             return false;
           }
@@ -12086,7 +11913,7 @@ public final class ClientServer {
   public interface SmallBlindAmountResponseOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // required fixed64 amount = 1;
+    // optional fixed64 amount = 1;
     boolean hasAmount();
     long getAmount();
     
@@ -12124,7 +11951,7 @@ public final class ClientServer {
     }
     
     private int bitField0_;
-    // required fixed64 amount = 1;
+    // optional fixed64 amount = 1;
     public static final int AMOUNT_FIELD_NUMBER = 1;
     private long amount_;
     public boolean hasAmount() {
@@ -12156,16 +11983,6 @@ public final class ClientServer {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
       
-      if (!hasAmount()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (hasException()) {
-        if (!getException().isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -12406,16 +12223,6 @@ public final class ClientServer {
       }
       
       public final boolean isInitialized() {
-        if (!hasAmount()) {
-          
-          return false;
-        }
-        if (hasException()) {
-          if (!getException().isInitialized()) {
-            
-            return false;
-          }
-        }
         return true;
       }
       
@@ -12462,7 +12269,7 @@ public final class ClientServer {
       
       private int bitField0_;
       
-      // required fixed64 amount = 1;
+      // optional fixed64 amount = 1;
       private long amount_ ;
       public boolean hasAmount() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
@@ -12587,7 +12394,7 @@ public final class ClientServer {
   public interface BigBlindAmountResponseOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // required fixed64 amount = 1;
+    // optional fixed64 amount = 1;
     boolean hasAmount();
     long getAmount();
     
@@ -12625,7 +12432,7 @@ public final class ClientServer {
     }
     
     private int bitField0_;
-    // required fixed64 amount = 1;
+    // optional fixed64 amount = 1;
     public static final int AMOUNT_FIELD_NUMBER = 1;
     private long amount_;
     public boolean hasAmount() {
@@ -12657,16 +12464,6 @@ public final class ClientServer {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
       
-      if (!hasAmount()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (hasException()) {
-        if (!getException().isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -12907,16 +12704,6 @@ public final class ClientServer {
       }
       
       public final boolean isInitialized() {
-        if (!hasAmount()) {
-          
-          return false;
-        }
-        if (hasException()) {
-          if (!getException().isInitialized()) {
-            
-            return false;
-          }
-        }
         return true;
       }
       
@@ -12963,7 +12750,7 @@ public final class ClientServer {
       
       private int bitField0_;
       
-      // required fixed64 amount = 1;
+      // optional fixed64 amount = 1;
       private long amount_ ;
       public boolean hasAmount() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
@@ -20608,114 +20395,114 @@ public final class ClientServer {
   static {
     java.lang.String[] descriptorData = {
       "\n\023communication.proto\"\006\n\004Void\"\006\n\004Ping\"\"\n" +
-      "\rVoidInSession\022\021\n\tsessionId\030\001 \002(\t\"J\n\016Exc" +
-      "eptionEvent\022\'\n\rexceptionType\030\001 \002(\0162\020.PBE" +
-      "xceptionType\022\017\n\007message\030\002 \001(\t\"\034\n\tPBMessa" +
-      "ge\022\017\n\007message\030\001 \002(\t\"6\n\006PBCard\022\025\n\004rank\030\001 " +
-      "\002(\0162\007.PBRank\022\025\n\004suit\030\002 \002(\0162\007.PBSuit\"=\n\010P" +
-      "BAction\022!\n\nactionType\030\001 \002(\0162\r.PBActionTy" +
-      "pe\022\016\n\006amount\030\002 \001(\006\"/\n\021PBPossibleActions\022" +
-      "\032\n\007actions\030\001 \003(\0132\t.PBAction\";\n\010PBPlayer\022" +
-      "\014\n\004name\030\001 \002(\t\022\016\n\006inPlay\030\002 \002(\010\022\021\n\tchipCou",
-      "nt\030\003 \002(\006\"\'\n\tPBPlayers\022\032\n\007players\030\001 \003(\0132\t" +
-      ".PBPlayer\"A\n\021PBPlayerWinAmount\022\031\n\006player" +
-      "\030\001 \002(\0132\t.PBPlayer\022\021\n\twinAmount\030\002 \002(\006\"B\n\022" +
-      "PBPlayersWinAmount\022,\n\020playersWinAmount\030\001" +
-      " \003(\0132\022.PBPlayerWinAmount\"G\n\026RegisterForP" +
-      "layRequest\022\022\n\nplayerName\030\001 \002(\t\022\031\n\021previo" +
-      "usSessionId\030\002 \001(\t\"P\n\027RegisterForPlayResp" +
-      "onse\022\021\n\tsessionId\030\001 \002(\t\022\"\n\texception\030\t \001" +
-      "(\0132\017.ExceptionEvent\"J\n\024MyChipAmountRespo" +
-      "nse\022\016\n\006amount\030\001 \002(\006\022\"\n\texception\030\t \001(\0132\017",
-      ".ExceptionEvent\"G\n\021PotAmountResponse\022\016\n\006" +
-      "amount\030\001 \002(\006\022\"\n\texception\030\t \001(\0132\017.Except" +
-      "ionEvent\"P\n\021PlayStateResponse\022\027\n\005state\030\001" +
-      " \002(\0162\010.PBState\022\"\n\texception\030\t \001(\0132\017.Exce" +
-      "ptionEvent\"R\n\017PlayersResponse\022\033\n\007players" +
-      "\030\001 \002(\0132\n.PBPlayers\022\"\n\texception\030\t \001(\0132\017." +
-      "ExceptionEvent\"U\n\024DealerPlayerResponse\022\031" +
-      "\n\006player\030\001 \002(\0132\t.PBPlayer\022\"\n\texception\030\t" +
-      " \001(\0132\017.ExceptionEvent\"Y\n\030SmallBlindPlaye" +
-      "rResponse\022\031\n\006player\030\001 \002(\0132\t.PBPlayer\022\"\n\t",
-      "exception\030\t \001(\0132\017.ExceptionEvent\"W\n\026BigB" +
-      "lindPlayerResponse\022\031\n\006player\030\001 \002(\0132\t.PBP" +
-      "layer\022\"\n\texception\030\t \001(\0132\017.ExceptionEven" +
-      "t\"T\n\026CommunityCardsResponse\022\026\n\005cards\030\001 \003" +
-      "(\0132\007.PBCard\022\"\n\texception\030\t \001(\0132\017.Excepti" +
-      "onEvent\"M\n\017MyCardsResponse\022\026\n\005cards\030\001 \003(" +
-      "\0132\007.PBCard\022\"\n\texception\030\t \001(\0132\017.Exceptio" +
-      "nEvent\"N\n\030SmallBlindAmountResponse\022\016\n\006am" +
-      "ount\030\001 \002(\006\022\"\n\texception\030\t \001(\0132\017.Exceptio" +
-      "nEvent\"L\n\026BigBlindAmountResponse\022\016\n\006amou",
-      "nt\030\001 \002(\006\022\"\n\texception\030\t \001(\0132\017.ExceptionE" +
-      "vent\"H\n\022PlayIsStartedEvent\022\033\n\007players\030\001 " +
-      "\002(\0132\n.PBPlayers\022\025\n\ryourPotAmount\030\002 \002(\006\"3" +
-      "\n\032YouHaveBeenDealtACardEvent\022\025\n\004card\030\001 \002" +
-      "(\0132\007.PBCard\"8\n\037CommunityHasBeenDealtACar" +
-      "dEvent\022\025\n\004card\030\001 \002(\0132\007.PBCard\"G\n\021PlayerF" +
-      "oldedEvent\022\031\n\006player\030\001 \002(\0132\t.PBPlayer\022\027\n" +
-      "\017investmentInPot\030\002 \002(\006\"?\n\021PlayerCalledEv" +
-      "ent\022\031\n\006player\030\001 \002(\0132\t.PBPlayer\022\017\n\007callBe" +
-      "t\030\002 \002(\006\"Q\n\021PlayerRaisedEvent\022\031\n\006player\030\001",
-      " \002(\0132\t.PBPlayer\022\017\n\007callBet\030\002 \002(\006\022\020\n\010rais" +
-      "eBet\030\003 \002(\006\"T\n\024PlayerWentAllInEvent\022\031\n\006pl" +
+      "\rVoidInSession\022\021\n\tsessionId\030\001 \002(\t\"X\n\016Exc" +
+      "eptionEvent\0225\n\rexceptionType\030\001 \001(\0162\020.PBE" +
+      "xceptionType:\014NO_EXCEPTION\022\017\n\007message\030\002 " +
+      "\001(\t\"\034\n\tPBMessage\022\017\n\007message\030\001 \002(\t\"6\n\006PBC" +
+      "ard\022\025\n\004rank\030\001 \002(\0162\007.PBRank\022\025\n\004suit\030\002 \002(\016" +
+      "2\007.PBSuit\"=\n\010PBAction\022!\n\nactionType\030\001 \002(" +
+      "\0162\r.PBActionType\022\016\n\006amount\030\002 \001(\006\"/\n\021PBPo" +
+      "ssibleActions\022\032\n\007actions\030\001 \003(\0132\t.PBActio" +
+      "n\";\n\010PBPlayer\022\014\n\004name\030\001 \002(\t\022\016\n\006inPlay\030\002 ",
+      "\002(\010\022\021\n\tchipCount\030\003 \002(\006\"\'\n\tPBPlayers\022\032\n\007p" +
+      "layers\030\001 \003(\0132\t.PBPlayer\"A\n\021PBPlayerWinAm" +
+      "ount\022\031\n\006player\030\001 \002(\0132\t.PBPlayer\022\021\n\twinAm" +
+      "ount\030\002 \002(\006\"B\n\022PBPlayersWinAmount\022,\n\020play" +
+      "ersWinAmount\030\001 \003(\0132\022.PBPlayerWinAmount\"?" +
+      "\n\026RegisterForPlayRequest\022\022\n\nplayerName\030\001" +
+      " \002(\t\022\021\n\tsessionId\030\002 \001(\t\"P\n\027RegisterForPl" +
+      "ayResponse\022\021\n\tsessionId\030\001 \001(\t\022\"\n\texcepti" +
+      "on\030\t \001(\0132\017.ExceptionEvent\"J\n\024MyChipAmoun" +
+      "tResponse\022\016\n\006amount\030\001 \001(\006\022\"\n\texception\030\t",
+      " \001(\0132\017.ExceptionEvent\"G\n\021PotAmountRespon" +
+      "se\022\016\n\006amount\030\001 \001(\006\022\"\n\texception\030\t \001(\0132\017." +
+      "ExceptionEvent\"P\n\021PlayStateResponse\022\027\n\005s" +
+      "tate\030\001 \001(\0162\010.PBState\022\"\n\texception\030\t \001(\0132" +
+      "\017.ExceptionEvent\"R\n\017PlayersResponse\022\033\n\007p" +
+      "layers\030\001 \001(\0132\n.PBPlayers\022\"\n\texception\030\t " +
+      "\001(\0132\017.ExceptionEvent\"U\n\024DealerPlayerResp" +
+      "onse\022\031\n\006player\030\001 \001(\0132\t.PBPlayer\022\"\n\texcep" +
+      "tion\030\t \001(\0132\017.ExceptionEvent\"Y\n\030SmallBlin" +
+      "dPlayerResponse\022\031\n\006player\030\001 \001(\0132\t.PBPlay",
+      "er\022\"\n\texception\030\t \001(\0132\017.ExceptionEvent\"W" +
+      "\n\026BigBlindPlayerResponse\022\031\n\006player\030\001 \001(\013" +
+      "2\t.PBPlayer\022\"\n\texception\030\t \001(\0132\017.Excepti" +
+      "onEvent\"T\n\026CommunityCardsResponse\022\026\n\005car" +
+      "ds\030\001 \003(\0132\007.PBCard\022\"\n\texception\030\t \001(\0132\017.E" +
+      "xceptionEvent\"M\n\017MyCardsResponse\022\026\n\005card" +
+      "s\030\001 \003(\0132\007.PBCard\022\"\n\texception\030\t \001(\0132\017.Ex" +
+      "ceptionEvent\"N\n\030SmallBlindAmountResponse" +
+      "\022\016\n\006amount\030\001 \001(\006\022\"\n\texception\030\t \001(\0132\017.Ex" +
+      "ceptionEvent\"L\n\026BigBlindAmountResponse\022\016",
+      "\n\006amount\030\001 \001(\006\022\"\n\texception\030\t \001(\0132\017.Exce" +
+      "ptionEvent\"H\n\022PlayIsStartedEvent\022\033\n\007play" +
+      "ers\030\001 \002(\0132\n.PBPlayers\022\025\n\ryourPotAmount\030\002" +
+      " \002(\006\"3\n\032YouHaveBeenDealtACardEvent\022\025\n\004ca" +
+      "rd\030\001 \002(\0132\007.PBCard\"8\n\037CommunityHasBeenDea" +
+      "ltACardEvent\022\025\n\004card\030\001 \002(\0132\007.PBCard\"G\n\021P" +
+      "layerFoldedEvent\022\031\n\006player\030\001 \002(\0132\t.PBPla" +
+      "yer\022\027\n\017investmentInPot\030\002 \002(\006\"?\n\021PlayerCa" +
+      "lledEvent\022\031\n\006player\030\001 \002(\0132\t.PBPlayer\022\017\n\007" +
+      "callBet\030\002 \002(\006\"Q\n\021PlayerRaisedEvent\022\031\n\006pl",
       "ayer\030\001 \002(\0132\t.PBPlayer\022\017\n\007callBet\030\002 \002(\006\022\020" +
-      "\n\010raiseBet\030\003 \002(\006\"/\n\022PlayerCheckedEvent\022\031" +
-      "\n\006player\030\001 \002(\0132\t.PBPlayer\">\n\rShowDownEve" +
-      "nt\022-\n\020playersWinAmount\030\001 \002(\0132\023.PBPlayers" +
-      "WinAmount\"#\n\021YouWonAmountEvent\022\016\n\006amount" +
-      "\030\001 \002(\006\"0\n\023PlayerWithdrewEvent\022\031\n\006player\030" +
-      "\001 \002(\0132\t.PBPlayer*x\n\017PBExceptionType\022\023\n\017I" +
-      "NVALID_SESSION\020\001\022\035\n\031PLAYER_NAME_ALREADY_",
-      "TAKEN\020\002\022\035\n\031NOT_IN_CORRECT_PLAY_STATE\020\n\022\022" +
-      "\n\016INVALID_AMOUNT\020\013*\214\001\n\006PBRank\022\t\n\005DEUCE\020\001" +
-      "\022\t\n\005THREE\020\002\022\010\n\004FOUR\020\003\022\010\n\004FIVE\020\004\022\007\n\003SIX\020\005" +
-      "\022\t\n\005SEVEN\020\006\022\t\n\005EIGHT\020\007\022\010\n\004NINE\020\010\022\007\n\003TEN\020" +
-      "\t\022\010\n\004JACK\020\n\022\t\n\005QUEEN\020\013\022\010\n\004KING\020\014\022\007\n\003ACE\020" +
-      "\r*9\n\006PBSuit\022\t\n\005CLUBS\020\001\022\014\n\010DIAMONDS\020\002\022\n\n\006" +
-      "HEARTS\020\003\022\n\n\006SPADES\020\004*D\n\014PBActionType\022\t\n\005" +
-      "CHECK\020\001\022\010\n\004FOLD\020\002\022\010\n\004CALL\020\003\022\t\n\005RAISE\020\004\022\n" +
-      "\n\006ALL_IN\020\005*U\n\007PBState\022\014\n\010PRE_FLOP\020\001\022\010\n\004F" +
-      "LOP\020\002\022\010\n\004TURN\020\003\022\t\n\005RIVER\020\004\022\014\n\010SHOWDOWN\020\005",
-      "\022\017\n\013NOT_IN_PLAY\020\t2\206\006\n\013GameService\022\024\n\004pin" +
-      "g\022\005.Void\032\005.Ping\022D\n\017registerForPlay\022\027.Reg" +
-      "isterForPlayRequest\032\030.RegisterForPlayRes" +
-      "ponse\022!\n\010withdraw\022\016.VoidInSession\032\005.Void" +
-      "\0228\n\017getMyChipAmount\022\016.VoidInSession\032\025.My" +
-      "ChipAmountResponse\022@\n\023getSmallBlindAmoun" +
-      "t\022\016.VoidInSession\032\031.SmallBlindAmountResp" +
-      "onse\022<\n\021getBigBlindAmount\022\016.VoidInSessio" +
-      "n\032\027.BigBlindAmountResponse\0222\n\014getPotAmou" +
-      "nt\022\016.VoidInSession\032\022.PotAmountResponse\0222",
-      "\n\014getPlayState\022\016.VoidInSession\032\022.PlaySta" +
-      "teResponse\022.\n\ngetPlayers\022\016.VoidInSession" +
-      "\032\020.PlayersResponse\0228\n\017getDealerPlayer\022\016." +
-      "VoidInSession\032\025.DealerPlayerResponse\022@\n\023" +
-      "getSmallBlindPlayer\022\016.VoidInSession\032\031.Sm" +
-      "allBlindPlayerResponse\022<\n\021getBigBlindPla" +
-      "yer\022\016.VoidInSession\032\027.BigBlindPlayerResp" +
-      "onse\022<\n\021getCommunityCards\022\016.VoidInSessio" +
-      "n\032\027.CommunityCardsResponse\022.\n\ngetMyCards" +
-      "\022\016.VoidInSession\032\020.MyCardsResponse2\242\005\n\rP",
-      "layerService\022\024\n\004ping\022\005.Void\032\005.Ping\022)\n\024se" +
-      "rverIsShuttingDown\022\n.PBMessage\032\005.Void\022-\n" +
-      "\017onPlayIsStarted\022\023.PlayIsStartedEvent\032\005." +
-      "Void\022=\n\027onYouHaveBeenDealtACard\022\033.YouHav" +
-      "eBeenDealtACardEvent\032\005.Void\022G\n\034onCommuni" +
-      "tyHasBeenDealtACard\022 .CommunityHasBeenDe" +
-      "altACardEvent\032\005.Void\022+\n\016onPlayerFolded\022\022" +
-      ".PlayerFoldedEvent\032\005.Void\022+\n\016onPlayerCal" +
-      "led\022\022.PlayerCalledEvent\032\005.Void\022+\n\016onPlay" +
-      "erRaised\022\022.PlayerRaisedEvent\032\005.Void\0221\n\021o",
-      "nPlayerWentAllIn\022\025.PlayerWentAllInEvent\032" +
-      "\005.Void\022-\n\017onPlayerChecked\022\023.PlayerChecke" +
-      "dEvent\032\005.Void\022#\n\nonShowDown\022\016.ShowDownEv" +
-      "ent\032\005.Void\022+\n\016onYouWonAmount\022\022.YouWonAmo" +
-      "untEvent\032\005.Void\022/\n\020onPlayerWithdrew\022\024.Pl" +
-      "ayerWithdrewEvent\032\005.Void\022-\n\014onYouMustAct" +
-      "\022\022.PBPossibleActions\032\t.PBActionB7\n\"se.cy" +
-      "gni.texasholdem.communicationB\014ClientSer" +
-      "verH\001\210\001\001"
+      "\n\010raiseBet\030\003 \002(\006\"T\n\024PlayerWentAllInEvent" +
+      "\022\031\n\006player\030\001 \002(\0132\t.PBPlayer\022\017\n\007callBet\030\002" +
+      " \002(\006\022\020\n\010raiseBet\030\003 \002(\006\"/\n\022PlayerCheckedE" +
+      "vent\022\031\n\006player\030\001 \002(\0132\t.PBPlayer\">\n\rShowD" +
+      "ownEvent\022-\n\020playersWinAmount\030\001 \002(\0132\023.PBP" +
+      "layersWinAmount\"#\n\021YouWonAmountEvent\022\016\n\006" +
+      "amount\030\001 \002(\006\"0\n\023PlayerWithdrewEvent\022\031\n\006p" +
+      "layer\030\001 \002(\0132\t.PBPlayer*\212\001\n\017PBExceptionTy" +
+      "pe\022\020\n\014NO_EXCEPTION\020\001\022\023\n\017INVALID_SESSION\020",
+      "\002\022\035\n\031PLAYER_NAME_ALREADY_TAKEN\020\003\022\035\n\031NOT_" +
+      "IN_CORRECT_PLAY_STATE\020\n\022\022\n\016INVALID_AMOUN" +
+      "T\020\013*\214\001\n\006PBRank\022\t\n\005DEUCE\020\001\022\t\n\005THREE\020\002\022\010\n\004" +
+      "FOUR\020\003\022\010\n\004FIVE\020\004\022\007\n\003SIX\020\005\022\t\n\005SEVEN\020\006\022\t\n\005" +
+      "EIGHT\020\007\022\010\n\004NINE\020\010\022\007\n\003TEN\020\t\022\010\n\004JACK\020\n\022\t\n\005" +
+      "QUEEN\020\013\022\010\n\004KING\020\014\022\007\n\003ACE\020\r*9\n\006PBSuit\022\t\n\005" +
+      "CLUBS\020\001\022\014\n\010DIAMONDS\020\002\022\n\n\006HEARTS\020\003\022\n\n\006SPA" +
+      "DES\020\004*D\n\014PBActionType\022\t\n\005CHECK\020\001\022\010\n\004FOLD" +
+      "\020\002\022\010\n\004CALL\020\003\022\t\n\005RAISE\020\004\022\n\n\006ALL_IN\020\005*U\n\007P" +
+      "BState\022\014\n\010PRE_FLOP\020\001\022\010\n\004FLOP\020\002\022\010\n\004TURN\020\003",
+      "\022\t\n\005RIVER\020\004\022\014\n\010SHOWDOWN\020\005\022\017\n\013NOT_IN_PLAY" +
+      "\020\t2\206\006\n\013GameService\022\024\n\004ping\022\005.Void\032\005.Ping" +
+      "\022D\n\017registerForPlay\022\027.RegisterForPlayReq" +
+      "uest\032\030.RegisterForPlayResponse\022!\n\010withdr" +
+      "aw\022\016.VoidInSession\032\005.Void\0228\n\017getMyChipAm" +
+      "ount\022\016.VoidInSession\032\025.MyChipAmountRespo" +
+      "nse\022@\n\023getSmallBlindAmount\022\016.VoidInSessi" +
+      "on\032\031.SmallBlindAmountResponse\022<\n\021getBigB" +
+      "lindAmount\022\016.VoidInSession\032\027.BigBlindAmo" +
+      "untResponse\0222\n\014getPotAmount\022\016.VoidInSess",
+      "ion\032\022.PotAmountResponse\0222\n\014getPlayState\022" +
+      "\016.VoidInSession\032\022.PlayStateResponse\022.\n\ng" +
+      "etPlayers\022\016.VoidInSession\032\020.PlayersRespo" +
+      "nse\0228\n\017getDealerPlayer\022\016.VoidInSession\032\025" +
+      ".DealerPlayerResponse\022@\n\023getSmallBlindPl" +
+      "ayer\022\016.VoidInSession\032\031.SmallBlindPlayerR" +
+      "esponse\022<\n\021getBigBlindPlayer\022\016.VoidInSes" +
+      "sion\032\027.BigBlindPlayerResponse\022<\n\021getComm" +
+      "unityCards\022\016.VoidInSession\032\027.CommunityCa" +
+      "rdsResponse\022.\n\ngetMyCards\022\016.VoidInSessio",
+      "n\032\020.MyCardsResponse2\242\005\n\rPlayerService\022\024\n" +
+      "\004ping\022\005.Void\032\005.Ping\022)\n\024serverIsShuttingD" +
+      "own\022\n.PBMessage\032\005.Void\022-\n\017onPlayIsStarte" +
+      "d\022\023.PlayIsStartedEvent\032\005.Void\022=\n\027onYouHa" +
+      "veBeenDealtACard\022\033.YouHaveBeenDealtACard" +
+      "Event\032\005.Void\022G\n\034onCommunityHasBeenDealtA" +
+      "Card\022 .CommunityHasBeenDealtACardEvent\032\005" +
+      ".Void\022+\n\016onPlayerFolded\022\022.PlayerFoldedEv" +
+      "ent\032\005.Void\022+\n\016onPlayerCalled\022\022.PlayerCal" +
+      "ledEvent\032\005.Void\022+\n\016onPlayerRaised\022\022.Play",
+      "erRaisedEvent\032\005.Void\0221\n\021onPlayerWentAllI" +
+      "n\022\025.PlayerWentAllInEvent\032\005.Void\022-\n\017onPla" +
+      "yerChecked\022\023.PlayerCheckedEvent\032\005.Void\022#" +
+      "\n\nonShowDown\022\016.ShowDownEvent\032\005.Void\022+\n\016o" +
+      "nYouWonAmount\022\022.YouWonAmountEvent\032\005.Void" +
+      "\022/\n\020onPlayerWithdrew\022\024.PlayerWithdrewEve" +
+      "nt\032\005.Void\022-\n\014onYouMustAct\022\022.PBPossibleAc" +
+      "tions\032\t.PBActionB7\n\"se.cygni.texasholdem" +
+      ".communicationB\014ClientServerH\001\210\001\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -20823,7 +20610,7 @@ public final class ClientServer {
           internal_static_RegisterForPlayRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_RegisterForPlayRequest_descriptor,
-              new java.lang.String[] { "PlayerName", "PreviousSessionId", },
+              new java.lang.String[] { "PlayerName", "SessionId", },
               se.cygni.texasholdem.communication.ClientServer.RegisterForPlayRequest.class,
               se.cygni.texasholdem.communication.ClientServer.RegisterForPlayRequest.Builder.class);
           internal_static_RegisterForPlayResponse_descriptor =

@@ -49,7 +49,7 @@ public class GameService {
     private static Logger log = LoggerFactory.getLogger(GameService.class);
 
     private final PlayerInterface player;
-    private final int clientPort = 1147;
+    private final int clientPort = 4711;
     private final String clientHostname = UUID.randomUUID().toString();
 
     private final PlayerServiceImpl playerService;
@@ -60,14 +60,15 @@ public class GameService {
     private RpcClientChannel serverChannel;
     private BlockingInterface gameService;
 
-    private String sessionId;
-
     public GameService(final PlayerInterface player, final int serverPort,
             final String serverHostname) {
 
         this.player = player;
 
+        // the client PeerInfo is only used as a sessionId
         clientPeerInfo = new PeerInfo(clientHostname, clientPort);
+
+        // the server PeerInfo is used to locate host and port
         serverPeerInfo = new PeerInfo(serverHostname, serverPort);
 
         playerService = new PlayerServiceImpl(player);
@@ -332,7 +333,7 @@ public class GameService {
             final RegisterForPlayRequest request =
                     RegisterForPlayRequest.newBuilder()
                             .setPlayerName(player.getName())
-                            .setPreviousSessionId(getSessionId()).build();
+                            .setSessionId(getSessionId()).build();
 
             final RegisterForPlayResponse response = gameService
                     .registerForPlay(
@@ -340,7 +341,6 @@ public class GameService {
                             request);
 
             ConversionUtil.checkForException(response.getException());
-            setSessionId(response.getSessionId());
 
             log.debug("My sessionId: {}", getSessionId());
 
@@ -424,12 +424,7 @@ public class GameService {
 
     public String getSessionId() {
 
-        return sessionId;
-    }
-
-    public void setSessionId(final String sessionId) {
-
-        this.sessionId = sessionId;
+        return clientPeerInfo.toString();
     }
 
 }

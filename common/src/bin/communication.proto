@@ -15,14 +15,15 @@ message VoidInSession {
 }
 
 enum PBExceptionType {
-    INVALID_SESSION = 1;
-    PLAYER_NAME_ALREADY_TAKEN = 2;
+    NO_EXCEPTION = 1;
+    INVALID_SESSION = 2;
+    PLAYER_NAME_ALREADY_TAKEN = 3;
     NOT_IN_CORRECT_PLAY_STATE = 10;
     INVALID_AMOUNT = 11;
 }
 
 message ExceptionEvent {
-    required PBExceptionType exceptionType = 1;
+    optional PBExceptionType exceptionType = 1 [default = NO_EXCEPTION];
     optional string message = 2;
 }
 
@@ -109,46 +110,46 @@ message PBPlayersWinAmount {
 
 message RegisterForPlayRequest {
     required string playerName = 1;
-    optional string previousSessionId = 2;
+    optional string sessionId = 2;
 }
 
 message RegisterForPlayResponse {
-    required string sessionId = 1;
+    optional string sessionId = 1;
     optional ExceptionEvent exception = 9;
 }
 
 message MyChipAmountResponse {
-    required fixed64 amount = 1;
+    optional fixed64 amount = 1;
     optional ExceptionEvent exception = 9;
 }
 
 message PotAmountResponse {
-    required fixed64 amount = 1;
+    optional fixed64 amount = 1;
     optional ExceptionEvent exception = 9;
 }
 
 message PlayStateResponse {
-    required PBState state = 1;
+    optional PBState state = 1;
     optional ExceptionEvent exception = 9;
 }
 
 message PlayersResponse {
-    required PBPlayers players = 1;
+    optional PBPlayers players = 1;
     optional ExceptionEvent exception = 9;
 }
 
 message DealerPlayerResponse {
-    required PBPlayer player = 1;
+    optional PBPlayer player = 1;
     optional ExceptionEvent exception = 9;
 }
 
 message SmallBlindPlayerResponse {
-    required PBPlayer player = 1;
+    optional PBPlayer player = 1;
     optional ExceptionEvent exception = 9;
 }
 
 message BigBlindPlayerResponse {
-    required PBPlayer player = 1;
+    optional PBPlayer player = 1;
     optional ExceptionEvent exception = 9;
 }
 
@@ -163,12 +164,12 @@ message MyCardsResponse {
 }
 
 message SmallBlindAmountResponse {
-    required fixed64 amount = 1;
+    optional fixed64 amount = 1;
     optional ExceptionEvent exception = 9;
 }
 
 message BigBlindAmountResponse {
-    required fixed64 amount = 1;
+    optional fixed64 amount = 1;
     optional ExceptionEvent exception = 9;
 }
 
