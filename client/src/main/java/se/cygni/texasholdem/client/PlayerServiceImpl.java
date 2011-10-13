@@ -60,11 +60,8 @@ public class PlayerServiceImpl implements
             final PBMessage request,
             final RpcCallback<Void> done) {
 
-        try {
-            player.serverIsShuttingDown(request.getMessage());
-        } finally {
-            returnVoid(done);
-        }
+        returnVoid(done);
+        player.serverIsShuttingDown(request.getMessage());
     }
 
     @Override
@@ -73,12 +70,9 @@ public class PlayerServiceImpl implements
             final PlayIsStartedEvent request,
             final RpcCallback<Void> done) {
 
-        try {
-            player.onPlayIsStarted(ConversionUtil
-                    .convertPBPlayers(request.getPlayers()));
-        } finally {
-            returnVoid(done);
-        }
+        returnVoid(done);
+        player.onPlayIsStarted(ConversionUtil
+                .convertPBPlayers(request.getPlayers()));
     }
 
     @Override
@@ -87,12 +81,9 @@ public class PlayerServiceImpl implements
             final YouHaveBeenDealtACardEvent request,
             final RpcCallback<Void> done) {
 
-        try {
-            player.onYouHaveBeenDealtACard(ConversionUtil.convertPBCard(request
-                    .getCard()));
-        } finally {
-            returnVoid(done);
-        }
+        returnVoid(done);
+        player.onYouHaveBeenDealtACard(ConversionUtil.convertPBCard(request
+                .getCard()));
     }
 
     @Override
@@ -101,13 +92,10 @@ public class PlayerServiceImpl implements
             final CommunityHasBeenDealtACardEvent request,
             final RpcCallback<Void> done) {
 
-        try {
-            player.onCommunityHasBeenDealtACard(ConversionUtil
-                    .convertPBCard(request
-                            .getCard()));
-        } finally {
-            returnVoid(done);
-        }
+        returnVoid(done);
+        player.onCommunityHasBeenDealtACard(ConversionUtil
+                .convertPBCard(request
+                        .getCard()));
     }
 
     @Override
@@ -116,12 +104,9 @@ public class PlayerServiceImpl implements
             final PlayerFoldedEvent request,
             final RpcCallback<Void> done) {
 
-        try {
-            player.onPlayerFolded(ConversionUtil.convertPBPlayer(request
-                    .getPlayer()));
-        } finally {
-            returnVoid(done);
-        }
+        returnVoid(done);
+        player.onPlayerFolded(ConversionUtil.convertPBPlayer(request
+                .getPlayer()));
     }
 
     @Override
@@ -130,12 +115,9 @@ public class PlayerServiceImpl implements
             final PlayerCalledEvent request,
             final RpcCallback<Void> done) {
 
-        try {
-            player.onPlayerFolded(ConversionUtil.convertPBPlayer(request
-                    .getPlayer()));
-        } finally {
-            returnVoid(done);
-        }
+        returnVoid(done);
+        player.onPlayerFolded(ConversionUtil.convertPBPlayer(request
+                .getPlayer()));
     }
 
     @Override
@@ -144,12 +126,9 @@ public class PlayerServiceImpl implements
             final PlayerRaisedEvent request,
             final RpcCallback<Void> done) {
 
-        try {
-            player.onPlayerRaised(ConversionUtil.convertPBPlayer(request
-                    .getPlayer()), request.getCallBet(), request.getRaiseBet());
-        } finally {
-            returnVoid(done);
-        }
+        returnVoid(done);
+        player.onPlayerRaised(ConversionUtil.convertPBPlayer(request
+                .getPlayer()), request.getCallBet(), request.getRaiseBet());
     }
 
     @Override
@@ -158,12 +137,9 @@ public class PlayerServiceImpl implements
             final PlayerWentAllInEvent request,
             final RpcCallback<Void> done) {
 
-        try {
-            player.onPlayerRaised(ConversionUtil.convertPBPlayer(request
-                    .getPlayer()), request.getCallBet(), request.getRaiseBet());
-        } finally {
-            returnVoid(done);
-        }
+        returnVoid(done);
+        player.onPlayerRaised(ConversionUtil.convertPBPlayer(request
+                .getPlayer()), request.getCallBet(), request.getRaiseBet());
     }
 
     @Override
@@ -172,12 +148,9 @@ public class PlayerServiceImpl implements
             final PlayerCheckedEvent request,
             final RpcCallback<Void> done) {
 
-        try {
-            player.onPlayerChecked(ConversionUtil.convertPBPlayer(request
-                    .getPlayer()));
-        } finally {
-            returnVoid(done);
-        }
+        returnVoid(done);
+        player.onPlayerChecked(ConversionUtil.convertPBPlayer(request
+                .getPlayer()));
     }
 
     @Override
@@ -186,15 +159,12 @@ public class PlayerServiceImpl implements
             final ShowDownEvent request,
             final RpcCallback<Void> done) {
 
-        try {
-            for (final PBPlayerWinAmount pw : request.getPlayersWinAmount()
-                    .getPlayersWinAmountList()) {
-                player.onPlayerWonAmount(
-                        ConversionUtil.convertPBPlayer(pw.getPlayer()),
-                        pw.getWinAmount());
-            }
-        } finally {
-            returnVoid(done);
+        returnVoid(done);
+        for (final PBPlayerWinAmount pw : request.getPlayersWinAmount()
+                .getPlayersWinAmountList()) {
+            player.onPlayerWonAmount(
+                    ConversionUtil.convertPBPlayer(pw.getPlayer()),
+                    pw.getWinAmount());
         }
     }
 
@@ -204,11 +174,8 @@ public class PlayerServiceImpl implements
             final YouWonAmountEvent request,
             final RpcCallback<Void> done) {
 
-        try {
-            player.onYouWonAmount(request.getAmount());
-        } finally {
-            returnVoid(done);
-        }
+        returnVoid(done);
+        player.onYouWonAmount(request.getAmount());
     }
 
     @Override
@@ -217,12 +184,9 @@ public class PlayerServiceImpl implements
             final PlayerWithdrewEvent request,
             final RpcCallback<Void> done) {
 
-        try {
-            player.onPlayerWithdrew(ConversionUtil.convertPBPlayer(request
-                    .getPlayer()));
-        } finally {
-            returnVoid(done);
-        }
+        returnVoid(done);
+        player.onPlayerWithdrew(ConversionUtil.convertPBPlayer(request
+                .getPlayer()));
     }
 
     @Override
