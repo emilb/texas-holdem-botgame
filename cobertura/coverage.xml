@@ -1,2952 +1,824 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.657556270096463" branch-rate="0.7738095238095238" lines-covered="409" lines-valid="622" branches-covered="195" branches-valid="252" complexity="2.564516129032258" version="1.9.4.1" timestamp="1318711054318">
+<coverage line-rate="0.0" branch-rate="0.0" lines-covered="0" lines-valid="256" branches-covered="0" branches-valid="4" complexity="1.5507246376811594" version="1.9.4.1" timestamp="1318711069144">
 	<sources>
+		<source>/Users/emil/projects/java/texas-holdem-botgame/client/src/main/java</source>
 		<source>--source</source>
-		<source>/Users/emil/projects/java/texas-holdem-botgame/server/src/main/java</source>
 	</sources>
 	<packages>
-		<package name="se.cygni.texasholdem" line-rate="0.25925925925925924" branch-rate="0.0" complexity="1.25">
+		<package name="se.cygni.texasholdem.client" line-rate="0.0" branch-rate="0.0" complexity="1.1764705882352942">
 			<classes>
-				<class name="se.cygni.texasholdem.SpringConfig" filename="se/cygni/texasholdem/SpringConfig.java" line-rate="0.0" branch-rate="1.0" complexity="1.0">
+				<class name="se.cygni.texasholdem.client.Main" filename="se/cygni/texasholdem/client/Main.java" line-rate="0.0" branch-rate="1.0" complexity="1.0">
 					<methods>
 						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="12" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="rpcServer" signature="()Lse/cygni/texasholdem/server/RpcServer;" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="26" hits="0" branch="false"/>
-							</lines>
-						</method>
-					</methods>
-					<lines>
-						<line number="12" hits="0" branch="false"/>
-						<line number="26" hits="0" branch="false"/>
-					</lines>
-				</class>
-				<class name="se.cygni.texasholdem.SystemSettings" filename="se/cygni/texasholdem/SystemSettings.java" line-rate="0.5833333333333334" branch-rate="1.0" complexity="1.0">
-					<methods>
-						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="20" hits="1" branch="false"/>
-								<line number="21" hits="1" branch="false"/>
-								<line number="23" hits="1" branch="false"/>
-								<line number="25" hits="1" branch="false"/>
-								<line number="27" hits="1" branch="false"/>
-								<line number="28" hits="1" branch="false"/>
-							</lines>
-						</method>
-						<method name="getHost" signature="()Ljava/lang/String;" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="37" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="getPort" signature="()I" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="32" hits="1" branch="false"/>
-							</lines>
-						</method>
-						<method name="setHost" signature="(Ljava/lang/String;)V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="49" hits="0" branch="false"/>
-								<line number="50" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="setPort" signature="(I)V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="43" hits="0" branch="false"/>
-								<line number="44" hits="0" branch="false"/>
-							</lines>
-						</method>
-					</methods>
-					<lines>
-						<line number="20" hits="1" branch="false"/>
-						<line number="21" hits="1" branch="false"/>
-						<line number="23" hits="1" branch="false"/>
-						<line number="25" hits="1" branch="false"/>
-						<line number="27" hits="1" branch="false"/>
-						<line number="28" hits="1" branch="false"/>
-						<line number="32" hits="1" branch="false"/>
-						<line number="37" hits="0" branch="false"/>
-						<line number="43" hits="0" branch="false"/>
-						<line number="44" hits="0" branch="false"/>
-						<line number="49" hits="0" branch="false"/>
-						<line number="50" hits="0" branch="false"/>
-					</lines>
-				</class>
-				<class name="se.cygni.texasholdem.TexasHoldem" filename="se/cygni/texasholdem/TexasHoldem.java" line-rate="0.0" branch-rate="0.0" complexity="2.0">
-					<methods>
-						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="8" hits="0" branch="false"/>
+								<line number="9" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="main" signature="([Ljava/lang/String;)V" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="12" hits="0" branch="false"/>
-								<line number="14" hits="0" branch="false"/>
-								<line number="15" hits="0" branch="false"/>
-								<line number="16" hits="0" branch="false"/>
+								<line number="17" hits="0" branch="false"/>
 								<line number="18" hits="0" branch="false"/>
 								<line number="20" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="setArgsAsSystemProperties" signature="([Ljava/lang/String;)V" line-rate="0.0" branch-rate="0.0">
-							<lines>
-								<line number="24" hits="0" branch="true" condition-coverage="0% (0/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="25" hits="0" branch="false"/>
-								<line number="26" hits="0" branch="true" condition-coverage="0% (0/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="27" hits="0" branch="false"/>
-								<line number="29" hits="0" branch="false"/>
-								<line number="33" hits="0" branch="false"/>
-							</lines>
-						</method>
-					</methods>
-					<lines>
-						<line number="8" hits="0" branch="false"/>
-						<line number="12" hits="0" branch="false"/>
-						<line number="14" hits="0" branch="false"/>
-						<line number="15" hits="0" branch="false"/>
-						<line number="16" hits="0" branch="false"/>
-						<line number="18" hits="0" branch="false"/>
-						<line number="20" hits="0" branch="false"/>
-						<line number="24" hits="0" branch="true" condition-coverage="0% (0/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="25" hits="0" branch="false"/>
-						<line number="26" hits="0" branch="true" condition-coverage="0% (0/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="27" hits="0" branch="false"/>
-						<line number="29" hits="0" branch="false"/>
-						<line number="33" hits="0" branch="false"/>
-					</lines>
-				</class>
-			</classes>
-		</package>
-		<package name="se.cygni.texasholdem.game" line-rate="0.6666666666666666" branch-rate="0.5" complexity="2.0">
-			<classes>
-				<class name="se.cygni.texasholdem.game.BestHand" filename="se/cygni/texasholdem/game/BestHand.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
-					<methods>
-						<method name="&lt;init&gt;" signature="(Ljava/util/List;Lse/cygni/texasholdem/game/definitions/PokerHand;)V" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="12" hits="30" branch="false"/>
-								<line number="14" hits="30" branch="false"/>
-								<line number="15" hits="30" branch="false"/>
-								<line number="16" hits="30" branch="false"/>
-							</lines>
-						</method>
-						<method name="getCards" signature="()Ljava/util/List;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="20" hits="30" branch="false"/>
-							</lines>
-						</method>
-						<method name="getPokerHand" signature="()Lse/cygni/texasholdem/game/definitions/PokerHand;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="25" hits="30" branch="false"/>
-							</lines>
-						</method>
-					</methods>
-					<lines>
-						<line number="12" hits="30" branch="false"/>
-						<line number="14" hits="30" branch="false"/>
-						<line number="15" hits="30" branch="false"/>
-						<line number="16" hits="30" branch="false"/>
-						<line number="20" hits="30" branch="false"/>
-						<line number="25" hits="30" branch="false"/>
-					</lines>
-				</class>
-				<class name="se.cygni.texasholdem.game.BotPlayer" filename="se/cygni/texasholdem/game/BotPlayer.java" line-rate="0.6" branch-rate="0.5" complexity="2.3333333333333335">
-					<methods>
-						<method name="&lt;init&gt;" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="10" hits="48" branch="false"/>
-								<line number="12" hits="48" branch="false"/>
-								<line number="14" hits="48" branch="false"/>
-								<line number="15" hits="48" branch="false"/>
-								<line number="16" hits="48" branch="false"/>
-							</lines>
-						</method>
-						<method name="clearCards" signature="()V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="40" hits="0" branch="false"/>
-								<line number="41" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="equals" signature="(Ljava/lang/Object;)Z" line-rate="0.6153846153846154" branch-rate="0.5">
-							<lines>
-								<line number="62" hits="596" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="63" hits="159" branch="false"/>
-								<line number="64" hits="437" branch="true" condition-coverage="50% (1/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="50%"/>
-									</conditions>
-								</line>
-								<line number="65" hits="0" branch="false"/>
-								<line number="66" hits="437" branch="true" condition-coverage="50% (1/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="50%"/>
-									</conditions>
-								</line>
-								<line number="67" hits="0" branch="false"/>
-								<line number="68" hits="437" branch="false"/>
-								<line number="69" hits="437" branch="true" condition-coverage="50% (1/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="50%"/>
-									</conditions>
-								</line>
-								<line number="70" hits="0" branch="true" condition-coverage="0% (0/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="71" hits="0" branch="false"/>
-								<line number="72" hits="437" branch="true" condition-coverage="50% (1/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="50%"/>
-									</conditions>
-								</line>
-								<line number="73" hits="437" branch="false"/>
-								<line number="74" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="getCards" signature="()Ljava/util/List;" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="30" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="getName" signature="()Ljava/lang/String;" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="20" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="getSessionId" signature="()Ljava/lang/String;" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="25" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="hashCode" signature="()I" line-rate="1.0" branch-rate="0.5">
-							<lines>
-								<line number="52" hits="247" branch="false"/>
-								<line number="53" hits="247" branch="false"/>
-								<line number="54" hits="247" branch="true" condition-coverage="50% (1/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="50%"/>
-									</conditions>
-								</line>
-								<line number="56" hits="247" branch="false"/>
-							</lines>
-						</method>
-						<method name="receiveCard" signature="(Lse/cygni/texasholdem/game/Card;)V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="35" hits="0" branch="false"/>
-								<line number="36" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="toString" signature="()Ljava/lang/String;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="46" hits="5" branch="false"/>
-							</lines>
-						</method>
-					</methods>
-					<lines>
-						<line number="10" hits="48" branch="false"/>
-						<line number="12" hits="48" branch="false"/>
-						<line number="14" hits="48" branch="false"/>
-						<line number="15" hits="48" branch="false"/>
-						<line number="16" hits="48" branch="false"/>
-						<line number="20" hits="0" branch="false"/>
-						<line number="25" hits="0" branch="false"/>
-						<line number="30" hits="0" branch="false"/>
-						<line number="35" hits="0" branch="false"/>
-						<line number="36" hits="0" branch="false"/>
-						<line number="40" hits="0" branch="false"/>
-						<line number="41" hits="0" branch="false"/>
-						<line number="46" hits="5" branch="false"/>
-						<line number="52" hits="247" branch="false"/>
-						<line number="53" hits="247" branch="false"/>
-						<line number="54" hits="247" branch="true" condition-coverage="50% (1/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="50%"/>
-							</conditions>
-						</line>
-						<line number="56" hits="247" branch="false"/>
-						<line number="62" hits="596" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="63" hits="159" branch="false"/>
-						<line number="64" hits="437" branch="true" condition-coverage="50% (1/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="50%"/>
-							</conditions>
-						</line>
-						<line number="65" hits="0" branch="false"/>
-						<line number="66" hits="437" branch="true" condition-coverage="50% (1/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="50%"/>
-							</conditions>
-						</line>
-						<line number="67" hits="0" branch="false"/>
-						<line number="68" hits="437" branch="false"/>
-						<line number="69" hits="437" branch="true" condition-coverage="50% (1/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="50%"/>
-							</conditions>
-						</line>
-						<line number="70" hits="0" branch="true" condition-coverage="0% (0/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="71" hits="0" branch="false"/>
-						<line number="72" hits="437" branch="true" condition-coverage="50% (1/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="50%"/>
-							</conditions>
-						</line>
-						<line number="73" hits="437" branch="false"/>
-						<line number="74" hits="0" branch="false"/>
-					</lines>
-				</class>
-			</classes>
-		</package>
-		<package name="se.cygni.texasholdem.game.definitions" line-rate="0.8809523809523809" branch-rate="0.75" complexity="1.5714285714285714">
-			<classes>
-				<class name="se.cygni.texasholdem.game.definitions.CardSortBy" filename="se/cygni/texasholdem/game/definitions/CardSortBy.java" line-rate="1.0" branch-rate="1.0" complexity="2.0">
-					<methods>
-						<method name="&lt;clinit&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="7" hits="1" branch="false"/>
-								<line number="9" hits="1" branch="false"/>
-								<line number="31" hits="1" branch="false"/>
-							</lines>
-						</method>
-						<method name="&lt;init&gt;" signature="(Ljava/lang/String;ILjava/util/Comparator;)V" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="55" hits="2" branch="false"/>
-								<line number="57" hits="2" branch="false"/>
-								<line number="58" hits="2" branch="false"/>
-							</lines>
-						</method>
-						<method name="getComparator" signature="()Ljava/util/Comparator;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="62" hits="82" branch="false"/>
-							</lines>
-						</method>
-						<method name="valueOf" signature="(Ljava/lang/String;)Lse/cygni/texasholdem/game/definitions/CardSortBy;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-							</lines>
-						</method>
-						<method name="values" signature="()[Lse/cygni/texasholdem/game/definitions/CardSortBy;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-							</lines>
-						</method>
-					</methods>
-					<lines>
-						<line number="7" hits="1" branch="false"/>
-						<line number="9" hits="1" branch="false"/>
-						<line number="31" hits="1" branch="false"/>
-						<line number="55" hits="2" branch="false"/>
-						<line number="57" hits="2" branch="false"/>
-						<line number="58" hits="2" branch="false"/>
-						<line number="62" hits="82" branch="false"/>
-					</lines>
-				</class>
-				<class name="se.cygni.texasholdem.game.definitions.CardSortBy$1" filename="se/cygni/texasholdem/game/definitions/CardSortBy.java" line-rate="1.0" branch-rate="1.0" complexity="2.0">
-					<methods>
-						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
-							<lines>
-							</lines>
-						</method>
-						<method name="compare" signature="(Ljava/lang/Object;Ljava/lang/Object;)I" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="9" hits="432" branch="false"/>
-							</lines>
-						</method>
-						<method name="compare" signature="(Lse/cygni/texasholdem/game/Card;Lse/cygni/texasholdem/game/Card;)I" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="14" hits="431" branch="false"/>
-								<line number="16" hits="431" branch="false"/>
-								<line number="19" hits="431" branch="false"/>
-								<line number="20" hits="431" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="21" hits="14" branch="false"/>
-								<line number="22" hits="14" branch="false"/>
-								<line number="24" hits="14" branch="false"/>
-								<line number="27" hits="417" branch="false"/>
-							</lines>
-						</method>
-					</methods>
-					<lines>
-						<line number="9" hits="432" branch="false"/>
-						<line number="14" hits="431" branch="false"/>
-						<line number="16" hits="431" branch="false"/>
-						<line number="19" hits="431" branch="false"/>
-						<line number="20" hits="431" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="21" hits="14" branch="false"/>
-						<line number="22" hits="14" branch="false"/>
-						<line number="24" hits="14" branch="false"/>
-						<line number="27" hits="417" branch="false"/>
-					</lines>
-				</class>
-				<class name="se.cygni.texasholdem.game.definitions.CardSortBy$2" filename="se/cygni/texasholdem/game/definitions/CardSortBy.java" line-rate="0.6666666666666666" branch-rate="0.5" complexity="2.0">
-					<methods>
-						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
-							<lines>
-							</lines>
-						</method>
-						<method name="compare" signature="(Ljava/lang/Object;Ljava/lang/Object;)I" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="31" hits="56" branch="false"/>
-							</lines>
-						</method>
-						<method name="compare" signature="(Lse/cygni/texasholdem/game/Card;Lse/cygni/texasholdem/game/Card;)I" line-rate="0.625" branch-rate="0.5">
-							<lines>
-								<line number="36" hits="55" branch="false"/>
-								<line number="37" hits="55" branch="false"/>
-								<line number="39" hits="55" branch="false"/>
-								<line number="40" hits="55" branch="true" condition-coverage="50% (1/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="50%"/>
-									</conditions>
-								</line>
-								<line number="41" hits="0" branch="false"/>
-								<line number="43" hits="0" branch="false"/>
-								<line number="46" hits="0" branch="false"/>
-								<line number="49" hits="55" branch="false"/>
-							</lines>
-						</method>
-					</methods>
-					<lines>
-						<line number="31" hits="56" branch="false"/>
-						<line number="36" hits="55" branch="false"/>
-						<line number="37" hits="55" branch="false"/>
-						<line number="39" hits="55" branch="false"/>
-						<line number="40" hits="55" branch="true" condition-coverage="50% (1/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="50%"/>
-							</conditions>
-						</line>
-						<line number="41" hits="0" branch="false"/>
-						<line number="43" hits="0" branch="false"/>
-						<line number="46" hits="0" branch="false"/>
-						<line number="49" hits="55" branch="false"/>
-					</lines>
-				</class>
-				<class name="se.cygni.texasholdem.game.definitions.PokerHand" filename="se/cygni/texasholdem/game/definitions/PokerHand.java" line-rate="0.8823529411764706" branch-rate="1.0" complexity="1.0">
-					<methods>
-						<method name="&lt;clinit&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="3" hits="1" branch="false"/>
-								<line number="5" hits="1" branch="false"/>
-								<line number="6" hits="1" branch="false"/>
-								<line number="7" hits="1" branch="false"/>
-								<line number="8" hits="1" branch="false"/>
-								<line number="9" hits="1" branch="false"/>
-								<line number="10" hits="1" branch="false"/>
-								<line number="11" hits="1" branch="false"/>
-								<line number="12" hits="1" branch="false"/>
-								<line number="13" hits="1" branch="false"/>
-								<line number="14" hits="1" branch="false"/>
-							</lines>
-						</method>
-						<method name="&lt;init&gt;" signature="(Ljava/lang/String;IILjava/lang/String;)V" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="19" hits="10" branch="false"/>
-								<line number="21" hits="10" branch="false"/>
-								<line number="22" hits="10" branch="false"/>
-								<line number="23" hits="10" branch="false"/>
-							</lines>
-						</method>
-						<method name="getName" signature="()Ljava/lang/String;" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="32" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="getOrderValue" signature="()I" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="27" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="valueOf" signature="(Ljava/lang/String;)Lse/cygni/texasholdem/game/definitions/PokerHand;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-							</lines>
-						</method>
-						<method name="values" signature="()[Lse/cygni/texasholdem/game/definitions/PokerHand;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-							</lines>
-						</method>
-					</methods>
-					<lines>
-						<line number="3" hits="1" branch="false"/>
-						<line number="5" hits="1" branch="false"/>
-						<line number="6" hits="1" branch="false"/>
-						<line number="7" hits="1" branch="false"/>
-						<line number="8" hits="1" branch="false"/>
-						<line number="9" hits="1" branch="false"/>
-						<line number="10" hits="1" branch="false"/>
-						<line number="11" hits="1" branch="false"/>
-						<line number="12" hits="1" branch="false"/>
-						<line number="13" hits="1" branch="false"/>
-						<line number="14" hits="1" branch="false"/>
-						<line number="19" hits="10" branch="false"/>
-						<line number="21" hits="10" branch="false"/>
-						<line number="22" hits="10" branch="false"/>
-						<line number="23" hits="10" branch="false"/>
-						<line number="27" hits="0" branch="false"/>
-						<line number="32" hits="0" branch="false"/>
-					</lines>
-				</class>
-			</classes>
-		</package>
-		<package name="se.cygni.texasholdem.game.pot" line-rate="0.9876543209876543" branch-rate="1.0" complexity="2.6470588235294117">
-			<classes>
-				<class name="se.cygni.texasholdem.game.pot.Pot" filename="se/cygni/texasholdem/game/pot/Pot.java" line-rate="1.0" branch-rate="1.0" complexity="3.1538461538461537">
-					<methods>
-						<method name="&lt;init&gt;" signature="(Ljava/util/List;)V" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="25" hits="12" branch="false"/>
-								<line number="26" hits="12" branch="false"/>
-								<line number="28" hits="12" branch="false"/>
-								<line number="30" hits="12" branch="false"/>
-								<line number="32" hits="12" branch="false"/>
-								<line number="34" hits="12" branch="false"/>
-								<line number="35" hits="12" branch="false"/>
-							</lines>
-						</method>
-						<method name="bet" signature="(Lse/cygni/texasholdem/game/BotPlayer;J)V" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="69" hits="63" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="70" hits="2" branch="false"/>
-								<line number="73" hits="61" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="74" hits="4" branch="false"/>
-								<line number="77" hits="57" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="78" hits="1" branch="false"/>
-								<line number="81" hits="56" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="82" hits="2" branch="false"/>
-								<line number="84" hits="54" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="85" hits="10" branch="false"/>
-								<line number="89" hits="54" branch="false"/>
-								<line number="91" hits="54" branch="false"/>
-								<line number="92" hits="54" branch="false"/>
-							</lines>
-						</method>
-						<method name="canPlaceBetInCurrentPlayState" signature="()Z" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="257" hits="63" branch="false"/>
-							</lines>
-						</method>
-						<method name="fold" signature="(Lse/cygni/texasholdem/game/BotPlayer;)V" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="101" hits="5" branch="false"/>
-								<line number="102" hits="5" branch="false"/>
-							</lines>
-						</method>
-						<method name="getCurrentPlayState" signature="()Lse/cygni/texasholdem/game/definitions/PlayState;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="135" hits="10" branch="false"/>
-							</lines>
-						</method>
-						<method name="getMaxTotalBetInCurrentPlayState" signature="()J" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="165" hits="18" branch="false"/>
-								<line number="167" hits="18" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="168" hits="72" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="169" hits="6" branch="false"/>
-								<line number="171" hits="66" branch="false"/>
-								<line number="173" hits="66" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="174" hits="66" branch="false"/>
-								<line number="176" hits="18" branch="false"/>
-							</lines>
-						</method>
-						<method name="getMinimumBetForPlayerToCall" signature="(Lse/cygni/texasholdem/game/BotPlayer;)J" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="46" hits="20" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="47" hits="2" branch="false"/>
-								<line number="49" hits="18" branch="false"/>
-								<line number="50" hits="18" branch="false"/>
-								<line number="52" hits="18" branch="false"/>
-							</lines>
-						</method>
-						<method name="getTotalBetAmountForPlayer" signature="(Lse/cygni/texasholdem/game/BotPlayer;)J" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="188" hits="8" branch="false"/>
-								<line number="189" hits="8" branch="false"/>
-								<line number="190" hits="8" branch="false"/>
-								<line number="192" hits="16" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="193" hits="8" branch="false"/>
-								<line number="194" hits="8" branch="false"/>
-								<line number="197" hits="8" branch="false"/>
-							</lines>
-						</method>
-						<method name="getTotalBetAmountForPlayerInPlayState" signature="(Lse/cygni/texasholdem/game/BotPlayer;Lse/cygni/texasholdem/game/definitions/PlayState;)J" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="212" hits="174" branch="false"/>
-								<line number="214" hits="174" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="215" hits="48" branch="false"/>
-								<line number="217" hits="126" branch="false"/>
-								<line number="218" hits="126" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="219" hits="596" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="220" hits="159" branch="false"/>
-								<line number="223" hits="126" branch="false"/>
-							</lines>
-						</method>
-						<method name="getTotalPotAmount" signature="()J" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="145" hits="7" branch="false"/>
-								<line number="147" hits="7" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="149" hits="14" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="150" hits="77" branch="false"/>
-								<line number="154" hits="7" branch="false"/>
-							</lines>
-						</method>
-						<method name="hasFolded" signature="(Lse/cygni/texasholdem/game/BotPlayer;)Z" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="111" hits="25" branch="false"/>
-							</lines>
-						</method>
-						<method name="isCurrentPlayStateBalanced" signature="()Z" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="234" hits="22" branch="false"/>
-								<line number="235" hits="22" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="236" hits="84" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="237" hits="10" branch="false"/>
-								<line number="239" hits="74" branch="false"/>
-								<line number="241" hits="74" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="242" hits="22" branch="false"/>
-								<line number="243" hits="52" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="244" hits="3" branch="false"/>
-								<line number="245" hits="71" branch="false"/>
-								<line number="247" hits="19" branch="false"/>
-							</lines>
-						</method>
-						<method name="nextPlayState" signature="()Lse/cygni/texasholdem/game/definitions/PlayState;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="125" hits="15" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="126" hits="1" branch="false"/>
-								<line number="129" hits="14" branch="false"/>
-								<line number="130" hits="12" branch="false"/>
-							</lines>
-						</method>
-					</methods>
-					<lines>
-						<line number="25" hits="12" branch="false"/>
-						<line number="26" hits="12" branch="false"/>
-						<line number="28" hits="12" branch="false"/>
-						<line number="30" hits="12" branch="false"/>
-						<line number="32" hits="12" branch="false"/>
-						<line number="34" hits="12" branch="false"/>
-						<line number="35" hits="12" branch="false"/>
-						<line number="46" hits="20" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="47" hits="2" branch="false"/>
-						<line number="49" hits="18" branch="false"/>
-						<line number="50" hits="18" branch="false"/>
-						<line number="52" hits="18" branch="false"/>
-						<line number="69" hits="63" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="70" hits="2" branch="false"/>
-						<line number="73" hits="61" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="74" hits="4" branch="false"/>
-						<line number="77" hits="57" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="78" hits="1" branch="false"/>
-						<line number="81" hits="56" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="82" hits="2" branch="false"/>
-						<line number="84" hits="54" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="85" hits="10" branch="false"/>
-						<line number="89" hits="54" branch="false"/>
-						<line number="91" hits="54" branch="false"/>
-						<line number="92" hits="54" branch="false"/>
-						<line number="101" hits="5" branch="false"/>
-						<line number="102" hits="5" branch="false"/>
-						<line number="111" hits="25" branch="false"/>
-						<line number="125" hits="15" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="126" hits="1" branch="false"/>
-						<line number="129" hits="14" branch="false"/>
-						<line number="130" hits="12" branch="false"/>
-						<line number="135" hits="10" branch="false"/>
-						<line number="145" hits="7" branch="false"/>
-						<line number="147" hits="7" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="149" hits="14" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="150" hits="77" branch="false"/>
-						<line number="154" hits="7" branch="false"/>
-						<line number="165" hits="18" branch="false"/>
-						<line number="167" hits="18" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="168" hits="72" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="169" hits="6" branch="false"/>
-						<line number="171" hits="66" branch="false"/>
-						<line number="173" hits="66" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="174" hits="66" branch="false"/>
-						<line number="176" hits="18" branch="false"/>
-						<line number="188" hits="8" branch="false"/>
-						<line number="189" hits="8" branch="false"/>
-						<line number="190" hits="8" branch="false"/>
-						<line number="192" hits="16" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="193" hits="8" branch="false"/>
-						<line number="194" hits="8" branch="false"/>
-						<line number="197" hits="8" branch="false"/>
-						<line number="212" hits="174" branch="false"/>
-						<line number="214" hits="174" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="215" hits="48" branch="false"/>
-						<line number="217" hits="126" branch="false"/>
-						<line number="218" hits="126" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="219" hits="596" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="220" hits="159" branch="false"/>
-						<line number="223" hits="126" branch="false"/>
-						<line number="234" hits="22" branch="false"/>
-						<line number="235" hits="22" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="236" hits="84" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="237" hits="10" branch="false"/>
-						<line number="239" hits="74" branch="false"/>
-						<line number="241" hits="74" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="242" hits="22" branch="false"/>
-						<line number="243" hits="52" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="244" hits="3" branch="false"/>
-						<line number="245" hits="71" branch="false"/>
-						<line number="247" hits="19" branch="false"/>
-						<line number="257" hits="63" branch="false"/>
-					</lines>
-				</class>
-				<class name="se.cygni.texasholdem.game.pot.PotTransaction" filename="se/cygni/texasholdem/game/pot/PotTransaction.java" line-rate="0.875" branch-rate="1.0" complexity="1.0">
-					<methods>
-						<method name="&lt;init&gt;" signature="(JLse/cygni/texasholdem/game/BotPlayer;J)V" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="12" hits="54" branch="false"/>
-								<line number="14" hits="54" branch="false"/>
-								<line number="15" hits="54" branch="false"/>
-								<line number="16" hits="54" branch="false"/>
-								<line number="17" hits="54" branch="false"/>
-							</lines>
-						</method>
-						<method name="getAmount" signature="()J" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="31" hits="236" branch="false"/>
-							</lines>
-						</method>
-						<method name="getPlayer" signature="()Lse/cygni/texasholdem/game/BotPlayer;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="26" hits="596" branch="false"/>
-							</lines>
-						</method>
-						<method name="getTransactionNumber" signature="()J" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="21" hits="0" branch="false"/>
-							</lines>
-						</method>
-					</methods>
-					<lines>
-						<line number="12" hits="54" branch="false"/>
-						<line number="14" hits="54" branch="false"/>
-						<line number="15" hits="54" branch="false"/>
-						<line number="16" hits="54" branch="false"/>
-						<line number="17" hits="54" branch="false"/>
-						<line number="21" hits="0" branch="false"/>
-						<line number="26" hits="596" branch="false"/>
-						<line number="31" hits="236" branch="false"/>
-					</lines>
-				</class>
-			</classes>
-		</package>
-		<package name="se.cygni.texasholdem.game.util" line-rate="0.9813953488372092" branch-rate="0.9516129032258065" complexity="5.409090909090909">
-			<classes>
-				<class name="se.cygni.texasholdem.game.util.ListUtil" filename="se/cygni/texasholdem/game/util/ListUtil.java" line-rate="0.9761904761904762" branch-rate="0.95" complexity="4.2">
-					<methods>
-						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="23" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="getHighestOfSameRank" signature="(ILjava/util/List;)Ljava/util/List;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="302" hits="29" branch="false"/>
-								<line number="304" hits="29" branch="false"/>
-								<line number="305" hits="29" branch="false"/>
-								<line number="306" hits="29" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="307" hits="126" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="308" hits="26" branch="true" condition-coverage="100% (4/4)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-										<condition number="1" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="310" hits="24" branch="false"/>
-								<line number="311" hits="24" branch="false"/>
-								<line number="315" hits="29" branch="false"/>
-								<line number="316" hits="29" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="317" hits="2" branch="false"/>
-								<line number="319" hits="29" branch="false"/>
-							</lines>
-						</method>
-						<method name="getHighestOfSameRankExcluding" signature="(ILjava/util/List;Lse/cygni/texasholdem/game/definitions/Rank;)Ljava/util/List;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="277" hits="11" branch="false"/>
-								<line number="278" hits="11" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="279" hits="77" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="280" hits="47" branch="false"/>
-								<line number="283" hits="11" branch="false"/>
-							</lines>
-						</method>
-						<method name="getHighestSortedAndExclude" signature="(ILjava/util/List;Ljava/util/List;)Ljava/util/List;" line-rate="0.8333333333333334" branch-rate="0.5">
-							<lines>
-								<line number="140" hits="22" branch="false"/>
-								<line number="141" hits="22" branch="false"/>
-								<line number="142" hits="22" branch="false"/>
-								<line number="144" hits="22" branch="true" condition-coverage="50% (1/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="50%"/>
-									</conditions>
-								</line>
-								<line number="145" hits="0" branch="false"/>
-								<line number="147" hits="22" branch="false"/>
-							</lines>
-						</method>
-						<method name="getLongestConsecutiveSubset" signature="(Ljava/util/List;)Ljava/util/List;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="182" hits="24" branch="false"/>
-								<line number="186" hits="24" branch="false"/>
-								<line number="187" hits="24" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="188" hits="8" branch="false"/>
-								<line number="191" hits="24" branch="false"/>
-								<line number="193" hits="24" branch="false"/>
-								<line number="194" hits="24" branch="false"/>
-								<line number="195" hits="176" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="196" hits="152" branch="false"/>
-								<line number="198" hits="152" branch="true" condition-coverage="100% (8/8)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-										<condition number="1" type="jump" coverage="100%"/>
-										<condition number="2" type="jump" coverage="100%"/>
-										<condition number="3" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="211" hits="66" branch="true" condition-coverage="100% (4/4)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-										<condition number="1" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="213" hits="18" branch="false"/>
-								<line number="215" hits="66" branch="false"/>
-								<line number="218" hits="152" branch="false"/>
-								<line number="222" hits="24" branch="true" condition-coverage="100% (4/4)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-										<condition number="1" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="225" hits="6" branch="false"/>
-								<line number="228" hits="24" branch="false"/>
-							</lines>
-						</method>
-						<method name="getRankDistribution" signature="(Ljava/util/List;)Ljava/util/Map;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="34" hits="69" branch="false"/>
-								<line number="35" hits="69" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="36" hits="453" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="37" hits="103" branch="false"/>
-								<line number="39" hits="350" branch="false"/>
-								<line number="40" hits="350" branch="false"/>
-								<line number="41" hits="350" branch="false"/>
-								<line number="42" hits="453" branch="false"/>
-								<line number="44" hits="69" branch="false"/>
-							</lines>
-						</method>
-						<method name="getSuitDistribution" signature="(Ljava/util/List;)Ljava/util/Map;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="56" hits="40" branch="false"/>
-								<line number="57" hits="40" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="58" hits="280" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="59" hits="150" branch="false"/>
-								<line number="61" hits="130" branch="false"/>
-								<line number="62" hits="130" branch="false"/>
-								<line number="63" hits="130" branch="false"/>
-								<line number="64" hits="280" branch="false"/>
-								<line number="66" hits="40" branch="false"/>
-							</lines>
-						</method>
-						<method name="merge" signature="(Ljava/util/List;Ljava/util/List;)Ljava/util/List;" line-rate="1.0" branch-rate="0.5">
-							<lines>
-								<line number="81" hits="40" branch="false"/>
-								<line number="83" hits="40" branch="true" condition-coverage="50% (1/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="50%"/>
-									</conditions>
-								</line>
-								<line number="84" hits="40" branch="false"/>
-								<line number="86" hits="40" branch="true" condition-coverage="50% (1/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="50%"/>
-									</conditions>
-								</line>
-								<line number="87" hits="40" branch="false"/>
-								<line number="89" hits="40" branch="false"/>
-							</lines>
-						</method>
-						<method name="remove" signature="(Ljava/util/List;Ljava/util/List;)Ljava/util/List;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="105" hits="22" branch="false"/>
-								<line number="107" hits="22" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="108" hits="12" branch="false"/>
-								<line number="109" hits="12" branch="false"/>
-								<line number="112" hits="10" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="113" hits="70" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="114" hits="38" branch="false"/>
-								<line number="118" hits="10" branch="false"/>
-							</lines>
-						</method>
-						<method name="removeDuplicatesByRankAndSortByRank" signature="(Ljava/util/List;)Ljava/util/List;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="244" hits="25" branch="false"/>
-								<line number="245" hits="25" branch="false"/>
-								<line number="246" hits="25" branch="false"/>
-								<line number="248" hits="25" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="249" hits="163" branch="true" condition-coverage="100% (4/4)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-										<condition number="1" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="250" hits="151" branch="false"/>
-								<line number="252" hits="163" branch="false"/>
-								<line number="254" hits="25" branch="false"/>
-							</lines>
-						</method>
-						<method name="sortBy" signature="(Lse/cygni/texasholdem/game/definitions/CardSortBy;Ljava/util/List;)Ljava/util/List;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="161" hits="25" branch="false"/>
-								<line number="162" hits="25" branch="false"/>
-								<line number="163" hits="25" branch="false"/>
-							</lines>
-						</method>
-					</methods>
-					<lines>
-						<line number="23" hits="0" branch="false"/>
-						<line number="34" hits="69" branch="false"/>
-						<line number="35" hits="69" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="36" hits="453" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="37" hits="103" branch="false"/>
-						<line number="39" hits="350" branch="false"/>
-						<line number="40" hits="350" branch="false"/>
-						<line number="41" hits="350" branch="false"/>
-						<line number="42" hits="453" branch="false"/>
-						<line number="44" hits="69" branch="false"/>
-						<line number="56" hits="40" branch="false"/>
-						<line number="57" hits="40" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="58" hits="280" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="59" hits="150" branch="false"/>
-						<line number="61" hits="130" branch="false"/>
-						<line number="62" hits="130" branch="false"/>
-						<line number="63" hits="130" branch="false"/>
-						<line number="64" hits="280" branch="false"/>
-						<line number="66" hits="40" branch="false"/>
-						<line number="81" hits="40" branch="false"/>
-						<line number="83" hits="40" branch="true" condition-coverage="50% (1/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="50%"/>
-							</conditions>
-						</line>
-						<line number="84" hits="40" branch="false"/>
-						<line number="86" hits="40" branch="true" condition-coverage="50% (1/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="50%"/>
-							</conditions>
-						</line>
-						<line number="87" hits="40" branch="false"/>
-						<line number="89" hits="40" branch="false"/>
-						<line number="105" hits="22" branch="false"/>
-						<line number="107" hits="22" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="108" hits="12" branch="false"/>
-						<line number="109" hits="12" branch="false"/>
-						<line number="112" hits="10" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="113" hits="70" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="114" hits="38" branch="false"/>
-						<line number="118" hits="10" branch="false"/>
-						<line number="140" hits="22" branch="false"/>
-						<line number="141" hits="22" branch="false"/>
-						<line number="142" hits="22" branch="false"/>
-						<line number="144" hits="22" branch="true" condition-coverage="50% (1/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="50%"/>
-							</conditions>
-						</line>
-						<line number="145" hits="0" branch="false"/>
-						<line number="147" hits="22" branch="false"/>
-						<line number="161" hits="25" branch="false"/>
-						<line number="162" hits="25" branch="false"/>
-						<line number="163" hits="25" branch="false"/>
-						<line number="182" hits="24" branch="false"/>
-						<line number="186" hits="24" branch="false"/>
-						<line number="187" hits="24" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="188" hits="8" branch="false"/>
-						<line number="191" hits="24" branch="false"/>
-						<line number="193" hits="24" branch="false"/>
-						<line number="194" hits="24" branch="false"/>
-						<line number="195" hits="176" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="196" hits="152" branch="false"/>
-						<line number="198" hits="152" branch="true" condition-coverage="100% (8/8)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-								<condition number="1" type="jump" coverage="100%"/>
-								<condition number="2" type="jump" coverage="100%"/>
-								<condition number="3" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="211" hits="66" branch="true" condition-coverage="100% (4/4)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-								<condition number="1" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="213" hits="18" branch="false"/>
-						<line number="215" hits="66" branch="false"/>
-						<line number="218" hits="152" branch="false"/>
-						<line number="222" hits="24" branch="true" condition-coverage="100% (4/4)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-								<condition number="1" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="225" hits="6" branch="false"/>
-						<line number="228" hits="24" branch="false"/>
-						<line number="244" hits="25" branch="false"/>
-						<line number="245" hits="25" branch="false"/>
-						<line number="246" hits="25" branch="false"/>
-						<line number="248" hits="25" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="249" hits="163" branch="true" condition-coverage="100% (4/4)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-								<condition number="1" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="250" hits="151" branch="false"/>
-						<line number="252" hits="163" branch="false"/>
-						<line number="254" hits="25" branch="false"/>
-						<line number="277" hits="11" branch="false"/>
-						<line number="278" hits="11" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="279" hits="77" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="280" hits="47" branch="false"/>
-						<line number="283" hits="11" branch="false"/>
-						<line number="302" hits="29" branch="false"/>
-						<line number="304" hits="29" branch="false"/>
-						<line number="305" hits="29" branch="false"/>
-						<line number="306" hits="29" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="307" hits="126" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="308" hits="26" branch="true" condition-coverage="100% (4/4)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-								<condition number="1" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="310" hits="24" branch="false"/>
-						<line number="311" hits="24" branch="false"/>
-						<line number="315" hits="29" branch="false"/>
-						<line number="316" hits="29" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="317" hits="2" branch="false"/>
-						<line number="319" hits="29" branch="false"/>
-					</lines>
-				</class>
-				<class name="se.cygni.texasholdem.game.util.PokerHandUtil" filename="se/cygni/texasholdem/game/util/PokerHandUtil.java" line-rate="0.9847328244274809" branch-rate="0.953125" complexity="6.416666666666667">
-					<methods>
-						<method name="&lt;init&gt;" signature="(Ljava/util/List;Ljava/util/List;)V" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="40" hits="40" branch="false"/>
-								<line number="42" hits="40" branch="false"/>
-								<line number="43" hits="40" branch="false"/>
-								<line number="44" hits="40" branch="false"/>
-								<line number="45" hits="40" branch="false"/>
-							</lines>
-						</method>
-						<method name="getBestHand" signature="()Lse/cygni/texasholdem/game/BestHand;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="56" hits="10" branch="false"/>
-								<line number="57" hits="9" branch="false"/>
-								<line number="60" hits="9" branch="false"/>
-								<line number="61" hits="8" branch="false"/>
-								<line number="64" hits="8" branch="false"/>
-								<line number="65" hits="7" branch="false"/>
-								<line number="68" hits="7" branch="false"/>
-								<line number="69" hits="6" branch="false"/>
-								<line number="72" hits="6" branch="false"/>
-								<line number="73" hits="5" branch="false"/>
-								<line number="76" hits="5" branch="false"/>
-								<line number="77" hits="4" branch="false"/>
-								<line number="80" hits="4" branch="false"/>
-								<line number="81" hits="3" branch="false"/>
-								<line number="84" hits="3" branch="false"/>
-								<line number="85" hits="2" branch="false"/>
-								<line number="88" hits="2" branch="false"/>
-								<line number="89" hits="1" branch="false"/>
-								<line number="92" hits="1" branch="false"/>
-							</lines>
-						</method>
-						<method name="isFlush" signature="()Lse/cygni/texasholdem/game/BestHand;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="195" hits="9" branch="false"/>
-								<line number="196" hits="9" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="197" hits="27" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="198" hits="3" branch="false"/>
-								<line number="199" hits="3" branch="false"/>
-								<line number="203" hits="9" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="204" hits="6" branch="false"/>
-								<line number="206" hits="3" branch="false"/>
-								<line number="208" hits="3" branch="false"/>
-							</lines>
-						</method>
-						<method name="isFourOfAKind" signature="()Lse/cygni/texasholdem/game/BestHand;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="156" hits="10" branch="false"/>
-								<line number="157" hits="10" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="158" hits="50" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="159" hits="2" branch="false"/>
-								<line number="160" hits="2" branch="false"/>
-								<line number="164" hits="10" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="165" hits="8" branch="false"/>
-								<line number="168" hits="2" branch="false"/>
-								<line number="169" hits="2" branch="false"/>
-								<line number="172" hits="2" branch="false"/>
-							</lines>
-						</method>
-						<method name="isFullHouse" signature="()Lse/cygni/texasholdem/game/BestHand;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="177" hits="10" branch="false"/>
-								<line number="178" hits="10" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="179" hits="5" branch="false"/>
-								<line number="181" hits="5" branch="false"/>
-								<line number="183" hits="5" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="184" hits="2" branch="false"/>
-								<line number="186" hits="3" branch="false"/>
-								<line number="187" hits="3" branch="false"/>
-								<line number="188" hits="3" branch="false"/>
-								<line number="190" hits="3" branch="false"/>
-							</lines>
-						</method>
-						<method name="isHighHand" signature="()Lse/cygni/texasholdem/game/BestHand;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="315" hits="2" branch="false"/>
-							</lines>
-						</method>
-						<method name="isOnePair" signature="()Lse/cygni/texasholdem/game/BestHand;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="284" hits="5" branch="false"/>
-								<line number="285" hits="5" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="286" hits="24" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="288" hits="4" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="289" hits="1" branch="false"/>
-								<line number="292" hits="3" branch="false"/>
-								<line number="293" hits="20" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="294" hits="1" branch="false"/>
-								<line number="299" hits="3" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="300" hits="1" branch="false"/>
-								<line number="303" hits="2" branch="false"/>
-								<line number="307" hits="2" branch="false"/>
-								<line number="308" hits="2" branch="false"/>
-								<line number="310" hits="2" branch="false"/>
-							</lines>
-						</method>
-						<method name="isRoyalFlush" signature="()Lse/cygni/texasholdem/game/BestHand;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="98" hits="13" branch="false"/>
-								<line number="99" hits="13" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="100" hits="41" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="101" hits="6" branch="false"/>
-								<line number="102" hits="6" branch="false"/>
-								<line number="106" hits="13" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="107" hits="7" branch="false"/>
-								<line number="109" hits="6" branch="false"/>
-								<line number="112" hits="6" branch="false"/>
-								<line number="113" hits="6" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="114" hits="18" branch="false"/>
-								<line number="115" hits="18" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="116" hits="3" branch="false"/>
-								<line number="117" hits="15" branch="false"/>
-								<line number="119" hits="3" branch="false"/>
-							</lines>
-						</method>
-						<method name="isStraight" signature="()Lse/cygni/texasholdem/game/BestHand;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="214" hits="10" branch="false"/>
-								<line number="216" hits="10" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="217" hits="5" branch="false"/>
-								<line number="219" hits="5" branch="false"/>
-								<line number="220" hits="5" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="221" hits="1" branch="false"/>
-								<line number="224" hits="5" branch="false"/>
-								<line number="226" hits="5" branch="false"/>
-							</lines>
-						</method>
-						<method name="isStraightFlush" signature="()Lse/cygni/texasholdem/game/BestHand;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="125" hits="14" branch="false"/>
-								<line number="126" hits="14" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="127" hits="35" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="128" hits="7" branch="false"/>
-								<line number="129" hits="7" branch="false"/>
-								<line number="133" hits="14" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="134" hits="7" branch="false"/>
-								<line number="136" hits="7" branch="false"/>
-								<line number="138" hits="7" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="139" hits="2" branch="false"/>
-								<line number="142" hits="5" branch="false"/>
-								<line number="143" hits="5" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="144" hits="2" branch="false"/>
-								<line number="148" hits="5" branch="false"/>
-								<line number="150" hits="5" branch="false"/>
-							</lines>
-						</method>
-						<method name="isThreeOfAKind" signature="()Lse/cygni/texasholdem/game/BestHand;" line-rate="0.8571428571428571" branch-rate="0.7">
-							<lines>
-								<line number="232" hits="6" branch="false"/>
-								<line number="233" hits="6" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="234" hits="34" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="236" hits="2" branch="false"/>
-								<line number="240" hits="2" branch="true" condition-coverage="50% (1/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="50%"/>
-									</conditions>
-								</line>
-								<line number="241" hits="0" branch="true" condition-coverage="0% (0/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="243" hits="0" branch="false"/>
-								<line number="246" hits="2" branch="false"/>
-								<line number="247" hits="34" branch="false"/>
-								<line number="250" hits="6" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="251" hits="4" branch="false"/>
-								<line number="253" hits="2" branch="false"/>
-								<line number="255" hits="2" branch="false"/>
-								<line number="258" hits="2" branch="false"/>
-							</lines>
-						</method>
-						<method name="isTwoPairs" signature="()Lse/cygni/texasholdem/game/BestHand;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="263" hits="6" branch="false"/>
-								<line number="264" hits="6" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="265" hits="1" branch="false"/>
-								<line number="267" hits="5" branch="false"/>
-								<line number="269" hits="5" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="270" hits="2" branch="false"/>
-								<line number="273" hits="3" branch="false"/>
-								<line number="274" hits="3" branch="false"/>
-								<line number="275" hits="3" branch="false"/>
-								<line number="276" hits="3" branch="false"/>
-								<line number="278" hits="3" branch="false"/>
-							</lines>
-						</method>
-					</methods>
-					<lines>
-						<line number="40" hits="40" branch="false"/>
-						<line number="42" hits="40" branch="false"/>
-						<line number="43" hits="40" branch="false"/>
-						<line number="44" hits="40" branch="false"/>
-						<line number="45" hits="40" branch="false"/>
-						<line number="56" hits="10" branch="false"/>
-						<line number="57" hits="9" branch="false"/>
-						<line number="60" hits="9" branch="false"/>
-						<line number="61" hits="8" branch="false"/>
-						<line number="64" hits="8" branch="false"/>
-						<line number="65" hits="7" branch="false"/>
-						<line number="68" hits="7" branch="false"/>
-						<line number="69" hits="6" branch="false"/>
-						<line number="72" hits="6" branch="false"/>
-						<line number="73" hits="5" branch="false"/>
-						<line number="76" hits="5" branch="false"/>
-						<line number="77" hits="4" branch="false"/>
-						<line number="80" hits="4" branch="false"/>
-						<line number="81" hits="3" branch="false"/>
-						<line number="84" hits="3" branch="false"/>
-						<line number="85" hits="2" branch="false"/>
-						<line number="88" hits="2" branch="false"/>
-						<line number="89" hits="1" branch="false"/>
-						<line number="92" hits="1" branch="false"/>
-						<line number="98" hits="13" branch="false"/>
-						<line number="99" hits="13" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="100" hits="41" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="101" hits="6" branch="false"/>
-						<line number="102" hits="6" branch="false"/>
-						<line number="106" hits="13" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="107" hits="7" branch="false"/>
-						<line number="109" hits="6" branch="false"/>
-						<line number="112" hits="6" branch="false"/>
-						<line number="113" hits="6" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="114" hits="18" branch="false"/>
-						<line number="115" hits="18" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="116" hits="3" branch="false"/>
-						<line number="117" hits="15" branch="false"/>
-						<line number="119" hits="3" branch="false"/>
-						<line number="125" hits="14" branch="false"/>
-						<line number="126" hits="14" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="127" hits="35" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="128" hits="7" branch="false"/>
-						<line number="129" hits="7" branch="false"/>
-						<line number="133" hits="14" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="134" hits="7" branch="false"/>
-						<line number="136" hits="7" branch="false"/>
-						<line number="138" hits="7" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="139" hits="2" branch="false"/>
-						<line number="142" hits="5" branch="false"/>
-						<line number="143" hits="5" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="144" hits="2" branch="false"/>
-						<line number="148" hits="5" branch="false"/>
-						<line number="150" hits="5" branch="false"/>
-						<line number="156" hits="10" branch="false"/>
-						<line number="157" hits="10" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="158" hits="50" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="159" hits="2" branch="false"/>
-						<line number="160" hits="2" branch="false"/>
-						<line number="164" hits="10" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="165" hits="8" branch="false"/>
-						<line number="168" hits="2" branch="false"/>
-						<line number="169" hits="2" branch="false"/>
-						<line number="172" hits="2" branch="false"/>
-						<line number="177" hits="10" branch="false"/>
-						<line number="178" hits="10" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="179" hits="5" branch="false"/>
-						<line number="181" hits="5" branch="false"/>
-						<line number="183" hits="5" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="184" hits="2" branch="false"/>
-						<line number="186" hits="3" branch="false"/>
-						<line number="187" hits="3" branch="false"/>
-						<line number="188" hits="3" branch="false"/>
-						<line number="190" hits="3" branch="false"/>
-						<line number="195" hits="9" branch="false"/>
-						<line number="196" hits="9" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="197" hits="27" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="198" hits="3" branch="false"/>
-						<line number="199" hits="3" branch="false"/>
-						<line number="203" hits="9" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="204" hits="6" branch="false"/>
-						<line number="206" hits="3" branch="false"/>
-						<line number="208" hits="3" branch="false"/>
-						<line number="214" hits="10" branch="false"/>
-						<line number="216" hits="10" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="217" hits="5" branch="false"/>
-						<line number="219" hits="5" branch="false"/>
-						<line number="220" hits="5" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="221" hits="1" branch="false"/>
-						<line number="224" hits="5" branch="false"/>
-						<line number="226" hits="5" branch="false"/>
-						<line number="232" hits="6" branch="false"/>
-						<line number="233" hits="6" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="234" hits="34" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="236" hits="2" branch="false"/>
-						<line number="240" hits="2" branch="true" condition-coverage="50% (1/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="50%"/>
-							</conditions>
-						</line>
-						<line number="241" hits="0" branch="true" condition-coverage="0% (0/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="243" hits="0" branch="false"/>
-						<line number="246" hits="2" branch="false"/>
-						<line number="247" hits="34" branch="false"/>
-						<line number="250" hits="6" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="251" hits="4" branch="false"/>
-						<line number="253" hits="2" branch="false"/>
-						<line number="255" hits="2" branch="false"/>
-						<line number="258" hits="2" branch="false"/>
-						<line number="263" hits="6" branch="false"/>
-						<line number="264" hits="6" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="265" hits="1" branch="false"/>
-						<line number="267" hits="5" branch="false"/>
-						<line number="269" hits="5" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="270" hits="2" branch="false"/>
-						<line number="273" hits="3" branch="false"/>
-						<line number="274" hits="3" branch="false"/>
-						<line number="275" hits="3" branch="false"/>
-						<line number="276" hits="3" branch="false"/>
-						<line number="278" hits="3" branch="false"/>
-						<line number="284" hits="5" branch="false"/>
-						<line number="285" hits="5" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="286" hits="24" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="288" hits="4" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="289" hits="1" branch="false"/>
-						<line number="292" hits="3" branch="false"/>
-						<line number="293" hits="20" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="294" hits="1" branch="false"/>
-						<line number="299" hits="3" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="300" hits="1" branch="false"/>
-						<line number="303" hits="2" branch="false"/>
-						<line number="307" hits="2" branch="false"/>
-						<line number="308" hits="2" branch="false"/>
-						<line number="310" hits="2" branch="false"/>
-						<line number="315" hits="2" branch="false"/>
-					</lines>
-				</class>
-			</classes>
-		</package>
-		<package name="se.cygni.texasholdem.server" line-rate="0.0" branch-rate="0.0" complexity="1.7096774193548387">
-			<classes>
-				<class name="se.cygni.texasholdem.server.GameServer" filename="se/cygni/texasholdem/server/GameServer.java" line-rate="0.0" branch-rate="0.0" complexity="2.0">
-					<methods>
-						<method name="&lt;clinit&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="20" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="18" hits="0" branch="false"/>
-								<line number="23" hits="0" branch="false"/>
-								<line number="24" hits="0" branch="false"/>
-								<line number="26" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="isValidSession" signature="(Ljava/lang/String;)Z" line-rate="0.0" branch-rate="0.0">
-							<lines>
-								<line number="30" hits="0" branch="true" condition-coverage="0% (0/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="31" hits="0" branch="false"/>
-								<line number="33" hits="0" branch="true" condition-coverage="0% (0/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="34" hits="0" branch="false"/>
-								<line number="36" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="registerClientDisconnect" signature="(Ljava/lang/String;)V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="50" hits="0" branch="false"/>
-								<line number="52" hits="0" branch="false"/>
-								<line number="53" hits="0" branch="false"/>
-								<line number="56" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="registerNewClientConnection" signature="(Ljava/lang/String;Lcom/googlecode/protobuf/pro/duplex/RpcClientChannel;)V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="43" hits="0" branch="false"/>
-								<line number="45" hits="0" branch="false"/>
-								<line number="46" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="registerNewPlayer" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="60" hits="0" branch="false"/>
-								<line number="64" hits="0" branch="false"/>
-								<line number="65" hits="0" branch="false"/>
-								<line number="69" hits="0" branch="false"/>
-							</lines>
-						</method>
-					</methods>
-					<lines>
-						<line number="18" hits="0" branch="false"/>
-						<line number="20" hits="0" branch="false"/>
-						<line number="23" hits="0" branch="false"/>
-						<line number="24" hits="0" branch="false"/>
-						<line number="26" hits="0" branch="false"/>
-						<line number="30" hits="0" branch="true" condition-coverage="0% (0/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="31" hits="0" branch="false"/>
-						<line number="33" hits="0" branch="true" condition-coverage="0% (0/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="34" hits="0" branch="false"/>
-						<line number="36" hits="0" branch="false"/>
-						<line number="43" hits="0" branch="false"/>
-						<line number="45" hits="0" branch="false"/>
-						<line number="46" hits="0" branch="false"/>
-						<line number="50" hits="0" branch="false"/>
-						<line number="52" hits="0" branch="false"/>
-						<line number="53" hits="0" branch="false"/>
-						<line number="56" hits="0" branch="false"/>
-						<line number="60" hits="0" branch="false"/>
-						<line number="64" hits="0" branch="false"/>
-						<line number="65" hits="0" branch="false"/>
-						<line number="69" hits="0" branch="false"/>
-					</lines>
-				</class>
-				<class name="se.cygni.texasholdem.server.GameServiceImpl" filename="se/cygni/texasholdem/server/GameServiceImpl.java" line-rate="0.0" branch-rate="0.0" complexity="1.9473684210526316">
-					<methods>
-						<method name="&lt;init&gt;" signature="(Lse/cygni/texasholdem/server/GameServer;)V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="38" hits="0" branch="false"/>
-								<line number="40" hits="0" branch="false"/>
-								<line number="41" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="buildAndReturnException" signature="(Ljava/lang/Class;Lse/cygni/texasholdem/communication/ClientServer$ExceptionEvent;Lcom/google/protobuf/RpcController;Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="257" hits="0" branch="false"/>
-								<line number="258" hits="0" branch="false"/>
-								<line number="260" hits="0" branch="false"/>
-								<line number="264" hits="0" branch="false"/>
-								<line number="266" hits="0" branch="false"/>
-								<line number="268" hits="0" branch="false"/>
-								<line number="269" hits="0" branch="false"/>
-								<line number="271" hits="0" branch="false"/>
-								<line number="275" hits="0" branch="false"/>
-								<line number="276" hits="0" branch="false"/>
-								<line number="277" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="checkForValidSession" signature="(Lse/cygni/texasholdem/communication/ClientServer$VoidInSession;)Lse/cygni/texasholdem/communication/ClientServer$ExceptionEvent;" line-rate="0.0" branch-rate="0.0">
-							<lines>
-								<line number="213" hits="0" branch="false"/>
-								<line number="215" hits="0" branch="true" condition-coverage="0% (0/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="216" hits="0" branch="false"/>
-								<line number="219" hits="0" branch="true" condition-coverage="0% (0/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="220" hits="0" branch="false"/>
-								<line number="223" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="createInvalidSessionException" signature="(Ljava/lang/String;)Lse/cygni/texasholdem/communication/ClientServer$ExceptionEvent;" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="228" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="getBigBlindAmount" signature="(Lcom/google/protobuf/RpcController;Lse/cygni/texasholdem/communication/ClientServer$VoidInSession;Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="0.0">
-							<lines>
-								<line number="105" hits="0" branch="true" condition-coverage="0% (0/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="107" hits="0" branch="false"/>
-								<line number="109" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="getBigBlindPlayer" signature="(Lcom/google/protobuf/RpcController;Lse/cygni/texasholdem/communication/ClientServer$VoidInSession;Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="0.0">
-							<lines>
-								<line number="181" hits="0" branch="true" condition-coverage="0% (0/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="183" hits="0" branch="false"/>
-								<line number="185" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="getCommunityCards" signature="(Lcom/google/protobuf/RpcController;Lse/cygni/texasholdem/communication/ClientServer$VoidInSession;Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="0.0">
-							<lines>
-								<line number="193" hits="0" branch="true" condition-coverage="0% (0/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="195" hits="0" branch="false"/>
-								<line number="197" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="getDealerPlayer" signature="(Lcom/google/protobuf/RpcController;Lse/cygni/texasholdem/communication/ClientServer$VoidInSession;Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="0.0">
-							<lines>
-								<line number="156" hits="0" branch="true" condition-coverage="0% (0/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="158" hits="0" branch="false"/>
-								<line number="160" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="getMyCards" signature="(Lcom/google/protobuf/RpcController;Lse/cygni/texasholdem/communication/ClientServer$VoidInSession;Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="0.0">
-							<lines>
-								<line number="205" hits="0" branch="true" condition-coverage="0% (0/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="207" hits="0" branch="false"/>
-								<line number="209" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="getMyChipAmount" signature="(Lcom/google/protobuf/RpcController;Lse/cygni/texasholdem/communication/ClientServer$VoidInSession;Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="0.0">
-							<lines>
-								<line number="80" hits="0" branch="true" condition-coverage="0% (0/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="82" hits="0" branch="false"/>
-								<line number="84" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="getPlayState" signature="(Lcom/google/protobuf/RpcController;Lse/cygni/texasholdem/communication/ClientServer$VoidInSession;Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="0.0">
-							<lines>
-								<line number="130" hits="0" branch="true" condition-coverage="0% (0/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="133" hits="0" branch="false"/>
-								<line number="135" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="getPlayers" signature="(Lcom/google/protobuf/RpcController;Lse/cygni/texasholdem/communication/ClientServer$VoidInSession;Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="0.0">
-							<lines>
-								<line number="143" hits="0" branch="true" condition-coverage="0% (0/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="146" hits="0" branch="false"/>
-								<line number="148" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="getPotAmount" signature="(Lcom/google/protobuf/RpcController;Lse/cygni/texasholdem/communication/ClientServer$VoidInSession;Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="0.0">
-							<lines>
-								<line number="117" hits="0" branch="true" condition-coverage="0% (0/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="120" hits="0" branch="false"/>
-								<line number="122" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="getSmallBlindAmount" signature="(Lcom/google/protobuf/RpcController;Lse/cygni/texasholdem/communication/ClientServer$VoidInSession;Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="0.0">
-							<lines>
-								<line number="92" hits="0" branch="true" condition-coverage="0% (0/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="95" hits="0" branch="false"/>
-								<line number="97" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="getSmallBlindPlayer" signature="(Lcom/google/protobuf/RpcController;Lse/cygni/texasholdem/communication/ClientServer$VoidInSession;Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="0.0">
-							<lines>
-								<line number="168" hits="0" branch="true" condition-coverage="0% (0/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="171" hits="0" branch="false"/>
-								<line number="173" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="ping" signature="(Lcom/google/protobuf/RpcController;Lse/cygni/texasholdem/communication/ClientServer$Void;Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="49" hits="0" branch="false"/>
-								<line number="50" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="registerForPlay" signature="(Lcom/google/protobuf/RpcController;Lse/cygni/texasholdem/communication/ClientServer$RegisterForPlayRequest;Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="58" hits="0" branch="false"/>
-								<line number="61" hits="0" branch="false"/>
-								<line number="63" hits="0" branch="false"/>
-								<line number="64" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="returnExceptionIfInvalidSession" signature="(Lse/cygni/texasholdem/communication/ClientServer$VoidInSession;Ljava/lang/Class;Lcom/google/protobuf/RpcController;Lcom/google/protobuf/RpcCallback;)Z" line-rate="0.0" branch-rate="0.0">
-							<lines>
-								<line number="240" hits="0" branch="false"/>
-								<line number="241" hits="0" branch="true" condition-coverage="0% (0/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="242" hits="0" branch="false"/>
-								<line number="244" hits="0" branch="false"/>
-								<line number="246" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="withdraw" signature="(Lcom/google/protobuf/RpcController;Lse/cygni/texasholdem/communication/ClientServer$VoidInSession;Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="72" hits="0" branch="false"/>
-							</lines>
-						</method>
-					</methods>
-					<lines>
-						<line number="38" hits="0" branch="false"/>
-						<line number="40" hits="0" branch="false"/>
-						<line number="41" hits="0" branch="false"/>
-						<line number="49" hits="0" branch="false"/>
-						<line number="50" hits="0" branch="false"/>
-						<line number="58" hits="0" branch="false"/>
-						<line number="61" hits="0" branch="false"/>
-						<line number="63" hits="0" branch="false"/>
-						<line number="64" hits="0" branch="false"/>
-						<line number="72" hits="0" branch="false"/>
-						<line number="80" hits="0" branch="true" condition-coverage="0% (0/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="82" hits="0" branch="false"/>
-						<line number="84" hits="0" branch="false"/>
-						<line number="92" hits="0" branch="true" condition-coverage="0% (0/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="95" hits="0" branch="false"/>
-						<line number="97" hits="0" branch="false"/>
-						<line number="105" hits="0" branch="true" condition-coverage="0% (0/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="107" hits="0" branch="false"/>
-						<line number="109" hits="0" branch="false"/>
-						<line number="117" hits="0" branch="true" condition-coverage="0% (0/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="120" hits="0" branch="false"/>
-						<line number="122" hits="0" branch="false"/>
-						<line number="130" hits="0" branch="true" condition-coverage="0% (0/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="133" hits="0" branch="false"/>
-						<line number="135" hits="0" branch="false"/>
-						<line number="143" hits="0" branch="true" condition-coverage="0% (0/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="146" hits="0" branch="false"/>
-						<line number="148" hits="0" branch="false"/>
-						<line number="156" hits="0" branch="true" condition-coverage="0% (0/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="158" hits="0" branch="false"/>
-						<line number="160" hits="0" branch="false"/>
-						<line number="168" hits="0" branch="true" condition-coverage="0% (0/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="171" hits="0" branch="false"/>
-						<line number="173" hits="0" branch="false"/>
-						<line number="181" hits="0" branch="true" condition-coverage="0% (0/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="183" hits="0" branch="false"/>
-						<line number="185" hits="0" branch="false"/>
-						<line number="193" hits="0" branch="true" condition-coverage="0% (0/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="195" hits="0" branch="false"/>
-						<line number="197" hits="0" branch="false"/>
-						<line number="205" hits="0" branch="true" condition-coverage="0% (0/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="207" hits="0" branch="false"/>
-						<line number="209" hits="0" branch="false"/>
-						<line number="213" hits="0" branch="false"/>
-						<line number="215" hits="0" branch="true" condition-coverage="0% (0/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="216" hits="0" branch="false"/>
-						<line number="219" hits="0" branch="true" condition-coverage="0% (0/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="220" hits="0" branch="false"/>
-						<line number="223" hits="0" branch="false"/>
-						<line number="228" hits="0" branch="false"/>
-						<line number="240" hits="0" branch="false"/>
-						<line number="241" hits="0" branch="true" condition-coverage="0% (0/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="242" hits="0" branch="false"/>
-						<line number="244" hits="0" branch="false"/>
-						<line number="246" hits="0" branch="false"/>
-						<line number="257" hits="0" branch="false"/>
-						<line number="258" hits="0" branch="false"/>
-						<line number="260" hits="0" branch="false"/>
-						<line number="264" hits="0" branch="false"/>
-						<line number="266" hits="0" branch="false"/>
-						<line number="268" hits="0" branch="false"/>
-						<line number="269" hits="0" branch="false"/>
-						<line number="271" hits="0" branch="false"/>
-						<line number="275" hits="0" branch="false"/>
-						<line number="276" hits="0" branch="false"/>
-						<line number="277" hits="0" branch="false"/>
-					</lines>
-				</class>
-				<class name="se.cygni.texasholdem.server.RpcServer" filename="se/cygni/texasholdem/server/RpcServer.java" line-rate="0.0" branch-rate="1.0" complexity="1.0">
-					<methods>
-						<method name="&lt;clinit&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="25" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="&lt;init&gt;" signature="(Ljava/lang/String;ILse/cygni/texasholdem/server/GameServiceImpl;Lse/cygni/texasholdem/server/GameServer;)V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="38" hits="0" branch="false"/>
-								<line number="40" hits="0" branch="false"/>
-								<line number="41" hits="0" branch="false"/>
-								<line number="42" hits="0" branch="false"/>
-								<line number="43" hits="0" branch="false"/>
-								<line number="44" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="access$000" signature="(Lse/cygni/texasholdem/server/RpcServer;)Lse/cygni/texasholdem/server/GameServer;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-							</lines>
-						</method>
-						<method name="access$100" signature="()Lorg/slf4j/Logger;" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="23" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="createRpcConnectionEventListener" signature="()Lcom/googlecode/protobuf/pro/duplex/listener/RpcConnectionEventListener;" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="91" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="initServer" signature="()V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="48" hits="0" branch="false"/>
-								<line number="50" hits="0" branch="false"/>
-								<line number="53" hits="0" branch="false"/>
-								<line number="60" hits="0" branch="false"/>
-								<line number="61" hits="0" branch="false"/>
-								<line number="62" hits="0" branch="false"/>
-								<line number="63" hits="0" branch="false"/>
-								<line number="64" hits="0" branch="false"/>
-								<line number="66" hits="0" branch="false"/>
-								<line number="67" hits="0" branch="false"/>
-								<line number="69" hits="0" branch="false"/>
-								<line number="70" hits="0" branch="false"/>
-								<line number="71" hits="0" branch="false"/>
-								<line number="74" hits="0" branch="false"/>
-								<line number="76" hits="0" branch="false"/>
-								<line number="77" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="startServer" signature="()V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="82" hits="0" branch="false"/>
-								<line number="83" hits="0" branch="false"/>
-								<line number="85" hits="0" branch="false"/>
-								<line number="87" hits="0" branch="false"/>
-							</lines>
-						</method>
-					</methods>
-					<lines>
-						<line number="23" hits="0" branch="false"/>
-						<line number="25" hits="0" branch="false"/>
-						<line number="38" hits="0" branch="false"/>
-						<line number="40" hits="0" branch="false"/>
-						<line number="41" hits="0" branch="false"/>
-						<line number="42" hits="0" branch="false"/>
-						<line number="43" hits="0" branch="false"/>
-						<line number="44" hits="0" branch="false"/>
-						<line number="48" hits="0" branch="false"/>
-						<line number="50" hits="0" branch="false"/>
-						<line number="53" hits="0" branch="false"/>
-						<line number="60" hits="0" branch="false"/>
-						<line number="61" hits="0" branch="false"/>
-						<line number="62" hits="0" branch="false"/>
-						<line number="63" hits="0" branch="false"/>
-						<line number="64" hits="0" branch="false"/>
-						<line number="66" hits="0" branch="false"/>
-						<line number="67" hits="0" branch="false"/>
-						<line number="69" hits="0" branch="false"/>
-						<line number="70" hits="0" branch="false"/>
-						<line number="71" hits="0" branch="false"/>
-						<line number="74" hits="0" branch="false"/>
-						<line number="76" hits="0" branch="false"/>
-						<line number="77" hits="0" branch="false"/>
-						<line number="82" hits="0" branch="false"/>
-						<line number="83" hits="0" branch="false"/>
-						<line number="85" hits="0" branch="false"/>
-						<line number="87" hits="0" branch="false"/>
-						<line number="91" hits="0" branch="false"/>
-					</lines>
-				</class>
-				<class name="se.cygni.texasholdem.server.RpcServer$1" filename="se/cygni/texasholdem/server/RpcServer.java" line-rate="0.0" branch-rate="1.0" complexity="1.0">
-					<methods>
-						<method name="&lt;init&gt;" signature="(Lse/cygni/texasholdem/server/RpcServer;)V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="91" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="connectionChanged" signature="(Lcom/googlecode/protobuf/pro/duplex/RpcClientChannel;)V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="122" hits="0" branch="false"/>
-								<line number="124" hits="0" branch="false"/>
-								<line number="125" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="connectionLost" signature="(Lcom/googlecode/protobuf/pro/duplex/RpcClientChannel;)V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="114" hits="0" branch="false"/>
-								<line number="116" hits="0" branch="false"/>
-								<line number="117" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="connectionOpened" signature="(Lcom/googlecode/protobuf/pro/duplex/RpcClientChannel;)V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="105" hits="0" branch="false"/>
-								<line number="107" hits="0" branch="false"/>
-								<line number="109" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="connectionReestablished" signature="(Lcom/googlecode/protobuf/pro/duplex/RpcClientChannel;)V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="97" hits="0" branch="false"/>
-								<line number="99" hits="0" branch="false"/>
-								<line number="100" hits="0" branch="false"/>
-							</lines>
-						</method>
-					</methods>
-					<lines>
-						<line number="91" hits="0" branch="false"/>
-						<line number="97" hits="0" branch="false"/>
-						<line number="99" hits="0" branch="false"/>
-						<line number="100" hits="0" branch="false"/>
-						<line number="105" hits="0" branch="false"/>
-						<line number="107" hits="0" branch="false"/>
-						<line number="109" hits="0" branch="false"/>
-						<line number="114" hits="0" branch="false"/>
-						<line number="116" hits="0" branch="false"/>
-						<line number="117" hits="0" branch="false"/>
-						<line number="122" hits="0" branch="false"/>
-						<line number="124" hits="0" branch="false"/>
-						<line number="125" hits="0" branch="false"/>
-					</lines>
-				</class>
-			</classes>
-		</package>
-		<package name="se.cygni.texasholdem.table" line-rate="0.0" branch-rate="1.0" complexity="1.0">
-			<classes>
-				<class name="se.cygni.texasholdem.table.GamePlan" filename="se/cygni/texasholdem/table/GamePlan.java" line-rate="0.0" branch-rate="1.0" complexity="1.0">
-					<methods>
-						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="16" hits="0" branch="false"/>
-								<line number="18" hits="0" branch="false"/>
-								<line number="19" hits="0" branch="false"/>
-								<line number="20" hits="0" branch="false"/>
-								<line number="21" hits="0" branch="false"/>
 								<line number="22" hits="0" branch="false"/>
 								<line number="23" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="&lt;init&gt;" signature="(IJJLse/cygni/texasholdem/table/GamePlan$BlindRaiseStrategy;J)V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="29" hits="0" branch="false"/>
-								<line number="31" hits="0" branch="false"/>
-								<line number="32" hits="0" branch="false"/>
-								<line number="33" hits="0" branch="false"/>
-								<line number="34" hits="0" branch="false"/>
-								<line number="35" hits="0" branch="false"/>
-								<line number="36" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="getBigBlindStart" signature="()J" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="55" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="getBlindRaiseStrategy" signature="()Lse/cygni/texasholdem/table/GamePlan$BlindRaiseStrategy;" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="45" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="getBlindRaiseStrategyValue" signature="()J" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="60" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="getPlaysBetweenBlindRaise" signature="()I" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="40" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="getSmalBlindStart" signature="()J" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="50" hits="0" branch="false"/>
-							</lines>
-						</method>
 					</methods>
 					<lines>
-						<line number="16" hits="0" branch="false"/>
+						<line number="9" hits="0" branch="false"/>
+						<line number="17" hits="0" branch="false"/>
 						<line number="18" hits="0" branch="false"/>
-						<line number="19" hits="0" branch="false"/>
 						<line number="20" hits="0" branch="false"/>
-						<line number="21" hits="0" branch="false"/>
 						<line number="22" hits="0" branch="false"/>
 						<line number="23" hits="0" branch="false"/>
-						<line number="29" hits="0" branch="false"/>
-						<line number="31" hits="0" branch="false"/>
-						<line number="32" hits="0" branch="false"/>
-						<line number="33" hits="0" branch="false"/>
-						<line number="34" hits="0" branch="false"/>
-						<line number="35" hits="0" branch="false"/>
-						<line number="36" hits="0" branch="false"/>
-						<line number="40" hits="0" branch="false"/>
-						<line number="45" hits="0" branch="false"/>
-						<line number="50" hits="0" branch="false"/>
-						<line number="55" hits="0" branch="false"/>
-						<line number="60" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="se.cygni.texasholdem.table.GamePlan$BlindRaiseStrategy" filename="se/cygni/texasholdem/table/GamePlan.java" line-rate="0.0" branch-rate="1.0" complexity="1.0">
+				<class name="se.cygni.texasholdem.client.PlayerServiceImpl" filename="se/cygni/texasholdem/client/PlayerServiceImpl.java" line-rate="0.0" branch-rate="0.0" complexity="1.1875">
 					<methods>
 						<method name="&lt;clinit&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="5" hits="0" branch="false"/>
-								<line number="6" hits="0" branch="false"/>
-								<line number="7" hits="0" branch="false"/>
+								<line number="37" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="&lt;init&gt;" signature="(Ljava/lang/String;I)V" line-rate="1.0" branch-rate="1.0">
+						<method name="&lt;init&gt;" signature="(Lse/cygni/texasholdem/player/PlayerInterface;)V" line-rate="0.0" branch-rate="1.0">
 							<lines>
+								<line number="42" hits="0" branch="false"/>
+								<line number="44" hits="0" branch="false"/>
+								<line number="45" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="valueOf" signature="(Ljava/lang/String;)Lse/cygni/texasholdem/table/GamePlan$BlindRaiseStrategy;" line-rate="1.0" branch-rate="1.0">
+						<method name="onCommunityHasBeenDealtACard" signature="(Lcom/google/protobuf/RpcController;Lse/cygni/texasholdem/communication/ClientServer$CommunityHasBeenDealtACardEvent;Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="1.0">
 							<lines>
+								<line number="95" hits="0" branch="false"/>
+								<line number="96" hits="0" branch="false"/>
+								<line number="99" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="values" signature="()[Lse/cygni/texasholdem/table/GamePlan$BlindRaiseStrategy;" line-rate="1.0" branch-rate="1.0">
+						<method name="onPlayIsStarted" signature="(Lcom/google/protobuf/RpcController;Lse/cygni/texasholdem/communication/ClientServer$PlayIsStartedEvent;Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="1.0">
 							<lines>
+								<line number="73" hits="0" branch="false"/>
+								<line number="74" hits="0" branch="false"/>
+								<line number="76" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="onPlayerCalled" signature="(Lcom/google/protobuf/RpcController;Lse/cygni/texasholdem/communication/ClientServer$PlayerCalledEvent;Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="118" hits="0" branch="false"/>
+								<line number="119" hits="0" branch="false"/>
+								<line number="121" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="onPlayerChecked" signature="(Lcom/google/protobuf/RpcController;Lse/cygni/texasholdem/communication/ClientServer$PlayerCheckedEvent;Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="151" hits="0" branch="false"/>
+								<line number="152" hits="0" branch="false"/>
+								<line number="154" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="onPlayerFolded" signature="(Lcom/google/protobuf/RpcController;Lse/cygni/texasholdem/communication/ClientServer$PlayerFoldedEvent;Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="107" hits="0" branch="false"/>
+								<line number="108" hits="0" branch="false"/>
+								<line number="110" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="onPlayerRaised" signature="(Lcom/google/protobuf/RpcController;Lse/cygni/texasholdem/communication/ClientServer$PlayerRaisedEvent;Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="129" hits="0" branch="false"/>
+								<line number="130" hits="0" branch="false"/>
+								<line number="132" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="onPlayerWentAllIn" signature="(Lcom/google/protobuf/RpcController;Lse/cygni/texasholdem/communication/ClientServer$PlayerWentAllInEvent;Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="140" hits="0" branch="false"/>
+								<line number="141" hits="0" branch="false"/>
+								<line number="143" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="onPlayerWithdrew" signature="(Lcom/google/protobuf/RpcController;Lse/cygni/texasholdem/communication/ClientServer$PlayerWithdrewEvent;Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="187" hits="0" branch="false"/>
+								<line number="188" hits="0" branch="false"/>
+								<line number="190" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="onShowDown" signature="(Lcom/google/protobuf/RpcController;Lse/cygni/texasholdem/communication/ClientServer$ShowDownEvent;Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="0.0">
+							<lines>
+								<line number="162" hits="0" branch="false"/>
+								<line number="163" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="165" hits="0" branch="false"/>
+								<line number="169" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="onYouHaveBeenDealtACard" signature="(Lcom/google/protobuf/RpcController;Lse/cygni/texasholdem/communication/ClientServer$YouHaveBeenDealtACardEvent;Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="84" hits="0" branch="false"/>
+								<line number="85" hits="0" branch="false"/>
+								<line number="87" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="onYouMustAct" signature="(Lcom/google/protobuf/RpcController;Lse/cygni/texasholdem/communication/ClientServer$PBPossibleActions;Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="0.0">
+							<lines>
+								<line number="199" hits="0" branch="false"/>
+								<line number="201" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="202" hits="0" branch="false"/>
+								<line number="205" hits="0" branch="false"/>
+								<line number="207" hits="0" branch="false"/>
+								<line number="210" hits="0" branch="false"/>
+								<line number="212" hits="0" branch="false"/>
+								<line number="213" hits="0" branch="false"/>
+								<line number="214" hits="0" branch="false"/>
+								<line number="215" hits="0" branch="false"/>
+								<line number="216" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="onYouWonAmount" signature="(Lcom/google/protobuf/RpcController;Lse/cygni/texasholdem/communication/ClientServer$YouWonAmountEvent;Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="177" hits="0" branch="false"/>
+								<line number="178" hits="0" branch="false"/>
+								<line number="179" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="ping" signature="(Lcom/google/protobuf/RpcController;Lse/cygni/texasholdem/communication/ClientServer$Void;Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="53" hits="0" branch="false"/>
+								<line number="54" hits="0" branch="false"/>
+								<line number="55" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="returnVoid" signature="(Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="220" hits="0" branch="false"/>
+								<line number="221" hits="0" branch="false"/>
+								<line number="222" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="serverIsShuttingDown" signature="(Lcom/google/protobuf/RpcController;Lse/cygni/texasholdem/communication/ClientServer$PBMessage;Lcom/google/protobuf/RpcCallback;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="63" hits="0" branch="false"/>
+								<line number="64" hits="0" branch="false"/>
+								<line number="65" hits="0" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="5" hits="0" branch="false"/>
-						<line number="6" hits="0" branch="false"/>
-						<line number="7" hits="0" branch="false"/>
+						<line number="37" hits="0" branch="false"/>
+						<line number="42" hits="0" branch="false"/>
+						<line number="44" hits="0" branch="false"/>
+						<line number="45" hits="0" branch="false"/>
+						<line number="53" hits="0" branch="false"/>
+						<line number="54" hits="0" branch="false"/>
+						<line number="55" hits="0" branch="false"/>
+						<line number="63" hits="0" branch="false"/>
+						<line number="64" hits="0" branch="false"/>
+						<line number="65" hits="0" branch="false"/>
+						<line number="73" hits="0" branch="false"/>
+						<line number="74" hits="0" branch="false"/>
+						<line number="76" hits="0" branch="false"/>
+						<line number="84" hits="0" branch="false"/>
+						<line number="85" hits="0" branch="false"/>
+						<line number="87" hits="0" branch="false"/>
+						<line number="95" hits="0" branch="false"/>
+						<line number="96" hits="0" branch="false"/>
+						<line number="99" hits="0" branch="false"/>
+						<line number="107" hits="0" branch="false"/>
+						<line number="108" hits="0" branch="false"/>
+						<line number="110" hits="0" branch="false"/>
+						<line number="118" hits="0" branch="false"/>
+						<line number="119" hits="0" branch="false"/>
+						<line number="121" hits="0" branch="false"/>
+						<line number="129" hits="0" branch="false"/>
+						<line number="130" hits="0" branch="false"/>
+						<line number="132" hits="0" branch="false"/>
+						<line number="140" hits="0" branch="false"/>
+						<line number="141" hits="0" branch="false"/>
+						<line number="143" hits="0" branch="false"/>
+						<line number="151" hits="0" branch="false"/>
+						<line number="152" hits="0" branch="false"/>
+						<line number="154" hits="0" branch="false"/>
+						<line number="162" hits="0" branch="false"/>
+						<line number="163" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="165" hits="0" branch="false"/>
+						<line number="169" hits="0" branch="false"/>
+						<line number="177" hits="0" branch="false"/>
+						<line number="178" hits="0" branch="false"/>
+						<line number="179" hits="0" branch="false"/>
+						<line number="187" hits="0" branch="false"/>
+						<line number="188" hits="0" branch="false"/>
+						<line number="190" hits="0" branch="false"/>
+						<line number="199" hits="0" branch="false"/>
+						<line number="201" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="202" hits="0" branch="false"/>
+						<line number="205" hits="0" branch="false"/>
+						<line number="207" hits="0" branch="false"/>
+						<line number="210" hits="0" branch="false"/>
+						<line number="212" hits="0" branch="false"/>
+						<line number="213" hits="0" branch="false"/>
+						<line number="214" hits="0" branch="false"/>
+						<line number="215" hits="0" branch="false"/>
+						<line number="216" hits="0" branch="false"/>
+						<line number="220" hits="0" branch="false"/>
+						<line number="221" hits="0" branch="false"/>
+						<line number="222" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="se.cygni.texasholdem.table.Table" filename="se/cygni/texasholdem/table/Table.java" line-rate="0.0" branch-rate="1.0" complexity="1.0">
+			</classes>
+		</package>
+		<package name="se.cygni.texasholdem.game" line-rate="0.0" branch-rate="1.0" complexity="2.75">
+			<classes>
+				<class name="se.cygni.texasholdem.game.GameService" filename="se/cygni/texasholdem/game/GameService.java" line-rate="0.0" branch-rate="1.0" complexity="2.75">
 					<methods>
-						<method name="&lt;init&gt;" signature="(Lse/cygni/texasholdem/table/GamePlan;Lse/cygni/texasholdem/server/GameServer;)V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="16" hits="0" branch="false"/>
-								<line number="31" hits="0" branch="false"/>
-								<line number="33" hits="0" branch="false"/>
-								<line number="34" hits="0" branch="false"/>
-								<line number="35" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="getBigBlind" signature="()J" line-rate="0.0" branch-rate="1.0">
+						<method name="&lt;clinit&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
 							<lines>
 								<line number="49" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="getBigBlindPlayer" signature="()Lse/cygni/texasholdem/game/BotPlayer;" line-rate="0.0" branch-rate="1.0">
+						<method name="&lt;init&gt;" signature="(Lse/cygni/texasholdem/player/PlayerInterface;ILjava/lang/String;)V" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="79" hits="0" branch="false"/>
+								<line number="52" hits="0" branch="false"/>
+								<line number="53" hits="0" branch="false"/>
+								<line number="64" hits="0" branch="false"/>
+								<line number="66" hits="0" branch="false"/>
+								<line number="69" hits="0" branch="false"/>
+								<line number="72" hits="0" branch="false"/>
+								<line number="74" hits="0" branch="false"/>
+								<line number="75" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="getCardsForPlayer" signature="(Lse/cygni/texasholdem/game/BotPlayer;)Ljava/util/List;" line-rate="0.0" branch-rate="1.0">
+						<method name="access$000" signature="()Lorg/slf4j/Logger;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="39" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="access$100" signature="(Lse/cygni/texasholdem/game/GameService;)Lse/cygni/texasholdem/player/PlayerInterface;" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="47" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="connect" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="360" hits="0" branch="false"/>
+								<line number="362" hits="0" branch="false"/>
+								<line number="370" hits="0" branch="false"/>
+								<line number="372" hits="0" branch="false"/>
+								<line number="375" hits="0" branch="false"/>
+								<line number="376" hits="0" branch="false"/>
+								<line number="377" hits="0" branch="false"/>
+								<line number="378" hits="0" branch="false"/>
+								<line number="379" hits="0" branch="false"/>
+								<line number="381" hits="0" branch="false"/>
+								<line number="382" hits="0" branch="false"/>
+								<line number="385" hits="0" branch="false"/>
+								<line number="386" hits="0" branch="false"/>
+								<line number="416" hits="0" branch="false"/>
+								<line number="417" hits="0" branch="false"/>
+								<line number="420" hits="0" branch="false"/>
+								<line number="421" hits="0" branch="false"/>
+								<line number="423" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="getBigBlindAmount" signature="()J" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="120" hits="0" branch="false"/>
+								<line number="122" hits="0" branch="false"/>
+								<line number="123" hits="0" branch="false"/>
+								<line number="127" hits="0" branch="false"/>
+								<line number="129" hits="0" branch="false"/>
+								<line number="131" hits="0" branch="false"/>
+								<line number="133" hits="0" branch="false"/>
+								<line number="134" hits="0" branch="false"/>
+								<line number="135" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="getBigBlindPlayer" signature="()Lse/cygni/texasholdem/game/Player;" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="257" hits="0" branch="false"/>
+								<line number="259" hits="0" branch="false"/>
+								<line number="260" hits="0" branch="false"/>
+								<line number="264" hits="0" branch="false"/>
+								<line number="266" hits="0" branch="false"/>
+								<line number="269" hits="0" branch="false"/>
+								<line number="271" hits="0" branch="false"/>
+								<line number="273" hits="0" branch="false"/>
+								<line number="274" hits="0" branch="false"/>
+								<line number="275" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="getCommunityCards" signature="()Ljava/util/List;" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="84" hits="0" branch="false"/>
+								<line number="281" hits="0" branch="false"/>
+								<line number="283" hits="0" branch="false"/>
+								<line number="284" hits="0" branch="false"/>
+								<line number="288" hits="0" branch="false"/>
+								<line number="290" hits="0" branch="false"/>
+								<line number="293" hits="0" branch="false"/>
+								<line number="295" hits="0" branch="false"/>
+								<line number="297" hits="0" branch="false"/>
+								<line number="298" hits="0" branch="false"/>
+								<line number="299" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="getDealerPlayer" signature="()Lse/cygni/texasholdem/game/BotPlayer;" line-rate="0.0" branch-rate="1.0">
+						<method name="getDealerPlayer" signature="()Lse/cygni/texasholdem/game/Player;" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="69" hits="0" branch="false"/>
+								<line number="209" hits="0" branch="false"/>
+								<line number="211" hits="0" branch="false"/>
+								<line number="212" hits="0" branch="false"/>
+								<line number="216" hits="0" branch="false"/>
+								<line number="218" hits="0" branch="false"/>
+								<line number="221" hits="0" branch="false"/>
+								<line number="223" hits="0" branch="false"/>
+								<line number="225" hits="0" branch="false"/>
+								<line number="226" hits="0" branch="false"/>
+								<line number="227" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="getMyCards" signature="()Ljava/util/List;" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="305" hits="0" branch="false"/>
+								<line number="307" hits="0" branch="false"/>
+								<line number="308" hits="0" branch="false"/>
+								<line number="312" hits="0" branch="false"/>
+								<line number="314" hits="0" branch="false"/>
+								<line number="317" hits="0" branch="false"/>
+								<line number="319" hits="0" branch="false"/>
+								<line number="321" hits="0" branch="false"/>
+								<line number="322" hits="0" branch="false"/>
+								<line number="323" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="getMyChipAmount" signature="()J" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="79" hits="0" branch="false"/>
+								<line number="81" hits="0" branch="false"/>
+								<line number="82" hits="0" branch="false"/>
+								<line number="85" hits="0" branch="false"/>
+								<line number="87" hits="0" branch="false"/>
+								<line number="89" hits="0" branch="false"/>
+								<line number="91" hits="0" branch="false"/>
+								<line number="92" hits="0" branch="false"/>
+								<line number="93" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="getPlayState" signature="()Lse/cygni/texasholdem/game/definitions/PlayState;" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="59" hits="0" branch="false"/>
+								<line number="162" hits="0" branch="false"/>
+								<line number="164" hits="0" branch="false"/>
+								<line number="165" hits="0" branch="false"/>
+								<line number="169" hits="0" branch="false"/>
+								<line number="171" hits="0" branch="false"/>
+								<line number="173" hits="0" branch="false"/>
+								<line number="175" hits="0" branch="false"/>
+								<line number="177" hits="0" branch="false"/>
+								<line number="178" hits="0" branch="false"/>
+								<line number="179" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="getPlayers" signature="()Ljava/util/List;" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="64" hits="0" branch="false"/>
+								<line number="185" hits="0" branch="false"/>
+								<line number="187" hits="0" branch="false"/>
+								<line number="188" hits="0" branch="false"/>
+								<line number="192" hits="0" branch="false"/>
+								<line number="194" hits="0" branch="false"/>
+								<line number="197" hits="0" branch="false"/>
+								<line number="199" hits="0" branch="false"/>
+								<line number="201" hits="0" branch="false"/>
+								<line number="202" hits="0" branch="false"/>
+								<line number="203" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="getPotAmount" signature="()J" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="54" hits="0" branch="false"/>
+								<line number="141" hits="0" branch="false"/>
+								<line number="143" hits="0" branch="false"/>
+								<line number="144" hits="0" branch="false"/>
+								<line number="148" hits="0" branch="false"/>
+								<line number="150" hits="0" branch="false"/>
+								<line number="152" hits="0" branch="false"/>
+								<line number="154" hits="0" branch="false"/>
+								<line number="155" hits="0" branch="false"/>
+								<line number="156" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="getSmallBlind" signature="()J" line-rate="0.0" branch-rate="1.0">
+						<method name="getSessionId" signature="()Ljava/lang/String;" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="44" hits="0" branch="false"/>
+								<line number="427" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="getSmallBlindPlayer" signature="()Lse/cygni/texasholdem/game/BotPlayer;" line-rate="0.0" branch-rate="1.0">
+						<method name="getSmallBlindAmount" signature="()J" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="74" hits="0" branch="false"/>
+								<line number="99" hits="0" branch="false"/>
+								<line number="101" hits="0" branch="false"/>
+								<line number="102" hits="0" branch="false"/>
+								<line number="106" hits="0" branch="false"/>
+								<line number="108" hits="0" branch="false"/>
+								<line number="110" hits="0" branch="false"/>
+								<line number="112" hits="0" branch="false"/>
+								<line number="113" hits="0" branch="false"/>
+								<line number="114" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="getSmallBlindPlayer" signature="()Lse/cygni/texasholdem/game/Player;" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="233" hits="0" branch="false"/>
+								<line number="235" hits="0" branch="false"/>
+								<line number="236" hits="0" branch="false"/>
+								<line number="240" hits="0" branch="false"/>
+								<line number="242" hits="0" branch="false"/>
+								<line number="245" hits="0" branch="false"/>
+								<line number="247" hits="0" branch="false"/>
+								<line number="249" hits="0" branch="false"/>
+								<line number="250" hits="0" branch="false"/>
+								<line number="251" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="getVoidInSession" signature="()Lse/cygni/texasholdem/communication/ClientServer$VoidInSession;" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="355" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="registerForPlay" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="329" hits="0" branch="false"/>
+								<line number="331" hits="0" branch="false"/>
+								<line number="333" hits="0" branch="false"/>
+								<line number="338" hits="0" branch="false"/>
+								<line number="343" hits="0" branch="false"/>
+								<line number="345" hits="0" branch="false"/>
+								<line number="347" hits="0" branch="false"/>
+								<line number="348" hits="0" branch="false"/>
+								<line number="349" hits="0" branch="false"/>
+								<line number="350" hits="0" branch="false"/>
+								<line number="351" hits="0" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="16" hits="0" branch="false"/>
-						<line number="31" hits="0" branch="false"/>
-						<line number="33" hits="0" branch="false"/>
-						<line number="34" hits="0" branch="false"/>
-						<line number="35" hits="0" branch="false"/>
-						<line number="39" hits="0" branch="false"/>
-						<line number="44" hits="0" branch="false"/>
+						<line number="47" hits="0" branch="false"/>
 						<line number="49" hits="0" branch="false"/>
-						<line number="54" hits="0" branch="false"/>
-						<line number="59" hits="0" branch="false"/>
+						<line number="52" hits="0" branch="false"/>
+						<line number="53" hits="0" branch="false"/>
 						<line number="64" hits="0" branch="false"/>
+						<line number="66" hits="0" branch="false"/>
 						<line number="69" hits="0" branch="false"/>
+						<line number="72" hits="0" branch="false"/>
 						<line number="74" hits="0" branch="false"/>
+						<line number="75" hits="0" branch="false"/>
 						<line number="79" hits="0" branch="false"/>
-						<line number="84" hits="0" branch="false"/>
+						<line number="81" hits="0" branch="false"/>
+						<line number="82" hits="0" branch="false"/>
+						<line number="85" hits="0" branch="false"/>
+						<line number="87" hits="0" branch="false"/>
+						<line number="89" hits="0" branch="false"/>
+						<line number="91" hits="0" branch="false"/>
+						<line number="92" hits="0" branch="false"/>
+						<line number="93" hits="0" branch="false"/>
+						<line number="99" hits="0" branch="false"/>
+						<line number="101" hits="0" branch="false"/>
+						<line number="102" hits="0" branch="false"/>
+						<line number="106" hits="0" branch="false"/>
+						<line number="108" hits="0" branch="false"/>
+						<line number="110" hits="0" branch="false"/>
+						<line number="112" hits="0" branch="false"/>
+						<line number="113" hits="0" branch="false"/>
+						<line number="114" hits="0" branch="false"/>
+						<line number="120" hits="0" branch="false"/>
+						<line number="122" hits="0" branch="false"/>
+						<line number="123" hits="0" branch="false"/>
+						<line number="127" hits="0" branch="false"/>
+						<line number="129" hits="0" branch="false"/>
+						<line number="131" hits="0" branch="false"/>
+						<line number="133" hits="0" branch="false"/>
+						<line number="134" hits="0" branch="false"/>
+						<line number="135" hits="0" branch="false"/>
+						<line number="141" hits="0" branch="false"/>
+						<line number="143" hits="0" branch="false"/>
+						<line number="144" hits="0" branch="false"/>
+						<line number="148" hits="0" branch="false"/>
+						<line number="150" hits="0" branch="false"/>
+						<line number="152" hits="0" branch="false"/>
+						<line number="154" hits="0" branch="false"/>
+						<line number="155" hits="0" branch="false"/>
+						<line number="156" hits="0" branch="false"/>
+						<line number="162" hits="0" branch="false"/>
+						<line number="164" hits="0" branch="false"/>
+						<line number="165" hits="0" branch="false"/>
+						<line number="169" hits="0" branch="false"/>
+						<line number="171" hits="0" branch="false"/>
+						<line number="173" hits="0" branch="false"/>
+						<line number="175" hits="0" branch="false"/>
+						<line number="177" hits="0" branch="false"/>
+						<line number="178" hits="0" branch="false"/>
+						<line number="179" hits="0" branch="false"/>
+						<line number="185" hits="0" branch="false"/>
+						<line number="187" hits="0" branch="false"/>
+						<line number="188" hits="0" branch="false"/>
+						<line number="192" hits="0" branch="false"/>
+						<line number="194" hits="0" branch="false"/>
+						<line number="197" hits="0" branch="false"/>
+						<line number="199" hits="0" branch="false"/>
+						<line number="201" hits="0" branch="false"/>
+						<line number="202" hits="0" branch="false"/>
+						<line number="203" hits="0" branch="false"/>
+						<line number="209" hits="0" branch="false"/>
+						<line number="211" hits="0" branch="false"/>
+						<line number="212" hits="0" branch="false"/>
+						<line number="216" hits="0" branch="false"/>
+						<line number="218" hits="0" branch="false"/>
+						<line number="221" hits="0" branch="false"/>
+						<line number="223" hits="0" branch="false"/>
+						<line number="225" hits="0" branch="false"/>
+						<line number="226" hits="0" branch="false"/>
+						<line number="227" hits="0" branch="false"/>
+						<line number="233" hits="0" branch="false"/>
+						<line number="235" hits="0" branch="false"/>
+						<line number="236" hits="0" branch="false"/>
+						<line number="240" hits="0" branch="false"/>
+						<line number="242" hits="0" branch="false"/>
+						<line number="245" hits="0" branch="false"/>
+						<line number="247" hits="0" branch="false"/>
+						<line number="249" hits="0" branch="false"/>
+						<line number="250" hits="0" branch="false"/>
+						<line number="251" hits="0" branch="false"/>
+						<line number="257" hits="0" branch="false"/>
+						<line number="259" hits="0" branch="false"/>
+						<line number="260" hits="0" branch="false"/>
+						<line number="264" hits="0" branch="false"/>
+						<line number="266" hits="0" branch="false"/>
+						<line number="269" hits="0" branch="false"/>
+						<line number="271" hits="0" branch="false"/>
+						<line number="273" hits="0" branch="false"/>
+						<line number="274" hits="0" branch="false"/>
+						<line number="275" hits="0" branch="false"/>
+						<line number="281" hits="0" branch="false"/>
+						<line number="283" hits="0" branch="false"/>
+						<line number="284" hits="0" branch="false"/>
+						<line number="288" hits="0" branch="false"/>
+						<line number="290" hits="0" branch="false"/>
+						<line number="293" hits="0" branch="false"/>
+						<line number="295" hits="0" branch="false"/>
+						<line number="297" hits="0" branch="false"/>
+						<line number="298" hits="0" branch="false"/>
+						<line number="299" hits="0" branch="false"/>
+						<line number="305" hits="0" branch="false"/>
+						<line number="307" hits="0" branch="false"/>
+						<line number="308" hits="0" branch="false"/>
+						<line number="312" hits="0" branch="false"/>
+						<line number="314" hits="0" branch="false"/>
+						<line number="317" hits="0" branch="false"/>
+						<line number="319" hits="0" branch="false"/>
+						<line number="321" hits="0" branch="false"/>
+						<line number="322" hits="0" branch="false"/>
+						<line number="323" hits="0" branch="false"/>
+						<line number="329" hits="0" branch="false"/>
+						<line number="331" hits="0" branch="false"/>
+						<line number="333" hits="0" branch="false"/>
+						<line number="338" hits="0" branch="false"/>
+						<line number="343" hits="0" branch="false"/>
+						<line number="345" hits="0" branch="false"/>
+						<line number="347" hits="0" branch="false"/>
+						<line number="348" hits="0" branch="false"/>
+						<line number="349" hits="0" branch="false"/>
+						<line number="350" hits="0" branch="false"/>
+						<line number="351" hits="0" branch="false"/>
+						<line number="355" hits="0" branch="false"/>
+						<line number="360" hits="0" branch="false"/>
+						<line number="362" hits="0" branch="false"/>
+						<line number="370" hits="0" branch="false"/>
+						<line number="372" hits="0" branch="false"/>
+						<line number="375" hits="0" branch="false"/>
+						<line number="376" hits="0" branch="false"/>
+						<line number="377" hits="0" branch="false"/>
+						<line number="378" hits="0" branch="false"/>
+						<line number="379" hits="0" branch="false"/>
+						<line number="381" hits="0" branch="false"/>
+						<line number="382" hits="0" branch="false"/>
+						<line number="385" hits="0" branch="false"/>
+						<line number="386" hits="0" branch="false"/>
+						<line number="416" hits="0" branch="false"/>
+						<line number="417" hits="0" branch="false"/>
+						<line number="420" hits="0" branch="false"/>
+						<line number="421" hits="0" branch="false"/>
+						<line number="423" hits="0" branch="false"/>
+						<line number="427" hits="0" branch="false"/>
+					</lines>
+				</class>
+				<class name="se.cygni.texasholdem.game.GameService$1" filename="se/cygni/texasholdem/game/GameService.java" line-rate="0.0" branch-rate="1.0" complexity="2.75">
+					<methods>
+						<method name="&lt;init&gt;" signature="(Lse/cygni/texasholdem/game/GameService;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="386" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="connectionChanged" signature="(Lcom/googlecode/protobuf/pro/duplex/RpcClientChannel;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="413" hits="0" branch="false"/>
+								<line number="414" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="connectionLost" signature="(Lcom/googlecode/protobuf/pro/duplex/RpcClientChannel;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="406" hits="0" branch="false"/>
+								<line number="407" hits="0" branch="false"/>
+								<line number="408" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="connectionOpened" signature="(Lcom/googlecode/protobuf/pro/duplex/RpcClientChannel;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="399" hits="0" branch="false"/>
+								<line number="400" hits="0" branch="false"/>
+								<line number="401" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="connectionReestablished" signature="(Lcom/googlecode/protobuf/pro/duplex/RpcClientChannel;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="392" hits="0" branch="false"/>
+								<line number="393" hits="0" branch="false"/>
+								<line number="394" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="386" hits="0" branch="false"/>
+						<line number="392" hits="0" branch="false"/>
+						<line number="393" hits="0" branch="false"/>
+						<line number="394" hits="0" branch="false"/>
+						<line number="399" hits="0" branch="false"/>
+						<line number="400" hits="0" branch="false"/>
+						<line number="401" hits="0" branch="false"/>
+						<line number="406" hits="0" branch="false"/>
+						<line number="407" hits="0" branch="false"/>
+						<line number="408" hits="0" branch="false"/>
+						<line number="413" hits="0" branch="false"/>
+						<line number="414" hits="0" branch="false"/>
 					</lines>
 				</class>
 			</classes>
 		</package>
-		<package name="se.cygni.texasholdem.tournament" line-rate="0.0" branch-rate="1.0" complexity="0.0">
+		<package name="se.cygni.texasholdem.player" line-rate="0.0" branch-rate="1.0" complexity="1.0">
 			<classes>
-				<class name="se.cygni.texasholdem.tournament.Tournament" filename="se/cygni/texasholdem/tournament/Tournament.java" line-rate="0.0" branch-rate="1.0" complexity="0.0">
+				<class name="se.cygni.texasholdem.player.DummyPlayer" filename="se/cygni/texasholdem/player/DummyPlayer.java" line-rate="0.0" branch-rate="1.0" complexity="1.0">
 					<methods>
 						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="4" hits="0" branch="false"/>
+								<line number="9" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="connectionToGameServerEstablished" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="125" hits="0" branch="false"/>
+								<line number="127" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="connectionToGameServerLost" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="118" hits="0" branch="false"/>
+								<line number="120" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="getName" signature="()Ljava/lang/String;" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="14" hits="0" branch="false"/>
+								<line number="15" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="onActionRequired" signature="(Ljava/util/List;)Lse/cygni/texasholdem/game/Action;" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="111" hits="0" branch="false"/>
+								<line number="112" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="onCommunityHasBeenDealtACard" signature="(Lse/cygni/texasholdem/game/Card;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="42" hits="0" branch="false"/>
+								<line number="44" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="onPlayIsStarted" signature="(Ljava/util/List;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="28" hits="0" branch="false"/>
+								<line number="30" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="onPlayerCalled" signature="(Lse/cygni/texasholdem/game/Player;J)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="56" hits="0" branch="false"/>
+								<line number="58" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="onPlayerChecked" signature="(Lse/cygni/texasholdem/game/Player;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="83" hits="0" branch="false"/>
+								<line number="85" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="onPlayerFolded" signature="(Lse/cygni/texasholdem/game/Player;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="49" hits="0" branch="false"/>
+								<line number="51" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="onPlayerRaised" signature="(Lse/cygni/texasholdem/game/Player;JJ)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="66" hits="0" branch="false"/>
+								<line number="68" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="onPlayerWentAllIn" signature="(Lse/cygni/texasholdem/game/Player;JJ)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="76" hits="0" branch="false"/>
+								<line number="78" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="onPlayerWithdrew" signature="(Lse/cygni/texasholdem/game/Player;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="104" hits="0" branch="false"/>
+								<line number="106" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="onPlayerWonAmount" signature="(Lse/cygni/texasholdem/game/Player;J)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="97" hits="0" branch="false"/>
+								<line number="99" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="onYouHaveBeenDealtACard" signature="(Lse/cygni/texasholdem/game/Card;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="35" hits="0" branch="false"/>
+								<line number="37" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="onYouWonAmount" signature="(J)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="90" hits="0" branch="false"/>
+								<line number="92" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="serverIsShuttingDown" signature="(Ljava/lang/String;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="21" hits="0" branch="false"/>
+								<line number="23" hits="0" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="4" hits="0" branch="false"/>
+						<line number="9" hits="0" branch="false"/>
+						<line number="14" hits="0" branch="false"/>
+						<line number="15" hits="0" branch="false"/>
+						<line number="21" hits="0" branch="false"/>
+						<line number="23" hits="0" branch="false"/>
+						<line number="28" hits="0" branch="false"/>
+						<line number="30" hits="0" branch="false"/>
+						<line number="35" hits="0" branch="false"/>
+						<line number="37" hits="0" branch="false"/>
+						<line number="42" hits="0" branch="false"/>
+						<line number="44" hits="0" branch="false"/>
+						<line number="49" hits="0" branch="false"/>
+						<line number="51" hits="0" branch="false"/>
+						<line number="56" hits="0" branch="false"/>
+						<line number="58" hits="0" branch="false"/>
+						<line number="66" hits="0" branch="false"/>
+						<line number="68" hits="0" branch="false"/>
+						<line number="76" hits="0" branch="false"/>
+						<line number="78" hits="0" branch="false"/>
+						<line number="83" hits="0" branch="false"/>
+						<line number="85" hits="0" branch="false"/>
+						<line number="90" hits="0" branch="false"/>
+						<line number="92" hits="0" branch="false"/>
+						<line number="97" hits="0" branch="false"/>
+						<line number="99" hits="0" branch="false"/>
+						<line number="104" hits="0" branch="false"/>
+						<line number="106" hits="0" branch="false"/>
+						<line number="111" hits="0" branch="false"/>
+						<line number="112" hits="0" branch="false"/>
+						<line number="118" hits="0" branch="false"/>
+						<line number="120" hits="0" branch="false"/>
+						<line number="125" hits="0" branch="false"/>
+						<line number="127" hits="0" branch="false"/>
 					</lines>
 				</class>
-			</classes>
-		</package>
-		<package name="se.cygni.texasholdem.util" line-rate="0.9259259259259259" branch-rate="0.7941176470588235" complexity="4.222222222222222">
-			<classes>
-				<class name="se.cygni.texasholdem.util.SystemFieldPopulator" filename="se/cygni/texasholdem/util/SystemFieldPopulator.java" line-rate="0.9259259259259259" branch-rate="0.7941176470588235" complexity="4.222222222222222">
+				<class name="se.cygni.texasholdem.player.PlayerInterface" filename="se/cygni/texasholdem/player/PlayerInterface.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
 					<methods>
-						<method name="&lt;clinit&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="11" hits="1" branch="false"/>
-							</lines>
-						</method>
-						<method name="&lt;init&gt;" signature="(Ljava/lang/Object;Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="17" hits="9" branch="false"/>
-								<line number="19" hits="9" branch="false"/>
-								<line number="20" hits="9" branch="false"/>
-								<line number="21" hits="9" branch="false"/>
-							</lines>
-						</method>
-						<method name="getBooleanPropertyFromSystem" signature="(Ljava/lang/String;)Ljava/lang/Boolean;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="130" hits="8" branch="false"/>
-								<line number="131" hits="8" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="132" hits="7" branch="false"/>
-								<line number="134" hits="1" branch="false"/>
-							</lines>
-						</method>
-						<method name="getDoublePropertyFromSystem" signature="(Ljava/lang/String;)Ljava/lang/Double;" line-rate="0.875" branch-rate="1.0">
-							<lines>
-								<line number="100" hits="8" branch="false"/>
-								<line number="101" hits="8" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="102" hits="7" branch="false"/>
-								<line number="104" hits="1" branch="false"/>
-								<line number="107" hits="1" branch="false"/>
-								<line number="108" hits="0" branch="false"/>
-								<line number="109" hits="1" branch="false"/>
-								<line number="110" hits="1" branch="false"/>
-							</lines>
-						</method>
-						<method name="getFloatPropertyFromSystem" signature="(Ljava/lang/String;)Ljava/lang/Float;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="85" hits="8" branch="false"/>
-								<line number="86" hits="8" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="87" hits="5" branch="false"/>
-								<line number="89" hits="3" branch="false"/>
-								<line number="92" hits="3" branch="false"/>
-								<line number="93" hits="1" branch="false"/>
-								<line number="94" hits="2" branch="false"/>
-								<line number="95" hits="3" branch="false"/>
-							</lines>
-						</method>
-						<method name="getIntegerPropertyFromSystem" signature="(Ljava/lang/String;)Ljava/lang/Integer;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="120" hits="9" branch="false"/>
-							</lines>
-						</method>
-						<method name="getLongPropertyFromSystem" signature="(Ljava/lang/String;)Ljava/lang/Long;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="115" hits="8" branch="false"/>
-							</lines>
-						</method>
-						<method name="getPropertyFromSystem" signature="(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;" line-rate="0.9230769230769231" branch-rate="0.6818181818181818">
-							<lines>
-								<line number="56" hits="50" branch="true" condition-coverage="75% (3/4)">
-									<conditions>
-										<condition number="0" type="jump" coverage="50%"/>
-										<condition number="1" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="57" hits="8" branch="false"/>
-								<line number="60" hits="42" branch="true" condition-coverage="75% (3/4)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-										<condition number="1" type="jump" coverage="50%"/>
-									</conditions>
-								</line>
-								<line number="61" hits="8" branch="false"/>
-								<line number="64" hits="34" branch="true" condition-coverage="75% (3/4)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-										<condition number="1" type="jump" coverage="50%"/>
-									</conditions>
-								</line>
-								<line number="65" hits="8" branch="false"/>
-								<line number="68" hits="26" branch="true" condition-coverage="75% (3/4)">
-									<conditions>
-										<condition number="0" type="jump" coverage="50%"/>
-										<condition number="1" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="69" hits="9" branch="false"/>
-								<line number="72" hits="17" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="73" hits="9" branch="false"/>
-								<line number="76" hits="8" branch="true" condition-coverage="25% (1/4)">
-									<conditions>
-										<condition number="0" type="jump" coverage="50%"/>
-										<condition number="1" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="77" hits="8" branch="false"/>
-								<line number="80" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="getStringPropertyFromSystem" signature="(Ljava/lang/String;)Ljava/lang/String;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="125" hits="25" branch="false"/>
-							</lines>
-						</method>
-						<method name="populateValuesFromSystemProperties" signature="()V" line-rate="0.8461538461538461" branch-rate="1.0">
-							<lines>
-								<line number="25" hits="9" branch="false"/>
-								<line number="26" hits="76" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="29" hits="67" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="30" hits="17" branch="false"/>
-								<line number="32" hits="50" branch="false"/>
-								<line number="35" hits="50" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="36" hits="7" branch="false"/>
-								<line number="38" hits="7" branch="false"/>
-								<line number="40" hits="7" branch="false"/>
-								<line number="44" hits="0" branch="false"/>
-								<line number="45" hits="0" branch="false"/>
-								<line number="48" hits="7" branch="false"/>
-								<line number="51" hits="9" branch="false"/>
-							</lines>
-						</method>
 					</methods>
 					<lines>
-						<line number="11" hits="1" branch="false"/>
-						<line number="17" hits="9" branch="false"/>
-						<line number="19" hits="9" branch="false"/>
-						<line number="20" hits="9" branch="false"/>
-						<line number="21" hits="9" branch="false"/>
-						<line number="25" hits="9" branch="false"/>
-						<line number="26" hits="76" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="29" hits="67" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="30" hits="17" branch="false"/>
-						<line number="32" hits="50" branch="false"/>
-						<line number="35" hits="50" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="36" hits="7" branch="false"/>
-						<line number="38" hits="7" branch="false"/>
-						<line number="40" hits="7" branch="false"/>
-						<line number="44" hits="0" branch="false"/>
-						<line number="45" hits="0" branch="false"/>
-						<line number="48" hits="7" branch="false"/>
-						<line number="51" hits="9" branch="false"/>
-						<line number="56" hits="50" branch="true" condition-coverage="75% (3/4)">
-							<conditions>
-								<condition number="0" type="jump" coverage="50%"/>
-								<condition number="1" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="57" hits="8" branch="false"/>
-						<line number="60" hits="42" branch="true" condition-coverage="75% (3/4)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-								<condition number="1" type="jump" coverage="50%"/>
-							</conditions>
-						</line>
-						<line number="61" hits="8" branch="false"/>
-						<line number="64" hits="34" branch="true" condition-coverage="75% (3/4)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-								<condition number="1" type="jump" coverage="50%"/>
-							</conditions>
-						</line>
-						<line number="65" hits="8" branch="false"/>
-						<line number="68" hits="26" branch="true" condition-coverage="75% (3/4)">
-							<conditions>
-								<condition number="0" type="jump" coverage="50%"/>
-								<condition number="1" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="69" hits="9" branch="false"/>
-						<line number="72" hits="17" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="73" hits="9" branch="false"/>
-						<line number="76" hits="8" branch="true" condition-coverage="25% (1/4)">
-							<conditions>
-								<condition number="0" type="jump" coverage="50%"/>
-								<condition number="1" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="77" hits="8" branch="false"/>
-						<line number="80" hits="0" branch="false"/>
-						<line number="85" hits="8" branch="false"/>
-						<line number="86" hits="8" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="87" hits="5" branch="false"/>
-						<line number="89" hits="3" branch="false"/>
-						<line number="92" hits="3" branch="false"/>
-						<line number="93" hits="1" branch="false"/>
-						<line number="94" hits="2" branch="false"/>
-						<line number="95" hits="3" branch="false"/>
-						<line number="100" hits="8" branch="false"/>
-						<line number="101" hits="8" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="102" hits="7" branch="false"/>
-						<line number="104" hits="1" branch="false"/>
-						<line number="107" hits="1" branch="false"/>
-						<line number="108" hits="0" branch="false"/>
-						<line number="109" hits="1" branch="false"/>
-						<line number="110" hits="1" branch="false"/>
-						<line number="115" hits="8" branch="false"/>
-						<line number="120" hits="9" branch="false"/>
-						<line number="125" hits="25" branch="false"/>
-						<line number="130" hits="8" branch="false"/>
-						<line number="131" hits="8" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="132" hits="7" branch="false"/>
-						<line number="134" hits="1" branch="false"/>
 					</lines>
 				</class>
 			</classes>

@@ -1,61 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd version="4.2.5" timestamp="2011-10-15T22:37:33.750">
-<file name="/Users/emil/projects/java/texas-holdem-botgame/server/src/main/java/se/cygni/texasholdem/game/util/ListUtil.java">
-<violation beginline="308" endline="312" begincolumn="17" endcolumn="17" rule="CollapsibleIfStatements" ruleset="Basic Rules" package="se.cygni.texasholdem.game.util" class="ListUtil" method="getHighestOfSameRank" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#CollapsibleIfStatements" priority="3">
-These nested if statements could be combined
+<pmd version="4.2.5" timestamp="2011-10-15T22:37:48.667">
+<file name="/Users/emil/projects/java/texas-holdem-botgame/client/src/main/java/se/cygni/texasholdem/client/Main.java">
+<violation beginline="3" endline="3" begincolumn="1" endcolumn="27" rule="UnusedImports" ruleset="Import Statement Rules" package="se.cygni.texasholdem.client" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'java.io.IOException'
 </violation>
 </file>
-<file name="/Users/emil/projects/java/texas-holdem-botgame/server/src/main/java/se/cygni/texasholdem/game/util/PokerHandUtil.java">
-<violation beginline="1" endline="319" begincolumn="1" endcolumn="2" rule="TooManyStaticImports" ruleset="Import Statement Rules" package="se.cygni.texasholdem.game.util" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#TooManyStaticImports" priority="3">
-Too many static imports may lead to messy code
-</violation>
-<violation beginline="57" endline="58" begincolumn="11" endcolumn="9" rule="EmptyCatchBlock" ruleset="Basic Rules" package="se.cygni.texasholdem.game.util" class="PokerHandUtil" method="getBestHand" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyCatchBlock" priority="3">
-Avoid empty catch blocks
-</violation>
-<violation beginline="61" endline="62" begincolumn="11" endcolumn="9" rule="EmptyCatchBlock" ruleset="Basic Rules" package="se.cygni.texasholdem.game.util" class="PokerHandUtil" method="getBestHand" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyCatchBlock" priority="3">
-Avoid empty catch blocks
-</violation>
-<violation beginline="65" endline="66" begincolumn="11" endcolumn="9" rule="EmptyCatchBlock" ruleset="Basic Rules" package="se.cygni.texasholdem.game.util" class="PokerHandUtil" method="getBestHand" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyCatchBlock" priority="3">
-Avoid empty catch blocks
-</violation>
-<violation beginline="69" endline="70" begincolumn="11" endcolumn="9" rule="EmptyCatchBlock" ruleset="Basic Rules" package="se.cygni.texasholdem.game.util" class="PokerHandUtil" method="getBestHand" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyCatchBlock" priority="3">
-Avoid empty catch blocks
-</violation>
-<violation beginline="73" endline="74" begincolumn="11" endcolumn="9" rule="EmptyCatchBlock" ruleset="Basic Rules" package="se.cygni.texasholdem.game.util" class="PokerHandUtil" method="getBestHand" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyCatchBlock" priority="3">
-Avoid empty catch blocks
-</violation>
-<violation beginline="77" endline="78" begincolumn="11" endcolumn="9" rule="EmptyCatchBlock" ruleset="Basic Rules" package="se.cygni.texasholdem.game.util" class="PokerHandUtil" method="getBestHand" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyCatchBlock" priority="3">
-Avoid empty catch blocks
-</violation>
-<violation beginline="81" endline="82" begincolumn="11" endcolumn="9" rule="EmptyCatchBlock" ruleset="Basic Rules" package="se.cygni.texasholdem.game.util" class="PokerHandUtil" method="getBestHand" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyCatchBlock" priority="3">
-Avoid empty catch blocks
-</violation>
-<violation beginline="85" endline="86" begincolumn="11" endcolumn="9" rule="EmptyCatchBlock" ruleset="Basic Rules" package="se.cygni.texasholdem.game.util" class="PokerHandUtil" method="getBestHand" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyCatchBlock" priority="3">
-Avoid empty catch blocks
-</violation>
-<violation beginline="89" endline="90" begincolumn="11" endcolumn="9" rule="EmptyCatchBlock" ruleset="Basic Rules" package="se.cygni.texasholdem.game.util" class="PokerHandUtil" method="getBestHand" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyCatchBlock" priority="3">
-Avoid empty catch blocks
-</violation>
-<violation beginline="241" endline="243" begincolumn="21" endcolumn="61" rule="CollapsibleIfStatements" ruleset="Basic Rules" package="se.cygni.texasholdem.game.util" class="PokerHandUtil" method="isThreeOfAKind" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#CollapsibleIfStatements" priority="3">
-These nested if statements could be combined
-</violation>
-</file>
-<file name="/Users/emil/projects/java/texas-holdem-botgame/server/src/main/java/se/cygni/texasholdem/table/Table.java">
-<violation beginline="17" endline="17" begincolumn="28" endcolumn="35" rule="UnusedPrivateField" ruleset="Unused Code Rules" package="se.cygni.texasholdem.table" class="Table" variable="gamePlan" externalInfoUrl="http://pmd.sourceforge.net/rules/unusedcode.html#UnusedPrivateField" priority="3">
-Avoid unused private fields such as 'gamePlan'.
-</violation>
-<violation beginline="18" endline="18" begincolumn="30" endcolumn="39" rule="UnusedPrivateField" ruleset="Unused Code Rules" package="se.cygni.texasholdem.table" class="Table" variable="gameServer" externalInfoUrl="http://pmd.sourceforge.net/rules/unusedcode.html#UnusedPrivateField" priority="3">
-Avoid unused private fields such as 'gameServer'.
-</violation>
-</file>
-<file name="/Users/emil/projects/java/texas-holdem-botgame/server/src/main/java/se/cygni/texasholdem/util/SystemFieldPopulator.java">
-<violation beginline="93" endline="94" begincolumn="11" endcolumn="9" rule="EmptyCatchBlock" ruleset="Basic Rules" package="se.cygni.texasholdem.util" class="SystemFieldPopulator" method="getFloatPropertyFromSystem" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyCatchBlock" priority="3">
-Avoid empty catch blocks
-</violation>
-<violation beginline="108" endline="109" begincolumn="11" endcolumn="9" rule="EmptyCatchBlock" ruleset="Basic Rules" package="se.cygni.texasholdem.util" class="SystemFieldPopulator" method="getDoublePropertyFromSystem" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyCatchBlock" priority="3">
-Avoid empty catch blocks
-</violation>
-</file>
-<suppressedviolation filename="/Users/emil/projects/java/texas-holdem-botgame/server/src/main/java/se/cygni/texasholdem/SystemSettings.java" suppressiontype="annotation" msg="Avoid unused private methods such as 'setPort(int)'." usermsg=""/>
-<suppressedviolation filename="/Users/emil/projects/java/texas-holdem-botgame/server/src/main/java/se/cygni/texasholdem/SystemSettings.java" suppressiontype="annotation" msg="Avoid unused private methods such as 'setHost(String)'." usermsg=""/>
 </pmd>

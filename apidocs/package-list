@@ -1,9 +1,3 @@
-se.cygni.texasholdem
+se.cygni.texasholdem.client
 se.cygni.texasholdem.game
-se.cygni.texasholdem.game.definitions
-se.cygni.texasholdem.game.pot
-se.cygni.texasholdem.game.util
-se.cygni.texasholdem.server
-se.cygni.texasholdem.table
-se.cygni.texasholdem.tournament
-se.cygni.texasholdem.util
+se.cygni.texasholdem.player
