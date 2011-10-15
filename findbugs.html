@@ -1,0 +1,194 @@
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>FindBugs Bug Detector Report</title>
+    <link rel="stylesheet" href="./css/maven-theme.css" type="text/css" />
+    <link rel="stylesheet" href="./css/maven-base.css" type="text/css"/>
+    <link rel="stylesheet" href="./css/prettify.css" type="text/css"/>
+    <link rel="stylesheet" href="./css/print.css" type="text/css" media="print" />
+    <script type="text/javascript" src="./js/prettify.js"></script>
+    <script type="text/javascript" src="./js/niftycube.js"></script>
+    <script type="text/javascript">
+        window.onload=function() {
+            Nifty("div\#wrapper", "big");
+            Nifty("div#breadcrumbs", "small");
+            Nifty("div\#navcolumn", "small");
+            Nifty("div.source", "medium");
+            prettyPrint();
+        }
+    </script>
+        <meta name="Date-Revision-yyyymmdd" content="20111015" />
+      </head>
+  <body>
+    <div id="wrapper">
+        <div id="banner">
+                        <div id="bannerLeft">
+    
+            texas-holdem-common
+    
+            </div>
+                            <div class="clear">
+            <hr/>
+          </div>
+        </div>
+        <div id="breadcrumbs">
+              
+  
+
+  
+    
+    
+  
+    
+            <div class="xleft">
+        <span id="publishDate">Last Published: 2011-10-15</span>
+                  &nbsp;| <span id="projectVersion">Version: 0.1-SNAPSHOT</span>
+                      </div>
+                <div class="xright">      
+  
+
+  
+    
+    
+  
+    
+  </div>
+          <div class="clear">
+            <hr/>
+          </div>
+        </div>
+        <div id="leftColumn">
+          <div id="navcolumn">
+               
+  
+
+  
+    
+    
+  
+    
+                       <h5>Overview</h5>
+                  <h5>Project Documentation</h5>
+            <ul>
+              
+                
+                    
+                  
+                  
+                  
+                  
+                  
+                        
+                  
+                  
+                  
+                  
+              
+            <li class="expanded">
+                    <a href="project-reports.html">Project Reports</a>
+                  <ul>
+                  
+    <li class="none">
+                    <a href="dev-activity.html">Developer Activity</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="file-activity.html">File Activity</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="changelog.html">Change Log</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="apidocs/index.html">JavaDocs</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="surefire-report.html">Surefire Report</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="failsafe-report.html">Surefire Report</a>
+          </li>
+                  
+    <li class="none">
+              <strong>FindBugs Report</strong>
+        </li>
+                  
+    <li class="none">
+                    <a href="checkstyle.html">Checkstyle</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="pmd.html">PMD Report</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="cpd.html">CPD Report</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="cobertura/index.html">Cobertura Test Coverage</a>
+          </li>
+              </ul>
+        </li>
+          </ul>
+                                               <a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
+            <img class="poweredBy"
+                 alt="Built by Maven"
+                 src="./images/logos/maven-feather.png"
+                 width="90"
+                 height="30"
+                 border="1" />
+          </a>
+                           
+  
+
+  
+    
+    
+  
+    
+            </div>
+        </div>
+        <div id="bodyColumn">
+          <div id="contentBox">
+            <div class="section"><h2>FindBugs Bug Detector Report<a name="FindBugs_Bug_Detector_Report"></a></h2><p>The following document contains the results of <a class="externalLink" href="http://findbugs.sourceforge.net">FindBugs Report</a></p><p>FindBugs Version is <i>1.3.9</i></p><p>Threshold is <i>medium</i></p><p>Effort is <i>min</i></p></div><div class="section"><h2>Summary<a name="Summary"></a></h2><table border="0" class="bodyTable"><tr class="a"><th>Classes</th><th>Bugs</th><th>Errors</th><th>Missing Classes</th></tr><tr class="b"><td>149</td><td>17</td><td>0</td><td>0</td></tr></table></div><div class="section"><h2>Files<a name="Files"></a></h2><table border="0" class="bodyTable"><tr class="a"><th>Class</th><th>Bugs</th></tr><tr class="b"><td><a href="#se.cygni.texasholdem.communication.ClientServer$ExceptionEvent">se.cygni.texasholdem.communication.ClientServer$ExceptionEvent</a></td><td>1</td></tr><tr class="a"><td><a href="#se.cygni.texasholdem.communication.ClientServer$ExceptionEvent$Builder">se.cygni.texasholdem.communication.ClientServer$ExceptionEvent$Builder</a></td><td>1</td></tr><tr class="b"><td><a href="#se.cygni.texasholdem.communication.ClientServer$PBAction$Builder">se.cygni.texasholdem.communication.ClientServer$PBAction$Builder</a></td><td>1</td></tr><tr class="a"><td><a href="#se.cygni.texasholdem.communication.ClientServer$PBCard$Builder">se.cygni.texasholdem.communication.ClientServer$PBCard$Builder</a></td><td>1</td></tr><tr class="b"><td><a href="#se.cygni.texasholdem.communication.ClientServer$PBMessage">se.cygni.texasholdem.communication.ClientServer$PBMessage</a></td><td>1</td></tr><tr class="a"><td><a href="#se.cygni.texasholdem.communication.ClientServer$PBMessage$Builder">se.cygni.texasholdem.communication.ClientServer$PBMessage$Builder</a></td><td>1</td></tr><tr class="b"><td><a href="#se.cygni.texasholdem.communication.ClientServer$PBPlayer">se.cygni.texasholdem.communication.ClientServer$PBPlayer</a></td><td>1</td></tr><tr class="a"><td><a href="#se.cygni.texasholdem.communication.ClientServer$PBPlayer$Builder">se.cygni.texasholdem.communication.ClientServer$PBPlayer$Builder</a></td><td>1</td></tr><tr class="b"><td><a href="#se.cygni.texasholdem.communication.ClientServer$Ping$Builder">se.cygni.texasholdem.communication.ClientServer$Ping$Builder</a></td><td>1</td></tr><tr class="a"><td><a href="#se.cygni.texasholdem.communication.ClientServer$RegisterForPlayRequest">se.cygni.texasholdem.communication.ClientServer$RegisterForPlayRequest</a></td><td>2</td></tr><tr class="b"><td><a href="#se.cygni.texasholdem.communication.ClientServer$RegisterForPlayRequest$Builder">se.cygni.texasholdem.communication.ClientServer$RegisterForPlayRequest$Builder</a></td><td>1</td></tr><tr class="a"><td><a href="#se.cygni.texasholdem.communication.ClientServer$RegisterForPlayResponse">se.cygni.texasholdem.communication.ClientServer$RegisterForPlayResponse</a></td><td>1</td></tr><tr class="b"><td><a href="#se.cygni.texasholdem.communication.ClientServer$Void$Builder">se.cygni.texasholdem.communication.ClientServer$Void$Builder</a></td><td>1</td></tr><tr class="a"><td><a href="#se.cygni.texasholdem.communication.ClientServer$VoidInSession">se.cygni.texasholdem.communication.ClientServer$VoidInSession</a></td><td>1</td></tr><tr class="b"><td><a href="#se.cygni.texasholdem.communication.ClientServer$VoidInSession$Builder">se.cygni.texasholdem.communication.ClientServer$VoidInSession$Builder</a></td><td>1</td></tr><tr class="a"><td><a href="#se.cygni.texasholdem.communication.ClientServer$YouWonAmountEvent$Builder">se.cygni.texasholdem.communication.ClientServer$YouWonAmountEvent$Builder</a></td><td>1</td></tr></table></div><a name="se.cygni.texasholdem.communication.ClientServerExceptionEvent"></a><div class="section"><h3>se.cygni.texasholdem.communication.ClientServer$ExceptionEvent<a name="se.cygni.texasholdem.communication.ClientServerExceptionEvent"></a></h3><table border="0" class="bodyTable"><tr class="b"><th>Bug</th><th>Category</th><th>Details</th><th>Line</th><th>Priority</th></tr><tr class="a"><td>com.google.protobuf.ByteString stored into non-transient field ClientServer$ExceptionEvent.message_</td><td>BAD_PRACTICE</td><td><a class="externalLink" href="http://findbugs.sourceforge.net/bugDescriptions.html#SE_BAD_FIELD_STORE">SE_BAD_FIELD_STORE</a></td><td>1435</td><td>Medium</td></tr></table></div><a name="se.cygni.texasholdem.communication.ClientServerExceptionEventBuilder"></a><div class="section"><h3>se.cygni.texasholdem.communication.ClientServer$ExceptionEvent$Builder<a name="se.cygni.texasholdem.communication.ClientServerExceptionEventBuilder"></a></h3><table border="0" class="bodyTable"><tr class="b"><th>Bug</th><th>Category</th><th>Details</th><th>Line</th><th>Priority</th></tr><tr class="a"><td>Useless control flow in se.cygni.texasholdem.communication.ClientServer$ExceptionEvent$Builder.maybeForceBuilderInitialization()</td><td>STYLE</td><td><a class="externalLink" href="http://findbugs.sourceforge.net/bugDescriptions.html#UCF_USELESS_CONTROL_FLOW">UCF_USELESS_CONTROL_FLOW</a></td><td>1596</td><td>Medium</td></tr></table></div><a name="se.cygni.texasholdem.communication.ClientServerPBActionBuilder"></a><div class="section"><h3>se.cygni.texasholdem.communication.ClientServer$PBAction$Builder<a name="se.cygni.texasholdem.communication.ClientServerPBActionBuilder"></a></h3><table border="0" class="bodyTable"><tr class="b"><th>Bug</th><th>Category</th><th>Details</th><th>Line</th><th>Priority</th></tr><tr class="a"><td>Useless control flow in se.cygni.texasholdem.communication.ClientServer$PBAction$Builder.maybeForceBuilderInitialization()</td><td>STYLE</td><td><a class="externalLink" href="http://findbugs.sourceforge.net/bugDescriptions.html#UCF_USELESS_CONTROL_FLOW">UCF_USELESS_CONTROL_FLOW</a></td><td>2831</td><td>Medium</td></tr></table></div><a name="se.cygni.texasholdem.communication.ClientServerPBCardBuilder"></a><div class="section"><h3>se.cygni.texasholdem.communication.ClientServer$PBCard$Builder<a name="se.cygni.texasholdem.communication.ClientServerPBCardBuilder"></a></h3><table border="0" class="bodyTable"><tr class="b"><th>Bug</th><th>Category</th><th>Details</th><th>Line</th><th>Priority</th></tr><tr class="a"><td>Useless control flow in se.cygni.texasholdem.communication.ClientServer$PBCard$Builder.maybeForceBuilderInitialization()</td><td>STYLE</td><td><a class="externalLink" href="http://findbugs.sourceforge.net/bugDescriptions.html#UCF_USELESS_CONTROL_FLOW">UCF_USELESS_CONTROL_FLOW</a></td><td>2406</td><td>Medium</td></tr></table></div><a name="se.cygni.texasholdem.communication.ClientServerPBMessage"></a><div class="section"><h3>se.cygni.texasholdem.communication.ClientServer$PBMessage<a name="se.cygni.texasholdem.communication.ClientServerPBMessage"></a></h3><table border="0" class="bodyTable"><tr class="b"><th>Bug</th><th>Category</th><th>Details</th><th>Line</th><th>Priority</th></tr><tr class="a"><td>com.google.protobuf.ByteString stored into non-transient field ClientServer$PBMessage.message_</td><td>BAD_PRACTICE</td><td><a class="externalLink" href="http://findbugs.sourceforge.net/bugDescriptions.html#SE_BAD_FIELD_STORE">SE_BAD_FIELD_STORE</a></td><td>1862</td><td>Medium</td></tr></table></div><a name="se.cygni.texasholdem.communication.ClientServerPBMessageBuilder"></a><div class="section"><h3>se.cygni.texasholdem.communication.ClientServer$PBMessage$Builder<a name="se.cygni.texasholdem.communication.ClientServerPBMessageBuilder"></a></h3><table border="0" class="bodyTable"><tr class="b"><th>Bug</th><th>Category</th><th>Details</th><th>Line</th><th>Priority</th></tr><tr class="a"><td>Useless control flow in se.cygni.texasholdem.communication.ClientServer$PBMessage$Builder.maybeForceBuilderInitialization()</td><td>STYLE</td><td><a class="externalLink" href="http://findbugs.sourceforge.net/bugDescriptions.html#UCF_USELESS_CONTROL_FLOW">UCF_USELESS_CONTROL_FLOW</a></td><td>2019</td><td>Medium</td></tr></table></div><a name="se.cygni.texasholdem.communication.ClientServerPBPlayer"></a><div class="section"><h3>se.cygni.texasholdem.communication.ClientServer$PBPlayer<a name="se.cygni.texasholdem.communication.ClientServerPBPlayer"></a></h3><table border="0" class="bodyTable"><tr class="b"><th>Bug</th><th>Category</th><th>Details</th><th>Line</th><th>Priority</th></tr><tr class="a"><td>com.google.protobuf.ByteString stored into non-transient field ClientServer$PBPlayer.name_</td><td>BAD_PRACTICE</td><td><a class="externalLink" href="http://findbugs.sourceforge.net/bugDescriptions.html#SE_BAD_FIELD_STORE">SE_BAD_FIELD_STORE</a></td><td>3657</td><td>Medium</td></tr></table></div><a name="se.cygni.texasholdem.communication.ClientServerPBPlayerBuilder"></a><div class="section"><h3>se.cygni.texasholdem.communication.ClientServer$PBPlayer$Builder<a name="se.cygni.texasholdem.communication.ClientServerPBPlayerBuilder"></a></h3><table border="0" class="bodyTable"><tr class="b"><th>Bug</th><th>Category</th><th>Details</th><th>Line</th><th>Priority</th></tr><tr class="a"><td>Useless control flow in se.cygni.texasholdem.communication.ClientServer$PBPlayer$Builder.maybeForceBuilderInitialization()</td><td>STYLE</td><td><a class="externalLink" href="http://findbugs.sourceforge.net/bugDescriptions.html#UCF_USELESS_CONTROL_FLOW">UCF_USELESS_CONTROL_FLOW</a></td><td>3858</td><td>Medium</td></tr></table></div><a name="se.cygni.texasholdem.communication.ClientServerPingBuilder"></a><div class="section"><h3>se.cygni.texasholdem.communication.ClientServer$Ping$Builder<a name="se.cygni.texasholdem.communication.ClientServerPingBuilder"></a></h3><table border="0" class="bodyTable"><tr class="b"><th>Bug</th><th>Category</th><th>Details</th><th>Line</th><th>Priority</th></tr><tr class="a"><td>Useless control flow in se.cygni.texasholdem.communication.ClientServer$Ping$Builder.maybeForceBuilderInitialization()</td><td>STYLE</td><td><a class="externalLink" href="http://findbugs.sourceforge.net/bugDescriptions.html#UCF_USELESS_CONTROL_FLOW">UCF_USELESS_CONTROL_FLOW</a></td><td>870</td><td>Medium</td></tr></table></div><a name="se.cygni.texasholdem.communication.ClientServerRegisterForPlayRequest"></a><div class="section"><h3>se.cygni.texasholdem.communication.ClientServer$RegisterForPlayRequest<a name="se.cygni.texasholdem.communication.ClientServerRegisterForPlayRequest"></a></h3><table border="0" class="bodyTable"><tr class="b"><th>Bug</th><th>Category</th><th>Details</th><th>Line</th><th>Priority</th></tr><tr class="a"><td>com.google.protobuf.ByteString stored into non-transient field ClientServer$RegisterForPlayRequest.playerName_</td><td>BAD_PRACTICE</td><td><a class="externalLink" href="http://findbugs.sourceforge.net/bugDescriptions.html#SE_BAD_FIELD_STORE">SE_BAD_FIELD_STORE</a></td><td>5797</td><td>Medium</td></tr><tr class="b"><td>com.google.protobuf.ByteString stored into non-transient field ClientServer$RegisterForPlayRequest.sessionId_</td><td>BAD_PRACTICE</td><td><a class="externalLink" href="http://findbugs.sourceforge.net/bugDescriptions.html#SE_BAD_FIELD_STORE">SE_BAD_FIELD_STORE</a></td><td>5829</td><td>Medium</td></tr></table></div><a name="se.cygni.texasholdem.communication.ClientServerRegisterForPlayRequestBuilder"></a><div class="section"><h3>se.cygni.texasholdem.communication.ClientServer$RegisterForPlayRequest$Builder<a name="se.cygni.texasholdem.communication.ClientServerRegisterForPlayRequestBuilder"></a></h3><table border="0" class="bodyTable"><tr class="a"><th>Bug</th><th>Category</th><th>Details</th><th>Line</th><th>Priority</th></tr><tr class="b"><td>Useless control flow in se.cygni.texasholdem.communication.ClientServer$RegisterForPlayRequest$Builder.maybeForceBuilderInitialization()</td><td>STYLE</td><td><a class="externalLink" href="http://findbugs.sourceforge.net/bugDescriptions.html#UCF_USELESS_CONTROL_FLOW">UCF_USELESS_CONTROL_FLOW</a></td><td>5994</td><td>Medium</td></tr></table></div><a name="se.cygni.texasholdem.communication.ClientServerRegisterForPlayResponse"></a><div class="section"><h3>se.cygni.texasholdem.communication.ClientServer$RegisterForPlayResponse<a name="se.cygni.texasholdem.communication.ClientServerRegisterForPlayResponse"></a></h3><table border="0" class="bodyTable"><tr class="a"><th>Bug</th><th>Category</th><th>Details</th><th>Line</th><th>Priority</th></tr><tr class="b"><td>com.google.protobuf.ByteString stored into non-transient field ClientServer$RegisterForPlayResponse.sessionId_</td><td>BAD_PRACTICE</td><td><a class="externalLink" href="http://findbugs.sourceforge.net/bugDescriptions.html#SE_BAD_FIELD_STORE">SE_BAD_FIELD_STORE</a></td><td>6275</td><td>Medium</td></tr></table></div><a name="se.cygni.texasholdem.communication.ClientServerVoidBuilder"></a><div class="section"><h3>se.cygni.texasholdem.communication.ClientServer$Void$Builder<a name="se.cygni.texasholdem.communication.ClientServerVoidBuilder"></a></h3><table border="0" class="bodyTable"><tr class="a"><th>Bug</th><th>Category</th><th>Details</th><th>Line</th><th>Priority</th></tr><tr class="b"><td>Useless control flow in se.cygni.texasholdem.communication.ClientServer$Void$Builder.maybeForceBuilderInitialization()</td><td>STYLE</td><td><a class="externalLink" href="http://findbugs.sourceforge.net/bugDescriptions.html#UCF_USELESS_CONTROL_FLOW">UCF_USELESS_CONTROL_FLOW</a></td><td>594</td><td>Medium</td></tr></table></div><a name="se.cygni.texasholdem.communication.ClientServerVoidInSession"></a><div class="section"><h3>se.cygni.texasholdem.communication.ClientServer$VoidInSession<a name="se.cygni.texasholdem.communication.ClientServerVoidInSession"></a></h3><table border="0" class="bodyTable"><tr class="a"><th>Bug</th><th>Category</th><th>Details</th><th>Line</th><th>Priority</th></tr><tr class="b"><td>com.google.protobuf.ByteString stored into non-transient field ClientServer$VoidInSession.sessionId_</td><td>BAD_PRACTICE</td><td><a class="externalLink" href="http://findbugs.sourceforge.net/bugDescriptions.html#SE_BAD_FIELD_STORE">SE_BAD_FIELD_STORE</a></td><td>1038</td><td>Medium</td></tr></table></div><a name="se.cygni.texasholdem.communication.ClientServerVoidInSessionBuilder"></a><div class="section"><h3>se.cygni.texasholdem.communication.ClientServer$VoidInSession$Builder<a name="se.cygni.texasholdem.communication.ClientServerVoidInSessionBuilder"></a></h3><table border="0" class="bodyTable"><tr class="a"><th>Bug</th><th>Category</th><th>Details</th><th>Line</th><th>Priority</th></tr><tr class="b"><td>Useless control flow in se.cygni.texasholdem.communication.ClientServer$VoidInSession$Builder.maybeForceBuilderInitialization()</td><td>STYLE</td><td><a class="externalLink" href="http://findbugs.sourceforge.net/bugDescriptions.html#UCF_USELESS_CONTROL_FLOW">UCF_USELESS_CONTROL_FLOW</a></td><td>1195</td><td>Medium</td></tr></table></div><a name="se.cygni.texasholdem.communication.ClientServerYouWonAmountEventBuilder"></a><div class="section"><h3>se.cygni.texasholdem.communication.ClientServer$YouWonAmountEvent$Builder<a name="se.cygni.texasholdem.communication.ClientServerYouWonAmountEventBuilder"></a></h3><table border="0" class="bodyTable"><tr class="a"><th>Bug</th><th>Category</th><th>Details</th><th>Line</th><th>Priority</th></tr><tr class="b"><td>Useless control flow in se.cygni.texasholdem.communication.ClientServer$YouWonAmountEvent$Builder.maybeForceBuilderInitialization()</td><td>STYLE</td><td><a class="externalLink" href="http://findbugs.sourceforge.net/bugDescriptions.html#UCF_USELESS_CONTROL_FLOW">UCF_USELESS_CONTROL_FLOW</a></td><td>17486</td><td>Medium</td></tr></table></div>
+          </div>
+        </div>
+        <div class="clear">
+          <hr/>
+        </div>
+        <div id="footer">
+          <div class="xright">Copyright &#169;         
+   
+          2011.
+    
+      All Rights Reserved.    
+  
+
+  
+    
+    
+  
+    
+  </div>
+          <div class="clear">
+            <hr/>
+          </div>
+        </div>
+    </div>
+  </body>
+</html>
