@@ -2,20 +2,20 @@
 
 <rss version="0.91">
   <channel>
-    <title>texas-holdem-common - Checkstyle report</title>
-    <link>https://github.com/emilb/texas-holdem-botgame/texas-holdem-common</link>
-    <description>texas-holdem-common - Checkstyle report</description>
+    <title>texas-holdem-server - Checkstyle report</title>
+    <link>https://github.com/emilb/texas-holdem-botgame/texas-holdem-server</link>
+    <description>texas-holdem-server - Checkstyle report</description>
     <language>en-us</language>
     <copyright>&#169;2011</copyright>
     <item>
-      <title>File: 16,
-             Errors: 10645,
+      <title>File: 18,
+             Errors: 473,
              Warnings: 0,
              Infos: 0
       </title>
-            <link>https://github.com/emilb/texas-holdem-botgame/texas-holdem-common/checkstyle.html</link>
+            <link>https://github.com/emilb/texas-holdem-botgame/texas-holdem-server/checkstyle.html</link>
       <description>
-        <p>Click <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common/checkstyle.html">here</a> for the full Checkstyle report.</p>
+        <p>Click <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server/checkstyle.html">here</a> for the full Checkstyle report.</p>
 
         <table summary="Files" boder="1">
           <thead>
@@ -29,7 +29,7 @@
           <tbody>
                           <tr>
                 <td>
-                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common/checkstyle.html#se.cygni.texasholdem.game.exception.GameException.java">se/cygni/texasholdem/game/exception/GameException.java</a>
+                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server/checkstyle.html#se.cygni.texasholdem.table.Table.java">se/cygni/texasholdem/table/Table.java</a>
                 </td>
                 <td>
                   0
@@ -38,12 +38,12 @@
                   0
                 </td>
                 <td>
-                  6
+                  35
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common/checkstyle.html#se.cygni.texasholdem.game.definitions.Rank.java">se/cygni/texasholdem/game/definitions/Rank.java</a>
+                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server/checkstyle.html#se.cygni.texasholdem.game.pot.Pot.java">se/cygni/texasholdem/game/pot/Pot.java</a>
                 </td>
                 <td>
                   0
@@ -52,96 +52,12 @@
                   0
                 </td>
                 <td>
-                  25
+                  67
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common/checkstyle.html#se.cygni.texasholdem.game.exception.NotInCorrectPlayStateException.java">se/cygni/texasholdem/game/exception/NotInCorrectPlayStateException.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  6
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common/checkstyle.html#se.cygni.texasholdem.game.definitions.PlayState.java">se/cygni/texasholdem/game/definitions/PlayState.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  19
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common/checkstyle.html#se.cygni.texasholdem.game.definitions.Suit.java">se/cygni/texasholdem/game/definitions/Suit.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  16
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common/checkstyle.html#se.cygni.texasholdem.game.exception.CommunicationException.java">se/cygni/texasholdem/game/exception/CommunicationException.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  7
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common/checkstyle.html#se.cygni.texasholdem.communication.ClientServer.java">se/cygni/texasholdem/communication/ClientServer.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  10469
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common/checkstyle.html#se.cygni.texasholdem.game.Deck.java">se/cygni/texasholdem/game/Deck.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  13
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common/checkstyle.html#se.cygni.texasholdem.communication.util.ConversionUtil.java">se/cygni/texasholdem/communication/util/ConversionUtil.java</a>
+                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server/checkstyle.html#se.cygni.texasholdem.SystemSettings.java">se/cygni/texasholdem/SystemSettings.java</a>
                 </td>
                 <td>
                   0
@@ -155,7 +71,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common/checkstyle.html#se.cygni.texasholdem.game.Card.java">se/cygni/texasholdem/game/Card.java</a>
+                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server/checkstyle.html#se.cygni.texasholdem.server.GameServiceImpl.java">se/cygni/texasholdem/server/GameServiceImpl.java</a>
                 </td>
                 <td>
                   0
@@ -164,12 +80,110 @@
                   0
                 </td>
                 <td>
-                  19
+                  39
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common/checkstyle.html#se.cygni.texasholdem.game.Action.java">se/cygni/texasholdem/game/Action.java</a>
+                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server/checkstyle.html#se.cygni.texasholdem.tournament.Tournament.java">se/cygni/texasholdem/tournament/Tournament.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  2
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server/checkstyle.html#se.cygni.texasholdem.game.definitions.PokerHand.java">se/cygni/texasholdem/game/definitions/PokerHand.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  18
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server/checkstyle.html#se.cygni.texasholdem.SpringConfig.java">se/cygni/texasholdem/SpringConfig.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  8
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server/checkstyle.html#se.cygni.texasholdem.game.BotPlayer.java">se/cygni/texasholdem/game/BotPlayer.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  26
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server/checkstyle.html#se.cygni.texasholdem.game.pot.PotTransaction.java">se/cygni/texasholdem/game/pot/PotTransaction.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  14
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server/checkstyle.html#se.cygni.texasholdem.game.util.ListUtil.java">se/cygni/texasholdem/game/util/ListUtil.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  43
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server/checkstyle.html#se.cygni.texasholdem.table.GamePlan.java">se/cygni/texasholdem/table/GamePlan.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  28
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server/checkstyle.html#se.cygni.texasholdem.game.BestHand.java">se/cygni/texasholdem/game/BestHand.java</a>
                 </td>
                 <td>
                   0
@@ -183,7 +197,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common/checkstyle.html#se.cygni.texasholdem.game.Player.java">se/cygni/texasholdem/game/Player.java</a>
+                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server/checkstyle.html#se.cygni.texasholdem.TexasHoldem.java">se/cygni/texasholdem/TexasHoldem.java</a>
                 </td>
                 <td>
                   0
@@ -192,12 +206,12 @@
                   0
                 </td>
                 <td>
-                  15
+                  7
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common/checkstyle.html#se.cygni.texasholdem.game.exception.InvalidAmountException.java">se/cygni/texasholdem/game/exception/InvalidAmountException.java</a>
+                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server/checkstyle.html#se.cygni.texasholdem.game.definitions.CardSortBy.java">se/cygni/texasholdem/game/definitions/CardSortBy.java</a>
                 </td>
                 <td>
                   0
@@ -206,12 +220,12 @@
                   0
                 </td>
                 <td>
-                  6
+                  8
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common/checkstyle.html#se.cygni.texasholdem.game.ActionType.java">se/cygni/texasholdem/game/ActionType.java</a>
+                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server/checkstyle.html#se.cygni.texasholdem.game.util.PokerHandUtil.java">se/cygni/texasholdem/game/util/PokerHandUtil.java</a>
                 </td>
                 <td>
                   0
@@ -220,12 +234,12 @@
                   0
                 </td>
                 <td>
-                  6
+                  80
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common/checkstyle.html#se.cygni.texasholdem.game.exception.InvalidSessionException.java">se/cygni/texasholdem/game/exception/InvalidSessionException.java</a>
+                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server/checkstyle.html#se.cygni.texasholdem.server.RpcServer.java">se/cygni/texasholdem/server/RpcServer.java</a>
                 </td>
                 <td>
                   0
@@ -234,12 +248,12 @@
                   0
                 </td>
                 <td>
-                  6
+                  23
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common/checkstyle.html#se.cygni.texasholdem.game.exception.PlayerNameAlreadyTakenException.java">se/cygni/texasholdem/game/exception/PlayerNameAlreadyTakenException.java</a>
+                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server/checkstyle.html#se.cygni.texasholdem.server.GameServer.java">se/cygni/texasholdem/server/GameServer.java</a>
                 </td>
                 <td>
                   0
@@ -248,7 +262,21 @@
                   0
                 </td>
                 <td>
-                  6
+                  24
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server/checkstyle.html#se.cygni.texasholdem.util.SystemFieldPopulator.java">se/cygni/texasholdem/util/SystemFieldPopulator.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  25
                 </td>
               </tr>
                       </tbody>
