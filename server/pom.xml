@@ -14,8 +14,17 @@
     <packaging>jar</packaging>
     <name>texas-holdem-server</name>
 
-    <dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.0</version>
+            </plugin>
+        </plugins>
+    </build>
 
+    <dependencies>
         <dependency>
             <groupId>se.cygni</groupId>
             <artifactId>texas-holdem-common</artifactId>
@@ -60,7 +69,6 @@
         <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib</artifactId>
-            <version>2.2.2</version>
         </dependency>
 
         <!-- Support for testing Spring applications with tools such as JUnit 
@@ -70,6 +78,11 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.jopt-simple</groupId>
+            <artifactId>jopt-simple</artifactId>
         </dependency>
 
         <!-- Utils from commons -->
