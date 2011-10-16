@@ -1,0 +1,248 @@
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Reactor Dependency Convergence</title>
+    <link rel="stylesheet" href="./css/maven-theme.css" type="text/css" />
+    <link rel="stylesheet" href="./css/maven-base.css" type="text/css"/>
+    <link rel="stylesheet" href="./css/prettify.css" type="text/css"/>
+    <link rel="stylesheet" href="./css/print.css" type="text/css" media="print" />
+    <script type="text/javascript" src="./js/prettify.js"></script>
+    <script type="text/javascript" src="./js/niftycube.js"></script>
+    <script type="text/javascript">
+        window.onload=function() {
+            Nifty("div\#wrapper", "big");
+            Nifty("div#breadcrumbs", "small");
+            Nifty("div\#navcolumn", "small");
+            Nifty("div.source", "medium");
+            prettyPrint();
+        }
+    </script>
+        <meta name="Date-Revision-yyyymmdd" content="20111016" />
+      </head>
+  <body>
+    <div id="wrapper">
+        <div id="banner">
+                        <div id="bannerLeft">
+    
+            texas-holdem-botgame
+    
+            </div>
+                            <div class="clear">
+            <hr/>
+          </div>
+        </div>
+        <div id="breadcrumbs">
+              
+  
+
+  
+    
+    
+  
+    
+            <div class="xleft">
+        <span id="publishDate">Last Published: 2011-10-16</span>
+                  &nbsp;| <span id="projectVersion">Version: 0.1-SNAPSHOT</span>
+                      </div>
+                <div class="xright">      
+  
+
+  
+    
+    
+  
+    
+  </div>
+          <div class="clear">
+            <hr/>
+          </div>
+        </div>
+        <div id="leftColumn">
+          <div id="navcolumn">
+               
+  
+
+  
+    
+    
+  
+    
+                       <h5>Overview</h5>
+                  <h5>Modules</h5>
+            <ul>
+              
+    <li class="none">
+                    <a href="texas-holdem-common/index.html">texas-holdem-common</a>
+          </li>
+              
+    <li class="none">
+                    <a href="texas-holdem-server/index.html">texas-holdem-server</a>
+          </li>
+              
+    <li class="none">
+                    <a href="texas-holdem-client/index.html">texas-holdem-client</a>
+          </li>
+          </ul>
+              <h5>Project Documentation</h5>
+            <ul>
+              
+                
+                    
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                        
+                  
+                  
+                  
+                  
+              
+            <li class="expanded">
+                    <a href="project-info.html">Project Information</a>
+                  <ul>
+                  
+    <li class="none">
+                    <a href="modules.html">Project Modules</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="source-repository.html">Source Repository</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="dependency-management.html">Dependency Management</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="index.html">About</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="distribution-management.html">Distribution Management</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="dependencies.html">Dependencies</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="plugin-management.html">Plugin Management</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="integration.html">Continuous Integration</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="project-summary.html">Project Summary</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="mail-lists.html">Mailing Lists</a>
+          </li>
+                  
+    <li class="none">
+              <strong>Dependency Convergence</strong>
+        </li>
+                  
+    <li class="none">
+                    <a href="plugins.html">Project Plugins</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="team-list.html">Project Team</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="license.html">Project License</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="issue-tracking.html">Issue Tracking</a>
+          </li>
+              </ul>
+        </li>
+              
+                
+                    
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+              
+        <li class="collapsed">
+                    <a href="project-reports.html">Project Reports</a>
+                </li>
+          </ul>
+                                               <a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
+            <img class="poweredBy"
+                 alt="Built by Maven"
+                 src="./images/logos/maven-feather.png"
+                 width="90"
+                 height="30"
+                 border="1" />
+          </a>
+                           
+  
+
+  
+    
+    
+  
+    
+            </div>
+        </div>
+        <div id="bodyColumn">
+          <div id="contentBox">
+            <div class="section"><h2>Reactor Dependency Convergence<a name="Reactor_Dependency_Convergence"></a></h2><table border="0" class="bodyTable"><caption>
+  <b>Legend:</b>
+</caption><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td>All projects share one version of the dependency.</td></tr><tr class="b"><td><img alt="error" src="images/icon_error_sml.gif" /></td><td>At least one project has a differing version of the dependency.</td></tr></table><br /><table border="0" class="bodyTable"><caption>
+  <b>Statistics:</b>
+</caption><tr class="a"><th>Number of sub-projects:</th><td>4</td></tr><tr class="b"><th>Number of dependencies (NOD):</th><td>20</td></tr><tr class="a"><th>Number of unique artifacts (NOA):</th><td>20</td></tr><tr class="b"><th>Number of SNAPSHOT artifacts (NOS):</th><td>0</td></tr><tr class="a"><th>Convergence (NOD/NOA):</th><td><img alt="success" src="images/icon_success_sml.gif" />&#160;<b>100%</b></td></tr><tr class="b"><th>Ready for Release (100% Convergence and no SNAPSHOTS):</th><td><img alt="success" src="images/icon_success_sml.gif" />&#160;<b>Success</b></td></tr></table></div><div class="section"><h3>Dependencies used in sub-projects<a name="Dependencies_used_in_sub-projects"></a></h3><div class="section"><h4>cglib:cglib<a name="cglib:cglib"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">2.2.2</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server">se.cygni:texas-holdem-server</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>ch.qos.logback:logback-classic<a name="ch.qos.logback:logback-classic"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">0.9.30</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame">se.cygni:texas-holdem-botgame</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-client">se.cygni:texas-holdem-client</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common">se.cygni:texas-holdem-common</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server">se.cygni:texas-holdem-server</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>com.google.protobuf:protobuf-java<a name="com.google.protobuf:protobuf-java"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">2.4.1</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common">se.cygni:texas-holdem-common</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>com.googlecode.protobuf.pro:protobuf-rpc-pro-duplex<a name="com.googlecode.protobuf.pro:protobuf-rpc-pro-duplex"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">1.1.0</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common">se.cygni:texas-holdem-common</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>commons-collections:commons-collections<a name="commons-collections:commons-collections"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">3.2.1</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-client">se.cygni:texas-holdem-client</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common">se.cygni:texas-holdem-common</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server">se.cygni:texas-holdem-server</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>commons-io:commons-io<a name="commons-io:commons-io"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">2.0.1</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-client">se.cygni:texas-holdem-client</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common">se.cygni:texas-holdem-common</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server">se.cygni:texas-holdem-server</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>commons-lang:commons-lang<a name="commons-lang:commons-lang"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">2.6</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-client">se.cygni:texas-holdem-client</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common">se.cygni:texas-holdem-common</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server">se.cygni:texas-holdem-server</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>junit:junit<a name="junit:junit"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">4.10</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame">se.cygni:texas-holdem-botgame</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-client">se.cygni:texas-holdem-client</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common">se.cygni:texas-holdem-common</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server">se.cygni:texas-holdem-server</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>net.sf.jopt-simple:jopt-simple<a name="net.sf.jopt-simple:jopt-simple"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">4.0-beta1</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server">se.cygni:texas-holdem-server</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>org.jboss.netty:netty<a name="org.jboss.netty:netty"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">3.2.5.Final</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common">se.cygni:texas-holdem-common</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>org.slf4j:jcl-over-slf4j<a name="org.slf4j:jcl-over-slf4j"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">1.6.2</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame">se.cygni:texas-holdem-botgame</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-client">se.cygni:texas-holdem-client</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common">se.cygni:texas-holdem-common</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server">se.cygni:texas-holdem-server</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>org.slf4j:log4j-over-slf4j<a name="org.slf4j:log4j-over-slf4j"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">1.6.2</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame">se.cygni:texas-holdem-botgame</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-client">se.cygni:texas-holdem-client</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common">se.cygni:texas-holdem-common</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server">se.cygni:texas-holdem-server</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>org.slf4j:slf4j-api<a name="org.slf4j:slf4j-api"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">1.6.2</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame">se.cygni:texas-holdem-botgame</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-client">se.cygni:texas-holdem-client</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common">se.cygni:texas-holdem-common</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server">se.cygni:texas-holdem-server</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>org.springframework:spring-beans<a name="org.springframework:spring-beans"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">3.0.6.RELEASE</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-client">se.cygni:texas-holdem-client</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common">se.cygni:texas-holdem-common</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server">se.cygni:texas-holdem-server</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>org.springframework:spring-context<a name="org.springframework:spring-context"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">3.0.6.RELEASE</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-client">se.cygni:texas-holdem-client</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common">se.cygni:texas-holdem-common</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server">se.cygni:texas-holdem-server</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>org.springframework:spring-context-support<a name="org.springframework:spring-context-support"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">3.0.6.RELEASE</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-client">se.cygni:texas-holdem-client</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common">se.cygni:texas-holdem-common</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server">se.cygni:texas-holdem-server</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>org.springframework:spring-core<a name="org.springframework:spring-core"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">3.0.6.RELEASE</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-client">se.cygni:texas-holdem-client</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common">se.cygni:texas-holdem-common</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server">se.cygni:texas-holdem-server</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>org.springframework:spring-expression<a name="org.springframework:spring-expression"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">3.0.6.RELEASE</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-client">se.cygni:texas-holdem-client</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common">se.cygni:texas-holdem-common</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server">se.cygni:texas-holdem-server</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>org.springframework:spring-test<a name="org.springframework:spring-test"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">3.0.6.RELEASE</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-client">se.cygni:texas-holdem-client</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-common">se.cygni:texas-holdem-common</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server">se.cygni:texas-holdem-server</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>se.cygni:texas-holdem-common<a name="se.cygni:texas-holdem-common"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">0.1-SNAPSHOT</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-client">se.cygni:texas-holdem-client</a></li><li><a class="externalLink" href="https://github.com/emilb/texas-holdem-botgame/texas-holdem-server">se.cygni:texas-holdem-server</a></li></ol></td></tr></table></td></tr></table></div></div>
+          </div>
+        </div>
+        <div class="clear">
+          <hr/>
+        </div>
+        <div id="footer">
+          <div class="xright">Copyright &#169;         
+   
+          2011.
+    
+      All Rights Reserved.    
+  
+
+  
+    
+    
+  
+    
+  </div>
+          <div class="clear">
+            <hr/>
+          </div>
+        </div>
+    </div>
+  </body>
+</html>
