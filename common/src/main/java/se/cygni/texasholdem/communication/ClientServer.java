@@ -13,13 +13,15 @@ public final class ClientServer {
     NO_EXCEPTION(0, 1),
     INVALID_SESSION(1, 2),
     PLAYER_NAME_ALREADY_TAKEN(2, 3),
-    NOT_IN_CORRECT_PLAY_STATE(3, 10),
-    INVALID_AMOUNT(4, 11),
+    PLAYER_NOT_ASSIGNED_TO_TABLE_YET(3, 4),
+    NOT_IN_CORRECT_PLAY_STATE(4, 10),
+    INVALID_AMOUNT(5, 11),
     ;
     
     public static final int NO_EXCEPTION_VALUE = 1;
     public static final int INVALID_SESSION_VALUE = 2;
     public static final int PLAYER_NAME_ALREADY_TAKEN_VALUE = 3;
+    public static final int PLAYER_NOT_ASSIGNED_TO_TABLE_YET_VALUE = 4;
     public static final int NOT_IN_CORRECT_PLAY_STATE_VALUE = 10;
     public static final int INVALID_AMOUNT_VALUE = 11;
     
@@ -31,6 +33,7 @@ public final class ClientServer {
         case 1: return NO_EXCEPTION;
         case 2: return INVALID_SESSION;
         case 3: return PLAYER_NAME_ALREADY_TAKEN;
+        case 4: return PLAYER_NOT_ASSIGNED_TO_TABLE_YET;
         case 10: return NOT_IN_CORRECT_PLAY_STATE;
         case 11: return INVALID_AMOUNT;
         default: return null;
@@ -63,7 +66,7 @@ public final class ClientServer {
     }
     
     private static final PBExceptionType[] VALUES = {
-      NO_EXCEPTION, INVALID_SESSION, PLAYER_NAME_ALREADY_TAKEN, NOT_IN_CORRECT_PLAY_STATE, INVALID_AMOUNT, 
+      NO_EXCEPTION, INVALID_SESSION, PLAYER_NAME_ALREADY_TAKEN, PLAYER_NOT_ASSIGNED_TO_TABLE_YET, NOT_IN_CORRECT_PLAY_STATE, INVALID_AMOUNT, 
     };
     
     public static PBExceptionType valueOf(
@@ -17633,7 +17636,7 @@ public final class ClientServer {
     // @@protoc_insertion_point(class_scope:YouWonAmountEvent)
   }
   
-  public interface PlayerWithdrewEventOrBuilder
+  public interface PlayerQuitEventOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
     // required .PBPlayer player = 1;
@@ -17641,32 +17644,32 @@ public final class ClientServer {
     se.cygni.texasholdem.communication.ClientServer.PBPlayer getPlayer();
     se.cygni.texasholdem.communication.ClientServer.PBPlayerOrBuilder getPlayerOrBuilder();
   }
-  public static final class PlayerWithdrewEvent extends
+  public static final class PlayerQuitEvent extends
       com.google.protobuf.GeneratedMessage
-      implements PlayerWithdrewEventOrBuilder {
-    // Use PlayerWithdrewEvent.newBuilder() to construct.
-    private PlayerWithdrewEvent(Builder builder) {
+      implements PlayerQuitEventOrBuilder {
+    // Use PlayerQuitEvent.newBuilder() to construct.
+    private PlayerQuitEvent(Builder builder) {
       super(builder);
     }
-    private PlayerWithdrewEvent(boolean noInit) {}
+    private PlayerQuitEvent(boolean noInit) {}
     
-    private static final PlayerWithdrewEvent defaultInstance;
-    public static PlayerWithdrewEvent getDefaultInstance() {
+    private static final PlayerQuitEvent defaultInstance;
+    public static PlayerQuitEvent getDefaultInstance() {
       return defaultInstance;
     }
     
-    public PlayerWithdrewEvent getDefaultInstanceForType() {
+    public PlayerQuitEvent getDefaultInstanceForType() {
       return defaultInstance;
     }
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return se.cygni.texasholdem.communication.ClientServer.internal_static_PlayerWithdrewEvent_descriptor;
+      return se.cygni.texasholdem.communication.ClientServer.internal_static_PlayerQuitEvent_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return se.cygni.texasholdem.communication.ClientServer.internal_static_PlayerWithdrewEvent_fieldAccessorTable;
+      return se.cygni.texasholdem.communication.ClientServer.internal_static_PlayerQuitEvent_fieldAccessorTable;
     }
     
     private int bitField0_;
@@ -17734,41 +17737,41 @@ public final class ClientServer {
       return super.writeReplace();
     }
     
-    public static se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent parseFrom(
+    public static se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent parseFrom(
+    public static se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent parseFrom(byte[] data)
+    public static se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent parseFrom(
+    public static se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent parseFrom(java.io.InputStream input)
+    public static se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent parseFrom(
+    public static se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
-    public static se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent parseDelimitedFrom(java.io.InputStream input)
+    public static se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       Builder builder = newBuilder();
       if (builder.mergeDelimitedFrom(input)) {
@@ -17777,7 +17780,7 @@ public final class ClientServer {
         return null;
       }
     }
-    public static se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent parseDelimitedFrom(
+    public static se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -17788,12 +17791,12 @@ public final class ClientServer {
         return null;
       }
     }
-    public static se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent parseFrom(
+    public static se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent parseFrom(
+    public static se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -17803,7 +17806,7 @@ public final class ClientServer {
     
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent prototype) {
+    public static Builder newBuilder(se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -17816,18 +17819,18 @@ public final class ClientServer {
     }
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEventOrBuilder {
+       implements se.cygni.texasholdem.communication.ClientServer.PlayerQuitEventOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return se.cygni.texasholdem.communication.ClientServer.internal_static_PlayerWithdrewEvent_descriptor;
+        return se.cygni.texasholdem.communication.ClientServer.internal_static_PlayerQuitEvent_descriptor;
       }
       
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return se.cygni.texasholdem.communication.ClientServer.internal_static_PlayerWithdrewEvent_fieldAccessorTable;
+        return se.cygni.texasholdem.communication.ClientServer.internal_static_PlayerQuitEvent_fieldAccessorTable;
       }
       
-      // Construct using se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent.newBuilder()
+      // Construct using se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -17862,24 +17865,24 @@ public final class ClientServer {
       
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent.getDescriptor();
+        return se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent.getDescriptor();
       }
       
-      public se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent getDefaultInstanceForType() {
-        return se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent.getDefaultInstance();
+      public se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent getDefaultInstanceForType() {
+        return se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent.getDefaultInstance();
       }
       
-      public se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent build() {
-        se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent result = buildPartial();
+      public se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent build() {
+        se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
       
-      private se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent buildParsed()
+      private se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
-        se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent result = buildPartial();
+        se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(
             result).asInvalidProtocolBufferException();
@@ -17887,8 +17890,8 @@ public final class ClientServer {
         return result;
       }
       
-      public se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent buildPartial() {
-        se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent result = new se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent(this);
+      public se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent buildPartial() {
+        se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent result = new se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -17905,16 +17908,16 @@ public final class ClientServer {
       }
       
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent) {
-          return mergeFrom((se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent)other);
+        if (other instanceof se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent) {
+          return mergeFrom((se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
       
-      public Builder mergeFrom(se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent other) {
-        if (other == se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent.getDefaultInstance()) return this;
+      public Builder mergeFrom(se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent other) {
+        if (other == se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent.getDefaultInstance()) return this;
         if (other.hasPlayer()) {
           mergePlayer(other.getPlayer());
         }
@@ -18062,15 +18065,15 @@ public final class ClientServer {
         return playerBuilder_;
       }
       
-      // @@protoc_insertion_point(builder_scope:PlayerWithdrewEvent)
+      // @@protoc_insertion_point(builder_scope:PlayerQuitEvent)
     }
     
     static {
-      defaultInstance = new PlayerWithdrewEvent(true);
+      defaultInstance = new PlayerQuitEvent(true);
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:PlayerWithdrewEvent)
+    // @@protoc_insertion_point(class_scope:PlayerQuitEvent)
   }
   
   public static abstract class GameService
@@ -18088,7 +18091,7 @@ public final class ClientServer {
           se.cygni.texasholdem.communication.ClientServer.RegisterForPlayRequest request,
           com.google.protobuf.RpcCallback<se.cygni.texasholdem.communication.ClientServer.RegisterForPlayResponse> done);
       
-      public abstract void withdraw(
+      public abstract void quit(
           com.google.protobuf.RpcController controller,
           se.cygni.texasholdem.communication.ClientServer.VoidInSession request,
           com.google.protobuf.RpcCallback<se.cygni.texasholdem.communication.ClientServer.Void> done);
@@ -18170,11 +18173,11 @@ public final class ClientServer {
         }
         
         @java.lang.Override
-        public  void withdraw(
+        public  void quit(
             com.google.protobuf.RpcController controller,
             se.cygni.texasholdem.communication.ClientServer.VoidInSession request,
             com.google.protobuf.RpcCallback<se.cygni.texasholdem.communication.ClientServer.Void> done) {
-          impl.withdraw(controller, request, done);
+          impl.quit(controller, request, done);
         }
         
         @java.lang.Override
@@ -18292,7 +18295,7 @@ public final class ClientServer {
             case 1:
               return impl.registerForPlay(controller, (se.cygni.texasholdem.communication.ClientServer.RegisterForPlayRequest)request);
             case 2:
-              return impl.withdraw(controller, (se.cygni.texasholdem.communication.ClientServer.VoidInSession)request);
+              return impl.quit(controller, (se.cygni.texasholdem.communication.ClientServer.VoidInSession)request);
             case 3:
               return impl.getMyChipAmount(controller, (se.cygni.texasholdem.communication.ClientServer.VoidInSession)request);
             case 4:
@@ -18417,7 +18420,7 @@ public final class ClientServer {
         se.cygni.texasholdem.communication.ClientServer.RegisterForPlayRequest request,
         com.google.protobuf.RpcCallback<se.cygni.texasholdem.communication.ClientServer.RegisterForPlayResponse> done);
     
-    public abstract void withdraw(
+    public abstract void quit(
         com.google.protobuf.RpcController controller,
         se.cygni.texasholdem.communication.ClientServer.VoidInSession request,
         com.google.protobuf.RpcCallback<se.cygni.texasholdem.communication.ClientServer.Void> done);
@@ -18510,7 +18513,7 @@ public final class ClientServer {
               done));
           return;
         case 2:
-          this.withdraw(controller, (se.cygni.texasholdem.communication.ClientServer.VoidInSession)request,
+          this.quit(controller, (se.cygni.texasholdem.communication.ClientServer.VoidInSession)request,
             com.google.protobuf.RpcUtil.<se.cygni.texasholdem.communication.ClientServer.Void>specializeCallback(
               done));
           return;
@@ -18704,7 +18707,7 @@ public final class ClientServer {
             se.cygni.texasholdem.communication.ClientServer.RegisterForPlayResponse.getDefaultInstance()));
       }
       
-      public  void withdraw(
+      public  void quit(
           com.google.protobuf.RpcController controller,
           se.cygni.texasholdem.communication.ClientServer.VoidInSession request,
           com.google.protobuf.RpcCallback<se.cygni.texasholdem.communication.ClientServer.Void> done) {
@@ -18901,7 +18904,7 @@ public final class ClientServer {
           se.cygni.texasholdem.communication.ClientServer.RegisterForPlayRequest request)
           throws com.google.protobuf.ServiceException;
       
-      public se.cygni.texasholdem.communication.ClientServer.Void withdraw(
+      public se.cygni.texasholdem.communication.ClientServer.Void quit(
           com.google.protobuf.RpcController controller,
           se.cygni.texasholdem.communication.ClientServer.VoidInSession request)
           throws com.google.protobuf.ServiceException;
@@ -18993,7 +18996,7 @@ public final class ClientServer {
       }
       
       
-      public se.cygni.texasholdem.communication.ClientServer.Void withdraw(
+      public se.cygni.texasholdem.communication.ClientServer.Void quit(
           com.google.protobuf.RpcController controller,
           se.cygni.texasholdem.communication.ClientServer.VoidInSession request)
           throws com.google.protobuf.ServiceException {
@@ -19204,9 +19207,9 @@ public final class ClientServer {
           se.cygni.texasholdem.communication.ClientServer.YouWonAmountEvent request,
           com.google.protobuf.RpcCallback<se.cygni.texasholdem.communication.ClientServer.Void> done);
       
-      public abstract void onPlayerWithdrew(
+      public abstract void onPlayerQuit(
           com.google.protobuf.RpcController controller,
-          se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent request,
+          se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent request,
           com.google.protobuf.RpcCallback<se.cygni.texasholdem.communication.ClientServer.Void> done);
       
       public abstract void onYouMustAct(
@@ -19316,11 +19319,11 @@ public final class ClientServer {
         }
         
         @java.lang.Override
-        public  void onPlayerWithdrew(
+        public  void onPlayerQuit(
             com.google.protobuf.RpcController controller,
-            se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent request,
+            se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent request,
             com.google.protobuf.RpcCallback<se.cygni.texasholdem.communication.ClientServer.Void> done) {
-          impl.onPlayerWithdrew(controller, request, done);
+          impl.onPlayerQuit(controller, request, done);
         }
         
         @java.lang.Override
@@ -19378,7 +19381,7 @@ public final class ClientServer {
             case 11:
               return impl.onYouWonAmount(controller, (se.cygni.texasholdem.communication.ClientServer.YouWonAmountEvent)request);
             case 12:
-              return impl.onPlayerWithdrew(controller, (se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent)request);
+              return impl.onPlayerQuit(controller, (se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent)request);
             case 13:
               return impl.onYouMustAct(controller, (se.cygni.texasholdem.communication.ClientServer.PBPossibleActions)request);
             default:
@@ -19420,7 +19423,7 @@ public final class ClientServer {
             case 11:
               return se.cygni.texasholdem.communication.ClientServer.YouWonAmountEvent.getDefaultInstance();
             case 12:
-              return se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent.getDefaultInstance();
+              return se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent.getDefaultInstance();
             case 13:
               return se.cygni.texasholdem.communication.ClientServer.PBPossibleActions.getDefaultInstance();
             default:
@@ -19533,9 +19536,9 @@ public final class ClientServer {
         se.cygni.texasholdem.communication.ClientServer.YouWonAmountEvent request,
         com.google.protobuf.RpcCallback<se.cygni.texasholdem.communication.ClientServer.Void> done);
     
-    public abstract void onPlayerWithdrew(
+    public abstract void onPlayerQuit(
         com.google.protobuf.RpcController controller,
-        se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent request,
+        se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent request,
         com.google.protobuf.RpcCallback<se.cygni.texasholdem.communication.ClientServer.Void> done);
     
     public abstract void onYouMustAct(
@@ -19626,7 +19629,7 @@ public final class ClientServer {
               done));
           return;
         case 12:
-          this.onPlayerWithdrew(controller, (se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent)request,
+          this.onPlayerQuit(controller, (se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent)request,
             com.google.protobuf.RpcUtil.<se.cygni.texasholdem.communication.ClientServer.Void>specializeCallback(
               done));
           return;
@@ -19674,7 +19677,7 @@ public final class ClientServer {
         case 11:
           return se.cygni.texasholdem.communication.ClientServer.YouWonAmountEvent.getDefaultInstance();
         case 12:
-          return se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent.getDefaultInstance();
+          return se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent.getDefaultInstance();
         case 13:
           return se.cygni.texasholdem.communication.ClientServer.PBPossibleActions.getDefaultInstance();
         default:
@@ -19920,9 +19923,9 @@ public final class ClientServer {
             se.cygni.texasholdem.communication.ClientServer.Void.getDefaultInstance()));
       }
       
-      public  void onPlayerWithdrew(
+      public  void onPlayerQuit(
           com.google.protobuf.RpcController controller,
-          se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent request,
+          se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent request,
           com.google.protobuf.RpcCallback<se.cygni.texasholdem.communication.ClientServer.Void> done) {
         channel.callMethod(
           getDescriptor().getMethods().get(12),
@@ -20017,9 +20020,9 @@ public final class ClientServer {
           se.cygni.texasholdem.communication.ClientServer.YouWonAmountEvent request)
           throws com.google.protobuf.ServiceException;
       
-      public se.cygni.texasholdem.communication.ClientServer.Void onPlayerWithdrew(
+      public se.cygni.texasholdem.communication.ClientServer.Void onPlayerQuit(
           com.google.protobuf.RpcController controller,
-          se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent request)
+          se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent request)
           throws com.google.protobuf.ServiceException;
       
       public se.cygni.texasholdem.communication.ClientServer.PBAction onYouMustAct(
@@ -20179,9 +20182,9 @@ public final class ClientServer {
       }
       
       
-      public se.cygni.texasholdem.communication.ClientServer.Void onPlayerWithdrew(
+      public se.cygni.texasholdem.communication.ClientServer.Void onPlayerQuit(
           com.google.protobuf.RpcController controller,
-          se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent request)
+          se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent request)
           throws com.google.protobuf.ServiceException {
         return (se.cygni.texasholdem.communication.ClientServer.Void) channel.callBlockingMethod(
           getDescriptor().getMethods().get(12),
@@ -20381,10 +20384,10 @@ public final class ClientServer {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_YouWonAmountEvent_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_PlayerWithdrewEvent_descriptor;
+    internal_static_PlayerQuitEvent_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_PlayerWithdrewEvent_fieldAccessorTable;
+      internal_static_PlayerQuitEvent_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -20451,58 +20454,59 @@ public final class ClientServer {
       "vent\022\031\n\006player\030\001 \002(\0132\t.PBPlayer\">\n\rShowD" +
       "ownEvent\022-\n\020playersWinAmount\030\001 \002(\0132\023.PBP" +
       "layersWinAmount\"#\n\021YouWonAmountEvent\022\016\n\006" +
-      "amount\030\001 \002(\006\"0\n\023PlayerWithdrewEvent\022\031\n\006p" +
-      "layer\030\001 \002(\0132\t.PBPlayer*\212\001\n\017PBExceptionTy" +
-      "pe\022\020\n\014NO_EXCEPTION\020\001\022\023\n\017INVALID_SESSION\020",
-      "\002\022\035\n\031PLAYER_NAME_ALREADY_TAKEN\020\003\022\035\n\031NOT_" +
-      "IN_CORRECT_PLAY_STATE\020\n\022\022\n\016INVALID_AMOUN" +
-      "T\020\013*\214\001\n\006PBRank\022\t\n\005DEUCE\020\001\022\t\n\005THREE\020\002\022\010\n\004" +
-      "FOUR\020\003\022\010\n\004FIVE\020\004\022\007\n\003SIX\020\005\022\t\n\005SEVEN\020\006\022\t\n\005" +
-      "EIGHT\020\007\022\010\n\004NINE\020\010\022\007\n\003TEN\020\t\022\010\n\004JACK\020\n\022\t\n\005" +
-      "QUEEN\020\013\022\010\n\004KING\020\014\022\007\n\003ACE\020\r*9\n\006PBSuit\022\t\n\005" +
-      "CLUBS\020\001\022\014\n\010DIAMONDS\020\002\022\n\n\006HEARTS\020\003\022\n\n\006SPA" +
-      "DES\020\004*D\n\014PBActionType\022\t\n\005CHECK\020\001\022\010\n\004FOLD" +
-      "\020\002\022\010\n\004CALL\020\003\022\t\n\005RAISE\020\004\022\n\n\006ALL_IN\020\005*U\n\007P" +
-      "BState\022\014\n\010PRE_FLOP\020\001\022\010\n\004FLOP\020\002\022\010\n\004TURN\020\003",
-      "\022\t\n\005RIVER\020\004\022\014\n\010SHOWDOWN\020\005\022\017\n\013NOT_IN_PLAY" +
-      "\020\t2\206\006\n\013GameService\022\024\n\004ping\022\005.Void\032\005.Ping" +
-      "\022D\n\017registerForPlay\022\027.RegisterForPlayReq" +
-      "uest\032\030.RegisterForPlayResponse\022!\n\010withdr" +
-      "aw\022\016.VoidInSession\032\005.Void\0228\n\017getMyChipAm" +
-      "ount\022\016.VoidInSession\032\025.MyChipAmountRespo" +
-      "nse\022@\n\023getSmallBlindAmount\022\016.VoidInSessi" +
-      "on\032\031.SmallBlindAmountResponse\022<\n\021getBigB" +
-      "lindAmount\022\016.VoidInSession\032\027.BigBlindAmo" +
-      "untResponse\0222\n\014getPotAmount\022\016.VoidInSess",
-      "ion\032\022.PotAmountResponse\0222\n\014getPlayState\022" +
-      "\016.VoidInSession\032\022.PlayStateResponse\022.\n\ng" +
-      "etPlayers\022\016.VoidInSession\032\020.PlayersRespo" +
-      "nse\0228\n\017getDealerPlayer\022\016.VoidInSession\032\025" +
-      ".DealerPlayerResponse\022@\n\023getSmallBlindPl" +
-      "ayer\022\016.VoidInSession\032\031.SmallBlindPlayerR" +
-      "esponse\022<\n\021getBigBlindPlayer\022\016.VoidInSes" +
-      "sion\032\027.BigBlindPlayerResponse\022<\n\021getComm" +
-      "unityCards\022\016.VoidInSession\032\027.CommunityCa" +
-      "rdsResponse\022.\n\ngetMyCards\022\016.VoidInSessio",
-      "n\032\020.MyCardsResponse2\242\005\n\rPlayerService\022\024\n" +
-      "\004ping\022\005.Void\032\005.Ping\022)\n\024serverIsShuttingD" +
-      "own\022\n.PBMessage\032\005.Void\022-\n\017onPlayIsStarte" +
-      "d\022\023.PlayIsStartedEvent\032\005.Void\022=\n\027onYouHa" +
-      "veBeenDealtACard\022\033.YouHaveBeenDealtACard" +
-      "Event\032\005.Void\022G\n\034onCommunityHasBeenDealtA" +
-      "Card\022 .CommunityHasBeenDealtACardEvent\032\005" +
-      ".Void\022+\n\016onPlayerFolded\022\022.PlayerFoldedEv" +
-      "ent\032\005.Void\022+\n\016onPlayerCalled\022\022.PlayerCal" +
-      "ledEvent\032\005.Void\022+\n\016onPlayerRaised\022\022.Play",
-      "erRaisedEvent\032\005.Void\0221\n\021onPlayerWentAllI" +
-      "n\022\025.PlayerWentAllInEvent\032\005.Void\022-\n\017onPla" +
-      "yerChecked\022\023.PlayerCheckedEvent\032\005.Void\022#" +
-      "\n\nonShowDown\022\016.ShowDownEvent\032\005.Void\022+\n\016o" +
-      "nYouWonAmount\022\022.YouWonAmountEvent\032\005.Void" +
-      "\022/\n\020onPlayerWithdrew\022\024.PlayerWithdrewEve" +
-      "nt\032\005.Void\022-\n\014onYouMustAct\022\022.PBPossibleAc" +
-      "tions\032\t.PBActionB7\n\"se.cygni.texasholdem" +
-      ".communicationB\014ClientServerH\001\210\001\001"
+      "amount\030\001 \002(\006\",\n\017PlayerQuitEvent\022\031\n\006playe" +
+      "r\030\001 \002(\0132\t.PBPlayer*\260\001\n\017PBExceptionType\022\020" +
+      "\n\014NO_EXCEPTION\020\001\022\023\n\017INVALID_SESSION\020\002\022\035\n",
+      "\031PLAYER_NAME_ALREADY_TAKEN\020\003\022$\n PLAYER_N" +
+      "OT_ASSIGNED_TO_TABLE_YET\020\004\022\035\n\031NOT_IN_COR" +
+      "RECT_PLAY_STATE\020\n\022\022\n\016INVALID_AMOUNT\020\013*\214\001" +
+      "\n\006PBRank\022\t\n\005DEUCE\020\001\022\t\n\005THREE\020\002\022\010\n\004FOUR\020\003" +
+      "\022\010\n\004FIVE\020\004\022\007\n\003SIX\020\005\022\t\n\005SEVEN\020\006\022\t\n\005EIGHT\020" +
+      "\007\022\010\n\004NINE\020\010\022\007\n\003TEN\020\t\022\010\n\004JACK\020\n\022\t\n\005QUEEN\020" +
+      "\013\022\010\n\004KING\020\014\022\007\n\003ACE\020\r*9\n\006PBSuit\022\t\n\005CLUBS\020" +
+      "\001\022\014\n\010DIAMONDS\020\002\022\n\n\006HEARTS\020\003\022\n\n\006SPADES\020\004*" +
+      "D\n\014PBActionType\022\t\n\005CHECK\020\001\022\010\n\004FOLD\020\002\022\010\n\004" +
+      "CALL\020\003\022\t\n\005RAISE\020\004\022\n\n\006ALL_IN\020\005*U\n\007PBState",
+      "\022\014\n\010PRE_FLOP\020\001\022\010\n\004FLOP\020\002\022\010\n\004TURN\020\003\022\t\n\005RI" +
+      "VER\020\004\022\014\n\010SHOWDOWN\020\005\022\017\n\013NOT_IN_PLAY\020\t2\202\006\n" +
+      "\013GameService\022\024\n\004ping\022\005.Void\032\005.Ping\022D\n\017re" +
+      "gisterForPlay\022\027.RegisterForPlayRequest\032\030" +
+      ".RegisterForPlayResponse\022\035\n\004quit\022\016.VoidI" +
+      "nSession\032\005.Void\0228\n\017getMyChipAmount\022\016.Voi" +
+      "dInSession\032\025.MyChipAmountResponse\022@\n\023get" +
+      "SmallBlindAmount\022\016.VoidInSession\032\031.Small" +
+      "BlindAmountResponse\022<\n\021getBigBlindAmount" +
+      "\022\016.VoidInSession\032\027.BigBlindAmountRespons",
+      "e\0222\n\014getPotAmount\022\016.VoidInSession\032\022.PotA" +
+      "mountResponse\0222\n\014getPlayState\022\016.VoidInSe" +
+      "ssion\032\022.PlayStateResponse\022.\n\ngetPlayers\022" +
+      "\016.VoidInSession\032\020.PlayersResponse\0228\n\017get" +
+      "DealerPlayer\022\016.VoidInSession\032\025.DealerPla" +
+      "yerResponse\022@\n\023getSmallBlindPlayer\022\016.Voi" +
+      "dInSession\032\031.SmallBlindPlayerResponse\022<\n" +
+      "\021getBigBlindPlayer\022\016.VoidInSession\032\027.Big" +
+      "BlindPlayerResponse\022<\n\021getCommunityCards" +
+      "\022\016.VoidInSession\032\027.CommunityCardsRespons",
+      "e\022.\n\ngetMyCards\022\016.VoidInSession\032\020.MyCard" +
+      "sResponse2\232\005\n\rPlayerService\022\024\n\004ping\022\005.Vo" +
+      "id\032\005.Ping\022)\n\024serverIsShuttingDown\022\n.PBMe" +
+      "ssage\032\005.Void\022-\n\017onPlayIsStarted\022\023.PlayIs" +
+      "StartedEvent\032\005.Void\022=\n\027onYouHaveBeenDeal" +
+      "tACard\022\033.YouHaveBeenDealtACardEvent\032\005.Vo" +
+      "id\022G\n\034onCommunityHasBeenDealtACard\022 .Com" +
+      "munityHasBeenDealtACardEvent\032\005.Void\022+\n\016o" +
+      "nPlayerFolded\022\022.PlayerFoldedEvent\032\005.Void" +
+      "\022+\n\016onPlayerCalled\022\022.PlayerCalledEvent\032\005",
+      ".Void\022+\n\016onPlayerRaised\022\022.PlayerRaisedEv" +
+      "ent\032\005.Void\0221\n\021onPlayerWentAllIn\022\025.Player" +
+      "WentAllInEvent\032\005.Void\022-\n\017onPlayerChecked" +
+      "\022\023.PlayerCheckedEvent\032\005.Void\022#\n\nonShowDo" +
+      "wn\022\016.ShowDownEvent\032\005.Void\022+\n\016onYouWonAmo" +
+      "unt\022\022.YouWonAmountEvent\032\005.Void\022\'\n\014onPlay" +
+      "erQuit\022\020.PlayerQuitEvent\032\005.Void\022-\n\014onYou" +
+      "MustAct\022\022.PBPossibleActions\032\t.PBActionB7" +
+      "\n\"se.cygni.texasholdem.communicationB\014Cl" +
+      "ientServerH\001\210\001\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -20789,14 +20793,14 @@ public final class ClientServer {
               new java.lang.String[] { "Amount", },
               se.cygni.texasholdem.communication.ClientServer.YouWonAmountEvent.class,
               se.cygni.texasholdem.communication.ClientServer.YouWonAmountEvent.Builder.class);
-          internal_static_PlayerWithdrewEvent_descriptor =
+          internal_static_PlayerQuitEvent_descriptor =
             getDescriptor().getMessageTypes().get(35);
-          internal_static_PlayerWithdrewEvent_fieldAccessorTable = new
+          internal_static_PlayerQuitEvent_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_PlayerWithdrewEvent_descriptor,
+              internal_static_PlayerQuitEvent_descriptor,
               new java.lang.String[] { "Player", },
-              se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent.class,
-              se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent.Builder.class);
+              se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent.class,
+              se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent.Builder.class);
           return null;
         }
       };

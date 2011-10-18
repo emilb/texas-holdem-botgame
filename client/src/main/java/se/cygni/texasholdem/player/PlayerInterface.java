@@ -32,7 +32,7 @@ public interface PlayerInterface {
 
     public void onPlayerWonAmount(Player player, long wonAmount);
 
-    public void onPlayerWithdrew(Player player);
+    public void onPlayerQuit(Player player);
 
     public Action onActionRequired(List<Action> possibleActions);
 

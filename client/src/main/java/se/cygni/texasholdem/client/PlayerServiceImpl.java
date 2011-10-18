@@ -17,9 +17,9 @@ import se.cygni.texasholdem.communication.ClientServer.PlayIsStartedEvent;
 import se.cygni.texasholdem.communication.ClientServer.PlayerCalledEvent;
 import se.cygni.texasholdem.communication.ClientServer.PlayerCheckedEvent;
 import se.cygni.texasholdem.communication.ClientServer.PlayerFoldedEvent;
+import se.cygni.texasholdem.communication.ClientServer.PlayerQuitEvent;
 import se.cygni.texasholdem.communication.ClientServer.PlayerRaisedEvent;
 import se.cygni.texasholdem.communication.ClientServer.PlayerWentAllInEvent;
-import se.cygni.texasholdem.communication.ClientServer.PlayerWithdrewEvent;
 import se.cygni.texasholdem.communication.ClientServer.ShowDownEvent;
 import se.cygni.texasholdem.communication.ClientServer.Void;
 import se.cygni.texasholdem.communication.ClientServer.YouHaveBeenDealtACardEvent;
@@ -179,13 +179,13 @@ public class PlayerServiceImpl implements
     }
 
     @Override
-    public void onPlayerWithdrew(
+    public void onPlayerQuit(
             final RpcController controller,
-            final PlayerWithdrewEvent request,
+            final PlayerQuitEvent request,
             final RpcCallback<Void> done) {
 
         returnVoid(done);
-        player.onPlayerWithdrew(ConversionUtil.convertPBPlayer(request
+        player.onPlayerQuit(ConversionUtil.convertPBPlayer(request
                 .getPlayer()));
     }
 

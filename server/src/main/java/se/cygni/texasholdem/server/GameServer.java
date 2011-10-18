@@ -1,16 +1,16 @@
 package se.cygni.texasholdem.server;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.table.Table;
+import se.cygni.texasholdem.table.TableManager;
 
 import com.googlecode.protobuf.pro.duplex.RpcClientChannel;
 
@@ -23,7 +23,18 @@ public class GameServer {
     final Map<String, RpcClientChannel> sessionChannelMap = new HashMap<String, RpcClientChannel>();
     final Map<String, BotPlayer> sessionPlayerMap = new HashMap<String, BotPlayer>();
 
-    final List<Table> tables = new ArrayList<Table>();
+    private final TableManager tableManager;
+
+    @Autowired
+    public GameServer(final TableManager tableManager) {
+
+        this.tableManager = tableManager;
+    }
+
+    public BotPlayer getPlayer(final String sessionId) {
+
+        return sessionPlayerMap.get(sessionId);
+    }
 
     public boolean isValidSession(final String sessionId) {
 
@@ -52,7 +63,11 @@ public class GameServer {
         sessionChannelMap.remove(sessionId);
         sessionPlayerMap.remove(sessionId);
 
-        // TODO: notify the player's Table that client has disconnected
+        final BotPlayer player = getPlayer(sessionId);
+        final Table table = tableManager.getTableForSessionId(sessionId);
+        if (table != null && player != null) {
+            table.removePlayer(player);
+        }
     }
 
     public void registerNewPlayer(final String name, final String sessionId) {
@@ -64,7 +79,6 @@ public class GameServer {
         final BotPlayer player = new BotPlayer(name, sessionId);
         sessionPlayerMap.put(sessionId, player);
 
-        // TODO: Add player to a free table
-        // ...
+        tableManager.assignPlayerToFreeTable(player);
     }
 }

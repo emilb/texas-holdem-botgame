@@ -7,12 +7,23 @@ public class BotPlayer {
 
     private final String name;
     private final String sessionId;
+    private long chipAmount;
     private final List<Card> cards = new ArrayList<Card>();
 
     public BotPlayer(final String name, final String sessionId) {
 
         this.name = name;
         this.sessionId = sessionId;
+    }
+
+    public long getChipAmount() {
+
+        return chipAmount;
+    }
+
+    public void setChipAmount(final long chipAmount) {
+
+        this.chipAmount = chipAmount;
     }
 
     public String getName() {

@@ -9,7 +9,7 @@ import se.cygni.texasholdem.game.definitions.PlayState;
 import se.cygni.texasholdem.game.pot.Pot;
 import se.cygni.texasholdem.server.GameServer;
 
-public class Table {
+public class Table implements Runnable {
 
     public static final int MAX_NOOF_PLAYERS = 11;
 
@@ -26,12 +26,38 @@ public class Table {
 
     private Pot pot;
 
+    private boolean gameHasStarted = false;
     private List<Card> communityCards;
 
     public Table(final GamePlan gamePlan, final GameServer gameServer) {
 
         this.gamePlan = gamePlan;
         this.gameServer = gameServer;
+    }
+
+    @Override
+    public void run() {
+
+    }
+
+    public void startGame() {
+
+        gameHasStarted = true;
+    }
+
+    public boolean gameHasStarted() {
+
+        return gameHasStarted;
+    }
+
+    public void addPlayer(final BotPlayer player) {
+
+        players.add(player);
+    }
+
+    public void removePlayer(final BotPlayer player) {
+
+        players.remove(player);
     }
 
     public List<Card> getCardsForPlayer(final BotPlayer player) {
@@ -62,6 +88,11 @@ public class Table {
     public List<BotPlayer> getPlayers() {
 
         return new ArrayList<BotPlayer>(players);
+    }
+
+    public int getNoofPlayers() {
+
+        return players.size();
     }
 
     public BotPlayer getDealerPlayer() {

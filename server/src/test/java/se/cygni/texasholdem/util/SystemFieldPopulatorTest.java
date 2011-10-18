@@ -173,6 +173,28 @@ public class SystemFieldPopulatorTest {
         clearSysProp(prop);
     }
 
+    @Test
+    public void testEnum() {
+
+        final String prop = "choice";
+        final ChoiceOfEnum orgVal = ChoiceOfEnum.BeTheBest;
+        final ChoiceOfEnum newVal = ChoiceOfEnum.BeTheWorst;
+
+        setSysProp(prop, newVal);
+
+        testClass.setChoice(orgVal);
+        assertEquals(orgVal, testClass.getChoice());
+        sp.populateValuesFromSystemProperties();
+        assertEquals(newVal, testClass.getChoice());
+
+        clearSysProp(prop);
+    }
+
+    enum ChoiceOfEnum {
+        BeTheBest,
+        BeTheWorst
+    }
+
     public class TestClass {
 
         private String strVal;
@@ -182,6 +204,7 @@ public class SystemFieldPopulatorTest {
         private Float floatVal;
         private Boolean booleanVal;
         private final String aFinalString = "joy";
+        private ChoiceOfEnum choice;
 
         public String getStrVal() {
 
@@ -247,5 +270,16 @@ public class SystemFieldPopulatorTest {
 
             return aFinalString;
         }
+
+        private ChoiceOfEnum getChoice() {
+
+            return choice;
+        }
+
+        private void setChoice(final ChoiceOfEnum choice) {
+
+            this.choice = choice;
+        }
+
     }
 }

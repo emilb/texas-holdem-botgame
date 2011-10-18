@@ -25,6 +25,9 @@ import se.cygni.texasholdem.communication.ClientServer.SmallBlindAmountResponse;
 import se.cygni.texasholdem.communication.ClientServer.SmallBlindPlayerResponse;
 import se.cygni.texasholdem.communication.ClientServer.Void;
 import se.cygni.texasholdem.communication.ClientServer.VoidInSession;
+import se.cygni.texasholdem.game.BotPlayer;
+import se.cygni.texasholdem.table.Table;
+import se.cygni.texasholdem.table.TableManager;
 
 import com.google.protobuf.RpcCallback;
 import com.google.protobuf.RpcController;
@@ -33,11 +36,14 @@ import com.google.protobuf.RpcController;
 public class GameServiceImpl implements ClientServer.GameService.Interface {
 
     private final GameServer gameServer;
+    private final TableManager tableManager;
 
     @Autowired
-    public GameServiceImpl(final GameServer gameServer) {
+    public GameServiceImpl(final GameServer gameServer,
+            final TableManager tableManager) {
 
         this.gameServer = gameServer;
+        this.tableManager = tableManager;
     }
 
     @Override
@@ -60,11 +66,12 @@ public class GameServiceImpl implements ClientServer.GameService.Interface {
 
         final RegisterForPlayResponse response = RegisterForPlayResponse
                 .newBuilder().setSessionId(request.getSessionId()).build();
+
         done.run(response);
     }
 
     @Override
-    public void withdraw(
+    public void quit(
             final RpcController controller,
             final VoidInSession request,
             final RpcCallback<Void> done) {
@@ -81,6 +88,11 @@ public class GameServiceImpl implements ClientServer.GameService.Interface {
                 MyChipAmountResponse.class, controller, done))
             return;
 
+        final BotPlayer player = gameServer.getPlayer(request.getSessionId());
+        final MyChipAmountResponse resp = MyChipAmountResponse.newBuilder()
+                .setAmount(player.getChipAmount()).build();
+
+        done.run(resp);
     }
 
     @Override
@@ -94,6 +106,15 @@ public class GameServiceImpl implements ClientServer.GameService.Interface {
                 done))
             return;
 
+        final Table table = returnExceptionIfPlayerNotInTable(request,
+                SmallBlindAmountResponse.class, controller, done);
+        if (table == null)
+            return;
+
+        final SmallBlindAmountResponse resp = SmallBlindAmountResponse
+                .newBuilder().setAmount(table.getSmallBlind()).build();
+
+        done.run(resp);
     }
 
     @Override
@@ -106,6 +127,15 @@ public class GameServiceImpl implements ClientServer.GameService.Interface {
                 BigBlindAmountResponse.class, controller, done))
             return;
 
+        final Table table = returnExceptionIfPlayerNotInTable(request,
+                BigBlindAmountResponse.class, controller, done);
+        if (table == null)
+            return;
+
+        final BigBlindAmountResponse resp = BigBlindAmountResponse.newBuilder()
+                .setAmount(table.getBigBlind()).build();
+
+        done.run(resp);
     }
 
     @Override
@@ -119,6 +149,15 @@ public class GameServiceImpl implements ClientServer.GameService.Interface {
                 done))
             return;
 
+        final Table table = returnExceptionIfPlayerNotInTable(request,
+                PotAmountResponse.class, controller, done);
+        if (table == null)
+            return;
+
+        final PotAmountResponse resp = PotAmountResponse.newBuilder()
+                .setAmount(table.getPotAmount()).build();
+
+        done.run(resp);
     }
 
     @Override
@@ -132,6 +171,12 @@ public class GameServiceImpl implements ClientServer.GameService.Interface {
                 done))
             return;
 
+        final Table table = returnExceptionIfPlayerNotInTable(request,
+                PlayStateResponse.class, controller, done);
+        if (table == null)
+            return;
+
+        // TODO: add playstate converter
     }
 
     @Override
@@ -145,6 +190,12 @@ public class GameServiceImpl implements ClientServer.GameService.Interface {
                 done))
             return;
 
+        final Table table = returnExceptionIfPlayerNotInTable(request,
+                PlayersResponse.class, controller, done);
+        if (table == null)
+            return;
+
+        // TODO: add BotPlayer converter
     }
 
     @Override
@@ -157,6 +208,12 @@ public class GameServiceImpl implements ClientServer.GameService.Interface {
                 DealerPlayerResponse.class, controller, done))
             return;
 
+        final Table table = returnExceptionIfPlayerNotInTable(request,
+                DealerPlayerResponse.class, controller, done);
+        if (table == null)
+            return;
+
+        // TODO: add BotPlayer converter
     }
 
     @Override
@@ -170,6 +227,12 @@ public class GameServiceImpl implements ClientServer.GameService.Interface {
                 done))
             return;
 
+        final Table table = returnExceptionIfPlayerNotInTable(request,
+                SmallBlindPlayerResponse.class, controller, done);
+        if (table == null)
+            return;
+
+        // TODO: add BotPlayer converter
     }
 
     @Override
@@ -182,6 +245,12 @@ public class GameServiceImpl implements ClientServer.GameService.Interface {
                 BigBlindPlayerResponse.class, controller, done))
             return;
 
+        final Table table = returnExceptionIfPlayerNotInTable(request,
+                BigBlindPlayerResponse.class, controller, done);
+        if (table == null)
+            return;
+
+        // TODO: add BotPlayer converter
     }
 
     @Override
@@ -194,6 +263,12 @@ public class GameServiceImpl implements ClientServer.GameService.Interface {
                 CommunityCardsResponse.class, controller, done))
             return;
 
+        final Table table = returnExceptionIfPlayerNotInTable(request,
+                CommunityCardsResponse.class, controller, done);
+        if (table == null)
+            return;
+
+        // TODO: add List<Card> converter
     }
 
     @Override
@@ -206,6 +281,12 @@ public class GameServiceImpl implements ClientServer.GameService.Interface {
                 controller, done))
             return;
 
+        final Table table = returnExceptionIfPlayerNotInTable(request,
+                MyCardsResponse.class, controller, done);
+        if (table == null)
+            return;
+
+        // TODO: add List<Card> converter
     }
 
     private ExceptionEvent checkForValidSession(final VoidInSession request) {
@@ -244,6 +325,37 @@ public class GameServiceImpl implements ClientServer.GameService.Interface {
         buildAndReturnException(msgClazz, invalidSessionEvent, controller, done);
 
         return true;
+    }
+
+    private ExceptionEvent checkThatPlayerIsInTable(final VoidInSession request) {
+
+        final String sessionId = request.getSessionId();
+
+        if (tableManager.getTableForSessionId(sessionId) == null) {
+            return ExceptionEvent
+                    .newBuilder()
+                    .setExceptionType(
+                            PBExceptionType.PLAYER_NOT_ASSIGNED_TO_TABLE_YET)
+                    .setMessage("You are not assigned to a table yet")
+                    .build();
+        }
+
+        return null;
+    }
+
+    private <T> Table returnExceptionIfPlayerNotInTable(
+            final VoidInSession request,
+            final Class<T> msgClazz,
+            final RpcController controller,
+            final RpcCallback<T> done) {
+
+        final ExceptionEvent invalidTable = checkThatPlayerIsInTable(request);
+        if (invalidTable == null)
+            return tableManager.getTableForSessionId(request.getSessionId());
+
+        buildAndReturnException(msgClazz, invalidTable, controller, done);
+
+        return null;
     }
 
     @SuppressWarnings("unchecked")

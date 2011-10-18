@@ -3,6 +3,7 @@ package se.cygni.texasholdem.util;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -75,6 +76,39 @@ public class SystemFieldPopulator {
 
         if (type == Boolean.class || type == boolean.class) {
             return getBooleanPropertyFromSystem(property);
+        }
+
+        if (type.isEnum()) {
+            return getEnumPropertyFromSystem(type, property);
+        }
+
+        return null;
+    }
+
+    @SuppressWarnings({ "rawtypes", "unchecked", "static-access" })
+    private Object getEnumPropertyFromSystem(
+            final Class type,
+            final String property) {
+
+        final String val = getStringPropertyFromSystem(property);
+
+        if (StringUtils.isEmpty(val))
+            return null;
+
+        final Object[] constants = type.getEnumConstants();
+
+        // This enum has no types!
+        if (constants == null || constants.length == 0)
+            return null;
+
+        // Just get the first enum type and use the static method valueOf(..)
+        try {
+            final Enum en = (Enum) constants[0];
+            return en.valueOf(type, val);
+        } catch (final Exception e) {
+            log.error(
+                    "Failed to extract enum value for type: {} and value: {}",
+                    constants[0].getClass(), val);
         }
 
         return null;

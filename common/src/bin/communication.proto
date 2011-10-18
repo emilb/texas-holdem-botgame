@@ -18,6 +18,7 @@ enum PBExceptionType {
     NO_EXCEPTION = 1;
     INVALID_SESSION = 2;
     PLAYER_NAME_ALREADY_TAKEN = 3;
+    PLAYER_NOT_ASSIGNED_TO_TABLE_YET = 4;
     NOT_IN_CORRECT_PLAY_STATE = 10;
     INVALID_AMOUNT = 11;
 }
@@ -223,7 +224,7 @@ message YouWonAmountEvent {
     required fixed64 amount = 1;
 }
 
-message PlayerWithdrewEvent {
+message PlayerQuitEvent {
     required PBPlayer player = 1;
 }
 
@@ -231,7 +232,7 @@ service GameService {
     rpc ping(Void) returns (Ping);
 
     rpc registerForPlay(RegisterForPlayRequest) returns (RegisterForPlayResponse);
-    rpc withdraw(VoidInSession) returns (Void);
+    rpc quit(VoidInSession) returns (Void);
     rpc getMyChipAmount(VoidInSession) returns (MyChipAmountResponse);
     rpc getSmallBlindAmount(VoidInSession) returns (SmallBlindAmountResponse);
     rpc getBigBlindAmount(VoidInSession) returns (BigBlindAmountResponse);
@@ -260,7 +261,7 @@ service PlayerService {
     rpc onPlayerChecked(PlayerCheckedEvent) returns (Void);
     rpc onShowDown(ShowDownEvent) returns (Void);
     rpc onYouWonAmount(YouWonAmountEvent) returns (Void);
-    rpc onPlayerWithdrew(PlayerWithdrewEvent) returns (Void);
+    rpc onPlayerQuit(PlayerQuitEvent) returns (Void);
 
     rpc onYouMustAct(PBPossibleActions) returns (PBAction);
 }

@@ -99,7 +99,7 @@ public class DummyPlayer implements PlayerInterface {
     }
 
     @Override
-    public void onPlayerWithdrew(final Player player) {
+    public void onPlayerQuit(final Player player) {
 
         System.out.println("Event: onPlayerWithdrew");
 

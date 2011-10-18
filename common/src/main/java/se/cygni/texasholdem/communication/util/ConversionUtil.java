@@ -21,6 +21,7 @@ import se.cygni.texasholdem.game.exception.InvalidAmountException;
 import se.cygni.texasholdem.game.exception.InvalidSessionException;
 import se.cygni.texasholdem.game.exception.NotInCorrectPlayStateException;
 import se.cygni.texasholdem.game.exception.PlayerNameAlreadyTakenException;
+import se.cygni.texasholdem.game.exception.PlayerNotAssignedToTableException;
 
 public class ConversionUtil {
 
@@ -87,6 +88,9 @@ public class ConversionUtil {
         if (e == null)
             return;
 
+        if (e.getExceptionType() == PBExceptionType.NO_EXCEPTION)
+            return;
+
         if (e.getExceptionType() == PBExceptionType.PLAYER_NAME_ALREADY_TAKEN)
             throw new PlayerNameAlreadyTakenException(e.getMessage());
 
@@ -98,5 +102,8 @@ public class ConversionUtil {
 
         if (e.getExceptionType() == PBExceptionType.INVALID_AMOUNT)
             throw new InvalidAmountException(e.getMessage());
+
+        if (e.getExceptionType() == PBExceptionType.PLAYER_NOT_ASSIGNED_TO_TABLE_YET)
+            throw new PlayerNotAssignedToTableException(e.getMessage());
     }
 }
