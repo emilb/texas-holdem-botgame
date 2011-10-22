@@ -24,10 +24,11 @@ public class PotScenarioTest {
 
     @Before
     public void setUp() throws Exception {
-        pA = new BotPlayer("A", "sessionA");
-        pB = new BotPlayer("B", "sessionB");
-        pC = new BotPlayer("C", "sessionC");
-        pD = new BotPlayer("D", "sessionD");
+
+        pA = new BotPlayer("A", "sessionA", 1000);
+        pB = new BotPlayer("B", "sessionB", 1000);
+        pC = new BotPlayer("C", "sessionC", 1000);
+        pD = new BotPlayer("D", "sessionD", 1000);
 
         final List<BotPlayer> players = new ArrayList<BotPlayer>();
         players.add(pA);
@@ -164,6 +165,7 @@ public class PotScenarioTest {
     }
 
     private void betButExpectError(final BotPlayer p, final long amount) {
+
         try {
             pot.bet(p, amount);
             fail("Folder player: " + p + " was allowed to place a bet");

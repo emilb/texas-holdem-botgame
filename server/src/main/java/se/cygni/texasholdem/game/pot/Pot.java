@@ -1,6 +1,8 @@
 package se.cygni.texasholdem.game.pot;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -28,6 +30,7 @@ public class Pot {
     private final Map<PlayState, List<PotTransaction>> transactionTable = new HashMap<PlayState, List<PotTransaction>>();
     private final List<BotPlayer> allPlayers;
     private final Set<BotPlayer> foldedPlayers = new HashSet<BotPlayer>();
+    private final Set<BotPlayer> allInPlayers = new HashSet<BotPlayer>();
 
     public Pot(final List<BotPlayer> players) {
 
@@ -43,7 +46,7 @@ public class Pot {
      */
     public long getMinimumBetForPlayerToCall(final BotPlayer player) {
 
-        if (hasFolded(player))
+        if (hasFolded(player) || isAllIn(player))
             return 0L;
 
         final long max = getMaxTotalBetInCurrentPlayState();
@@ -86,9 +89,22 @@ public class Pot {
                     new ArrayList<PotTransaction>());
         }
 
+        // Verify that player can cover the bet
+        if (player.getChipAmount() < amount)
+            throw new IllegalArgumentException("Player: " + player
+                    + " tried to place a larger bet than her chip stack");
+
+        // Subtract the bet from player
+        player.getChips(amount);
+
+        final boolean isAllIn = player.getChipAmount() == 0;
+
         final PotTransaction transaction = new PotTransaction(
-                transactionCounter.getAndIncrement(), player, amount);
+                transactionCounter.getAndIncrement(), player, amount, isAllIn);
         transactionTable.get(currentPlayState).add(transaction);
+
+        if (isAllIn)
+            allInPlayers.add(player);
     }
 
     /**
@@ -109,6 +125,16 @@ public class Pot {
     public boolean hasFolded(final BotPlayer player) {
 
         return foldedPlayers.contains(player);
+    }
+
+    /**
+     * 
+     * @param player
+     * @return TRUE if player has gone all in any time during this play.
+     */
+    public boolean isAllIn(final BotPlayer player) {
+
+        return allInPlayers.contains(player);
     }
 
     /**
@@ -231,16 +257,19 @@ public class Pot {
      */
     public boolean isCurrentPlayStateBalanced() {
 
-        Long lastTotal = null;
+        final long maxPlayersTotalInCurrentPlayState = getMaxTotalBetInCurrentPlayState();
+
         for (final BotPlayer player : allPlayers) {
             if (foldedPlayers.contains(player))
                 continue;
 
+            if (allInPlayers.contains(player))
+                continue;
+
             final long playerTotal = getTotalBetAmountForPlayerInPlayState(
                     player, currentPlayState);
-            if (lastTotal == null)
-                lastTotal = Long.valueOf(playerTotal);
-            else if (lastTotal != playerTotal)
+
+            if (maxPlayersTotalInCurrentPlayState != playerTotal)
                 return false;
         }
 
@@ -255,5 +284,126 @@ public class Pot {
     protected boolean canPlaceBetInCurrentPlayState() {
 
         return PlayState.hasNextState(currentPlayState);
+    }
+
+    /**
+     * Creates a list of all transactions, sorted by ascending event order.
+     * 
+     * @return A sorted list of all transactions
+     */
+    protected List<PotTransaction> getAllTransactionsInOrder() {
+
+        final List<PotTransaction> allTransactions = new ArrayList<PotTransaction>();
+
+        for (final List<PotTransaction> stateTrans : transactionTable.values()) {
+            allTransactions.addAll(stateTrans);
+        }
+
+        Collections.sort(allTransactions, new Comparator<PotTransaction>() {
+
+            @Override
+            public int compare(final PotTransaction o1, final PotTransaction o2) {
+
+                final Long firstTxNo = Long.valueOf(o1.getTransactionNumber());
+                final Long secondTxNo = Long.valueOf(o2.getTransactionNumber());
+                return firstTxNo.compareTo(secondTxNo);
+            }
+        });
+
+        return allTransactions;
+    }
+
+    /**
+     * Calculates the maximum amount this player could win if he didn't have to
+     * share the pot with another player.
+     * 
+     * A player that has folded defaults to a maximum winning potential of 0
+     * (zero). A player that has not played all in defaults to a maximum winning
+     * potential of the whole pot. A player that sometime during play went all
+     * in needs calculation of the side pot.
+     * 
+     * @param player
+     * @return The maximum amount this player can win
+     */
+    protected long getTotalMaxWinnings(final BotPlayer player) {
+
+        if (hasFolded(player))
+            return 0;
+
+        if (!isAllIn(player)) {
+            return getTotalPotAmount();
+        }
+
+        // This is a player that went all in, calculate how much the side
+        // pot for this player is worth
+        final long thisPlayersTotalBet = getTotalBetAmountForPlayer(player);
+
+        // Simplest case, no player has folded, and only this player went all in
+        if (foldedPlayers.isEmpty() && allInPlayers.size() == 1)
+            return thisPlayersTotalBet * allPlayers.size();
+
+        // Otherwise, calculate the side-pot value for this player's all in.
+        long total = thisPlayersTotalBet;
+        for (final BotPlayer p : allPlayers) {
+            if (p.equals(player))
+                continue;
+
+            final long otherPlayersTotalBet = getTotalBetAmountForPlayer(p);
+            total += otherPlayersTotalBet > thisPlayersTotalBet ? thisPlayersTotalBet
+                    : otherPlayersTotalBet;
+        }
+
+        return total;
+    }
+
+    /**
+     * Calculates the payout per player.
+     * 
+     * @param playerRanking
+     * @return a map with player and the amount won.
+     */
+    public Map<BotPlayer, Long> calculatePayout(
+            final List<List<BotPlayer>> playerRanking) {
+
+        // Init result
+        final Map<BotPlayer, Long> result = new HashMap<BotPlayer, Long>();
+        for (final BotPlayer player : allPlayers)
+            result.put(player, Long.valueOf(0));
+
+        long totalPotLeft = getTotalPotAmount();
+
+        for (final List<BotPlayer> sameRank : playerRanking) {
+
+            if (sameRank.size() == 1) {
+                final BotPlayer player = sameRank.get(0);
+
+                final long maxWin = getTotalMaxWinnings(player);
+                final long winAmount = maxWin <= totalPotLeft ? maxWin
+                        : totalPotLeft;
+                result.put(player, winAmount);
+                totalPotLeft -= winAmount;
+                continue;
+            }
+
+            final PotSplitter potSplitter = new PotSplitter();
+            for (final BotPlayer player : sameRank) {
+
+                final long maxWin = getTotalMaxWinnings(player);
+                if (maxWin == 0)
+                    continue;
+
+                final long winAmount = maxWin <= totalPotLeft ? maxWin
+                        : totalPotLeft;
+
+                potSplitter.addMaxWinAmountForPlayer(player, winAmount);
+            }
+
+            for (final BotPlayer player : sameRank) {
+                final long amount = potSplitter.getWinAmountFor(player);
+                result.put(player, amount);
+                totalPotLeft -= amount;
+            }
+        }
+        return result;
     }
 }

@@ -10,10 +10,22 @@ public class BotPlayer {
     private long chipAmount;
     private final List<Card> cards = new ArrayList<Card>();
 
+    public BotPlayer(final String name, final String sessionId,
+            final long chipAmount) {
+
+        this(name, sessionId);
+        this.chipAmount = chipAmount;
+    }
+
     public BotPlayer(final String name, final String sessionId) {
 
         this.name = name;
         this.sessionId = sessionId;
+    }
+
+    public void getChips(final long amount) {
+
+        chipAmount -= amount;
     }
 
     public long getChipAmount() {

@@ -5,6 +5,7 @@ import java.util.List;
 
 import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.game.Card;
+import se.cygni.texasholdem.game.Deck;
 import se.cygni.texasholdem.game.definitions.PlayState;
 import se.cygni.texasholdem.game.pot.Pot;
 import se.cygni.texasholdem.server.GameServer;
@@ -38,6 +39,81 @@ public class Table implements Runnable {
     @Override
     public void run() {
 
+        gameHasStarted = true;
+
+        while (!isThereAWinner()) {
+            pot = new Pot(players);
+            final Deck deck = Deck.getShuffledDeck();
+
+            // The OPEN
+            dealACardToAllParticipatingPlayers(deck);
+            dealACardToAllParticipatingPlayers(deck);
+
+            pot.bet(smallBlindPlayer, smallBlind);
+            pot.bet(bigBlindPlayer, bigBlind);
+
+            // Do betting rounds
+
+            // Flop
+
+            // Betting
+
+            // Turn
+
+            // Betting
+
+            // River
+
+            // Betting
+
+            // Showdown
+
+            // Distribute payback
+        }
+
+    }
+
+    protected void dealACardToAllParticipatingPlayers(final Deck deck) {
+
+        for (final BotPlayer player : players) {
+            if (player.getChipAmount() > 0) {
+                player.receiveCard(deck.getNextCard());
+            }
+        }
+    }
+
+    protected void shiftRolesForPlayers() {
+
+        if (dealerPlayer == null) {
+            dealerPlayer = players.get(0);
+            if (players.size() == 2) {
+                smallBlindPlayer = players.get(0);
+                bigBlindPlayer = players.get(1);
+            }
+        }
+
+        else {
+            final BotPlayer previousDealer = players.remove(0);
+            players.add(previousDealer);
+            dealerPlayer = null;
+            smallBlindPlayer = null;
+            bigBlindPlayer = null;
+            shiftRolesForPlayers();
+        }
+    }
+
+    protected boolean isThereAWinner() {
+
+        int noofPlayersWithChipsLeft = 0;
+        for (final BotPlayer player : players) {
+            if (player.getChipAmount() > 0)
+                noofPlayersWithChipsLeft++;
+
+            if (noofPlayersWithChipsLeft > 1)
+                return false;
+        }
+
+        return true;
     }
 
     public void startGame() {

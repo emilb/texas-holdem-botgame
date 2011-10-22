@@ -23,10 +23,11 @@ public class PotTest {
 
     @Before
     public void setUp() throws Exception {
-        pA = new BotPlayer("A", "sessionA");
-        pB = new BotPlayer("B", "sessionB");
-        pC = new BotPlayer("C", "sessionC");
-        pD = new BotPlayer("D", "sessionD");
+
+        pA = new BotPlayer("A", "sessionA", 1000);
+        pB = new BotPlayer("B", "sessionB", 1000);
+        pC = new BotPlayer("C", "sessionC", 1000);
+        pD = new BotPlayer("D", "sessionD", 1000);
 
         final List<BotPlayer> players = new ArrayList<BotPlayer>();
         players.add(pA);
@@ -39,6 +40,7 @@ public class PotTest {
 
     @Test
     public void testMinimumBetForPlayerToCall() {
+
         pot.bet(pA, 5L);
         pot.bet(pB, 10L);
         pot.bet(pC, 10L);
@@ -52,6 +54,7 @@ public class PotTest {
 
     @Test
     public void testBet() {
+
         pot.bet(pA, 5L);
         pot.bet(pB, 10L);
         pot.bet(pC, 10L);
@@ -67,6 +70,7 @@ public class PotTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testNegativeBet() {
+
         pot.bet(pA, 5L);
         pot.bet(pB, 10L);
         pot.bet(pC, 10L);
@@ -77,6 +81,7 @@ public class PotTest {
 
     @Test(expected = IllegalStateException.class)
     public void testBetWhenPlayerHasFolded() {
+
         pot.bet(pA, 5L);
         pot.bet(pB, 10L);
         pot.bet(pC, 10L);
@@ -88,6 +93,7 @@ public class PotTest {
 
     @Test
     public void testFold() {
+
         pot.fold(pD);
 
         assertFalse(pot.hasFolded(pA));
@@ -98,6 +104,7 @@ public class PotTest {
 
     @Test(expected = IllegalStateException.class)
     public void testNextPlayStateBeyondLast() {
+
         pot.nextPlayState(); // to FLOP
         pot.nextPlayState(); // to TURN
         pot.nextPlayState(); // to RIVER
@@ -107,6 +114,7 @@ public class PotTest {
 
     @Test
     public void testNextPlayState() {
+
         assertEquals(PlayState.PRE_FLOP, pot.getCurrentPlayState());
         assertEquals(PlayState.FLOP, pot.nextPlayState());
         assertEquals(PlayState.FLOP, pot.getCurrentPlayState());
@@ -120,11 +128,13 @@ public class PotTest {
 
     @Test
     public void testGetCurrentPlayState() {
+
         assertEquals(PlayState.PRE_FLOP, pot.getCurrentPlayState());
     }
 
     @Test
     public void testGetTotalPotSize() {
+
         pot.bet(pA, 5L);
         pot.bet(pB, 10L);
         pot.bet(pC, 10L);
@@ -137,6 +147,7 @@ public class PotTest {
 
     @Test
     public void testIsCurrentPlayStateBalanced() {
+
         pot.bet(pA, 5L);
         pot.bet(pB, 10L);
         pot.bet(pC, 10L);
@@ -152,6 +163,7 @@ public class PotTest {
 
     @Test
     public void testIsCurrentPlayStateBalancedWithPlayerFolded() {
+
         pot.bet(pA, 5L);
         pot.bet(pB, 10L);
         pot.bet(pC, 10L);
