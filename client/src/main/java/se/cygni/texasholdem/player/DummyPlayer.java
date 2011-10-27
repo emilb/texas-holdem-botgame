@@ -32,14 +32,14 @@ public class DummyPlayer implements PlayerInterface {
     @Override
     public void onYouHaveBeenDealtACard(final Card card) {
 
-        System.out.println("Event: onYouHaveBeenDealtACard");
+        System.out.println("Event: onYouHaveBeenDealtACard: " + card);
 
     }
 
     @Override
     public void onCommunityHasBeenDealtACard(final Card card) {
 
-        System.out.println("Event: onCommunityHasBeenDealtACard");
+        System.out.println("Event: onCommunityHasBeenDealtACard: " + card);
 
     }
 

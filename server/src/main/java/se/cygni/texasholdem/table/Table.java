@@ -39,10 +39,12 @@ public class Table implements Runnable {
     @Override
     public void run() {
 
+        System.out.println("Starting the GAME!");
         gameHasStarted = true;
 
         while (!isThereAWinner()) {
             pot = new Pot(players);
+            communityCards = new ArrayList<Card>();
             final Deck deck = Deck.getShuffledDeck();
 
             // The OPEN
@@ -55,51 +57,83 @@ public class Table implements Runnable {
             // Do betting rounds
 
             // Flop
+            pot.nextPlayState();
+            burnAndDealCardsToCommunity(deck, 3);
 
             // Betting
 
             // Turn
+            pot.nextPlayState();
+            burnAndDealCardsToCommunity(deck, 1);
 
             // Betting
 
             // River
+            pot.nextPlayState();
+            burnAndDealCardsToCommunity(deck, 1);
 
             // Betting
 
             // Showdown
+            pot.nextPlayState();
 
             // Distribute payback
         }
 
     }
 
+    protected void burnAndDealCardsToCommunity(
+            final Deck deck,
+            final int noofCards) {
+
+        deck.burn();
+        for (int i = 0; i < noofCards; i++)
+            communityCards.add(deck.getNextCard());
+    }
+
     protected void dealACardToAllParticipatingPlayers(final Deck deck) {
 
         for (final BotPlayer player : players) {
-            if (player.getChipAmount() > 0) {
-                player.receiveCard(deck.getNextCard());
+            if (isPlayerInPlay(player)) {
+                final Card card = deck.getNextCard();
+                player.receiveCard(card);
+                gameServer.onYouHaveBeenDealtACard(player, card);
             }
         }
     }
 
     protected void shiftRolesForPlayers() {
 
-        if (dealerPlayer == null) {
-            dealerPlayer = players.get(0);
-            if (players.size() == 2) {
-                smallBlindPlayer = players.get(0);
-                bigBlindPlayer = players.get(1);
-            }
+        dealerPlayer = getNextPlayerInPlay(dealerPlayer);
+        smallBlindPlayer = getNextPlayerInPlay(dealerPlayer);
+        bigBlindPlayer = getNextPlayerInPlay(smallBlindPlayer);
+    }
+
+    private BotPlayer getNextPlayerInPlay(final BotPlayer startingFromPlayer) {
+
+        final int ix = startingFromPlayer == null ? -1 : players
+                .indexOf(startingFromPlayer);
+
+        // Start from where startingFromPlayer is positioned
+        for (int currIx = ix + 1; currIx < players.size(); currIx++) {
+            final BotPlayer nextPlayer = players.get(currIx);
+            if (isPlayerInPlay(nextPlayer))
+                return nextPlayer;
         }
 
-        else {
-            final BotPlayer previousDealer = players.remove(0);
-            players.add(previousDealer);
-            dealerPlayer = null;
-            smallBlindPlayer = null;
-            bigBlindPlayer = null;
-            shiftRolesForPlayers();
+        // Didn't find a player, start from beginning
+        for (int currIx = 0; currIx < ix + 1; currIx++) {
+            final BotPlayer nextPlayer = players.get(currIx);
+            if (isPlayerInPlay(nextPlayer))
+                return nextPlayer;
         }
+
+        return null;
+    }
+
+    private boolean isPlayerInPlay(final BotPlayer player) {
+
+        return player.getChipAmount() > 0;
     }
 
     protected boolean isThereAWinner() {

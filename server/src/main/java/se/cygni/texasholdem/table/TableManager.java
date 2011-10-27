@@ -3,6 +3,7 @@ package se.cygni.texasholdem.table;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import se.cygni.texasholdem.game.BotPlayer;
@@ -15,12 +16,17 @@ public class TableManager {
 
     private final List<Table> tables = new ArrayList<Table>();
 
-    private final GameServer gameServer;
+    private GameServer gameServer;
     private final GamePlan gamePlan;
 
-    public TableManager(final GamePlan gamePlan, final GameServer gameServer) {
+    @Autowired
+    public TableManager(final GamePlan gamePlan) {
 
         this.gamePlan = gamePlan;
+    }
+
+    public void setGameServer(final GameServer gameServer) {
+
         this.gameServer = gameServer;
     }
 
@@ -63,6 +69,12 @@ public class TableManager {
 
         if (freeTableWithLowestNoofPlayers != null) {
             freeTableWithLowestNoofPlayers.addPlayer(player);
+
+            if (freeTableWithLowestNoofPlayers.getNoofPlayers() > 1) {
+                System.out.println("Starting game on table!");
+                final Thread t = new Thread(freeTableWithLowestNoofPlayers);
+                t.start();
+            }
             return;
         }
 

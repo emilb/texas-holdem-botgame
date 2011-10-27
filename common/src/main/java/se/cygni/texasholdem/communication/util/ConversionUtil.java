@@ -10,6 +10,8 @@ import se.cygni.texasholdem.communication.ClientServer.PBCard;
 import se.cygni.texasholdem.communication.ClientServer.PBExceptionType;
 import se.cygni.texasholdem.communication.ClientServer.PBPlayer;
 import se.cygni.texasholdem.communication.ClientServer.PBPlayers;
+import se.cygni.texasholdem.communication.ClientServer.PBRank;
+import se.cygni.texasholdem.communication.ClientServer.PBSuit;
 import se.cygni.texasholdem.game.Action;
 import se.cygni.texasholdem.game.ActionType;
 import se.cygni.texasholdem.game.Card;
@@ -41,6 +43,13 @@ public class ConversionUtil {
         }
 
         return players;
+    }
+
+    public static PBCard convertCard(final Card card) {
+
+        return PBCard.newBuilder()
+                .setRank(PBRank.valueOf(card.rank().ordinal()))
+                .setSuit(PBSuit.valueOf(card.suit().ordinal())).build();
     }
 
     public static Card convertPBCard(final PBCard pbCard) {

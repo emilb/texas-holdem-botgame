@@ -84,23 +84,28 @@ public class Pot {
         if (amount == 0)
             return;
 
+        if (player.getChipAmount() <= 0)
+            throw new IllegalStateException("Player: " + player
+                    + " has run out of chips, cannot bet");
+
         if (!transactionTable.containsKey(currentPlayState)) {
             transactionTable.put(currentPlayState,
                     new ArrayList<PotTransaction>());
         }
 
-        // Verify that player can cover the bet
-        if (player.getChipAmount() < amount)
-            throw new IllegalArgumentException("Player: " + player
-                    + " tried to place a larger bet than her chip stack");
+        // Verify that player can cover the bet, otherwise withdraw as much as
+        // possible and go all in.
+        final long realAmount = player.getChipAmount() >= amount ? amount
+                : player.getChipAmount();
 
         // Subtract the bet from player
-        player.getChips(amount);
+        player.getChips(realAmount);
 
         final boolean isAllIn = player.getChipAmount() == 0;
 
         final PotTransaction transaction = new PotTransaction(
-                transactionCounter.getAndIncrement(), player, amount, isAllIn);
+                transactionCounter.getAndIncrement(), player, realAmount,
+                isAllIn);
         transactionTable.get(currentPlayState).add(transaction);
 
         if (isAllIn)
