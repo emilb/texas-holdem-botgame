@@ -3,8 +3,6 @@ package se.cygni.texasholdem;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import se.cygni.texasholdem.server.RpcServer;
-
 public class TexasHoldem {
 
     public static void main(final String[] args) {
@@ -14,8 +12,6 @@ public class TexasHoldem {
         final AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
         ctx.scan("se.cygni");
         ctx.refresh();
-
-        ctx.getBean(RpcServer.class);
 
     }
 

@@ -35,7 +35,7 @@ public class TableTest {
         players.add(pC);
         players.add(pD);
 
-        table = new Table(null, null);
+        table = new Table(null);
         table.addPlayer(pA);
         table.addPlayer(pB);
         table.addPlayer(pC);
@@ -88,7 +88,7 @@ public class TableTest {
     @Test
     public void testShiftRolesForPlayersWhenOnlyTwoPlayers() {
 
-        table = new Table(null, null);
+        table = new Table(null);
         table.addPlayer(pA);
         table.addPlayer(pB);
 

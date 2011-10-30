@@ -8,7 +8,6 @@ import se.cygni.texasholdem.game.Card;
 import se.cygni.texasholdem.game.Deck;
 import se.cygni.texasholdem.game.definitions.PlayState;
 import se.cygni.texasholdem.game.pot.Pot;
-import se.cygni.texasholdem.server.GameServer;
 
 public class Table implements Runnable {
 
@@ -16,7 +15,6 @@ public class Table implements Runnable {
 
     private final List<BotPlayer> players = new ArrayList<BotPlayer>();
     private final GamePlan gamePlan;
-    private final GameServer gameServer;
 
     private BotPlayer dealerPlayer;
     private BotPlayer smallBlindPlayer;
@@ -30,10 +28,9 @@ public class Table implements Runnable {
     private boolean gameHasStarted = false;
     private List<Card> communityCards;
 
-    public Table(final GamePlan gamePlan, final GameServer gameServer) {
+    public Table(final GamePlan gamePlan) {
 
         this.gamePlan = gamePlan;
-        this.gameServer = gameServer;
     }
 
     @Override
@@ -97,7 +94,7 @@ public class Table implements Runnable {
             if (isPlayerInPlay(player)) {
                 final Card card = deck.getNextCard();
                 player.receiveCard(card);
-                gameServer.onYouHaveBeenDealtACard(player, card);
+                // gameController.onYouHaveBeenDealtACard(player, card);
             }
         }
     }

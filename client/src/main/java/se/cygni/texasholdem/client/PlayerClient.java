@@ -1,0 +1,114 @@
+package se.cygni.texasholdem.client;
+
+import java.util.UUID;
+
+import org.codemonkey.swiftsocketclient.SwiftSocketClient;
+
+import se.cygni.texasholdem.client.message.ClientToServerMessage;
+import se.cygni.texasholdem.client.message.ServerToClientMessage;
+import se.cygni.texasholdem.communication.message.TexasMessage;
+import se.cygni.texasholdem.communication.message.event.TexasEvent;
+import se.cygni.texasholdem.communication.message.exception.TexasException;
+import se.cygni.texasholdem.communication.message.request.RegisterForPlayRequest;
+import se.cygni.texasholdem.communication.message.request.TexasRequest;
+import se.cygni.texasholdem.communication.message.response.RegisterForPlayResponse;
+import se.cygni.texasholdem.communication.message.response.TexasResponse;
+import se.cygni.texasholdem.player.PlayerInterface;
+
+public class PlayerClient {
+
+    private static final long RESPONSE_TIMEOUT = 80000;
+
+    private final EventDispatcher eventDispatcher;
+    private final SyncMessageResponseManager responseManager;
+    private final PlayerInterface player;
+    private SwiftSocketClient client;
+
+    public PlayerClient(final PlayerInterface player) {
+
+        this.player = player;
+
+        responseManager = new SyncMessageResponseManager();
+        eventDispatcher = new EventDispatcher(player);
+
+        connect();
+    }
+
+    protected void connect() {
+
+        client = new SwiftSocketClient("localhost", 4711);
+        client.registerClientMessageToServerType(1, ClientToServerMessage.class);
+        client.registerServerMessageToClientType(1, ServerToClientMessage.class);
+        client.registerExecutionContext(ServerToClientMessage.class, this);
+        client.start();
+    }
+
+    public void onMessageReceived(final TexasMessage message) {
+
+        if (message instanceof TexasEvent) {
+            System.out.println("Got an event: " + message.getType());
+            eventDispatcher.onEvent((TexasEvent) message);
+            return;
+        }
+
+        if (message instanceof TexasResponse) {
+            final TexasResponse response = (TexasResponse) message;
+            final String requestId = response.requestId;
+
+            final ResponseLock lock = responseManager.pop(requestId);
+            lock.setResponse(response);
+
+            synchronized (lock) {
+                lock.notifyAll();
+            }
+        }
+    }
+
+    public boolean registerForPlay()
+            throws se.cygni.texasholdem.game.exception.GameException {
+
+        final RegisterForPlayRequest request = new RegisterForPlayRequest();
+        request.requestId = getUniqueRequestId();
+        request.name = player.getName();
+
+        final TexasMessage resp = sendAndWaitForResponse(request);
+
+        System.out.println(resp.getType());
+        if (resp instanceof RegisterForPlayResponse)
+            return true;
+
+        if (resp instanceof TexasException) {
+            final TexasException ge = (TexasException) resp;
+            ge.throwException();
+        }
+
+        return false;
+    }
+
+    protected TexasResponse sendAndWaitForResponse(final TexasRequest request) {
+
+        final ResponseLock lock = responseManager.push(request.requestId);
+        sendRequest(request);
+        synchronized (lock) {
+            try {
+                lock.wait(RESPONSE_TIMEOUT);
+            } catch (final InterruptedException e) {
+            }
+        }
+
+        if (lock.getResponse() == null)
+            throw new RuntimeException("Did not get response in time");
+
+        return lock.getResponse();
+    }
+
+    protected void sendRequest(final TexasRequest request) {
+
+        client.sendMessage(new ClientToServerMessage(request));
+    }
+
+    protected String getUniqueRequestId() {
+
+        return UUID.randomUUID().toString();
+    }
+}

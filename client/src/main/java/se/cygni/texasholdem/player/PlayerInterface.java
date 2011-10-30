@@ -1,40 +1,50 @@
 package se.cygni.texasholdem.player;
 
-import java.util.List;
-
+import se.cygni.texasholdem.communication.message.event.CommunityHasBeenDealtACardEvent;
+import se.cygni.texasholdem.communication.message.event.PlayIsStartedEvent;
+import se.cygni.texasholdem.communication.message.event.PlayerCalledEvent;
+import se.cygni.texasholdem.communication.message.event.PlayerCheckedEvent;
+import se.cygni.texasholdem.communication.message.event.PlayerFoldedEvent;
+import se.cygni.texasholdem.communication.message.event.PlayerQuitEvent;
+import se.cygni.texasholdem.communication.message.event.PlayerRaisedEvent;
+import se.cygni.texasholdem.communication.message.event.PlayerWentAllInEvent;
+import se.cygni.texasholdem.communication.message.event.ServerIsShuttingDownEvent;
+import se.cygni.texasholdem.communication.message.event.ShowDownEvent;
+import se.cygni.texasholdem.communication.message.event.YouHaveBeenDealtACardEvent;
+import se.cygni.texasholdem.communication.message.event.YouWonAmountEvent;
+import se.cygni.texasholdem.communication.message.request.ActionRequest;
 import se.cygni.texasholdem.game.Action;
-import se.cygni.texasholdem.game.Card;
-import se.cygni.texasholdem.game.Player;
 
 public interface PlayerInterface {
 
     public String getName();
 
-    public void serverIsShuttingDown(String message);
+    public void serverIsShuttingDown(ServerIsShuttingDownEvent event);
 
-    public void onPlayIsStarted(List<Player> players);
+    public void onPlayIsStarted(PlayIsStartedEvent event);
 
-    public void onYouHaveBeenDealtACard(Card card);
+    public void onYouHaveBeenDealtACard(YouHaveBeenDealtACardEvent event);
 
-    public void onCommunityHasBeenDealtACard(Card card);
+    public void onCommunityHasBeenDealtACard(
+            CommunityHasBeenDealtACardEvent event);
 
-    public void onPlayerFolded(Player player);
+    public void onPlayerFolded(PlayerFoldedEvent event);
 
-    public void onPlayerCalled(Player player, long callAmount);
+    public void onPlayerCalled(PlayerCalledEvent event);
 
-    public void onPlayerRaised(Player player, long callAmount, long betAmount);
+    public void onPlayerRaised(PlayerRaisedEvent event);
 
-    public void onPlayerWentAllIn(Player player, long callAmount, long betAmount);
+    public void onPlayerWentAllIn(PlayerWentAllInEvent event);
 
-    public void onPlayerChecked(Player player);
+    public void onPlayerChecked(PlayerCheckedEvent event);
 
-    public void onYouWonAmount(long wonAmount);
+    public void onYouWonAmount(YouWonAmountEvent event);
 
-    public void onPlayerWonAmount(Player player, long wonAmount);
+    public void onShowDown(ShowDownEvent event);
 
-    public void onPlayerQuit(Player player);
+    public void onPlayerQuit(PlayerQuitEvent event);
 
-    public Action onActionRequired(List<Action> possibleActions);
+    public Action onActionRequired(ActionRequest request);
 
     public void connectionToGameServerLost();
 

@@ -45,6 +45,6 @@ public enum Suit {
 
     public static Suit get(final String name) {
 
-        return lookup.get(name);
+        return lookup.get(name.toLowerCase());
     }
 }

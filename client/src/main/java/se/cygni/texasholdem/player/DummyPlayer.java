@@ -1,10 +1,19 @@
 package se.cygni.texasholdem.player;
 
-import java.util.List;
-
+import se.cygni.texasholdem.communication.message.event.CommunityHasBeenDealtACardEvent;
+import se.cygni.texasholdem.communication.message.event.PlayIsStartedEvent;
+import se.cygni.texasholdem.communication.message.event.PlayerCalledEvent;
+import se.cygni.texasholdem.communication.message.event.PlayerCheckedEvent;
+import se.cygni.texasholdem.communication.message.event.PlayerFoldedEvent;
+import se.cygni.texasholdem.communication.message.event.PlayerQuitEvent;
+import se.cygni.texasholdem.communication.message.event.PlayerRaisedEvent;
+import se.cygni.texasholdem.communication.message.event.PlayerWentAllInEvent;
+import se.cygni.texasholdem.communication.message.event.ServerIsShuttingDownEvent;
+import se.cygni.texasholdem.communication.message.event.ShowDownEvent;
+import se.cygni.texasholdem.communication.message.event.YouHaveBeenDealtACardEvent;
+import se.cygni.texasholdem.communication.message.event.YouWonAmountEvent;
+import se.cygni.texasholdem.communication.message.request.ActionRequest;
 import se.cygni.texasholdem.game.Action;
-import se.cygni.texasholdem.game.Card;
-import se.cygni.texasholdem.game.Player;
 
 public class DummyPlayer implements PlayerInterface {
 
@@ -16,99 +25,94 @@ public class DummyPlayer implements PlayerInterface {
     }
 
     @Override
-    public void serverIsShuttingDown(final String message) {
+    public void serverIsShuttingDown(final ServerIsShuttingDownEvent event) {
 
-        System.out.println("Event: serverIsShuttingDown");
-
-    }
-
-    @Override
-    public void onPlayIsStarted(final List<Player> players) {
-
-        System.out.println("Event: onPlayIsStarted");
+        System.out.println(event.message);
 
     }
 
     @Override
-    public void onYouHaveBeenDealtACard(final Card card) {
+    public void onPlayIsStarted(final PlayIsStartedEvent event) {
 
-        System.out.println("Event: onYouHaveBeenDealtACard: " + card);
-
-    }
-
-    @Override
-    public void onCommunityHasBeenDealtACard(final Card card) {
-
-        System.out.println("Event: onCommunityHasBeenDealtACard: " + card);
+        // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void onPlayerFolded(final Player player) {
+    public void onYouHaveBeenDealtACard(final YouHaveBeenDealtACardEvent event) {
 
-        System.out.println("Event: onPlayerFolded");
-
-    }
-
-    @Override
-    public void onPlayerCalled(final Player player, final long callAmount) {
-
-        System.out.println("onPlayerCalled");
+        System.out.println("I've been dealt a card: " + event.card);
 
     }
 
     @Override
-    public void onPlayerRaised(
-            final Player player,
-            final long callAmount,
-            final long betAmount) {
+    public void onCommunityHasBeenDealtACard(
+            final CommunityHasBeenDealtACardEvent event) {
 
-        System.out.println("Event: onPlayerRaised");
+        // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void onPlayerWentAllIn(
-            final Player player,
-            final long callAmount,
-            final long betAmount) {
+    public void onPlayerFolded(final PlayerFoldedEvent event) {
 
-        System.out.println("Event: onPlayerWentAllIn");
+        // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void onPlayerChecked(final Player player) {
+    public void onPlayerCalled(final PlayerCalledEvent event) {
 
-        System.out.println("Event: onPlayerChecked");
-
-    }
-
-    @Override
-    public void onYouWonAmount(final long wonAmount) {
-
-        System.out.println("Event: onYouWonAmount");
+        // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void onPlayerWonAmount(final Player player, final long wonAmount) {
+    public void onPlayerRaised(final PlayerRaisedEvent event) {
 
-        System.out.println("Event: onPlayerWonAmount");
-
-    }
-
-    @Override
-    public void onPlayerQuit(final Player player) {
-
-        System.out.println("Event: onPlayerWithdrew");
+        // TODO Auto-generated method stub
 
     }
 
     @Override
-    public Action onActionRequired(final List<Action> possibleActions) {
+    public void onPlayerWentAllIn(final PlayerWentAllInEvent event) {
 
-        System.out.println("Event: onActionRequired");
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onPlayerChecked(final PlayerCheckedEvent event) {
+
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onYouWonAmount(final YouWonAmountEvent event) {
+
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onShowDown(final ShowDownEvent event) {
+
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onPlayerQuit(final PlayerQuitEvent event) {
+
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public Action onActionRequired(final ActionRequest request) {
+
+        // TODO Auto-generated method stub
         return null;
     }
 
