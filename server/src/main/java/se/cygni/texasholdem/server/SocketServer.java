@@ -3,6 +3,8 @@ package se.cygni.texasholdem.server;
 import javax.annotation.PostConstruct;
 
 import org.codemonkey.swiftsocketserver.SwiftSocketServer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,9 @@ import se.cygni.texasholdem.server.message.ServerToClientMessage;
 
 @Service
 public class SocketServer {
+
+    private static Logger log = LoggerFactory
+            .getLogger(SocketServer.class);
 
     private final MessageReceiver messageReceiver;
 

@@ -25,8 +25,8 @@ public class GamePlan {
 
         this.startingChipsAmount = 1000;
         this.playsBetweenBlindRaise = 10;
-        this.smalBlindStart = 1;
-        this.bigBlindStart = 2;
+        this.smalBlindStart = 25;
+        this.bigBlindStart = 50;
         this.blindRaiseStrategy = BlindRaiseStrategy.FIX_AMOUNT;
         this.blindRaiseStrategyValue = 2;
 

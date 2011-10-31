@@ -8,5 +8,15 @@ import se.cygni.texasholdem.game.Action;
 @IsATexasMessage
 public class ActionRequest extends TexasRequest {
 
-    public List<Action> possibleActions;
+    private final List<Action> possibleActions;
+
+    public ActionRequest(final List<Action> possibleActions) {
+
+        this.possibleActions = possibleActions;
+    }
+
+    public List<Action> getPossibleActions() {
+
+        return possibleActions;
+    }
 }

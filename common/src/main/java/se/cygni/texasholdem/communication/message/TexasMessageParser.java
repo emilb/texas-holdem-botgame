@@ -5,11 +5,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.JsonParser;
-import org.codehaus.jackson.JsonToken;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -69,13 +70,18 @@ public class TexasMessageParser {
         JsonParser parser = null;
         try {
             parser = factory.createJsonParser(message);
-            parser.nextToken();
-            while (parser.nextToken() != JsonToken.END_OBJECT) {
-                final String nameField = parser.getCurrentName();
-                parser.nextToken();
-                if (nameField.equals(TYPE_IDENTIFIER))
-                    return getClassForIdentifier(parser.getText());
-            }
+            final JsonNode node = mapper.readTree(parser);
+            final JsonNode typeNode = node.path(TYPE_IDENTIFIER);
+
+            if (typeNode == null
+                    || StringUtils.isEmpty(typeNode.getTextValue()))
+                // Nothing found
+                throw new IllegalArgumentException("Could not find [" +
+                        TYPE_IDENTIFIER
+                        + "] in message: " + message);
+
+            return getClassForIdentifier(typeNode.getTextValue());
+
         } catch (final Exception e) {
             // JSON exception
             throw new IllegalArgumentException("Could not parse message: "
@@ -88,9 +94,6 @@ public class TexasMessageParser {
                 }
         }
 
-        // Nothing found
-        throw new IllegalArgumentException("Could not find [" + TYPE_IDENTIFIER
-                + "] in message: " + message);
     }
 
     public static Class<? extends TexasMessage> getClassForIdentifier(

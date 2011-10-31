@@ -3,17 +3,15 @@ package se.cygni.texasholdem.table;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import se.cygni.texasholdem.communication.message.event.YouHaveBeenDealtACardEvent;
 import se.cygni.texasholdem.game.BotPlayer;
-import se.cygni.texasholdem.game.Card;
-import se.cygni.texasholdem.game.definitions.Rank;
-import se.cygni.texasholdem.game.definitions.Suit;
 import se.cygni.texasholdem.server.SessionManager;
-import se.cygni.texasholdem.server.eventbus.EventWrapper;
 import se.cygni.texasholdem.server.eventbus.NewPlayerEvent;
+import se.cygni.texasholdem.server.eventbus.PlayerQuitEvent;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
@@ -21,7 +19,8 @@ import com.google.common.eventbus.Subscribe;
 @Component
 public class TableManager {
 
-    private static final int MAX_PLAYERS_PER_TABLE = 10;
+    private static Logger log = LoggerFactory
+            .getLogger(TableManager.class);
 
     private final List<Table> tables = new ArrayList<Table>();
 
@@ -41,14 +40,20 @@ public class TableManager {
     }
 
     @Subscribe
+    public void onPlayerQuit(final PlayerQuitEvent playerQuitEvent) {
+
+        final BotPlayer player = playerQuitEvent.getPlayer();
+        final Table table = getTableForPlayer(player);
+        if (table != null)
+            table.removePlayer(player);
+
+    }
+
+    @Subscribe
     public void onNewPlayerEvent(final NewPlayerEvent event) {
 
         assignPlayerToFreeTable(event.getPlayer());
 
-        final YouHaveBeenDealtACardEvent evc = new YouHaveBeenDealtACardEvent();
-        evc.card = Card.valueOf(Rank.ACE, Suit.SPADES);
-        final EventWrapper eventw = new EventWrapper(evc, event.getPlayer());
-        eventBus.post(eventw);
     }
 
     public Table getTableForPlayer(final BotPlayer player) {
@@ -80,7 +85,7 @@ public class TableManager {
             if (table.gameHasStarted())
                 continue;
 
-            if (table.getNoofPlayers() < MAX_PLAYERS_PER_TABLE && (
+            if (table.getNoofPlayers() < Table.MAX_NOOF_PLAYERS && (
                     freeTableWithLowestNoofPlayers == null ||
                     freeTableWithLowestNoofPlayers.getNoofPlayers() > table
                             .getNoofPlayers())) {
@@ -92,7 +97,7 @@ public class TableManager {
             freeTableWithLowestNoofPlayers.addPlayer(player);
 
             if (freeTableWithLowestNoofPlayers.getNoofPlayers() > 1) {
-                System.out.println("Starting game on table!");
+                log.info("Starting game on table!");
                 final Thread t = new Thread(freeTableWithLowestNoofPlayers);
                 t.start();
             }
@@ -105,7 +110,7 @@ public class TableManager {
 
     private Table createNewTable() {
 
-        final Table table = new Table(gamePlan);
+        final Table table = new Table(gamePlan, eventBus);
         tables.add(table);
         return table;
     }

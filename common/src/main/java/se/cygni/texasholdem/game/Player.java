@@ -1,16 +1,19 @@
 package se.cygni.texasholdem.game;
 
+import org.codehaus.jackson.annotate.JsonCreator;
+import org.codehaus.jackson.annotate.JsonProperty;
+
 public class Player {
 
     private final String name;
     private final long chipCount;
-    private final boolean inPlay;
 
-    public Player(final String name, final long chipCount, final boolean inPlay) {
+    @JsonCreator
+    public Player(@JsonProperty("name") final String name,
+            @JsonProperty("chipCount") final long chipCount) {
 
         this.name = name;
         this.chipCount = chipCount;
-        this.inPlay = inPlay;
     }
 
     public String getName() {
@@ -23,9 +26,10 @@ public class Player {
         return chipCount;
     }
 
-    public boolean isInPlay() {
+    @Override
+    public String toString() {
 
-        return inPlay;
+        return "Player [name=" + name + "]";
     }
 
 }

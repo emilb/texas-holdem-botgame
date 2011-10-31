@@ -1,6 +1,8 @@
 package se.cygni.texasholdem.server;
 
 import org.codemonkey.swiftsocketserver.ClientContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,9 @@ import com.google.common.eventbus.EventBus;
 
 @Service
 public class MessageSender {
+
+    private static Logger log = LoggerFactory
+            .getLogger(MessageSender.class);
 
     private final SocketServer socketServer;
 

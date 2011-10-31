@@ -11,6 +11,8 @@ import org.junit.Test;
 
 import se.cygni.texasholdem.game.BotPlayer;
 
+import com.google.common.eventbus.EventBus;
+
 public class TableTest {
 
     private BotPlayer pA;
@@ -35,7 +37,7 @@ public class TableTest {
         players.add(pC);
         players.add(pD);
 
-        table = new Table(null);
+        table = new Table(new GamePlan(), new EventBus());
         table.addPlayer(pA);
         table.addPlayer(pB);
         table.addPlayer(pC);
@@ -88,7 +90,7 @@ public class TableTest {
     @Test
     public void testShiftRolesForPlayersWhenOnlyTwoPlayers() {
 
-        table = new Table(null);
+        table = new Table(new GamePlan(), new EventBus());
         table.addPlayer(pA);
         table.addPlayer(pB);
 

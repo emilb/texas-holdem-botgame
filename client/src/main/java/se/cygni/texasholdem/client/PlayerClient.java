@@ -46,7 +46,6 @@ public class PlayerClient {
     public void onMessageReceived(final TexasMessage message) {
 
         if (message instanceof TexasEvent) {
-            System.out.println("Got an event: " + message.getType());
             eventDispatcher.onEvent((TexasEvent) message);
             return;
         }

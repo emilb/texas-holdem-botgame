@@ -17,17 +17,19 @@ import se.cygni.texasholdem.game.Action;
 
 public class DummyPlayer implements PlayerInterface {
 
+    private final String name = "dummmy" + (int) (100 * Math.random());
+
     @Override
     public String getName() {
 
         System.out.println("Event: getName");
-        return "dummmy";
+        return name;
     }
 
     @Override
     public void serverIsShuttingDown(final ServerIsShuttingDownEvent event) {
 
-        System.out.println(event.message);
+        System.out.println(event.getMessage());
 
     }
 
@@ -41,7 +43,7 @@ public class DummyPlayer implements PlayerInterface {
     @Override
     public void onYouHaveBeenDealtACard(final YouHaveBeenDealtACardEvent event) {
 
-        System.out.println("I've been dealt a card: " + event.card);
+        System.out.println("I've been dealt a card: " + event.getCard());
 
     }
 
@@ -49,6 +51,7 @@ public class DummyPlayer implements PlayerInterface {
     public void onCommunityHasBeenDealtACard(
             final CommunityHasBeenDealtACardEvent event) {
 
+        System.out.println("Community got a card: " + event.getCard());
         // TODO Auto-generated method stub
 
     }
@@ -91,7 +94,7 @@ public class DummyPlayer implements PlayerInterface {
     @Override
     public void onYouWonAmount(final YouWonAmountEvent event) {
 
-        // TODO Auto-generated method stub
+        System.out.println("I won: " + event.getWonAmount());
 
     }
 

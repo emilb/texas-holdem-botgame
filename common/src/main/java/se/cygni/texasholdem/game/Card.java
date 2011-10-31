@@ -3,9 +3,16 @@ package se.cygni.texasholdem.game;
 import java.util.EnumMap;
 import java.util.Map;
 
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import se.cygni.texasholdem.communication.json.CardDeserializer;
+import se.cygni.texasholdem.communication.json.CardSerializer;
 import se.cygni.texasholdem.game.definitions.Rank;
 import se.cygni.texasholdem.game.definitions.Suit;
 
+@JsonSerialize(using = CardSerializer.class)
+@JsonDeserialize(using = CardDeserializer.class)
 public class Card {
 
     private final Rank rank;

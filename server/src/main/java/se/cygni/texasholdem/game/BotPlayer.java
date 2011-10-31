@@ -28,6 +28,11 @@ public class BotPlayer {
         chipAmount -= amount;
     }
 
+    public void addChipAmount(final long amount) {
+
+        chipAmount += amount;
+    }
+
     public long getChipAmount() {
 
         return chipAmount;

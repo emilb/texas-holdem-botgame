@@ -4,6 +4,14 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import se.cygni.texasholdem.communication.json.SuitDeserializer;
+import se.cygni.texasholdem.communication.json.SuitSerializer;
+
+@JsonSerialize(using = SuitSerializer.class)
+@JsonDeserialize(using = SuitDeserializer.class)
 public enum Suit {
 
     CLUBS("c", "Clubs"),

@@ -254,6 +254,25 @@ public class Pot {
         return total;
     }
 
+    public long getAmountNeededToCall(final BotPlayer player) {
+
+        if (foldedPlayers.contains(player))
+            return 0;
+
+        if (allInPlayers.contains(player))
+            return 0;
+
+        if (isCurrentPlayStateBalanced())
+            return 0;
+
+        final long maxPlayersTotalInCurrentPlayState = getMaxTotalBetInCurrentPlayState();
+
+        return maxPlayersTotalInCurrentPlayState
+                - getTotalBetAmountForPlayerInPlayState(player,
+                        getCurrentPlayState());
+
+    }
+
     /**
      * Checks that all active players have placed bets amounting to the same
      * value in the current play state.

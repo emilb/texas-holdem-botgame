@@ -17,6 +17,7 @@ import se.cygni.texasholdem.communication.message.response.RegisterForPlayRespon
 import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.server.eventbus.EventWrapper;
 import se.cygni.texasholdem.server.eventbus.NewPlayerEvent;
+import se.cygni.texasholdem.server.eventbus.PlayerQuitEvent;
 import se.cygni.texasholdem.server.eventbus.RequestContextWrapper;
 import se.cygni.texasholdem.table.GamePlan;
 
@@ -28,6 +29,8 @@ public class SessionManager {
 
     private static Logger log = LoggerFactory
             .getLogger(SessionManager.class);
+
+    public static final String SESSION_ID = "SESSION_ID";
 
     private final EventBus eventBus;
 
@@ -53,13 +56,38 @@ public class SessionManager {
     @Subscribe
     public void notifyPlayerOfEvent(final EventWrapper eventWrapper) {
 
-        log.debug("Notifying player of event");
+        log.debug("Notifying players {} of event: {}",
+                eventWrapper.getReceivers(), eventWrapper.getEvent());
 
         for (final BotPlayer player : eventWrapper.getReceivers()) {
+
+            final ClientContext context = sessionClientContextMap.get(player
+                    .getSessionId());
+
+            if (context == null || !context.isActive()) {
+                log.info("Player {} has unexpectedly left the game",
+                        player.getName());
+                eventBus.post(new PlayerQuitEvent(player));
+                continue;
+            }
+
             messageSender.sendMessage(
                     sessionClientContextMap.get(player.getSessionId()),
                     eventWrapper.getEvent());
         }
+    }
+
+    @Subscribe
+    public void onPlayerQuit(final PlayerQuitEvent playerQuitEvent) {
+
+        log.info("Player {} has left the game",
+                playerQuitEvent.getPlayer().getName());
+
+        final String sessionId = playerQuitEvent.getPlayer().getSessionId();
+
+        sessionPlayerMap.remove(sessionId);
+        sessionClientContextMap.remove(sessionId);
+
     }
 
     @Subscribe
@@ -95,6 +123,9 @@ public class SessionManager {
         log.debug("New client connection registered. sessionId: {} name: {}",
                 sessionId, player.getName());
 
+        // Store the sessionId in the context
+        clientContext.getSessionData().put(SESSION_ID, sessionId);
+
         // Send login response to client
         messageSender.sendMessage(clientContext, response);
 
@@ -110,8 +141,14 @@ public class SessionManager {
     private boolean isNameUnique(final String name) {
 
         for (final BotPlayer player : sessionPlayerMap.values()) {
-            if (StringUtils.equalsIgnoreCase(name, player.getName()))
+            if (StringUtils.equalsIgnoreCase(name, player.getName())) {
+                if (!sessionClientContextMap.get(player.getSessionId())
+                        .isActive()) {
+                    eventBus.post(new PlayerQuitEvent(player));
+                    return true;
+                }
                 return false;
+            }
         }
         return true;
     }
