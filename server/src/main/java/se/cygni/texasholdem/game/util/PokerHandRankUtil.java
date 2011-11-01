@@ -36,20 +36,6 @@ public class PokerHandRankUtil {
         }
 
         Collections.sort(bestHands);
-        /*
-         * Collections.sort(bestHands, new Comparator<BestHand>() {
-         * 
-         * @Override public int compare(final BestHand a, final BestHand b) {
-         * 
-         * final int aVal = a.getPokerHand().getOrderValue(); final int bVal =
-         * b.getPokerHand().getOrderValue();
-         * 
-         * if (aVal == bVal) return 0;
-         * 
-         * if (aVal < bVal) return 1;
-         * 
-         * return -1; } });
-         */
 
         BestHand previousBestHand = null;
         for (final BestHand bestHand : bestHands) {

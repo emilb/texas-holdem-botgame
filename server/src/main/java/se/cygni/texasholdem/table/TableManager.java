@@ -1,7 +1,9 @@
 package se.cygni.texasholdem.table;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +25,7 @@ public class TableManager {
             .getLogger(TableManager.class);
 
     private final List<Table> tables = new ArrayList<Table>();
+    private final Set<BotPlayer> playerPool = new HashSet<BotPlayer>();
 
     private final EventBus eventBus;
     private final GamePlan gamePlan;
@@ -54,6 +57,14 @@ public class TableManager {
 
         assignPlayerToFreeTable(event.getPlayer());
 
+    }
+
+    public void onTableGameDone(final Table table) {
+
+        log.info("A table game is finished, removing table and returning players to pool");
+        tables.remove(table);
+        playerPool.addAll(table.getPlayers());
+        System.gc();
     }
 
     public Table getTableForPlayer(final BotPlayer player) {
@@ -110,7 +121,7 @@ public class TableManager {
 
     private Table createNewTable() {
 
-        final Table table = new Table(gamePlan, eventBus);
+        final Table table = new Table(gamePlan, this, eventBus);
         tables.add(table);
         return table;
     }

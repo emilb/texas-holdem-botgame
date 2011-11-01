@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,9 +36,12 @@ public class Table implements Runnable {
 
     public static final int MAX_NOOF_PLAYERS = 11;
 
+    private final String tableId = UUID.randomUUID().toString();
+
     private final List<BotPlayer> players = new ArrayList<BotPlayer>();
     private final GamePlan gamePlan;
     private final EventBus eventBus;
+    private final TableManager tableManager;
 
     private BotPlayer dealerPlayer;
     private BotPlayer smallBlindPlayer;
@@ -51,9 +55,11 @@ public class Table implements Runnable {
     private boolean gameHasStarted = false;
     private List<Card> communityCards;
 
-    public Table(final GamePlan gamePlan, final EventBus eventBus) {
+    public Table(final GamePlan gamePlan, final TableManager tableManager,
+            final EventBus eventBus) {
 
         this.gamePlan = gamePlan;
+        this.tableManager = tableManager;
         this.eventBus = eventBus;
     }
 
@@ -152,7 +158,9 @@ public class Table implements Runnable {
             // }
         }
 
-        log.info("Game is finnished!");
+        log.info("Game is finished!");
+        tableManager.onTableGameDone(this);
+        eventBus.unregister(this);
     }
 
     protected void doBettingRound() {
@@ -407,6 +415,40 @@ public class Table implements Runnable {
     public List<Card> getCommunityCards() {
 
         return new ArrayList<Card>(communityCards);
+    }
+
+    @Override
+    public int hashCode() {
+
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((tableId == null) ? 0 : tableId.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        final Table other = (Table) obj;
+        if (tableId == null) {
+            if (other.tableId != null)
+                return false;
+        } else if (!tableId.equals(other.tableId))
+            return false;
+        return true;
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+
+        log.info("\n\n\n\nTable is being finalized, good!\n\n\n");
+        super.finalize();
     }
 
 }

@@ -37,7 +37,7 @@ public class TableTest {
         players.add(pC);
         players.add(pD);
 
-        table = new Table(new GamePlan(), new EventBus());
+        table = new Table(new GamePlan(), null, new EventBus());
         table.addPlayer(pA);
         table.addPlayer(pB);
         table.addPlayer(pC);
@@ -90,7 +90,7 @@ public class TableTest {
     @Test
     public void testShiftRolesForPlayersWhenOnlyTwoPlayers() {
 
-        table = new Table(new GamePlan(), new EventBus());
+        table = new Table(new GamePlan(), null, new EventBus());
         table.addPlayer(pA);
         table.addPlayer(pB);
 

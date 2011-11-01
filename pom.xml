@@ -186,6 +186,11 @@
                     <artifactId>maven-site-plugin</artifactId>
                     <version>3.0</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>1.2.1</version>
+                </plugin>
             </plugins>
         </pluginManagement>
 
@@ -202,7 +207,6 @@
         <org.springframework.version>3.0.6.RELEASE</org.springframework.version>
         <slf4j.version>1.6.3</slf4j.version>
         <jackson.version>1.9.1</jackson.version>
-        <!-- default env setting -->
         <targetJdk>1.6</targetJdk>
     </properties>
 
@@ -288,7 +292,7 @@
             <dependency>
                 <groupId>net.sf.jopt-simple</groupId>
                 <artifactId>jopt-simple</artifactId>
-                <version>4.0-beta1</version>
+                <version>4.1</version>
             </dependency>
 
             <!-- Utils from commons -->
@@ -300,7 +304,7 @@
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
-                <version>2.0.1</version>
+                <version>2.1</version>
             </dependency>
             <dependency>
                 <groupId>commons-lang</groupId>
@@ -416,4 +420,5 @@
         <name>Cygni AB</name>
         <url>http://www.cygni.se</url>
     </organization>
+
 </project>
