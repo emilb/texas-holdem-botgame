@@ -75,16 +75,6 @@
             <artifactId>commons-lang</artifactId>
         </dependency>
 
-        <!-- Socket server and client -->
-        <dependency>
-            <groupId>org.codemonkey.swiftsocketserver</groupId>
-            <artifactId>swift-server</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.codemonkey.swiftsocketserver</groupId>
-            <artifactId>swift-client</artifactId>
-        </dependency>
-
         <!-- Jackson, json -->
         <dependency>
             <groupId>org.codehaus.jackson</groupId>

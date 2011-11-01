@@ -319,11 +319,23 @@
                 <groupId>org.codemonkey.swiftsocketserver</groupId>
                 <artifactId>swift-server</artifactId>
                 <version>1.0</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>log4j</artifactId>
+                        <groupId>log4j</groupId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.codemonkey.swiftsocketserver</groupId>
                 <artifactId>swift-client</artifactId>
                 <version>1.0</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>log4j</artifactId>
+                        <groupId>log4j</groupId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <!-- Jackson, json -->

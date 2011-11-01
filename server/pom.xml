@@ -84,6 +84,12 @@
             <artifactId>jopt-simple</artifactId>
         </dependency>
 
+        <!-- Socket server and client -->
+        <dependency>
+            <groupId>org.codemonkey.swiftsocketserver</groupId>
+            <artifactId>swift-server</artifactId>
+        </dependency>
+
         <!-- Utils from commons -->
         <dependency>
             <groupId>commons-collections</groupId>

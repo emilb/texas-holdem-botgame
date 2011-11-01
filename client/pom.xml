@@ -79,6 +79,12 @@
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
 		</dependency>
+		
+	    <!-- Socket server and client -->
+        <dependency>
+            <groupId>org.codemonkey.swiftsocketserver</groupId>
+            <artifactId>swift-client</artifactId>
+        </dependency>
 
 	</dependencies>
 
