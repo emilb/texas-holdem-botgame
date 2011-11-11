@@ -4,5 +4,16 @@ import se.cygni.texasholdem.communication.message.TexasMessage;
 
 public class TexasResponse extends TexasMessage {
 
-    public String requestId;
+    private String requestId;
+
+    public String getRequestId() {
+
+        return requestId;
+    }
+
+    public void setRequestId(final String requestId) {
+
+        this.requestId = requestId;
+    }
+
 }

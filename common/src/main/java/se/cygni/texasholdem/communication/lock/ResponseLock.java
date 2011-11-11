@@ -1,4 +1,4 @@
-package se.cygni.texasholdem.client;
+package se.cygni.texasholdem.communication.lock;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -24,7 +24,7 @@ public class ResponseLock {
         if (response == null)
             throw new IllegalArgumentException("Response is null");
 
-        if (!StringUtils.equals(requestId, response.requestId))
+        if (!StringUtils.equals(requestId, response.getRequestId()))
             throw new IllegalArgumentException("Response has wrong request ID");
 
         this.response = response;

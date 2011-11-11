@@ -18,8 +18,9 @@ public class GamePlan {
     private int playsBetweenBlindRaise;
     private BlindRaiseStrategy blindRaiseStrategy;
     private long smalBlindStart;
+    private long smallBlindRaiseStrategyValue;
     private long bigBlindStart;
-    private long blindRaiseStrategyValue;
+    private long bigBlindRaiseStrategyValue;
 
     public GamePlan() {
 
@@ -28,7 +29,8 @@ public class GamePlan {
         this.smalBlindStart = 25;
         this.bigBlindStart = 50;
         this.blindRaiseStrategy = BlindRaiseStrategy.FIX_AMOUNT;
-        this.blindRaiseStrategyValue = 2;
+        this.smallBlindRaiseStrategyValue = 15;
+        this.bigBlindRaiseStrategyValue = 50;
 
         // Override values from system properties
         final SystemFieldPopulator fieldPopulator = new SystemFieldPopulator(
@@ -41,14 +43,16 @@ public class GamePlan {
             final long smalBlindStart,
             final long bigBlindStart,
             final BlindRaiseStrategy blindRaiseStrategy,
-            final long blindRaiseStrategyValue) {
+            final long bigBlindRaiseStrategyValue,
+            final long smallBlindRaiseStrategyValue) {
 
         this.startingChipsAmount = startingChipsAmount;
         this.playsBetweenBlindRaise = playsBetweenBlindRaise;
         this.smalBlindStart = smalBlindStart;
         this.bigBlindStart = bigBlindStart;
         this.blindRaiseStrategy = blindRaiseStrategy;
-        this.blindRaiseStrategyValue = blindRaiseStrategyValue;
+        this.bigBlindRaiseStrategyValue = bigBlindRaiseStrategyValue;
+        this.smallBlindRaiseStrategyValue = smallBlindRaiseStrategyValue;
     }
 
     public long getStartingChipsAmount() {
@@ -76,9 +80,14 @@ public class GamePlan {
         return bigBlindStart;
     }
 
-    public long getBlindRaiseStrategyValue() {
+    public long getBigBlindRaiseStrategyValue() {
 
-        return blindRaiseStrategyValue;
+        return bigBlindRaiseStrategyValue;
+    }
+
+    public long getSmallBlindRaiseStrategyValue() {
+
+        return smallBlindRaiseStrategyValue;
     }
 
     @SuppressWarnings("unused")
@@ -113,9 +122,17 @@ public class GamePlan {
     }
 
     @SuppressWarnings("unused")
-    private void setBlindRaiseStrategyValue(final long blindRaiseStrategyValue) {
+    private void setBigBlindRaiseStrategyValue(
+            final long bigBlindRaiseStrategyValue) {
 
-        this.blindRaiseStrategyValue = blindRaiseStrategyValue;
+        this.bigBlindRaiseStrategyValue = bigBlindRaiseStrategyValue;
+    }
+
+    @SuppressWarnings("unused")
+    private void setSmallBlindRaiseStrategyValue(
+            final long smallBlindRaiseStrategyValue) {
+
+        this.smallBlindRaiseStrategyValue = smallBlindRaiseStrategyValue;
     }
 
 }

@@ -19,7 +19,7 @@ public class CardSerializer extends JsonSerializer<Card> {
             throws IOException, JsonProcessingException {
 
         generator.writeStartObject();
-        generator.writeFieldName("shorthand");
+        generator.writeFieldName("c");
         generator.writeString(card.rank().getName()
                 + card.suit().getShortName());
         generator.writeEndObject();

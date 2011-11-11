@@ -195,7 +195,7 @@ public class SystemFieldPopulatorTest {
         BeTheWorst
     }
 
-    public class TestClass {
+    public static class TestClass {
 
         private String strVal;
         private Long longVal;

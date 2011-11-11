@@ -6,8 +6,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import se.cygni.texasholdem.communication.lock.ResponseLock;
 import se.cygni.texasholdem.communication.message.TexasMessage;
 import se.cygni.texasholdem.communication.message.request.RegisterForPlayRequest;
+import se.cygni.texasholdem.communication.message.response.TexasResponse;
 import se.cygni.texasholdem.server.eventbus.RequestContextWrapper;
 
 import com.google.common.eventbus.EventBus;
@@ -18,11 +20,14 @@ public class MessageReceiver {
     private static Logger log = LoggerFactory
             .getLogger(MessageReceiver.class);
 
+    private final ResponseLockManager responseLockManager;
     private final EventBus eventBus;
 
     @Autowired
-    public MessageReceiver(final EventBus eventBus) {
+    public MessageReceiver(final ResponseLockManager responseLockManager,
+            final EventBus eventBus) {
 
+        this.responseLockManager = responseLockManager;
         this.eventBus = eventBus;
     }
 
@@ -35,6 +40,21 @@ public class MessageReceiver {
         if (message instanceof RegisterForPlayRequest) {
             eventBus.post(new RequestContextWrapper(clientContext,
                     (RegisterForPlayRequest) message));
+            return;
+        }
+
+        // Check if there is a waiting lock for this response
+        if (message instanceof TexasResponse) {
+            final TexasResponse response = (TexasResponse) message;
+            if (responseLockManager.containsRequestId(response.getRequestId())) {
+                final ResponseLock lock = responseLockManager.pop(response
+                        .getRequestId());
+
+                synchronized (lock) {
+                    lock.notifyAll();
+                }
+            }
+
             return;
         }
 

@@ -34,7 +34,8 @@ public class Pot {
 
     public Pot(final List<BotPlayer> players) {
 
-        allPlayers = new ArrayList<BotPlayer>(players);
+        allPlayers = Collections.synchronizedList(new ArrayList<BotPlayer>(
+                players));
     }
 
     /**

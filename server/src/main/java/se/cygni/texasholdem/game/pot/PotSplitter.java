@@ -130,7 +130,7 @@ public class PotSplitter {
         return calculatedPlayerWinAmount.get(player);
     }
 
-    private final class PlayerWinAmount {
+    private static final class PlayerWinAmount {
 
         final BotPlayer player;
         final long amount;

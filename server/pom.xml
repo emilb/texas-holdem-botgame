@@ -133,6 +133,13 @@
             <artifactId>guava</artifactId>
         </dependency>
 
+        <!-- Logging with Lilith appender -->
+        <dependency>
+            <groupId>de.huxhorn.lilith</groupId>
+            <artifactId>de.huxhorn.lilith.logback.appender.multiplex-classic</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
     </dependencies>
 
 </project>

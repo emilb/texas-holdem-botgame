@@ -3,6 +3,8 @@ package se.cygni.texasholdem.client;
 import java.util.HashMap;
 import java.util.Map;
 
+import se.cygni.texasholdem.communication.lock.ResponseLock;
+
 public class SyncMessageResponseManager {
 
     private final Object mapLock = new Object();

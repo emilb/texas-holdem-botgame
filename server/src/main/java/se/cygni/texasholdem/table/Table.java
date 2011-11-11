@@ -1,6 +1,8 @@
 package se.cygni.texasholdem.table;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -11,16 +13,20 @@ import org.slf4j.LoggerFactory;
 
 import se.cygni.texasholdem.communication.message.event.CommunityHasBeenDealtACardEvent;
 import se.cygni.texasholdem.communication.message.event.PlayIsStartedEvent;
+import se.cygni.texasholdem.communication.message.event.ShowDownEvent;
 import se.cygni.texasholdem.communication.message.event.TexasEvent;
 import se.cygni.texasholdem.communication.message.event.YouHaveBeenDealtACardEvent;
 import se.cygni.texasholdem.communication.message.event.YouWonAmountEvent;
 import se.cygni.texasholdem.communication.message.request.ActionRequest;
 import se.cygni.texasholdem.game.Action;
 import se.cygni.texasholdem.game.ActionType;
+import se.cygni.texasholdem.game.BestHand;
 import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.game.Card;
 import se.cygni.texasholdem.game.Deck;
+import se.cygni.texasholdem.game.Hand;
 import se.cygni.texasholdem.game.Player;
+import se.cygni.texasholdem.game.PlayerShowDown;
 import se.cygni.texasholdem.game.definitions.PlayState;
 import se.cygni.texasholdem.game.pot.Pot;
 import se.cygni.texasholdem.game.util.PokerHandRankUtil;
@@ -38,7 +44,8 @@ public class Table implements Runnable {
 
     private final String tableId = UUID.randomUUID().toString();
 
-    private final List<BotPlayer> players = new ArrayList<BotPlayer>();
+    private final List<BotPlayer> players = Collections
+            .synchronizedList(new ArrayList<BotPlayer>());
     private final GamePlan gamePlan;
     private final EventBus eventBus;
     private final TableManager tableManager;
@@ -71,10 +78,12 @@ public class Table implements Runnable {
 
         smallBlind = gamePlan.getSmalBlindStart();
         bigBlind = gamePlan.getBigBlindStart();
+        int roundCounter = 0;
 
         while (!isThereAWinner()) {
             pot = new Pot(players);
-            communityCards = new ArrayList<Card>();
+            communityCards = Collections
+                    .synchronizedList(new ArrayList<Card>());
 
             // Shuffle the deck
             final Deck deck = Deck.getShuffledDeck();
@@ -119,43 +128,15 @@ public class Table implements Runnable {
             // Showdown
             pot.nextPlayState();
 
-            // Distribute payback TODO: Only include active players
-            final List<List<BotPlayer>> playerRanking = PokerHandRankUtil
-                    .getPlayerRanking(getCommunityCards(), getPlayers());
-
-            final Map<BotPlayer, Long> payout = pot
-                    .calculatePayout(playerRanking);
-
-            // TODO: Notify players of showdown
-
-            // Distribute payout
-            for (final Entry<BotPlayer, Long> entry : payout.entrySet()) {
-
-                final BotPlayer player = entry.getKey();
-                final Long amount = entry.getValue();
-
-                // Transfer funds
-                log.debug("{} won {}", player, amount);
-                player.addChipAmount(amount);
-
-                postToEventBus(
-                        new YouWonAmountEvent(amount, player.getChipAmount()),
-                        player);
-            }
+            distributePayback();
 
             // Clear cards, prepare for next round
-            for (final BotPlayer player : players) {
-                player.clearCards();
-            }
+            clearAllCards();
 
-            communityCards.clear();
+            // Is it time to increase blinds?
+            roundCounter++;
+            updateBlinds(roundCounter);
 
-            // TODO: is it time to increase blinds?
-
-            // try {
-            // Thread.sleep(500);
-            // } catch (final InterruptedException e) {
-            // }
         }
 
         log.info("Game is finished!");
@@ -163,8 +144,106 @@ public class Table implements Runnable {
         eventBus.unregister(this);
     }
 
+    protected void updateBlinds(final int currentRound) {
+
+        if (currentRound % gamePlan.getPlaysBetweenBlindRaise() == 0) {
+
+            switch (gamePlan.getBlindRaiseStrategy()) {
+                case FIX_AMOUNT:
+                    smallBlind += gamePlan.getSmallBlindRaiseStrategyValue();
+                    bigBlind += gamePlan.getBigBlindRaiseStrategyValue();
+                    break;
+
+                case FACTOR:
+                    smallBlind = smallBlind
+                            * gamePlan.getSmallBlindRaiseStrategyValue();
+                    bigBlind = bigBlind
+                            * gamePlan.getBigBlindRaiseStrategyValue();
+                    break;
+            }
+
+            log.debug("Updated blinds, smallBlind: {}, bigBlind: {}",
+                    smallBlind, bigBlind);
+        }
+    }
+
+    protected void clearAllCards() {
+
+        final Iterator<BotPlayer> iter = players.iterator();
+
+        while (iter.hasNext()) {
+            final BotPlayer player = iter.next();
+            player.clearCards();
+        }
+
+        communityCards.clear();
+    }
+
+    protected void distributePayback() {
+
+        final PokerHandRankUtil rankUtil = new PokerHandRankUtil(
+                getCommunityCards(), getActivePlayers());
+
+        // Calculate player ranking
+        final List<List<BotPlayer>> playerRanking = rankUtil
+                .getPlayerRankings();
+
+        final Map<BotPlayer, Long> payout = pot
+                .calculatePayout(playerRanking);
+
+        final List<PlayerShowDown> showDowns = new ArrayList<PlayerShowDown>();
+
+        // Distribute payout
+        for (final Entry<BotPlayer, Long> entry : payout.entrySet()) {
+
+            final BotPlayer player = entry.getKey();
+            final Long amount = entry.getValue();
+            final BestHand bestHand = rankUtil.getBestHand(player);
+
+            // Transfer funds
+            log.debug("{} won {}", player, amount);
+            player.addChipAmount(amount);
+
+            postToEventBus(
+                    new YouWonAmountEvent(amount, player.getChipAmount()),
+                    player);
+
+            final PlayerShowDown psd = new PlayerShowDown(
+                    PlayerTypeConverter.fromBotPlayer(player),
+                    new Hand(bestHand.getCards(), bestHand.getPokerHand()),
+                    amount);
+            showDowns.add(psd);
+        }
+
+        final ShowDownEvent event = new ShowDownEvent(showDowns);
+        postToEventBus(event, getPlayers());
+
+    }
+
+    /**
+     * Creates a list of players still active in current game (i.e. has not
+     * folded)
+     * 
+     * @return
+     */
+    protected List<BotPlayer> getActivePlayers() {
+
+        final Iterator<BotPlayer> iter = players.iterator();
+        final List<BotPlayer> activePlayers = new ArrayList<BotPlayer>();
+
+        while (iter.hasNext()) {
+            final BotPlayer player = iter.next();
+            if (isPlayerInPlay(player))
+                activePlayers.add(player);
+        }
+
+        return activePlayers;
+    }
+
     protected void doBettingRound() {
 
+        // TODO: Need to handle the case where players suddenly drop out, there
+        // might only be one player left with the pot unbalanced
         BotPlayer currentPlayer = bigBlindPlayer;
         while (!pot.isCurrentPlayStateBalanced()) {
             currentPlayer = getNextPlayerInPlay(currentPlayer);
@@ -268,7 +347,9 @@ public class Table implements Runnable {
 
     protected void dealACardToAllParticipatingPlayers(final Deck deck) {
 
-        for (final BotPlayer player : players) {
+        final Iterator<BotPlayer> iter = players.iterator();
+        while (iter.hasNext()) {
+            final BotPlayer player = iter.next();
             if (isPlayerInPlay(player)) {
                 final Card card = deck.getNextCard();
                 player.receiveCard(card);
@@ -285,7 +366,7 @@ public class Table implements Runnable {
         bigBlindPlayer = getNextPlayerInPlay(smallBlindPlayer);
     }
 
-    private BotPlayer getNextPlayerInPlay(final BotPlayer startingFromPlayer) {
+    protected BotPlayer getNextPlayerInPlay(final BotPlayer startingFromPlayer) {
 
         final int ix = startingFromPlayer == null ? -1 : players
                 .indexOf(startingFromPlayer);
@@ -307,9 +388,10 @@ public class Table implements Runnable {
         return null;
     }
 
-    private boolean isPlayerInPlay(final BotPlayer player) {
+    protected boolean isPlayerInPlay(final BotPlayer player) {
 
-        return player.getChipAmount() > 0;
+        return !pot.hasFolded(player);
+        // return player.getChipAmount() > 0;
     }
 
     protected boolean isThereAWinner() {
@@ -329,20 +411,14 @@ public class Table implements Runnable {
     protected PlayIsStartedEvent createPlayIsStartedEvent() {
 
         final List<Player> currentPlayers = new ArrayList<Player>();
-        for (final BotPlayer player : players)
-            if (isPlayerInPlay(player))
-                currentPlayers.add(PlayerTypeConverter.fromBotPlayer(player));
+        for (final BotPlayer player : getActivePlayers())
+            currentPlayers.add(PlayerTypeConverter.fromBotPlayer(player));
 
         return new PlayIsStartedEvent(currentPlayers,
                 getSmallBlind(), getBigBlind(),
                 PlayerTypeConverter.fromBotPlayer(getDealerPlayer()),
                 PlayerTypeConverter.fromBotPlayer(getSmallBlindPlayer()),
                 PlayerTypeConverter.fromBotPlayer(getBigBlindPlayer()));
-    }
-
-    public void startGame() {
-
-        gameHasStarted = true;
     }
 
     public boolean gameHasStarted() {
@@ -442,13 +518,6 @@ public class Table implements Runnable {
         } else if (!tableId.equals(other.tableId))
             return false;
         return true;
-    }
-
-    @Override
-    protected void finalize() throws Throwable {
-
-        log.info("\n\n\n\nTable is being finalized, good!\n\n\n");
-        super.finalize();
     }
 
 }

@@ -2,6 +2,8 @@ package se.cygni.texasholdem.communication.json;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import junit.framework.Assert;
 
@@ -14,6 +16,10 @@ import org.junit.Test;
 import se.cygni.texasholdem.communication.message.TexasMessageParser;
 import se.cygni.texasholdem.communication.message.event.YouHaveBeenDealtACardEvent;
 import se.cygni.texasholdem.game.Card;
+import se.cygni.texasholdem.game.Hand;
+import se.cygni.texasholdem.game.Player;
+import se.cygni.texasholdem.game.PlayerShowDown;
+import se.cygni.texasholdem.game.definitions.PokerHand;
 import se.cygni.texasholdem.game.definitions.Rank;
 import se.cygni.texasholdem.game.definitions.Suit;
 
@@ -64,6 +70,31 @@ public class JsonTests {
     }
 
     @Test
+    public void testListOfCardsToAndFromJson() throws JsonGenerationException,
+            JsonMappingException, IOException {
+
+        final List<Card> cards = new ArrayList<Card>();
+        cards.add(Card.valueOf(Rank.ACE, Suit.HEARTS));
+        // cards.add(Card.valueOf(Rank.THREE, Suit.DIAMONDS));
+        // cards.add(Card.valueOf(Rank.TEN, Suit.CLUBS));
+
+        final PlayerShowDown psd = new PlayerShowDown(new Player("test", 343),
+                new Hand(cards, PokerHand.HIGH_HAND), 0);
+
+        final ByteArrayOutputStream out = new ByteArrayOutputStream();
+        mapper.writeValue(out, psd);
+        final String json = out.toString();
+        System.out.println(json);
+
+        final PlayerShowDown psdReread = mapper.readValue(json,
+                PlayerShowDown.class);
+
+        for (int i = 0; i < cards.size(); i++)
+            Assert.assertEquals(cards.get(i), psdReread.getHand().getCards()
+                    .get(i));
+    }
+
+    @Test
     public void testEventToAndFromJson() throws JsonParseException,
             JsonMappingException, IOException {
 
@@ -78,9 +109,6 @@ public class JsonTests {
                 YouHaveBeenDealtACardEvent.class);
 
         Assert.assertEquals(event.getCard(), e.getCard());
-
-        // {"card":{"shorthand":"9h"},"type":"se.cygni.texasholdem.communication.message.event.YouHaveBeenDealtACardEvent"}
-        // {"card":{"shorthand":"As"},"type":"se.cygni.texasholdem.communication.message.event.YouHaveBeenDealtACardEvent"}
     }
 
     @Test
@@ -88,7 +116,7 @@ public class JsonTests {
             throws JsonParseException, JsonMappingException, IOException {
 
         final YouHaveBeenDealtACardEvent event = (YouHaveBeenDealtACardEvent) TexasMessageParser
-                .decodeMessage("{\"card\":{\"shorthand\":\"9h\"},\"type\":\"se.cygni.texasholdem.communication.message.event.YouHaveBeenDealtACardEvent\"}");
+                .decodeMessage("{\"card\":{\"c\":\"9h\"},\"type\":\"se.cygni.texasholdem.communication.message.event.YouHaveBeenDealtACardEvent\"}");
 
         Assert.assertNotNull(event.getCard());
     }

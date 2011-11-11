@@ -21,7 +21,7 @@ public class RankDeserializer extends JsonDeserializer<Rank> {
         parser.nextToken();
         while (parser.nextToken() != JsonToken.END_OBJECT) {
             final String fieldName = parser.getCurrentName();
-            if ("rank".equals(fieldName)) {
+            if ("r".equals(fieldName)) {
                 return Rank.get(parser.getText());
             }
         }

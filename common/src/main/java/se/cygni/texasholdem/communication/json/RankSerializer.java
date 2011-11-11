@@ -19,7 +19,7 @@ public class RankSerializer extends JsonSerializer<Rank> {
             throws IOException, JsonProcessingException {
 
         generator.writeStartObject();
-        generator.writeFieldName("rank");
+        generator.writeFieldName("r");
         generator.writeString(rank.getName());
         generator.writeEndObject();
     }

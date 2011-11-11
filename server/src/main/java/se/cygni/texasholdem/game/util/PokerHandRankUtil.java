@@ -2,7 +2,9 @@ package se.cygni.texasholdem.game.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,14 +15,28 @@ import se.cygni.texasholdem.game.Card;
 
 public class PokerHandRankUtil {
 
+    @SuppressWarnings("unused")
     private static Logger log = LoggerFactory
             .getLogger(PokerHandRankUtil.class);
 
-    public static List<List<BotPlayer>> getPlayerRanking(
-            final List<Card> communityCards,
+    private final List<Card> communityCards;
+    private final List<BotPlayer> players;
+
+    private List<List<BotPlayer>> playerRankings;
+    private Map<BotPlayer, BestHand> playerBestHandMap;
+
+    public PokerHandRankUtil(final List<Card> communityCards,
             final List<BotPlayer> players) {
 
-        final List<List<BotPlayer>> result = new ArrayList<List<BotPlayer>>();
+        this.communityCards = communityCards;
+        this.players = players;
+        init();
+    }
+
+    private void init() {
+
+        playerRankings = new ArrayList<List<BotPlayer>>();
+        playerBestHandMap = new HashMap<BotPlayer, BestHand>();
 
         final List<BestHand> bestHands = new ArrayList<BestHand>();
 
@@ -33,6 +49,7 @@ public class PokerHandRankUtil {
             bestHand.setPlayer(player);
 
             bestHands.add(bestHand);
+            playerBestHandMap.put(player, bestHand);
         }
 
         Collections.sort(bestHands);
@@ -45,18 +62,26 @@ public class PokerHandRankUtil {
 
                 final List<BotPlayer> currPos = new ArrayList<BotPlayer>();
                 currPos.add(bestHand.getPlayer());
-                result.add(currPos);
+                playerRankings.add(currPos);
             }
 
             else if (previousBestHand.compareTo(bestHand) == 0) {
-                result.get(result.size() - 1).add(bestHand.getPlayer());
+                playerRankings.get(playerRankings.size() - 1).add(
+                        bestHand.getPlayer());
             }
 
             previousBestHand = bestHand;
-
-            log.debug(bestHand.toString());
         }
 
-        return result;
+    }
+
+    public List<List<BotPlayer>> getPlayerRankings() {
+
+        return playerRankings;
+    }
+
+    public BestHand getBestHand(final BotPlayer player) {
+
+        return playerBestHandMap.get(player);
     }
 }

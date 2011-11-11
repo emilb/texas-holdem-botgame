@@ -1,8 +1,8 @@
 package se.cygni.texasholdem.server;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.lang.StringUtils;
 import org.codemonkey.swiftsocketserver.ClientContext;
@@ -38,8 +38,8 @@ public class SessionManager {
 
     private final MessageSender messageSender;
 
-    private final Map<String, BotPlayer> sessionPlayerMap = new HashMap<String, BotPlayer>();
-    private final Map<String, ClientContext> sessionClientContextMap = new HashMap<String, ClientContext>();
+    private final Map<String, BotPlayer> sessionPlayerMap = new ConcurrentHashMap<String, BotPlayer>();
+    private final Map<String, ClientContext> sessionClientContextMap = new ConcurrentHashMap<String, ClientContext>();
 
     @Autowired
     public SessionManager(final EventBus eventBus,
@@ -101,7 +101,7 @@ public class SessionManager {
         if (!isNameUnique(request.name)) {
             final UsernameAlreadyTakenException e = new UsernameAlreadyTakenException();
             e.message = request.name + " is already used by another player.";
-            e.requestId = request.requestId;
+            e.setRequestId(request.getRequestId());
             messageSender.sendMessage(clientContext, e);
             return;
         }
@@ -110,7 +110,7 @@ public class SessionManager {
 
         // Create response
         final RegisterForPlayResponse response = new RegisterForPlayResponse();
-        response.requestId = request.requestId;
+        response.setRequestId(request.getRequestId());
         response.sessionId = sessionId;
 
         // Create the bot player

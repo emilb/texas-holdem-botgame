@@ -49,11 +49,16 @@ public class TexasMessageParser {
     public static TexasMessage decodeMessage(final String msg)
             throws JsonParseException, JsonMappingException, IOException {
 
-        final TexasMessage message = mapper
-                .readValue(msg,
-                        TexasMessageParser.parseAndGetClassForMessage(msg));
+        try {
+            final TexasMessage message = mapper
+                    .readValue(msg,
+                            TexasMessageParser.parseAndGetClassForMessage(msg));
 
-        return message;
+            return message;
+        } catch (final IllegalStateException e) {
+            System.out.println(msg);
+            throw e;
+        }
     }
 
     public static String encodeMessage(final TexasMessage message)

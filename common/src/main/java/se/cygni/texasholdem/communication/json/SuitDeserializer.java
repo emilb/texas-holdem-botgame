@@ -21,7 +21,7 @@ public class SuitDeserializer extends JsonDeserializer<Suit> {
         parser.nextToken();
         while (parser.nextToken() != JsonToken.END_OBJECT) {
             final String fieldName = parser.getCurrentName();
-            if ("suit".equals(fieldName)) {
+            if ("s".equals(fieldName)) {
                 return Suit.get(parser.getText());
             }
         }

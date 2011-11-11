@@ -1,5 +1,8 @@
 package se.cygni.texasholdem.player;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import se.cygni.texasholdem.communication.message.event.CommunityHasBeenDealtACardEvent;
 import se.cygni.texasholdem.communication.message.event.PlayIsStartedEvent;
 import se.cygni.texasholdem.communication.message.event.PlayerCalledEvent;
@@ -17,19 +20,22 @@ import se.cygni.texasholdem.game.Action;
 
 public class DummyPlayer implements PlayerInterface {
 
+    private static Logger log = LoggerFactory
+            .getLogger(DummyPlayer.class);
+
     private final String name = "dummmy" + (int) (100 * Math.random());
 
     @Override
     public String getName() {
 
-        System.out.println("Event: getName");
+        log.debug("Event: getName");
         return name;
     }
 
     @Override
     public void serverIsShuttingDown(final ServerIsShuttingDownEvent event) {
 
-        System.out.println(event.getMessage());
+        log.debug(event.getMessage());
 
     }
 
@@ -43,7 +49,7 @@ public class DummyPlayer implements PlayerInterface {
     @Override
     public void onYouHaveBeenDealtACard(final YouHaveBeenDealtACardEvent event) {
 
-        System.out.println("I've been dealt a card: " + event.getCard());
+        log.debug("I've been dealt a card: " + event.getCard());
 
     }
 
@@ -51,7 +57,7 @@ public class DummyPlayer implements PlayerInterface {
     public void onCommunityHasBeenDealtACard(
             final CommunityHasBeenDealtACardEvent event) {
 
-        System.out.println("Community got a card: " + event.getCard());
+        log.debug("Community got a card: " + event.getCard());
         // TODO Auto-generated method stub
 
     }
@@ -94,7 +100,7 @@ public class DummyPlayer implements PlayerInterface {
     @Override
     public void onYouWonAmount(final YouWonAmountEvent event) {
 
-        System.out.println("I won: " + event.getWonAmount());
+        log.debug("I won: " + event.getWonAmount());
 
     }
 
@@ -122,14 +128,14 @@ public class DummyPlayer implements PlayerInterface {
     @Override
     public void connectionToGameServerLost() {
 
-        System.out.println("Event: connectionToGameServerLost");
+        log.debug("Event: connectionToGameServerLost");
 
     }
 
     @Override
     public void connectionToGameServerEstablished() {
 
-        System.out.println("Event: connectionToGameServerEstablished");
+        log.debug("Event: connectionToGameServerEstablished");
 
     }
 

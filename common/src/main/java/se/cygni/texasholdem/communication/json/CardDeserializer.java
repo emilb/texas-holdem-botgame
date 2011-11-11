@@ -20,19 +20,24 @@ public class CardDeserializer extends JsonDeserializer<Card> {
             final DeserializationContext context)
             throws IOException, JsonProcessingException {
 
-        parser.nextToken();
-        while (parser.nextToken() != JsonToken.END_OBJECT) {
-            final String fieldName = parser.getCurrentName();
-            if ("shorthand".equals(fieldName)) {
-                final String rankAndSuit = parser.getText();
+        // parser.nextToken();
+        // while (parser.nextToken() != JsonToken.END_OBJECT) {
+        while (parser.getCurrentToken() != JsonToken.FIELD_NAME)
+            parser.nextToken();
 
-                final Rank r = Rank.get(rankAndSuit.substring(0, 1));
-                final Suit s = Suit.get(rankAndSuit.substring(1, 2));
+        final String fieldName = parser.getCurrentName();
+        if ("c".equals(fieldName)) {
 
-                return Card.valueOf(r, s);
-            }
+            final String rankAndSuit = parser.nextTextValue();
+
+            final Rank r = Rank.get(rankAndSuit.substring(0, 1));
+            final Suit s = Suit.get(rankAndSuit.substring(1, 2));
+
+            return Card.valueOf(r, s);
         }
+        // }
 
+        // return null;
         throw new IllegalStateException();
     }
 

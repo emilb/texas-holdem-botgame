@@ -19,7 +19,7 @@ public class SuitSerializer extends JsonSerializer<Suit> {
             throws IOException, JsonProcessingException {
 
         generator.writeStartObject();
-        generator.writeFieldName("suit");
+        generator.writeFieldName("s");
         generator.writeString(suit.getShortName());
         generator.writeEndObject();
     }

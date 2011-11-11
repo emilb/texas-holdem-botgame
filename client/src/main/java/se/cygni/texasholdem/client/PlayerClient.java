@@ -6,6 +6,7 @@ import org.codemonkey.swiftsocketclient.SwiftSocketClient;
 
 import se.cygni.texasholdem.client.message.ClientToServerMessage;
 import se.cygni.texasholdem.client.message.ServerToClientMessage;
+import se.cygni.texasholdem.communication.lock.ResponseLock;
 import se.cygni.texasholdem.communication.message.TexasMessage;
 import se.cygni.texasholdem.communication.message.event.TexasEvent;
 import se.cygni.texasholdem.communication.message.exception.TexasException;
@@ -52,7 +53,7 @@ public class PlayerClient {
 
         if (message instanceof TexasResponse) {
             final TexasResponse response = (TexasResponse) message;
-            final String requestId = response.requestId;
+            final String requestId = response.getRequestId();
 
             final ResponseLock lock = responseManager.pop(requestId);
             lock.setResponse(response);
@@ -67,7 +68,7 @@ public class PlayerClient {
             throws se.cygni.texasholdem.game.exception.GameException {
 
         final RegisterForPlayRequest request = new RegisterForPlayRequest();
-        request.requestId = getUniqueRequestId();
+        request.setRequestId(getUniqueRequestId());
         request.name = player.getName();
 
         final TexasMessage resp = sendAndWaitForResponse(request);
@@ -86,7 +87,7 @@ public class PlayerClient {
 
     protected TexasResponse sendAndWaitForResponse(final TexasRequest request) {
 
-        final ResponseLock lock = responseManager.push(request.requestId);
+        final ResponseLock lock = responseManager.push(request.getRequestId());
         sendRequest(request);
         synchronized (lock) {
             try {

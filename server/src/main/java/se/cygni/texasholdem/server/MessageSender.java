@@ -6,27 +6,30 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import se.cygni.texasholdem.communication.lock.ResponseLock;
 import se.cygni.texasholdem.communication.message.TexasMessage;
+import se.cygni.texasholdem.communication.message.request.TexasRequest;
+import se.cygni.texasholdem.communication.message.response.TexasResponse;
 import se.cygni.texasholdem.server.message.ServerToClientMessage;
-
-import com.google.common.eventbus.EventBus;
 
 @Service
 public class MessageSender {
 
+    private static final long RESPONSE_TIMEOUT = 30000;
+
+    @SuppressWarnings("unused")
     private static Logger log = LoggerFactory
             .getLogger(MessageSender.class);
 
     private final SocketServer socketServer;
-
-    private final EventBus eventBus;
+    private final ResponseLockManager responseLockManager;
 
     @Autowired
     public MessageSender(final SocketServer socketServer,
-            final EventBus eventBus) {
+            final ResponseLockManager responseLockManager) {
 
         this.socketServer = socketServer;
-        this.eventBus = eventBus;
+        this.responseLockManager = responseLockManager;
 
     }
 
@@ -36,5 +39,25 @@ public class MessageSender {
 
         socketServer.sendMessage(new ServerToClientMessage(clientContext,
                 message));
+    }
+
+    public TexasResponse sendAndWaitForResponse(
+            final ClientContext clientContext,
+            final TexasRequest request) {
+
+        final ResponseLock lock = responseLockManager.push(request
+                .getRequestId());
+        sendMessage(clientContext, request);
+        synchronized (lock) {
+            try {
+                lock.wait(RESPONSE_TIMEOUT);
+            } catch (final InterruptedException e) {
+            }
+        }
+
+        if (lock.getResponse() == null)
+            throw new RuntimeException("Did not get response in time");
+
+        return lock.getResponse();
     }
 }
