@@ -6,5 +6,16 @@ import se.cygni.texasholdem.game.Action;
 @IsATexasMessage
 public class ActionResponse extends TexasResponse {
 
-    public Action action;
+    private Action action;
+
+    public Action getAction() {
+
+        return action;
+    }
+
+    public void setAction(final Action action) {
+
+        this.action = action;
+    }
+
 }

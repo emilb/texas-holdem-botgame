@@ -17,7 +17,6 @@ public class MessageSender {
 
     private static final long RESPONSE_TIMEOUT = 30000;
 
-    @SuppressWarnings("unused")
     private static Logger log = LoggerFactory
             .getLogger(MessageSender.class);
 
@@ -45,9 +44,15 @@ public class MessageSender {
             final ClientContext clientContext,
             final TexasRequest request) {
 
+        if (clientContext == null || !clientContext.isActive())
+            throw new RuntimeException("Client context not valid");
+
         final ResponseLock lock = responseLockManager.push(request
                 .getRequestId());
+
+        System.currentTimeMillis();
         sendMessage(clientContext, request);
+
         synchronized (lock) {
             try {
                 lock.wait(RESPONSE_TIMEOUT);
@@ -58,6 +63,8 @@ public class MessageSender {
         if (lock.getResponse() == null)
             throw new RuntimeException("Did not get response in time");
 
+        // log.debug("It took {}ms to get reply from client",
+        // (System.currentTimeMillis() - startTime));
         return lock.getResponse();
     }
 }

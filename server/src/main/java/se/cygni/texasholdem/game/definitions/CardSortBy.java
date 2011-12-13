@@ -11,15 +11,15 @@ public enum CardSortBy {
         @Override
         public int compare(final Card first, final Card second) {
 
-            final Integer firstVal = Integer.valueOf(first.rank()
+            final Integer firstVal = Integer.valueOf(first.getRank()
                     .getOrderValue());
-            final Integer secondVal = Integer.valueOf(second.rank()
+            final Integer secondVal = Integer.valueOf(second.getRank()
                     .getOrderValue());
 
             final int comparison = firstVal.compareTo(secondVal);
             if (comparison == 0) {
-                final String firstStrVal = first.suit().getShortName();
-                final String secondStrVal = second.suit().getShortName();
+                final String firstStrVal = first.getSuit().getShortName();
+                final String secondStrVal = second.getSuit().getShortName();
 
                 return firstStrVal.compareTo(secondStrVal);
             }
@@ -33,14 +33,14 @@ public enum CardSortBy {
         @Override
         public int compare(final Card first, final Card second) {
 
-            final String firstVal = first.suit().getShortName();
-            final String secondVal = second.suit().getShortName();
+            final String firstVal = first.getSuit().getShortName();
+            final String secondVal = second.getSuit().getShortName();
 
             final int comparison = firstVal.compareTo(secondVal);
             if (comparison == 0) {
-                final Integer firstIntVal = Integer.valueOf(first.rank()
+                final Integer firstIntVal = Integer.valueOf(first.getRank()
                         .getOrderValue());
-                final Integer secondIntVal = Integer.valueOf(second.rank()
+                final Integer secondIntVal = Integer.valueOf(second.getRank()
                         .getOrderValue());
 
                 return firstIntVal.compareTo(secondIntVal);

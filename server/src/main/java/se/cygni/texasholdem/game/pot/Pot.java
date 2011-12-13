@@ -275,6 +275,23 @@ public class Pot {
     }
 
     /**
+     * Returns the list of transactions that happened in the supplied state. An
+     * empty list if no transactions happened during the state or if the state
+     * has not yet happened.
+     * 
+     * @param state
+     * @return List of transactions
+     */
+    public List<PotTransaction> getTransactionsForState(final PlayState state) {
+
+        final List<PotTransaction> transactions = new ArrayList<PotTransaction>();
+        if (transactionTable.containsKey(state))
+            transactions.addAll(transactionTable.get(state));
+
+        return transactions;
+    }
+
+    /**
      * Checks that all active players have placed bets amounting to the same
      * value in the current play state.
      * 

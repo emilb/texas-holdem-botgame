@@ -1,9 +1,13 @@
 package se.cygni.texasholdem.client;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import se.cygni.texasholdem.game.exception.GameException;
 import se.cygni.texasholdem.player.DummyPlayer;
+import se.cygni.texasholdem.player.PlayerInterface;
+import se.cygni.texasholdem.player.RandomPlayer;
 
 public class Main {
 
@@ -13,8 +17,11 @@ public class Main {
      */
     public static void main(final String[] args) throws Exception {
 
-        final DummyPlayer player = new DummyPlayer();
-        final PlayerClient client = new PlayerClient(player);
+        final List<PlayerClient> clients = new ArrayList<PlayerClient>();
+        clients.add(createDummy());
+        clients.add(createDummy());
+        clients.add(createRandom());
+        clients.add(createRandom());
 
         final Thread t = new Thread(new Runnable() {
 
@@ -23,11 +30,11 @@ public class Main {
 
                 waitForRandom();
                 try {
-                    final boolean result = client.registerForPlay();
-                    if (result)
-                        System.out.println("Login success!");
-                    else
-                        System.out.println("Login failed");
+                    for (final PlayerClient client : clients) {
+                        final boolean result = client.registerForPlay();
+                        System.out.println(client.getPlayer().getName()
+                                + " is connected: " + result);
+                    }
                 } catch (final GameException ge) {
                     ge.printStackTrace();
                 }
@@ -39,6 +46,29 @@ public class Main {
         });
 
         t.start();
+    }
+
+    private static PlayerClient createDummy() {
+
+        return new PlayerClient(new DummyPlayer());
+    }
+
+    private static PlayerClient createRandom() {
+
+        return new PlayerClient(new RandomPlayer());
+    }
+
+    private static PlayerClient createPlayerClient() {
+
+        return new PlayerClient(createPlayer());
+    }
+
+    private static PlayerInterface createPlayer() {
+
+        if (Math.random() < 0.5)
+            return new DummyPlayer();
+
+        return new RandomPlayer();
     }
 
     private static void waitForRandom() {

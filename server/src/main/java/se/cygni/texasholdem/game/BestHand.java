@@ -58,10 +58,10 @@ public class BestHand implements Comparable<BestHand> {
             final Card card = cards.get(i);
             final Card otherCard = other.getCards().get(i);
 
-            if (card.rank() == otherCard.rank())
+            if (card.getRank() == otherCard.getRank())
                 continue;
 
-            if (card.rank().getOrderValue() < otherCard.rank().getOrderValue())
+            if (card.getRank().getOrderValue() < otherCard.getRank().getOrderValue())
                 return 1;
 
             return -1;

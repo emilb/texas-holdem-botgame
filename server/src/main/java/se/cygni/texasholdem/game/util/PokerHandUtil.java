@@ -112,7 +112,7 @@ public class PokerHandUtil {
         int counter = 4;
         for (final Rank r : EnumSet.range(Rank.TEN, Rank.ACE)) {
             final Card c = potentialRoyalFlush.get(counter--);
-            if (r != c.rank())
+            if (r != c.getRank())
                 throw new RuntimeException("No Royal Flush found");
         }
 
@@ -179,7 +179,7 @@ public class PokerHandUtil {
             throw new RuntimeException("No three of a kind found in Full House");
 
         final List<Card> highestTwoOfAKind = getHighestOfSameRankExcluding(2,
-                cards, highestThreeOfAKind.get(0).rank());
+                cards, highestThreeOfAKind.get(0).getRank());
         if (CollectionUtils.isEmpty(highestTwoOfAKind))
             throw new RuntimeException("No two of a kind found in Full House");
 
@@ -238,8 +238,8 @@ public class PokerHandUtil {
                 // There might be more than one set of three-of-a-kind, choose
                 // the highest ranking one.
                 if (potentialThreeOfAKind != null) {
-                    if (potentialThreeOfAKind.get(0).rank().getOrderValue() < threeOfAKind
-                            .get(0).rank().getOrderValue())
+                    if (potentialThreeOfAKind.get(0).getRank().getOrderValue() < threeOfAKind
+                            .get(0).getRank().getOrderValue())
                         potentialThreeOfAKind = threeOfAKind;
                 }
 
@@ -265,7 +265,7 @@ public class PokerHandUtil {
             throw new RuntimeException("No two of a kind found in Two pairs");
 
         final List<Card> nextHighestTwoOfAKind = getHighestOfSameRankExcluding(
-                2, cards, highestTwoOfAKind.get(0).rank());
+                2, cards, highestTwoOfAKind.get(0).getRank());
         if (CollectionUtils.isEmpty(nextHighestTwoOfAKind))
             throw new RuntimeException(
                     "No second two of a kind found in Two pairs");

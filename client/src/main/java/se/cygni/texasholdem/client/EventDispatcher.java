@@ -46,7 +46,7 @@ public class EventDispatcher {
 
         log.debug("Populating invoke map");
 
-        final Method ms[] = target.getClass().getDeclaredMethods();
+        final Method ms[] = target.getClass().getMethods();
         for (final Method m : ms) {
             if (m.getReturnType() != void.class)
                 continue;

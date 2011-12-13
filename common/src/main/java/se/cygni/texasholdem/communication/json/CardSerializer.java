@@ -20,8 +20,8 @@ public class CardSerializer extends JsonSerializer<Card> {
 
         generator.writeStartObject();
         generator.writeFieldName("c");
-        generator.writeString(card.rank().getName()
-                + card.suit().getShortName());
+        generator.writeString(card.getRank().getName()
+                + card.getSuit().getShortName());
         generator.writeEndObject();
     }
 

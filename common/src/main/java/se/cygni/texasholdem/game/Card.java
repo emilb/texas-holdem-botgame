@@ -3,33 +3,33 @@ package se.cygni.texasholdem.game;
 import java.util.EnumMap;
 import java.util.Map;
 
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.annotate.JsonCreator;
+import org.codehaus.jackson.annotate.JsonProperty;
 
-import se.cygni.texasholdem.communication.json.CardDeserializer;
-import se.cygni.texasholdem.communication.json.CardSerializer;
 import se.cygni.texasholdem.game.definitions.Rank;
 import se.cygni.texasholdem.game.definitions.Suit;
 
-@JsonSerialize(using = CardSerializer.class)
-@JsonDeserialize(using = CardDeserializer.class)
+//@JsonSerialize(using = CardSerializer.class)
+//@JsonDeserialize(using = CardDeserializer.class)
 public class Card {
 
     private final Rank rank;
     private final Suit suit;
 
-    private Card(final Rank rank, final Suit suit) {
+    @JsonCreator
+    public Card(@JsonProperty("rank") final Rank rank,
+            @JsonProperty("suit") final Suit suit) {
 
         this.rank = rank;
         this.suit = suit;
     }
 
-    public Rank rank() {
+    public Rank getRank() {
 
         return rank;
     }
 
-    public Suit suit() {
+    public Suit getSuit() {
 
         return suit;
     }

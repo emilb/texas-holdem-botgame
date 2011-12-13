@@ -13,7 +13,6 @@ public class SyncMessageResponseManager {
     public ResponseLock push(final String requestId) {
 
         final ResponseLock lock = new ResponseLock(requestId);
-        System.out.println("pushing requestId: " + requestId);
 
         if (responseLocks.containsKey(requestId))
             throw new IllegalArgumentException("Request ID is already in use");
@@ -26,8 +25,6 @@ public class SyncMessageResponseManager {
     }
 
     public ResponseLock pop(final String requestId) {
-
-        System.out.println("pop requestId: " + requestId);
 
         if (!responseLocks.containsKey(requestId))
             throw new IllegalArgumentException("Unknown Request ID");

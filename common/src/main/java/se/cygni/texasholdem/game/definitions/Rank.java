@@ -4,14 +4,8 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-
-import se.cygni.texasholdem.communication.json.RankDeserializer;
-import se.cygni.texasholdem.communication.json.RankSerializer;
-
-@JsonSerialize(using = RankSerializer.class)
-@JsonDeserialize(using = RankDeserializer.class)
+//@JsonSerialize(using = RankSerializer.class)
+//@JsonDeserialize(using = RankDeserializer.class)
 public enum Rank {
 
     DEUCE(2, "2"),

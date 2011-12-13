@@ -44,7 +44,7 @@ public interface PlayerInterface {
 
     public void onPlayerQuit(PlayerQuitEvent event);
 
-    public Action onActionRequired(ActionRequest request);
+    public Action actionRequired(ActionRequest request);
 
     public void connectionToGameServerLost();
 

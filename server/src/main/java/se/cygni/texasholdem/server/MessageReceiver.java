@@ -35,7 +35,7 @@ public class MessageReceiver {
             final ClientContext clientContext,
             final TexasMessage message) {
 
-        log.debug("Received a message: " + message.getType());
+        // log.debug("Received a message: " + message.getType());
 
         if (message instanceof RegisterForPlayRequest) {
             eventBus.post(new RequestContextWrapper(clientContext,
@@ -49,6 +49,8 @@ public class MessageReceiver {
             if (responseLockManager.containsRequestId(response.getRequestId())) {
                 final ResponseLock lock = responseLockManager.pop(response
                         .getRequestId());
+
+                lock.setResponse(response);
 
                 synchronized (lock) {
                     lock.notifyAll();

@@ -10,10 +10,13 @@ import se.cygni.texasholdem.communication.lock.ResponseLock;
 import se.cygni.texasholdem.communication.message.TexasMessage;
 import se.cygni.texasholdem.communication.message.event.TexasEvent;
 import se.cygni.texasholdem.communication.message.exception.TexasException;
+import se.cygni.texasholdem.communication.message.request.ActionRequest;
 import se.cygni.texasholdem.communication.message.request.RegisterForPlayRequest;
 import se.cygni.texasholdem.communication.message.request.TexasRequest;
+import se.cygni.texasholdem.communication.message.response.ActionResponse;
 import se.cygni.texasholdem.communication.message.response.RegisterForPlayResponse;
 import se.cygni.texasholdem.communication.message.response.TexasResponse;
+import se.cygni.texasholdem.game.Action;
 import se.cygni.texasholdem.player.PlayerInterface;
 
 public class PlayerClient {
@@ -44,11 +47,25 @@ public class PlayerClient {
         client.start();
     }
 
+    public PlayerInterface getPlayer() {
+
+        return player;
+    }
+
     public void onMessageReceived(final TexasMessage message) {
 
         if (message instanceof TexasEvent) {
             eventDispatcher.onEvent((TexasEvent) message);
             return;
+        }
+
+        if (message instanceof ActionRequest) {
+            final Action action = player
+                    .actionRequired((ActionRequest) message);
+            final ActionResponse response = new ActionResponse();
+            response.setRequestId(((ActionRequest) message).getRequestId());
+            response.setAction(action);
+            client.sendMessage(new ClientToServerMessage(response));
         }
 
         if (message instanceof TexasResponse) {
@@ -73,7 +90,6 @@ public class PlayerClient {
 
         final TexasMessage resp = sendAndWaitForResponse(request);
 
-        System.out.println(resp.getType());
         if (resp instanceof RegisterForPlayResponse)
             return true;
 

@@ -1,11 +1,13 @@
 package se.cygni.texasholdem.communication.message.request;
 
+import java.util.UUID;
+
 import se.cygni.texasholdem.communication.message.TexasMessage;
 
 public class TexasRequest extends TexasMessage {
 
     private String sessionId;
-    private String requestId;
+    private String requestId = UUID.randomUUID().toString();
 
     public String getSessionId() {
 

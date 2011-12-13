@@ -33,12 +33,12 @@ public class ListUtil {
 
         final Map<Rank, List<Card>> distribution = new HashMap<Rank, List<Card>>();
         for (final Card c : cards) {
-            if (distribution.containsKey(c.rank())) {
-                distribution.get(c.rank()).add(c);
+            if (distribution.containsKey(c.getRank())) {
+                distribution.get(c.getRank()).add(c);
             } else {
                 final ArrayList<Card> l = new ArrayList<Card>();
                 l.add(c);
-                distribution.put(c.rank(), l);
+                distribution.put(c.getRank(), l);
             }
         }
         return distribution;
@@ -55,12 +55,12 @@ public class ListUtil {
 
         final Map<Suit, List<Card>> distribution = new HashMap<Suit, List<Card>>();
         for (final Card c : cards) {
-            if (distribution.containsKey(c.suit())) {
-                distribution.get(c.suit()).add(c);
+            if (distribution.containsKey(c.getSuit())) {
+                distribution.get(c.getSuit()).add(c);
             } else {
                 final ArrayList<Card> l = new ArrayList<Card>();
                 l.add(c);
-                distribution.put(c.suit(), l);
+                distribution.put(c.getSuit(), l);
             }
         }
         return distribution;
@@ -184,7 +184,7 @@ public class ListUtil {
         // If an ACE exists in cards place it at beginning as well since
         // in a straight it may act as numeric value 14 or 1.
         final Card lastCard = sortedCards.get(sortedCards.size() - 1);
-        if (lastCard.rank() == Rank.ACE) {
+        if (lastCard.getRank() == Rank.ACE) {
             sortedCards.add(0, lastCard);
         }
 
@@ -198,11 +198,11 @@ public class ListUtil {
             if (previousCard == null ||
                     // If the previous card value + 1 is not equal to the
                     // current card's value the order is broken. Unless...
-                    ((previousCard.rank().getOrderValue() + 1 != currentCard
-                            .rank().getOrderValue()) &&
+                    ((previousCard.getRank().getOrderValue() + 1 != currentCard
+                            .getRank().getOrderValue()) &&
                     // ... the previous card was an ACE and the current
                     // card is valued 2.
-                    !(previousCard.rank() == Rank.ACE && currentCard.rank()
+                    !(previousCard.getRank() == Rank.ACE && currentCard.getRank()
                             .getOrderValue() == 2))) {
 
                 // Found consecutive subset larger than one,
@@ -246,7 +246,7 @@ public class ListUtil {
         Card previousCard = null;
 
         for (final Card c : sortedCards) {
-            if (previousCard == null || previousCard.rank() != c.rank())
+            if (previousCard == null || previousCard.getRank() != c.getRank())
                 result.add(c);
 
             previousCard = c;
@@ -276,7 +276,7 @@ public class ListUtil {
 
         final List<Card> activeCardList = new ArrayList<Card>();
         for (final Card c : cards) {
-            if (c.rank() != excludedRank)
+            if (c.getRank() != excludedRank)
                 activeCardList.add(c);
         }
 

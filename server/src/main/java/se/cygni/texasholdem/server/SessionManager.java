@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 
 import se.cygni.texasholdem.communication.message.exception.UsernameAlreadyTakenException;
 import se.cygni.texasholdem.communication.message.request.RegisterForPlayRequest;
+import se.cygni.texasholdem.communication.message.request.TexasRequest;
 import se.cygni.texasholdem.communication.message.response.RegisterForPlayResponse;
+import se.cygni.texasholdem.communication.message.response.TexasResponse;
 import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.server.eventbus.EventWrapper;
 import se.cygni.texasholdem.server.eventbus.NewPlayerEvent;
@@ -33,9 +35,7 @@ public class SessionManager {
     public static final String SESSION_ID = "SESSION_ID";
 
     private final EventBus eventBus;
-
     private final GamePlan gamePlan;
-
     private final MessageSender messageSender;
 
     private final Map<String, BotPlayer> sessionPlayerMap = new ConcurrentHashMap<String, BotPlayer>();
@@ -53,11 +53,22 @@ public class SessionManager {
         eventBus.register(this);
     }
 
+    public TexasResponse sendAndWaitForResponse(
+            final BotPlayer player,
+            final TexasRequest request) {
+
+        final ClientContext context = sessionClientContextMap.get(player
+                .getSessionId());
+
+        return messageSender.sendAndWaitForResponse(
+                context, request);
+    }
+
     @Subscribe
     public void notifyPlayerOfEvent(final EventWrapper eventWrapper) {
 
-        log.debug("Notifying players {} of event: {}",
-                eventWrapper.getReceivers(), eventWrapper.getEvent());
+        // log.debug("Notifying players {} of event: {}",
+        // eventWrapper.getReceivers(), eventWrapper.getEvent());
 
         for (final BotPlayer player : eventWrapper.getReceivers()) {
 

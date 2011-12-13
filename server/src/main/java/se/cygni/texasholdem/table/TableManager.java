@@ -108,7 +108,7 @@ public class TableManager {
         if (freeTableWithLowestNoofPlayers != null) {
             freeTableWithLowestNoofPlayers.addPlayer(player);
 
-            if (freeTableWithLowestNoofPlayers.getNoofPlayers() > 1) {
+            if (freeTableWithLowestNoofPlayers.getNoofPlayers() > 3) {
                 log.info("Starting game on table!");
                 final Thread t = new Thread(freeTableWithLowestNoofPlayers);
                 t.start();
@@ -122,7 +122,7 @@ public class TableManager {
 
     private Table createNewTable() {
 
-        final Table table = new Table(gamePlan, this, eventBus);
+        final Table table = new Table(gamePlan, this, eventBus, sessionManager);
         tables.add(table);
         return table;
     }

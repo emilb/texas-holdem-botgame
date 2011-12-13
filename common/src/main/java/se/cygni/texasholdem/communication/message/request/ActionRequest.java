@@ -8,7 +8,11 @@ import se.cygni.texasholdem.game.Action;
 @IsATexasMessage
 public class ActionRequest extends TexasRequest {
 
-    private final List<Action> possibleActions;
+    private List<Action> possibleActions;
+
+    public ActionRequest() {
+
+    }
 
     public ActionRequest(final List<Action> possibleActions) {
 
@@ -19,4 +23,10 @@ public class ActionRequest extends TexasRequest {
 
         return possibleActions;
     }
+
+    public void setPossibleActions(final List<Action> possibleActions) {
+
+        this.possibleActions = possibleActions;
+    }
+
 }
