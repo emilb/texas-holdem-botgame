@@ -19,8 +19,8 @@
 
     <logger name="se" level="DEBUG" />
     <root level="WARN">
-<!--         <appender-ref ref="STDOUT" /> -->
-        <appender-ref ref="SOCKET" />
+        <appender-ref ref="STDOUT" />
+<!--         <appender-ref ref="SOCKET" /> -->
     </root>
 
 </configuration>

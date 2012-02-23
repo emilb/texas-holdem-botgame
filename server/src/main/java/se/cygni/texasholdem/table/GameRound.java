@@ -3,6 +3,7 @@ package se.cygni.texasholdem.table;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Formatter;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -57,6 +58,9 @@ public class GameRound {
     private final SessionManager sessionManager;
     private final List<Card> communityCards = new ArrayList<Card>();
     private final Pot pot;
+
+    private final Map<BotPlayer, Long> payoutResult = new HashMap<BotPlayer, Long>();
+    private PokerHandRankUtil rankUtil;
 
     public GameRound(final List<BotPlayer> players,
             final BotPlayer dealerPlayer, final long smallBlind,
@@ -133,25 +137,51 @@ public class GameRound {
         final StringBuilder sb = new StringBuilder();
         final Formatter formatter = new Formatter(sb);
 
-        sb.append("Transactions during game round\n");
-        sb.append("Small blind: ").append(smallBlind);
-        sb.append("\nBig blind: ").append(bigBlind);
-        sb.append("\nDealer: ").append(dealerPlayer.getName());
+        sb.append("\n\n** Transactions during game round **\n\n");
+        sb.append("Small blind:        ").append(smallBlind);
+        sb.append("\nBig blind:          ").append(bigBlind);
+        sb.append("\nDealer:             ").append(dealerPlayer.getName());
         sb.append("\nSmall blind player: ").append(smallBlindPlayer.getName());
-        sb.append("\nBig blind player: ").append(bigBlindPlayer.getName())
+        sb.append("\nBig blind player:   ").append(bigBlindPlayer.getName())
                 .append("\n");
 
         for (final PlayState state : PlayState.values()) {
             final List<PotTransaction> transactions = pot
                     .getTransactionsForState(state);
+
             sb.append("\nState: ").append(state).append("\n");
-            for (final PotTransaction trans : transactions) {
-                formatter.format("%04d %10s %5d %s \n", trans
-                        .getTransactionNumber(), trans.getPlayer().getName(),
-                        trans.getAmount(), trans.isAllIn());
+
+            if (transactions.size() > 0) {
+                sb.append("Tx no  Player        Bet All in\n");
+
+                for (final PotTransaction trans : transactions) {
+                    formatter.format("%04d %10s %8d %s \n",
+                            trans.getTransactionNumber(),
+                            trans.getPlayer().getName(),
+                            trans.getAmount(), trans.isAllIn());
+                }
+            } else {
+                sb.append("No transactions\n");
             }
         }
+        formatter.format("%-10s %8s %-15s %-14s %-13s\n", "Player", "Won",
+                "Hand",
+                "Cards", "Comment");
+        for (final Entry<BotPlayer, Long> entry : payoutResult.entrySet()) {
 
+            final BotPlayer player = entry.getKey();
+            final Long amount = entry.getValue();
+            final BestHand bestHand = rankUtil.getBestHand(player);
+            formatter.format("%-10s %8d %-15s %-14s %-6s %-6s \n",
+                    player.getName(), amount,
+                    bestHand.getPokerHand().getName(),
+                    bestHand.cardsToShortString(),
+                    (pot.hasFolded(player) ? "folded" : ""),
+                    (pot.isAllIn(player) ? "all in" : ""));
+
+        }
+
+        sb.append("\n** ------------------------------ **\n");
         log.debug(sb.toString());
     }
 
@@ -322,7 +352,7 @@ public class GameRound {
 
     protected void distributePayback() {
 
-        final PokerHandRankUtil rankUtil = new PokerHandRankUtil(
+        rankUtil = new PokerHandRankUtil(
                 communityCards, players);
 
         // Calculate player ranking
@@ -356,6 +386,8 @@ public class GameRound {
                     amount);
             showDowns.add(psd);
         }
+
+        payoutResult.putAll(payout);
 
         final ShowDownEvent event = new ShowDownEvent(showDowns);
         EventBusUtil.postToEventBus(eventBus, event, players);

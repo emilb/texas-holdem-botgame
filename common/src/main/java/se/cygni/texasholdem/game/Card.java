@@ -86,4 +86,9 @@ public class Card {
 
         return rank.getName() + " of " + suit;
     }
+
+    public String toShortString() {
+
+        return rank.getName() + suit.getShortName();
+    }
 }

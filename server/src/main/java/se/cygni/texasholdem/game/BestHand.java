@@ -61,7 +61,8 @@ public class BestHand implements Comparable<BestHand> {
             if (card.getRank() == otherCard.getRank())
                 continue;
 
-            if (card.getRank().getOrderValue() < otherCard.getRank().getOrderValue())
+            if (card.getRank().getOrderValue() < otherCard.getRank()
+                    .getOrderValue())
                 return 1;
 
             return -1;
@@ -81,6 +82,15 @@ public class BestHand implements Comparable<BestHand> {
         }
         sb.append("hand: ").append(pokerHand);
 
+        return sb.toString();
+    }
+
+    public String cardsToShortString() {
+
+        final StringBuilder sb = new StringBuilder();
+        for (final Card c : cards) {
+            sb.append(c.toShortString()).append(" ");
+        }
         return sb.toString();
     }
 }
