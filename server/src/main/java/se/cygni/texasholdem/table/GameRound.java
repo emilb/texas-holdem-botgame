@@ -164,6 +164,8 @@ public class GameRound {
                 sb.append("No transactions\n");
             }
         }
+
+        sb.append("\nGame round result:\n");
         formatter.format("%-10s %8s %-15s %-14s %-13s\n", "Player", "Won",
                 "Hand",
                 "Cards", "Comment");
@@ -178,7 +180,13 @@ public class GameRound {
                     bestHand.cardsToShortString(),
                     (pot.hasFolded(player) ? "folded" : ""),
                     (pot.isAllIn(player) ? "all in" : ""));
+        }
 
+        sb.append("\nPlayer standing now:\n");
+        formatter.format("%-10s %8s\n", "Player", "Cash");
+        for (final BotPlayer player : players) {
+            formatter.format("%-10s %8d\n", player.getName(),
+                    player.getChipAmount());
         }
 
         sb.append("\n** ------------------------------ **\n");
@@ -320,8 +328,7 @@ public class GameRound {
             possibleActions.add(new Action(ActionType.CHECK, 0));
 
         if (player.getChipAmount() > 0) {
-            possibleActions.add(new Action(ActionType.RAISE, player
-                    .getChipAmount()));
+            possibleActions.add(new Action(ActionType.RAISE, smallBlind));
             possibleActions.add(new Action(ActionType.ALL_IN, player
                     .getChipAmount()));
         }

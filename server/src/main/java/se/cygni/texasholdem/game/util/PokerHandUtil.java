@@ -241,9 +241,10 @@ public class PokerHandUtil {
                     if (potentialThreeOfAKind.get(0).getRank().getOrderValue() < threeOfAKind
                             .get(0).getRank().getOrderValue())
                         potentialThreeOfAKind = threeOfAKind;
-                }
+                } else {
 
-                potentialThreeOfAKind = entry.getValue();
+                    potentialThreeOfAKind = entry.getValue();
+                }
             }
         }
 

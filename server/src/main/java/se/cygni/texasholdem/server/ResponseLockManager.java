@@ -12,7 +12,7 @@ import se.cygni.texasholdem.communication.lock.ResponseLock;
 @Service
 public class ResponseLockManager {
 
-    private static Logger log = LoggerFactory
+    private static final Logger log = LoggerFactory
             .getLogger(ResponseLockManager.class);
 
     private final Map<String, ResponseLock> responseLocks = new ConcurrentHashMap<String, ResponseLock>();
@@ -20,7 +20,6 @@ public class ResponseLockManager {
     public ResponseLock push(final String requestId) {
 
         final ResponseLock lock = new ResponseLock(requestId);
-        // log.debug("pushing requestId: " + requestId);
 
         if (responseLocks.containsKey(requestId))
             throw new IllegalArgumentException("Request ID is already in use");
@@ -31,8 +30,6 @@ public class ResponseLockManager {
     }
 
     public ResponseLock pop(final String requestId) {
-
-        // log.debug("pop requestId: " + requestId);
 
         if (!responseLocks.containsKey(requestId))
             throw new IllegalArgumentException("Unknown Request ID");

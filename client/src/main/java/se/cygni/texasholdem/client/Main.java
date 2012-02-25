@@ -4,12 +4,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import se.cygni.texasholdem.game.exception.GameException;
 import se.cygni.texasholdem.player.DummyPlayer;
 import se.cygni.texasholdem.player.PlayerInterface;
+import se.cygni.texasholdem.player.RaiserPlayer;
 import se.cygni.texasholdem.player.RandomPlayer;
 
 public class Main {
+
+    final static long MAX_RUNNING_TIME = 25 * 1000; // 25 seconds
+    private static final Logger log = LoggerFactory.getLogger(Main.class);
 
     /**
      * @param args
@@ -22,26 +29,32 @@ public class Main {
         clients.add(createDummy());
         clients.add(createRandom());
         clients.add(createRandom());
+        clients.add(createRaiser());
+        clients.add(createRaiser());
 
         final Thread t = new Thread(new Runnable() {
 
             @Override
             public void run() {
 
-                waitForRandom();
+                final long now = System.currentTimeMillis();
+
                 try {
                     for (final PlayerClient client : clients) {
                         final boolean result = client.registerForPlay();
-                        System.out.println(client.getPlayer().getName()
+                        log.debug(client.getPlayer().getName()
                                 + " is connected: " + result);
                     }
                 } catch (final GameException ge) {
                     ge.printStackTrace();
+                    System.exit(-1);
                 }
 
-                while (true) {
+                while (now + MAX_RUNNING_TIME > System.currentTimeMillis()) {
                     waitForRandom();
                 }
+                log.info("Time for game is up, System.exit(0)");
+                System.exit(0);
             }
         });
 
@@ -56,6 +69,11 @@ public class Main {
     private static PlayerClient createRandom() {
 
         return new PlayerClient(new RandomPlayer());
+    }
+
+    private static PlayerClient createRaiser() {
+
+        return new PlayerClient(new RaiserPlayer());
     }
 
     private static PlayerClient createPlayerClient() {
