@@ -18,7 +18,7 @@ public class TexasHoldemTest extends AbstractJUnit4SpringContextTests {
     @Autowired
     protected SessionManager sessionManager;
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void testDuplicatePlayerName() {
 
         final RegisterForPlayRequest request = new RegisterForPlayRequest();
