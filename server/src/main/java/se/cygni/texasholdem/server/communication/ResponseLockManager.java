@@ -1,4 +1,4 @@
-package se.cygni.texasholdem.server;
+package se.cygni.texasholdem.server.communication;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

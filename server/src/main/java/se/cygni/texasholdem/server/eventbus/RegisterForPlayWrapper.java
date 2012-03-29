@@ -4,12 +4,12 @@ import org.codemonkey.swiftsocketserver.ClientContext;
 
 import se.cygni.texasholdem.communication.message.request.TexasRequest;
 
-public class RequestContextWrapper {
+public class RegisterForPlayWrapper {
 
     private final ClientContext clientContext;
     private final TexasRequest request;
 
-    public RequestContextWrapper(final ClientContext clientContext,
+    public RegisterForPlayWrapper(final ClientContext clientContext,
             final TexasRequest request) {
 
         this.clientContext = clientContext;

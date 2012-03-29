@@ -1,4 +1,4 @@
-package se.cygni.texasholdem.server;
+package se.cygni.texasholdem.server.communication;
 
 import org.codemonkey.swiftsocketserver.ClientContext;
 import org.slf4j.Logger;
@@ -10,7 +10,7 @@ import se.cygni.texasholdem.communication.lock.ResponseLock;
 import se.cygni.texasholdem.communication.message.TexasMessage;
 import se.cygni.texasholdem.communication.message.request.RegisterForPlayRequest;
 import se.cygni.texasholdem.communication.message.response.TexasResponse;
-import se.cygni.texasholdem.server.eventbus.RequestContextWrapper;
+import se.cygni.texasholdem.server.eventbus.RegisterForPlayWrapper;
 
 import com.google.common.eventbus.EventBus;
 
@@ -38,7 +38,7 @@ public class MessageReceiver {
         // log.debug("Received a message: " + message.getType());
 
         if (message instanceof RegisterForPlayRequest) {
-            eventBus.post(new RequestContextWrapper(clientContext,
+            eventBus.post(new RegisterForPlayWrapper(clientContext,
                     (RegisterForPlayRequest) message));
             return;
         }

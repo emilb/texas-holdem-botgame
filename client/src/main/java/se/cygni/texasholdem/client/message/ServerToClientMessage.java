@@ -26,7 +26,6 @@ public class ServerToClientMessage implements
         try {
             message = TexasMessageParser.decodeMessage(requestStr);
         } catch (final Exception e) {
-            e.printStackTrace();
             throw new IllegalArgumentException(e.getMessage());
         }
 

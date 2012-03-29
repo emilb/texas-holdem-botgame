@@ -5,7 +5,7 @@ import org.codemonkey.swiftsocketserver.ClientMessageToServer;
 
 import se.cygni.texasholdem.communication.message.TexasMessage;
 import se.cygni.texasholdem.communication.message.TexasMessageParser;
-import se.cygni.texasholdem.server.MessageReceiver;
+import se.cygni.texasholdem.server.communication.MessageReceiver;
 
 /**
  * For receiving a chat message from the client.

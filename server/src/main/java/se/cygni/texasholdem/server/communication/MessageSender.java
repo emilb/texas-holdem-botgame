@@ -1,4 +1,4 @@
-package se.cygni.texasholdem.server;
+package se.cygni.texasholdem.server.communication;
 
 import org.codemonkey.swiftsocketserver.ClientContext;
 import org.slf4j.Logger;
@@ -10,6 +10,7 @@ import se.cygni.texasholdem.communication.lock.ResponseLock;
 import se.cygni.texasholdem.communication.message.TexasMessage;
 import se.cygni.texasholdem.communication.message.request.TexasRequest;
 import se.cygni.texasholdem.communication.message.response.TexasResponse;
+import se.cygni.texasholdem.server.SocketServer;
 import se.cygni.texasholdem.server.message.ServerToClientMessage;
 
 @Service

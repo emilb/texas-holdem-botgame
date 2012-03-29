@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import se.cygni.texasholdem.SystemSettings;
+import se.cygni.texasholdem.server.communication.MessageReceiver;
 import se.cygni.texasholdem.server.message.ClientToServerMessage;
 import se.cygni.texasholdem.server.message.ServerToClientMessage;
 

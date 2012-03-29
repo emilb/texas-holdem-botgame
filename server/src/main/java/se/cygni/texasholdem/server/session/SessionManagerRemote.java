@@ -1,4 +1,4 @@
-package se.cygni.texasholdem.server;
+package se.cygni.texasholdem.server.session;
 
 import java.util.Map;
 import java.util.UUID;
@@ -17,22 +17,23 @@ import se.cygni.texasholdem.communication.message.request.TexasRequest;
 import se.cygni.texasholdem.communication.message.response.RegisterForPlayResponse;
 import se.cygni.texasholdem.communication.message.response.TexasResponse;
 import se.cygni.texasholdem.game.BotPlayer;
+import se.cygni.texasholdem.profile.ProductionProfile;
+import se.cygni.texasholdem.server.communication.MessageSender;
 import se.cygni.texasholdem.server.eventbus.EventWrapper;
 import se.cygni.texasholdem.server.eventbus.NewPlayerEvent;
 import se.cygni.texasholdem.server.eventbus.PlayerQuitEvent;
-import se.cygni.texasholdem.server.eventbus.RequestContextWrapper;
+import se.cygni.texasholdem.server.eventbus.RegisterForPlayWrapper;
 import se.cygni.texasholdem.table.GamePlan;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 
 @Service
-public class SessionManager {
+@ProductionProfile
+public class SessionManagerRemote implements SessionManager {
 
     private static Logger log = LoggerFactory
-            .getLogger(SessionManager.class);
-
-    public static final String SESSION_ID = "SESSION_ID";
+            .getLogger(SessionManagerRemote.class);
 
     private final EventBus eventBus;
     private final GamePlan gamePlan;
@@ -42,7 +43,7 @@ public class SessionManager {
     private final Map<String, ClientContext> sessionClientContextMap = new ConcurrentHashMap<String, ClientContext>();
 
     @Autowired
-    public SessionManager(final EventBus eventBus,
+    public SessionManagerRemote(final EventBus eventBus,
             final MessageSender messageSender,
             final GamePlan gamePlan) {
 
@@ -53,6 +54,7 @@ public class SessionManager {
         eventBus.register(this);
     }
 
+    @Override
     public TexasResponse sendAndWaitForResponse(
             final BotPlayer player,
             final TexasRequest request) {
@@ -65,6 +67,7 @@ public class SessionManager {
     }
 
     @Subscribe
+    @Override
     public void notifyPlayerOfEvent(final EventWrapper eventWrapper) {
 
         // log.debug("Notifying players {} of event: {}",
@@ -89,6 +92,7 @@ public class SessionManager {
     }
 
     @Subscribe
+    @Override
     public void onPlayerQuit(final PlayerQuitEvent playerQuitEvent) {
 
         log.info("Player {} has left the game",
@@ -102,7 +106,8 @@ public class SessionManager {
     }
 
     @Subscribe
-    public void onRegisterForPlay(final RequestContextWrapper requestWrapper) {
+    @Override
+    public void onRegisterForPlay(final RegisterForPlayWrapper requestWrapper) {
 
         final ClientContext clientContext = requestWrapper.getClientContext();
         final RegisterForPlayRequest request = (RegisterForPlayRequest) requestWrapper

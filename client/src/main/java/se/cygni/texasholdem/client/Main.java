@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import se.cygni.texasholdem.game.exception.GameException;
 import se.cygni.texasholdem.player.DummyPlayer;
-import se.cygni.texasholdem.player.PlayerInterface;
+import se.cygni.texasholdem.player.Player;
 import se.cygni.texasholdem.player.RaiserPlayer;
 import se.cygni.texasholdem.player.RandomPlayer;
 
@@ -81,7 +81,7 @@ public class Main {
         return new PlayerClient(createPlayer());
     }
 
-    private static PlayerInterface createPlayer() {
+    private static Player createPlayer() {
 
         if (Math.random() < 0.5)
             return new DummyPlayer();

@@ -20,7 +20,6 @@ public class ClientToServerMessage extends ClientMessageToServer {
         try {
             return TexasMessageParser.encodeMessage(message);
         } catch (final Exception e) {
-            e.printStackTrace();
             throw new IllegalArgumentException(e.getMessage());
         }
     }

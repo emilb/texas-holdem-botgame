@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.game.Card;
 import se.cygni.texasholdem.game.util.GameUtil;
-import se.cygni.texasholdem.server.SessionManager;
+import se.cygni.texasholdem.server.session.SessionManager;
 
 import com.google.common.eventbus.EventBus;
 

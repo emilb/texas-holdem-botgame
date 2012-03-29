@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import se.cygni.texasholdem.communication.message.event.TexasEvent;
 import se.cygni.texasholdem.player.PlayerInterface;
+import se.cygni.texasholdem.player.Player;
 
 /**
  * This EventDispatcher uses reflection to notify a player of incoming events.

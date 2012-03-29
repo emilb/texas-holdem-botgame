@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import se.cygni.texasholdem.game.BotPlayer;
-import se.cygni.texasholdem.server.SessionManager;
 import se.cygni.texasholdem.server.eventbus.NewPlayerEvent;
 import se.cygni.texasholdem.server.eventbus.PlayerQuitEvent;
+import se.cygni.texasholdem.server.session.SessionManager;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;

@@ -1,4 +1,4 @@
-package se.cygni.texasholdem;
+package se.cygni.texasholdem.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

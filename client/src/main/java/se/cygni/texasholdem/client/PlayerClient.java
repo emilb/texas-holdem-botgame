@@ -17,7 +17,7 @@ import se.cygni.texasholdem.communication.message.response.ActionResponse;
 import se.cygni.texasholdem.communication.message.response.RegisterForPlayResponse;
 import se.cygni.texasholdem.communication.message.response.TexasResponse;
 import se.cygni.texasholdem.game.Action;
-import se.cygni.texasholdem.player.PlayerInterface;
+import se.cygni.texasholdem.player.Player;
 
 public class PlayerClient {
 
@@ -25,10 +25,10 @@ public class PlayerClient {
 
     private final EventDispatcher eventDispatcher;
     private final SyncMessageResponseManager responseManager;
-    private final PlayerInterface player;
+    private final Player player;
     private SwiftSocketClient client;
 
-    public PlayerClient(final PlayerInterface player) {
+    public PlayerClient(final Player player) {
 
         this.player = player;
 
@@ -47,7 +47,7 @@ public class PlayerClient {
         client.start();
     }
 
-    public PlayerInterface getPlayer() {
+    public Player getPlayer() {
 
         return player;
     }

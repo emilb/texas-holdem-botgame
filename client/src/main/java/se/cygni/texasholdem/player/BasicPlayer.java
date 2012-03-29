@@ -18,7 +18,7 @@ import se.cygni.texasholdem.communication.message.event.YouWonAmountEvent;
 import se.cygni.texasholdem.game.Card;
 import se.cygni.texasholdem.game.PlayerShowDown;
 
-public abstract class BasicPlayer implements PlayerInterface {
+public abstract class BasicPlayer implements Player {
 
     private static Logger log = LoggerFactory
             .getLogger(BasicPlayer.class);

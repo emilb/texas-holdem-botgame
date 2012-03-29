@@ -33,8 +33,8 @@ import se.cygni.texasholdem.game.pot.Pot;
 import se.cygni.texasholdem.game.pot.PotTransaction;
 import se.cygni.texasholdem.game.util.GameUtil;
 import se.cygni.texasholdem.game.util.PokerHandRankUtil;
-import se.cygni.texasholdem.server.SessionManager;
 import se.cygni.texasholdem.server.eventbus.EventBusUtil;
+import se.cygni.texasholdem.server.session.SessionManager;
 import se.cygni.texasholdem.util.PlayerTypeConverter;
 
 import com.google.common.eventbus.EventBus;
@@ -328,7 +328,9 @@ public class GameRound {
             possibleActions.add(new Action(ActionType.CHECK, 0));
 
         if (player.getChipAmount() > 0) {
-            possibleActions.add(new Action(ActionType.RAISE, smallBlind));
+            possibleActions.add(new Action(ActionType.RAISE,
+                    smallBlind < player.getChipAmount() ? smallBlind : player
+                            .getChipAmount()));
             possibleActions.add(new Action(ActionType.ALL_IN, player
                     .getChipAmount()));
         }
@@ -406,4 +408,20 @@ public class GameRound {
         // TODO: How to handle if removed player was a dealer or blind player?
         pot.fold(player);
     }
+
+    protected BotPlayer getDealerPlayer() {
+
+        return dealerPlayer;
+    }
+
+    protected BotPlayer getSmallBlindPlayer() {
+
+        return smallBlindPlayer;
+    }
+
+    protected BotPlayer getBigBlindPlayer() {
+
+        return bigBlindPlayer;
+    }
+
 }

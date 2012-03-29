@@ -15,7 +15,7 @@ import se.cygni.texasholdem.communication.message.event.YouWonAmountEvent;
 import se.cygni.texasholdem.communication.message.request.ActionRequest;
 import se.cygni.texasholdem.game.Action;
 
-public interface PlayerInterface {
+public interface Player {
 
     public String getName();
 
