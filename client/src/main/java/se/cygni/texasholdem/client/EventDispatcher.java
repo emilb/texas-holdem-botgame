@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import se.cygni.texasholdem.communication.message.event.TexasEvent;
-import se.cygni.texasholdem.player.PlayerInterface;
 import se.cygni.texasholdem.player.Player;
 
 /**
@@ -29,12 +28,12 @@ public class EventDispatcher {
     private static Logger log = LoggerFactory
             .getLogger(EventDispatcher.class);
 
-    private final PlayerInterface target;
+    private final Player target;
 
     @SuppressWarnings("rawtypes")
     private final Map<Class, Method> invokeMap = new HashMap<Class, Method>();
 
-    public EventDispatcher(final PlayerInterface target) {
+    public EventDispatcher(final Player target) {
 
         this.target = target;
         populateInvokeMap();
@@ -96,7 +95,7 @@ public class EventDispatcher {
     private boolean isDeclaredInInterface(final Method m) {
 
         try {
-            final Method ifaceMethod = PlayerInterface.class.getMethod(
+            final Method ifaceMethod = Player.class.getMethod(
                     m.getName(), m.getParameterTypes());
             if (ifaceMethod != null)
                 return true;
