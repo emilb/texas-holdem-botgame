@@ -9,16 +9,21 @@ import org.slf4j.LoggerFactory;
 
 import se.cygni.texasholdem.game.exception.GameException;
 import se.cygni.texasholdem.player.DummyPlayer;
-import se.cygni.texasholdem.player.Player;
 import se.cygni.texasholdem.player.RaiserPlayer;
 import se.cygni.texasholdem.player.RandomPlayer;
 
-public class Main {
+public class TestPlayMain {
 
     final static long MAX_RUNNING_TIME = 25 * 1000; // 25 seconds
-    private static final Logger log = LoggerFactory.getLogger(Main.class);
+    private static final Logger log = LoggerFactory
+            .getLogger(TestPlayMain.class);
 
     /**
+     * Creates six players and lets them connect and play session of poker.
+     * 
+     * After MAX_RUNNING_TIME ms the program will terminate (as a convenience
+     * when running from Eclipse)
+     * 
      * @param args
      * @throws IOException
      */
@@ -41,6 +46,8 @@ public class Main {
 
                 try {
                     for (final PlayerClient client : clients) {
+                        log.debug("Letting " + client.getPlayer().getName()
+                                + " connect...");
                         final boolean result = client.registerForPlay();
                         log.debug(client.getPlayer().getName()
                                 + " is connected: " + result);
@@ -74,19 +81,6 @@ public class Main {
     private static PlayerClient createRaiser() {
 
         return new PlayerClient(new RaiserPlayer());
-    }
-
-    private static PlayerClient createPlayerClient() {
-
-        return new PlayerClient(createPlayer());
-    }
-
-    private static Player createPlayer() {
-
-        if (Math.random() < 0.5)
-            return new DummyPlayer();
-
-        return new RandomPlayer();
     }
 
     private static void waitForRandom() {

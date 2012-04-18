@@ -17,7 +17,6 @@ import se.cygni.texasholdem.communication.message.request.TexasRequest;
 import se.cygni.texasholdem.communication.message.response.RegisterForPlayResponse;
 import se.cygni.texasholdem.communication.message.response.TexasResponse;
 import se.cygni.texasholdem.game.BotPlayer;
-import se.cygni.texasholdem.profile.ProductionProfile;
 import se.cygni.texasholdem.server.communication.MessageSender;
 import se.cygni.texasholdem.server.eventbus.EventWrapper;
 import se.cygni.texasholdem.server.eventbus.NewPlayerEvent;
@@ -29,7 +28,6 @@ import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 
 @Service
-@ProductionProfile
 public class SessionManagerRemote implements SessionManager {
 
     private static Logger log = LoggerFactory

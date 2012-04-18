@@ -16,7 +16,6 @@ import se.cygni.texasholdem.server.message.ServerToClientMessage;
 @Service
 public class SocketServer {
 
-    @SuppressWarnings("unused")
     private static Logger log = LoggerFactory
             .getLogger(SocketServer.class);
 
@@ -37,6 +36,7 @@ public class SocketServer {
     @PostConstruct
     public void startServer() {
 
+        log.info("Starting socket server");
         init();
         socketServer.start();
     }
@@ -51,6 +51,7 @@ public class SocketServer {
         socketServer
                 .registerExecutionContext(ClientToServerMessage.class,
                         messageReceiver);
+
     }
 
     public void sendMessage(final ServerToClientMessage message) {
