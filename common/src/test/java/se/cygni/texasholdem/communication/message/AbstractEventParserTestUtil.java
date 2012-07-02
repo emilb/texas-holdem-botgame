@@ -13,7 +13,7 @@ import se.cygni.texasholdem.game.PlayerShowDown;
 
 public abstract class AbstractEventParserTestUtil {
 
-    protected TexasMessage assertEncodeDecode(final TexasMessage message)
+    protected <T extends TexasMessage> T assertEncodeDecode(final T message)
             throws JsonParseException, JsonMappingException, IOException {
 
         final String jsonMsg = TexasMessageParser.encodeMessage(message);
@@ -26,7 +26,7 @@ public abstract class AbstractEventParserTestUtil {
 
         assertEquals(message.getClass(), tMessage.getClass());
 
-        return tMessage;
+        return (T)tMessage;
     }
 
     protected static void assertEqualss(

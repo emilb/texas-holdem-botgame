@@ -34,7 +34,7 @@ public class TexasEventParserTest extends AbstractEventParserTestUtil {
         final CommunityHasBeenDealtACardEvent event = new CommunityHasBeenDealtACardEvent(
                 DomainUtil.card());
 
-        final CommunityHasBeenDealtACardEvent decodedMsg = (CommunityHasBeenDealtACardEvent) assertEncodeDecode(event);
+        final CommunityHasBeenDealtACardEvent decodedMsg = assertEncodeDecode(event);
 
         assertEquals(event.getCard(), decodedMsg.getCard());
     }
@@ -47,7 +47,7 @@ public class TexasEventParserTest extends AbstractEventParserTestUtil {
         final PlayerCalledEvent event = new PlayerCalledEvent(
                 DomainUtil.player(), DomainUtil.randomLong());
 
-        final PlayerCalledEvent decodedMsg = (PlayerCalledEvent) assertEncodeDecode(event);
+        final PlayerCalledEvent decodedMsg = assertEncodeDecode(event);
 
         assertEqualss(event.getPlayer(), decodedMsg.getPlayer());
         assertEquals(event.getCallBet(), decodedMsg.getCallBet());
@@ -61,7 +61,7 @@ public class TexasEventParserTest extends AbstractEventParserTestUtil {
         final PlayerCheckedEvent event = new PlayerCheckedEvent(
                 DomainUtil.player());
 
-        final PlayerCheckedEvent decodedMsg = (PlayerCheckedEvent) assertEncodeDecode(event);
+        final PlayerCheckedEvent decodedMsg = assertEncodeDecode(event);
 
         assertEqualss(event.getPlayer(), decodedMsg.getPlayer());
     }
@@ -74,7 +74,7 @@ public class TexasEventParserTest extends AbstractEventParserTestUtil {
         final PlayerFoldedEvent event = new PlayerFoldedEvent(
                 DomainUtil.player(), DomainUtil.randomLong());
 
-        final PlayerFoldedEvent decodedMsg = (PlayerFoldedEvent) assertEncodeDecode(event);
+        final PlayerFoldedEvent decodedMsg = assertEncodeDecode(event);
 
         assertEqualss(event.getPlayer(), decodedMsg.getPlayer());
         assertEquals(event.getInvestmentInPot(),
@@ -89,7 +89,7 @@ public class TexasEventParserTest extends AbstractEventParserTestUtil {
         final PlayerQuitEvent event = new PlayerQuitEvent(
                 DomainUtil.player());
 
-        final PlayerQuitEvent decodedMsg = (PlayerQuitEvent) assertEncodeDecode(event);
+        final PlayerQuitEvent decodedMsg = assertEncodeDecode(event);
 
         assertEqualss(event.getPlayer(), decodedMsg.getPlayer());
     }
@@ -103,7 +103,7 @@ public class TexasEventParserTest extends AbstractEventParserTestUtil {
                 DomainUtil.player(), DomainUtil.randomLong(),
                 DomainUtil.randomLong());
 
-        final PlayerRaisedEvent decodedMsg = (PlayerRaisedEvent) assertEncodeDecode(event);
+        final PlayerRaisedEvent decodedMsg = assertEncodeDecode(event);
 
         assertEqualss(event.getPlayer(), decodedMsg.getPlayer());
         assertEquals(event.getCallBet(),
@@ -120,7 +120,7 @@ public class TexasEventParserTest extends AbstractEventParserTestUtil {
         final PlayerWentAllInEvent event = new PlayerWentAllInEvent(
                 DomainUtil.player(), DomainUtil.randomLong());
 
-        final PlayerWentAllInEvent decodedMsg = (PlayerWentAllInEvent) assertEncodeDecode(event);
+        final PlayerWentAllInEvent decodedMsg = assertEncodeDecode(event);
 
         assertEqualss(event.getPlayer(), decodedMsg.getPlayer());
         assertEquals(event.getAllInAmount(),
@@ -138,7 +138,7 @@ public class TexasEventParserTest extends AbstractEventParserTestUtil {
                 players, DomainUtil.randomLong(), DomainUtil.randomLong(),
                 players.get(0), players.get(1), players.get(2));
 
-        final PlayIsStartedEvent decodedMsg = (PlayIsStartedEvent) assertEncodeDecode(event);
+        final PlayIsStartedEvent decodedMsg = assertEncodeDecode(event);
 
         assertEqualss(event.getDealer(), decodedMsg.getDealer());
         assertEqualss(event.getSmallBlindPlayer(),
@@ -165,7 +165,7 @@ public class TexasEventParserTest extends AbstractEventParserTestUtil {
         final ServerIsShuttingDownEvent event = new ServerIsShuttingDownEvent(
                 DomainUtil.randomString(25));
 
-        final ServerIsShuttingDownEvent decodedMsg = (ServerIsShuttingDownEvent) assertEncodeDecode(event);
+        final ServerIsShuttingDownEvent decodedMsg = assertEncodeDecode(event);
 
         assertEquals(event.getMessage(),
                 decodedMsg.getMessage());
@@ -179,7 +179,7 @@ public class TexasEventParserTest extends AbstractEventParserTestUtil {
         final ShowDownEvent event = new ShowDownEvent(
                 DomainUtil.playerShowdowns(5));
 
-        final ShowDownEvent decodedMsg = (ShowDownEvent) assertEncodeDecode(event);
+        final ShowDownEvent decodedMsg = assertEncodeDecode(event);
 
         for (int i = 0; i < event.getPlayersShowDown().size(); i++) {
             assertEqualss(event.getPlayersShowDown().get(i),
@@ -195,7 +195,7 @@ public class TexasEventParserTest extends AbstractEventParserTestUtil {
         final YouHaveBeenDealtACardEvent event = new YouHaveBeenDealtACardEvent(
                 DomainUtil.card());
 
-        final YouHaveBeenDealtACardEvent decodedMsg = (YouHaveBeenDealtACardEvent) assertEncodeDecode(event);
+        final YouHaveBeenDealtACardEvent decodedMsg = assertEncodeDecode(event);
 
         assertEquals(event.getCard(),
                 decodedMsg.getCard());
@@ -209,7 +209,7 @@ public class TexasEventParserTest extends AbstractEventParserTestUtil {
         final YouWonAmountEvent event = new YouWonAmountEvent(
                 DomainUtil.randomLong(), DomainUtil.randomLong());
 
-        final YouWonAmountEvent decodedMsg = (YouWonAmountEvent) assertEncodeDecode(event);
+        final YouWonAmountEvent decodedMsg = assertEncodeDecode(event);
 
         assertEquals(event.getWonAmount(),
                 decodedMsg.getWonAmount());

@@ -82,7 +82,6 @@ public class Table implements Runnable {
 
         log.info("Game is finished, " + getWinner() + " won!");
         tableManager.onTableGameDone(this);
-        eventBus.unregister(this);
     }
 
     protected void updateBlinds(final int currentRound) {

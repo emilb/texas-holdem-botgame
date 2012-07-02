@@ -8,7 +8,7 @@ public class BotPlayer {
     private final String name;
     private final String sessionId;
     private long chipAmount;
-    private final List<Card> cards = new ArrayList<Card>();
+    private final List<Card> cards = new ArrayList();
 
     public BotPlayer(final String name, final String sessionId,
             final long chipAmount) {
@@ -55,7 +55,7 @@ public class BotPlayer {
 
     public List<Card> getCards() {
 
-        return new ArrayList<Card>(cards);
+        return new ArrayList(cards);
     }
 
     public void receiveCard(final Card c) {
