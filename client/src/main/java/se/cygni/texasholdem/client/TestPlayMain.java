@@ -7,10 +7,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import se.cygni.texasholdem.game.Room;
 import se.cygni.texasholdem.game.exception.GameException;
 import se.cygni.texasholdem.player.DummyPlayer;
-import se.cygni.texasholdem.player.RaiserPlayer;
-import se.cygni.texasholdem.player.RandomPlayer;
 
 public class TestPlayMain {
 
@@ -31,11 +30,6 @@ public class TestPlayMain {
 
         final List<PlayerClient> clients = new ArrayList<PlayerClient>();
         clients.add(createDummy());
-        clients.add(createDummy());
-        clients.add(createRandom());
-        clients.add(createRandom());
-        clients.add(createRaiser());
-        clients.add(createRaiser());
 
         final Thread t = new Thread(new Runnable() {
 
@@ -48,7 +42,7 @@ public class TestPlayMain {
                     for (final PlayerClient client : clients) {
                         log.debug("Letting " + client.getPlayer().getName()
                                 + " connect...");
-                        final boolean result = client.registerForPlay();
+                        final boolean result = client.registerForPlay(Room.TRAINING);
                         log.debug(client.getPlayer().getName()
                                 + " is connected: " + result);
                     }
@@ -71,16 +65,6 @@ public class TestPlayMain {
     private static PlayerClient createDummy() {
 
         return new PlayerClient(new DummyPlayer());
-    }
-
-    private static PlayerClient createRandom() {
-
-        return new PlayerClient(new RandomPlayer());
-    }
-
-    private static PlayerClient createRaiser() {
-
-        return new PlayerClient(new RaiserPlayer());
     }
 
     private static void waitForRandom() {

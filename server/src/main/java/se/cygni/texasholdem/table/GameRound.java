@@ -287,6 +287,9 @@ public class GameRound {
         }
     }
 
+    // TODO: Need to verify that a correct actions has been taken, both with regard to the action itself
+    // but also to the amount.
+
     protected void act(final Action action, final BotPlayer player) {
 
         switch (action.getActionType()) {
@@ -329,8 +332,8 @@ public class GameRound {
 
         if (player.getChipAmount() > 0) {
             possibleActions.add(new Action(ActionType.RAISE,
-                    smallBlind < player.getChipAmount() ? smallBlind : player
-                            .getChipAmount()));
+                    smallBlind > player.getChipAmount() ? player.getChipAmount() : smallBlind));
+
             possibleActions.add(new Action(ActionType.ALL_IN, player
                     .getChipAmount()));
         }

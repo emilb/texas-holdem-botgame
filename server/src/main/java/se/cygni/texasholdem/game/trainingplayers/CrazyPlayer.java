@@ -1,49 +1,83 @@
-package se.cygni.texasholdem.player;
+package se.cygni.texasholdem.game.trainingplayers;
 
-import java.util.*;
 import org.apache.commons.lang.math.RandomUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import se.cygni.texasholdem.communication.message.event.*;
 import se.cygni.texasholdem.communication.message.request.ActionRequest;
 import se.cygni.texasholdem.game.Action;
 import se.cygni.texasholdem.game.ActionType;
 
-public class RandomPlayer extends BasicPlayer {
+import java.util.*;
 
-    private static Logger log = LoggerFactory
-            .getLogger(RandomPlayer.class);
+public class CrazyPlayer extends TrainingPlayer {
 
-    private final String name = "random" + (int) (90 * Math.random() + 10);
-
-    private static final List<ActionTypeWeigth> actionWeight = new ArrayList<RandomPlayer.ActionTypeWeigth>();
+    private static final List<ActionTypeWeigth> actionWeight = new ArrayList<CrazyPlayer.ActionTypeWeigth>();
 
     static {
         actionWeight.add(new ActionTypeWeigth(800, ActionType.CHECK));
         actionWeight.add(new ActionTypeWeigth(600, ActionType.CALL));
         actionWeight.add(new ActionTypeWeigth(200, ActionType.RAISE));
-        actionWeight.add(new ActionTypeWeigth(100, ActionType.FOLD));
-        actionWeight.add(new ActionTypeWeigth(1, ActionType.ALL_IN));
+        actionWeight.add(new ActionTypeWeigth(50, ActionType.FOLD));
+        actionWeight.add(new ActionTypeWeigth(10, ActionType.ALL_IN));
     }
 
-    private static final Map<ActionType, Integer> actionDistributionMap = new HashMap<ActionType, Integer>();
-
-    static {
-        actionDistributionMap.put(ActionType.RAISE, 50);
-        actionDistributionMap.put(ActionType.CALL, 30);
-        actionDistributionMap.put(ActionType.FOLD, 10);
-        actionDistributionMap.put(ActionType.ALL_IN, 5);
-        actionDistributionMap.put(ActionType.CHECK, 5);
+    public CrazyPlayer(String name, String sessionId, long chipAmount) {
+        super(name, sessionId, chipAmount);
     }
 
-    @Override
-    public String getName() {
-
-        return name;
+    public CrazyPlayer(String name, String sessionId) {
+        super(name, sessionId);
     }
 
     @Override
-    public Action actionRequired(final ActionRequest request) {
+    public void serverIsShuttingDown(ServerIsShuttingDownEvent event) {
+    }
 
+    @Override
+    public void onPlayIsStarted(PlayIsStartedEvent event) {
+    }
+
+    @Override
+    public void onYouHaveBeenDealtACard(YouHaveBeenDealtACardEvent event) {
+    }
+
+    @Override
+    public void onCommunityHasBeenDealtACard(CommunityHasBeenDealtACardEvent event) {
+    }
+
+    @Override
+    public void onPlayerFolded(PlayerFoldedEvent event) {
+    }
+
+    @Override
+    public void onPlayerCalled(PlayerCalledEvent event) {
+    }
+
+    @Override
+    public void onPlayerRaised(PlayerRaisedEvent event) {
+    }
+
+    @Override
+    public void onPlayerWentAllIn(PlayerWentAllInEvent event) {
+    }
+
+    @Override
+    public void onPlayerChecked(PlayerCheckedEvent event) {
+    }
+
+    @Override
+    public void onYouWonAmount(YouWonAmountEvent event) {
+    }
+
+    @Override
+    public void onShowDown(ShowDownEvent event) {
+    }
+
+    @Override
+    public void onPlayerQuit(PlayerQuitEvent event) {
+    }
+
+    @Override
+    public Action actionRequired(ActionRequest request) {
         final List<ActionTypeWeigth> actionWeights = new ArrayList<ActionTypeWeigth>();
         for (final ActionTypeWeigth w : actionWeight) {
             if (hasActionType(request.getPossibleActions(), w.getType()))
@@ -56,8 +90,10 @@ public class RandomPlayer extends BasicPlayer {
 
         ActionType choosenActionType = null;
         for (final ActionTypeWeigth w : actionWeights) {
-            if (randomNumber < w.getWeight())
+            if (randomNumber < w.getWeight()) {
                 choosenActionType = w.getType();
+                break;
+            }
             else
                 randomNumber -= w.getWeight();
         }
@@ -69,14 +105,12 @@ public class RandomPlayer extends BasicPlayer {
             action = new Action(choosenActionType,
                     getReasonableRaiseAmount(action.getAmount()));
         }
-
-        log.debug("{} returning action: {}", getName(), action);
         return action;
     }
 
-    private long getReasonableRaiseAmount(final long maxRaise) {
-
-        return (long) (Math.random() * maxRaise / 2);
+    private long getReasonableRaiseAmount(final long minRaise) {
+        return minRaise;
+//        return (long) (Math.random() * minRaise / 2);
     }
 
     private int getTotalActionWeight(final List<ActionTypeWeigth> actionWeights) {
@@ -109,6 +143,14 @@ public class RandomPlayer extends BasicPlayer {
         }
 
         return null;
+    }
+
+    @Override
+    public void connectionToGameServerLost() {
+    }
+
+    @Override
+    public void connectionToGameServerEstablished() {
     }
 
     public static final class ActionTypeWeigth implements

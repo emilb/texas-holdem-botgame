@@ -17,11 +17,13 @@ import se.cygni.texasholdem.communication.message.response.ActionResponse;
 import se.cygni.texasholdem.communication.message.response.RegisterForPlayResponse;
 import se.cygni.texasholdem.communication.message.response.TexasResponse;
 import se.cygni.texasholdem.game.Action;
+import se.cygni.texasholdem.game.Room;
 import se.cygni.texasholdem.player.Player;
 
 public class PlayerClient {
 
     private static final long RESPONSE_TIMEOUT = 80000;
+    private static final long CONNECT_WAIT = 1200;
 
     private final EventDispatcher eventDispatcher;
     private final SyncMessageResponseManager responseManager;
@@ -45,6 +47,13 @@ public class PlayerClient {
         client.registerServerMessageToClientType(1, ServerToClientMessage.class);
         client.registerExecutionContext(ServerToClientMessage.class, this);
         client.start();
+
+        try {
+            Thread.currentThread().sleep(CONNECT_WAIT);
+        } catch (InterruptedException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
     }
 
     public Player getPlayer() {
@@ -81,12 +90,13 @@ public class PlayerClient {
         }
     }
 
-    public boolean registerForPlay()
+    public boolean registerForPlay(Room room)
             throws se.cygni.texasholdem.game.exception.GameException {
 
         final RegisterForPlayRequest request = new RegisterForPlayRequest();
         request.setRequestId(getUniqueRequestId());
         request.name = player.getName();
+        request.room = room;
 
         final TexasMessage resp = sendAndWaitForResponse(request);
 
