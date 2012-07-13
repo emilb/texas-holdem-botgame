@@ -55,12 +55,15 @@ public class MessageSender {
         sendMessage(clientContext, request);
 
         synchronized (lock) {
-            try {
-                lock.wait(RESPONSE_TIMEOUT);
-            } catch (final InterruptedException e) {
-            }
+        	if(lock.getResponse() == null) {
+        		// If we have no response yet, then we want to continue only when we have one
+	            try {
+	                lock.wait(RESPONSE_TIMEOUT);
+	            } catch (final InterruptedException e) {
+	            }
+        	}
         }
-
+        
         if (lock.getResponse() == null)
             throw new RuntimeException("Did not get response in time");
 

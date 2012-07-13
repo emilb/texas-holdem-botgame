@@ -3,20 +3,19 @@ package se.cygni.texasholdem.client.message;
 import org.codemonkey.swiftsocketclient.ServerMessageToClient;
 import org.codemonkey.swiftsocketclient.UnknownMessageException;
 
-import se.cygni.texasholdem.client.PlayerClient;
 import se.cygni.texasholdem.communication.message.TexasMessage;
 import se.cygni.texasholdem.communication.message.TexasMessageParser;
 
 public class ServerToClientMessage implements
-        ServerMessageToClient<PlayerClient> {
+        ServerMessageToClient<ServerMessageReceiver> {
 
     private TexasMessage message;
 
     @Override
-    public void execute(final PlayerClient controller)
+    public void execute(final ServerMessageReceiver serverMessageReceiver)
             throws UnknownMessageException {
 
-        controller.onMessageReceived(message);
+    	serverMessageReceiver.onMessageReceived(message);
 
     }
 

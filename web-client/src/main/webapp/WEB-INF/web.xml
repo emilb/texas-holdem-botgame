@@ -15,6 +15,10 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>AtmosphereServlet</servlet-name>
+        <url-pattern>/poker/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AtmosphereServlet</servlet-name>
         <url-pattern>/chat/*</url-pattern>
     </servlet-mapping>
 </web-app>

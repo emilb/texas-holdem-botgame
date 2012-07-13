@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.codemonkey.swiftsocketclient.SwiftSocketClient;
 
 import se.cygni.texasholdem.client.message.ClientToServerMessage;
+import se.cygni.texasholdem.client.message.ServerMessageReceiver;
 import se.cygni.texasholdem.client.message.ServerToClientMessage;
 import se.cygni.texasholdem.communication.lock.ResponseLock;
 import se.cygni.texasholdem.communication.message.TexasMessage;
@@ -19,7 +20,7 @@ import se.cygni.texasholdem.communication.message.response.TexasResponse;
 import se.cygni.texasholdem.game.Action;
 import se.cygni.texasholdem.player.Player;
 
-public class PlayerClient {
+public class PlayerClient implements ServerMessageReceiver {
 
     private static final long RESPONSE_TIMEOUT = 80000;
 
@@ -65,7 +66,7 @@ public class PlayerClient {
             final ActionResponse response = new ActionResponse();
             response.setRequestId(((ActionRequest) message).getRequestId());
             response.setAction(action);
-            client.sendMessage(new ClientToServerMessage(response));
+            sendResponse(response);
         }
 
         if (message instanceof TexasResponse) {
@@ -86,7 +87,7 @@ public class PlayerClient {
 
         final RegisterForPlayRequest request = new RegisterForPlayRequest();
         request.setRequestId(getUniqueRequestId());
-        request.name = player.getName();
+        request.name = getPlayerName();
 
         final TexasMessage resp = sendAndWaitForResponse(request);
 
@@ -101,15 +102,21 @@ public class PlayerClient {
         return false;
     }
 
+	protected String getPlayerName() {
+		return player.getName();
+	}
+
     protected TexasResponse sendAndWaitForResponse(final TexasRequest request) {
 
         final ResponseLock lock = responseManager.push(request.getRequestId());
         sendRequest(request);
         synchronized (lock) {
-            try {
-                lock.wait(RESPONSE_TIMEOUT);
-            } catch (final InterruptedException e) {
-            }
+        	if (lock.getResponse() == null) {
+	            try {
+	                lock.wait(RESPONSE_TIMEOUT);
+	            } catch (final InterruptedException e) {
+	            }
+        	}
         }
 
         if (lock.getResponse() == null)
@@ -121,6 +128,10 @@ public class PlayerClient {
     protected void sendRequest(final TexasRequest request) {
 
         client.sendMessage(new ClientToServerMessage(request));
+    }
+
+    public void sendResponse(final TexasResponse response) {
+        client.sendMessage(new ClientToServerMessage(response));
     }
 
     protected String getUniqueRequestId() {

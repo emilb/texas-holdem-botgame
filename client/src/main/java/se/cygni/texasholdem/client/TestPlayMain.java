@@ -14,7 +14,7 @@ import se.cygni.texasholdem.player.RandomPlayer;
 
 public class TestPlayMain {
 
-    final static long MAX_RUNNING_TIME = 25 * 1000; // 25 seconds
+    final static long MAX_RUNNING_TIME = 90 * 1000; // 25 seconds
     private static final Logger log = LoggerFactory
             .getLogger(TestPlayMain.class);
 
@@ -46,7 +46,7 @@ public class TestPlayMain {
 
                 try {
                     for (final PlayerClient client : clients) {
-                        log.debug("Letting " + client.getPlayer().getName()
+                        log.debug("Letting " + client.getPlayerName()
                                 + " connect...");
                         final boolean result = client.registerForPlay();
                         log.debug(client.getPlayer().getName()
