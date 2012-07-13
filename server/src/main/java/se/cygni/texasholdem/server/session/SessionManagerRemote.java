@@ -12,16 +12,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import se.cygni.texasholdem.communication.message.exception.UsernameAlreadyTakenException;
+import se.cygni.texasholdem.communication.message.request.ActionRequest;
 import se.cygni.texasholdem.communication.message.request.RegisterForPlayRequest;
 import se.cygni.texasholdem.communication.message.request.TexasRequest;
+import se.cygni.texasholdem.communication.message.response.ActionResponse;
 import se.cygni.texasholdem.communication.message.response.RegisterForPlayResponse;
 import se.cygni.texasholdem.communication.message.response.TexasResponse;
+import se.cygni.texasholdem.game.Action;
 import se.cygni.texasholdem.game.BotPlayer;
+import se.cygni.texasholdem.game.Room;
+import se.cygni.texasholdem.game.trainingplayers.TrainingPlayer;
 import se.cygni.texasholdem.server.communication.MessageSender;
 import se.cygni.texasholdem.server.eventbus.EventWrapper;
 import se.cygni.texasholdem.server.eventbus.NewPlayerEvent;
 import se.cygni.texasholdem.server.eventbus.PlayerQuitEvent;
 import se.cygni.texasholdem.server.eventbus.RegisterForPlayWrapper;
+import se.cygni.texasholdem.server.room.Training;
 import se.cygni.texasholdem.table.GamePlan;
 
 import com.google.common.eventbus.EventBus;
@@ -57,6 +63,13 @@ public class SessionManagerRemote implements SessionManager {
             final BotPlayer player,
             final TexasRequest request) {
 
+        if (player instanceof TrainingPlayer && request instanceof ActionRequest) {
+            Action action = ((TrainingPlayer) player).actionRequired((ActionRequest)request);
+            ActionResponse response = new ActionResponse();
+            response.setAction(action);
+            return response;
+        }
+
         final ClientContext context = sessionClientContextMap.get(player
                 .getSessionId());
 
@@ -72,6 +85,9 @@ public class SessionManagerRemote implements SessionManager {
         // eventWrapper.getReceivers(), eventWrapper.getEvent());
 
         for (final BotPlayer player : eventWrapper.getReceivers()) {
+            if (player instanceof TrainingPlayer) {
+                continue;
+            }
 
             final ClientContext context = sessionClientContextMap.get(player
                     .getSessionId());
@@ -143,8 +159,13 @@ public class SessionManagerRemote implements SessionManager {
         // Send login response to client
         messageSender.sendMessage(clientContext, response);
 
+        if (request.room == Room.TRAINING) {
+            se.cygni.texasholdem.server.room.Room room = new Training(eventBus, gamePlan, this);
+            room.addPlayer(player);
+        }
+
         // Notify of new player
-        eventBus.post(new NewPlayerEvent(player));
+        //eventBus.post(new NewPlayerEvent(player));
     }
 
     private String createSessionId() {

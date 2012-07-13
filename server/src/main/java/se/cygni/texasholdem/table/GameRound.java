@@ -47,6 +47,8 @@ public class GameRound {
     private final List<BotPlayer> players = Collections
             .synchronizedList(new ArrayList<BotPlayer>());
 
+    private static final int NOOF_ACTION_RETRIES = 3;
+
     private final BotPlayer dealerPlayer;
     private final BotPlayer smallBlindPlayer;
     private final BotPlayer bigBlindPlayer;
@@ -248,7 +250,7 @@ public class GameRound {
             if (pot.hasFolded(player))
                 continue;
 
-            final Action action = getActionFromPlayer(player);
+            final Action action = prepareAndGetActionFromPlayer(player);
             if (action != null)
                 act(action, player);
             else
@@ -277,7 +279,7 @@ public class GameRound {
             if (pot.hasFolded(currentPlayer))
                 continue;
 
-            final Action action = getActionFromPlayer(currentPlayer);
+            final Action action = prepareAndGetActionFromPlayer(currentPlayer);
             if (action != null)
                 act(action, currentPlayer);
 
@@ -316,8 +318,7 @@ public class GameRound {
         }
     }
 
-    protected Action getActionFromPlayer(final BotPlayer player) {
-
+    protected Action prepareAndGetActionFromPlayer(final BotPlayer player) {
         final List<Action> possibleActions = new ArrayList<Action>();
         possibleActions.add(new Action(ActionType.FOLD, 0));
 
@@ -329,12 +330,64 @@ public class GameRound {
 
         if (player.getChipAmount() > 0) {
             possibleActions.add(new Action(ActionType.RAISE,
-                    smallBlind < player.getChipAmount() ? smallBlind : player
-                            .getChipAmount()));
+                    smallBlind > player.getChipAmount() ? player.getChipAmount() : smallBlind));
+
             possibleActions.add(new Action(ActionType.ALL_IN, player
                     .getChipAmount()));
         }
 
+        int counter = 0;
+
+        Action userAction = null;
+        while (!isPlayerActionValid(player, possibleActions, userAction) && counter < NOOF_ACTION_RETRIES) {
+            userAction = getActionFromPlayer(possibleActions, player);
+            counter++;
+        }
+
+        return userAction;
+    }
+
+    protected boolean isPlayerActionValid(final BotPlayer player, final List<Action> possibleActions, Action action) {
+        if (action == null)
+            return false;
+
+        if (action.getActionType() == null)
+            return false;
+
+
+        switch (action.getActionType()) {
+            case FOLD:
+                return true;
+
+            case CHECK:
+                return containsActionType(possibleActions, ActionType.CHECK);
+
+            case CALL:
+                if (!containsActionType(possibleActions, ActionType.CALL))
+                    return false;
+
+                Action allowedCall = getActionOfType(possibleActions, ActionType.CALL);
+                return (action.getAmount() == allowedCall.getAmount());
+
+            case RAISE:
+                if (!containsActionType(possibleActions, ActionType.RAISE))
+                    return false;
+
+                Action allowedRaise = getActionOfType(possibleActions, ActionType.RAISE);
+                return (action.getAmount() >= allowedRaise.getAmount());
+
+            case ALL_IN:
+                if (!containsActionType(possibleActions, ActionType.ALL_IN))
+                    return false;
+
+                Action allowedAllIn = getActionOfType(possibleActions, ActionType.ALL_IN);
+                return (action.getAmount() >= allowedAllIn.getAmount());
+        }
+
+        return false;
+    }
+
+    protected Action getActionFromPlayer(final List<Action> possibleActions, final BotPlayer player) {
         try {
             final ActionRequest request = new ActionRequest(possibleActions);
             final ActionResponse response = (ActionResponse) sessionManager
@@ -345,8 +398,22 @@ public class GameRound {
         } catch (final Exception e) {
             log.info("Player failed to respond, folding for this round", e);
             pot.fold(player);
-            return null;
+            return new Action(ActionType.FOLD, 0);
         }
+    }
+
+    protected boolean containsActionType(final List<Action> possibleActions, ActionType actionType) {
+        return getActionOfType(possibleActions, actionType) != null;
+    }
+
+    protected Action getActionOfType(final List<Action> possibleActions, ActionType actionType) {
+
+        for (Action possibleAction : possibleActions) {
+            if (possibleAction.getActionType() == actionType)
+                return possibleAction;
+        }
+
+        return null;
     }
 
     protected void clearAllCards() {

@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.game.Card;
 import se.cygni.texasholdem.game.util.GameUtil;
+import se.cygni.texasholdem.server.room.Room;
 import se.cygni.texasholdem.server.session.SessionManager;
 
 import com.google.common.eventbus.EventBus;
@@ -30,7 +31,7 @@ public class Table implements Runnable {
 
     private final GamePlan gamePlan;
     private final EventBus eventBus;
-    private final TableManager tableManager;
+    private final Room room;
     private final SessionManager sessionManager;
 
     private BotPlayer dealerPlayer = null;
@@ -41,11 +42,11 @@ public class Table implements Runnable {
 
     private boolean gameHasStarted = false;
 
-    public Table(final GamePlan gamePlan, final TableManager tableManager,
+    public Table(final GamePlan gamePlan, final Room room,
             final EventBus eventBus, final SessionManager sessionManager) {
 
         this.gamePlan = gamePlan;
-        this.tableManager = tableManager;
+        this.room = room;
         this.eventBus = eventBus;
         this.sessionManager = sessionManager;
     }
@@ -81,7 +82,7 @@ public class Table implements Runnable {
         }
 
         log.info("Game is finished, " + getWinner() + " won!");
-        tableManager.onTableGameDone(this);
+        room.onTableGameDone(this);
     }
 
     protected void updateBlinds(final int currentRound) {

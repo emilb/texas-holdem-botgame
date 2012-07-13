@@ -27,6 +27,7 @@ public class TableManager {
 
     private final List<Table> tables = Collections
             .synchronizedList(new ArrayList<Table>());
+
     private final Set<BotPlayer> playerPool = Collections
             .synchronizedSet(new HashSet<BotPlayer>());
 
@@ -87,7 +88,7 @@ public class TableManager {
     public void assignPlayerToFreeTable(final BotPlayer player) {
 
         if (tables.size() == 0) {
-            createNewTable().addPlayer(player);
+            //createNewTable().addPlayer(player);
             return;
         }
 
@@ -117,13 +118,13 @@ public class TableManager {
         }
 
         // Couldn't find a free table, start a new!
-        createNewTable().addPlayer(player);
+//        createNewTable().addPlayer(player);
     }
 
-    private Table createNewTable() {
-
-        final Table table = new Table(gamePlan, this, eventBus, sessionManager);
-        tables.add(table);
-        return table;
-    }
+//    private Table createNewTable() {
+//
+//        final Table table = new Table(gamePlan, this, eventBus, sessionManager);
+//        tables.add(table);
+//        return table;
+//    }
 }
