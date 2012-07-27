@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import se.cygni.texasholdem.communication.message.exception.NoRoomSpecifiedException;
 import se.cygni.texasholdem.communication.message.exception.UsernameAlreadyTakenException;
 import se.cygni.texasholdem.communication.message.request.ActionRequest;
 import se.cygni.texasholdem.communication.message.request.RegisterForPlayRequest;
@@ -136,6 +137,15 @@ public class SessionManagerRemote implements SessionManager {
             return;
         }
 
+        // Check that a valid Room has been choosen
+        if (request.room == null) {
+            final NoRoomSpecifiedException e = new NoRoomSpecifiedException();
+            e.message = "No valid room was specified in RegisterForPlayRequest.";
+            e.setRequestId(request.getRequestId());
+            messageSender.sendMessage(clientContext, e);
+            return;
+        }
+
         final String sessionId = createSessionId();
 
         // Create response
@@ -163,9 +173,6 @@ public class SessionManagerRemote implements SessionManager {
             se.cygni.texasholdem.server.room.Room room = new Training(eventBus, gamePlan, this);
             room.addPlayer(player);
         }
-
-        // Notify of new player
-        //eventBus.post(new NewPlayerEvent(player));
     }
 
     private String createSessionId() {

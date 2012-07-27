@@ -20,6 +20,7 @@ import se.cygni.texasholdem.communication.message.request.RegisterForPlayRequest
 import se.cygni.texasholdem.communication.message.request.TexasRequest;
 import se.cygni.texasholdem.communication.message.response.RegisterForPlayResponse;
 import se.cygni.texasholdem.communication.message.response.TexasResponse;
+import se.cygni.texasholdem.game.Room;
 
 public class WebPlayerClient implements ServerMessageReceiver {
 
@@ -46,14 +47,15 @@ public class WebPlayerClient implements ServerMessageReceiver {
         waitForClientConnected();
     }
 
-	// TODO: 
-	// rensa upp, blockar inte här - i så fall känn av att respons kommit i webklienten
+	// TODO: rensa upp, blockar inte här - i så fall känn av att respons kommit i webklienten
+    // TODO: Ta bort hårdkodning för room = Room.TRAINING
     public boolean registerForPlay()
             throws se.cygni.texasholdem.game.exception.GameException {
 
         final RegisterForPlayRequest request = new RegisterForPlayRequest();
         request.setRequestId(getUniqueRequestId());
         request.name = getPlayerName();
+        request.room = Room.TRAINING;
         
         // Skicka request och vänta på svar
         final TexasMessage resp = sendAndWaitForResponse(request);

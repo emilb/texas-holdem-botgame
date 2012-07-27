@@ -42,7 +42,7 @@ public interface Player {
 
     public void onShowDown(ShowDownEvent event);
 
-    public void onGameCompleted(GameCompletedEvent event);
+    //public void onGameCompleted(GameCompletedEvent event);
 
     public void onPlayerQuit(PlayerQuitEvent event);
 

@@ -22,10 +22,26 @@ import se.cygni.texasholdem.communication.message.event.ServerIsShuttingDownEven
 import se.cygni.texasholdem.communication.message.event.ShowDownEvent;
 import se.cygni.texasholdem.communication.message.event.YouHaveBeenDealtACardEvent;
 import se.cygni.texasholdem.communication.message.event.YouWonAmountEvent;
+import se.cygni.texasholdem.communication.message.request.RegisterForPlayRequest;
 import se.cygni.texasholdem.game.Player;
+import se.cygni.texasholdem.game.Room;
 import se.cygni.texasholdem.test.util.DomainUtil;
 
 public class TexasEventParserTest extends AbstractEventParserTestUtil {
+
+    @Test
+    public void testRegisterForPlayRequest()
+            throws JsonGenerationException, JsonMappingException, IOException {
+
+        final RegisterForPlayRequest request = new RegisterForPlayRequest();
+        request.room = Room.TRAINING;
+        request.name = "Tester";
+
+        final RegisterForPlayRequest decodedMsg = assertEncodeDecode(request);
+
+        assertEquals(request.name, decodedMsg.name);
+        assertEquals(request.room, decodedMsg.room);
+    }
 
     @Test
     public void testCommunityHasBeenDealtACardEvent()

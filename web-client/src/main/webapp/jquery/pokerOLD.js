@@ -131,8 +131,9 @@ RegisterForPlayResponse:
         var name = input.val()
         var stringifyJSON = jQuery.stringifyJSON({
             "name":name,
+            "room":"TRAINING",
             "type":"se.cygni.texasholdem.communication.message.request.RegisterForPlayRequest"});
-        player = pokerPlayer(author);              
+        player = pokerPlayer(author);
         subSocket.push(stringifyJSON);
     });
 
