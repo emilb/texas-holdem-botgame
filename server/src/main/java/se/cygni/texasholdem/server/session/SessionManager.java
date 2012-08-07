@@ -17,6 +17,8 @@ public interface SessionManager {
             final BotPlayer player,
             final TexasRequest request);
 
+    public abstract void terminateSession(final BotPlayer player);
+
     @Subscribe
     public abstract void notifyPlayerOfEvent(final EventWrapper eventWrapper);
 

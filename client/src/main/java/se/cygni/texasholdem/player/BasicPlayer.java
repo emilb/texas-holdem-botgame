@@ -3,18 +3,7 @@ package se.cygni.texasholdem.player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import se.cygni.texasholdem.communication.message.event.CommunityHasBeenDealtACardEvent;
-import se.cygni.texasholdem.communication.message.event.PlayIsStartedEvent;
-import se.cygni.texasholdem.communication.message.event.PlayerCalledEvent;
-import se.cygni.texasholdem.communication.message.event.PlayerCheckedEvent;
-import se.cygni.texasholdem.communication.message.event.PlayerFoldedEvent;
-import se.cygni.texasholdem.communication.message.event.PlayerQuitEvent;
-import se.cygni.texasholdem.communication.message.event.PlayerRaisedEvent;
-import se.cygni.texasholdem.communication.message.event.PlayerWentAllInEvent;
-import se.cygni.texasholdem.communication.message.event.ServerIsShuttingDownEvent;
-import se.cygni.texasholdem.communication.message.event.ShowDownEvent;
-import se.cygni.texasholdem.communication.message.event.YouHaveBeenDealtACardEvent;
-import se.cygni.texasholdem.communication.message.event.YouWonAmountEvent;
+import se.cygni.texasholdem.communication.message.event.*;
 import se.cygni.texasholdem.game.Card;
 import se.cygni.texasholdem.game.PlayerShowDown;
 
@@ -63,6 +52,10 @@ public abstract class BasicPlayer implements Player {
 
         log.debug("{} raised", event.getPlayer().getName());
 
+    }
+
+    @Override
+    public void onTableIsDone(TableIsDoneEvent event) {
     }
 
     @Override

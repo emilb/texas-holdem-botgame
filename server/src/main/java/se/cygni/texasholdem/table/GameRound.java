@@ -197,12 +197,7 @@ public class GameRound {
 
     protected PlayIsStartedEvent createPlayIsStartedEvent() {
 
-        final List<Player> currentPlayers = new ArrayList<Player>();
-        final Iterator<BotPlayer> iter = players.iterator();
-        while (iter.hasNext()) {
-            final BotPlayer player = iter.next();
-            currentPlayers.add(PlayerTypeConverter.fromBotPlayer(player));
-        }
+        final List<Player> currentPlayers = PlayerTypeConverter.listOfBotPlayers(players);
 
         return new PlayIsStartedEvent(currentPlayers,
                 smallBlind, bigBlind,

@@ -9,13 +9,17 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import se.cygni.texasholdem.communication.message.event.TableIsDoneEvent;
 import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.game.Card;
+import se.cygni.texasholdem.game.Player;
 import se.cygni.texasholdem.game.util.GameUtil;
+import se.cygni.texasholdem.server.eventbus.EventBusUtil;
 import se.cygni.texasholdem.server.room.Room;
 import se.cygni.texasholdem.server.session.SessionManager;
 
 import com.google.common.eventbus.EventBus;
+import se.cygni.texasholdem.util.PlayerTypeConverter;
 
 public class Table implements Runnable {
 
@@ -82,7 +86,13 @@ public class Table implements Runnable {
         }
 
         log.info("Game is finished, " + getWinner() + " won!");
+        notifyPlayersOfTableIsDone();
         room.onTableGameDone(this);
+    }
+
+    protected void notifyPlayersOfTableIsDone() {
+        TableIsDoneEvent event = new TableIsDoneEvent(PlayerTypeConverter.listOfBotPlayers(players));
+        EventBusUtil.postToEventBus(eventBus, event, players);
     }
 
     protected void updateBlinds(final int currentRound) {

@@ -17,6 +17,7 @@ public class Tournament extends Room {
     @Override
     public void addPlayer(BotPlayer player) {
     }
+
     @Override
     public void onTableGameDone(Table table) {
     }

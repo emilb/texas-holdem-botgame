@@ -36,6 +36,10 @@ public class RaiserPlayer extends TrainingPlayer {
     }
 
     @Override
+    public void onTableIsDone(TableIsDoneEvent event) {
+    }
+
+    @Override
     public void onPlayerCalled(PlayerCalledEvent event) {
     }
 

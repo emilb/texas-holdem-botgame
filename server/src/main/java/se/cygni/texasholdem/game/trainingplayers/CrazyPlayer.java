@@ -73,6 +73,10 @@ public class CrazyPlayer extends TrainingPlayer {
     }
 
     @Override
+    public void onTableIsDone(TableIsDoneEvent event) {
+    }
+
+    @Override
     public void onPlayerQuit(PlayerQuitEvent event) {
     }
 

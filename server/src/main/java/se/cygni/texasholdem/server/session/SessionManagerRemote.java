@@ -106,6 +106,14 @@ public class SessionManagerRemote implements SessionManager {
         }
     }
 
+    @Override
+    public void terminateSession(BotPlayer player) {
+        final String sessionId = player.getSessionId();
+
+        sessionPlayerMap.remove(sessionId);
+        sessionClientContextMap.remove(sessionId);
+    }
+
     @Subscribe
     @Override
     public void onPlayerQuit(final PlayerQuitEvent playerQuitEvent) {
@@ -169,11 +177,20 @@ public class SessionManagerRemote implements SessionManager {
         // Send login response to client
         messageSender.sendMessage(clientContext, response);
 
-        if (request.room == Room.TRAINING) {
-            se.cygni.texasholdem.server.room.Room room = new Training(eventBus, gamePlan, this);
-            room.addPlayer(player);
+        switch (request.room) {
+            case TRAINING:
+                se.cygni.texasholdem.server.room.Room room = new Training(eventBus, gamePlan, this);
+                room.addPlayer(player);
+                break;
+
+            default:
+                log.info("Player connected with invalid room definition, terminating");
+                terminateSession(player);
         }
+
     }
+
+
 
     private String createSessionId() {
 

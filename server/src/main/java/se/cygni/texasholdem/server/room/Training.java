@@ -20,6 +20,7 @@ public class Training extends Room {
             .getLogger(Training.class);
 
     BotPlayer player;
+    Table table;
 
     @Autowired
     public Training(EventBus eventBus, GamePlan gamePlan, SessionManager sessionManager) {
@@ -31,7 +32,7 @@ public class Training extends Room {
 
         this.player = player;
 
-        Table table = new Table(gamePlan, this, eventBus, sessionManager);
+        table = new Table(gamePlan, this, eventBus, sessionManager);
         table.addPlayer(getTrainingPlayer());
         table.addPlayer(getTrainingPlayer());
         table.addPlayer(getTrainingPlayer());
@@ -46,6 +47,7 @@ public class Training extends Room {
 
     @Override
     public void onTableGameDone(Table table) {
-         log.debug("Training for player: " + player.getName() + " is done");
+        log.debug("Training for player: " + player.getName() + " is done");
+
     }
 }

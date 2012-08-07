@@ -59,6 +59,10 @@ public class GodPlayer extends TrainingPlayer {
     }
 
     @Override
+    public void onTableIsDone(TableIsDoneEvent event) {
+    }
+
+    @Override
     public void onPlayerQuit(PlayerQuitEvent event) {
     }
 
