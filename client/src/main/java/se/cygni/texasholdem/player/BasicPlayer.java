@@ -32,36 +32,53 @@ public abstract class BasicPlayer implements Player {
     public void onCommunityHasBeenDealtACard(
             final CommunityHasBeenDealtACardEvent event) {
 
+        log.debug("Community got a card: {}", event.getCard());
+
+    }
+
+    @Override
+    public void onPlayerBetBigBlind(PlayerBetBigBlindEvent event) {
+
+        log.debug("{} placed big blind with amount {}", event.getPlayer().getName(), event.getBigBlind());
+    }
+
+    @Override
+    public void onPlayerBetSmallBlind(PlayerBetSmallBlindEvent event) {
+
+        log.debug("{} placed small blind with amount {}", event.getPlayer().getName(), event.getSmallBlind());
     }
 
     @Override
     public void onPlayerFolded(final PlayerFoldedEvent event) {
 
-        log.debug("{} folded", event.getPlayer().getName());
+        log.debug("{} folded after putting {} in the pot", event.getPlayer().getName(), event.getInvestmentInPot());
     }
 
     @Override
     public void onPlayerCalled(final PlayerCalledEvent event) {
 
-        log.debug("{} called", event.getPlayer().getName());
+        log.debug("{} called with amount {}", event.getPlayer().getName(), event.getCallBet());
 
     }
 
     @Override
     public void onPlayerRaised(final PlayerRaisedEvent event) {
 
-        log.debug("{} raised", event.getPlayer().getName());
+        log.debug("{} raised with bet {}", event.getPlayer().getName(), event.getRaiseBet());
 
     }
 
     @Override
     public void onTableIsDone(TableIsDoneEvent event) {
+
+        log.debug("Table is done!");
+
     }
 
     @Override
     public void onPlayerWentAllIn(final PlayerWentAllInEvent event) {
 
-        log.debug("{} went all in", event.getPlayer().getName());
+        log.debug("{} went all in with amount {}", event.getPlayer().getName(), event.getAllInAmount());
 
     }
 

@@ -17,6 +17,10 @@ public interface Player {
     public void onCommunityHasBeenDealtACard(
             CommunityHasBeenDealtACardEvent event);
 
+    public void onPlayerBetBigBlind(PlayerBetBigBlindEvent event);
+
+    public void onPlayerBetSmallBlind(PlayerBetSmallBlindEvent event);
+
     public void onPlayerFolded(PlayerFoldedEvent event);
 
     public void onPlayerCalled(PlayerCalledEvent event);

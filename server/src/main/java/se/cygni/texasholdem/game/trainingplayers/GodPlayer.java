@@ -31,6 +31,14 @@ public class GodPlayer extends TrainingPlayer {
     }
 
     @Override
+    public void onPlayerBetBigBlind(PlayerBetBigBlindEvent event) {
+    }
+
+    @Override
+    public void onPlayerBetSmallBlind(PlayerBetSmallBlindEvent event) {
+    }
+
+    @Override
     public void onPlayerFolded(PlayerFoldedEvent event) {
     }
 

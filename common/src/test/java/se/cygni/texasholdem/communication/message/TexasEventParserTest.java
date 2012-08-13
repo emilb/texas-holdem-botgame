@@ -116,14 +116,12 @@ public class TexasEventParserTest extends AbstractEventParserTestUtil {
             IOException {
 
         final PlayerRaisedEvent event = new PlayerRaisedEvent(
-                DomainUtil.player(), DomainUtil.randomLong(),
+                DomainUtil.player(),
                 DomainUtil.randomLong());
 
         final PlayerRaisedEvent decodedMsg = assertEncodeDecode(event);
 
         assertEqualss(event.getPlayer(), decodedMsg.getPlayer());
-        assertEquals(event.getCallBet(),
-                decodedMsg.getCallBet());
         assertEquals(event.getRaiseBet(),
                 decodedMsg.getRaiseBet());
     }

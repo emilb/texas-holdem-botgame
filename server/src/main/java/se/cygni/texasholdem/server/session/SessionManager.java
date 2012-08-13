@@ -9,6 +9,8 @@ import se.cygni.texasholdem.server.eventbus.RegisterForPlayWrapper;
 
 import com.google.common.eventbus.Subscribe;
 
+import java.util.List;
+
 public interface SessionManager {
 
     public static final String SESSION_ID = "SESSION_ID";
@@ -28,5 +30,9 @@ public interface SessionManager {
     @Subscribe
     public abstract void onRegisterForPlay(
             final RegisterForPlayWrapper requestWrapper);
+
+    public int getNoofPlayers();
+
+    public List<BotPlayer> listPlayers();
 
 }

@@ -68,7 +68,7 @@ public class Pot {
      * @param player
      * @param amount
      */
-    public void bet(final BotPlayer player, final long amount) {
+    public long bet(final BotPlayer player, final long amount) {
 
         if (!canPlaceBetInCurrentPlayState())
             throw new IllegalStateException("Pot is in state: "
@@ -83,7 +83,7 @@ public class Pot {
                     + " tried to place negative bet");
 
         if (amount == 0)
-            return;
+            return 0;
 
         if (player.getChipAmount() <= 0)
             throw new IllegalStateException("Player: " + player
@@ -111,6 +111,8 @@ public class Pot {
 
         if (isAllIn)
             allInPlayers.add(player);
+
+        return realAmount;
     }
 
     /**
@@ -141,6 +143,16 @@ public class Pot {
     public boolean isAllIn(final BotPlayer player) {
 
         return allInPlayers.contains(player);
+    }
+
+    /**
+     *
+     * @param player
+     * @return TRUE if player is still able to bet more (i.e. has not folded or gone all in)
+     */
+    public boolean isAbleToBet(final BotPlayer player) {
+
+        return !hasFolded(player) && !isAllIn(player);
     }
 
     /**
@@ -446,6 +458,59 @@ public class Pot {
                 totalPotLeft -= amount;
             }
         }
+
+        /**
+         * If a player folds while having the largest stake in the pot (which of course is extremely stupid)
+         * there might be a rest in the pot. Example:
+         *
+         * Player A goes ALL-IN with a total stake in the pot of 150
+         * Player B has a stake of 200 in the pot but suddenly folds.
+         *
+         * According to normal rules player A wins 150+150=300 which leaves a rest of 50.
+         *
+         * The rest will be distributed evenly for all players with a payout on this round.
+         */
+        if (totalPotLeft > 0) {
+            List<BotPlayer> playersWithPayout = new ArrayList<BotPlayer>();
+
+            for (BotPlayer player : result.keySet()) {
+                if (result.get(player) > 0)
+                    playersWithPayout.add(player);
+            }
+
+            if (playersWithPayout.size() == 1) {
+                long newPlayerResult = result.get(playersWithPayout.get(0)) + totalPotLeft;
+                result.put(playersWithPayout.get(0), newPlayerResult);
+            } else if (playersWithPayout.size() > 1) {
+                int playerIndex = 0;
+                while (totalPotLeft > 0) {
+                    long newPlayerResult = result.get(playersWithPayout.get(playerIndex)) + 1;
+                    result.put(playersWithPayout.get(playerIndex), newPlayerResult);
+
+                    totalPotLeft--;
+                    playerIndex = playerIndex == playersWithPayout.size() - 1 ? 0 : playerIndex + 1;
+                }
+            }
+        }
+
+        /**
+         * Ultra special case for when all players suddenly fold. In this case, all bets are returned.
+         *
+         */
+        if (totalPotLeft > 0 && allPlayersFolded()) {
+            for (final BotPlayer player : allPlayers) {
+                result.put(player, getTotalBetAmountForPlayer(player));
+            }
+        }
         return result;
+    }
+
+    private boolean allPlayersFolded() {
+        for (final BotPlayer player : allPlayers) {
+            if (!hasFolded(player))
+                return false;
+        }
+
+        return true;
     }
 }

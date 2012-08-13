@@ -52,8 +52,13 @@ public class PlayerClient implements ServerMessageReceiver {
         try {
             Thread.currentThread().sleep(CONNECT_WAIT);
         } catch (InterruptedException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
+    }
+
+    public void disconnect() {
+
+        client.stop();
 
     }
 

@@ -12,11 +12,7 @@ import java.util.Map.Entry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import se.cygni.texasholdem.communication.message.event.CommunityHasBeenDealtACardEvent;
-import se.cygni.texasholdem.communication.message.event.PlayIsStartedEvent;
-import se.cygni.texasholdem.communication.message.event.ShowDownEvent;
-import se.cygni.texasholdem.communication.message.event.YouHaveBeenDealtACardEvent;
-import se.cygni.texasholdem.communication.message.event.YouWonAmountEvent;
+import se.cygni.texasholdem.communication.message.event.*;
 import se.cygni.texasholdem.communication.message.request.ActionRequest;
 import se.cygni.texasholdem.communication.message.response.ActionResponse;
 import se.cygni.texasholdem.game.Action;
@@ -96,8 +92,11 @@ public class GameRound {
         dealACardToAllParticipatingPlayers(deck);
         dealACardToAllParticipatingPlayers(deck);
 
-        pot.bet(smallBlindPlayer, smallBlind);
-        pot.bet(bigBlindPlayer, bigBlind);
+        long bigBlindAmount = pot.bet(bigBlindPlayer, bigBlind);
+        EventBusUtil.postPlayerBetBigBlind(eventBus, bigBlindPlayer, bigBlindAmount, players);
+
+        long smallBlindAmount = pot.bet(smallBlindPlayer, smallBlind);
+        EventBusUtil.postPlayerBetSmallBlind(eventBus, smallBlindPlayer, smallBlindAmount, players);
 
         // Pre flop
         getBetsTillPotBalanced();
@@ -242,7 +241,8 @@ public class GameRound {
                 .getOrderedListOfPlayersInPlay(players, bigBlindPlayer);
 
         for (final BotPlayer player : playerOrder) {
-            if (pot.hasFolded(player))
+
+            if (!pot.isAbleToBet(player))
                 continue;
 
             final Action action = prepareAndGetActionFromPlayer(player);
@@ -271,7 +271,7 @@ public class GameRound {
                 throw new AssertionError(
                         "Could not find next player and pot is not balanced!");
 
-            if (pot.hasFolded(currentPlayer))
+            if (!pot.isAbleToBet(currentPlayer))
                 continue;
 
             final Action action = prepareAndGetActionFromPlayer(currentPlayer);
@@ -288,24 +288,38 @@ public class GameRound {
 
         switch (action.getActionType()) {
             case ALL_IN:
+                long chipAmount = player.getChipAmount();
                 pot.bet(player, player.getChipAmount());
+                EventBusUtil.postPlayerWentAllIn(eventBus, player, chipAmount, players);
                 break;
 
             case CALL:
-                log.debug("{} called", player.getName());
+                log.debug("{} called with amount {}", player.getName(), action.getAmount());
                 pot.bet(player, action.getAmount());
+                EventBusUtil.postPlayerCalled(eventBus, player, action.getAmount(), players);
                 break;
 
             case CHECK:
                 log.debug("{} checked", player.getName());
+                EventBusUtil.postPlayerChecked(eventBus, player, players);
                 break;
 
             case FOLD:
+                log.debug("{} folded", player.getName());
                 pot.fold(player);
+                EventBusUtil.postPlayerFolded(eventBus, player, pot.getTotalBetAmountForPlayer(player), players);
                 break;
 
             case RAISE:
                 pot.bet(player, action.getAmount());
+                if (player.getChipAmount() == 0) {
+                    log.debug("{} went all in with amount {}", player.getName(), action.getAmount());
+                    EventBusUtil.postPlayerWentAllIn(eventBus, player, action.getAmount(), players);
+                } else {
+                    log.debug("{} raised with amount {}", player.getName(), action.getAmount());
+                    EventBusUtil.postPlayerRaised(eventBus, player, action.getAmount(), players);
+                }
+
                 break;
 
             default:
@@ -318,9 +332,9 @@ public class GameRound {
         possibleActions.add(new Action(ActionType.FOLD, 0));
 
         final long callAmount = pot.getAmountNeededToCall(player);
-        if (callAmount > 0 && player.getChipAmount() > 0)
+        if (callAmount > 0 && player.getChipAmount() >= callAmount)
             possibleActions.add(new Action(ActionType.CALL, callAmount));
-        else
+        else if (callAmount == 0)
             possibleActions.add(new Action(ActionType.CHECK, 0));
 
         if (player.getChipAmount() > 0) {

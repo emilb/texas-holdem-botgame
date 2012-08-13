@@ -1,7 +1,6 @@
 package se.cygni.texasholdem.server.session;
 
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.lang.StringUtils;
@@ -57,6 +56,8 @@ public class SessionManagerRemote implements SessionManager {
         this.gamePlan = gamePlan;
 
         eventBus.register(this);
+
+        initConnectionStatusTimer();
     }
 
     @Override
@@ -121,11 +122,7 @@ public class SessionManagerRemote implements SessionManager {
         log.info("Player {} has left the game",
                 playerQuitEvent.getPlayer().getName());
 
-        final String sessionId = playerQuitEvent.getPlayer().getSessionId();
-
-        sessionPlayerMap.remove(sessionId);
-        sessionClientContextMap.remove(sessionId);
-
+        terminateSession(playerQuitEvent.getPlayer());
     }
 
     @Subscribe
@@ -190,7 +187,19 @@ public class SessionManagerRemote implements SessionManager {
 
     }
 
+    @Override
+    public int getNoofPlayers() {
+        return sessionPlayerMap.values().size();
+    }
 
+    @Override
+    public List<BotPlayer> listPlayers() {
+        List<BotPlayer> players = new ArrayList<BotPlayer>();
+        players.addAll(
+                sessionPlayerMap.values());
+
+        return players;
+    }
 
     private String createSessionId() {
 
@@ -210,5 +219,25 @@ public class SessionManagerRemote implements SessionManager {
             }
         }
         return true;
+    }
+
+    private void initConnectionStatusTimer() {
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                List<BotPlayer> disconnectedPlayers = new ArrayList<BotPlayer>();
+                for (BotPlayer player : listPlayers()) {
+                    if (!sessionClientContextMap.get(player.getSessionId()).isActive()) {
+                        log.debug("Found disconnected player: {}", player);
+                        disconnectedPlayers.add(player);
+                    }
+                }
+
+                for (BotPlayer player : disconnectedPlayers)
+                    eventBus.post(new PlayerQuitEvent(player));
+            }
+        }, 5000, 500);
+        // delay, repeat every ms
     }
 }
