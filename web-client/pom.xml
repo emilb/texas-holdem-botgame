@@ -15,22 +15,15 @@
     <name>texas-holdem-web-client</name>
 
 
-   <build>
+    <build>
        <plugins>
            <plugin>
                <groupId>org.mortbay.jetty</groupId>
                <artifactId>jetty-maven-plugin</artifactId>
-               <version>8.1.4.v20120524</version>
-               <configuration>
-                   <scanIntervalSeconds>0</scanIntervalSeconds>
-                   <webAppConfig>
-                       <contextPath>/</contextPath>
-                   </webAppConfig>
-
-               </configuration>
            </plugin>
        </plugins>
-   </build>
+    </build>
+
     <dependencies>
 
         <dependency>
@@ -73,6 +66,7 @@
             <version>1.0</version>
             <scope>provided</scope>
         </dependency>
+
         <!-- This is ONLY required if you use Atmosphere's annotation. If you use atmosphere.xml, not required -->
         <dependency>
             <groupId>eu.infomas</groupId>
@@ -102,7 +96,6 @@
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
         </dependency>
-
 
         <dependency>
             <groupId>cglib</groupId>
