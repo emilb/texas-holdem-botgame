@@ -67,11 +67,13 @@ public class Table implements Runnable {
 
         while (!isThereAWinner()) {
 
-            final List<BotPlayer> currentPlayers = GameUtil
-                    .getActivePlayersWithChipsLeft(players);
+//            final List<BotPlayer> currentPlayers = GameUtil
+//                    .getActivePlayersWithChipsLeft(players);
+
+            final List<BotPlayer> currentPlayers = new ArrayList<BotPlayer>(players);
 
             dealerPlayer = GameUtil.getNextPlayerInPlay(currentPlayers,
-                    dealerPlayer);
+                    dealerPlayer, null);
 
             currentGameRound = new GameRound(currentPlayers,
                     dealerPlayer,
@@ -159,6 +161,7 @@ public class Table implements Runnable {
 
     public void removePlayer(final BotPlayer player) {
 
+        log.info("Removing player {}", player);
         players.remove(player);
         if (currentGameRound != null)
             currentGameRound.removePlayerFromGame(player);

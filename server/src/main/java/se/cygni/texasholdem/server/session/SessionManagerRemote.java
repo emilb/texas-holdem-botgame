@@ -10,6 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import se.cygni.texasholdem.communication.message.event.CommunityHasBeenDealtACardEvent;
+import se.cygni.texasholdem.communication.message.event.PlayIsStartedEvent;
+import se.cygni.texasholdem.communication.message.event.YouHaveBeenDealtACardEvent;
 import se.cygni.texasholdem.communication.message.exception.NoRoomSpecifiedException;
 import se.cygni.texasholdem.communication.message.exception.UsernameAlreadyTakenException;
 import se.cygni.texasholdem.communication.message.request.ActionRequest;
@@ -75,6 +78,11 @@ public class SessionManagerRemote implements SessionManager {
         final ClientContext context = sessionClientContextMap.get(player
                 .getSessionId());
 
+        if (context == null || !context.isActive()) {
+            terminateSession(player);
+            return null;
+        }
+
         return messageSender.sendAndWaitForResponse(
                 context, request);
     }
@@ -88,6 +96,14 @@ public class SessionManagerRemote implements SessionManager {
 
         for (final BotPlayer player : eventWrapper.getReceivers()) {
             if (player instanceof TrainingPlayer) {
+                TrainingPlayer trainingPlayer = (TrainingPlayer)player;
+                if (eventWrapper.getEvent() instanceof YouHaveBeenDealtACardEvent)
+                    trainingPlayer.onYouHaveBeenDealtACard((YouHaveBeenDealtACardEvent) eventWrapper.getEvent());
+                else if (eventWrapper.getEvent() instanceof CommunityHasBeenDealtACardEvent)
+                    trainingPlayer.onCommunityHasBeenDealtACard((CommunityHasBeenDealtACardEvent) eventWrapper.getEvent());
+                else if (eventWrapper.getEvent() instanceof PlayIsStartedEvent)
+                    trainingPlayer.onPlayIsStarted((PlayIsStartedEvent) eventWrapper.getEvent());
+
                 continue;
             }
 

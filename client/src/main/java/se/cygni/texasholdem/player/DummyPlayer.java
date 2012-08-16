@@ -3,8 +3,12 @@ package se.cygni.texasholdem.player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import se.cygni.texasholdem.client.PlayerClient;
+import se.cygni.texasholdem.communication.message.event.TableIsDoneEvent;
 import se.cygni.texasholdem.communication.message.request.ActionRequest;
 import se.cygni.texasholdem.game.Action;
+import se.cygni.texasholdem.game.Room;
+import se.cygni.texasholdem.game.exception.GameException;
 
 public class DummyPlayer extends BasicPlayer {
 
@@ -12,6 +16,27 @@ public class DummyPlayer extends BasicPlayer {
             .getLogger(DummyPlayer.class);
 
     private final String name = "dummmy" + (int) (90 * Math.random() + 10);
+
+    private PlayerClient playerClient;
+
+    public DummyPlayer() {
+        playerClient = new PlayerClient(this);
+    }
+
+    public static void main(String[] args) {
+        DummyPlayer player = new DummyPlayer();
+        player.playAGame();
+    }
+
+    public void playAGame() {
+        try {
+            playerClient.registerForPlay(Room.TRAINING);
+
+        } catch (GameException e) {
+
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public String getName() {
@@ -54,4 +79,9 @@ public class DummyPlayer extends BasicPlayer {
         return action;
     }
 
+    @Override
+    public void onTableIsDone(TableIsDoneEvent event) {
+
+        playerClient.disconnect();
+    }
 }

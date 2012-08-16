@@ -9,6 +9,7 @@ import se.cygni.texasholdem.game.BotPlayer;
 
 import com.google.common.eventbus.EventBus;
 import se.cygni.texasholdem.game.Card;
+import se.cygni.texasholdem.game.Player;
 import se.cygni.texasholdem.util.PlayerTypeConverter;
 
 public class EventBusUtil {
@@ -31,6 +32,25 @@ public class EventBusUtil {
             final List<BotPlayer> recipients) {
 
         eventBus.post(new EventWrapper(event, recipients));
+    }
+
+    public static void postPlayIsStarted(
+            final EventBus eventBus,
+            final long smallBlind,
+            final long bigBlind,
+            final BotPlayer dealerPlayer,
+            final BotPlayer smallBlindPlayer,
+            final BotPlayer bigBlindPlayer,
+            final List<BotPlayer> players,
+            final List<BotPlayer> recipients) {
+
+        postToEventBus(eventBus,
+                new PlayIsStartedEvent(PlayerTypeConverter.listOfBotPlayers(players),
+                smallBlind, bigBlind,
+                PlayerTypeConverter.fromBotPlayer(dealerPlayer),
+                PlayerTypeConverter.fromBotPlayer(smallBlindPlayer),
+                PlayerTypeConverter.fromBotPlayer(bigBlindPlayer)),
+                recipients);
     }
 
     public static void postCommunityHasBeenDealtACard (

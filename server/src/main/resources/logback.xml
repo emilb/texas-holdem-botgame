@@ -19,7 +19,7 @@
     </appender>
 -->
 
-    <logger name="se" level="DEBUG" />
+    <logger name="se" level="INFO" />
     <logger name="org.codemonkey" level="INFO" />
     <root level="INFO">
         <appender-ref ref="STDOUT" />

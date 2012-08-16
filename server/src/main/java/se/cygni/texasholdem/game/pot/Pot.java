@@ -38,6 +38,10 @@ public class Pot {
                 players));
     }
 
+    public List<BotPlayer> getAllPlayers() {
+        return allPlayers;
+    }
+
     /**
      * Calculates the bet the player has to make to Call. If player has folded 0
      * is returned.
@@ -148,11 +152,25 @@ public class Pot {
     /**
      *
      * @param player
-     * @return TRUE if player is still able to bet more (i.e. has not folded or gone all in)
+     * @return TRUE if player is still able to bet more (i.e. has money left, has not folded or gone all in)
      */
     public boolean isAbleToBet(final BotPlayer player) {
 
-        return !hasFolded(player) && !isAllIn(player);
+        return !hasFolded(player) && !isAllIn(player) && player.getChipAmount() > 0;
+    }
+
+    /**
+     *
+     * @return The number of players that are able to make a bet
+     */
+    public int getNoofPlayersAbleToBet() {
+        int counter = 0;
+
+        for (BotPlayer player : allPlayers) {
+            counter += isAbleToBet(player) ? 1 : 0;
+        }
+
+        return counter;
     }
 
     /**

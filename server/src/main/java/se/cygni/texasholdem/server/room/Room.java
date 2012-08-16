@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.game.trainingplayers.CrazyPlayer;
+import se.cygni.texasholdem.game.trainingplayers.PhilHellmuthPlayer;
 import se.cygni.texasholdem.game.trainingplayers.RaiserPlayer;
 import se.cygni.texasholdem.game.trainingplayers.TrainingPlayer;
 import se.cygni.texasholdem.server.eventbus.PlayerQuitEvent;
@@ -45,11 +46,13 @@ public abstract class Room {
 
     @Subscribe
     public void onPlayerQuit(final PlayerQuitEvent playerQuitEvent) {
-
         final BotPlayer player = playerQuitEvent.getPlayer();
+        log.info("Player {} has quit, ordering Table to remove her", player);
         final Table table = getTableForPlayer(player);
         if (table != null)
             table.removePlayer(player);
+        else
+            log.info("Couldn't find table for user!?");
 
     }
 
@@ -74,6 +77,10 @@ public abstract class Room {
             return new RaiserPlayer("Raiser_" + PlayerTrainerCounter++, UUID.randomUUID().toString(), gamePlan.getStartingChipsAmount());
         else
             return new CrazyPlayer("Crazy_" + PlayerTrainerCounter++, UUID.randomUUID().toString(), gamePlan.getStartingChipsAmount());
+    }
+
+    protected TrainingPlayer getPhilHellmuthPlayer() {
+        return new PhilHellmuthPlayer("Hellmuth_" + PlayerTrainerCounter++, UUID.randomUUID().toString(), gamePlan.getStartingChipsAmount());
     }
 
     public abstract void addPlayer(BotPlayer player);

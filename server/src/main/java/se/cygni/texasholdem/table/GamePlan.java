@@ -24,13 +24,13 @@ public class GamePlan {
 
     public GamePlan() {
 
-        this.startingChipsAmount = 1000;
+        this.startingChipsAmount = 10000;
         this.playsBetweenBlindRaise = 10;
-        this.smalBlindStart = 25;
-        this.bigBlindStart = 50;
+        this.smalBlindStart = 5;
+        this.bigBlindStart = 10;
         this.blindRaiseStrategy = BlindRaiseStrategy.FIX_AMOUNT;
-        this.smallBlindRaiseStrategyValue = 15;
-        this.bigBlindRaiseStrategyValue = 50;
+        this.smallBlindRaiseStrategyValue = 5;
+        this.bigBlindRaiseStrategyValue = 10;
 
         // Override values from system properties
         final SystemFieldPopulator fieldPopulator = new SystemFieldPopulator(

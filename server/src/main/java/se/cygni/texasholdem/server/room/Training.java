@@ -37,8 +37,10 @@ public class Training extends Room {
         table.addPlayer(getTrainingPlayer());
         table.addPlayer(getTrainingPlayer());
         table.addPlayer(getTrainingPlayer());
-        table.addPlayer(getTrainingPlayer());
+        table.addPlayer(getPhilHellmuthPlayer());
         table.addPlayer(player);
+
+        tables.add(table);
 
         Thread t = new Thread(table);
         t.start();

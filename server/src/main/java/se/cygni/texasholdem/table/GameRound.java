@@ -2,7 +2,6 @@ package se.cygni.texasholdem.table;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Formatter;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -22,11 +21,8 @@ import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.game.Card;
 import se.cygni.texasholdem.game.Deck;
 import se.cygni.texasholdem.game.Hand;
-import se.cygni.texasholdem.game.Player;
 import se.cygni.texasholdem.game.PlayerShowDown;
-import se.cygni.texasholdem.game.definitions.PlayState;
 import se.cygni.texasholdem.game.pot.Pot;
-import se.cygni.texasholdem.game.pot.PotTransaction;
 import se.cygni.texasholdem.game.util.GameUtil;
 import se.cygni.texasholdem.game.util.PokerHandRankUtil;
 import se.cygni.texasholdem.server.eventbus.EventBusUtil;
@@ -43,7 +39,8 @@ public class GameRound {
     private final List<BotPlayer> players = Collections
             .synchronizedList(new ArrayList<BotPlayer>());
 
-    private static final int NOOF_ACTION_RETRIES = 3;
+    private static final int MAX_NOOF_ACTION_RETRIES = 3;
+    private static final int MAX_NOOF_TURNS_PER_STATE = 10;
 
     private final BotPlayer dealerPlayer;
     private final BotPlayer smallBlindPlayer;
@@ -66,17 +63,18 @@ public class GameRound {
             final EventBus eventBus,
             final SessionManager sessionManager) {
 
+        pot = new Pot(GameUtil.getActivePlayersWithChipsLeft(players));
+
         this.players.addAll(players);
         this.dealerPlayer = dealerPlayer;
         this.smallBlindPlayer = GameUtil.getNextPlayerInPlay(this.players,
-                dealerPlayer);
+                dealerPlayer, pot);
         this.bigBlindPlayer = GameUtil.getNextPlayerInPlay(this.players,
-                smallBlindPlayer);
+                smallBlindPlayer, pot);
         this.smallBlind = smallBlind;
         this.bigBlind = bigBlind;
         this.eventBus = eventBus;
         this.sessionManager = sessionManager;
-        pot = new Pot(this.players);
     }
 
     public void playGameRound() {
@@ -85,20 +83,25 @@ public class GameRound {
         final Deck deck = Deck.getShuffledDeck();
 
         // Notify of start
-        EventBusUtil.postToEventBus(eventBus, createPlayIsStartedEvent(),
+        EventBusUtil.postPlayIsStarted(eventBus,
+                smallBlind, bigBlind,
+                dealerPlayer, smallBlindPlayer, bigBlindPlayer, players,
                 players);
 
         // The OPEN
         dealACardToAllParticipatingPlayers(deck);
         dealACardToAllParticipatingPlayers(deck);
 
-        long bigBlindAmount = pot.bet(bigBlindPlayer, bigBlind);
-        EventBusUtil.postPlayerBetBigBlind(eventBus, bigBlindPlayer, bigBlindAmount, players);
-
         long smallBlindAmount = pot.bet(smallBlindPlayer, smallBlind);
         EventBusUtil.postPlayerBetSmallBlind(eventBus, smallBlindPlayer, smallBlindAmount, players);
+        log.debug("{} placed small blind of {}", smallBlindPlayer.getName(), smallBlindAmount);
+
+        long bigBlindAmount = pot.bet(bigBlindPlayer, bigBlind);
+        EventBusUtil.postPlayerBetBigBlind(eventBus, bigBlindPlayer, bigBlindAmount, players);
+        log.debug("{} placed big blind of {}", bigBlindPlayer.getName(), bigBlindAmount);
 
         // Pre flop
+        log.debug("PRE FLOP betting round");
         getBetsTillPotBalanced();
 
         // Flop
@@ -106,6 +109,7 @@ public class GameRound {
         burnAndDealCardsToCommunity(deck, 3);
 
         // Betting
+        log.debug("FLOP betting round");
         getBetsTillPotBalanced();
 
         // Turn
@@ -113,6 +117,7 @@ public class GameRound {
         burnAndDealCardsToCommunity(deck, 1);
 
         // Betting
+        log.debug("TURN betting round");
         getBetsTillPotBalanced();
 
         // River
@@ -120,6 +125,7 @@ public class GameRound {
         burnAndDealCardsToCommunity(deck, 1);
 
         // Betting
+        log.debug("RIVER betting round");
         getBetsTillPotBalanced();
 
         // Showdown
@@ -128,81 +134,12 @@ public class GameRound {
         distributePayback();
 
         // Clear cards, prepare for next round
-        clearAllCards();
+        GameUtil.clearAllCards(players);
 
-        printTransactions();
-    }
-
-    private void printTransactions() {
-
-        final StringBuilder sb = new StringBuilder();
-        final Formatter formatter = new Formatter(sb);
-
-        sb.append("\n\n** Transactions during game round **\n\n");
-        sb.append("Small blind:        ").append(smallBlind);
-        sb.append("\nBig blind:          ").append(bigBlind);
-        sb.append("\nDealer:             ").append(dealerPlayer.getName());
-        sb.append("\nSmall blind player: ").append(smallBlindPlayer.getName());
-        sb.append("\nBig blind player:   ").append(bigBlindPlayer.getName())
-                .append("\n");
-
-        for (final PlayState state : PlayState.values()) {
-            final List<PotTransaction> transactions = pot
-                    .getTransactionsForState(state);
-
-            sb.append("\nState: ").append(state).append("\n");
-
-            if (transactions.size() > 0) {
-                sb.append("Tx no  Player        Bet All in\n");
-
-                for (final PotTransaction trans : transactions) {
-                    formatter.format("%04d %10s %8d %s \n",
-                            trans.getTransactionNumber(),
-                            trans.getPlayer().getName(),
-                            trans.getAmount(), trans.isAllIn());
-                }
-            } else {
-                sb.append("No transactions\n");
-            }
-        }
-
-        sb.append("\nGame round result:\n");
-        formatter.format("%-10s %8s %-15s %-14s %-13s\n", "Player", "Won",
-                "Hand",
-                "Cards", "Comment");
-        for (final Entry<BotPlayer, Long> entry : payoutResult.entrySet()) {
-
-            final BotPlayer player = entry.getKey();
-            final Long amount = entry.getValue();
-            final BestHand bestHand = rankUtil.getBestHand(player);
-            formatter.format("%-10s %8d %-15s %-14s %-6s %-6s \n",
-                    player.getName(), amount,
-                    bestHand.getPokerHand().getName(),
-                    bestHand.cardsToShortString(),
-                    (pot.hasFolded(player) ? "folded" : ""),
-                    (pot.isAllIn(player) ? "all in" : ""));
-        }
-
-        sb.append("\nPlayer standing now:\n");
-        formatter.format("%-10s %8s\n", "Player", "Cash");
-        for (final BotPlayer player : players) {
-            formatter.format("%-10s %8d\n", player.getName(),
-                    player.getChipAmount());
-        }
-
-        sb.append("\n** ------------------------------ **\n");
-        log.debug(sb.toString());
-    }
-
-    protected PlayIsStartedEvent createPlayIsStartedEvent() {
-
-        final List<Player> currentPlayers = PlayerTypeConverter.listOfBotPlayers(players);
-
-        return new PlayIsStartedEvent(currentPlayers,
-                smallBlind, bigBlind,
-                PlayerTypeConverter.fromBotPlayer(dealerPlayer),
-                PlayerTypeConverter.fromBotPlayer(smallBlindPlayer),
-                PlayerTypeConverter.fromBotPlayer(bigBlindPlayer));
+        // Log results
+        log.info(GameUtil.printTransactions(
+                smallBlind, bigBlind, dealerPlayer, bigBlindPlayer, smallBlindPlayer, players,
+                pot, payoutResult, rankUtil));
     }
 
     protected void burnAndDealCardsToCommunity(
@@ -235,52 +172,79 @@ public class GameRound {
         }
     }
 
-    protected void doMandatoryBettingRound() {
-
-        final List<BotPlayer> playerOrder = GameUtil
-                .getOrderedListOfPlayersInPlay(players, bigBlindPlayer);
-
-        for (final BotPlayer player : playerOrder) {
-
-            if (!pot.isAbleToBet(player))
-                continue;
-
-            final Action action = prepareAndGetActionFromPlayer(player);
-            if (action != null)
-                act(action, player);
-            else
-                pot.fold(player);
-        }
-
-    }
-
     protected void getBetsTillPotBalanced() {
 
-        doMandatoryBettingRound();
+        doInitialBettingRound();
 
-        BotPlayer currentPlayer = bigBlindPlayer;
+        log.debug("Starting normal betting round pot is balanced: {}", pot.isCurrentPlayStateBalanced());
+
+        List<BotPlayer> playersInOrder = GameUtil.getOrderedListOfPlayersInPlay(players, dealerPlayer, pot);
+
+        int noofTurns = 1;
         while (!pot.isCurrentPlayStateBalanced()) {
+            for (BotPlayer currentPlayer : playersInOrder) {
+                log.debug("Current player is {}", currentPlayer);
 
-            currentPlayer = GameUtil
-                    .getNextPlayerInPlay(players, currentPlayer);
+                if (!pot.isAbleToBet(currentPlayer)) {
+                    log.debug("{} is not able to bet, skipping", currentPlayer);
+                    continue;
+                }
 
-            if (currentPlayer == null && pot.isCurrentPlayStateBalanced())
-                return;
-
-            if (currentPlayer == null && !pot.isCurrentPlayStateBalanced())
-                throw new AssertionError(
-                        "Could not find next player and pot is not balanced!");
-
-            if (!pot.isAbleToBet(currentPlayer))
-                continue;
-
-            final Action action = prepareAndGetActionFromPlayer(currentPlayer);
-            if (action != null)
+                final Action action = prepareAndGetActionFromPlayer(currentPlayer, noofTurns < MAX_NOOF_TURNS_PER_STATE);
                 act(action, currentPlayer);
+            }
+            noofTurns++;
+        }
+    }
 
-            if (pot.isCurrentPlayStateBalanced()
-                    && currentPlayer.equals(bigBlindPlayer))
-                return;
+    protected void doInitialBettingRound() {
+
+        log.debug("Initial Betting Round starting");
+
+        // Start with next active player after bigBlindPlayer
+        final List<BotPlayer> playerOrder = GameUtil
+                .getOrderedListOfPlayersInPlay(players, bigBlindPlayer, pot);
+
+        for (final BotPlayer player : playerOrder) {
+            log.debug("Letting {} act", player);
+
+            final Action action = prepareAndGetActionFromPlayer(player, true);
+            act(action, player);
+        }
+    }
+
+    protected Action prepareAndGetActionFromPlayer(final BotPlayer player, boolean raiseAllowed) {
+
+        final List<Action> possibleActions = GameUtil.getPossibleActions(player, pot, smallBlind, bigBlind, raiseAllowed);
+
+        int counter = 0;
+
+        Action userAction = null;
+        while (!GameUtil.isActionValid(possibleActions, userAction) && counter < MAX_NOOF_ACTION_RETRIES) {
+            userAction = getActionFromPlayer(possibleActions, player);
+            counter++;
+        }
+
+        if (!GameUtil.isActionValid(possibleActions, userAction)) {
+            log.debug("{} did not reply with a valid action, auto-folding", player);
+            userAction = new Action(ActionType.FOLD, 0);
+        }
+
+        return userAction;
+    }
+
+    protected Action getActionFromPlayer(final List<Action> possibleActions, final BotPlayer player) {
+        try {
+            final ActionRequest request = new ActionRequest(possibleActions);
+            final ActionResponse response = (ActionResponse) sessionManager
+                    .sendAndWaitForResponse(player, request);
+
+            return response.getAction();
+
+        } catch (final Exception e) {
+            log.info("Player failed to respond, folding for this round", e);
+            pot.fold(player);
+            return new Action(ActionType.FOLD, 0);
         }
     }
 
@@ -288,6 +252,7 @@ public class GameRound {
 
         switch (action.getActionType()) {
             case ALL_IN:
+                log.debug("{} went all in with amount {}", player.getName(), player.getChipAmount());
                 long chipAmount = player.getChipAmount();
                 pot.bet(player, player.getChipAmount());
                 EventBusUtil.postPlayerWentAllIn(eventBus, player, chipAmount, players);
@@ -327,118 +292,10 @@ public class GameRound {
         }
     }
 
-    protected Action prepareAndGetActionFromPlayer(final BotPlayer player) {
-        final List<Action> possibleActions = new ArrayList<Action>();
-        possibleActions.add(new Action(ActionType.FOLD, 0));
-
-        final long callAmount = pot.getAmountNeededToCall(player);
-        if (callAmount > 0 && player.getChipAmount() >= callAmount)
-            possibleActions.add(new Action(ActionType.CALL, callAmount));
-        else if (callAmount == 0)
-            possibleActions.add(new Action(ActionType.CHECK, 0));
-
-        if (player.getChipAmount() > 0) {
-            possibleActions.add(new Action(ActionType.RAISE,
-                    smallBlind > player.getChipAmount() ? player.getChipAmount() : smallBlind));
-
-            possibleActions.add(new Action(ActionType.ALL_IN, player
-                    .getChipAmount()));
-        }
-
-        int counter = 0;
-
-        Action userAction = null;
-        while (!isPlayerActionValid(player, possibleActions, userAction) && counter < NOOF_ACTION_RETRIES) {
-            userAction = getActionFromPlayer(possibleActions, player);
-            counter++;
-        }
-
-        return userAction;
-    }
-
-    protected boolean isPlayerActionValid(final BotPlayer player, final List<Action> possibleActions, Action action) {
-        if (action == null)
-            return false;
-
-        if (action.getActionType() == null)
-            return false;
-
-
-        switch (action.getActionType()) {
-            case FOLD:
-                return true;
-
-            case CHECK:
-                return containsActionType(possibleActions, ActionType.CHECK);
-
-            case CALL:
-                if (!containsActionType(possibleActions, ActionType.CALL))
-                    return false;
-
-                Action allowedCall = getActionOfType(possibleActions, ActionType.CALL);
-                return (action.getAmount() == allowedCall.getAmount());
-
-            case RAISE:
-                if (!containsActionType(possibleActions, ActionType.RAISE))
-                    return false;
-
-                Action allowedRaise = getActionOfType(possibleActions, ActionType.RAISE);
-                return (action.getAmount() >= allowedRaise.getAmount());
-
-            case ALL_IN:
-                if (!containsActionType(possibleActions, ActionType.ALL_IN))
-                    return false;
-
-                Action allowedAllIn = getActionOfType(possibleActions, ActionType.ALL_IN);
-                return (action.getAmount() >= allowedAllIn.getAmount());
-        }
-
-        return false;
-    }
-
-    protected Action getActionFromPlayer(final List<Action> possibleActions, final BotPlayer player) {
-        try {
-            final ActionRequest request = new ActionRequest(possibleActions);
-            final ActionResponse response = (ActionResponse) sessionManager
-                    .sendAndWaitForResponse(player, request);
-
-            return response.getAction();
-
-        } catch (final Exception e) {
-            log.info("Player failed to respond, folding for this round", e);
-            pot.fold(player);
-            return new Action(ActionType.FOLD, 0);
-        }
-    }
-
-    protected boolean containsActionType(final List<Action> possibleActions, ActionType actionType) {
-        return getActionOfType(possibleActions, actionType) != null;
-    }
-
-    protected Action getActionOfType(final List<Action> possibleActions, ActionType actionType) {
-
-        for (Action possibleAction : possibleActions) {
-            if (possibleAction.getActionType() == actionType)
-                return possibleAction;
-        }
-
-        return null;
-    }
-
-    protected void clearAllCards() {
-
-        final Iterator<BotPlayer> iter = players.iterator();
-
-        while (iter.hasNext()) {
-            final BotPlayer player = iter.next();
-            player.clearCards();
-        }
-    }
-
     protected void distributePayback() {
 
         rankUtil = new PokerHandRankUtil(
-                communityCards, players);
+                communityCards, pot.getAllPlayers());
 
         // Calculate player ranking
         final List<List<BotPlayer>> playerRanking = rankUtil
@@ -481,7 +338,6 @@ public class GameRound {
 
     public void removePlayerFromGame(final BotPlayer player) {
 
-        // TODO: How to handle if removed player was a dealer or blind player?
         pot.fold(player);
     }
 
