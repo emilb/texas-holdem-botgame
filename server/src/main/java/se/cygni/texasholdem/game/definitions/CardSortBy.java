@@ -1,8 +1,8 @@
 package se.cygni.texasholdem.game.definitions;
 
-import java.util.Comparator;
-
 import se.cygni.texasholdem.game.Card;
+
+import java.util.Comparator;
 
 public enum CardSortBy {
 

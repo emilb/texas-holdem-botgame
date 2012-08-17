@@ -1,4 +1,4 @@
-<%@ include file="/WEB-INF/views/includes/taglibs.jsp"%>
+<%@ include file="/WEB-INF/views/includes/taglibs.jsp" %>
 
 <spring:url scope="page" var="jqueryJavascriptUrl" value="/resources/js/jquery-1.7.1.js"/>
 <spring:url scope="page" var="jqueryTmplJavascriptUrl" value="/resources/js/jquery.tmpl.min.js"/>
@@ -9,84 +9,89 @@
 
 <!DOCTYPE HTML>
 <html>
-    <head>
+<head>
 
-        <title>Cygni Texas Hold'em</title>
+    <title>Cygni Texas Hold'em</title>
 
-        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-		<script src="${pageScope.jqueryJavascriptUrl}"></script>
-		<script src="${pageScope.jqueryTmplJavascriptUrl}"></script>
-		<script src="${pageScope.jqueryAtmosphereUrl}"></script>
-		<script src="${pageScope.bootstrapUrl}"></script>
-		<link rel="stylesheet" href="${pageScope.bootstrapCssUrl}"/>
-		<link rel="stylesheet" href="${pageScope.bootstrapResponsiveCssUrl}"/>
-    </head>
-    <body>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <script src="${pageScope.jqueryJavascriptUrl}"></script>
+    <script src="${pageScope.jqueryTmplJavascriptUrl}"></script>
+    <script src="${pageScope.jqueryAtmosphereUrl}"></script>
+    <script src="${pageScope.bootstrapUrl}"></script>
+    <link rel="stylesheet" href="${pageScope.bootstrapCssUrl}"/>
+    <link rel="stylesheet" href="${pageScope.bootstrapResponsiveCssUrl}"/>
+</head>
+<body>
 
-        <h:navbar section="serverstatus"/>
+<h:navbar section="serverstatus"/>
 
-        <div class="container-fluid">
-                 <div class="span9">
-                    <div class="hero-unit">
-                        <h1>Server Status</h1>
-                        <p>Shows some statistics and connected players</p>
-                    </div>
-                    <div class="row-fluid">
-                        <div class="span6">
-                            <table class="table table-striped">
-                                <thead>
-                                <tr>
-                                    <th colspan="2">Statistics</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>Uptime</td>
-                                    <td>${uptime}</td>
-                                </tr>
-                                <tr>
-                                    <td>Connected players</td>
-                                    <td>${noofPlayers}</td>
-                                </tr>
-                                <tr>
-                                    <td>Total clients served</td>
-                                    <td>${totalNoofConnections}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div><!--/span-->
+<div class="container-fluid">
+    <div class="span9">
+        <div class="hero-unit">
+            <h1>Server Status</h1>
 
-                        <div class="span6">
-                            <table class="table table-striped">
-                                <thead>
-                                <tr>
-                                    <th colspan="2">Players</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach var="player" items="${players}">
-                                    <tr>
-                                        <td>${player.name}</td>
-                                        <td>$ ${player.chipCount}</td>
-                                    </tr>
-                                </c:forEach>
+            <p>Shows some statistics and connected players</p>
+        </div>
+        <div class="row-fluid">
+            <div class="span6">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th colspan="2">Statistics</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Uptime</td>
+                        <td>${uptime}</td>
+                    </tr>
+                    <tr>
+                        <td>Connected players</td>
+                        <td>${noofPlayers}</td>
+                    </tr>
+                    <tr>
+                        <td>Total clients served</td>
+                        <td>${totalNoofConnections}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--/span-->
 
-                                </tbody>
-                            </table>
-                        </div><!--/span-->
-                    </div>
+            <div class="span6">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th colspan="2">Players</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="player" items="${players}">
+                        <tr>
+                            <td>${player.name}</td>
+                            <td>$ ${player.chipCount}</td>
+                        </tr>
+                    </c:forEach>
 
-                </div><!--/span-->
-            </div><!--/row-->
+                    </tbody>
+                </table>
+            </div>
+            <!--/span-->
+        </div>
 
-            <hr>
+    </div>
+    <!--/span-->
+</div>
+<!--/row-->
 
-            <footer>
-                <p> &copy; Cygni AB 2012</p>
-            </footer>
+<hr>
 
-        </div><!--/.fluid-container-->
+<footer>
+    <p> &copy; Cygni AB 2012</p>
+</footer>
+
+</div><!--/.fluid-container-->
 
 
-    </body>
+</body>
 </html>

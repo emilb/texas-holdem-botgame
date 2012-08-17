@@ -1,17 +1,12 @@
 package se.cygni.texasholdem.game.util;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import se.cygni.texasholdem.game.BestHand;
 import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.game.Card;
+
+import java.util.*;
 
 public class PokerHandRankUtil {
 
@@ -26,7 +21,7 @@ public class PokerHandRankUtil {
     private Map<BotPlayer, BestHand> playerBestHandMap;
 
     public PokerHandRankUtil(final List<Card> communityCards,
-            final List<BotPlayer> players) {
+                             final List<BotPlayer> players) {
 
         this.communityCards = communityCards;
         this.players = players;
@@ -63,9 +58,7 @@ public class PokerHandRankUtil {
                 final List<BotPlayer> currPos = new ArrayList<BotPlayer>();
                 currPos.add(bestHand.getPlayer());
                 playerRankings.add(currPos);
-            }
-
-            else if (previousBestHand.compareTo(bestHand) == 0) {
+            } else if (previousBestHand.compareTo(bestHand) == 0) {
                 playerRankings.get(playerRankings.size() - 1).add(
                         bestHand.getPlayer());
             }

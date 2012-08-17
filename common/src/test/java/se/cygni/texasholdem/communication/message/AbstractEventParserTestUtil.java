@@ -1,15 +1,14 @@
 package se.cygni.texasholdem.communication.message;
 
-import static org.junit.Assert.assertEquals;
-
-import java.io.IOException;
-
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
-
 import se.cygni.texasholdem.game.Hand;
 import se.cygni.texasholdem.game.Player;
 import se.cygni.texasholdem.game.PlayerShowDown;
+
+import java.io.IOException;
+
+import static org.junit.Assert.assertEquals;
 
 public abstract class AbstractEventParserTestUtil {
 
@@ -26,7 +25,7 @@ public abstract class AbstractEventParserTestUtil {
 
         assertEquals(message.getClass(), tMessage.getClass());
 
-        return (T)tMessage;
+        return (T) tMessage;
     }
 
     protected static void assertEqualss(

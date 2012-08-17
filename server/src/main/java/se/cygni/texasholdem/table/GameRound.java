@@ -1,27 +1,15 @@
 package se.cygni.texasholdem.table;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
+import com.google.common.eventbus.EventBus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import se.cygni.texasholdem.communication.message.event.*;
+import se.cygni.texasholdem.communication.message.event.CommunityHasBeenDealtACardEvent;
+import se.cygni.texasholdem.communication.message.event.ShowDownEvent;
+import se.cygni.texasholdem.communication.message.event.YouHaveBeenDealtACardEvent;
+import se.cygni.texasholdem.communication.message.event.YouWonAmountEvent;
 import se.cygni.texasholdem.communication.message.request.ActionRequest;
 import se.cygni.texasholdem.communication.message.response.ActionResponse;
-import se.cygni.texasholdem.game.Action;
-import se.cygni.texasholdem.game.ActionType;
-import se.cygni.texasholdem.game.BestHand;
-import se.cygni.texasholdem.game.BotPlayer;
-import se.cygni.texasholdem.game.Card;
-import se.cygni.texasholdem.game.Deck;
-import se.cygni.texasholdem.game.Hand;
-import se.cygni.texasholdem.game.PlayerShowDown;
+import se.cygni.texasholdem.game.*;
 import se.cygni.texasholdem.game.pot.Pot;
 import se.cygni.texasholdem.game.util.GameUtil;
 import se.cygni.texasholdem.game.util.PokerHandRankUtil;
@@ -29,7 +17,8 @@ import se.cygni.texasholdem.server.eventbus.EventBusUtil;
 import se.cygni.texasholdem.server.session.SessionManager;
 import se.cygni.texasholdem.util.PlayerTypeConverter;
 
-import com.google.common.eventbus.EventBus;
+import java.util.*;
+import java.util.Map.Entry;
 
 public class GameRound {
 
@@ -58,10 +47,10 @@ public class GameRound {
     private PokerHandRankUtil rankUtil;
 
     public GameRound(final List<BotPlayer> players,
-            final BotPlayer dealerPlayer, final long smallBlind,
-            final long bigBlind,
-            final EventBus eventBus,
-            final SessionManager sessionManager) {
+                     final BotPlayer dealerPlayer, final long smallBlind,
+                     final long bigBlind,
+                     final EventBus eventBus,
+                     final SessionManager sessionManager) {
 
         pot = new Pot(GameUtil.getActivePlayersWithChipsLeft(players));
 

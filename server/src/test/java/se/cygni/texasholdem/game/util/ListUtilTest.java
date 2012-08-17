@@ -1,16 +1,14 @@
 package se.cygni.texasholdem.game.util;
 
-import static org.junit.Assert.assertEquals;
-import static se.cygni.texasholdem.test.util.TestUtil.getCards;
+import org.junit.Test;
+import org.springframework.util.CollectionUtils;
+import se.cygni.texasholdem.game.Card;
+import se.cygni.texasholdem.game.definitions.Rank;
 
 import java.util.List;
 
-import org.junit.Test;
-import org.springframework.util.CollectionUtils;
-
-import se.cygni.texasholdem.game.Card;
-import se.cygni.texasholdem.game.definitions.Rank;
-import se.cygni.texasholdem.game.util.ListUtil;
+import static org.junit.Assert.assertEquals;
+import static se.cygni.texasholdem.test.util.TestUtil.getCards;
 
 public class ListUtilTest {
 

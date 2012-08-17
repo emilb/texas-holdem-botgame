@@ -4,7 +4,6 @@ import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 import se.cygni.texasholdem.communication.message.type.IsATexasMessage;
 import se.cygni.texasholdem.game.Player;
-import se.cygni.texasholdem.game.PlayerShowDown;
 
 import java.util.List;
 

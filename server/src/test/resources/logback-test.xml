@@ -10,20 +10,20 @@
         </encoder>
     </appender>
 
-<!-- 
-    <appender name="SOCKET" class="de.huxhorn.lilith.logback.appender.ClassicMultiplexSocketAppender">
-        <remoteHost>localhost</remoteHost>
-        <compressing>true</compressing>
-        <reconnectionDelay>10000</reconnectionDelay>
-        <includeCallerData>true</includeCallerData>
-    </appender>
--->
+    <!--
+        <appender name="SOCKET" class="de.huxhorn.lilith.logback.appender.ClassicMultiplexSocketAppender">
+            <remoteHost>localhost</remoteHost>
+            <compressing>true</compressing>
+            <reconnectionDelay>10000</reconnectionDelay>
+            <includeCallerData>true</includeCallerData>
+        </appender>
+    -->
 
-    <logger name="se" level="DEBUG" />
-    <logger name="org.codemonkey" level="DEBUG" />
+    <logger name="se" level="DEBUG"/>
+    <logger name="org.codemonkey" level="DEBUG"/>
     <root level="INFO">
-        <appender-ref ref="STDOUT" />
-<!--         <appender-ref ref="SOCKET" /> -->
+        <appender-ref ref="STDOUT"/>
+        <!--         <appender-ref ref="SOCKET" /> -->
     </root>
 
 </configuration>

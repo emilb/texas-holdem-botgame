@@ -1,11 +1,10 @@
 package se.cygni.texasholdem.game.pot;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import se.cygni.texasholdem.game.BotPlayer;
+
+import static org.junit.Assert.assertEquals;
 
 public class PotSplitterTest {
 

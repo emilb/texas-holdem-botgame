@@ -1,13 +1,12 @@
 package se.cygni.texasholdem.server.communication;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
 import se.cygni.texasholdem.communication.lock.ResponseLock;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class ResponseLockManager {

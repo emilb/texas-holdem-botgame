@@ -1,27 +1,25 @@
 package se.cygni.texasholdem.client;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import se.cygni.texasholdem.communication.message.event.TexasEvent;
+import se.cygni.texasholdem.player.Player;
+
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import se.cygni.texasholdem.communication.message.event.TexasEvent;
-import se.cygni.texasholdem.player.Player;
-
 /**
  * This EventDispatcher uses reflection to notify a player of incoming events.
  * Upon instantiation of this class the target object is analyzed for methods
  * that take an event class as argument (and also has that same method declared
  * in the interface).
- * 
+ * <p/>
  * The matching methods are stored in a map for quick lookups.
- * 
+ *
  * @author emil
- * 
  */
 public class EventDispatcher {
 
@@ -88,7 +86,7 @@ public class EventDispatcher {
 
     /**
      * Returns true if the Method m is also declared in the interface.
-     * 
+     *
      * @param m
      * @return
      */

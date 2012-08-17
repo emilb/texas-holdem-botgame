@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.game.Player;
 import se.cygni.texasholdem.server.session.SessionManager;
 import se.cygni.texasholdem.server.session.se.cygni.texasholdem.server.statistics.StatisticsCollector;

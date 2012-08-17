@@ -1,17 +1,12 @@
 package se.cygni.texasholdem.test.util;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.math.random.RandomData;
 import org.apache.commons.math.random.RandomDataImpl;
-
-import se.cygni.texasholdem.game.Card;
-import se.cygni.texasholdem.game.Deck;
-import se.cygni.texasholdem.game.Hand;
-import se.cygni.texasholdem.game.Player;
-import se.cygni.texasholdem.game.PlayerShowDown;
+import se.cygni.texasholdem.game.*;
 import se.cygni.texasholdem.game.definitions.PokerHand;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DomainUtil {
 

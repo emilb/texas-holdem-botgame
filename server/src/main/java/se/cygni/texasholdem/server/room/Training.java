@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import se.cygni.texasholdem.game.BotPlayer;
-import se.cygni.texasholdem.game.trainingplayers.RaiserPlayer;
 import se.cygni.texasholdem.server.session.SessionManager;
 import se.cygni.texasholdem.table.GamePlan;
 import se.cygni.texasholdem.table.Table;

@@ -35,7 +35,7 @@ public abstract class Room {
     private static long PlayerTrainerCounter = 0;
 
     public Room(final EventBus eventBus, final GamePlan gamePlan,
-                        final SessionManager sessionManager) {
+                final SessionManager sessionManager) {
 
         this.eventBus = eventBus;
         this.gamePlan = gamePlan;

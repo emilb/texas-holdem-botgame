@@ -10,7 +10,7 @@ public class Action {
 
     @JsonCreator
     public Action(@JsonProperty("actionType") final ActionType actionType,
-            @JsonProperty("amount") final long amount) {
+                  @JsonProperty("amount") final long amount) {
 
         this.actionType = actionType;
         this.amount = amount;

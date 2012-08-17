@@ -1,12 +1,5 @@
 package se.cygni.texasholdem.client;
 
-import java.net.InetSocketAddress;
-import java.util.UUID;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-
-
 import org.jboss.netty.bootstrap.ClientBootstrap;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBuffers;
@@ -31,6 +24,12 @@ import se.cygni.texasholdem.communication.netty.JsonDelimiter;
 import se.cygni.texasholdem.game.Action;
 import se.cygni.texasholdem.game.Room;
 import se.cygni.texasholdem.player.Player;
+
+import java.net.InetSocketAddress;
+import java.util.UUID;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class PlayerClient extends SimpleChannelHandler {
 
@@ -85,10 +84,10 @@ public class PlayerClient extends SimpleChannelHandler {
         cf.await(2000, TimeUnit.MILLISECONDS);
         cf.awaitUninterruptibly();
         cf.awaitUninterruptibly(2000, TimeUnit.MILLISECONDS);
-        cf.addListener(new ChannelFutureListener(){
+        cf.addListener(new ChannelFutureListener() {
             public void operationComplete(ChannelFuture future) throws Exception {
                 // chek to see if we succeeded
-                if(future.isSuccess()) {
+                if (future.isSuccess()) {
 
                     isConnected = true;
                     channel = future.getChannel();
@@ -123,7 +122,7 @@ public class PlayerClient extends SimpleChannelHandler {
     }
 
     public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) throws Exception {
-        String message = (String)e.getMessage();
+        String message = (String) e.getMessage();
         onMessageReceived(TexasMessageParser.decodeMessage(message));
     }
 
@@ -177,21 +176,21 @@ public class PlayerClient extends SimpleChannelHandler {
         return false;
     }
 
-	protected String getPlayerName() {
-		return player.getName();
-	}
+    protected String getPlayerName() {
+        return player.getName();
+    }
 
     protected TexasResponse sendAndWaitForResponse(final TexasRequest request) {
 
         final ResponseLock lock = responseManager.push(request.getRequestId());
         sendMessage(request);
         synchronized (lock) {
-        	if (lock.getResponse() == null) {
-	            try {
-	                lock.wait(RESPONSE_TIMEOUT_MS);
-	            } catch (final InterruptedException e) {
-	            }
-        	}
+            if (lock.getResponse() == null) {
+                try {
+                    lock.wait(RESPONSE_TIMEOUT_MS);
+                } catch (final InterruptedException e) {
+                }
+            }
         }
 
         if (lock.getResponse() == null)
@@ -202,7 +201,7 @@ public class PlayerClient extends SimpleChannelHandler {
 
     protected void sendMessage(final TexasMessage message) {
         try {
-            channel.write(TexasMessageParser.encodeMessage(message)+ new String(JsonDelimiter.delimiter()));
+            channel.write(TexasMessageParser.encodeMessage(message) + new String(JsonDelimiter.delimiter()));
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);

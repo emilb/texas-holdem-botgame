@@ -1,17 +1,15 @@
 package se.cygni.texasholdem.game.util;
 
-import static org.junit.Assert.assertEquals;
-import static se.cygni.texasholdem.test.util.TestUtil.createPokerHandUtil;
-import static se.cygni.texasholdem.test.util.TestUtil.getCards;
-
-import java.util.List;
-
 import org.junit.Test;
-
 import se.cygni.texasholdem.game.BestHand;
 import se.cygni.texasholdem.game.Card;
 import se.cygni.texasholdem.game.definitions.PokerHand;
-import se.cygni.texasholdem.game.util.PokerHandUtil;
+
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static se.cygni.texasholdem.test.util.TestUtil.createPokerHandUtil;
+import static se.cygni.texasholdem.test.util.TestUtil.getCards;
 
 public class PokerHandUtilTest {
 

@@ -2,7 +2,6 @@ package se.cygni.texasholdem.communication.message.event;
 
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
-
 import se.cygni.texasholdem.communication.message.type.IsATexasMessage;
 import se.cygni.texasholdem.game.Player;
 
@@ -14,7 +13,7 @@ public class PlayerCalledEvent extends TexasEvent {
 
     @JsonCreator
     public PlayerCalledEvent(@JsonProperty("player") final Player player,
-            @JsonProperty("callBet") final long callBet) {
+                             @JsonProperty("callBet") final long callBet) {
 
         this.player = player;
         this.callBet = callBet;

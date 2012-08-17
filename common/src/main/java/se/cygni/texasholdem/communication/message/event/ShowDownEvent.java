@@ -1,12 +1,11 @@
 package se.cygni.texasholdem.communication.message.event;
 
-import java.util.List;
-
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
-
 import se.cygni.texasholdem.communication.message.type.IsATexasMessage;
 import se.cygni.texasholdem.game.PlayerShowDown;
+
+import java.util.List;
 
 @IsATexasMessage
 public class ShowDownEvent extends TexasEvent {

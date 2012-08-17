@@ -111,8 +111,7 @@ public class RaiserPlayer extends TrainingPlayer {
                 action = callAction;
             else
                 action = raiseAction;
-        }
-        else if (raiseAction != null)
+        } else if (raiseAction != null)
             action = raiseAction;
         else if (callAction != null)
             action = callAction;

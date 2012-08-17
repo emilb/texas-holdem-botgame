@@ -1,7 +1,5 @@
 package se.cygni.texasholdem.game.util;
 
-import java.util.*;
-
 import se.cygni.texasholdem.game.Action;
 import se.cygni.texasholdem.game.ActionType;
 import se.cygni.texasholdem.game.BestHand;
@@ -10,11 +8,13 @@ import se.cygni.texasholdem.game.definitions.PlayState;
 import se.cygni.texasholdem.game.pot.Pot;
 import se.cygni.texasholdem.game.pot.PotTransaction;
 
+import java.util.*;
+
 public class GameUtil {
 
     /**
      * Returns the next player that still has chips to play for.
-     * 
+     *
      * @param players
      * @param startingFromPlayer
      * @return
@@ -31,7 +31,7 @@ public class GameUtil {
         for (int currIx = ix + 1; currIx < players.size(); currIx++) {
             final BotPlayer nextPlayer = players.get(currIx);
             if ((pot != null && pot.isAbleToBet(nextPlayer)) ||
-                (pot == null && playerHasChips(nextPlayer)))
+                    (pot == null && playerHasChips(nextPlayer)))
                 return nextPlayer;
         }
 
@@ -73,7 +73,7 @@ public class GameUtil {
         return result;
     }
 
-    public static List<BotPlayer> getOrderedListOfPlayers (
+    public static List<BotPlayer> getOrderedListOfPlayers(
             final List<BotPlayer> players,
             final BotPlayer startingFromPlayer) {
 
@@ -98,7 +98,7 @@ public class GameUtil {
     /**
      * Creates a list of players still active in current game (i.e. has not
      * folded and has money left)
-     * 
+     *
      * @return
      */
     public static List<BotPlayer> getActivePlayersWithChipsLeft(
@@ -215,9 +215,9 @@ public class GameUtil {
     }
 
     public static String printTransactions(long smallBlind, long bigBlind,
-                                   BotPlayer dealerPlayer, BotPlayer bigBlindPlayer, BotPlayer smallBlindPlayer,
-                                   List<BotPlayer> players,
-                                   Pot pot, Map<BotPlayer, Long> payoutResult, PokerHandRankUtil rankUtil) {
+                                           BotPlayer dealerPlayer, BotPlayer bigBlindPlayer, BotPlayer smallBlindPlayer,
+                                           List<BotPlayer> players,
+                                           Pot pot, Map<BotPlayer, Long> payoutResult, PokerHandRankUtil rankUtil) {
 
         final StringBuilder sb = new StringBuilder();
         final Formatter formatter = new Formatter(sb);

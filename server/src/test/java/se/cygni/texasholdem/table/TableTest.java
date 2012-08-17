@@ -1,13 +1,11 @@
 package se.cygni.texasholdem.table;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.google.common.eventbus.EventBus;
 import org.junit.Before;
-
 import se.cygni.texasholdem.game.BotPlayer;
 
-import com.google.common.eventbus.EventBus;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TableTest {
 

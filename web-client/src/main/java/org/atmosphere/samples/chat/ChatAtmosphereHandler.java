@@ -16,11 +16,7 @@
 package org.atmosphere.samples.chat;
 
 import org.atmosphere.config.service.AtmosphereHandlerService;
-import org.atmosphere.cpr.AtmosphereHandler;
-import org.atmosphere.cpr.AtmosphereRequest;
-import org.atmosphere.cpr.AtmosphereResource;
-import org.atmosphere.cpr.AtmosphereResourceEvent;
-import org.atmosphere.cpr.AtmosphereResponse;
+import org.atmosphere.cpr.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

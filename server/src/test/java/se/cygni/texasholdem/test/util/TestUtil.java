@@ -1,23 +1,22 @@
 package se.cygni.texasholdem.test.util;
 
-import static org.junit.Assert.assertTrue;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.lang.ArrayUtils;
-
 import se.cygni.texasholdem.game.Card;
 import se.cygni.texasholdem.game.definitions.Rank;
 import se.cygni.texasholdem.game.definitions.Suit;
 import se.cygni.texasholdem.game.util.PokerHandUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertTrue;
 
 public class TestUtil {
 
     /**
      * Expects an array of cards defined in shorthand. 9c = 9 of clubs ks = King
      * of spades
-     * 
+     *
      * @param shorthand
      * @return a list of Cards
      */
@@ -38,7 +37,7 @@ public class TestUtil {
      * Convenience method for creating a PokerHandUtil with the last two cards
      * in the shorthand array as player cards and anything before that as
      * community cards.
-     * 
+     *
      * @param shorthand
      * @return
      */

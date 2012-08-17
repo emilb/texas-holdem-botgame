@@ -1,10 +1,10 @@
 package se.cygni.texasholdem.server.eventbus;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import se.cygni.texasholdem.communication.message.event.TexasEvent;
 import se.cygni.texasholdem.game.BotPlayer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EventWrapper {
 

@@ -1,13 +1,12 @@
 package se.cygni.texasholdem.server.session;
 
+import com.google.common.eventbus.Subscribe;
 import se.cygni.texasholdem.communication.message.request.TexasRequest;
 import se.cygni.texasholdem.communication.message.response.TexasResponse;
 import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.server.eventbus.EventWrapper;
 import se.cygni.texasholdem.server.eventbus.PlayerQuitEvent;
 import se.cygni.texasholdem.server.eventbus.RegisterForPlayWrapper;
-
-import com.google.common.eventbus.Subscribe;
 
 import java.util.List;
 

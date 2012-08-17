@@ -1,18 +1,14 @@
 package se.cygni.texasholdem.game.pot;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import org.junit.Before;
+import org.junit.Test;
+import se.cygni.texasholdem.game.BotPlayer;
+import se.cygni.texasholdem.game.definitions.PlayState;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import se.cygni.texasholdem.game.BotPlayer;
-import se.cygni.texasholdem.game.definitions.PlayState;
+import static org.junit.Assert.*;
 
 public class PotScenarioTest {
 
@@ -44,7 +40,7 @@ public class PotScenarioTest {
 
         /**
          * PRE_FLOP
-         * 
+         *
          * - All players are in play.
          */
         pot.bet(pA, 5L);
@@ -68,7 +64,7 @@ public class PotScenarioTest {
 
         /**
          * FLOP
-         * 
+         *
          * - pA decides to fold. - Assert that it is not possible to change
          * PlayState when current bets are unbalanced. - Assert that a folded
          * player cannot place bet.
@@ -108,7 +104,7 @@ public class PotScenarioTest {
 
         /**
          * TURN
-         * 
+         *
          * - All players check - assert the total bet amount for players
          */
         pot.nextPlayState();
@@ -124,7 +120,7 @@ public class PotScenarioTest {
 
         /**
          * RIVER
-         * 
+         *
          * - pC folds - pB and pD battles but both are in play to SHOWDOWN -
          * assert that pA and pC cannot place more bets -
          */
@@ -144,7 +140,7 @@ public class PotScenarioTest {
 
         /**
          * SHOWDOWN
-         * 
+         *
          * - assert that no bets can be placed - assert that it is not possible
          * to change to next state
          */

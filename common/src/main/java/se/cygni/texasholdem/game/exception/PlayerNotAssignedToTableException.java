@@ -10,8 +10,8 @@ public class PlayerNotAssignedToTableException extends GameException {
     }
 
     public PlayerNotAssignedToTableException(final String message,
-            final Throwable
-            cause) {
+                                             final Throwable
+                                                     cause) {
 
         super(message, cause);
     }

@@ -1,15 +1,13 @@
 package se.cygni.texasholdem.server.session;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 import org.apache.commons.lang.StringUtils;
 import org.jboss.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import se.cygni.texasholdem.communication.message.event.CommunityHasBeenDealtACardEvent;
 import se.cygni.texasholdem.communication.message.event.PlayIsStartedEvent;
 import se.cygni.texasholdem.communication.message.event.YouHaveBeenDealtACardEvent;
@@ -23,18 +21,16 @@ import se.cygni.texasholdem.communication.message.response.RegisterForPlayRespon
 import se.cygni.texasholdem.communication.message.response.TexasResponse;
 import se.cygni.texasholdem.game.Action;
 import se.cygni.texasholdem.game.BotPlayer;
-import se.cygni.texasholdem.game.Room;
 import se.cygni.texasholdem.game.trainingplayers.TrainingPlayer;
 import se.cygni.texasholdem.server.communication.MessageSender;
 import se.cygni.texasholdem.server.eventbus.EventWrapper;
-import se.cygni.texasholdem.server.eventbus.NewPlayerEvent;
 import se.cygni.texasholdem.server.eventbus.PlayerQuitEvent;
 import se.cygni.texasholdem.server.eventbus.RegisterForPlayWrapper;
 import se.cygni.texasholdem.server.room.Training;
 import se.cygni.texasholdem.table.GamePlan;
 
-import com.google.common.eventbus.EventBus;
-import com.google.common.eventbus.Subscribe;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class SessionManagerRemote implements SessionManager {
@@ -51,8 +47,8 @@ public class SessionManagerRemote implements SessionManager {
 
     @Autowired
     public SessionManagerRemote(final EventBus eventBus,
-            final MessageSender messageSender,
-            final GamePlan gamePlan) {
+                                final MessageSender messageSender,
+                                final GamePlan gamePlan) {
 
         this.eventBus = eventBus;
         this.messageSender = messageSender;
@@ -69,7 +65,7 @@ public class SessionManagerRemote implements SessionManager {
             final TexasRequest request) {
 
         if (player instanceof TrainingPlayer && request instanceof ActionRequest) {
-            Action action = ((TrainingPlayer) player).actionRequired((ActionRequest)request);
+            Action action = ((TrainingPlayer) player).actionRequired((ActionRequest) request);
             ActionResponse response = new ActionResponse();
             response.setAction(action);
             return response;
@@ -96,7 +92,7 @@ public class SessionManagerRemote implements SessionManager {
 
         for (final BotPlayer player : eventWrapper.getReceivers()) {
             if (player instanceof TrainingPlayer) {
-                TrainingPlayer trainingPlayer = (TrainingPlayer)player;
+                TrainingPlayer trainingPlayer = (TrainingPlayer) player;
                 if (eventWrapper.getEvent() instanceof YouHaveBeenDealtACardEvent)
                     trainingPlayer.onYouHaveBeenDealtACard((YouHaveBeenDealtACardEvent) eventWrapper.getEvent());
                 else if (eventWrapper.getEvent() instanceof CommunityHasBeenDealtACardEvent)

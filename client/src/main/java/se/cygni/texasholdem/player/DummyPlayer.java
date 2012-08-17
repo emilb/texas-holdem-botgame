@@ -2,7 +2,6 @@ package se.cygni.texasholdem.player;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import se.cygni.texasholdem.client.PlayerClient;
 import se.cygni.texasholdem.communication.message.event.TableIsDoneEvent;
 import se.cygni.texasholdem.communication.message.request.ActionRequest;

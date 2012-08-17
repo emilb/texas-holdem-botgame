@@ -1,9 +1,9 @@
 package se.cygni.texasholdem.client;
 
+import se.cygni.texasholdem.communication.lock.ResponseLock;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import se.cygni.texasholdem.communication.lock.ResponseLock;
 
 public class SyncMessageResponseManager {
 

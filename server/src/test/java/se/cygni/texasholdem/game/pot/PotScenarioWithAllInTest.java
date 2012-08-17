@@ -1,20 +1,16 @@
 package se.cygni.texasholdem.game.pot;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import org.junit.Before;
+import org.junit.Test;
+import se.cygni.texasholdem.game.BotPlayer;
+import se.cygni.texasholdem.game.definitions.PlayState;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import se.cygni.texasholdem.game.BotPlayer;
-import se.cygni.texasholdem.game.definitions.PlayState;
+import static org.junit.Assert.*;
 
 public class PotScenarioWithAllInTest {
 
@@ -46,7 +42,7 @@ public class PotScenarioWithAllInTest {
 
         /**
          * PRE_FLOP
-         * 
+         *
          * - All players are in play but pA goes all in.
          */
         pot.bet(pA, 5L);
@@ -73,7 +69,7 @@ public class PotScenarioWithAllInTest {
 
         /**
          * FLOP
-         * 
+         *
          * - Assert that pA cannot place more bets - Assert that it is not
          * possible to change PlayState when current bets are unbalanced.
          */
@@ -113,7 +109,7 @@ public class PotScenarioWithAllInTest {
 
         /**
          * TURN
-         * 
+         *
          * - All players check - assert the total bet amount for players
          */
         pot.nextPlayState();
@@ -128,7 +124,7 @@ public class PotScenarioWithAllInTest {
 
         /**
          * RIVER
-         * 
+         *
          * - pC folds - pB and pD battles but both are in play to SHOWDOWN -
          * assert that pA and pC cannot place more bets -
          */
@@ -148,7 +144,7 @@ public class PotScenarioWithAllInTest {
 
         /**
          * SHOWDOWN
-         * 
+         *
          * - assert that no bets can be placed - assert that it is not possible
          * to change to next state
          */
@@ -169,7 +165,7 @@ public class PotScenarioWithAllInTest {
 
         /**
          * PAYOUT - assert that players are paid their due
-         * 
+         *
          * First case rank: pB pD pA pC
          */
         final List<List<BotPlayer>> ranking = new ArrayList<List<BotPlayer>>();
@@ -187,7 +183,7 @@ public class PotScenarioWithAllInTest {
 
         /**
          * PAYOUT - assert that players are paid their due
-         * 
+         *
          * Second case rank: pA pD pB pC
          */
         ranking.clear();
@@ -205,7 +201,7 @@ public class PotScenarioWithAllInTest {
 
         /**
          * PAYOUT - assert that players are paid their due
-         * 
+         *
          * Third case rank: (pA pB) pD pC
          */
         ranking.clear();
@@ -222,7 +218,7 @@ public class PotScenarioWithAllInTest {
 
         /**
          * PAYOUT - assert that players are paid their due
-         * 
+         *
          * Fourth case rank: pA (pB pD) pC
          */
         ranking.clear();
@@ -239,7 +235,7 @@ public class PotScenarioWithAllInTest {
 
         /**
          * PAYOUT - assert that players are paid their due
-         * 
+         *
          * Fifth case rank: pC (pB pD) pA Remember that Pc folded!
          */
         ranking.clear();

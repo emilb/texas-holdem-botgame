@@ -1,21 +1,14 @@
 package se.cygni.texasholdem.game.pot;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import se.cygni.texasholdem.game.BotPlayer;
+
+import java.util.*;
 
 /**
  * This class calculates a split of a pot if there are more than one players
  * with the best hand.
- * 
- * 
+ *
  * @author emil
- * 
  */
 public class PotSplitter {
 
@@ -25,7 +18,7 @@ public class PotSplitter {
 
     /**
      * Add the maximum potential winnings for a player.
-     * 
+     *
      * @param player
      * @param amount
      */
@@ -118,7 +111,7 @@ public class PotSplitter {
     /**
      * Returns the calculated split for supplied player. If the player is not
      * registered in this split 0 (zero) is returned.
-     * 
+     *
      * @param player
      * @return The splitted win amount for player
      */

@@ -1,22 +1,6 @@
 package se.cygni.texasholdem.game.util;
 
-import static se.cygni.texasholdem.game.util.ListUtil.getHighestOfSameRank;
-import static se.cygni.texasholdem.game.util.ListUtil.getHighestOfSameRankExcluding;
-import static se.cygni.texasholdem.game.util.ListUtil.getHighestSortedAndExclude;
-import static se.cygni.texasholdem.game.util.ListUtil.getLongestConsecutiveSubset;
-import static se.cygni.texasholdem.game.util.ListUtil.getRankDistribution;
-import static se.cygni.texasholdem.game.util.ListUtil.getSuitDistribution;
-import static se.cygni.texasholdem.game.util.ListUtil.merge;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import org.apache.commons.collections.CollectionUtils;
-
 import se.cygni.texasholdem.game.BestHand;
 import se.cygni.texasholdem.game.Card;
 import se.cygni.texasholdem.game.definitions.CardSortBy;
@@ -24,11 +8,15 @@ import se.cygni.texasholdem.game.definitions.PokerHand;
 import se.cygni.texasholdem.game.definitions.Rank;
 import se.cygni.texasholdem.game.definitions.Suit;
 
+import java.util.*;
+import java.util.Map.Entry;
+
+import static se.cygni.texasholdem.game.util.ListUtil.*;
+
 /**
  * PokerHandUtil extracts the best possible hand for a Player.
- * 
+ *
  * @author emil
- * 
  */
 public class PokerHandUtil {
 
@@ -37,7 +25,7 @@ public class PokerHandUtil {
     private final List<Card> cards;
 
     public PokerHandUtil(final List<Card> communityCards,
-            final List<Card> playerCards) {
+                         final List<Card> playerCards) {
 
         cards = merge(communityCards, playerCards);
         rankDistribution = getRankDistribution(cards);
@@ -47,7 +35,7 @@ public class PokerHandUtil {
     /**
      * Extracts the best possible hand and returns the type of PokerHand and the
      * List of cards that make that hand.
-     * 
+     *
      * @return The BestHand given the current list of cards
      */
     public BestHand getBestHand() {

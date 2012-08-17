@@ -1,12 +1,12 @@
 package se.cygni.texasholdem.game;
 
+import se.cygni.texasholdem.game.definitions.Rank;
+import se.cygni.texasholdem.game.definitions.Suit;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-
-import se.cygni.texasholdem.game.definitions.Rank;
-import se.cygni.texasholdem.game.definitions.Suit;
 
 public class Deck {
 

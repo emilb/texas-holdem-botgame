@@ -9,7 +9,7 @@ public class RegisterForPlayWrapper {
     private final TexasRequest request;
 
     public RegisterForPlayWrapper(final ChannelHandlerContext context,
-            final TexasRequest request) {
+                                  final TexasRequest request) {
 
         this.context = context;
         this.request = request;

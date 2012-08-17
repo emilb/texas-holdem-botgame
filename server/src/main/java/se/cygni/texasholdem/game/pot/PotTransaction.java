@@ -10,7 +10,7 @@ public class PotTransaction {
     private final boolean allIn;
 
     public PotTransaction(final long transactionNumber, final BotPlayer player,
-            final long amount, final boolean allIn) {
+                          final long amount, final boolean allIn) {
 
         this.transactionNumber = transactionNumber;
         this.player = player;

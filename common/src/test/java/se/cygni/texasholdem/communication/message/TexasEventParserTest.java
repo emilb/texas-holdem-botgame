@@ -1,31 +1,19 @@
 package se.cygni.texasholdem.communication.message;
 
-import static org.junit.Assert.assertEquals;
-
-import java.io.IOException;
-import java.util.List;
-
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.junit.Test;
-
-import se.cygni.texasholdem.communication.message.event.CommunityHasBeenDealtACardEvent;
-import se.cygni.texasholdem.communication.message.event.PlayIsStartedEvent;
-import se.cygni.texasholdem.communication.message.event.PlayerCalledEvent;
-import se.cygni.texasholdem.communication.message.event.PlayerCheckedEvent;
-import se.cygni.texasholdem.communication.message.event.PlayerFoldedEvent;
-import se.cygni.texasholdem.communication.message.event.PlayerQuitEvent;
-import se.cygni.texasholdem.communication.message.event.PlayerRaisedEvent;
-import se.cygni.texasholdem.communication.message.event.PlayerWentAllInEvent;
-import se.cygni.texasholdem.communication.message.event.ServerIsShuttingDownEvent;
-import se.cygni.texasholdem.communication.message.event.ShowDownEvent;
-import se.cygni.texasholdem.communication.message.event.YouHaveBeenDealtACardEvent;
-import se.cygni.texasholdem.communication.message.event.YouWonAmountEvent;
+import se.cygni.texasholdem.communication.message.event.*;
 import se.cygni.texasholdem.communication.message.request.RegisterForPlayRequest;
 import se.cygni.texasholdem.game.Player;
 import se.cygni.texasholdem.game.Room;
 import se.cygni.texasholdem.test.util.DomainUtil;
+
+import java.io.IOException;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 public class TexasEventParserTest extends AbstractEventParserTestUtil {
 

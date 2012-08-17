@@ -6,7 +6,9 @@ import se.cygni.texasholdem.communication.message.request.ActionRequest;
 import se.cygni.texasholdem.game.Action;
 import se.cygni.texasholdem.game.ActionType;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class CrazyPlayer extends TrainingPlayer {
 
@@ -105,8 +107,7 @@ public class CrazyPlayer extends TrainingPlayer {
             if (randomNumber < w.getWeight()) {
                 choosenActionType = w.getType();
                 break;
-            }
-            else
+            } else
                 randomNumber -= w.getWeight();
         }
 

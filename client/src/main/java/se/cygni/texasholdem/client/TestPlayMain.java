@@ -1,15 +1,14 @@
 package se.cygni.texasholdem.client;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import se.cygni.texasholdem.game.Room;
 import se.cygni.texasholdem.game.exception.GameException;
 import se.cygni.texasholdem.player.DummyPlayer;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TestPlayMain {
 
@@ -19,10 +18,10 @@ public class TestPlayMain {
 
     /**
      * Creates six players and lets them connect and play session of poker.
-     * 
+     * <p/>
      * After MAX_RUNNING_TIME ms the program will terminate (as a convenience
      * when running from Eclipse)
-     * 
+     *
      * @param args
      * @throws IOException
      */

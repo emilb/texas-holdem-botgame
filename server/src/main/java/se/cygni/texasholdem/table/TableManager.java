@@ -1,23 +1,17 @@
 package se.cygni.texasholdem.table;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.server.eventbus.NewPlayerEvent;
 import se.cygni.texasholdem.server.eventbus.PlayerQuitEvent;
 import se.cygni.texasholdem.server.session.SessionManager;
 
-import com.google.common.eventbus.EventBus;
-import com.google.common.eventbus.Subscribe;
+import java.util.*;
 
 @Component
 public class TableManager {
@@ -37,7 +31,7 @@ public class TableManager {
 
     @Autowired
     public TableManager(final EventBus eventBus, final GamePlan gamePlan,
-            final SessionManager sessionManager) {
+                        final SessionManager sessionManager) {
 
         this.eventBus = eventBus;
         this.gamePlan = gamePlan;
@@ -100,8 +94,8 @@ public class TableManager {
 
             if (table.getNoofPlayers() < Table.MAX_NOOF_PLAYERS && (
                     freeTableWithLowestNoofPlayers == null ||
-                    freeTableWithLowestNoofPlayers.getNoofPlayers() > table
-                            .getNoofPlayers())) {
+                            freeTableWithLowestNoofPlayers.getNoofPlayers() > table
+                                    .getNoofPlayers())) {
                 freeTableWithLowestNoofPlayers = table;
             }
         }

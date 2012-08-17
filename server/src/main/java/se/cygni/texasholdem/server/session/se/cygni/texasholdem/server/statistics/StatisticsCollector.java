@@ -53,7 +53,7 @@ public class StatisticsCollector {
                 .toFormatter();
 
         Period period = new Period();
-        period = period.plusMillis((int)getUpTime());
+        period = period.plusMillis((int) getUpTime());
 
         return daysHoursMinutes.print(period.normalizedStandard());
     }

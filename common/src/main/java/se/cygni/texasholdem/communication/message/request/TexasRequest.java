@@ -1,8 +1,8 @@
 package se.cygni.texasholdem.communication.message.request;
 
-import java.util.UUID;
-
 import se.cygni.texasholdem.communication.message.TexasMessage;
+
+import java.util.UUID;
 
 public class TexasRequest extends TexasMessage {
 

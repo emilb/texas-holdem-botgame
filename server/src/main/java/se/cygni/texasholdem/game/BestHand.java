@@ -1,8 +1,8 @@
 package se.cygni.texasholdem.game;
 
-import java.util.List;
-
 import se.cygni.texasholdem.game.definitions.PokerHand;
+
+import java.util.List;
 
 public class BestHand implements Comparable<BestHand> {
 
@@ -17,7 +17,7 @@ public class BestHand implements Comparable<BestHand> {
     }
 
     public BestHand(final List<Card> cards, final PokerHand pokerHand,
-            final BotPlayer player) {
+                    final BotPlayer player) {
 
         this.cards = cards;
         this.pokerHand = pokerHand;

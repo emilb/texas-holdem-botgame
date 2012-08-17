@@ -1,20 +1,18 @@
 package se.cygni.texasholdem.server.eventbus;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.google.common.eventbus.EventBus;
 import se.cygni.texasholdem.communication.message.event.*;
 import se.cygni.texasholdem.communication.message.event.PlayerQuitEvent;
 import se.cygni.texasholdem.game.BotPlayer;
-
-import com.google.common.eventbus.EventBus;
 import se.cygni.texasholdem.game.Card;
-import se.cygni.texasholdem.game.Player;
 import se.cygni.texasholdem.util.PlayerTypeConverter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EventBusUtil {
 
-    public static void postToEventBus (
+    public static void postToEventBus(
             final EventBus eventBus,
             final TexasEvent event,
             final BotPlayer... players) {
@@ -26,7 +24,7 @@ public class EventBusUtil {
         postToEventBus(eventBus, event, recipients);
     }
 
-    public static void postToEventBus (
+    public static void postToEventBus(
             final EventBus eventBus,
             final TexasEvent event,
             final List<BotPlayer> recipients) {
@@ -46,14 +44,14 @@ public class EventBusUtil {
 
         postToEventBus(eventBus,
                 new PlayIsStartedEvent(PlayerTypeConverter.listOfBotPlayers(players),
-                smallBlind, bigBlind,
-                PlayerTypeConverter.fromBotPlayer(dealerPlayer),
-                PlayerTypeConverter.fromBotPlayer(smallBlindPlayer),
-                PlayerTypeConverter.fromBotPlayer(bigBlindPlayer)),
+                        smallBlind, bigBlind,
+                        PlayerTypeConverter.fromBotPlayer(dealerPlayer),
+                        PlayerTypeConverter.fromBotPlayer(smallBlindPlayer),
+                        PlayerTypeConverter.fromBotPlayer(bigBlindPlayer)),
                 recipients);
     }
 
-    public static void postCommunityHasBeenDealtACard (
+    public static void postCommunityHasBeenDealtACard(
             final EventBus eventBus,
             final Card card,
             final List<BotPlayer> recipients) {
@@ -61,7 +59,7 @@ public class EventBusUtil {
         postToEventBus(eventBus, new CommunityHasBeenDealtACardEvent(card), recipients);
     }
 
-    public static void postPlayerBetBigBlind (
+    public static void postPlayerBetBigBlind(
             final EventBus eventBus,
             final BotPlayer player,
             final long bigBlind,
@@ -73,7 +71,7 @@ public class EventBusUtil {
                 recipients);
     }
 
-    public static void postPlayerBetSmallBlind (
+    public static void postPlayerBetSmallBlind(
             final EventBus eventBus,
             final BotPlayer player,
             final long smallBlind,
@@ -85,7 +83,7 @@ public class EventBusUtil {
                 recipients);
     }
 
-    public static void postPlayerCalled (
+    public static void postPlayerCalled(
             final EventBus eventBus,
             final BotPlayer player,
             final long callBet,
@@ -97,7 +95,7 @@ public class EventBusUtil {
                 recipients);
     }
 
-    public static void postPlayerChecked (
+    public static void postPlayerChecked(
             final EventBus eventBus,
             final BotPlayer player,
             final List<BotPlayer> recipients) {
@@ -108,7 +106,7 @@ public class EventBusUtil {
                 recipients);
     }
 
-    public static void postPlayerFolded (
+    public static void postPlayerFolded(
             final EventBus eventBus,
             final BotPlayer player,
             final long investmentInPot,
@@ -120,7 +118,7 @@ public class EventBusUtil {
                 recipients);
     }
 
-    public static void postPlayerQuit (
+    public static void postPlayerQuit(
             final EventBus eventBus,
             final BotPlayer player,
             final List<BotPlayer> recipients) {
@@ -131,7 +129,7 @@ public class EventBusUtil {
                 recipients);
     }
 
-    public static void postPlayerRaised (
+    public static void postPlayerRaised(
             final EventBus eventBus,
             final BotPlayer player,
             final long raiseBet,
@@ -143,7 +141,7 @@ public class EventBusUtil {
                 recipients);
     }
 
-    public static void postPlayerWentAllIn (
+    public static void postPlayerWentAllIn(
             final EventBus eventBus,
             final BotPlayer player,
             final long allInAmount,

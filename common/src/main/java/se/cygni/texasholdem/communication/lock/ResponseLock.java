@@ -1,7 +1,6 @@
 package se.cygni.texasholdem.communication.lock;
 
 import org.apache.commons.lang.StringUtils;
-
 import se.cygni.texasholdem.communication.message.response.TexasResponse;
 
 public class ResponseLock {

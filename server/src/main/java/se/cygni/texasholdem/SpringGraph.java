@@ -1,18 +1,5 @@
 package se.cygni.texasholdem;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.lang.reflect.Proxy;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.StringTokenizer;
-import java.util.TreeSet;
-
 import org.springframework.aop.framework.Advised;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
@@ -22,6 +9,14 @@ import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.Ordered;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.util.StringUtils;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.lang.reflect.Proxy;
+import java.util.*;
 
 //@Component
 public class SpringGraph implements ApplicationContextAware, InitializingBean,
@@ -42,7 +37,7 @@ public class SpringGraph implements ApplicationContextAware, InitializingBean,
     public SpringGraph() {
 
         this.target = "spring-graph.dot";
-        this.excludePatterns = new String[] { "org.*" };
+        this.excludePatterns = new String[]{"org.*"};
 
         System.out.println("Created graph");
     }
@@ -191,7 +186,7 @@ public class SpringGraph implements ApplicationContextAware, InitializingBean,
     }
 
     private static String fullName(final String beanName, final Object bean,
-            final boolean prototype) {
+                                   final boolean prototype) {
 
         final StringBuilder sb = new StringBuilder();
         final Class clazz = bean.getClass();
@@ -356,7 +351,7 @@ public class SpringGraph implements ApplicationContextAware, InitializingBean,
         }
 
         public Node addNode(final String beanName, final Object bean,
-                final boolean prototype) {
+                            final boolean prototype) {
 
             final Node n = new Node(beanName, bean, prototype);
             getNodes().add(n);
@@ -374,7 +369,7 @@ public class SpringGraph implements ApplicationContextAware, InitializingBean,
         private final Set<Node> dependency = new TreeSet<Node>();
 
         public Node(final String beanName, final Object bean,
-                final boolean prototype) {
+                    final boolean prototype) {
 
             this.beanName = beanName;
             this.prototype = prototype;

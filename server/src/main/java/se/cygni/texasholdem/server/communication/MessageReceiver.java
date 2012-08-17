@@ -1,18 +1,16 @@
 package se.cygni.texasholdem.server.communication;
 
+import com.google.common.eventbus.EventBus;
 import org.jboss.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import se.cygni.texasholdem.communication.lock.ResponseLock;
 import se.cygni.texasholdem.communication.message.TexasMessage;
 import se.cygni.texasholdem.communication.message.request.RegisterForPlayRequest;
 import se.cygni.texasholdem.communication.message.response.TexasResponse;
 import se.cygni.texasholdem.server.eventbus.RegisterForPlayWrapper;
-
-import com.google.common.eventbus.EventBus;
 
 @Service
 public class MessageReceiver {
@@ -25,7 +23,7 @@ public class MessageReceiver {
 
     @Autowired
     public MessageReceiver(final ResponseLockManager responseLockManager,
-            final EventBus eventBus) {
+                           final EventBus eventBus) {
 
         this.responseLockManager = responseLockManager;
         this.eventBus = eventBus;

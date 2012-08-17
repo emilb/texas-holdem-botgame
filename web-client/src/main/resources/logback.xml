@@ -10,11 +10,11 @@
         </encoder>
     </appender>
 
-    <logger name="se" level="DEBUG" />
-    <logger name="org.codemonkey" level="DEBUG" />
+    <logger name="se" level="DEBUG"/>
+    <logger name="org.codemonkey" level="DEBUG"/>
     <root level="INFO">
-        <appender-ref ref="STDOUT" />
-<!--         <appender-ref ref="SOCKET" /> -->
+        <appender-ref ref="STDOUT"/>
+        <!--         <appender-ref ref="SOCKET" /> -->
     </root>
 
 </configuration>

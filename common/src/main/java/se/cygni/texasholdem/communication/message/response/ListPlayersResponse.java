@@ -1,9 +1,9 @@
 package se.cygni.texasholdem.communication.message.response;
 
-import java.util.List;
-
 import se.cygni.texasholdem.communication.message.type.IsATexasMessage;
 import se.cygni.texasholdem.game.Player;
+
+import java.util.List;
 
 @IsATexasMessage
 public class ListPlayersResponse extends TexasResponse {

@@ -1,7 +1,6 @@
 package se.cygni.texasholdem.table;
 
 import org.springframework.stereotype.Component;
-
 import se.cygni.texasholdem.util.SystemFieldPopulator;
 
 @Component
@@ -39,12 +38,12 @@ public class GamePlan {
     }
 
     public GamePlan(final long startingChipsAmount,
-            final int playsBetweenBlindRaise,
-            final long smalBlindStart,
-            final long bigBlindStart,
-            final BlindRaiseStrategy blindRaiseStrategy,
-            final long bigBlindRaiseStrategyValue,
-            final long smallBlindRaiseStrategyValue) {
+                    final int playsBetweenBlindRaise,
+                    final long smalBlindStart,
+                    final long bigBlindStart,
+                    final BlindRaiseStrategy blindRaiseStrategy,
+                    final long bigBlindRaiseStrategyValue,
+                    final long smallBlindRaiseStrategyValue) {
 
         this.startingChipsAmount = startingChipsAmount;
         this.playsBetweenBlindRaise = playsBetweenBlindRaise;

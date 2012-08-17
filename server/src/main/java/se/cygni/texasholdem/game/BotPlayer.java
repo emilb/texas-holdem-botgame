@@ -11,7 +11,7 @@ public class BotPlayer {
     private final List<Card> cards = new ArrayList();
 
     public BotPlayer(final String name, final String sessionId,
-            final long chipAmount) {
+                     final long chipAmount) {
 
         this(name, sessionId);
         this.chipAmount = chipAmount;

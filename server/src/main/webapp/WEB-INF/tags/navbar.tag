@@ -9,7 +9,7 @@
                 Cygni Texas Hold'em
             </a>
             <ul class="nav">
-                <c:if test = "${section == 'home'}">
+                <c:if test="${section == 'home'}">
                     <c:set var="currentClass">class="active"</c:set>
                 </c:if>
                 <li ${currentClass}>
@@ -17,14 +17,14 @@
                 </li>
 
                 <c:set var="currentClass"></c:set>
-                <c:if test = "${section == 'serverstatus'}">
+                <c:if test="${section == 'serverstatus'}">
                     <c:set var="currentClass">class="active"</c:set>
                 </c:if>
                 <li ${currentClass}><a href="/serverstatus">Server Status</a></li>
 
 
                 <c:set var="currentClass"></c:set>
-                <c:if test = "${section == 'tournament'}">
+                <c:if test="${section == 'tournament'}">
                     <c:set var="currentClass">class="active"</c:set>
                 </c:if>
                 <li ${currentClass}><a href="/tournament">Tournament</a></li>

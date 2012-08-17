@@ -29,42 +29,42 @@ $(function () {
         req.url = document.location.toString() + 'chat';
         req.contentType = "application/json";
         req.transport = transport;
-        req.headers = { "negotiating" : "true" };
+        req.headers = { "negotiating":"true" };
 
-        req.onOpen = function(response) {
-            detect.append('<p><span style="color:blue">' + transport + ' supported: '  + '</span>' + (response.transport == transport));
+        req.onOpen = function (response) {
+            detect.append('<p><span style="color:blue">' + transport + ' supported: ' + '</span>' + (response.transport == transport));
         };
 
-        req.onReconnect = function(request) {
+        req.onReconnect = function (request) {
             request.close();
         };
 
         socket.subscribe(req);
     });
-    
+
     // Below is code that can be re-used -->
 
     // We are now ready to cut the request
-    var request = { url: document.location.toString() + 'chat',
-        contentType : "application/json",
-        logLevel : 'debug',
-        transport : 'websocket' ,
-        fallbackTransport: 'long-polling'};
+    var request = { url:document.location.toString() + 'chat',
+        contentType:"application/json",
+        logLevel:'debug',
+        transport:'websocket',
+        fallbackTransport:'long-polling'};
 
 
-    request.onOpen = function(response) {
-        content.html($('<p>', { text: 'Atmosphere connected using ' + response.transport }));
+    request.onOpen = function (response) {
+        content.html($('<p>', { text:'Atmosphere connected using ' + response.transport }));
         input.removeAttr('disabled').focus();
         status.text('Choose name:');
     };
 
     // For demonstration of how you can customize the fallbackTransport based on the browser -->
-    request.onTransportFailure = function(errorMsg, request) {
+    request.onTransportFailure = function (errorMsg, request) {
         jQuery.atmosphere.info(errorMsg);
-        if ( window.EventSource ) {
+        if (window.EventSource) {
             request.fallbackTransport = "sse";
         }
-        header.html($('<h3>', { text: 'Atmosphere Chat. Default transport is WebSocket, fallback is ' + request.fallbackTransport }));
+        header.html($('<h3>', { text:'Atmosphere Chat. Default transport is WebSocket, fallback is ' + request.fallbackTransport }));
     };
 
     request.onReconnect = function (request, response) {
@@ -93,14 +93,14 @@ $(function () {
         }
     };
 
-    request.onError = function(response) {
-        content.html($('<p>', { text: 'Sorry, but there\'s some problem with your '
+    request.onError = function (response) {
+        content.html($('<p>', { text:'Sorry, but there\'s some problem with your '
             + 'socket or the server is down' }));
     };
 
     var subSocket = socket.subscribe(request);
 
-    input.keydown(function(e) {
+    input.keydown(function (e) {
         if (e.keyCode === 13) {
             var msg = $(this).val();
 
@@ -109,7 +109,7 @@ $(function () {
                 author = msg;
             }
 
-            subSocket.push(jQuery.stringifyJSON({ author: author, message: msg }));
+            subSocket.push(jQuery.stringifyJSON({ author:author, message:msg }));
             $(this).val('');
 
             input.attr('disabled', 'disabled');
@@ -121,7 +121,7 @@ $(function () {
 
     function addMessage(author, message, color, datetime) {
         content.append('<p><span style="color:' + color + '">' + author + '</span> @ ' +
-            + (datetime.getHours() < 10 ? '0' + datetime.getHours() : datetime.getHours()) + ':'
+            +(datetime.getHours() < 10 ? '0' + datetime.getHours() : datetime.getHours()) + ':'
             + (datetime.getMinutes() < 10 ? '0' + datetime.getMinutes() : datetime.getMinutes())
             + ': ' + message + '</p>');
     }

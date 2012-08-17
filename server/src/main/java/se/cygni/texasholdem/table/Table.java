@@ -1,25 +1,18 @@
 package se.cygni.texasholdem.table;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
-
+import com.google.common.eventbus.EventBus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import se.cygni.texasholdem.communication.message.event.TableIsDoneEvent;
 import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.game.Card;
-import se.cygni.texasholdem.game.Player;
 import se.cygni.texasholdem.game.util.GameUtil;
 import se.cygni.texasholdem.server.eventbus.EventBusUtil;
 import se.cygni.texasholdem.server.room.Room;
 import se.cygni.texasholdem.server.session.SessionManager;
-
-import com.google.common.eventbus.EventBus;
 import se.cygni.texasholdem.util.PlayerTypeConverter;
+
+import java.util.*;
 
 public class Table implements Runnable {
 
@@ -47,7 +40,7 @@ public class Table implements Runnable {
     private boolean gameHasStarted = false;
 
     public Table(final GamePlan gamePlan, final Room room,
-            final EventBus eventBus, final SessionManager sessionManager) {
+                 final EventBus eventBus, final SessionManager sessionManager) {
 
         this.gamePlan = gamePlan;
         this.room = room;

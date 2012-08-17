@@ -1,12 +1,5 @@
 package se.cygni.texasholdem.webclient;
 
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.util.UUID;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-
 import org.atmosphere.cpr.AtmosphereResource;
 import org.jboss.netty.bootstrap.ClientBootstrap;
 import org.jboss.netty.buffer.ChannelBuffer;
@@ -31,23 +24,30 @@ import se.cygni.texasholdem.communication.message.response.TexasResponse;
 import se.cygni.texasholdem.communication.netty.JsonDelimiter;
 import se.cygni.texasholdem.game.Room;
 
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.util.UUID;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 public class WebPlayerClient extends SimpleChannelHandler {
 
     private static final long RESPONSE_TIMEOUT_MS = 80000;
     private static final long CONNECT_WAIT_MS = 1200;
 
-	private AtmosphereResource atmosphereResource;
+    private AtmosphereResource atmosphereResource;
     private final SyncMessageResponseManager responseManager;
     private Channel channel;
     private boolean isConnected = false;
     private String playerName;
 
-	public WebPlayerClient(final String playerName, final AtmosphereResource atmosphereResource) throws Exception {
-		this.playerName = playerName;
+    public WebPlayerClient(final String playerName, final AtmosphereResource atmosphereResource) throws Exception {
+        this.playerName = playerName;
         responseManager = new SyncMessageResponseManager();
-		this.atmosphereResource = atmosphereResource;
-		connect();
-	}
+        this.atmosphereResource = atmosphereResource;
+        connect();
+    }
 
     protected void connect() throws Exception {
 
@@ -76,10 +76,10 @@ public class WebPlayerClient extends SimpleChannelHandler {
         cf.await(2000, TimeUnit.MILLISECONDS);
         cf.awaitUninterruptibly();
         cf.awaitUninterruptibly(2000, TimeUnit.MILLISECONDS);
-        cf.addListener(new ChannelFutureListener(){
+        cf.addListener(new ChannelFutureListener() {
             public void operationComplete(ChannelFuture future) throws Exception {
                 // chek to see if we succeeded
-                if(future.isSuccess()) {
+                if (future.isSuccess()) {
 
                     isConnected = true;
                     channel = future.getChannel();
@@ -90,7 +90,7 @@ public class WebPlayerClient extends SimpleChannelHandler {
         waitForClientConnected();
     }
 
-	// TODO: rensa upp, blockar inte här - i så fall känn av att respons kommit i webklienten
+    // TODO: rensa upp, blockar inte här - i så fall känn av att respons kommit i webklienten
     // TODO: Ta bort hårdkodning för room = Room.TRAINING
     public boolean registerForPlay()
             throws se.cygni.texasholdem.game.exception.GameException {
@@ -99,25 +99,25 @@ public class WebPlayerClient extends SimpleChannelHandler {
         request.setRequestId(getUniqueRequestId());
         request.name = getPlayerName();
         request.room = Room.TRAINING;
-        
+
         // Skicka request och vänta på svar
         final TexasMessage resp = sendAndWaitForResponse(request);
-       
-		String responseJson = null;
-		try {
-			responseJson = TexasMessageParser.encodeMessage(resp);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+        String responseJson = null;
+        try {
+            responseJson = TexasMessageParser.encodeMessage(resp);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
         if (resp instanceof RegisterForPlayResponse) {
-    		try {
-				respondAndFlush(responseJson);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+            try {
+                respondAndFlush(responseJson);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
             return true;
         }
 
@@ -144,20 +144,20 @@ public class WebPlayerClient extends SimpleChannelHandler {
         }
     }
 
-	protected String getPlayerName() {
-		return playerName;
-	}
-	
-   protected TexasResponse sendAndWaitForResponse(final TexasRequest request) {
+    protected String getPlayerName() {
+        return playerName;
+    }
+
+    protected TexasResponse sendAndWaitForResponse(final TexasRequest request) {
 
         final ResponseLock lock = responseManager.push(request.getRequestId());
         sendMessage(request);
         synchronized (lock) {
-        	if (lock.getResponse() == null) {
-	            try {
-	                lock.wait(RESPONSE_TIMEOUT_MS);
-	            } catch (final InterruptedException e) {
-	            }
+            if (lock.getResponse() == null) {
+                try {
+                    lock.wait(RESPONSE_TIMEOUT_MS);
+                } catch (final InterruptedException e) {
+                }
             }
         }
 
@@ -167,22 +167,21 @@ public class WebPlayerClient extends SimpleChannelHandler {
         return lock.getResponse();
     }
 
-	   
-	/**
-	 * Handler for server-to-client messages
-	 * 
-	 */
+
+    /**
+     * Handler for server-to-client messages
+     */
     public void onMessageReceived(final TexasMessage message) {
 
         if (message instanceof TexasEvent) {
-        	String texasEventJson;
-			try {
-				texasEventJson = TexasMessageParser.encodeMessage(message);
-				respondAndFlush(texasEventJson);
-			} catch (Exception e) {
-				// TODO felhantering
-				throw new RuntimeException("Error on forwarding TexasEvent to client", e);
-			}
+            String texasEventJson;
+            try {
+                texasEventJson = TexasMessageParser.encodeMessage(message);
+                respondAndFlush(texasEventJson);
+            } catch (Exception e) {
+                // TODO felhantering
+                throw new RuntimeException("Error on forwarding TexasEvent to client", e);
+            }
             return;
         }
 
@@ -191,13 +190,13 @@ public class WebPlayerClient extends SimpleChannelHandler {
         // with Action taken by that player, sent as a POST-message to the handler
         // which won't be suspended
         if (message instanceof ActionRequest) {
-        	try {
-				String actionRequestJson = TexasMessageParser.encodeMessage(message);
-				respondAndFlush(actionRequestJson);
-			} catch (IOException e) {
-				// TODO felhantering
-				throw new RuntimeException("Error on forwarding ActionRequest to client", e);
-			}
+            try {
+                String actionRequestJson = TexasMessageParser.encodeMessage(message);
+                respondAndFlush(actionRequestJson);
+            } catch (IOException e) {
+                // TODO felhantering
+                throw new RuntimeException("Error on forwarding ActionRequest to client", e);
+            }
         }
 
         if (message instanceof TexasResponse) {
@@ -225,14 +224,14 @@ public class WebPlayerClient extends SimpleChannelHandler {
     }
 
 
-	private void respondAndFlush(String jsonResponse) throws IOException {
-		atmosphereResource.getResponse().getWriter().write(jsonResponse);
-		atmosphereResource.getResponse().getWriter().flush();
-	}
+    private void respondAndFlush(String jsonResponse) throws IOException {
+        atmosphereResource.getResponse().getWriter().write(jsonResponse);
+        atmosphereResource.getResponse().getWriter().flush();
+    }
 
     protected void sendMessage(final TexasMessage message) {
         try {
-            channel.write(TexasMessageParser.encodeMessage(message)+ new String(JsonDelimiter.delimiter()));
+            channel.write(TexasMessageParser.encodeMessage(message) + new String(JsonDelimiter.delimiter()));
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);

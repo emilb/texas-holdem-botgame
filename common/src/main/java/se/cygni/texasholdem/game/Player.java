@@ -10,7 +10,7 @@ public class Player {
 
     @JsonCreator
     public Player(@JsonProperty("name") final String name,
-            @JsonProperty("chipCount") final long chipCount) {
+                  @JsonProperty("chipCount") final long chipCount) {
 
         this.name = name;
         this.chipCount = chipCount;

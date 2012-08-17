@@ -1,26 +1,17 @@
 package se.cygni.texasholdem.game.pot;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.concurrent.atomic.AtomicLong;
-
 import org.apache.commons.collections.CollectionUtils;
-
 import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.game.definitions.PlayState;
 
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.atomic.AtomicLong;
+
 /**
  * The Pot manages the state of a play and the betting statuses of each player.
- * 
+ *
  * @author emil
- * 
  */
 public class Pot {
 
@@ -45,7 +36,7 @@ public class Pot {
     /**
      * Calculates the bet the player has to make to Call. If player has folded 0
      * is returned.
-     * 
+     *
      * @param player
      * @return
      */
@@ -62,15 +53,12 @@ public class Pot {
 
     /**
      * Places a bet for the player.
-     * 
-     * @throws IllegalStateException
-     *             if in a state that doesn't allow bets
-     * @throws IllegalStateException
-     *             if player has folded
-     * @throws IllegalArgumentException
-     *             if bet is negative
+     *
      * @param player
      * @param amount
+     * @throws IllegalStateException    if in a state that doesn't allow bets
+     * @throws IllegalStateException    if player has folded
+     * @throws IllegalArgumentException if bet is negative
      */
     public long bet(final BotPlayer player, final long amount) {
 
@@ -121,7 +109,7 @@ public class Pot {
 
     /**
      * Folds a player. This player will not be allowed to place any more bets.
-     * 
+     *
      * @param player
      */
     public void fold(final BotPlayer player) {
@@ -130,7 +118,6 @@ public class Pot {
     }
 
     /**
-     * 
      * @param player
      * @return TRUE if player has folded any time during this play.
      */
@@ -140,7 +127,6 @@ public class Pot {
     }
 
     /**
-     * 
      * @param player
      * @return TRUE if player has gone all in any time during this play.
      */
@@ -150,7 +136,6 @@ public class Pot {
     }
 
     /**
-     *
      * @param player
      * @return TRUE if player is still able to bet more (i.e. has money left, has not folded or gone all in)
      */
@@ -160,7 +145,6 @@ public class Pot {
     }
 
     /**
-     *
      * @return The number of players that are able to make a bet
      */
     public int getNoofPlayersAbleToBet() {
@@ -175,12 +159,10 @@ public class Pot {
 
     /**
      * Changes PlayState to the next.
-     * 
-     * @throws IllegalStateException
-     *             if the current PlayState is not balanced.
-     * @throws IllegalStateException
-     *             if already at the last PlayState.
+     *
      * @return the new PlayState
+     * @throws IllegalStateException if the current PlayState is not balanced.
+     * @throws IllegalStateException if already at the last PlayState.
      */
     public PlayState nextPlayState() {
 
@@ -199,7 +181,7 @@ public class Pot {
 
     /**
      * Calculates the total amount in the Pot.
-     * 
+     *
      * @return
      */
     public long getTotalPotAmount() {
@@ -219,7 +201,7 @@ public class Pot {
     /**
      * Calculates the total bet amount per player in the current PlayState and
      * returns the highest.
-     * 
+     *
      * @return
      */
     public long getMaxTotalBetInCurrentPlayState() {
@@ -241,7 +223,7 @@ public class Pot {
     /**
      * Calculates the total amount for all bets placed by Player during this
      * whole play.
-     * 
+     *
      * @param player
      * @return
      */
@@ -262,7 +244,7 @@ public class Pot {
     /**
      * Calculates the amount of all the bets placed by the Player in specified
      * PlayState.
-     * 
+     *
      * @param player
      * @param playState
      * @return
@@ -300,7 +282,7 @@ public class Pot {
 
         return maxPlayersTotalInCurrentPlayState
                 - getTotalBetAmountForPlayerInPlayState(player,
-                        getCurrentPlayState());
+                getCurrentPlayState());
 
     }
 
@@ -308,7 +290,7 @@ public class Pot {
      * Returns the list of transactions that happened in the supplied state. An
      * empty list if no transactions happened during the state or if the state
      * has not yet happened.
-     * 
+     *
      * @param state
      * @return List of transactions
      */
@@ -324,7 +306,7 @@ public class Pot {
     /**
      * Checks that all active players have placed bets amounting to the same
      * value in the current play state.
-     * 
+     *
      * @return
      */
     public boolean isCurrentPlayStateBalanced() {
@@ -350,7 +332,7 @@ public class Pot {
 
     /**
      * Bets are allowed in all states except the last.
-     * 
+     *
      * @return TRUE if allowed to place bet.
      */
     protected boolean canPlaceBetInCurrentPlayState() {
@@ -360,7 +342,7 @@ public class Pot {
 
     /**
      * Creates a list of all transactions, sorted by ascending event order.
-     * 
+     *
      * @return A sorted list of all transactions
      */
     protected List<PotTransaction> getAllTransactionsInOrder() {
@@ -388,12 +370,12 @@ public class Pot {
     /**
      * Calculates the maximum amount this player could win if he didn't have to
      * share the pot with another player.
-     * 
+     * <p/>
      * A player that has folded defaults to a maximum winning potential of 0
      * (zero). A player that has not played all in defaults to a maximum winning
      * potential of the whole pot. A player that sometime during play went all
      * in needs calculation of the side pot.
-     * 
+     *
      * @param player
      * @return The maximum amount this player can win
      */
@@ -430,7 +412,7 @@ public class Pot {
 
     /**
      * Calculates the payout per player.
-     * 
+     *
      * @param playerRanking
      * @return a map with player and the amount won.
      */
