@@ -1,6 +1,6 @@
 package se.cygni.texasholdem.server.communication;
 
-import org.codemonkey.swiftsocketserver.ClientContext;
+import org.jboss.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,13 +32,13 @@ public class MessageReceiver {
     }
 
     public void onRequest(
-            final ClientContext clientContext,
+            final ChannelHandlerContext context,
             final TexasMessage message) {
 
         // log.debug("Received a message: " + message.getType());
 
         if (message instanceof RegisterForPlayRequest) {
-            eventBus.post(new RegisterForPlayWrapper(clientContext,
+            eventBus.post(new RegisterForPlayWrapper(context,
                     (RegisterForPlayRequest) message));
             return;
         }

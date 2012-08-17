@@ -83,5 +83,6 @@ public class DummyPlayer extends BasicPlayer {
     public void onTableIsDone(TableIsDoneEvent event) {
 
         playerClient.disconnect();
+        System.exit(0);
     }
 }

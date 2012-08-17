@@ -455,44 +455,11 @@
 
             <!-- Socket server and client -->
             <dependency>
-            	<groupId>org.codemonkey.swiftsocketserver</groupId>
-                <artifactId>swift-server</artifactId>
-                <version>1.0</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>log4j</artifactId>
-                        <groupId>log4j</groupId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.codemonkey.swiftsocketserver</groupId>
-                <artifactId>swift-client</artifactId>
-                <version>1.0</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>log4j</artifactId>
-                        <groupId>log4j</groupId>
-                    </exclusion>
-                </exclusions>
+                <groupId>io.netty</groupId>
+                <artifactId>netty</artifactId>
+                <version>3.5.4.Final</version>
             </dependency>
 
-            <!-- Logging with Lilith appender 
-            <dependency>
-                <groupId>de.huxhorn.lilith</groupId>
-                <artifactId>de.huxhorn.lilith.logback.appender.multiplex-classic</artifactId>
-                <version>0.9.42.1</version>
-                <scope>runtime</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>de.huxhorn.lilith</groupId>
-                <artifactId>de.huxhorn.lilith.logback.encoder.classic</artifactId>
-                <version>0.9.42.1</version>
-                <scope>runtime</scope>
-            </dependency>
-			-->
-			
             <!-- Jackson, json -->
             <dependency>
                 <groupId>org.codehaus.jackson</groupId>

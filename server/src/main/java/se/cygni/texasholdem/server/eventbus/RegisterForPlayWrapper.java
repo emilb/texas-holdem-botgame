@@ -1,24 +1,23 @@
 package se.cygni.texasholdem.server.eventbus;
 
-import org.codemonkey.swiftsocketserver.ClientContext;
-
+import org.jboss.netty.channel.ChannelHandlerContext;
 import se.cygni.texasholdem.communication.message.request.TexasRequest;
 
 public class RegisterForPlayWrapper {
 
-    private final ClientContext clientContext;
+    private final ChannelHandlerContext context;
     private final TexasRequest request;
 
-    public RegisterForPlayWrapper(final ClientContext clientContext,
+    public RegisterForPlayWrapper(final ChannelHandlerContext context,
             final TexasRequest request) {
 
-        this.clientContext = clientContext;
+        this.context = context;
         this.request = request;
     }
 
-    public ClientContext getClientContext() {
+    public ChannelHandlerContext getChannelHandlerContext() {
 
-        return clientContext;
+        return context;
     }
 
     public TexasRequest getRequest() {

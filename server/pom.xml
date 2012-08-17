@@ -147,8 +147,8 @@
 
         <!-- Socket server and client -->
         <dependency>
-            <groupId>org.codemonkey.swiftsocketserver</groupId>
-            <artifactId>swift-server</artifactId>
+            <groupId>io.netty</groupId>
+            <artifactId>netty</artifactId>
         </dependency>
 
         <!-- Utils from commons -->

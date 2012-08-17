@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.lang.StringUtils;
-import org.codemonkey.swiftsocketserver.ClientContext;
+import org.jboss.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +47,7 @@ public class SessionManagerRemote implements SessionManager {
     private final MessageSender messageSender;
 
     private final Map<String, BotPlayer> sessionPlayerMap = new ConcurrentHashMap<String, BotPlayer>();
-    private final Map<String, ClientContext> sessionClientContextMap = new ConcurrentHashMap<String, ClientContext>();
+    private final Map<String, ChannelHandlerContext> sessionChannelHandlerContextMap = new ConcurrentHashMap<String, ChannelHandlerContext>();
 
     @Autowired
     public SessionManagerRemote(final EventBus eventBus,
@@ -75,10 +75,10 @@ public class SessionManagerRemote implements SessionManager {
             return response;
         }
 
-        final ClientContext context = sessionClientContextMap.get(player
+        final ChannelHandlerContext context = sessionChannelHandlerContextMap.get(player
                 .getSessionId());
 
-        if (context == null || !context.isActive()) {
+        if (context == null || !context.getChannel().isConnected()) {
             terminateSession(player);
             return null;
         }
@@ -107,10 +107,10 @@ public class SessionManagerRemote implements SessionManager {
                 continue;
             }
 
-            final ClientContext context = sessionClientContextMap.get(player
+            final ChannelHandlerContext context = sessionChannelHandlerContextMap.get(player
                     .getSessionId());
 
-            if (context == null || !context.isActive()) {
+            if (context == null || !context.getChannel().isConnected()) {
                 log.info("Player {} has unexpectedly left the game",
                         player.getName());
                 eventBus.post(new PlayerQuitEvent(player));
@@ -118,7 +118,7 @@ public class SessionManagerRemote implements SessionManager {
             }
 
             messageSender.sendMessage(
-                    sessionClientContextMap.get(player.getSessionId()),
+                    sessionChannelHandlerContextMap.get(player.getSessionId()),
                     eventWrapper.getEvent());
         }
     }
@@ -128,7 +128,7 @@ public class SessionManagerRemote implements SessionManager {
         final String sessionId = player.getSessionId();
 
         sessionPlayerMap.remove(sessionId);
-        sessionClientContextMap.remove(sessionId);
+        sessionChannelHandlerContextMap.remove(sessionId);
     }
 
     @Subscribe
@@ -145,7 +145,7 @@ public class SessionManagerRemote implements SessionManager {
     @Override
     public void onRegisterForPlay(final RegisterForPlayWrapper requestWrapper) {
 
-        final ClientContext clientContext = requestWrapper.getClientContext();
+        final ChannelHandlerContext clientContext = requestWrapper.getChannelHandlerContext();
         final RegisterForPlayRequest request = (RegisterForPlayRequest) requestWrapper
                 .getRequest();
 
@@ -179,13 +179,13 @@ public class SessionManagerRemote implements SessionManager {
                 gamePlan.getStartingChipsAmount());
 
         sessionPlayerMap.put(sessionId, player);
-        sessionClientContextMap.put(sessionId, clientContext);
+        sessionChannelHandlerContextMap.put(sessionId, clientContext);
 
         log.debug("New client connection registered. sessionId: {} name: {}",
                 sessionId, player.getName());
 
         // Store the sessionId in the context
-        clientContext.getSessionData().put(SESSION_ID, sessionId);
+//        clientContext.getSessionData().put(SESSION_ID, sessionId);
 
         // Send login response to client
         messageSender.sendMessage(clientContext, response);
@@ -226,8 +226,8 @@ public class SessionManagerRemote implements SessionManager {
 
         for (final BotPlayer player : sessionPlayerMap.values()) {
             if (StringUtils.equalsIgnoreCase(name, player.getName())) {
-                if (!sessionClientContextMap.get(player.getSessionId())
-                        .isActive()) {
+                if (!sessionChannelHandlerContextMap.get(player.getSessionId())
+                        .getChannel().isConnected()) {
                     eventBus.post(new PlayerQuitEvent(player));
                     return true;
                 }
@@ -244,7 +244,7 @@ public class SessionManagerRemote implements SessionManager {
             public void run() {
                 List<BotPlayer> disconnectedPlayers = new ArrayList<BotPlayer>();
                 for (BotPlayer player : listPlayers()) {
-                    if (!sessionClientContextMap.get(player.getSessionId()).isActive()) {
+                    if (!sessionChannelHandlerContextMap.get(player.getSessionId()).getChannel().isConnected()) {
                         log.debug("Found disconnected player: {}", player);
                         disconnectedPlayers.add(player);
                     }

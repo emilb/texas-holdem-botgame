@@ -1,15 +1,23 @@
 package se.cygni.texasholdem.webclient;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.util.UUID;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import org.atmosphere.cpr.AtmosphereResource;
-import org.codemonkey.swiftsocketclient.SwiftSocketClient;
-
+import org.jboss.netty.bootstrap.ClientBootstrap;
+import org.jboss.netty.buffer.ChannelBuffer;
+import org.jboss.netty.buffer.ChannelBuffers;
+import org.jboss.netty.channel.*;
+import org.jboss.netty.channel.socket.nio.NioClientSocketChannelFactory;
+import org.jboss.netty.handler.codec.frame.DelimiterBasedFrameDecoder;
+import org.jboss.netty.handler.codec.string.StringDecoder;
+import org.jboss.netty.handler.codec.string.StringEncoder;
+import org.jboss.netty.util.CharsetUtil;
 import se.cygni.texasholdem.client.SyncMessageResponseManager;
-import se.cygni.texasholdem.client.message.ClientToServerMessage;
-import se.cygni.texasholdem.client.message.ServerMessageReceiver;
-import se.cygni.texasholdem.client.message.ServerToClientMessage;
 import se.cygni.texasholdem.communication.lock.ResponseLock;
 import se.cygni.texasholdem.communication.message.TexasMessage;
 import se.cygni.texasholdem.communication.message.TexasMessageParser;
@@ -20,30 +28,65 @@ import se.cygni.texasholdem.communication.message.request.RegisterForPlayRequest
 import se.cygni.texasholdem.communication.message.request.TexasRequest;
 import se.cygni.texasholdem.communication.message.response.RegisterForPlayResponse;
 import se.cygni.texasholdem.communication.message.response.TexasResponse;
+import se.cygni.texasholdem.communication.netty.JsonDelimiter;
 import se.cygni.texasholdem.game.Room;
 
-public class WebPlayerClient implements ServerMessageReceiver {
+public class WebPlayerClient extends SimpleChannelHandler {
 
-    private static final long RESPONSE_TIMEOUT = 8000;
+    private static final long RESPONSE_TIMEOUT_MS = 80000;
+    private static final long CONNECT_WAIT_MS = 1200;
 
 	private AtmosphereResource atmosphereResource;
     private final SyncMessageResponseManager responseManager;
-    private SwiftSocketClient client;
+    private Channel channel;
+    private boolean isConnected = false;
     private String playerName;
 
-	public WebPlayerClient(final String playerName, final AtmosphereResource atmosphereResource) {
+	public WebPlayerClient(final String playerName, final AtmosphereResource atmosphereResource) throws Exception {
 		this.playerName = playerName;
         responseManager = new SyncMessageResponseManager();
 		this.atmosphereResource = atmosphereResource;
 		connect();
 	}
 
-	protected void connect() {
-        client = new SwiftSocketClient("localhost", 4711);
-        client.registerClientMessageToServerType(1, ClientToServerMessage.class);
-        client.registerServerMessageToClientType(1, ServerToClientMessage.class);
-        client.registerExecutionContext(ServerToClientMessage.class, this);
-        client.start();
+    protected void connect() throws Exception {
+
+        Executor bossPool = Executors.newCachedThreadPool();
+        Executor workerPool = Executors.newCachedThreadPool();
+        ChannelFactory channelFactory = new NioClientSocketChannelFactory(bossPool, workerPool);
+        ChannelPipelineFactory pipelineFactory = new ChannelPipelineFactory() {
+            public ChannelPipeline getPipeline() throws Exception {
+                return Channels.pipeline(
+                        new DelimiterBasedFrameDecoder(4096, true, new ChannelBuffer[]{
+                                ChannelBuffers.wrappedBuffer(JsonDelimiter.delimiter())}),
+                        new StringDecoder(CharsetUtil.UTF_8),
+                        new StringEncoder(CharsetUtil.UTF_8),
+                        WebPlayerClient.this);
+            }
+        };
+        ClientBootstrap bootstrap = new ClientBootstrap(channelFactory);
+        bootstrap.setPipelineFactory(pipelineFactory);
+
+        // Phew. Ok. We built all that. Now what ?
+        String remoteHost = "localhost";
+        int remotePort = 4711;
+        InetSocketAddress addressToConnectTo = new InetSocketAddress(remoteHost, remotePort);
+        ChannelFuture cf = bootstrap.connect(addressToConnectTo);
+        cf.await();
+        cf.await(2000, TimeUnit.MILLISECONDS);
+        cf.awaitUninterruptibly();
+        cf.awaitUninterruptibly(2000, TimeUnit.MILLISECONDS);
+        cf.addListener(new ChannelFutureListener(){
+            public void operationComplete(ChannelFuture future) throws Exception {
+                // chek to see if we succeeded
+                if(future.isSuccess()) {
+
+                    isConnected = true;
+                    channel = future.getChannel();
+                }
+            }
+        });
+
         waitForClientConnected();
     }
 
@@ -89,15 +132,17 @@ public class WebPlayerClient implements ServerMessageReceiver {
     /**
      * SwiftSocketClient takes a few 10ths of a seconds to start up.
      */
-	private void waitForClientConnected() {
-		int count=0;
-        while (!(client.isConnected() && client.isRunning()) && ++count<100) {
-	        	try {
-					Thread.sleep(5);
-				} catch (InterruptedException e) {
-			}
+    private void waitForClientConnected() {
+        long startTime = System.currentTimeMillis();
+        while (!isConnected) {
+            try {
+                Thread.sleep(5);
+            } catch (InterruptedException e) {
+            }
+            if (System.currentTimeMillis() > startTime + CONNECT_WAIT_MS)
+                throw new RuntimeException("Connection to server timed out, is it alive?");
         }
-	}
+    }
 
 	protected String getPlayerName() {
 		return playerName;
@@ -106,11 +151,11 @@ public class WebPlayerClient implements ServerMessageReceiver {
    protected TexasResponse sendAndWaitForResponse(final TexasRequest request) {
 
         final ResponseLock lock = responseManager.push(request.getRequestId());
-        sendRequest(request);
+        sendMessage(request);
         synchronized (lock) {
         	if (lock.getResponse() == null) {
 	            try {
-	                lock.wait(RESPONSE_TIMEOUT);
+	                lock.wait(RESPONSE_TIMEOUT_MS);
 	            } catch (final InterruptedException e) {
 	            }
             }
@@ -141,7 +186,7 @@ public class WebPlayerClient implements ServerMessageReceiver {
             return;
         }
 
-        // Deferr this to web client by resuming suspended websocket/request with 
+        // Defer this to web client by resuming suspended websocket/request with
         // ActionRequest response. This will cause the javascript webclient to respond to
         // with Action taken by that player, sent as a POST-message to the handler
         // which won't be suspended
@@ -185,12 +230,13 @@ public class WebPlayerClient implements ServerMessageReceiver {
 		atmosphereResource.getResponse().getWriter().flush();
 	}
 
-    protected void sendRequest(final TexasRequest request) {
-        client.sendMessage(new ClientToServerMessage(request));
-    }
-
-    public void sendResponse(final TexasResponse response) {
-        client.sendMessage(new ClientToServerMessage(response));
+    protected void sendMessage(final TexasMessage message) {
+        try {
+            channel.write(TexasMessageParser.encodeMessage(message)+ new String(JsonDelimiter.delimiter()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 
     protected String getUniqueRequestId() {

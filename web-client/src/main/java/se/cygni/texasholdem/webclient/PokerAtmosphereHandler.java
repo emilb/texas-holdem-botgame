@@ -53,7 +53,9 @@ public class PokerAtmosphereHandler implements AtmosphereHandler {
         	String body = getRequestBody(r);
         	String connectionId = req.getHeader("connectionId");
         	TexasMessage texasMessage = TexasMessageParser.decodeMessage(body);
-        	WebPlayerClient webclient = webclientForConnection(connectionId, r, body, texasMessage);
+
+            WebPlayerClient webclient = webclientForConnection(connectionId, r, body, texasMessage);
+
         	if (webclient == null) {
         		return;
         	}
@@ -62,7 +64,7 @@ public class PokerAtmosphereHandler implements AtmosphereHandler {
         	}
             if (texasMessage instanceof ActionResponse) {
             	ActionResponse actionResponse = ((ActionResponse)texasMessage);
-            	webclient.sendResponse(actionResponse);
+            	webclient.sendMessage(actionResponse);
             } else {
             	log.error("error: illegal web client request, body:" + body);
             }
@@ -84,8 +86,14 @@ public class PokerAtmosphereHandler implements AtmosphereHandler {
 			if (texasMessage instanceof RegisterForPlayRequest) {
 				String playerName = ((RegisterForPlayRequest)texasMessage).name;
 				log.info("Registring for play; "+playerName);
-				webclient = new WebPlayerClient(playerName, r);
-				try {
+
+                try {
+                    webclient = new WebPlayerClient(playerName, r);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new IOException(e);
+                }
+                try {
 					boolean ok = webclient.registerForPlay();
 					if (!ok) {
 						log.error("error on webclient.registerForPlay()");

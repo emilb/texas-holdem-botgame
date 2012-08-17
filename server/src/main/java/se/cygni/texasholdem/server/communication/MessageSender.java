@@ -1,6 +1,6 @@
 package se.cygni.texasholdem.server.communication;
 
-import org.codemonkey.swiftsocketserver.ClientContext;
+import org.jboss.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import se.cygni.texasholdem.communication.message.TexasMessage;
 import se.cygni.texasholdem.communication.message.request.TexasRequest;
 import se.cygni.texasholdem.communication.message.response.TexasResponse;
 import se.cygni.texasholdem.server.SocketServer;
-import se.cygni.texasholdem.server.message.ServerToClientMessage;
 
 @Service
 public class MessageSender {
@@ -34,25 +33,25 @@ public class MessageSender {
     }
 
     public void sendMessage(
-            final ClientContext clientContext,
+            final ChannelHandlerContext context,
             final TexasMessage message) {
 
-        socketServer.sendMessage(new ServerToClientMessage(clientContext,
-                message));
+        socketServer.sendMessage(context, message);
     }
 
     public TexasResponse sendAndWaitForResponse(
-            final ClientContext clientContext,
+            final ChannelHandlerContext context,
             final TexasRequest request) {
 
-        if (clientContext == null || !clientContext.isActive())
+
+        if (context == null || !context.getChannel().isConnected())
             throw new RuntimeException("Client context not valid");
 
         final ResponseLock lock = responseLockManager.push(request
                 .getRequestId());
 
         System.currentTimeMillis();
-        sendMessage(clientContext, request);
+        sendMessage(context, request);
 
         synchronized (lock) {
         	if(lock.getResponse() == null) {
