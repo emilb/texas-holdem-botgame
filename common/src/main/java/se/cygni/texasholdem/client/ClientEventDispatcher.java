@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 /**
- * This EventDispatcher uses reflection to notify a player of incoming events.
+ * This ClientEventDispatcher uses reflection to notify a player of incoming events.
  * Upon instantiation of this class the target object is analyzed for methods
  * that take an event class as argument (and also has that same method declared
  * in the interface).
@@ -21,17 +21,17 @@ import java.util.Map.Entry;
  *
  * @author emil
  */
-public class EventDispatcher {
+public class ClientEventDispatcher {
 
     private static Logger log = LoggerFactory
-            .getLogger(EventDispatcher.class);
+            .getLogger(ClientEventDispatcher.class);
 
     private final Player target;
 
     @SuppressWarnings("rawtypes")
     private final Map<Class, Method> invokeMap = new HashMap<Class, Method>();
 
-    public EventDispatcher(final Player target) {
+    public ClientEventDispatcher(final Player target) {
 
         this.target = target;
         populateInvokeMap();
