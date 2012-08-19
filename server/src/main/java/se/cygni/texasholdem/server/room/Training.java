@@ -21,7 +21,8 @@ public class Training extends Room {
     BotPlayer player;
     Table table;
 
-    @Autowired
+    Thread thread;
+
     public Training(EventBus eventBus, GamePlan gamePlan, SessionManager sessionManager) {
         super(eventBus, gamePlan, sessionManager);
     }
@@ -41,14 +42,19 @@ public class Training extends Room {
 
         tables.add(table);
 
-        Thread t = new Thread(table);
-        t.start();
-
+        thread = new Thread(table);
+        thread.setName("Training - " + player.getName());
+        thread.start();
     }
 
     @Override
     public void onTableGameDone(Table table) {
         log.debug("Training for player: " + player.getName() + " is done");
+        eventBus.unregister(this);
+        sessionManager.terminateSession(player);
+    }
 
+    @Override
+    public void onPlayerBusted(BotPlayer player) {
     }
 }

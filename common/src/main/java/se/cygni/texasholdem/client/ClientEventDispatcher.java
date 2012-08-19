@@ -66,7 +66,7 @@ public class ClientEventDispatcher {
             }
         }
 
-        if (log.isDebugEnabled())
+        if (log.isTraceEnabled())
             printInvokeMap();
     }
 
@@ -76,10 +76,10 @@ public class ClientEventDispatcher {
     @SuppressWarnings("rawtypes")
     private void printInvokeMap() {
 
-        log.debug("Invoke map:");
+        log.trace("Invoke map:");
         for (final Entry<Class, Method> entry : invokeMap.entrySet()) {
 
-            log.debug("{} => {}", entry.getKey().getSimpleName(), entry
+            log.trace("{} => {}", entry.getKey().getSimpleName(), entry
                     .getValue().getName());
         }
     }

@@ -61,8 +61,6 @@ public class SocketServer {
         bootstrap.setPipelineFactory(new ChannelPipelineFactory() {
             public ChannelPipeline getPipeline() throws Exception {
                 return Channels.pipeline(
-//                        new ObjectDecoder(ClassResolvers.cacheDisabled(getClass().getClassLoader())),
-//                        new ObjectEncoder(),
                         new DelimiterBasedFrameDecoder(4096, true, new ChannelBuffer[]{
                                 ChannelBuffers.wrappedBuffer(JsonDelimiter.delimiter())}),
                         new StringDecoder(CharsetUtil.UTF_8),
@@ -106,11 +104,10 @@ public class SocketServer {
         }
 
         public void messageReceived(ChannelHandlerContext context, MessageEvent e) throws Exception {
-            String message = (String) e.getMessage();
-
-            log.debug("Server got a message: {}", message);
-            receiver.onRequest(context, TexasMessageParser.decodeMessage(message));
             super.messageReceived(context, e);
+
+            String message = (String) e.getMessage();
+            receiver.onRequest(context, TexasMessageParser.decodeMessage(message));
         }
     }
 }

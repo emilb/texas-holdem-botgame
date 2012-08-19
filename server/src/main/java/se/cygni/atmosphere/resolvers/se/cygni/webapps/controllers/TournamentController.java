@@ -28,7 +28,7 @@ public class TournamentController {
     StatisticsCollector statisticsCollector;
 
 
-    @RequestMapping(value = "/serverstatus", method = RequestMethod.GET)
+    @RequestMapping(value = "/tournament", method = RequestMethod.GET)
     public String home(Locale locale, Model model) {
 
 
@@ -40,6 +40,6 @@ public class TournamentController {
         model.addAttribute("players", players);
 
 
-        return "serverstatus";
+        return "tournament";
     }
 }

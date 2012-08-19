@@ -36,7 +36,7 @@ public class PlayerClient extends SimpleChannelHandler {
     private static final long RESPONSE_TIMEOUT_MS = 80000;
     private static final long CONNECT_WAIT_MS = 1200;
 
-    private final EventDispatcher eventDispatcher;
+    private final ClientEventDispatcher clientEventDispatcher;
     private final SyncMessageResponseManager responseManager;
     private final Player player;
     private Channel channel;
@@ -47,7 +47,7 @@ public class PlayerClient extends SimpleChannelHandler {
         this.player = player;
 
         responseManager = new SyncMessageResponseManager();
-        eventDispatcher = new EventDispatcher(player);
+        clientEventDispatcher = new ClientEventDispatcher(player);
 
         try {
             connect();
@@ -129,7 +129,7 @@ public class PlayerClient extends SimpleChannelHandler {
     protected void onMessageReceived(final TexasMessage message) {
 
         if (message instanceof TexasEvent) {
-            eventDispatcher.onEvent((TexasEvent) message);
+            clientEventDispatcher.onEvent((TexasEvent) message);
             return;
         }
 

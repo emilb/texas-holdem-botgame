@@ -93,12 +93,15 @@ public class SessionManagerRemote implements SessionManager {
         for (final BotPlayer player : eventWrapper.getReceivers()) {
             if (player instanceof TrainingPlayer) {
                 TrainingPlayer trainingPlayer = (TrainingPlayer) player;
-                if (eventWrapper.getEvent() instanceof YouHaveBeenDealtACardEvent)
-                    trainingPlayer.onYouHaveBeenDealtACard((YouHaveBeenDealtACardEvent) eventWrapper.getEvent());
-                else if (eventWrapper.getEvent() instanceof CommunityHasBeenDealtACardEvent)
-                    trainingPlayer.onCommunityHasBeenDealtACard((CommunityHasBeenDealtACardEvent) eventWrapper.getEvent());
-                else if (eventWrapper.getEvent() instanceof PlayIsStartedEvent)
-                    trainingPlayer.onPlayIsStarted((PlayIsStartedEvent) eventWrapper.getEvent());
+
+                trainingPlayer.dispatchEvent(eventWrapper.getEvent());
+
+//                if (eventWrapper.getEvent() instanceof YouHaveBeenDealtACardEvent)
+//                    trainingPlayer.onYouHaveBeenDealtACard((YouHaveBeenDealtACardEvent) eventWrapper.getEvent());
+//                else if (eventWrapper.getEvent() instanceof CommunityHasBeenDealtACardEvent)
+//                    trainingPlayer.onCommunityHasBeenDealtACard((CommunityHasBeenDealtACardEvent) eventWrapper.getEvent());
+//                else if (eventWrapper.getEvent() instanceof PlayIsStartedEvent)
+//                    trainingPlayer.onPlayIsStarted((PlayIsStartedEvent) eventWrapper.getEvent());
 
                 continue;
             }

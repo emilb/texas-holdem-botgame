@@ -60,9 +60,6 @@ public class Table implements Runnable {
 
         while (!isThereAWinner()) {
 
-//            final List<BotPlayer> currentPlayers = GameUtil
-//                    .getActivePlayersWithChipsLeft(players);
-
             final List<BotPlayer> currentPlayers = new ArrayList<BotPlayer>(players);
 
             dealerPlayer = GameUtil.getNextPlayerInPlay(currentPlayers,

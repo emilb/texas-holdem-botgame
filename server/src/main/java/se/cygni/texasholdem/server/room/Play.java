@@ -22,4 +22,7 @@ public class Play extends Room {
     public void onTableGameDone(Table table) {
     }
 
+    @Override
+    public void onPlayerBusted(BotPlayer player) {
+    }
 }

@@ -23,14 +23,14 @@
 </head>
 <body>
 
-<h:navbar section="serverstatus"/>
+<h:navbar section="tournament"/>
 
 <div class="container-fluid">
     <div class="span9">
         <div class="hero-unit">
-            <h1>Server Status</h1>
+            <h1>Tournaments</h1>
 
-            <p>Shows some statistics and connected players</p>
+            <p>Status and player top-lists for current tournaments</p>
         </div>
         <div class="row-fluid">
             <div class="span6">

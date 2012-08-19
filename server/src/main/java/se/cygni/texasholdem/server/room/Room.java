@@ -86,4 +86,8 @@ public abstract class Room {
     public abstract void addPlayer(BotPlayer player);
 
     public abstract void onTableGameDone(Table table);
+
+    public abstract void onPlayerBusted(BotPlayer player);
 }
+
+
