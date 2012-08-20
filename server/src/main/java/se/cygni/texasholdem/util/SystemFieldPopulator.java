@@ -3,13 +3,14 @@ package se.cygni.texasholdem.util;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StopWatch;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 public class SystemFieldPopulator {
 
-    private static Logger log = LoggerFactory
+    private final Logger log = LoggerFactory
             .getLogger(SystemFieldPopulator.class);
 
     private final Object target;
@@ -24,11 +25,13 @@ public class SystemFieldPopulator {
     public void populateValuesFromSystemProperties() {
 
         final Field[] fields = target.getClass().getDeclaredFields();
+
         for (final Field f : fields) {
 
             // Don't try to set final variables
-            if (Modifier.isFinal(f.getModifiers()))
+            if (Modifier.isFinal(f.getModifiers())) {
                 continue;
+            }
 
             final Object valueFromSystem = getPropertyFromSystem(
                     f.getName(), f.getType());

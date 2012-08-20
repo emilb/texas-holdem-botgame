@@ -19,8 +19,7 @@
         </appender>
     -->
 
-    <logger name="se" level="DEBUG"/>
-    <logger name="org.jboss" level="DEBUG"/>
+    <logger name="se" level="INFO"/>
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
         <!--         <appender-ref ref="SOCKET" /> -->

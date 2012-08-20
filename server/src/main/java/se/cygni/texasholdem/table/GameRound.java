@@ -28,8 +28,8 @@ public class GameRound {
     private final List<BotPlayer> players = Collections
             .synchronizedList(new ArrayList<BotPlayer>());
 
-    private static final int MAX_NOOF_ACTION_RETRIES = 3;
-    private static final int MAX_NOOF_TURNS_PER_STATE = 10;
+//    private static final int MAX_NOOF_ACTION_RETRIES = 3;
+//    private static final int MAX_NOOF_TURNS_PER_STATE = 10;
 
     private final BotPlayer dealerPlayer;
     private final BotPlayer smallBlindPlayer;
@@ -37,6 +37,9 @@ public class GameRound {
 
     private final long smallBlind;
     private final long bigBlind;
+
+    private final int maxNoofTurnsPerState;
+    private final int maxNoofActionRetries;
 
     private final EventBus eventBus;
     private final SessionManager sessionManager;
@@ -49,6 +52,8 @@ public class GameRound {
     public GameRound(final List<BotPlayer> players,
                      final BotPlayer dealerPlayer, final long smallBlind,
                      final long bigBlind,
+                     final int  maxNoofTurnsPerState,
+                     final int  maxNoofActionRetries,
                      final EventBus eventBus,
                      final SessionManager sessionManager) {
 
@@ -62,6 +67,8 @@ public class GameRound {
                 smallBlindPlayer, pot);
         this.smallBlind = smallBlind;
         this.bigBlind = bigBlind;
+        this.maxNoofTurnsPerState = maxNoofTurnsPerState;
+        this.maxNoofActionRetries = maxNoofActionRetries;
         this.eventBus = eventBus;
         this.sessionManager = sessionManager;
     }
@@ -179,7 +186,7 @@ public class GameRound {
                     continue;
                 }
 
-                final Action action = prepareAndGetActionFromPlayer(currentPlayer, noofTurns < MAX_NOOF_TURNS_PER_STATE);
+                final Action action = prepareAndGetActionFromPlayer(currentPlayer, noofTurns < maxNoofTurnsPerState);
                 act(action, currentPlayer);
             }
             noofTurns++;
@@ -209,7 +216,7 @@ public class GameRound {
         int counter = 0;
 
         Action userAction = null;
-        while (!GameUtil.isActionValid(possibleActions, userAction) && counter < MAX_NOOF_ACTION_RETRIES) {
+        while (!GameUtil.isActionValid(possibleActions, userAction) && counter < maxNoofActionRetries) {
             userAction = getActionFromPlayer(possibleActions, player);
             counter++;
         }

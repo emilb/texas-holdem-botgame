@@ -16,20 +16,24 @@ public class GamePlan {
     private long startingChipsAmount;
     private int playsBetweenBlindRaise;
     private BlindRaiseStrategy blindRaiseStrategy;
-    private long smalBlindStart;
+    private long smallBlindStart;
     private long smallBlindRaiseStrategyValue;
     private long bigBlindStart;
     private long bigBlindRaiseStrategyValue;
+    private int maxNoofTurnsPerState;
+    private int maxNoofActionRetries;
 
     public GamePlan() {
 
         this.startingChipsAmount = 10000;
         this.playsBetweenBlindRaise = 10;
-        this.smalBlindStart = 5;
+        this.smallBlindStart = 5;
         this.bigBlindStart = 10;
         this.blindRaiseStrategy = BlindRaiseStrategy.FIX_AMOUNT;
         this.smallBlindRaiseStrategyValue = 5;
         this.bigBlindRaiseStrategyValue = 10;
+        this.maxNoofTurnsPerState = 10;
+        this.maxNoofActionRetries = 3;
 
         // Override values from system properties
         final SystemFieldPopulator fieldPopulator = new SystemFieldPopulator(
@@ -39,19 +43,23 @@ public class GamePlan {
 
     public GamePlan(final long startingChipsAmount,
                     final int playsBetweenBlindRaise,
-                    final long smalBlindStart,
+                    final long smallBlindStart,
                     final long bigBlindStart,
                     final BlindRaiseStrategy blindRaiseStrategy,
                     final long bigBlindRaiseStrategyValue,
-                    final long smallBlindRaiseStrategyValue) {
+                    final long smallBlindRaiseStrategyValue,
+                    final int maxNoofTurnsPerState,
+                    final int maxNoofActionRetries) {
 
         this.startingChipsAmount = startingChipsAmount;
         this.playsBetweenBlindRaise = playsBetweenBlindRaise;
-        this.smalBlindStart = smalBlindStart;
+        this.smallBlindStart = smallBlindStart;
         this.bigBlindStart = bigBlindStart;
         this.blindRaiseStrategy = blindRaiseStrategy;
         this.bigBlindRaiseStrategyValue = bigBlindRaiseStrategyValue;
         this.smallBlindRaiseStrategyValue = smallBlindRaiseStrategyValue;
+        this.maxNoofTurnsPerState = maxNoofTurnsPerState;
+        this.maxNoofActionRetries = maxNoofActionRetries;
     }
 
     public long getStartingChipsAmount() {
@@ -69,9 +77,9 @@ public class GamePlan {
         return blindRaiseStrategy;
     }
 
-    public long getSmalBlindStart() {
+    public long getSmallBlindStart() {
 
-        return smalBlindStart;
+        return smallBlindStart;
     }
 
     public long getBigBlindStart() {
@@ -87,6 +95,14 @@ public class GamePlan {
     public long getSmallBlindRaiseStrategyValue() {
 
         return smallBlindRaiseStrategyValue;
+    }
+
+    public int getMaxNoofTurnsPerState() {
+        return maxNoofTurnsPerState;
+    }
+
+    public int getMaxNoofActionRetries() {
+        return maxNoofActionRetries;
     }
 
     @SuppressWarnings("unused")
@@ -109,9 +125,9 @@ public class GamePlan {
     }
 
     @SuppressWarnings("unused")
-    private void setSmalBlindStart(final long smalBlindStart) {
+    private void setSmallBlindStart(final long smallBlindStart) {
 
-        this.smalBlindStart = smalBlindStart;
+        this.smallBlindStart = smallBlindStart;
     }
 
     @SuppressWarnings("unused")
@@ -134,4 +150,13 @@ public class GamePlan {
         this.smallBlindRaiseStrategyValue = smallBlindRaiseStrategyValue;
     }
 
+    @SuppressWarnings("unused")
+    private void setMaxNoofTurnsPerState(int maxNoofTurnsPerState) {
+        this.maxNoofTurnsPerState = maxNoofTurnsPerState;
+    }
+
+    @SuppressWarnings("unused")
+    private void setMaxNoofActionRetries(int maxNoofActionRetries) {
+        this.maxNoofActionRetries = maxNoofActionRetries;
+    }
 }

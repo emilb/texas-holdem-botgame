@@ -1,4 +1,4 @@
-package se.cygni.atmosphere.resolvers.se.cygni.webapps.controllers;
+package se.cygni.webapp.controllers.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,10 +16,10 @@ import java.util.List;
 import java.util.Locale;
 
 @Controller
-public class ServerStatusController {
+public class TournamentController {
 
     private static Logger log = LoggerFactory
-            .getLogger(ServerStatusController.class);
+            .getLogger(TournamentController.class);
 
     @Autowired
     SessionManager sessionManager;
@@ -28,7 +28,7 @@ public class ServerStatusController {
     StatisticsCollector statisticsCollector;
 
 
-    @RequestMapping(value = "/serverstatus", method = RequestMethod.GET)
+    @RequestMapping(value = "/tournament", method = RequestMethod.GET)
     public String home(Locale locale, Model model) {
 
 
@@ -40,6 +40,6 @@ public class ServerStatusController {
         model.addAttribute("players", players);
 
 
-        return "serverstatus";
+        return "tournament";
     }
 }

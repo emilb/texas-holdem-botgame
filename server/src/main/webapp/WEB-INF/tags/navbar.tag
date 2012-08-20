@@ -28,6 +28,12 @@
                     <c:set var="currentClass">class="active"</c:set>
                 </c:if>
                 <li ${currentClass}><a href="/tournament">Tournament</a></li>
+
+                <c:set var="currentClass"></c:set>
+                <c:if test="${section == 'rules'}">
+                    <c:set var="currentClass">class="active"</c:set>
+                </c:if>
+                <li ${currentClass}><a href="/rules">House rules</a></li>
             </ul>
         </div>
     </div>

@@ -54,7 +54,7 @@ public class Table implements Runnable {
         log.info("Starting the GAME!");
         gameHasStarted = true;
 
-        smallBlind = gamePlan.getSmalBlindStart();
+        smallBlind = gamePlan.getSmallBlindStart();
         bigBlind = gamePlan.getBigBlindStart();
         int roundCounter = 0;
 
@@ -67,7 +67,9 @@ public class Table implements Runnable {
 
             currentGameRound = new GameRound(currentPlayers,
                     dealerPlayer,
-                    smallBlind, bigBlind, eventBus, sessionManager);
+                    smallBlind, bigBlind,
+                    gamePlan.getMaxNoofTurnsPerState(), gamePlan.getMaxNoofActionRetries(),
+                    eventBus, sessionManager);
 
             currentGameRound.playGameRound();
 

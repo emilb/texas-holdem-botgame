@@ -1,4 +1,4 @@
-package se.cygni.atmosphere.resolvers.se.cygni.webapps.controllers;
+package se.cygni.webapp.controllers.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

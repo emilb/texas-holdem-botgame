@@ -23,35 +23,59 @@
 </head>
 <body>
 
-<h:navbar section="tournament"/>
+<h:navbar section="rules"/>
 
 <div class="container-fluid">
     <div class="span12">
         <div class="hero-unit">
-            <h1>Tournaments</h1>
+            <h1>House Rules</h1>
 
-            <p>Status and player top-lists for current tournaments</p>
+            <p>Game rules</p>
         </div>
         <div class="row-fluid">
             <div class="span6">
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th colspan="2">Statistics</th>
+                        <th colspan="2">Numbers</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td>Uptime</td>
-                        <td>${uptime}</td>
+                        <td>Starting chip amount</td>
+                        <td>${gamePlan.startingChipsAmount}</td>
                     </tr>
                     <tr>
-                        <td>Connected players</td>
-                        <td>${noofPlayers}</td>
+                        <td>Big blind</td>
+                        <td>${gamePlan.bigBlindStart}</td>
                     </tr>
                     <tr>
-                        <td>Total clients served</td>
-                        <td>${totalNoofConnections}</td>
+                        <td>Small blind</td>
+                        <td>${gamePlan.smallBlindStart}</td>
+                    </tr>
+                    <tr>
+                        <td>Blind raise strategy</td>
+                        <td>${gamePlan.blindRaiseStrategy}</td>
+                    </tr>
+                    <tr>
+                        <td>Big blind raise</td>
+                        <td>${gamePlan.bigBlindRaiseStrategyValue}</td>
+                    </tr>
+                    <tr>
+                        <td>Small blind raise</td>
+                        <td>${gamePlan.smallBlindRaiseStrategyValue}</td>
+                    </tr>
+                    <tr>
+                        <td># rounds between blind raise</td>
+                        <td>${gamePlan.playsBetweenBlindRaise}</td>
+                    </tr>
+                    <tr>
+                        <td>Max # turns per state</td>
+                        <td>${gamePlan.maxNoofTurnsPerState}</td>
+                    </tr>
+                    <tr>
+                        <td>Max # action retries</td>
+                        <td>${gamePlan.maxNoofActionRetries}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -59,22 +83,9 @@
             <!--/span-->
 
             <div class="span6">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th colspan="2">Players</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="player" items="${players}">
-                        <tr>
-                            <td>${player.name}</td>
-                            <td>$ ${player.chipCount}</td>
-                        </tr>
-                    </c:forEach>
-
-                    </tbody>
-                </table>
+                <p>
+                    A maximum of
+                </p>
             </div>
             <!--/span-->
         </div>
