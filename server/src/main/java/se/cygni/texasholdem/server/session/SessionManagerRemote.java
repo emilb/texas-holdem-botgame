@@ -26,6 +26,7 @@ import se.cygni.texasholdem.server.communication.MessageSender;
 import se.cygni.texasholdem.server.eventbus.EventWrapper;
 import se.cygni.texasholdem.server.eventbus.PlayerQuitEvent;
 import se.cygni.texasholdem.server.eventbus.RegisterForPlayWrapper;
+import se.cygni.texasholdem.server.room.Tournament;
 import se.cygni.texasholdem.server.room.Training;
 import se.cygni.texasholdem.table.GamePlan;
 
@@ -44,6 +45,9 @@ public class SessionManagerRemote implements SessionManager {
 
     private final Map<String, BotPlayer> sessionPlayerMap = new ConcurrentHashMap<String, BotPlayer>();
     private final Map<String, ChannelHandlerContext> sessionChannelHandlerContextMap = new ConcurrentHashMap<String, ChannelHandlerContext>();
+
+    private final List<Tournament> tournaments = Collections
+            .synchronizedList(new ArrayList<Tournament>());
 
     @Autowired
     public SessionManagerRemote(final EventBus eventBus,
@@ -93,16 +97,7 @@ public class SessionManagerRemote implements SessionManager {
         for (final BotPlayer player : eventWrapper.getReceivers()) {
             if (player instanceof TrainingPlayer) {
                 TrainingPlayer trainingPlayer = (TrainingPlayer) player;
-
                 trainingPlayer.dispatchEvent(eventWrapper.getEvent());
-
-//                if (eventWrapper.getEvent() instanceof YouHaveBeenDealtACardEvent)
-//                    trainingPlayer.onYouHaveBeenDealtACard((YouHaveBeenDealtACardEvent) eventWrapper.getEvent());
-//                else if (eventWrapper.getEvent() instanceof CommunityHasBeenDealtACardEvent)
-//                    trainingPlayer.onCommunityHasBeenDealtACard((CommunityHasBeenDealtACardEvent) eventWrapper.getEvent());
-//                else if (eventWrapper.getEvent() instanceof PlayIsStartedEvent)
-//                    trainingPlayer.onPlayIsStarted((PlayIsStartedEvent) eventWrapper.getEvent());
-
                 continue;
             }
 
@@ -195,11 +190,32 @@ public class SessionManagerRemote implements SessionManager {
                 room.addPlayer(player);
                 break;
 
+            case TOURNAMENT:
+                Tournament currentTournament = getAvailableTournament();
+                currentTournament.addPlayer(player);
+                break;
+
             default:
                 log.info("Player connected with invalid room definition, terminating");
                 terminateSession(player);
         }
 
+    }
+
+    private synchronized Tournament getAvailableTournament() {
+        Tournament currentTournament = null;
+        for (Tournament tournament : tournaments) {
+            if (!tournament.tournamentHasStarted()) {
+                currentTournament = tournament;
+                break;
+            }
+        }
+
+        if (currentTournament == null) {
+            currentTournament = new Tournament(eventBus, gamePlan, this);
+            tournaments.add(currentTournament);
+        }
+        return currentTournament;
     }
 
     @Override

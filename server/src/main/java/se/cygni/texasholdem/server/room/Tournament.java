@@ -28,8 +28,17 @@ public class Tournament extends Room {
             playerPool.add(player);
     }
 
+    public boolean tournamentHasStarted() {
+        return tournamentHasStarted;
+    }
+
     public void startTournament() {
 
+        // Already started
+        if (tournamentHasStarted)
+            return;
+
+        tournamentHasStarted = true;
     }
 
     @Override
@@ -38,5 +47,6 @@ public class Tournament extends Room {
 
     @Override
     public void onPlayerBusted(BotPlayer player) {
+
     }
 }

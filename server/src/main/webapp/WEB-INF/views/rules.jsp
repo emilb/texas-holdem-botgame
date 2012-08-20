@@ -84,7 +84,21 @@
 
             <div class="span6">
                 <p>
-                    A maximum of
+                    A game bout is played till either all players but one has folded or the game has
+                    entered the state SHOWDOWN. If the latter the pot is divided according to player hands,
+                    bet amounts etc.
+                </p>
+                <p>
+                    A maximum of ${gamePlan.maxNoofTurnsPerState} turns are allowed per player and state.
+                    This is to hinder raise races between players. It is always possible to go ALL-IN.
+                </p>
+                <p>
+                    Raises are always fixed to the current value of the big blind.
+                </p>
+                <p>
+                    A bot player that fails to respond in time (30 sec) or responds with non valid actions (i.e.
+                    trying to CHECK when a CALL or RAISE is needed) more than ${gamePlan.maxNoofActionRetries}
+                    in a row will automatically be folded in the current game bout.
                 </p>
             </div>
             <!--/span-->

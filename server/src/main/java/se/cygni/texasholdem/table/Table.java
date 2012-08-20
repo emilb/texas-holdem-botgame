@@ -38,6 +38,7 @@ public class Table implements Runnable {
     private long bigBlind;
 
     private boolean gameHasStarted = false;
+    private boolean stopTable = false;
 
     public Table(final GamePlan gamePlan, final Room room,
                  final EventBus eventBus, final SessionManager sessionManager) {
@@ -58,7 +59,7 @@ public class Table implements Runnable {
         bigBlind = gamePlan.getBigBlindStart();
         int roundCounter = 0;
 
-        while (!isThereAWinner()) {
+        while (!stopTable && !isThereAWinner()) {
 
             final List<BotPlayer> currentPlayers = new ArrayList<BotPlayer>(players);
 
@@ -82,6 +83,10 @@ public class Table implements Runnable {
         log.info("Game is finished, " + getWinner() + " won!");
         notifyPlayersOfTableIsDone();
         room.onTableGameDone(this);
+    }
+
+    public void stopGame() {
+         stopTable = true;
     }
 
     protected void notifyPlayersOfTableIsDone() {
