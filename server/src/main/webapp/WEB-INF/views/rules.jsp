@@ -30,7 +30,7 @@
         <div class="hero-unit">
             <h1>House Rules</h1>
 
-            <p>Game rules</p>
+            <p>and settings</p>
         </div>
         <div class="row-fluid">
             <div class="span6">
@@ -43,39 +43,39 @@
                     <tbody>
                     <tr>
                         <td>Starting chip amount</td>
-                        <td>${gamePlan.startingChipsAmount}</td>
+                        <td><div class="pull-right">$${gamePlan.startingChipsAmount}</div></td>
                     </tr>
                     <tr>
                         <td>Big blind</td>
-                        <td>${gamePlan.bigBlindStart}</td>
+                        <td><div class="pull-right">$${gamePlan.bigBlindStart}</div></td>
                     </tr>
                     <tr>
                         <td>Small blind</td>
-                        <td>${gamePlan.smallBlindStart}</td>
+                        <td><div class="pull-right">$${gamePlan.smallBlindStart}</div></td>
                     </tr>
                     <tr>
                         <td>Blind raise strategy</td>
-                        <td>${gamePlan.blindRaiseStrategy}</td>
+                        <td><div class="pull-right">${gamePlan.blindRaiseStrategy}</div></td>
                     </tr>
                     <tr>
                         <td>Big blind raise</td>
-                        <td>${gamePlan.bigBlindRaiseStrategyValue}</td>
+                        <td><div class="pull-right">${gamePlan.bigBlindRaiseStrategyValue}</div></td>
                     </tr>
                     <tr>
                         <td>Small blind raise</td>
-                        <td>${gamePlan.smallBlindRaiseStrategyValue}</td>
+                        <td><div class="pull-right">${gamePlan.smallBlindRaiseStrategyValue}</div></td>
                     </tr>
                     <tr>
                         <td># rounds between blind raise</td>
-                        <td>${gamePlan.playsBetweenBlindRaise}</td>
+                        <td><div class="pull-right">${gamePlan.playsBetweenBlindRaise}</div></td>
                     </tr>
                     <tr>
                         <td>Max # turns per state</td>
-                        <td>${gamePlan.maxNoofTurnsPerState}</td>
+                        <td><div class="pull-right">${gamePlan.maxNoofTurnsPerState}</div></td>
                     </tr>
                     <tr>
                         <td>Max # action retries</td>
-                        <td>${gamePlan.maxNoofActionRetries}</td>
+                        <td><div class="pull-right">${gamePlan.maxNoofActionRetries}</div></td>
                     </tr>
                     </tbody>
                 </table>
@@ -98,7 +98,7 @@
                 <p>
                     A bot player that fails to respond in time (30 sec) or responds with non valid actions (i.e.
                     trying to CHECK when a CALL or RAISE is needed) more than ${gamePlan.maxNoofActionRetries}
-                    in a row will automatically be folded in the current game bout.
+                    times in a row will automatically be folded in the current game bout.
                 </p>
             </div>
             <!--/span-->
