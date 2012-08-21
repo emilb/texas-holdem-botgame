@@ -23,6 +23,8 @@ public class Pot {
     private final Set<BotPlayer> foldedPlayers = new HashSet<BotPlayer>();
     private final Set<BotPlayer> allInPlayers = new HashSet<BotPlayer>();
 
+    private final Map<BotPlayer, PlayState> playerFoldedInStateMap = new HashMap<BotPlayer, PlayState>();
+
     public Pot(final List<BotPlayer> players) {
 
         allPlayers = Collections.synchronizedList(new ArrayList<BotPlayer>(
@@ -115,6 +117,7 @@ public class Pot {
     public void fold(final BotPlayer player) {
 
         foldedPlayers.add(player);
+        playerFoldedInStateMap.put(player, getCurrentPlayState());
     }
 
     /**
@@ -124,6 +127,11 @@ public class Pot {
     public boolean hasFolded(final BotPlayer player) {
 
         return foldedPlayers.contains(player);
+    }
+
+    public PlayState getPlayStateForFold(BotPlayer player) {
+
+        return playerFoldedInStateMap.get(player);
     }
 
     /**

@@ -1,9 +1,8 @@
 package se.cygni.texasholdem.game.util;
 
-import se.cygni.texasholdem.game.Action;
-import se.cygni.texasholdem.game.ActionType;
-import se.cygni.texasholdem.game.BestHand;
-import se.cygni.texasholdem.game.BotPlayer;
+import se.cygni.texasholdem.dao.model.GameLog;
+import se.cygni.texasholdem.dao.model.PlayerInGame;
+import se.cygni.texasholdem.game.*;
 import se.cygni.texasholdem.game.definitions.PlayState;
 import se.cygni.texasholdem.game.pot.Pot;
 import se.cygni.texasholdem.game.pot.PotTransaction;
@@ -212,6 +211,76 @@ public class GameUtil {
         }
 
         return null;
+    }
+
+    public static GameLog createGameLog(long smallBlind, long bigBlind,
+                                           BotPlayer dealerPlayer, BotPlayer bigBlindPlayer, BotPlayer smallBlindPlayer,
+                                           List<BotPlayer> players, List<Card> communityCards,
+                                           Pot pot, Map<BotPlayer, Long> payoutResult, PokerHandRankUtil rankUtil) {
+
+        GameLog gameLog = new GameLog();
+        gameLog.smallBlind = smallBlind;
+        gameLog.bigBlind = bigBlind;
+        gameLog.communityCards.addAll(communityCards);
+
+        for (BotPlayer player : players) {
+            if (pot.getTotalBetAmountForPlayer(player) == 0 && !pot.hasFolded(player))
+                continue;
+
+            PlayerInGame pg = new PlayerInGame();
+
+            pg.name = player.getName();
+
+            if (player == dealerPlayer)
+                pg.dealer = true;
+
+            if (player == smallBlindPlayer)
+                pg.smallBlind = true;
+
+            if (player == bigBlindPlayer)
+                pg.bigBlind = true;
+
+            pg.preflopBet = pot.getTotalBetAmountForPlayerInPlayState(player, PlayState.PRE_FLOP);
+            pg.flopBet =  pot.getTotalBetAmountForPlayerInPlayState(player, PlayState.FLOP);
+            pg.turnBet =  pot.getTotalBetAmountForPlayerInPlayState(player, PlayState.TURN);
+            pg.riverBet =  pot.getTotalBetAmountForPlayerInPlayState(player, PlayState.RIVER);
+
+            pg.isAllIn = pot.isAllIn(player);
+
+            if (pot.hasFolded(player)) {
+
+                switch (pot.getPlayStateForFold(player)) {
+                    case PRE_FLOP:
+                        pg.preflopFolded = true;
+                        break;
+                    case  FLOP:
+                        pg.flopFolded = true;
+                        break;
+                    case TURN:
+                        pg.turnFolded = true;
+                        break;
+                    case RIVER:
+                        pg.riverFolded = true;
+                        break;
+                }
+            }
+
+            try {
+                pg.cards.addAll(player.getCards());
+
+                BestHand bestHand = rankUtil.getBestHand(player);
+                pg.pokerHand = bestHand.getPokerHand();
+                pg.cardsBestHand.addAll(bestHand.getCards());
+            } catch (Exception e) {
+            }
+
+            pg.winnings = payoutResult.get(player) == null ? 0 : payoutResult.get(player);
+            pg.chipsAfterGame = player.getChipAmount();
+
+            gameLog.players.add(pg);
+        }
+
+        return gameLog;
     }
 
     public static String printTransactions(long smallBlind, long bigBlind,

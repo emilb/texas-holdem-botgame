@@ -74,6 +74,8 @@ public class Table implements Runnable {
 
             currentGameRound.playGameRound();
 
+            eventBus.post(currentGameRound.getGameLog());
+
             // Is it time to increase blinds?
             roundCounter++;
             updateBlinds(roundCounter);

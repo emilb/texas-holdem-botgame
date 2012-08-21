@@ -9,6 +9,7 @@ import se.cygni.texasholdem.communication.message.event.YouHaveBeenDealtACardEve
 import se.cygni.texasholdem.communication.message.event.YouWonAmountEvent;
 import se.cygni.texasholdem.communication.message.request.ActionRequest;
 import se.cygni.texasholdem.communication.message.response.ActionResponse;
+import se.cygni.texasholdem.dao.model.GameLog;
 import se.cygni.texasholdem.game.*;
 import se.cygni.texasholdem.game.pot.Pot;
 import se.cygni.texasholdem.game.util.GameUtil;
@@ -28,9 +29,6 @@ public class GameRound {
     private final List<BotPlayer> players = Collections
             .synchronizedList(new ArrayList<BotPlayer>());
 
-//    private static final int MAX_NOOF_ACTION_RETRIES = 3;
-//    private static final int MAX_NOOF_TURNS_PER_STATE = 10;
-
     private final BotPlayer dealerPlayer;
     private final BotPlayer smallBlindPlayer;
     private final BotPlayer bigBlindPlayer;
@@ -48,6 +46,8 @@ public class GameRound {
 
     private final Map<BotPlayer, Long> payoutResult = new HashMap<BotPlayer, Long>();
     private PokerHandRankUtil rankUtil;
+
+    private GameLog gameLog;
 
     public GameRound(final List<BotPlayer> players,
                      final BotPlayer dealerPlayer, final long smallBlind,
@@ -129,13 +129,19 @@ public class GameRound {
 
         distributePayback();
 
+        gameLog = GameUtil.createGameLog(
+                smallBlind, bigBlind, dealerPlayer, bigBlindPlayer, smallBlindPlayer, players,
+                communityCards, pot, payoutResult, rankUtil);
+
         // Clear cards, prepare for next round
         GameUtil.clearAllCards(players);
 
         // Log results
-        log.info(GameUtil.printTransactions(
-                smallBlind, bigBlind, dealerPlayer, bigBlindPlayer, smallBlindPlayer, players,
-                pot, payoutResult, rankUtil));
+        if (log.isDebugEnabled()) {
+            log.debug(GameUtil.printTransactions(
+                    smallBlind, bigBlind, dealerPlayer, bigBlindPlayer, smallBlindPlayer, players,
+                    pot, payoutResult, rankUtil));
+        }
     }
 
     protected void burnAndDealCardsToCommunity(
@@ -352,4 +358,7 @@ public class GameRound {
         return bigBlindPlayer;
     }
 
+    public GameLog getGameLog() {
+        return gameLog;
+    }
 }

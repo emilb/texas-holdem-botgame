@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import se.cygni.texasholdem.game.Player;
 import se.cygni.texasholdem.server.session.SessionManager;
-import se.cygni.texasholdem.server.session.se.cygni.texasholdem.server.statistics.StatisticsCollector;
+import se.cygni.texasholdem.server.statistics.StatisticsCollector;
 import se.cygni.texasholdem.util.PlayerTypeConverter;
 
 import java.util.List;
@@ -31,15 +31,8 @@ public class ShowGameController {
     @RequestMapping(value = "/showgame", method = RequestMethod.GET)
     public String home(Locale locale, Model model) {
 
+        model.addAttribute("gamelog", statisticsCollector.getLastGameLog());
 
-        model.addAttribute("uptime", statisticsCollector.getUpTimeAsText());
-        model.addAttribute("noofPlayers", sessionManager.getNoofPlayers());
-        model.addAttribute("totalNoofConnections", statisticsCollector.getTotalNoofConnectionsMade());
-
-        List<Player> players = PlayerTypeConverter.listOfBotPlayers(sessionManager.listPlayers());
-        model.addAttribute("players", players);
-
-
-        return "tournament";
+        return "showgame";
     }
 }

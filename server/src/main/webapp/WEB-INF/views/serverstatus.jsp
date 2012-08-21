@@ -25,14 +25,14 @@
 
 <h:navbar section="serverstatus"/>
 
-<div class="container-fluid">
-    <div class="span9">
+<div class="container">
+
         <div class="hero-unit">
             <h1>Server Status</h1>
 
             <p>Shows some statistics and connected players</p>
         </div>
-        <div class="row-fluid">
+        <div class="row">
             <div class="span6">
                 <table class="table table-striped">
                     <thead>
@@ -78,11 +78,6 @@
             </div>
             <!--/span-->
         </div>
-
-    </div>
-    <!--/span-->
-</div>
-<!--/row-->
 
 <hr>
 

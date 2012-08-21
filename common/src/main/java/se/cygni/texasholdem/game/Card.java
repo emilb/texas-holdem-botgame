@@ -1,6 +1,7 @@
 package se.cygni.texasholdem.game;
 
 import org.codehaus.jackson.annotate.JsonCreator;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import se.cygni.texasholdem.game.definitions.Rank;
 import se.cygni.texasholdem.game.definitions.Suit;
@@ -89,5 +90,10 @@ public class Card {
     public String toShortString() {
 
         return rank.getName() + suit.getShortName();
+    }
+
+    @JsonIgnore
+    public String getNameForImage() {
+        return toShortString();
     }
 }

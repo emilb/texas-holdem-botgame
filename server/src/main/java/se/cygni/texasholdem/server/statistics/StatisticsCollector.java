@@ -1,4 +1,4 @@
-package se.cygni.texasholdem.server.session.se.cygni.texasholdem.server.statistics;
+package se.cygni.texasholdem.server.statistics;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
@@ -7,8 +7,11 @@ import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import se.cygni.texasholdem.dao.model.GameLog;
 import se.cygni.texasholdem.server.eventbus.RegisterForPlayWrapper;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Service
@@ -20,6 +23,8 @@ public class StatisticsCollector {
 
     private EventBus eventBus;
 
+    private List<GameLog> gameLogs = new ArrayList<GameLog>();
+
     @Autowired
     public StatisticsCollector(EventBus eventBus) {
         this.eventBus = eventBus;
@@ -29,6 +34,11 @@ public class StatisticsCollector {
     @Subscribe
     public void onRegisterForPlay(final RegisterForPlayWrapper requestWrapper) {
         noofConnections.incrementAndGet();
+    }
+
+    @Subscribe
+    public void addGameLog(final GameLog gameLog) {
+        gameLogs.add(gameLog);
     }
 
     public long getTotalNoofConnectionsMade() {
@@ -58,5 +68,12 @@ public class StatisticsCollector {
         return daysHoursMinutes.print(period.normalizedStandard());
     }
 
+    public GameLog getLastGameLog() {
+        if (gameLogs.size() == 0)
+            return null;
+
+        return gameLogs.get(
+                gameLogs.size() -1);
+    }
 
 }
