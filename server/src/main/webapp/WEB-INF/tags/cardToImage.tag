@@ -3,5 +3,5 @@
 <%@ attribute name="cards" required="true" type="java.util.List" %>
 
 <c:forEach var="card" items="${cards}">
-    <img src="/resources/img/cards/${card.nameForImage}_mini.png" alt="${card}" width="27" height="37">
+    <img src="/resources/img/cards/${card.nameForImage}_small.png" alt="${card}" width="36" height="50">
 </c:forEach>

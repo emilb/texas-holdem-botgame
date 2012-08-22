@@ -24,6 +24,7 @@ public class Pot {
     private final Set<BotPlayer> allInPlayers = new HashSet<BotPlayer>();
 
     private final Map<BotPlayer, PlayState> playerFoldedInStateMap = new HashMap<BotPlayer, PlayState>();
+    private final Map<BotPlayer, PlayState> playerWentAllInStateMap = new HashMap<BotPlayer, PlayState>();
 
     public Pot(final List<BotPlayer> players) {
 
@@ -103,9 +104,10 @@ public class Pot {
                 isAllIn);
         transactionTable.get(currentPlayState).add(transaction);
 
-        if (isAllIn)
+        if (isAllIn) {
             allInPlayers.add(player);
-
+            playerWentAllInStateMap.put(player, getCurrentPlayState());
+        }
         return realAmount;
     }
 
@@ -141,6 +143,11 @@ public class Pot {
     public boolean isAllIn(final BotPlayer player) {
 
         return allInPlayers.contains(player);
+    }
+
+    public PlayState getPlayStateForAllIn(BotPlayer player) {
+
+        return playerWentAllInStateMap.get(player);
     }
 
     /**

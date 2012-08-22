@@ -245,7 +245,25 @@ public class GameUtil {
             pg.turnBet =  pot.getTotalBetAmountForPlayerInPlayState(player, PlayState.TURN);
             pg.riverBet =  pot.getTotalBetAmountForPlayerInPlayState(player, PlayState.RIVER);
 
-            pg.isAllIn = pot.isAllIn(player);
+            pg.allIn = pot.isAllIn(player);
+
+            if (pot.isAllIn(player)) {
+
+                switch (pot.getPlayStateForAllIn(player)) {
+                    case PRE_FLOP:
+                        pg.preflopAllIn = true;
+                        break;
+                    case  FLOP:
+                        pg.flopAllIn = true;
+                        break;
+                    case TURN:
+                        pg.turnAllIn = true;
+                        break;
+                    case RIVER:
+                        pg.riverAllIn = true;
+                        break;
+                }
+            }
 
             if (pot.hasFolded(player)) {
 

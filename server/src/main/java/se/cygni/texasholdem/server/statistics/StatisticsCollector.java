@@ -39,6 +39,7 @@ public class StatisticsCollector {
     @Subscribe
     public void addGameLog(final GameLog gameLog) {
         gameLogs.add(gameLog);
+        gameLog.logPosition = gameLogs.size()-1;
     }
 
     public long getTotalNoofConnectionsMade() {
@@ -76,4 +77,14 @@ public class StatisticsCollector {
                 gameLogs.size() -1);
     }
 
+    public GameLog getGameLogAtPos(int position) {
+        try {
+            return gameLogs.get(position);
+        } catch (Exception e) {}
+        return null;
+    }
+
+    public int getNoofGameLogs() {
+        return gameLogs.size();
+    }
 }

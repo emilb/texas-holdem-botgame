@@ -25,12 +25,17 @@ public class PlayerInGame {
     public boolean turnFolded;
     public boolean riverFolded;
 
+    public boolean preflopAllIn;
+    public boolean flopAllIn;
+    public boolean turnAllIn;
+    public boolean riverAllIn;
+
     public long preflopBet;
     public long flopBet;
     public long turnBet;
     public long riverBet;
 
-    public boolean isAllIn;
+    public boolean allIn;
 
     public String getName() {
         return name;
@@ -64,8 +69,8 @@ public class PlayerInGame {
         return cardsBestHand;
     }
 
-    public PokerHand getPokerHand() {
-        return pokerHand;
+    public String getPokerHand() {
+        return pokerHand.getName();
     }
 
     public boolean isPreflopFolded() {
@@ -100,7 +105,23 @@ public class PlayerInGame {
         return riverBet;
     }
 
-    public boolean isAllIn() {
-        return isAllIn;
+    public boolean getAllIn() {
+        return allIn;
+    }
+
+    public boolean getPreflopAllIn() {
+        return preflopAllIn;
+    }
+
+    public boolean getFlopAllIn() {
+        return flopAllIn;
+    }
+
+    public boolean getTurnAllIn() {
+        return turnAllIn;
+    }
+
+    public boolean getRiverAllIn() {
+        return riverAllIn;
     }
 }

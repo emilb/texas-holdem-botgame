@@ -25,12 +25,17 @@ public class TestUtil {
         final List<Card> cards = new ArrayList<Card>();
 
         for (final String s : shorthand) {
-            final Rank rank = Rank.get(s.substring(0, 1));
-            final Suit suit = Suit.get(s.substring(1, 2));
-            cards.add(Card.valueOf(rank, suit));
+            cards.add(getCard(s));
         }
 
         return cards;
+    }
+
+    public static Card getCard(final String shorthand) {
+        final Rank rank = Rank.get(shorthand.substring(0, 1));
+        final Suit suit = Suit.get(shorthand.substring(1, 2));
+
+        return Card.valueOf(rank, suit);
     }
 
     /**

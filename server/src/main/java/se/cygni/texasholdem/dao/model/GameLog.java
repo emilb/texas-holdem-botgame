@@ -11,6 +11,7 @@ public class GameLog {
     public long bigBlind;
     public long smallBlind;
     public List<Card> communityCards = new ArrayList<Card>();
+    public int logPosition;
 
     public List<PlayerInGame> getPlayers() {
         return players;
@@ -38,5 +39,9 @@ public class GameLog {
 
     public List<Card> getRiverCards() {
         return communityCards.subList(4, 5);
+    }
+
+    public int getLogPosition() {
+        return logPosition;
     }
 }

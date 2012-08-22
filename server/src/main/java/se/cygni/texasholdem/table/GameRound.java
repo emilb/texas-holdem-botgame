@@ -61,10 +61,11 @@ public class GameRound {
 
         this.players.addAll(players);
         this.dealerPlayer = dealerPlayer;
-        this.smallBlindPlayer = GameUtil.getNextPlayerInPlay(this.players,
-                dealerPlayer, pot);
         this.bigBlindPlayer = GameUtil.getNextPlayerInPlay(this.players,
-                smallBlindPlayer, pot);
+                dealerPlayer, pot);
+        this.smallBlindPlayer = GameUtil.getNextPlayerInPlay(this.players,
+                bigBlindPlayer, pot);
+
         this.smallBlind = smallBlind;
         this.bigBlind = bigBlind;
         this.maxNoofTurnsPerState = maxNoofTurnsPerState;
