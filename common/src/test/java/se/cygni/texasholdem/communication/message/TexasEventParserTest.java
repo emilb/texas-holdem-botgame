@@ -138,7 +138,7 @@ public class TexasEventParserTest extends AbstractEventParserTestUtil {
 
         final PlayIsStartedEvent event = new PlayIsStartedEvent(
                 players, DomainUtil.randomLong(), DomainUtil.randomLong(),
-                players.get(0), players.get(1), players.get(2));
+                players.get(0), players.get(1), players.get(2), 358);
 
         final PlayIsStartedEvent decodedMsg = assertEncodeDecode(event);
 
@@ -152,6 +152,9 @@ public class TexasEventParserTest extends AbstractEventParserTestUtil {
 
         assertEquals(event.getBigBlindAmount(),
                 decodedMsg.getBigBlindAmount());
+
+        assertEquals(event.getTableId(),
+                decodedMsg.getTableId());
 
         for (int i = 0; i < players.size(); i++) {
             assertEqualss(event.getPlayers().get(i), decodedMsg.getPlayers()

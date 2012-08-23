@@ -2,12 +2,12 @@ package se.cygni.webapp.controllers.controllers.model;
 
 public class GameNavigation {
 
+    private long tableId;
     private int position;
     private int previous;
     private int next;
 
     public GameNavigation() {
-        this.position = position;
     }
 
     public int getPosition() {
@@ -32,5 +32,13 @@ public class GameNavigation {
 
     public void setNext(int next) {
         this.next = next;
+    }
+
+    public long getTableId() {
+        return tableId;
+    }
+
+    public void setTableId(long tableId) {
+        this.tableId = tableId;
     }
 }

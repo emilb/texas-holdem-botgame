@@ -13,13 +13,7 @@
 
     <title>Cygni Texas Hold'em</title>
 
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-    <script src="${pageScope.jqueryJavascriptUrl}"></script>
-    <script src="${pageScope.jqueryTmplJavascriptUrl}"></script>
-    <script src="${pageScope.jqueryAtmosphereUrl}"></script>
-    <script src="${pageScope.bootstrapUrl}"></script>
-    <link rel="stylesheet" href="${pageScope.bootstrapCssUrl}"/>
-    <link rel="stylesheet" href="${pageScope.bootstrapResponsiveCssUrl}"/>
+    <%@ include file="/WEB-INF/views/includes/head.jsp" %>
 </head>
 <body>
 

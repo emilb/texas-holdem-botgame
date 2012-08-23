@@ -56,35 +56,35 @@ public class GameRoundTest {
     @Test
     public void testCorrectPlayerAssignmentSimple() {
 
-        final GameRound round = new GameRound(players, pA, 5, 10, 10, 3, eventBus,
+        final GameRound round = new GameRound(1, players, pA, 5, 10, 10, 3, eventBus,
                 sessionManager);
 
         assertEquals(pA, round.getDealerPlayer());
-        assertEquals(pB, round.getSmallBlindPlayer());
-        assertEquals(pC, round.getBigBlindPlayer());
+        assertEquals(pB, round.getBigBlindPlayer());
+        assertEquals(pC, round.getSmallBlindPlayer());
     }
 
     @Test
     public void testCorrectPlayerAssignmentWithTwoPlayers() {
 
-        final GameRound round = new GameRound(players.subList(0, 2), pA, 5, 10,
+        final GameRound round = new GameRound(1, players.subList(0, 2), pA, 5, 10,
                 10, 3, eventBus,
                 sessionManager);
 
         assertEquals(pA, round.getDealerPlayer());
-        assertEquals(pB, round.getSmallBlindPlayer());
-        assertEquals(pA, round.getBigBlindPlayer());
+        assertEquals(pB, round.getBigBlindPlayer());
+        assertEquals(pA, round.getSmallBlindPlayer());
     }
 
     @Test
     public void testCorrectPlayerAssignmentTurn() {
 
-        final GameRound round = new GameRound(players, pC, 5, 10, 10, 3, eventBus,
+        final GameRound round = new GameRound(1, players, pC, 5, 10, 10, 3, eventBus,
                 sessionManager);
 
         assertEquals(pC, round.getDealerPlayer());
-        assertEquals(pD, round.getSmallBlindPlayer());
-        assertEquals(pA, round.getBigBlindPlayer());
+        assertEquals(pD, round.getBigBlindPlayer());
+        assertEquals(pA, round.getSmallBlindPlayer());
     }
 
     // @Test
@@ -93,7 +93,7 @@ public class GameRoundTest {
         final ArgumentCaptor<EventWrapper> argument = ArgumentCaptor
                 .forClass(EventWrapper.class);
 
-        final GameRound round = new GameRound(players, pA, 5, 10, 10, 3, eventBus,
+        final GameRound round = new GameRound(1, players, pA, 5, 10, 10, 3, eventBus,
                 sessionManager);
 
         round.playGameRound();

@@ -13,13 +13,7 @@
 
     <title>Cygni Texas Hold'em</title>
 
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-    <script src="${pageScope.jqueryJavascriptUrl}"></script>
-    <script src="${pageScope.jqueryTmplJavascriptUrl}"></script>
-    <script src="${pageScope.jqueryAtmosphereUrl}"></script>
-    <script src="${pageScope.bootstrapUrl}"></script>
-    <link rel="stylesheet" href="${pageScope.bootstrapCssUrl}"/>
-    <link rel="stylesheet" href="${pageScope.bootstrapResponsiveCssUrl}"/>
+    <%@ include file="/WEB-INF/views/includes/head.jsp" %>
 </head>
 <body>
 
@@ -32,49 +26,54 @@
 
             <p>Shows some statistics and connected players</p>
         </div>
+
         <div class="row">
             <div class="span6">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th colspan="2">Statistics</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Uptime</td>
-                        <td>${uptime}</td>
-                    </tr>
-                    <tr>
-                        <td>Connected players</td>
-                        <td>${noofPlayers}</td>
-                    </tr>
-                    <tr>
-                        <td>Total clients served</td>
-                        <td>${totalNoofConnections}</td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div class="well well-large">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th colspan="2">Statistics</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Uptime</td>
+                            <td>${uptime}</td>
+                        </tr>
+                        <tr>
+                            <td>Connected players</td>
+                            <td>${noofPlayers}</td>
+                        </tr>
+                        <tr>
+                            <td>Total clients served</td>
+                            <td>${totalNoofConnections}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <!--/span-->
 
             <div class="span6">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th colspan="2">Players</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="player" items="${players}">
+                <div class="well well-large">
+                    <table class="table table-striped">
+                        <thead>
                         <tr>
-                            <td>${player.name}</td>
-                            <td>$ ${player.chipCount}</td>
+                            <th colspan="2">Players</th>
                         </tr>
-                    </c:forEach>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="player" items="${players}">
+                            <tr>
+                                <td>${player.name}</td>
+                                <td>$ ${player.chipCount}</td>
+                            </tr>
+                        </c:forEach>
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <!--/span-->
         </div>

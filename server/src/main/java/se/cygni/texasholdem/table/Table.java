@@ -4,12 +4,16 @@ import com.google.common.eventbus.EventBus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import se.cygni.texasholdem.communication.message.event.TableIsDoneEvent;
+import se.cygni.texasholdem.dao.model.GameLog;
 import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.game.Card;
+import se.cygni.texasholdem.game.trainingplayers.TrainingPlayer;
 import se.cygni.texasholdem.game.util.GameUtil;
 import se.cygni.texasholdem.server.eventbus.EventBusUtil;
+import se.cygni.texasholdem.server.eventbus.TableDoneEvent;
 import se.cygni.texasholdem.server.room.Room;
 import se.cygni.texasholdem.server.session.SessionManager;
+import se.cygni.texasholdem.server.statistics.AtomicCounter;
 import se.cygni.texasholdem.util.PlayerTypeConverter;
 
 import java.util.*;
@@ -19,9 +23,11 @@ public class Table implements Runnable {
     private static Logger log = LoggerFactory
             .getLogger(Table.class);
 
+    private final static String COUNTER_ID = "table";
     public static final int MAX_NOOF_PLAYERS = 11;
 
     private final String tableId = UUID.randomUUID().toString();
+    private final long tableCounter;
 
     private final List<BotPlayer> players = Collections
             .synchronizedList(new ArrayList<BotPlayer>());
@@ -47,6 +53,7 @@ public class Table implements Runnable {
         this.room = room;
         this.eventBus = eventBus;
         this.sessionManager = sessionManager;
+        this.tableCounter = AtomicCounter.increment(COUNTER_ID);
     }
 
     @Override
@@ -59,14 +66,16 @@ public class Table implements Runnable {
         bigBlind = gamePlan.getBigBlindStart();
         int roundCounter = 0;
 
-        while (!stopTable && !isThereAWinner()) {
+        while (!stopTable && !isThereAWinner() && atLeastOnePlayerIsReal()) {
 
             final List<BotPlayer> currentPlayers = new ArrayList<BotPlayer>(players);
 
             dealerPlayer = GameUtil.getNextPlayerInPlay(currentPlayers,
                     dealerPlayer, null);
 
-            currentGameRound = new GameRound(currentPlayers,
+            currentGameRound = new GameRound(
+                    tableCounter,
+                    currentPlayers,
                     dealerPlayer,
                     smallBlind, bigBlind,
                     gamePlan.getMaxNoofTurnsPerState(), gamePlan.getMaxNoofActionRetries(),
@@ -74,7 +83,10 @@ public class Table implements Runnable {
 
             currentGameRound.playGameRound();
 
-            eventBus.post(currentGameRound.getGameLog());
+            GameLog gameLog = currentGameRound.getGameLog();
+            gameLog.tableCounter = tableCounter;
+            gameLog.roundNumber = roundCounter;
+            eventBus.post(gameLog);
 
             // Is it time to increase blinds?
             roundCounter++;
@@ -82,9 +94,22 @@ public class Table implements Runnable {
 
         }
 
+        stopGame();
         log.info("Game is finished, " + getWinner() + " won!");
         notifyPlayersOfTableIsDone();
+
+        eventBus.post(new TableDoneEvent(this));
         room.onTableGameDone(this);
+    }
+
+    private boolean atLeastOnePlayerIsReal() {
+        for (BotPlayer player : players) {
+            if (!(player instanceof TrainingPlayer) &&
+                    player.getChipAmount() > 0)
+                return true;
+        }
+
+        return false;
     }
 
     public void stopGame() {
@@ -194,6 +219,10 @@ public class Table implements Runnable {
     public BotPlayer getDealerPlayer() {
 
         return dealerPlayer;
+    }
+
+    public long getTableCounter() {
+        return tableCounter;
     }
 
     @Override

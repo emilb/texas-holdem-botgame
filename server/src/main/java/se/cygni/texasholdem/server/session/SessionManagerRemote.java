@@ -122,7 +122,12 @@ public class SessionManagerRemote implements SessionManager {
         final String sessionId = player.getSessionId();
 
         sessionPlayerMap.remove(sessionId);
-        sessionChannelHandlerContextMap.remove(sessionId);
+        ChannelHandlerContext context = sessionChannelHandlerContextMap.remove(sessionId);
+        try {
+            context.getChannel().disconnect();
+        } catch (Exception e) {
+            log.warn("Failed to disconnect player: {}", e.getMessage());
+        }
     }
 
     @Subscribe

@@ -63,7 +63,7 @@ public class TestPlayMain {
 
     private static PlayerClient createDummy() {
 
-        return new PlayerClient(new DummyPlayer());
+        return new PlayerClient(new DummyPlayer(), "localhost", 4711);
     }
 
     private static void waitForRandom() {

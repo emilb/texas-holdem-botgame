@@ -12,6 +12,8 @@ public class GameLog {
     public long smallBlind;
     public List<Card> communityCards = new ArrayList<Card>();
     public int logPosition;
+    public long tableCounter;
+    public int roundNumber;
 
     public List<PlayerInGame> getPlayers() {
         return players;
@@ -43,5 +45,13 @@ public class GameLog {
 
     public int getLogPosition() {
         return logPosition;
+    }
+
+    public long getTableCounter() {
+        return tableCounter;
+    }
+
+    public int getRoundNumber() {
+        return roundNumber;
     }
 }

@@ -16,6 +16,7 @@ public class PlayIsStartedEvent extends TexasEvent {
     private final Player dealer;
     private final Player smallBlindPlayer;
     private final Player bigBlindPlayer;
+    private final long tableId;
 
     @JsonCreator
     public PlayIsStartedEvent(
@@ -24,7 +25,8 @@ public class PlayIsStartedEvent extends TexasEvent {
             @JsonProperty("bigBlindAmount") final long bigBlindAmount,
             @JsonProperty("dealer") final Player dealer,
             @JsonProperty("smallBlindPlayer") final Player smallBlindPlayer,
-            @JsonProperty("bigBlindPlayer") final Player bigBlindPlayer) {
+            @JsonProperty("bigBlindPlayer") final Player bigBlindPlayer,
+            @JsonProperty("tableId") final long tableId ) {
 
         this.players = players;
         this.smallBlindAmount = smallBlindAmount;
@@ -32,6 +34,7 @@ public class PlayIsStartedEvent extends TexasEvent {
         this.dealer = dealer;
         this.smallBlindPlayer = smallBlindPlayer;
         this.bigBlindPlayer = bigBlindPlayer;
+        this.tableId = tableId;
     }
 
     public List<Player> getPlayers() {
@@ -62,6 +65,10 @@ public class PlayIsStartedEvent extends TexasEvent {
     public Player getBigBlindPlayer() {
 
         return bigBlindPlayer;
+    }
+
+    public long getTableId() {
+        return tableId;
     }
 
     @Override

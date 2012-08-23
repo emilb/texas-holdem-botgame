@@ -49,7 +49,7 @@ public class Training extends Room {
 
     @Override
     public void onTableGameDone(Table table) {
-        log.debug("Training for player: " + player.getName() + " is done");
+        log.info("Training for player: " + player.getName() + " is done");
         eventBus.unregister(this);
         sessionManager.terminateSession(player);
     }

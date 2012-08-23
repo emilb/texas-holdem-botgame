@@ -9,6 +9,8 @@ import org.jboss.netty.handler.codec.frame.DelimiterBasedFrameDecoder;
 import org.jboss.netty.handler.codec.string.StringDecoder;
 import org.jboss.netty.handler.codec.string.StringEncoder;
 import org.jboss.netty.util.CharsetUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import se.cygni.texasholdem.communication.lock.ResponseLock;
 import se.cygni.texasholdem.communication.message.TexasMessage;
 import se.cygni.texasholdem.communication.message.TexasMessageParser;
@@ -26,7 +28,7 @@ import se.cygni.texasholdem.game.Room;
 import se.cygni.texasholdem.player.Player;
 
 import java.net.InetSocketAddress;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -36,28 +38,29 @@ public class PlayerClient extends SimpleChannelHandler {
     private static final long RESPONSE_TIMEOUT_MS = 80000;
     private static final long CONNECT_WAIT_MS = 1200;
 
+    private static Logger log = LoggerFactory.getLogger(PlayerClient.class);
+
     private final ClientEventDispatcher clientEventDispatcher;
     private final SyncMessageResponseManager responseManager;
     private final Player player;
     private Channel channel;
     private boolean isConnected = false;
+    private final String serverHost;
+    private final int serverPort;
 
-    public PlayerClient(final Player player) {
+    public PlayerClient(final Player player, final String serverHost, final int serverPort) {
 
         this.player = player;
+        this.serverHost = serverHost;
+        this.serverPort = serverPort;
 
         responseManager = new SyncMessageResponseManager();
         clientEventDispatcher = new ClientEventDispatcher(player);
-
-        try {
-            connect();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
     }
 
-    protected void connect() throws Exception {
+    public void connect() throws Exception {
+
+//        log.info("Connecting to {} at port {}", serverHost, serverPort);
 
         Executor bossPool = Executors.newCachedThreadPool();
         Executor workerPool = Executors.newCachedThreadPool();
@@ -75,10 +78,7 @@ public class PlayerClient extends SimpleChannelHandler {
         ClientBootstrap bootstrap = new ClientBootstrap(channelFactory);
         bootstrap.setPipelineFactory(pipelineFactory);
 
-        // Phew. Ok. We built all that. Now what ?
-        String remoteHost = "localhost";
-        int remotePort = 4711;
-        InetSocketAddress addressToConnectTo = new InetSocketAddress(remoteHost, remotePort);
+        InetSocketAddress addressToConnectTo = new InetSocketAddress(serverHost, serverPort);
         ChannelFuture cf = bootstrap.connect(addressToConnectTo);
         cf.await();
         cf.await(2000, TimeUnit.MILLISECONDS);
@@ -96,6 +96,8 @@ public class PlayerClient extends SimpleChannelHandler {
         });
 
         waitForClientConnected();
+
+        initConnectionStatusTimer();
     }
 
     private void waitForClientConnected() {
@@ -211,5 +213,19 @@ public class PlayerClient extends SimpleChannelHandler {
     protected String getUniqueRequestId() {
 
         return UUID.randomUUID().toString();
+    }
+
+    private void initConnectionStatusTimer() {
+        final Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                if (!channel.isConnected() || !channel.isOpen()) {
+                    player.connectionToGameServerLost();
+                    cancel();
+                }
+            }
+        }, 5000, 500);
+        // delay, repeat every ms
     }
 }

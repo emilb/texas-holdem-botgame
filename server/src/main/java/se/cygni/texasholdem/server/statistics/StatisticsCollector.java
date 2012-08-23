@@ -9,13 +9,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.cygni.texasholdem.dao.model.GameLog;
 import se.cygni.texasholdem.server.eventbus.RegisterForPlayWrapper;
+import se.cygni.texasholdem.server.eventbus.TableDoneEvent;
+import se.cygni.texasholdem.util.CircularBuffer;
+import se.cygni.texasholdem.util.ObjectMatcher;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class StatisticsCollector {
+
+    private static final int MAX_HISTORY_TABLES = 250;
 
     private long startUp = System.currentTimeMillis();
 
@@ -23,12 +29,19 @@ public class StatisticsCollector {
 
     private EventBus eventBus;
 
-    private List<GameLog> gameLogs = new ArrayList<GameLog>();
+    private CircularBuffer<TableHistory> tableHistories;
 
     @Autowired
     public StatisticsCollector(EventBus eventBus) {
         this.eventBus = eventBus;
         this.eventBus.register(this);
+        tableHistories = new CircularBuffer<TableHistory>(MAX_HISTORY_TABLES, new Comparator<TableHistory>() {
+            @Override
+            public int compare(TableHistory first, TableHistory second) {
+                return Long.valueOf(first.getTableId()).
+                        compareTo(Long.valueOf(second.getTableId()));
+            }
+        });
     }
 
     @Subscribe
@@ -38,8 +51,22 @@ public class StatisticsCollector {
 
     @Subscribe
     public void addGameLog(final GameLog gameLog) {
-        gameLogs.add(gameLog);
-        gameLog.logPosition = gameLogs.size()-1;
+
+        TableHistory tableHistory = getTableHistory(gameLog.tableCounter);
+
+        if (tableHistory == null) {
+            tableHistory = new TableHistory(gameLog.tableCounter);
+            tableHistories.add(tableHistory);
+        }
+
+        tableHistory.addGameLog(gameLog);
+    }
+
+    @Subscribe
+    public void tableDone(final TableDoneEvent tableDoneEvent) {
+        TableHistory tableHistory = getTableHistory(tableDoneEvent.getTable().getTableCounter());
+        if (tableHistory != null)
+            tableHistory.setGameEnded(true);
     }
 
     public long getTotalNoofConnectionsMade() {
@@ -56,6 +83,9 @@ public class StatisticsCollector {
                 .appendDays()
                 .appendSuffix(" day", " days")
                 .appendSeparator(" and ")
+                .appendHours()
+                .appendSuffix(" hour", " hours")
+                .appendSeparator(" and ")
                 .appendMinutes()
                 .appendSuffix(" minute", " minutes")
                 .appendSeparator(" and ")
@@ -69,22 +99,105 @@ public class StatisticsCollector {
         return daysHoursMinutes.print(period.normalizedStandard());
     }
 
-    public GameLog getLastGameLog() {
-        if (gameLogs.size() == 0)
-            return null;
+    public List<Long> listTableIds() {
+        List<Long> tableIds = new ArrayList<Long>(MAX_HISTORY_TABLES);
+        for (TableHistory history : tableHistories.getAll()) {
+            tableIds.add(history.tableId);
+        }
 
-        return gameLogs.get(
-                gameLogs.size() -1);
+        return tableIds;
     }
 
-    public GameLog getGameLogAtPos(int position) {
+    public GameLog getLastGameLog() {
         try {
-            return gameLogs.get(position);
+            return tableHistories.getLast().getLastGameLog();
         } catch (Exception e) {}
         return null;
     }
 
-    public int getNoofGameLogs() {
-        return gameLogs.size();
+    public GameLog getLastGameLog(final long tableId) {
+        try {
+            return getTableHistory(tableId).getLastGameLog();
+        } catch (Exception e) {}
+        return null;
+    }
+
+    public GameLog getGameLogAtPos(final long tableId, int position) {
+        if (position < 0)
+            return getLastGameLog(tableId);
+
+        try {
+            return getTableHistory(tableId).get(position);
+        } catch (Exception e) {}
+        return null;
+    }
+
+    public int getNoofGameLogs(final long tableId) {
+        TableHistory tableHistory = getTableHistory(tableId);
+        if (tableHistory == null)
+            return 0;
+
+        return tableHistory.size();
+    }
+
+    private TableHistory getTableHistory(final long tableId) {
+        return tableHistories.get(new ObjectMatcher<TableHistory>() {
+            @Override
+            public boolean matches(TableHistory first) {
+                return first.getTableId() == tableId;
+            }
+        });
+    }
+
+    private class TableHistory {
+        private long tableId;
+        private boolean gameEnded;
+        private List<GameLog> gameLogs = new ArrayList<GameLog>(150);
+
+        private TableHistory(long tableId) {
+            this.tableId = tableId;
+        }
+
+        public void setGameEnded(boolean gameEnded) {
+            this.gameEnded = gameEnded;
+        }
+
+        public long getTableId() {
+            return tableId;
+        }
+
+        public boolean isGameEnded() {
+            return gameEnded;
+        }
+
+        public GameLog getFirstGameLog() {
+            if (gameLogs.isEmpty())
+                return null;
+
+            return gameLogs.get(0);
+        }
+
+        public GameLog getLastGameLog() {
+            if (gameLogs.isEmpty())
+                return null;
+
+            return gameLogs.get(gameLogs.size() - 1);
+        }
+
+        public GameLog get(int position) {
+            if (position >= gameLogs.size())
+                return getLastGameLog();
+
+            return gameLogs.get(position);
+        }
+
+        public int size() {
+            return gameLogs.size();
+        }
+
+        public void addGameLog(GameLog gameLog) {
+            gameLogs.add(gameLog);
+            gameLog.logPosition = gameLogs.size()-1;
+        }
     }
 }

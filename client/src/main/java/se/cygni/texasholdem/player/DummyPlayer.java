@@ -1,8 +1,10 @@
 package se.cygni.texasholdem.player;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import se.cygni.texasholdem.client.PlayerClient;
+import se.cygni.texasholdem.communication.message.event.PlayIsStartedEvent;
 import se.cygni.texasholdem.communication.message.event.TableIsDoneEvent;
 import se.cygni.texasholdem.communication.message.request.ActionRequest;
 import se.cygni.texasholdem.game.Action;
@@ -14,12 +16,40 @@ public class DummyPlayer extends BasicPlayer {
     private static Logger log = LoggerFactory
             .getLogger(DummyPlayer.class);
 
+    private static final String DEFAULT_HOST = "localhost";
+    private static final int DEFAULT_PORT = 4711;
+
+    private static final String HOST_PROPERTY = "host";
+    private static final String PORT_PROPERTY = "port";
+
     private final String name = "dummmy" + (int) (90 * Math.random() + 10);
 
     private PlayerClient playerClient;
 
     public DummyPlayer() {
-        playerClient = new PlayerClient(this);
+        playerClient = new PlayerClient(this, getServerHost(), getServerPort());
+    }
+
+    private String getServerHost() {
+        String hostFromSystemProp = System.getProperty(HOST_PROPERTY);
+        if (StringUtils.isEmpty(hostFromSystemProp))
+            return DEFAULT_HOST;
+
+        return hostFromSystemProp;
+    }
+
+    private int getServerPort() {
+        String portFromSystemProp = System.getProperty(PORT_PROPERTY);
+        if (StringUtils.isEmpty(portFromSystemProp))
+            return DEFAULT_PORT;
+
+        try {
+            return Integer.parseInt(portFromSystemProp);
+        } catch (Exception e) {
+            log.warn("Failed to parse port from system properties");
+        }
+
+        return DEFAULT_PORT;
     }
 
     public static void main(String[] args) {
@@ -29,9 +59,10 @@ public class DummyPlayer extends BasicPlayer {
 
     public void playAGame() {
         try {
+            playerClient.connect();
             playerClient.registerForPlay(Room.TRAINING);
 
-        } catch (GameException e) {
+        } catch (Exception e) {
 
             e.printStackTrace();
         }
@@ -41,6 +72,11 @@ public class DummyPlayer extends BasicPlayer {
     public String getName() {
 
         return name;
+    }
+
+    @Override
+    public void onPlayIsStarted(PlayIsStartedEvent event) {
+        log.info("Play is starting. My table id is: " + event.getTableId());
     }
 
     @Override
@@ -79,9 +115,16 @@ public class DummyPlayer extends BasicPlayer {
     }
 
     @Override
+    public void connectionToGameServerLost() {
+        log.info("I've lost my connection to the game server!");
+        log.info("Connecting for another game!");
+        playAGame();
+    }
+
+    @Override
     public void onTableIsDone(TableIsDoneEvent event) {
 
-        playerClient.disconnect();
-        System.exit(0);
+        //playerClient.disconnect();
+        //System.exit(0);
     }
 }

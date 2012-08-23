@@ -29,6 +29,8 @@ public class GameRound {
     private final List<BotPlayer> players = Collections
             .synchronizedList(new ArrayList<BotPlayer>());
 
+    private final long tableId;
+
     private final BotPlayer dealerPlayer;
     private final BotPlayer smallBlindPlayer;
     private final BotPlayer bigBlindPlayer;
@@ -49,7 +51,9 @@ public class GameRound {
 
     private GameLog gameLog;
 
-    public GameRound(final List<BotPlayer> players,
+
+    public GameRound(final long tableId,
+                     final List<BotPlayer> players,
                      final BotPlayer dealerPlayer, final long smallBlind,
                      final long bigBlind,
                      final int  maxNoofTurnsPerState,
@@ -59,6 +63,7 @@ public class GameRound {
 
         pot = new Pot(GameUtil.getActivePlayersWithChipsLeft(players));
 
+        this.tableId = tableId;
         this.players.addAll(players);
         this.dealerPlayer = dealerPlayer;
         this.bigBlindPlayer = GameUtil.getNextPlayerInPlay(this.players,
@@ -82,8 +87,8 @@ public class GameRound {
         // Notify of start
         EventBusUtil.postPlayIsStarted(eventBus,
                 smallBlind, bigBlind,
-                dealerPlayer, smallBlindPlayer, bigBlindPlayer, players,
-                players);
+                dealerPlayer, smallBlindPlayer, bigBlindPlayer, tableId,
+                players, players);
 
         // The OPEN
         dealACardToAllParticipatingPlayers(deck);

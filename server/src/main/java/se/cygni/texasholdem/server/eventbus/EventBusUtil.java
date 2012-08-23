@@ -39,6 +39,7 @@ public class EventBusUtil {
             final BotPlayer dealerPlayer,
             final BotPlayer smallBlindPlayer,
             final BotPlayer bigBlindPlayer,
+            final long tableId,
             final List<BotPlayer> players,
             final List<BotPlayer> recipients) {
 
@@ -47,7 +48,8 @@ public class EventBusUtil {
                         smallBlind, bigBlind,
                         PlayerTypeConverter.fromBotPlayer(dealerPlayer),
                         PlayerTypeConverter.fromBotPlayer(smallBlindPlayer),
-                        PlayerTypeConverter.fromBotPlayer(bigBlindPlayer)),
+                        PlayerTypeConverter.fromBotPlayer(bigBlindPlayer),
+                        tableId),
                 recipients);
     }
 

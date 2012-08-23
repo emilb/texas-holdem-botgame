@@ -15,13 +15,7 @@
 
     <title>Cygni Texas Hold'em</title>
 
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-    <script src="${pageScope.jqueryJavascriptUrl}"></script>
-    <script src="${pageScope.jqueryTmplJavascriptUrl}"></script>
-    <script src="${pageScope.jqueryAtmosphereUrl}"></script>
-    <script src="${pageScope.bootstrapUrl}"></script>
-    <link rel="stylesheet" href="${pageScope.bootstrapCssUrl}"/>
-    <link rel="stylesheet" href="${pageScope.bootstrapResponsiveCssUrl}"/>
+    <%@ include file="/WEB-INF/views/includes/head.jsp" %>
 </head>
 <body>
 
@@ -34,8 +28,50 @@
             <p>Inspect games played</p>
         </div>
 
-        <div class="row">
 
+        <div class="row">
+            <div class="span12">
+
+                <div class="well">
+
+                    <form class="form-horizontal">
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label" for="inputTable">Table id</label>
+                            <div class="controls">
+                                <select class="span1" id="inputTable">
+                                <c:forEach var="tableId" items="${tableIds}">
+                                    <option value="${tableId}" <c:if test="${tableId == gameLog.tableCounter}">selected</c:if>>${tableId}</option>
+                                </c:forEach>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label" for="inputGameRound">Game round</label>
+                            <div class="controls">
+                                <input class="span1" type="text" id="inputGameRound" value="${position.position}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span3">
+                        <button type="button" class="btn btn-primary" id="btn_update">Update</button>
+                    </div>
+
+                    </form>
+
+                    <form:form action="timemachine" commandName="position" method="GET" id="changegame">
+                        <form:hidden id="tableId" path="tableId"/>
+                        <form:hidden id="new_position" path="position"/>
+                    </form:form>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
             <div class="span12">
                 <table class="table">
                     <thead>
@@ -56,21 +92,21 @@
                             <td><b>Community</b></td>
                             <td></td>
                             <td></td>
-                            <td><h:cardToImage cards="${gamelog.flopCards}"/></td>
-                            <td><h:cardToImage cards="${gamelog.turnCards}"/></td>
-                            <td><h:cardToImage cards="${gamelog.riverCards}"/></td>
+                            <td><h:cardToImage cards="${gameLog.flopCards}"/></td>
+                            <td><h:cardToImage cards="${gameLog.turnCards}"/></td>
+                            <td><h:cardToImage cards="${gameLog.riverCards}"/></td>
                             <td></td>
                             <td></td>
                             <td></td>
                         </tr>
 
-                    <c:forEach var="player" items="${gamelog.players}">
+                    <c:forEach var="player" items="${gameLog.players}">
                         <tr>
                             <td>
                                 ${player.name}  <br/>
                                 <c:if test="${player.dealer}">Dealer</c:if>
-                                <c:if test="${player.bigBlind}">Big Blind ($${gamelog.bigBlind})</c:if>
-                                <c:if test="${player.smallBlind}">Small Blind ($${gamelog.smallBlind})</c:if>
+                                <c:if test="${player.bigBlind}">Big Blind ($${gameLog.bigBlind})</c:if>
+                                <c:if test="${player.smallBlind}">Small Blind ($${gameLog.smallBlind})</c:if>
                             </td>
                             <td>
                                 <h:cardToImage cards="${player.cards}"/>
@@ -116,17 +152,20 @@
         <div class="row">
             <div class="span12">
                 <ul class="pager">
-                    <li class="previous">
-                        <a href="#" id="older">&larr; Older</a>
+                    <li>
+                        <a href="#" id="nav_first">&larr; First</a>
                     </li>
-                    <li class="next">
-                        <a href="#" id="newer">Newer &rarr;</a>
+                    <li>
+                        <a href="#" id="nav_previous">&larr; Previous</a>
+                    </li>
+                    <li>
+                        <a href="#" id="nav_next">Next &rarr;</a>
+                    </li>
+                    <li>
+                        <a href="#" id="nav_last">Last &rarr;</a>
                     </li>
                 </ul>
-            <form:form action="changegame" commandName="position" method="POST" id="changegame">
-                <form:hidden id="new_position" path="position" value="666"/>
-                <%--<input type="submit" value="Submit" />--%>
-            </form:form>
+
             </div>
         </div>
 <hr>
@@ -139,16 +178,40 @@
 
 <script>
     $(document).ready(function() {
-        $('#older').click(function()
+        $('#nav_first').click(function()
+        {
+            $('#new_position').val(0);
+            $('#changegame').trigger('submit');
+        });
+
+        $('#nav_previous').click(function()
         {
             $('#new_position').val(${position.previous});
             $('#changegame').trigger('submit');
         });
 
-        $('#newer').click(function()
+        $('#nav_next').click(function()
         {
             $('#new_position').val(${position.next});
             $('#changegame').trigger('submit');
+        });
+
+        $('#nav_last').click(function()
+        {
+            $('#new_position').val(-1);
+            $('#changegame').trigger('submit');
+        });
+
+        $('#btn_update').click(function()
+        {
+            $('#new_position').val($('#inputGameRound').val().replace(/[^\d]/, ''));
+            $('#tableId').val($('#inputTable').val());
+            $('#changegame').trigger('submit');
+        });
+
+        // Only allow numbers
+        $('#inputGameRound').keyup(function() {
+            $(this).val($(this).val().replace(/[^\d]/, ''));
         });
     });
 

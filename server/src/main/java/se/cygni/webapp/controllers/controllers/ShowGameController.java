@@ -13,6 +13,8 @@ import se.cygni.texasholdem.server.session.SessionManager;
 import se.cygni.texasholdem.server.statistics.StatisticsCollector;
 import se.cygni.webapp.controllers.controllers.model.GameNavigation;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
 
 @Controller
@@ -32,32 +34,39 @@ public class ShowGameController {
     public String home(Locale locale, Model model) {
 
         GameLog gamelog = statisticsCollector.getLastGameLog();
-        model.addAttribute("gamelog", gamelog);
-
-
-
+        model.addAttribute("gameLog", gamelog);
         model.addAttribute("position", getGameNavigation(gamelog));
+        model.addAttribute("tableIds", getReversedListOfTableIds());
+
         return "showgame_vertical";
     }
 
-    @RequestMapping(value = "/changegame", method = RequestMethod.POST)
+    @RequestMapping(value = "/timemachine", method = RequestMethod.GET)
     public String change(@ModelAttribute GameNavigation navigation, Model model) {
 
-        log.info("game position: " + navigation.getPosition());
+        GameLog gamelog = statisticsCollector.getGameLogAtPos(navigation.getTableId(), navigation.getPosition());
 
-        GameLog gamelog = statisticsCollector.getGameLogAtPos(navigation.getPosition());
-
-        model.addAttribute("gamelog", gamelog);
+        model.addAttribute("gameLog", gamelog);
         model.addAttribute("position", getGameNavigation(gamelog));
+        model.addAttribute("tableIds", getReversedListOfTableIds());
 
         return "showgame_vertical";
     }
+
+    private List<Long> getReversedListOfTableIds() {
+        List<Long> reversedListOfTableIds = statisticsCollector.listTableIds();
+        Collections.reverse(reversedListOfTableIds);
+
+        return reversedListOfTableIds;
+    }
+
 
     private GameNavigation getGameNavigation(GameLog gameLog) {
         GameNavigation position = new GameNavigation();
 
         if (gameLog != null) {
-            position.setNext(gameLog.logPosition < statisticsCollector.getNoofGameLogs()-1 ? gameLog.logPosition+1 : gameLog.logPosition);
+            position.setTableId(gameLog.tableCounter);
+            position.setNext(gameLog.logPosition < statisticsCollector.getNoofGameLogs(gameLog.tableCounter)-1 ? gameLog.logPosition+1 : gameLog.logPosition);
             position.setPosition(gameLog.logPosition);
             position.setPrevious(gameLog.logPosition > 1 ? gameLog.logPosition-1 : 0);
         }
