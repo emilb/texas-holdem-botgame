@@ -10,8 +10,10 @@
 
     <script type="text/javascript" src="jquery/jquery-1.7.2.js"></script>
     <script type="text/javascript" src="jquery/jquery.atmosphere.js"></script>
+
     <script type="text/javascript" src="jquery/pokerPlayer.js"></script>
-    <script type="text/javascript" src="jquery/pokerOLD.js"></script>
+    <script type="text/javascript" src="jquery/poker.js"></script>
+    <script type="text/javascript" src="jquery/pokerApp.js"></script>
 
     <style>
         * {
@@ -79,8 +81,17 @@
             width: 40px;
         }
 
+        #messagelog {
+            padding: 5px;
+            background: #ddd;
+            border-radius: 5px;
+            border: 1px solid #CCC;
+            margin-top: 10px;
+        }
+
     </style>
 </head>
+
 <body>
 <div id="header"><h3>Poker</h3></div>
 <div id="content"></div>
@@ -89,6 +100,7 @@
     <input type="text" id="input" disabled="disabled"/>
     <button id="button">starta</button>
 </div>
+<div id="messagelog"></div>
 
 </body>
 </html>

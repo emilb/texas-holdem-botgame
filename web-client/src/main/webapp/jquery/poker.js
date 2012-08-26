@@ -70,25 +70,24 @@ var pokerClient = function (spec) {
                 if (actionRequest) {
                         // TODO: move test to QUnit instead
                     if (!player.actionRequestHandler) {
-                        console.log('Player handler for ' + clazz + ' missing.');
+                        console.log('Player actionRequestHandler is missing.');
                     } else {
                         var actionResponse = player.actionRequestHandler(json);
                         if (actionResponse) {
                             spec.actionResponseCallback && spec.actionResponseCallback(actionResponse);
-                            console.log('### handler response for ' + clazz + ' is: ' + jQuery.stringifyJSON(actionResponse));
+                            //console.log('### handler response for ' + clazz + ' is: ' + jQuery.stringifyJSON(actionResponse));
                             subSocket.push(jQuery.stringifyJSON(actionResponse));
                         }
                     }
                 } else {
                     var handler = player.eventHandlers['on' + clazz];
                     if (!handler) {
-                        console.log('Player handler for ' + clazz + ' missing.');
+                        console.log('Player eventhandler for ' + clazz + ' is missing.');
                     } else {
                         handler(json);
+                        spec.onPlayerState(player.state);
                     }
                 }
-            } else {
-                console.log('Invalid JSON:' + jQuery.stringifyJSON(actionResponse) + ' or no player.');
             }
         } catch (e) {
             console.log('error: ' + e.toString());
@@ -108,7 +107,8 @@ var pokerClient = function (spec) {
         register:function (myPlayer) {
             player = myPlayer;
             var stringifyJSON = jQuery.stringifyJSON({
-                "name":playerName,
+                "name":player.name,
+                "room":"TRAINING",
                 "type":"se.cygni.texasholdem.communication.message.request.RegisterForPlayRequest"});
             subSocket.push(stringifyJSON);
         }
