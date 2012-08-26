@@ -7,7 +7,7 @@ ToDo:
 - Better sharing of code between client and web-client
 - Better handling of connection failures
 X Disconnect player after game in room finished
-- Implement Tournament room
+X Implement Tournament room
 - Admin gui for starting and inspecting tournaments
 - Collect fun statistics
 - Create better and more real playing bots for training
@@ -28,5 +28,5 @@ X StatisticsCollector
     X List table IDs
     X Get GameLog for choosen tableID
     X Throw away oldest tables (store only 250 tables)
-- Fix SLF4J warnings
+X Fix SLF4J warnings
 X Favicon
