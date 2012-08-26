@@ -47,12 +47,12 @@ public abstract class Room {
     @Subscribe
     public void onPlayerQuit(final PlayerQuitEvent playerQuitEvent) {
         final BotPlayer player = playerQuitEvent.getPlayer();
-        log.info("Player {} has quit, ordering Table to remove her", player);
+        log.debug("Player {} has quit, ordering Table to remove her", player);
         final Table table = getTableForPlayer(player);
         if (table != null)
             table.removePlayer(player);
         else
-            log.info("Couldn't find table for user!?");
+            log.debug("Couldn't find table for user!?");
 
     }
 
@@ -70,6 +70,12 @@ public abstract class Room {
             }
         }
         return null;
+    }
+
+    protected List<BotPlayer> getPlayers() {
+        List<BotPlayer> players = new ArrayList<BotPlayer>();
+        players.addAll(playerPool);
+        return players;
     }
 
     protected TrainingPlayer getTrainingPlayer() {

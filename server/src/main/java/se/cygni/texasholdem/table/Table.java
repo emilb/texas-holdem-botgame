@@ -23,28 +23,29 @@ public class Table implements Runnable {
     private static Logger log = LoggerFactory
             .getLogger(Table.class);
 
-    private final static String COUNTER_ID = "table";
+    public static final String COUNTER_ID = "table";
     public static final int MAX_NOOF_PLAYERS = 11;
 
-    private final String tableId = UUID.randomUUID().toString();
-    private final long tableCounter;
+    protected final String tableId = UUID.randomUUID().toString();
+    protected final long tableCounter;
 
-    private final List<BotPlayer> players = Collections
+    protected final List<BotPlayer> players = Collections
             .synchronizedList(new ArrayList<BotPlayer>());
 
-    private final GamePlan gamePlan;
-    private final EventBus eventBus;
-    private final Room room;
-    private final SessionManager sessionManager;
+    protected final GamePlan gamePlan;
+    protected final EventBus eventBus;
+    protected final Room room;
+    protected final SessionManager sessionManager;
 
-    private BotPlayer dealerPlayer = null;
-    private GameRound currentGameRound = null;
+    protected BotPlayer dealerPlayer = null;
+    protected GameRound currentGameRound = null;
 
-    private long smallBlind;
-    private long bigBlind;
+    protected long smallBlind;
+    protected long bigBlind;
 
-    private boolean gameHasStarted = false;
-    private boolean stopTable = false;
+    protected boolean gameHasStarted = false;
+    protected boolean stopTable = false;
+    protected boolean gameHasStopped = false;
 
     public Table(final GamePlan gamePlan, final Room room,
                  final EventBus eventBus, final SessionManager sessionManager) {
@@ -66,7 +67,9 @@ public class Table implements Runnable {
         bigBlind = gamePlan.getBigBlindStart();
         int roundCounter = 0;
 
-        while (!stopTable && !isThereAWinner() && atLeastOnePlayerIsReal()) {
+        while (!stopTable &&
+                !GameUtil.isThereAWinner(players)
+                && atLeastOnePlayerIsReal()) {
 
             final List<BotPlayer> currentPlayers = new ArrayList<BotPlayer>(players);
 
@@ -94,15 +97,17 @@ public class Table implements Runnable {
 
         }
 
+        gameHasStopped = true;
         stopGame();
         log.info("Game is finished, " + getWinner() + " won!");
         notifyPlayersOfTableIsDone();
 
+        // For statistics
         eventBus.post(new TableDoneEvent(this));
         room.onTableGameDone(this);
     }
 
-    private boolean atLeastOnePlayerIsReal() {
+    protected boolean atLeastOnePlayerIsReal() {
         for (BotPlayer player : players) {
             if (!(player instanceof TrainingPlayer) &&
                     player.getChipAmount() > 0)
@@ -156,31 +161,23 @@ public class Table implements Runnable {
         return null;
     }
 
-    protected boolean isThereAWinner() {
-
-        if (players.size() <= 1)
-            return true;
-
-        int noofPlayersWithChipsLeft = 0;
-        for (final BotPlayer player : players) {
-            if (player.getChipAmount() > 0)
-                noofPlayersWithChipsLeft++;
-
-            if (noofPlayersWithChipsLeft > 1)
-                return false;
-        }
-
-        return true;
-    }
-
     public boolean gameHasStarted() {
 
         return gameHasStarted;
     }
 
+    public boolean gameHasStopped() {
+        return gameHasStopped;
+    }
+
     public void addPlayer(final BotPlayer player) {
 
         players.add(player);
+    }
+
+    public void addPlayers(final List<BotPlayer> players) {
+
+        this.players.addAll(players);
     }
 
     public void removePlayer(final BotPlayer player) {
@@ -190,36 +187,36 @@ public class Table implements Runnable {
         if (currentGameRound != null)
             currentGameRound.removePlayerFromGame(player);
     }
-
-    public List<Card> getCardsForPlayer(final BotPlayer player) {
-
-        return player.getCards();
-    }
-
-    public long getSmallBlind() {
-
-        return smallBlind;
-    }
-
-    public long getBigBlind() {
-
-        return bigBlind;
-    }
+//
+//    public List<Card> getCardsForPlayer(final BotPlayer player) {
+//
+//        return player.getCards();
+//    }
+//
+//    public long getSmallBlind() {
+//
+//        return smallBlind;
+//    }
+//
+//    public long getBigBlind() {
+//
+//        return bigBlind;
+//    }
 
     public List<BotPlayer> getPlayers() {
 
         return new ArrayList<BotPlayer>(players);
     }
 
-    public int getNoofPlayers() {
-
-        return players.size();
-    }
-
-    public BotPlayer getDealerPlayer() {
-
-        return dealerPlayer;
-    }
+//    public int getNoofPlayers() {
+//
+//        return players.size();
+//    }
+//
+//    public BotPlayer getDealerPlayer() {
+//
+//        return dealerPlayer;
+//    }
 
     public long getTableCounter() {
         return tableCounter;

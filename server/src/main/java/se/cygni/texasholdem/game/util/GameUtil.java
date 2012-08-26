@@ -115,6 +115,21 @@ public class GameUtil {
         return playersWithChipsLeft;
     }
 
+    public static List<BotPlayer> getBustedPlayers(
+            final List<BotPlayer> players) {
+
+        final List<BotPlayer> playersWithoutChipsLeft = new ArrayList<BotPlayer>();
+
+        final Iterator<BotPlayer> iter = players.iterator();
+        while (iter.hasNext()) {
+            final BotPlayer player = iter.next();
+            if (!GameUtil.playerHasChips(player))
+                playersWithoutChipsLeft.add(player);
+        }
+
+        return playersWithoutChipsLeft;
+    }
+
     public static boolean playerHasChips(final BotPlayer nextPlayer) {
 
         return nextPlayer.getChipAmount() > 0;
@@ -128,6 +143,23 @@ public class GameUtil {
             final BotPlayer player = iter.next();
             player.clearCards();
         }
+    }
+
+    public static boolean isThereAWinner(List<BotPlayer> players) {
+
+        if (players.size() <= 1)
+            return true;
+
+        int noofPlayersWithChipsLeft = 0;
+        for (final BotPlayer player : players) {
+            if (player.getChipAmount() > 0)
+                noofPlayersWithChipsLeft++;
+
+            if (noofPlayersWithChipsLeft > 1)
+                return false;
+        }
+
+        return true;
     }
 
     public static List<Action> getPossibleActions(BotPlayer player, Pot pot, long smallBlind, long bigBlind, boolean raiseAllowed) {

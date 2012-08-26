@@ -207,7 +207,7 @@ public class SessionManagerRemote implements SessionManager {
 
     }
 
-    private synchronized Tournament getAvailableTournament() {
+    public synchronized Tournament getAvailableTournament() {
         Tournament currentTournament = null;
         for (Tournament tournament : tournaments) {
             if (!tournament.tournamentHasStarted()) {
