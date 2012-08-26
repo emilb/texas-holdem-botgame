@@ -23,7 +23,7 @@ public class PerformanceTestPlayer extends BasicPlayer {
     private static final String DEFAULT_HOST = "localhost";
     private static final int DEFAULT_PORT = 4711;
     private static final String DEFAULT_NAME = "perftest";
-    private static final int DEFAULT_NOOF_PLAYERS = 1;
+    private static final int DEFAULT_NOOF_PLAYERS = 15;
 
     private static final AtomicInteger counter = new AtomicInteger(0);
 
@@ -71,7 +71,7 @@ public class PerformanceTestPlayer extends BasicPlayer {
     public void playAGame() {
         try {
             playerClient.connect();
-            playerClient.registerForPlay(Room.TRAINING);
+            playerClient.registerForPlay(Room.TOURNAMENT);
 
         } catch (Exception e) {
 
@@ -138,7 +138,7 @@ public class PerformanceTestPlayer extends BasicPlayer {
     public void connectionToGameServerLost() {
 //        log.info("I've lost my connection to the game server!");
 //        log.info("Connecting for another game!");
-        playAGame();
+        //playAGame();
     }
 
     @Override
@@ -162,6 +162,7 @@ public class PerformanceTestPlayer extends BasicPlayer {
             });
 
             t.start();
+            log.info("Started player {}", i);
 
             try {
                 Thread.sleep(1200);

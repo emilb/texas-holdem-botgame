@@ -7,6 +7,7 @@ import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.server.eventbus.EventWrapper;
 import se.cygni.texasholdem.server.eventbus.PlayerQuitEvent;
 import se.cygni.texasholdem.server.eventbus.RegisterForPlayWrapper;
+import se.cygni.texasholdem.server.room.Tournament;
 
 import java.util.List;
 
@@ -33,5 +34,7 @@ public interface SessionManager {
     public int getNoofPlayers();
 
     public List<BotPlayer> listPlayers();
+
+    public Tournament getAvailableTournament();
 
 }
