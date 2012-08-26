@@ -10,6 +10,9 @@ import org.jboss.netty.handler.codec.frame.DelimiterBasedFrameDecoder;
 import org.jboss.netty.handler.codec.string.StringDecoder;
 import org.jboss.netty.handler.codec.string.StringEncoder;
 import org.jboss.netty.util.CharsetUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import se.cygni.texasholdem.client.SyncMessageResponseManager;
 import se.cygni.texasholdem.communication.lock.ResponseLock;
 import se.cygni.texasholdem.communication.message.TexasMessage;
@@ -31,10 +34,21 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Client for web player.
+ * 
+ * TODO: merge common code with PlayerClient
+ * 
+ * @author jonas
+ *
+ */
 public class WebPlayerClient extends SimpleChannelHandler {
 
     private static final long RESPONSE_TIMEOUT_MS = 80000;
     private static final long CONNECT_WAIT_MS = 1200;
+
+    private static Logger log = LoggerFactory
+            .getLogger(WebPlayerClient.class);
 
     private AtmosphereResource atmosphereResource;
     private final SyncMessageResponseManager responseManager;
@@ -110,6 +124,7 @@ public class WebPlayerClient extends SimpleChannelHandler {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        log.info("Sent RegisterForPlayRequest, response: " + responseJson);
 
         if (resp instanceof RegisterForPlayResponse) {
             try {
@@ -167,6 +182,11 @@ public class WebPlayerClient extends SimpleChannelHandler {
         return lock.getResponse();
     }
 
+    @Override
+    public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) throws Exception {
+        String message = (String) e.getMessage();
+        onMessageReceived(TexasMessageParser.decodeMessage(message));
+    }
 
     /**
      * Handler for server-to-client messages
@@ -203,6 +223,7 @@ public class WebPlayerClient extends SimpleChannelHandler {
             final TexasResponse response = (TexasResponse) message;
             final String requestId = response.getRequestId();
 
+            log.info("onEvent: TexasRepsponse: "+message);
             final ResponseLock lock = responseManager.pop(requestId);
             lock.setResponse(response);
 

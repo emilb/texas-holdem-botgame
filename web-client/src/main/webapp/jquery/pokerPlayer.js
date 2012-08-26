@@ -22,6 +22,7 @@ var pokerPlayer = function (name) {
 
     player.actionRequestHandler = function (actionRequest) {
         // TODO: at least look in possible actions
+        // TODO: move type and requestId to poker.js
         return {
             "type":responseClass,
             "requestId":actionRequest.requestId,

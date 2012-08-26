@@ -180,7 +180,7 @@ public class SessionManagerRemote implements SessionManager {
         sessionPlayerMap.put(sessionId, player);
         sessionChannelHandlerContextMap.put(sessionId, clientContext);
 
-        log.debug("New client connection registered. sessionId: {} name: {}",
+        log.info("New client connection registered. sessionId: {} name: {}",
                 sessionId, player.getName());
 
         // Store the sessionId in the context

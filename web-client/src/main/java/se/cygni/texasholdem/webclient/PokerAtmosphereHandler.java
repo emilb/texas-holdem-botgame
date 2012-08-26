@@ -125,8 +125,6 @@ public class PokerAtmosphereHandler implements AtmosphereHandler {
 
     @Override
     public void onStateChange(AtmosphereResourceEvent event) throws IOException {
-        AtmosphereResource r = event.getResource();
-
         if (event.isSuspended()) {
             String msg = event.getMessage().toString();
             log.info("onStateChange: event.getMessage():" + msg);

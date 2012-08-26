@@ -5,7 +5,7 @@ var pokerClient = function (spec) {
 
     var player = null;
 
-    var validateJson = function (json) {
+    function validateJson (json) {
         if (!json.type) {
             console.log("JSON must contain type: \n" + jQuery.stringifyJSON(json));
             alert("JSON must contain type: \n" + jQuery.stringifyJSON(json));
@@ -68,6 +68,7 @@ var pokerClient = function (spec) {
 
                 var actionRequest = (clazz === 'ActionRequest');
                 if (actionRequest) {
+                        // TODO: move test to QUnit instead
                     if (!player.actionRequestHandler) {
                         console.log('Player handler for ' + clazz + ' missing.');
                     } else {

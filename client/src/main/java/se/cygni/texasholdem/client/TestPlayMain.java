@@ -41,11 +41,12 @@ public class TestPlayMain {
                     for (final PlayerClient client : clients) {
                         log.debug("Letting " + client.getPlayerName()
                                 + " connect...");
+                        client.connect();
                         final boolean result = client.registerForPlay(Room.TRAINING);
                         log.debug(client.getPlayer().getName()
                                 + " is connected: " + result);
                     }
-                } catch (final GameException ge) {
+                } catch (final Exception ge) {
                     ge.printStackTrace();
                     System.exit(-1);
                 }
