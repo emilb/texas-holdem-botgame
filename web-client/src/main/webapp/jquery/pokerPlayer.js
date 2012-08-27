@@ -34,12 +34,37 @@ var pokerPlayer = function (name) {
      */
 
         actionRequestHandler : function (actionRequest) {
-            // TODO: at least look in possible actions
+            var chosenAction1, chosenAction2, chosenAction3;
+            var i;
+            for (i = 0; i < actionRequest.possibleActions.length; i += 1) {
+                var action = actionRequest.possibleActions[i];
+                switch (action.actionType) {
+                    case "RAISE":
+                        chosenAction1 = action;
+                        break;
+                    case "CALL":
+                        chosenAction2 = action;
+                        break;
+                    case "CHECK":
+                        chosenAction3 = action;
+                        break;
+                    case "FOLD":
+                        chosenAction3 = action;
+                        break;
+                    case "ALL_IN":
+                        //chosenAction3 = action;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            var chosenAction = chosenAction1 || chosenAction2 || chosenAction3;
             // TODO: move type and requestId to poker.js
             return {
                 "type":responseClass,
                 "requestId":actionRequest.requestId,
-                "action":{"actionType":"RAISE", "amount":25}
+                "action":chosenAction
             };
         },
 
@@ -86,7 +111,9 @@ var pokerPlayer = function (name) {
             },
             onYouWonAmountEvent : function (event) {
                 playerState.amount = parseInt(event.yourChipAmount);
-                addViewMessage('You won '+event.wonAmount);
+                if (parseInt(event.wonAmount) > 0) {
+                    addViewMessage('You won '+event.wonAmount);
+                }
             }
         }
 

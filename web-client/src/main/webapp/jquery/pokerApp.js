@@ -7,6 +7,7 @@ $(function () {
     var input = $('#input');
     var status = $('#status');
     var messagelog = $('#messagelog');
+    var state = $('#state');
 
     var enableMessagelog = false; // TODO: checkbox value instead
 
@@ -32,10 +33,10 @@ $(function () {
             addMessage(clazz, "", 'blue', new Date());
         },
         onPlayerState:function (playerState) {
+            state.text('amount: '+playerState.amount);
             var msg = playerState.newMessages.pop();
             if (msg) {
                 content.html($('<p>', { text : msg }));
-                content.append('<p>amount: '+playerState.amount+'</p>');
             }
         }
     };

@@ -116,7 +116,7 @@ public class PokerAtmosphereHandler implements AtmosphereHandler {
     private String getRequestBody(AtmosphereResource r) {
         try {
             String val = r.getRequest().getReader().readLine();
-            log.info("Poker: line: " + val);
+            log.trace("Poker: line: " + val);
             val = val == null ? "" : val;
             return val.trim();
         } catch (Exception e) {
