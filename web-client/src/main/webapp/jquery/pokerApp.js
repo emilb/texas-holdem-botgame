@@ -12,7 +12,7 @@ $(function () {
 
     var spec = {
         url:'http://localhost:8080/poker',
-        
+
         actionResponseCallback:function (actionResponse) {
             addMessage(actionResponse.type, actionResponse.action.actionType, 'green', new Date());
         },
@@ -56,8 +56,9 @@ $(function () {
     $('#button').click(function () {
         // starta
         var name = input.val();
+        var room = $('#room').val();
         player = pokerPlayer(name);
-        client.register(player);
+        client.register(player, room);
     });
 
 

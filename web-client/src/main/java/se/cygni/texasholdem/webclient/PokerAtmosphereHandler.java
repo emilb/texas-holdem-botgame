@@ -11,6 +11,7 @@ import se.cygni.texasholdem.communication.message.TexasMessage;
 import se.cygni.texasholdem.communication.message.TexasMessageParser;
 import se.cygni.texasholdem.communication.message.request.RegisterForPlayRequest;
 import se.cygni.texasholdem.communication.message.response.ActionResponse;
+import se.cygni.texasholdem.game.Room;
 import se.cygni.texasholdem.game.exception.GameException;
 
 import java.io.IOException;
@@ -81,10 +82,11 @@ public class PokerAtmosphereHandler implements AtmosphereHandler {
             // first request for this connection(AtmosphereResource)
             if (texasMessage instanceof RegisterForPlayRequest) {
                 String playerName = ((RegisterForPlayRequest) texasMessage).name;
+                Room room = ((RegisterForPlayRequest) texasMessage).room;
                 log.info("Registring for play; " + playerName);
 
                 try {
-                    webclient = new WebPlayerClient(playerName, r);
+                    webclient = new WebPlayerClient(playerName, room, r);
                 } catch (Exception e) {
                     e.printStackTrace();
                     throw new IOException(e);

@@ -55,9 +55,11 @@ public class WebPlayerClient extends SimpleChannelHandler {
     private Channel channel;
     private boolean isConnected = false;
     private String playerName;
+	private Room room;
 
-    public WebPlayerClient(final String playerName, final AtmosphereResource atmosphereResource) throws Exception {
+    public WebPlayerClient(final String playerName, final Room room, final AtmosphereResource atmosphereResource) throws Exception {
         this.playerName = playerName;
+		this.room = room;
         responseManager = new SyncMessageResponseManager();
         this.atmosphereResource = atmosphereResource;
         connect();
@@ -112,7 +114,7 @@ public class WebPlayerClient extends SimpleChannelHandler {
         final RegisterForPlayRequest request = new RegisterForPlayRequest();
         request.setRequestId(getUniqueRequestId());
         request.name = getPlayerName();
-        request.room = Room.TRAINING;
+        request.room = room;
 
         // Skicka request och vänta på svar
         final TexasMessage resp = sendAndWaitForResponse(request);

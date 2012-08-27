@@ -104,11 +104,11 @@ var pokerClient = function (spec) {
     var subSocket = socket.subscribe(request);
 
     return {
-        register:function (myPlayer) {
+        register:function (myPlayer, room) {
             player = myPlayer;
             var stringifyJSON = jQuery.stringifyJSON({
                 "name":player.name,
-                "room":"TRAINING",
+                "room":room,
                 "type":"se.cygni.texasholdem.communication.message.request.RegisterForPlayRequest"});
             subSocket.push(stringifyJSON);
         }
