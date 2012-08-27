@@ -159,4 +159,16 @@ public class GamePlan {
     private void setMaxNoofActionRetries(int maxNoofActionRetries) {
         this.maxNoofActionRetries = maxNoofActionRetries;
     }
+
+    public GamePlan createCopy() {
+        return new GamePlan(startingChipsAmount,
+                playsBetweenBlindRaise,
+                smallBlindStart,
+                bigBlindStart,
+                blindRaiseStrategy,
+                bigBlindRaiseStrategyValue,
+                smallBlindRaiseStrategyValue,
+                maxNoofTurnsPerState,
+                maxNoofActionRetries);
+    }
 }

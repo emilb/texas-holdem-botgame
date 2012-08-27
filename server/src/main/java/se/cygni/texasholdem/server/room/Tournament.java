@@ -1,36 +1,46 @@
 package se.cygni.texasholdem.server.room;
 
+import com.google.common.collect.Lists;
 import com.google.common.eventbus.EventBus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import se.cygni.texasholdem.game.BotPlayer;
+import se.cygni.texasholdem.game.Player;
 import se.cygni.texasholdem.game.util.GameUtil;
+import se.cygni.texasholdem.game.util.ListUtil;
 import se.cygni.texasholdem.game.util.TableUtil;
 import se.cygni.texasholdem.server.session.SessionManager;
+import se.cygni.texasholdem.server.statistics.AtomicCounter;
 import se.cygni.texasholdem.table.GamePlan;
 import se.cygni.texasholdem.table.Table;
 import se.cygni.texasholdem.table.TournamentTable;
+import se.cygni.texasholdem.util.PlayerTypeConverter;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class Tournament extends Room {
 
     private static Logger log = LoggerFactory
             .getLogger(Tournament.class);
 
+    public static final String COUNTER_ID = "tournament";
     protected final String tournamentId = UUID.randomUUID().toString();
+    protected final long tournamentCounter;
 
     private boolean tournamentHasStarted = false;
     private boolean tournamentHasEnded = false;
+    private Date created;
 
     private List<BotPlayer> playerRank = Collections.synchronizedList(new ArrayList<BotPlayer>());
 
+    private List<Long> tablesPlayedIds = new ArrayList<Long>();
+
     public Tournament(EventBus eventBus, GamePlan gamePlan, SessionManager sessionManager) {
         super(eventBus, gamePlan, sessionManager);
+
+        this.tournamentCounter = AtomicCounter.increment(COUNTER_ID);
+        this.created = new Date();
     }
 
     @Override
@@ -39,8 +49,63 @@ public class Tournament extends Room {
             playerPool.add(player);
     }
 
+    public GamePlan getGamePlan() {
+        return gamePlan.createCopy();
+    }
+
+    public void setGamePlan(GamePlan gamePlan) {
+        this.gamePlan = gamePlan;
+    }
+
     public boolean tournamentHasStarted() {
         return tournamentHasStarted;
+    }
+
+    public boolean tournamentHasEnded() {
+        return tournamentHasEnded;
+    }
+
+    public String getTournamentId() {
+        return tournamentId;
+    }
+
+    public long getTournamentCounter() {
+        return tournamentCounter;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public List<Player> getPlayerRanking() {
+        if (tournamentHasEnded()) {
+            return PlayerTypeConverter.listOfBotPlayers(playerRank);
+        }
+
+        List<Player> currentPlayerRank = new ArrayList<Player>();
+
+        // Add all current active players
+        for (BotPlayer player : playerPool) {
+            if (GameUtil.playerHasChips(player))
+                currentPlayerRank.add(PlayerTypeConverter.fromBotPlayer(player));
+        }
+
+        // Sort descending
+        Collections.sort(currentPlayerRank, new Comparator<Player>() {
+            @Override
+            public int compare(Player player, Player player1) {
+                if (player.getChipCount() == player1.getChipCount())
+                    return 0;
+
+                if (player.getChipCount() > player1.getChipCount())
+                    return -1;
+
+                return 1;
+            }
+        });
+
+        currentPlayerRank.addAll(PlayerTypeConverter.listOfBotPlayers(playerRank));
+        return currentPlayerRank;
     }
 
     public void startTournament() {
@@ -57,6 +122,19 @@ public class Tournament extends Room {
 
     private boolean isThereAWinner() {
         return GameUtil.isThereAWinner(getPlayers());
+    }
+
+    private BotPlayer getWinner() {
+
+        if (!isThereAWinner())
+            return null;
+
+        for (BotPlayer player : playerPool) {
+            if (GameUtil.playerHasChips(player))
+                return player;
+        }
+
+        return null;
     }
 
     private void restartTables() {
@@ -80,7 +158,7 @@ public class Tournament extends Room {
         for (List<BotPlayer> playersInTable : partitionedPlayers) {
             Table table = new TournamentTable(gamePlan, this, eventBus, sessionManager, playTillNoofPlayersLeft);
             table.addPlayers(playersInTable);
-
+            tablesPlayedIds.add(table.getTableCounter());
             tables.add(table);
         }
     }
@@ -143,6 +221,9 @@ public class Tournament extends Room {
             log.info("This tournament has a winner, ending!");
             tournamentHasEnded = true;
             shutdown();
+
+            playerRank.add(0, getWinner());
+
             return;
         }
 
@@ -152,6 +233,10 @@ public class Tournament extends Room {
     @Override
     public synchronized void onPlayerBusted(BotPlayer player) {
         log.info("{} busted!", player);
-        playerRank.add(player);
+        playerRank.add(0, player);
+    }
+
+    public List<Long> getTablesPlayedIds() {
+        return new ArrayList<Long>(tablesPlayedIds);
     }
 }

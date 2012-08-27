@@ -29,7 +29,7 @@ public abstract class Room {
             .synchronizedSet(new HashSet<BotPlayer>());
 
     protected final EventBus eventBus;
-    protected final GamePlan gamePlan;
+    protected GamePlan gamePlan;
     protected final SessionManager sessionManager;
 
     private static long PlayerTrainerCounter = 0;

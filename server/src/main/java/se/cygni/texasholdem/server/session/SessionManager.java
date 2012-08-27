@@ -37,4 +37,8 @@ public interface SessionManager {
 
     public Tournament getAvailableTournament();
 
+    public List<Tournament> listFinishedOrStartedTournaments();
+
+    public Tournament getTournament(String id);
+
 }
