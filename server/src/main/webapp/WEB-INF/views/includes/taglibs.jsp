@@ -18,7 +18,6 @@
 
 <spring:url scope="page" var="jqueryJavascriptUrl" value="/resources/js/jquery-1.7.1.js"/>
 <spring:url scope="page" var="jqueryTmplJavascriptUrl" value="/resources/js/jquery.tmpl.min.js"/>
-<spring:url scope="page" var="jqueryAtmosphereUrl" value="/resources/js/jquery.atmosphere.js"/>
 <spring:url scope="page" var="bootstrapUrl" value="/resources/js/bootstrap.js"/>
 <spring:url scope="page" var="bootstrapCssUrl" value="/resources/css/bootstrap.css"/>
 <spring:url scope="page" var="bootstrapResponsiveCssUrl" value="/resources/css/bootstrap-responsive.css"/>

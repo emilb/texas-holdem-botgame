@@ -207,6 +207,23 @@ public class SessionManagerRemote implements SessionManager {
 
     }
 
+    public List<Tournament> listFinishedOrStartedTournaments() {
+        List<Tournament> finishedTournaments = new ArrayList<Tournament>();
+
+        for (Tournament tournament : tournaments) {
+            if (tournament.tournamentHasStarted() || tournament.tournamentHasEnded())
+                finishedTournaments.add(tournament);
+        }
+
+        return finishedTournaments;
+    }
+
+    /**
+     * There can only be one active (i.e not started) Tournament. If none
+     * exists, a new is created.
+     *
+     * @return The current not started Tournament
+     */
     public synchronized Tournament getAvailableTournament() {
         Tournament currentTournament = null;
         for (Tournament tournament : tournaments) {
@@ -221,6 +238,15 @@ public class SessionManagerRemote implements SessionManager {
             tournaments.add(currentTournament);
         }
         return currentTournament;
+    }
+
+    public Tournament getTournament(String id) {
+        for (Tournament tournament : tournaments) {
+            if (tournament.getTournamentId().equals(id))
+                return tournament;
+        }
+
+        return null;
     }
 
     @Override

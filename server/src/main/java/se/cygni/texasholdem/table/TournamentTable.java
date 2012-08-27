@@ -74,7 +74,7 @@ public class TournamentTable extends Table {
 
         gameHasStopped = true;
         stopGame();
-        log.info("Table is finished, {} players still in play", GameUtil.getActivePlayersWithChipsLeft(players).size());
+        log.info("TournamentTable is finished, {} players still in play", GameUtil.getActivePlayersWithChipsLeft(players).size());
 
         // For statistics
         eventBus.post(new TableDoneEvent(this));

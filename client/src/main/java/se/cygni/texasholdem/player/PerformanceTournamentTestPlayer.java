@@ -15,15 +15,15 @@ import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class PerformanceTestPlayer extends BasicPlayer {
+public class PerformanceTournamentTestPlayer extends BasicPlayer {
 
     private static Logger log = LoggerFactory
-            .getLogger(PerformanceTestPlayer.class);
+            .getLogger(PerformanceTournamentTestPlayer.class);
 
     private static final String DEFAULT_HOST = "localhost";
     private static final int DEFAULT_PORT = 4711;
     private static final String DEFAULT_NAME = "perftest";
-    private static final int DEFAULT_NOOF_PLAYERS = 1;
+    private static final int DEFAULT_NOOF_PLAYERS = 15;
 
     private static final AtomicInteger counter = new AtomicInteger(0);
 
@@ -41,7 +41,7 @@ public class PerformanceTestPlayer extends BasicPlayer {
 
     private long lastNewGame;
 
-    public PerformanceTestPlayer() {
+    public PerformanceTournamentTestPlayer() {
         name = getSystemProperty(NAME_PROPERTY, DEFAULT_NAME) + "_" + counter.getAndIncrement();
         playerClient = new PlayerClient(this, getSystemProperty(HOST_PROPERTY, DEFAULT_HOST), getSystemProperty(PORT_PROPERTY, DEFAULT_PORT));
     }
@@ -71,7 +71,7 @@ public class PerformanceTestPlayer extends BasicPlayer {
     public void playAGame() {
         try {
             playerClient.connect();
-            playerClient.registerForPlay(Room.TRAINING);
+            playerClient.registerForPlay(Room.TOURNAMENT);
 
         } catch (Exception e) {
 
@@ -138,7 +138,7 @@ public class PerformanceTestPlayer extends BasicPlayer {
     public void connectionToGameServerLost() {
 //        log.info("I've lost my connection to the game server!");
 //        log.info("Connecting for another game!");
-        playAGame();
+        //playAGame();
     }
 
     @Override
@@ -156,12 +156,13 @@ public class PerformanceTestPlayer extends BasicPlayer {
             Thread t = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    PerformanceTestPlayer player = new PerformanceTestPlayer();
+                    PerformanceTournamentTestPlayer player = new PerformanceTournamentTestPlayer();
                     player.playAGame();
                 }
             });
 
             t.start();
+            log.info("Started player {}", i);
 
             try {
                 Thread.sleep(1200);

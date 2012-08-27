@@ -9,12 +9,6 @@
                 Cygni Texas Hold'em
             </a>
             <ul class="nav">
-                <c:if test="${section == 'home'}">
-                    <c:set var="currentClass">class="active"</c:set>
-                </c:if>
-                <li ${currentClass}>
-                    <a href="/">Home</a>
-                </li>
 
                 <c:set var="currentClass"></c:set>
                 <c:if test="${section == 'rules'}">
