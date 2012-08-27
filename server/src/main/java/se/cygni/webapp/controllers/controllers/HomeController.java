@@ -19,18 +19,9 @@ public class HomeController {
     private static Logger log = LoggerFactory
             .getLogger(HomeController.class);
 
-    @Autowired
-    SessionManager sessionManager;
-
-    @Autowired
-    GamePlan gamePlan;
-
-    @RequestMapping(value = "/rules", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public String home(Locale locale, Model model) {
 
-        log.warn("I've been changed AGAIN!");
-        model.addAttribute("gamePlan", gamePlan);
-
-        return "rules";
+        return "redirect:/rules";
     }
 }
