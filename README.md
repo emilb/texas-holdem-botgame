@@ -32,19 +32,19 @@ X Fix SLF4J warnings
 X Favicon
 
 
-Mejla regler till Tommy (lista över händer)
+X Mejla regler till Tommy (lista över händer)
 Mejla krav för uppgiften (java, maven? IDE med m2eclipse plugin etc)
-Router att skaffa
-Köp 5st 10m ethernetkablar
+X Router att skaffa
+X Köp 5st 10m ethernetkablar
 Förbered paketering av jarar och webcliektn etc
 Kom igång instruktioner
 Förebered presentation
 Ta med projektor
 Fundera på vilka sourcepaket som ska med
 Köra maven repo på servern
-Köp priser till vinnare
 Rensa i requests
 Testramverket JS
+
 Serverpaketering web-client (och parametrar startup, local port, server host, server port, webdirectory)
 http://stackoverflow.com/questions/3718221/add-resources-to-jetty-programmatically
 

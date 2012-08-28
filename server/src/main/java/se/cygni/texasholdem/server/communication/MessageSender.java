@@ -14,7 +14,7 @@ import se.cygni.texasholdem.server.SocketServer;
 @Service
 public class MessageSender {
 
-    private static final long RESPONSE_TIMEOUT = 30000;
+    private static final long RESPONSE_TIMEOUT = 3000;
 
     private static Logger log = LoggerFactory
             .getLogger(MessageSender.class);

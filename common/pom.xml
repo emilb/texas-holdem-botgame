@@ -17,49 +17,12 @@
 
     <dependencies>
 
-        <!-- Core utilities used by other modules. Define this if you use Spring
-              Utility APIs (org.springframework.core.*/org.springframework.util.*) -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-        </dependency>
-
-        <!-- Expression Language (depends on spring-core) Define this if you use
-              Spring Expression APIs (org.springframework.expression.*) -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-expression</artifactId>
-        </dependency>
-
-        <!-- Bean Factory and JavaBeans utilities (depends on spring-core) Define
-              this if you use Spring Bean APIs (org.springframework.beans.*) -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-        </dependency>
-
         <!-- Application Context (depends on spring-core, spring-expression, spring-aop,
               spring-beans) This is the central artifact for Spring's Dependency Injection
               Container and is generally always defined -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-        </dependency>
-
-        <!-- Various Application Context utilities, including EhCache, JavaMail,
-              Quartz, and Freemarker integration Define this if you need any of these integrations -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-        </dependency>
-
-        <!-- Support for testing Spring applications with tools such as JUnit and
-              TestNG This artifact is generally always defined with a 'test' scope for
-              the integration testing framework and unit testing stubs -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <scope>test</scope>
         </dependency>
 
         <!-- Utils from commons -->
