@@ -148,6 +148,9 @@ public class SessionManagerRemote implements SessionManager {
         final RegisterForPlayRequest request = (RegisterForPlayRequest) requestWrapper
                 .getRequest();
 
+        // Store client ip, max 5 connections per ip
+        //clientContext.getChannel().getRemoteAddress()
+
         // Check that user name is not already in use
         if (!isNameUnique(request.name)) {
             final UsernameAlreadyTakenException e = new UsernameAlreadyTakenException();

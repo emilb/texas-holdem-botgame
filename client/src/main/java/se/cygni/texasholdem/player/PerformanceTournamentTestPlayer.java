@@ -1,6 +1,7 @@
 package se.cygni.texasholdem.player;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import se.cygni.texasholdem.client.PlayerClient;
@@ -23,7 +24,7 @@ public class PerformanceTournamentTestPlayer extends BasicPlayer {
     private static final String DEFAULT_HOST = "localhost";
     private static final int DEFAULT_PORT = 4711;
     private static final String DEFAULT_NAME = "perftest";
-    private static final int DEFAULT_NOOF_PLAYERS = 15;
+    private static final int DEFAULT_NOOF_PLAYERS = 25;
 
     private static final AtomicInteger counter = new AtomicInteger(0);
 
@@ -105,6 +106,7 @@ public class PerformanceTournamentTestPlayer extends BasicPlayer {
         Action callAction = null;
         Action checkAction = null;
         Action foldAction = null;
+        Action raiseAction = null;
 
         for (final Action action : request.getPossibleActions()) {
             switch (action.getActionType()) {
@@ -117,20 +119,42 @@ public class PerformanceTournamentTestPlayer extends BasicPlayer {
                 case FOLD:
                     foldAction = action;
                     break;
+                case RAISE:
+                    raiseAction = action;
+                    break;
                 default:
                     break;
             }
         }
 
         Action action = null;
-        if (callAction != null)
+
+        double randomVal = RandomUtils.nextDouble();
+
+        // 60% chance of check
+        if (checkAction != null && randomVal < 0.60)
+            action = checkAction;
+
+            // 90% chance of call
+        else if (callAction != null && raiseAction != null) {
+            if (randomVal < 0.90)
+                action = callAction;
+            else
+                action = raiseAction;
+        }
+
+        else if (raiseAction != null)
+            action = raiseAction;
+
+        else if (callAction != null)
             action = callAction;
+
         else if (checkAction != null)
             action = checkAction;
+
         else
             action = foldAction;
 
-//        log.debug("{} returning action: {}", getName(), action);
         return action;
     }
 
