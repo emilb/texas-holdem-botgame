@@ -31,22 +31,20 @@ X StatisticsCollector
 X Fix SLF4J warnings
 X Favicon
 
-
-X Mejla regler till Tommy (lista över händer)
-Mejla krav för uppgiften (java, maven? IDE med m2eclipse plugin etc)
-X Router att skaffa
-X Köp 5st 10m ethernetkablar
 Förbered paketering av jarar och webcliektn etc
 Kom igång instruktioner
 Förebered presentation
-Ta med projektor
 Fundera på vilka sourcepaket som ska med
 Köra maven repo på servern
-Rensa i requests
 Testramverket JS
+X Rensa i requests
 
 Serverpaketering web-client (och parametrar startup, local port, server host, server port, webdirectory)
 http://stackoverflow.com/questions/3718221/add-resources-to-jetty-programmatically
+http://wiki.eclipse.org/Jetty/Tutorial/Embedding_Jetty#Setting_a_Web_Application_Context
+http://docs.codehaus.org/display/JETTY/Embedding+Jetty
+http://internna.blogspot.se/2011/08/step-by-step-executable-war-files.html
+http://eclipsesource.com/blogs/2009/10/02/executable-wars-with-jetty/
 
 Ta ut Json exempel på alla anrop och events
 
