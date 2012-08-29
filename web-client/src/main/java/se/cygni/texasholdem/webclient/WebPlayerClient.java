@@ -44,6 +44,11 @@ import java.util.concurrent.TimeUnit;
  */
 public class WebPlayerClient extends SimpleChannelHandler {
 
+    // Warning! If these values are changed be sure to update Launcher as well.
+    public static final String SYS_PROP_REMOTE_HOST = "remote.host";
+    public static final String SYS_PROP_REMOTE_PORT = "remote.port";
+
+
     private static final long RESPONSE_TIMEOUT_MS = 80000;
     private static final long CONNECT_WAIT_MS = 1200;
 
@@ -84,8 +89,9 @@ public class WebPlayerClient extends SimpleChannelHandler {
         bootstrap.setPipelineFactory(pipelineFactory);
 
         // Phew. Ok. We built all that. Now what ?
-        String remoteHost = "localhost";
-        int remotePort = 4711;
+        String remoteHost = getRemoteHostFromSystemProperties();
+        int remotePort = getRemotePortFromSystemProperties();
+
         InetSocketAddress addressToConnectTo = new InetSocketAddress(remoteHost, remotePort);
         ChannelFuture cf = bootstrap.connect(addressToConnectTo);
         cf.await();
@@ -94,16 +100,30 @@ public class WebPlayerClient extends SimpleChannelHandler {
         cf.awaitUninterruptibly(2000, TimeUnit.MILLISECONDS);
         cf.addListener(new ChannelFutureListener() {
             public void operationComplete(ChannelFuture future) throws Exception {
-                // chek to see if we succeeded
-                if (future.isSuccess()) {
+            // chek to see if we succeeded
+            if (future.isSuccess()) {
 
-                    isConnected = true;
-                    channel = future.getChannel();
-                }
+                isConnected = true;
+                channel = future.getChannel();
+            }
             }
         });
 
         waitForClientConnected();
+    }
+
+    public String getRemoteHostFromSystemProperties() {
+        return System.getProperty(SYS_PROP_REMOTE_HOST, "localhost");
+    }
+
+    public int getRemotePortFromSystemProperties() {
+        String remotePort = System.getProperty(SYS_PROP_REMOTE_PORT);
+        try {
+            return Integer.parseInt(remotePort);
+        } catch (Exception e) {
+            log.warn("Failed to parse remote port: {} to integer value. Defaulting to 4711", remotePort);
+            return 4711;
+        }
     }
 
     // TODO: rensa upp, blockar inte här - i så fall känn av att respons kommit i webklienten
@@ -123,7 +143,6 @@ public class WebPlayerClient extends SimpleChannelHandler {
         try {
             responseJson = TexasMessageParser.encodeMessage(resp);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         log.info("Sent RegisterForPlayRequest, response: " + responseJson);
@@ -132,7 +151,6 @@ public class WebPlayerClient extends SimpleChannelHandler {
             try {
                 respondAndFlush(responseJson);
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             return true;
