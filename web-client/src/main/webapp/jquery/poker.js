@@ -68,24 +68,20 @@ var pokerClient = function (spec) {
 
                 var actionRequest = (clazz === 'ActionRequest');
                 if (actionRequest) {
-                        // TODO: move test to QUnit instead
-                    if (!player.actionRequestHandler) {
-                        console.log('Player actionRequestHandler is missing.');
-                    } else {
-                        var actionResponse = player.actionRequestHandler(json);
-                        if (actionResponse) {
-                            spec.actionResponseCallback && spec.actionResponseCallback(actionResponse);
-                            //console.log('### handler response for ' + clazz + ' is: ' + jQuery.stringifyJSON(actionResponse));
-                            subSocket.push(jQuery.stringifyJSON(actionResponse));
-                        }
+                    var actionResponse = player.actionRequestHandler(json);
+                    if (actionResponse) {
+                        spec.actionResponseCallback && spec.actionResponseCallback(actionResponse);
+                        //console.log('### handler response for ' + clazz + ' is: ' + jQuery.stringifyJSON(actionResponse));
+                        subSocket.push(jQuery.stringifyJSON(actionResponse));
                     }
                 } else {
+                    // else it's a *Event or RegisterForPlayResponse
                     var handler = player.eventHandlers['on' + clazz];
                     if (!handler) {
                         console.log('Player eventhandler for ' + clazz + ' is missing.');
                     } else {
                         handler(json);
-                        spec.onPlayerState(player.state);
+                        spec.onPlayerState && spec.onPlayerState(player.state);
                     }
                 }
             }

@@ -8,7 +8,7 @@ var pokerPlayer = function (name) {
         isPlaying : false,
         isTableDone : false,
         newMessages : [],
-        amount : 0
+        amount : 10000
     };
 
     function addViewMessage(newMessage) {
