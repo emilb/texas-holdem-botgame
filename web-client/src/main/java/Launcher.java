@@ -8,7 +8,7 @@ import se.cygni.texasholdem.webclient.WebPlayerClient;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
+import java.net.*;
 import java.security.ProtectionDomain;
 
 public final class Launcher {
@@ -45,7 +45,7 @@ public final class Launcher {
         try {
             options = parser.parse(args);
         } catch (Exception e) {
-            System.out.println("Missing required parameter");
+            System.out.println("Missing required parameter: " + e.getMessage());
             printHelpAndExit();
         }
 
@@ -81,7 +81,17 @@ public final class Launcher {
 
         // Check directory
         if (!isDirectoryValid(directory)) {
-            System.out.println("\n\nWarning, " + directory + " doesn't seem to be a directory that I can read.\n");
+            System.out.println("Warning, " + directory + " doesn't seem to be a directory that I can read.");
+        }
+
+        // Check host
+        if (!isHostReachable(remoteHost)) {
+            System.out.println("Warning, " + remoteHost + " is unreachable.");
+        }
+
+        // Check Poker service is up
+        if (!isPokerServiceAlive(remoteHost, remotePort)) {
+            System.out.println("Warning, the Poker server is not responding. " + remoteHost + ":" + remotePort);
         }
 
         // Set directory as system variable
@@ -112,5 +122,37 @@ public final class Launcher {
         File dir = new File(directory);
 
         return dir.isDirectory() && dir.canRead();
+    }
+
+    private static boolean isHostReachable(String host) {
+        try {
+            return InetAddress.getByName(host).isReachable(500);
+        } catch (IOException e) { }
+
+        return false;
+    }
+
+    private static boolean isPokerServiceAlive(String host, int port) {
+        Socket s = null;
+        try {
+            s = new Socket();
+            s.setReuseAddress(true);
+            SocketAddress sa = new InetSocketAddress(host, port);
+            s.connect(sa, 3000);
+
+            return true;
+
+        } catch (IOException e) {
+
+        } finally {
+            if (s != null) {
+                try {
+                    s.close();
+                } catch (IOException e) {
+                }
+            }
+        }
+
+        return false;
     }
 }
