@@ -80,6 +80,21 @@ public class CurrentPlayState {
         return myCurrentChipAmount;
     }
 
+    public boolean hasPlayerFolded(Player player) {
+        return foldedPlayers.contains(player);
+    }
+
+    public boolean hasPlayerGoneAllIn(Player player) {
+        return allInPlayers.contains(player);
+    }
+
+    public long getInvestmentInPotFor(Player player) {
+        if (!potInvestmentPerPlayer.containsKey(player))
+            return 0;
+
+        return potInvestmentPerPlayer.get(player);
+    }
+
     private void reset() {
         myCards.clear();
         communityCards.clear();
