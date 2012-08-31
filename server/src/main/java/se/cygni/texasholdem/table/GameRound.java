@@ -3,10 +3,7 @@ package se.cygni.texasholdem.table;
 import com.google.common.eventbus.EventBus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import se.cygni.texasholdem.communication.message.event.CommunityHasBeenDealtACardEvent;
-import se.cygni.texasholdem.communication.message.event.ShowDownEvent;
-import se.cygni.texasholdem.communication.message.event.YouHaveBeenDealtACardEvent;
-import se.cygni.texasholdem.communication.message.event.YouWonAmountEvent;
+import se.cygni.texasholdem.communication.message.event.*;
 import se.cygni.texasholdem.communication.message.request.ActionRequest;
 import se.cygni.texasholdem.communication.message.response.ActionResponse;
 import se.cygni.texasholdem.dao.model.GameLog;
@@ -98,6 +95,8 @@ public class GameRound {
         dealACardToAllParticipatingPlayers(deck);
         dealACardToAllParticipatingPlayers(deck);
 
+        EventBusUtil.postToEventBus(eventBus, new TableChangedStateEvent(pot.getCurrentPlayState()), players);
+
         long smallBlindAmount = pot.bet(smallBlindPlayer, smallBlind);
         EventBusUtil.postPlayerBetSmallBlind(eventBus, smallBlindPlayer, smallBlindAmount, players);
         log.debug("{} placed small blind of {}", smallBlindPlayer.getName(), smallBlindAmount);
@@ -112,6 +111,7 @@ public class GameRound {
 
         // Flop
         pot.nextPlayState();
+        EventBusUtil.postToEventBus(eventBus, new TableChangedStateEvent(pot.getCurrentPlayState()), players);
         burnAndDealCardsToCommunity(deck, 3);
 
         // Betting
@@ -120,6 +120,7 @@ public class GameRound {
 
         // Turn
         pot.nextPlayState();
+        EventBusUtil.postToEventBus(eventBus, new TableChangedStateEvent(pot.getCurrentPlayState()), players);
         burnAndDealCardsToCommunity(deck, 1);
 
         // Betting
@@ -128,6 +129,7 @@ public class GameRound {
 
         // River
         pot.nextPlayState();
+        EventBusUtil.postToEventBus(eventBus, new TableChangedStateEvent(pot.getCurrentPlayState()), players);
         burnAndDealCardsToCommunity(deck, 1);
 
         // Betting
@@ -136,6 +138,7 @@ public class GameRound {
 
         // Showdown
         pot.nextPlayState();
+        EventBusUtil.postToEventBus(eventBus, new TableChangedStateEvent(pot.getCurrentPlayState()), players);
 
         distributePayback();
 

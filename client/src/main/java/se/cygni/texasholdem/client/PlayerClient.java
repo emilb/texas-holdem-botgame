@@ -41,6 +41,7 @@ public class PlayerClient extends SimpleChannelHandler {
     private static Logger log = LoggerFactory.getLogger(PlayerClient.class);
 
     private final ClientEventDispatcher clientEventDispatcher;
+    private final ClientEventDispatcher currentPlayStateEventDispatcher;
     private final SyncMessageResponseManager responseManager;
     private final Player player;
     private Channel channel;
@@ -48,6 +49,8 @@ public class PlayerClient extends SimpleChannelHandler {
     private final String serverHost;
     private final int serverPort;
     private Timer connectionChecker;
+    private final CurrentPlayState currentPlayState;
+
 
     public PlayerClient(final Player player, final String serverHost, final int serverPort) {
 
@@ -55,8 +58,14 @@ public class PlayerClient extends SimpleChannelHandler {
         this.serverHost = serverHost;
         this.serverPort = serverPort;
 
+        currentPlayState = new CurrentPlayState(player.getName());
         responseManager = new SyncMessageResponseManager();
         clientEventDispatcher = new ClientEventDispatcher(player);
+        currentPlayStateEventDispatcher = new ClientEventDispatcher(currentPlayState.getPlayerImpl());
+    }
+
+    public CurrentPlayState getCurrentPlayState() {
+        return currentPlayState;
     }
 
     public void connect() throws Exception {
@@ -137,6 +146,7 @@ public class PlayerClient extends SimpleChannelHandler {
     protected void onMessageReceived(final TexasMessage message) {
 
         if (message instanceof TexasEvent) {
+            currentPlayStateEventDispatcher.onEvent((TexasEvent) message);
             clientEventDispatcher.onEvent((TexasEvent) message);
             return;
         }

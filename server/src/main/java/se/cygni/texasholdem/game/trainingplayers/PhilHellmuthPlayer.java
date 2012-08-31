@@ -52,6 +52,10 @@ public class PhilHellmuthPlayer extends TrainingPlayer {
     }
 
     @Override
+    public void onTableChangedStateEvent(TableChangedStateEvent event) {
+    }
+
+    @Override
     public void onYouHaveBeenDealtACard(YouHaveBeenDealtACardEvent event) {
         myCards.add(event.getCard());
     }

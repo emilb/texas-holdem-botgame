@@ -12,6 +12,8 @@ public interface Player {
 
     public void onPlayIsStarted(PlayIsStartedEvent event);
 
+    public void onTableChangedStateEvent(TableChangedStateEvent event);
+
     public void onYouHaveBeenDealtACard(YouHaveBeenDealtACardEvent event);
 
     public void onCommunityHasBeenDealtACard(

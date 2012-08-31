@@ -39,6 +39,10 @@ public class CrazyPlayer extends TrainingPlayer {
     }
 
     @Override
+    public void onTableChangedStateEvent(TableChangedStateEvent event) {
+    }
+
+    @Override
     public void onYouHaveBeenDealtACard(YouHaveBeenDealtACardEvent event) {
     }
 

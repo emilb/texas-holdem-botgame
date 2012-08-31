@@ -22,6 +22,12 @@ public abstract class BasicPlayer implements Player {
     }
 
     @Override
+    public void onTableChangedStateEvent(TableChangedStateEvent event) {
+
+        log.debug("Table changed state: {}", event.getState());
+    }
+
+    @Override
     public void onYouHaveBeenDealtACard(final YouHaveBeenDealtACardEvent event) {
 
         log.debug("I, {}, got a card: {}", getName(), event.getCard());
