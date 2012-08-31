@@ -60,8 +60,8 @@ public class GameRoundTest {
                 sessionManager);
 
         assertEquals(pA, round.getDealerPlayer());
-        assertEquals(pB, round.getBigBlindPlayer());
-        assertEquals(pC, round.getSmallBlindPlayer());
+        assertEquals(pB, round.getSmallBlindPlayer());
+        assertEquals(pC, round.getBigBlindPlayer());
     }
 
     @Test
@@ -72,8 +72,8 @@ public class GameRoundTest {
                 sessionManager);
 
         assertEquals(pA, round.getDealerPlayer());
-        assertEquals(pB, round.getBigBlindPlayer());
-        assertEquals(pA, round.getSmallBlindPlayer());
+        assertEquals(pB, round.getSmallBlindPlayer());
+        assertEquals(pA, round.getBigBlindPlayer());
     }
 
     @Test
@@ -83,8 +83,8 @@ public class GameRoundTest {
                 sessionManager);
 
         assertEquals(pC, round.getDealerPlayer());
-        assertEquals(pD, round.getBigBlindPlayer());
-        assertEquals(pA, round.getSmallBlindPlayer());
+        assertEquals(pD, round.getSmallBlindPlayer());
+        assertEquals(pA, round.getBigBlindPlayer());
     }
 
     // @Test

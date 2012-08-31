@@ -47,6 +47,7 @@ public class PlayerClient extends SimpleChannelHandler {
     private boolean isConnected = false;
     private final String serverHost;
     private final int serverPort;
+    private Timer connectionChecker;
 
     public PlayerClient(final Player player, final String serverHost, final int serverPort) {
 
@@ -60,7 +61,11 @@ public class PlayerClient extends SimpleChannelHandler {
 
     public void connect() throws Exception {
 
-//        log.info("Connecting to {} at port {}", serverHost, serverPort);
+        log.info("Connecting to {} at port {}", serverHost, serverPort);
+
+        if (connectionChecker != null) {
+            connectionChecker.cancel();
+        }
 
         Executor bossPool = Executors.newCachedThreadPool();
         Executor workerPool = Executors.newCachedThreadPool();
@@ -97,7 +102,7 @@ public class PlayerClient extends SimpleChannelHandler {
 
         waitForClientConnected();
 
-        initConnectionStatusTimer();
+
     }
 
     private void waitForClientConnected() {
@@ -110,6 +115,7 @@ public class PlayerClient extends SimpleChannelHandler {
             if (System.currentTimeMillis() > startTime + CONNECT_WAIT_MS)
                 throw new RuntimeException("Connection to server timed out, is it alive?");
         }
+        connectionChecker = initConnectionStatusTimer();
     }
 
     public void disconnect() {
@@ -215,18 +221,19 @@ public class PlayerClient extends SimpleChannelHandler {
         return UUID.randomUUID().toString();
     }
 
-    private void initConnectionStatusTimer() {
+    private Timer initConnectionStatusTimer() {
         final Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 if (!channel.isConnected() || !channel.isOpen()) {
-                    player.connectionToGameServerLost();
-                    channel.disconnect();
                     cancel();
+                    channel.disconnect();
+                    player.connectionToGameServerLost();
                 }
             }
-        }, 5000, 500);
+        }, 50, 250);
+        return timer;
         // delay, repeat every ms
     }
 }

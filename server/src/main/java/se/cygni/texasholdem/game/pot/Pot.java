@@ -194,6 +194,10 @@ public class Pot {
         return currentPlayState;
     }
 
+    public boolean isInPlayState(PlayState state) {
+        return currentPlayState == state;
+    }
+
     /**
      * Calculates the total amount in the Pot.
      *

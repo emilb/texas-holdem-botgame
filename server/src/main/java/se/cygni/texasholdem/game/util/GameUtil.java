@@ -115,6 +115,10 @@ public class GameUtil {
         return playersWithChipsLeft;
     }
 
+    public static int getNoofPlayersWithChipsLeft(final List<BotPlayer> players) {
+        return getActivePlayersWithChipsLeft(players).size();
+    }
+
     public static List<BotPlayer> getBustedPlayers(
             final List<BotPlayer> players) {
 

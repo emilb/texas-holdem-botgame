@@ -43,7 +43,7 @@ public class Training extends Room {
         tables.add(table);
 
         thread = new Thread(table);
-        thread.setName("Training - " + player.getName());
+        thread.setName("Training - " + player.getName() + " tid: " + table.getTableCounter());
         thread.start();
     }
 

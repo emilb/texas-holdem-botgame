@@ -11,6 +11,7 @@ import se.cygni.texasholdem.communication.message.request.ActionRequest;
 import se.cygni.texasholdem.communication.message.response.ActionResponse;
 import se.cygni.texasholdem.dao.model.GameLog;
 import se.cygni.texasholdem.game.*;
+import se.cygni.texasholdem.game.definitions.PlayState;
 import se.cygni.texasholdem.game.pot.Pot;
 import se.cygni.texasholdem.game.util.GameUtil;
 import se.cygni.texasholdem.game.util.PokerHandRankUtil;
@@ -66,10 +67,13 @@ public class GameRound {
         this.tableId = tableId;
         this.players.addAll(players);
         this.dealerPlayer = dealerPlayer;
-        this.bigBlindPlayer = GameUtil.getNextPlayerInPlay(this.players,
-                dealerPlayer, pot);
+
         this.smallBlindPlayer = GameUtil.getNextPlayerInPlay(this.players,
-                bigBlindPlayer, pot);
+                dealerPlayer, pot);
+
+        this.bigBlindPlayer = GameUtil.getNextPlayerInPlay(this.players,
+                smallBlindPlayer, pot);
+
 
         this.smallBlind = smallBlind;
         this.bigBlind = bigBlind;
@@ -182,14 +186,22 @@ public class GameRound {
 
     protected void getBetsTillPotBalanced() {
 
-        doInitialBettingRound();
+        if (pot.isInPlayState(PlayState.PRE_FLOP))
+            doInitialBettingRound();
 
         log.debug("Starting normal betting round pot is balanced: {}", pot.isCurrentPlayStateBalanced());
 
         List<BotPlayer> playersInOrder = GameUtil.getOrderedListOfPlayersInPlay(players, dealerPlayer, pot);
 
+        if (!pot.isInPlayState(PlayState.PRE_FLOP) && GameUtil.getNoofPlayersWithChipsLeft(playersInOrder) < 2) {
+            log.info("*** Only one player left in gamebout, moving to next state");
+            return;
+        }
+
         int noofTurns = 1;
-        while (!pot.isCurrentPlayStateBalanced()) {
+        boolean isFirstRound = true;
+        while ( !pot.isCurrentPlayStateBalanced()
+                || (isFirstRound && !pot.isInPlayState(PlayState.PRE_FLOP)) ) {
             for (BotPlayer currentPlayer : playersInOrder) {
                 log.debug("Current player is {}", currentPlayer);
 
@@ -202,6 +214,12 @@ public class GameRound {
                 act(action, currentPlayer);
             }
             noofTurns++;
+
+            if (GameUtil.getNoofPlayersWithChipsLeft(playersInOrder) < 2) {
+                log.warn("Less than two active players left in this gameround, no more bets should be allowed.");
+            }
+
+            isFirstRound = false;
         }
     }
 

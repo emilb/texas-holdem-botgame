@@ -119,14 +119,19 @@ public class SessionManagerRemote implements SessionManager {
 
     @Override
     public void terminateSession(BotPlayer player) {
+        log.info("//// Terminating connection to player: {} \\\\\\\\", player);
         final String sessionId = player.getSessionId();
 
-        sessionPlayerMap.remove(sessionId);
         ChannelHandlerContext context = sessionChannelHandlerContextMap.remove(sessionId);
+        sessionPlayerMap.remove(sessionId);
+
+        if (context == null)
+            return;
+
         try {
             context.getChannel().disconnect();
         } catch (Exception e) {
-            log.warn("Failed to disconnect player: {}", e.getMessage());
+            log.warn("Failed to disconnect player: " + player, e);
         }
     }
 
@@ -302,7 +307,7 @@ public class SessionManagerRemote implements SessionManager {
                 for (BotPlayer player : disconnectedPlayers)
                     eventBus.post(new PlayerQuitEvent(player));
             }
-        }, 5000, 500);
+        }, 50, 500);
         // delay, repeat every ms
     }
 }

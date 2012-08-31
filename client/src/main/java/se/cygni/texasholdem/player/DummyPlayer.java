@@ -22,12 +22,16 @@ public class DummyPlayer extends BasicPlayer {
     private static final String HOST_PROPERTY = "host";
     private static final String PORT_PROPERTY = "port";
 
-    private final String name = "dummmy" + (int) (90 * Math.random() + 10);
+    private String name = "dummmy_1";
 
     private PlayerClient playerClient;
 
     public DummyPlayer() {
         playerClient = new PlayerClient(this, getServerHost(), getServerPort());
+    }
+
+    private void populateNewName() {
+        name = "dummmy_" + (int) (9000 * Math.random() + 10);
     }
 
     private String getServerHost() {
@@ -82,6 +86,8 @@ public class DummyPlayer extends BasicPlayer {
     @Override
     public Action actionRequired(final ActionRequest request) {
 
+//        waitFor(2500);
+
         Action callAction = null;
         Action checkAction = null;
         Action foldAction = null;
@@ -118,13 +124,24 @@ public class DummyPlayer extends BasicPlayer {
     public void connectionToGameServerLost() {
         log.info("I've lost my connection to the game server!");
         log.info("Connecting for another game!");
+        populateNewName();
         playAGame();
+//        System.exit(0);
     }
 
     @Override
     public void onTableIsDone(TableIsDoneEvent event) {
 
-        //playerClient.disconnect();
+        playerClient.disconnect();
+        populateNewName();
         //System.exit(0);
+    }
+
+    private void waitFor(long ms) {
+        try {
+            Thread.currentThread().sleep(ms);
+        } catch (InterruptedException e) {
+
+        }
     }
 }
