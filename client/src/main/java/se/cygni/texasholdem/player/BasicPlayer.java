@@ -6,6 +6,8 @@ import se.cygni.texasholdem.communication.message.event.*;
 import se.cygni.texasholdem.game.Card;
 import se.cygni.texasholdem.game.PlayerShowDown;
 
+import java.util.Formatter;
+
 public abstract class BasicPlayer implements Player {
 
     private static Logger log = LoggerFactory
@@ -104,15 +106,23 @@ public abstract class BasicPlayer implements Player {
     @Override
     public void onShowDown(final ShowDownEvent event) {
 
+        if (!log.isDebugEnabled())
+            return;
+
         final StringBuilder sb = new StringBuilder();
+        final Formatter formatter = new Formatter(sb);
+
         sb.append("ShowDown:\n");
+
         for (final PlayerShowDown psd : event.getPlayersShowDown()) {
-            sb.append(psd.getPlayer().getName()).append("\thand: ");
-            sb.append(psd.getHand().getPokerHand().getName());
-            sb.append("\t");
+            formatter.format("%-13s won: %6s  hand: %-15s ",
+                psd.getPlayer().getName(),
+                psd.getWonAmount(),
+                psd.getHand().getPokerHand().getName());
+
             sb.append(" cards: | ");
             for (final Card card : psd.getHand().getCards()) {
-                sb.append(card).append(" | ");
+                formatter.format("%-13s | ", card);
             }
             sb.append("\n");
         }

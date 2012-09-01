@@ -4,8 +4,6 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 
-//@JsonSerialize(using = RankSerializer.class)
-//@JsonDeserialize(using = RankDeserializer.class)
 public enum Rank {
 
     DEUCE(2, "2"),

@@ -41,11 +41,11 @@ public class CurrentPlayState {
     }
 
     public List<Card> getMyCards() {
-        return myCards;
+        return new ArrayList<Card>(myCards);
     }
 
     public List<Card> getCommunityCards() {
-        return communityCards;
+        return new ArrayList<Card>(communityCards);
     }
 
     public PlayState getCurrentPlayState() {
@@ -93,6 +93,10 @@ public class CurrentPlayState {
             return 0;
 
         return potInvestmentPerPlayer.get(player);
+    }
+
+    public List<Player> getPlayers() {
+        return new ArrayList<Player>(players);
     }
 
     private void reset() {

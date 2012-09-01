@@ -42,7 +42,7 @@ public class ClientEventDispatcher {
      */
     private void populateInvokeMap() {
 
-        log.debug("Populating invoke map");
+        log.trace("Populating invoke map");
 
         final Method ms[] = target.getClass().getMethods();
         for (final Method m : ms) {

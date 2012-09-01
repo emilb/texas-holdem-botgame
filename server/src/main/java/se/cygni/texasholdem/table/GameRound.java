@@ -197,7 +197,7 @@ public class GameRound {
         List<BotPlayer> playersInOrder = GameUtil.getOrderedListOfPlayersInPlay(players, dealerPlayer, pot);
 
         if (!pot.isInPlayState(PlayState.PRE_FLOP) && GameUtil.getNoofPlayersWithChipsLeft(playersInOrder) < 2) {
-            log.info("*** Only one player left in gamebout, moving to next state");
+            log.debug("*** Only one player left in gamebout, moving to next state");
             return;
         }
 
@@ -217,10 +217,6 @@ public class GameRound {
                 act(action, currentPlayer);
             }
             noofTurns++;
-
-            if (GameUtil.getNoofPlayersWithChipsLeft(playersInOrder) < 2) {
-                log.warn("Less than two active players left in this gameround, no more bets should be allowed.");
-            }
 
             isFirstRound = false;
         }
