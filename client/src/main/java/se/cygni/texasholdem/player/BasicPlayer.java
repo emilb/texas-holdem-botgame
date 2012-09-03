@@ -117,7 +117,7 @@ public abstract class BasicPlayer implements Player {
         for (final PlayerShowDown psd : event.getPlayersShowDown()) {
             formatter.format("%-13s won: %6s  hand: %-15s ",
                 psd.getPlayer().getName(),
-                psd.getWonAmount(),
+                psd.getHand().isFolded() ? "Fold" : psd.getWonAmount(),
                 psd.getHand().getPokerHand().getName());
 
             sb.append(" cards: | ");

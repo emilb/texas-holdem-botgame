@@ -349,7 +349,7 @@ public class GameRound {
 
             final PlayerShowDown psd = new PlayerShowDown(
                     PlayerTypeConverter.fromBotPlayer(player),
-                    new Hand(bestHand.getCards(), bestHand.getPokerHand()),
+                    new Hand(bestHand.getCards(), bestHand.getPokerHand(), pot.hasFolded(player)),
                     amount);
             showDowns.add(psd);
         }

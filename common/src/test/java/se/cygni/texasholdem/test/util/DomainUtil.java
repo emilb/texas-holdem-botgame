@@ -54,7 +54,7 @@ public class DomainUtil {
     public static Hand hand() {
 
         return new Hand(cards(5), PokerHand.values()[random.nextInt(0,
-                PokerHand.values().length - 1)]);
+                PokerHand.values().length - 1)], false);
     }
 
     public static PlayerShowDown playerShowdown() {

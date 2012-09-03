@@ -11,7 +11,8 @@ public enum PokerHand {
     THREE_OF_A_KIND(4, "Three of a kind"),
     TWO_PAIRS(3, "Two pair"),
     ONE_PAIR(2, "One pair"),
-    HIGH_HAND(1, "High hand");
+    HIGH_HAND(1, "High hand"),
+    NOTHING(0, "No hand");
 
     private final int orderValue;
     private final String name;
