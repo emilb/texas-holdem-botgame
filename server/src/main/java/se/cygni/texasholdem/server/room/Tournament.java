@@ -1,14 +1,11 @@
 package se.cygni.texasholdem.server.room;
 
-import com.google.common.collect.Lists;
 import com.google.common.eventbus.EventBus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import se.cygni.texasholdem.game.BotPlayer;
-import se.cygni.texasholdem.game.Player;
+import se.cygni.texasholdem.game.GamePlayer;
 import se.cygni.texasholdem.game.util.GameUtil;
-import se.cygni.texasholdem.game.util.ListUtil;
 import se.cygni.texasholdem.game.util.TableUtil;
 import se.cygni.texasholdem.server.session.SessionManager;
 import se.cygni.texasholdem.server.statistics.AtomicCounter;
@@ -77,12 +74,12 @@ public class Tournament extends Room {
         return created;
     }
 
-    public List<Player> getPlayerRanking() {
+    public List<GamePlayer> getPlayerRanking() {
         if (tournamentHasEnded()) {
             return PlayerTypeConverter.listOfBotPlayers(playerRank);
         }
 
-        List<Player> currentPlayerRank = new ArrayList<Player>();
+        List<GamePlayer> currentPlayerRank = new ArrayList<GamePlayer>();
 
         // Add all current active players
         for (BotPlayer player : playerPool) {
@@ -91,9 +88,9 @@ public class Tournament extends Room {
         }
 
         // Sort descending
-        Collections.sort(currentPlayerRank, new Comparator<Player>() {
+        Collections.sort(currentPlayerRank, new Comparator<GamePlayer>() {
             @Override
-            public int compare(Player player, Player player1) {
+            public int compare(GamePlayer player, GamePlayer player1) {
                 if (player.getChipCount() == player1.getChipCount())
                     return 0;
 

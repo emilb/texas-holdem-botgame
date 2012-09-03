@@ -3,14 +3,14 @@ package se.cygni.texasholdem.game;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 
-public class Player {
+public class GamePlayer {
 
     private final String name;
     private final long chipCount;
 
     @JsonCreator
-    public Player(@JsonProperty("name") final String name,
-                  @JsonProperty("chipCount") final long chipCount) {
+    public GamePlayer(@JsonProperty("name") final String name,
+                      @JsonProperty("chipCount") final long chipCount) {
 
         this.name = name;
         this.chipCount = chipCount;
@@ -29,7 +29,7 @@ public class Player {
     @Override
     public String toString() {
 
-        return "Player [name=" + name + "]";
+        return "GamePlayer [name=" + name + "]";
     }
 
     @Override
@@ -37,7 +37,7 @@ public class Player {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Player player = (Player) o;
+        GamePlayer player = (GamePlayer) o;
 
         if (!name.equals(player.name)) return false;
 

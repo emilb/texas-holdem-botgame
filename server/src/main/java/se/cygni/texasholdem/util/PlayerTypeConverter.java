@@ -1,15 +1,15 @@
 package se.cygni.texasholdem.util;
 
 import se.cygni.texasholdem.game.BotPlayer;
-import se.cygni.texasholdem.game.Player;
+import se.cygni.texasholdem.game.GamePlayer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerTypeConverter {
 
-    public static List<Player> listOfBotPlayers(final List<BotPlayer> bots) {
-        List<Player> players = new ArrayList<Player>(bots.size());
+    public static List<GamePlayer> listOfBotPlayers(final List<BotPlayer> bots) {
+        List<GamePlayer> players = new ArrayList<GamePlayer>(bots.size());
         for (BotPlayer bot : bots) {
             players.add(fromBotPlayer(bot));
         }
@@ -17,9 +17,9 @@ public class PlayerTypeConverter {
         return players;
     }
 
-    public static Player fromBotPlayer(final BotPlayer bot) {
+    public static GamePlayer fromBotPlayer(final BotPlayer bot) {
 
-        return new Player(bot.getName(), bot.getChipAmount());
+        return new GamePlayer(bot.getName(), bot.getChipAmount());
     }
 
 }

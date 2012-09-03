@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import se.cygni.texasholdem.game.Player;
+import se.cygni.texasholdem.game.GamePlayer;
 import se.cygni.texasholdem.server.session.SessionManager;
 import se.cygni.texasholdem.server.statistics.StatisticsCollector;
 import se.cygni.texasholdem.util.PlayerTypeConverter;
@@ -36,7 +36,7 @@ public class ServerStatusController {
         model.addAttribute("noofPlayers", sessionManager.getNoofPlayers());
         model.addAttribute("totalNoofConnections", statisticsCollector.getTotalNoofConnectionsMade());
 
-        List<Player> players = PlayerTypeConverter.listOfBotPlayers(sessionManager.listPlayers());
+        List<GamePlayer> players = PlayerTypeConverter.listOfBotPlayers(sessionManager.listPlayers());
         model.addAttribute("players", players);
 
 

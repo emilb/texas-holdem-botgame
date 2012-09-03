@@ -1,7 +1,6 @@
 package se.cygni.texasholdem.game.util;
 
 import se.cygni.texasholdem.dao.model.TournamentLog;
-import se.cygni.texasholdem.game.Player;
 import se.cygni.texasholdem.server.room.Tournament;
 
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 package se.cygni.texasholdem.dao.model;
 
-import se.cygni.texasholdem.game.Player;
+import se.cygni.texasholdem.game.GamePlayer;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,13 +14,13 @@ public class TournamentLog {
     private final boolean tournamentHasStarted;
     private final boolean tournamentHasEnded;
 
-    private final List<Player> playerRanking;
+    private final List<GamePlayer> playerRanking;
     private final List<Long> tableIds;
 
     private final Date created;
     private final SimpleDateFormat sdf;
 
-    public TournamentLog(String id, long tournamentCounter, Date created, boolean tournamentHasStarted, boolean tournamentHasEnded, List<Player> playerRanking, List<Long> tableIds) {
+    public TournamentLog(String id, long tournamentCounter, Date created, boolean tournamentHasStarted, boolean tournamentHasEnded, List<GamePlayer> playerRanking, List<Long> tableIds) {
         this.id = id;
         this.tournamentCounter = tournamentCounter;
         this.created = created;
@@ -48,7 +48,7 @@ public class TournamentLog {
         return tournamentHasEnded;
     }
 
-    public List<Player> getPlayerRanking() {
+    public List<GamePlayer> getPlayerRanking() {
         return playerRanking;
     }
 

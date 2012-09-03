@@ -2,8 +2,8 @@ package se.cygni.texasholdem.communication.message;
 
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
+import se.cygni.texasholdem.game.GamePlayer;
 import se.cygni.texasholdem.game.Hand;
-import se.cygni.texasholdem.game.Player;
 import se.cygni.texasholdem.game.PlayerShowDown;
 
 import java.io.IOException;
@@ -29,8 +29,8 @@ public abstract class AbstractEventParserTestUtil {
     }
 
     protected static void assertEqualss(
-            final Player expected,
-            final Player actual) {
+            final GamePlayer expected,
+            final GamePlayer actual) {
 
         assertEquals(expected.getName(), actual.getName());
         assertEquals(expected.getChipCount(), actual.getChipCount());

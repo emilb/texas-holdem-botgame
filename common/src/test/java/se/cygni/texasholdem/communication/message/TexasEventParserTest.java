@@ -6,7 +6,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.junit.Test;
 import se.cygni.texasholdem.communication.message.event.*;
 import se.cygni.texasholdem.communication.message.request.RegisterForPlayRequest;
-import se.cygni.texasholdem.game.Player;
+import se.cygni.texasholdem.game.GamePlayer;
 import se.cygni.texasholdem.game.Room;
 import se.cygni.texasholdem.test.util.DomainUtil;
 
@@ -134,7 +134,7 @@ public class TexasEventParserTest extends AbstractEventParserTestUtil {
             JsonMappingException,
             IOException {
 
-        final List<Player> players = DomainUtil.players(5);
+        final List<GamePlayer> players = DomainUtil.players(5);
 
         final PlayIsStartedEvent event = new PlayIsStartedEvent(
                 players, DomainUtil.randomLong(), DomainUtil.randomLong(),

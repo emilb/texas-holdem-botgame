@@ -3,29 +3,29 @@ package se.cygni.texasholdem.communication.message.event;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 import se.cygni.texasholdem.communication.message.type.IsATexasMessage;
-import se.cygni.texasholdem.game.Player;
+import se.cygni.texasholdem.game.GamePlayer;
 
 import java.util.List;
 
 @IsATexasMessage
 public class PlayIsStartedEvent extends TexasEvent {
 
-    private final List<Player> players;
+    private final List<GamePlayer> players;
     private final long smallBlindAmount;
     private final long bigBlindAmount;
-    private final Player dealer;
-    private final Player smallBlindPlayer;
-    private final Player bigBlindPlayer;
+    private final GamePlayer dealer;
+    private final GamePlayer smallBlindPlayer;
+    private final GamePlayer bigBlindPlayer;
     private final long tableId;
 
     @JsonCreator
     public PlayIsStartedEvent(
-            @JsonProperty("players") final List<Player> players,
+            @JsonProperty("players") final List<GamePlayer> players,
             @JsonProperty("smallBlindAmount") final long smallBlindAmount,
             @JsonProperty("bigBlindAmount") final long bigBlindAmount,
-            @JsonProperty("dealer") final Player dealer,
-            @JsonProperty("smallBlindPlayer") final Player smallBlindPlayer,
-            @JsonProperty("bigBlindPlayer") final Player bigBlindPlayer,
+            @JsonProperty("dealer") final GamePlayer dealer,
+            @JsonProperty("smallBlindPlayer") final GamePlayer smallBlindPlayer,
+            @JsonProperty("bigBlindPlayer") final GamePlayer bigBlindPlayer,
             @JsonProperty("tableId") final long tableId ) {
 
         this.players = players;
@@ -37,7 +37,7 @@ public class PlayIsStartedEvent extends TexasEvent {
         this.tableId = tableId;
     }
 
-    public List<Player> getPlayers() {
+    public List<GamePlayer> getPlayers() {
 
         return players;
     }
@@ -52,17 +52,17 @@ public class PlayIsStartedEvent extends TexasEvent {
         return bigBlindAmount;
     }
 
-    public Player getDealer() {
+    public GamePlayer getDealer() {
 
         return dealer;
     }
 
-    public Player getSmallBlindPlayer() {
+    public GamePlayer getSmallBlindPlayer() {
 
         return smallBlindPlayer;
     }
 
-    public Player getBigBlindPlayer() {
+    public GamePlayer getBigBlindPlayer() {
 
         return bigBlindPlayer;
     }

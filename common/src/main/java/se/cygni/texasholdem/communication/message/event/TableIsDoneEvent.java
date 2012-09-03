@@ -3,23 +3,23 @@ package se.cygni.texasholdem.communication.message.event;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 import se.cygni.texasholdem.communication.message.type.IsATexasMessage;
-import se.cygni.texasholdem.game.Player;
+import se.cygni.texasholdem.game.GamePlayer;
 
 import java.util.List;
 
 @IsATexasMessage
 public class TableIsDoneEvent extends TexasEvent {
 
-    private final List<Player> players;
+    private final List<GamePlayer> players;
 
     @JsonCreator
     public TableIsDoneEvent(
-            @JsonProperty("players") final List<Player> players) {
+            @JsonProperty("players") final List<GamePlayer> players) {
 
         this.players = players;
     }
 
-    public List<Player> getPlayers() {
+    public List<GamePlayer> getPlayers() {
 
         return players;
     }

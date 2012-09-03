@@ -36,14 +36,14 @@ public class DomainUtil {
         return cards;
     }
 
-    public static Player player() {
+    public static GamePlayer player() {
 
-        return new Player(randomString(8), randomLong());
+        return new GamePlayer(randomString(8), randomLong());
     }
 
-    public static List<Player> players(final int length) {
+    public static List<GamePlayer> players(final int length) {
 
-        final List<Player> players = new ArrayList<Player>();
+        final List<GamePlayer> players = new ArrayList<GamePlayer>();
         for (int i = 0; i < length; i++) {
             players.add(player());
         }

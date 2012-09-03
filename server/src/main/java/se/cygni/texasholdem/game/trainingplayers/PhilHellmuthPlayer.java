@@ -4,7 +4,7 @@ import se.cygni.texasholdem.communication.message.event.*;
 import se.cygni.texasholdem.communication.message.request.ActionRequest;
 import se.cygni.texasholdem.game.Action;
 import se.cygni.texasholdem.game.Card;
-import se.cygni.texasholdem.game.Player;
+import se.cygni.texasholdem.game.GamePlayer;
 import se.cygni.texasholdem.game.definitions.PokerHand;
 import se.cygni.texasholdem.game.definitions.Rank;
 import se.cygni.texasholdem.game.util.PokerHandUtil;
@@ -40,7 +40,7 @@ public class PhilHellmuthPlayer extends TrainingPlayer {
         totalPotValue = 0;
         amIBigBlind = false;
 
-        for (Player player : event.getPlayers()) {
+        for (GamePlayer player : event.getPlayers()) {
             if (player.getName().equals(getName())) {
                 myCash = player.getChipCount();
             }

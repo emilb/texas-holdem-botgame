@@ -3,20 +3,20 @@ package se.cygni.texasholdem.communication.message.event;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 import se.cygni.texasholdem.communication.message.type.IsATexasMessage;
-import se.cygni.texasholdem.game.Player;
+import se.cygni.texasholdem.game.GamePlayer;
 
 @IsATexasMessage
 public class PlayerQuitEvent extends TexasEvent {
 
-    private final Player player;
+    private final GamePlayer player;
 
     @JsonCreator
-    public PlayerQuitEvent(@JsonProperty("player") final Player player) {
+    public PlayerQuitEvent(@JsonProperty("player") final GamePlayer player) {
 
         this.player = player;
     }
 
-    public Player getPlayer() {
+    public GamePlayer getPlayer() {
 
         return player;
     }

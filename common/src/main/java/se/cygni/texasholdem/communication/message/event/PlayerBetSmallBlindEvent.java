@@ -3,23 +3,23 @@ package se.cygni.texasholdem.communication.message.event;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 import se.cygni.texasholdem.communication.message.type.IsATexasMessage;
-import se.cygni.texasholdem.game.Player;
+import se.cygni.texasholdem.game.GamePlayer;
 
 @IsATexasMessage
 public class PlayerBetSmallBlindEvent extends TexasEvent {
 
-    private final Player player;
+    private final GamePlayer player;
     private final long smallBlind;
 
     @JsonCreator
-    public PlayerBetSmallBlindEvent(@JsonProperty("player") final Player player,
+    public PlayerBetSmallBlindEvent(@JsonProperty("player") final GamePlayer player,
                                     @JsonProperty("smallBlind") final long smallBlind) {
 
         this.player = player;
         this.smallBlind = smallBlind;
     }
 
-    public Player getPlayer() {
+    public GamePlayer getPlayer() {
 
         return player;
     }

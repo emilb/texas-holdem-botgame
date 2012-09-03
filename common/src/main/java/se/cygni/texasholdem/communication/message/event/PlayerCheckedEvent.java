@@ -3,7 +3,7 @@ package se.cygni.texasholdem.communication.message.event;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 import se.cygni.texasholdem.communication.message.type.IsATexasMessage;
-import se.cygni.texasholdem.game.Player;
+import se.cygni.texasholdem.game.GamePlayer;
 
 @IsATexasMessage
 public class PlayerCheckedEvent extends TexasEvent {
@@ -14,15 +14,15 @@ public class PlayerCheckedEvent extends TexasEvent {
         return "PlayerCheckedEvent [player=" + player + "]";
     }
 
-    private final Player player;
+    private final GamePlayer player;
 
     @JsonCreator
-    public PlayerCheckedEvent(@JsonProperty("player") final Player player) {
+    public PlayerCheckedEvent(@JsonProperty("player") final GamePlayer player) {
 
         this.player = player;
     }
 
-    public Player getPlayer() {
+    public GamePlayer getPlayer() {
 
         return player;
     }

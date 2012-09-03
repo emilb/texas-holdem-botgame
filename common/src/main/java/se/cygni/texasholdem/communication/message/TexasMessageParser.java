@@ -44,7 +44,6 @@ public class TexasMessageParser {
 
     public static TexasMessage decodeMessage(final String msg)
             throws JsonParseException, JsonMappingException, IOException {
-
         try {
             final TexasMessage message = mapper
                     .readValue(msg,

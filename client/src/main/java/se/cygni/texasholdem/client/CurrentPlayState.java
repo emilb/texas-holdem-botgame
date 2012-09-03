@@ -4,7 +4,7 @@ import se.cygni.texasholdem.communication.message.event.*;
 import se.cygni.texasholdem.communication.message.request.ActionRequest;
 import se.cygni.texasholdem.game.Action;
 import se.cygni.texasholdem.game.Card;
-import se.cygni.texasholdem.game.Player;
+import se.cygni.texasholdem.game.GamePlayer;
 import se.cygni.texasholdem.game.PlayerShowDown;
 import se.cygni.texasholdem.game.definitions.PlayState;
 
@@ -16,16 +16,16 @@ public class CurrentPlayState {
     private List<Card> myCards = new ArrayList<Card>(2);
     private List<Card> communityCards = new ArrayList<Card>(5);
     private PlayState currentPlayState = PlayState.PRE_FLOP;
-    private Set<Player> foldedPlayers = new HashSet<Player>();
-    private Set<Player> allInPlayers = new HashSet<Player>();
-    private Set<Player> players = new HashSet<Player>();
+    private Set<GamePlayer> foldedPlayers = new HashSet<GamePlayer>();
+    private Set<GamePlayer> allInPlayers = new HashSet<GamePlayer>();
+    private Set<GamePlayer> players = new HashSet<GamePlayer>();
     private long potTotal;
-    private HashMap<Player, Long> potInvestmentPerPlayer = new HashMap<Player, Long>();
+    private HashMap<GamePlayer, Long> potInvestmentPerPlayer = new HashMap<GamePlayer, Long>();
     private long smallBlind;
     private long bigBlind;
-    private Player dealerPlayer;
-    private Player smallBlindPlayer;
-    private Player bigBlindPlayer;
+    private GamePlayer dealerPlayer;
+    private GamePlayer smallBlindPlayer;
+    private GamePlayer bigBlindPlayer;
     
     private long myCurrentChipAmount = 0;
     private String myPlayersName;
@@ -64,15 +64,15 @@ public class CurrentPlayState {
         return bigBlind;
     }
 
-    public Player getDealerPlayer() {
+    public GamePlayer getDealerPlayer() {
         return dealerPlayer;
     }
 
-    public Player getSmallBlindPlayer() {
+    public GamePlayer getSmallBlindPlayer() {
         return smallBlindPlayer;
     }
 
-    public Player getBigBlindPlayer() {
+    public GamePlayer getBigBlindPlayer() {
         return bigBlindPlayer;
     }
 
@@ -80,23 +80,23 @@ public class CurrentPlayState {
         return myCurrentChipAmount;
     }
 
-    public boolean hasPlayerFolded(Player player) {
+    public boolean hasPlayerFolded(GamePlayer player) {
         return foldedPlayers.contains(player);
     }
 
-    public boolean hasPlayerGoneAllIn(Player player) {
+    public boolean hasPlayerGoneAllIn(GamePlayer player) {
         return allInPlayers.contains(player);
     }
 
-    public long getInvestmentInPotFor(Player player) {
+    public long getInvestmentInPotFor(GamePlayer player) {
         if (!potInvestmentPerPlayer.containsKey(player))
             return 0;
 
         return potInvestmentPerPlayer.get(player);
     }
 
-    public List<Player> getPlayers() {
-        return new ArrayList<Player>(players);
+    public List<GamePlayer> getPlayers() {
+        return new ArrayList<GamePlayer>(players);
     }
 
     private void reset() {
@@ -115,7 +115,7 @@ public class CurrentPlayState {
         bigBlindPlayer = null;
     }
 
-    private void addPotInvestmentToPlayer(Player player, long amount) {
+    private void addPotInvestmentToPlayer(GamePlayer player, long amount) {
         potTotal += amount;
 
         if (!potInvestmentPerPlayer.containsKey(player)) {
