@@ -52,13 +52,13 @@ $(function () {
 
 
     var player = null;
-    var client = pokerClient(spec); // från poker.js
+    var client = pokerClient(spec); // från pokerClient.js
 
     $('#button').click(function () {
         // starta
         var name = input.val();
         var room = $('#room').val();
-        player = pokerPlayer(name);
+        player = pokerPlayer(name); // från pokerPlayer.js
         client.register(player, room);
     });
 

@@ -8,7 +8,7 @@ var pokerPlayer = function (name) {
         isPlaying : false,
         isTableDone : false,
         newMessages : [],
-        amount : 10000
+        amount : 0
     };
 
     function addViewMessage(newMessage) {
@@ -102,6 +102,8 @@ var pokerPlayer = function (name) {
             onServerIsShuttingDownEvent : function (event) {
             },
             onShowDownEvent : function (event) {
+            },
+            onTableChangedStateEvent : function (event) {
             },
             onTableIsDoneEvent : function (event) {
                 playerState.isTableDone = true;

@@ -52,6 +52,7 @@ var possibleEvents = [
     'onPlayIsStartedEvent',
     'onServerIsShuttingDownEvent',
     'onShowDownEvent',
+    'onTableChangedStateEvent',
     'onTableIsDoneEvent',
     'onYouHaveBeenDealtACardEvent',
     'onYouWonAmountEvent'
