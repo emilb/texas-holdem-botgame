@@ -27,6 +27,27 @@
                         <version>${jetty.version}</version>
                     </dependency>
                 </dependencies>
+                <configuration>
+                    <systemProperties>
+                        <systemProperty>
+                            <name>static.dir</name>
+                            <value>${project.basedir}/src/main/assembly/player</value>
+                        </systemProperty>
+                        <!--
+                        <systemProperty>
+                            <name>remote.host</name>
+                            <value>doot.se</value>
+                        </systemProperty>
+                        <systemProperty>
+                            <name>remote.port</name>
+                            <value>4711</value>
+                        </systemProperty>
+                        -->
+                    </systemProperties>
+                    <webApp>
+                        <contextPath>/</contextPath>
+                    </webApp>
+                </configuration>
             </plugin>
 
             <plugin>
@@ -40,6 +61,28 @@
                     </archive>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/main/assembly/kit.xml</descriptor>
+                            </descriptors>
+                            <finalName>${pom.artifactId}-${pom.version}</finalName>
+                            <outputDirectory>target</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
 
             <plugin>
                 <artifactId>maven-antrun-plugin</artifactId>
@@ -85,10 +128,6 @@
                 </executions>
             </plugin>
 
-            <plugin>
-
-
-            </plugin>
         </plugins>
     </build>
 

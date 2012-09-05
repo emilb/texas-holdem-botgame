@@ -1,0 +1,26 @@
+<assembly>
+    <id>kit</id>
+    <formats>
+        <format>zip</format>
+        <format>tar.gz</format>
+    </formats>
+    <fileSets>
+        <fileSet>
+            <directory>src/main/assembly</directory>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+            <excludes>
+                <exclude>kit.xml</exclude>
+            </excludes>
+        </fileSet>
+    </fileSets>
+    <files>
+        <file>
+            <source>${project.basedir}/target/${artifactId}-${version}.${packaging}</source>
+            <outputDirectory>/</outputDirectory>
+            <destName>${artifactId}.${packaging}</destName>
+        </file>
+    </files>
+</assembly>
