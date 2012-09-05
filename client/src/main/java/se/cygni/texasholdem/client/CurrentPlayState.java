@@ -40,54 +40,118 @@ public class CurrentPlayState {
         return dummy;
     }
 
+    /**
+     * A list of your current cards
+     *
+     * @return your List<Card> of cards
+     * @see Card
+     */
     public List<Card> getMyCards() {
         return new ArrayList<Card>(myCards);
     }
 
+    /**
+     * The list of cards played to the community so far.
+     *
+     * @return List<Card> of currently played community cards
+     * @see Card
+     */
     public List<Card> getCommunityCards() {
         return new ArrayList<Card>(communityCards);
     }
 
+    /**
+     * The current state the game play is in.
+     * @return PlayState
+     * @see CurrentPlayState
+     */
     public PlayState getCurrentPlayState() {
         return currentPlayState;
     }
 
+    /**
+     * The sum of all bets placed during this round
+     * @return The long value of the sum of all bets placed
+     */
     public long getPotTotal() {
         return potTotal;
     }
 
+    /**
+     * The small blind bet this game round
+     * @return The long value of the current small blind bet
+     */
     public long getSmallBlind() {
         return smallBlind;
     }
 
+    /**
+     * The big blind bet this game round
+     * @return The long value of the current big blind bet
+     */
     public long getBigBlind() {
         return bigBlind;
     }
 
+    /**
+     * The player that acts as dealer during this game round
+     * @return the Dealer player
+     * @see GamePlayer
+     */
     public GamePlayer getDealerPlayer() {
         return dealerPlayer;
     }
 
+    /**
+     * The player that is small blind better during this game round
+     * @return the small blind player
+     * @see GamePlayer
+     */
     public GamePlayer getSmallBlindPlayer() {
         return smallBlindPlayer;
     }
 
+    /**
+     * The player that big blind better during this game round
+     * @return the big blind player
+     * @see GamePlayer
+     */
     public GamePlayer getBigBlindPlayer() {
         return bigBlindPlayer;
     }
 
+    /**
+     * The amount of chips you have left
+     * @return the long value of your current amount of chips
+     */
     public long getMyCurrentChipAmount() {
         return myCurrentChipAmount;
     }
 
+    /**
+     *
+     * @param player
+     * @return True if player has folded this game round
+     */
     public boolean hasPlayerFolded(GamePlayer player) {
         return foldedPlayers.contains(player);
     }
 
+    /**
+     *
+     * @param player
+     * @return True if player has gone all in this game round
+     */
     public boolean hasPlayerGoneAllIn(GamePlayer player) {
         return allInPlayers.contains(player);
     }
 
+    /**
+     * Gives the total amount a player has invested in the pot
+     * during this game round.
+     * @param player
+     * @return the long value of the chip amount this player has invested in the pot
+     */
     public long getInvestmentInPotFor(GamePlayer player) {
         if (!potInvestmentPerPlayer.containsKey(player))
             return 0;
@@ -95,6 +159,10 @@ public class CurrentPlayState {
         return potInvestmentPerPlayer.get(player);
     }
 
+    /**
+     *
+     * @return A List<GamePlayer> participating in this game round
+     */
     public List<GamePlayer> getPlayers() {
         return new ArrayList<GamePlayer>(players);
     }
