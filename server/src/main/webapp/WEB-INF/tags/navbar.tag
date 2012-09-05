@@ -17,6 +17,12 @@
                 <li ${currentClass}><a href="/rules">House rules</a></li>
 
                 <c:set var="currentClass"></c:set>
+                <c:if test="${section == 'gettingstarted'}">
+                    <c:set var="currentClass">class="active"</c:set>
+                </c:if>
+                <li ${currentClass}><a href="/gettingstarted">Getting started</a></li>
+
+                <c:set var="currentClass"></c:set>
                 <c:if test="${section == 'serverstatus'}">
                     <c:set var="currentClass">class="active"</c:set>
                 </c:if>
