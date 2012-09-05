@@ -107,6 +107,10 @@ public class StaticFileServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         basePath = System.getProperty(SYS_PROP_STATIC_DIR);
+
+        if (!StringUtils.endsWith(basePath, File.separator))
+            basePath = basePath + File.separator;
+
         log.info("StaticFileServlet initialized, static directory: {}", basePath);
     }
 

@@ -1,6 +1,4 @@
 <atmosphere-handlers>
-    <atmosphere-handler context-root="/chat" class-name="org.atmosphere.samples.chat.ChatAtmosphereHandler">
-    </atmosphere-handler>
     <atmosphere-handler context-root="/poker" class-name="se.cygni.texasholdem.webclient.PokerAtmosphereHandler">
     </atmosphere-handler>
 </atmosphere-handlers>
