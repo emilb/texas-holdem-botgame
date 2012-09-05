@@ -18,22 +18,15 @@ test('actionRequestHandler function exists', function() {
 // TODO: test that player chooses one of the given possibleActions; type amd amount.
 // For actionType RAISE the max amount is the given one and min is 1 ?
 test('ActionResponse raise', function() {  
-	var request = {
-     "requestId":"c8586f44-39b8-4aaf-a6ef-572ea64eb7c3",
-     "possibleActions":[
+	var possibleActions = [
 	     {"actionType":"FOLD","amount":0},
 	     {"actionType":"CALL","amount":50},
 	     {"actionType":"RAISE","amount":25},
 	     {"actionType":"ALL_IN","amount":1000}
-     ]};
+     ];
 
-	var expected = {
-            "type":responseClass,
-            "requestId":"c8586f44-39b8-4aaf-a6ef-572ea64eb7c3",
-            "action":{"actionType":"RAISE","amount":25}
-	};
-
-    deepEqual(player.actionRequestHandler(request), expected, 'response is RAISE 25');  
+	var expected = {"actionType":"RAISE","amount":25};
+    deepEqual(player.actionRequestHandler(possibleActions), expected, 'response is RAISE 25');  
 });
 
 module('EventCallbacks');
@@ -75,7 +68,7 @@ test('can execute event from snapshot game round', function() {
 		var clazz = json.type.split('.').pop();
         var actionRequest = (clazz === 'ActionRequest');
         if (actionRequest) {
-            var actionResponse = player.actionRequestHandler(json);
+            var actionResponse = player.actionRequestHandler(json.possibleActions);
             ok(actionResponse, 'actionResponse should exist');
 		} else {
 	        var handler = player.eventHandlers['on' + clazz];

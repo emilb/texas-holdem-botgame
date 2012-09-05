@@ -2,8 +2,6 @@ var pokerPlayer = function (name) {
     "use strict";
 
 
-    var responseClass = "se.cygni.texasholdem.communication.message.response.ActionResponse";
-
     var playerState = {
         isPlaying : false,
         isTableDone : false,
@@ -20,24 +18,21 @@ var pokerPlayer = function (name) {
 
 
     /*
-     The main function in the player - to respond with an Action
-
-     {"type":"se.cygni.texasholdem.communication.message.request.ActionRequest",
-     "sessionId":null,
-     "requestId":"c8586f44-39b8-4aaf-a6ef-572ea64eb7c3",
+     The main function in the player - to respond with an actionType
+        For example:
      "possibleActions":[
-     {"actionType":"FOLD","amount":0},
-     {"actionType":"CALL","amount":50},
-     {"actionType":"RAISE","amount":25},
-     {"actionType":"ALL_IN","amount":1000}
-     ]}
+         {"actionType":"FOLD","amount":0},
+         {"actionType":"CALL","amount":50},
+         {"actionType":"RAISE","amount":25},
+         {"actionType":"ALL_IN","amount":1000}
+     ]
      */
 
-        actionRequestHandler : function (actionRequest) {
+        actionRequestHandler : function (possibleActions) {
             var chosenAction1, chosenAction2, chosenAction3;
-            var i;
-            for (i = 0; i < actionRequest.possibleActions.length; i += 1) {
-                var action = actionRequest.possibleActions[i];
+            var i, action;
+            for (i = 0; i < possibleActions.length; i += 1) {
+                action = possibleActions[i];
                 switch (action.actionType) {
                     case "RAISE":
                         chosenAction1 = action;
@@ -60,12 +55,7 @@ var pokerPlayer = function (name) {
             }
 
             var chosenAction = chosenAction1 || chosenAction2 || chosenAction3;
-            // TODO: move type and requestId to poker.js
-            return {
-                "type":responseClass,
-                "requestId":actionRequest.requestId,
-                "action":chosenAction
-            };
+            return chosenAction;
         },
 
         // public state for view

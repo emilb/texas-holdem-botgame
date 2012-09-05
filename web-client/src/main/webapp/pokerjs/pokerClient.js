@@ -66,12 +66,16 @@ var pokerClient = function (spec) {
                 var clazz = json.type.split('.').pop();
                 spec.onMessage && spec.onMessage(clazz);
 
-                var actionRequest = (clazz === 'ActionRequest');
-                if (actionRequest) {
-                    var actionResponse = player.actionRequestHandler(json);
-                    if (actionResponse) {
+                var isActionRequest = (clazz === 'ActionRequest');
+                if (isActionRequest) {
+                    var chosenAction = player.actionRequestHandler(json.possibleActions);
+                    var actionResponse = {
+                        "type":"se.cygni.texasholdem.communication.message.response.ActionResponse",
+                        "requestId":json.requestId,
+                        "action":chosenAction
+                    };
+                    if (chosenAction) {
                         spec.actionResponseCallback && spec.actionResponseCallback(actionResponse);
-                        //console.log('### handler response for ' + clazz + ' is: ' + jQuery.stringifyJSON(actionResponse));
                         subSocket.push(jQuery.stringifyJSON(actionResponse));
                     }
                 } else {
