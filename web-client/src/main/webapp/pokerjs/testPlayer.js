@@ -60,6 +60,13 @@ for (var i = 0; i < possibleEvents.length; i++) {
 	});
 };
 
+player = pokerPlayer('qunit');
+
+test('playerState correct before round', function() {
+    equal(player.state.amount, 0, 'amount should be a 0 before game');  
+    equal(player.state.isTableDone, false, 'isTableDone should be false before game');  
+});
+
 // Test events by calling player event handlers with real game data
 // and verify that player can receive them without throwing exception
 test('can execute event from snapshot game round', function() {  
@@ -71,11 +78,17 @@ test('can execute event from snapshot game round', function() {
             var actionResponse = player.actionRequestHandler(json.possibleActions);
             ok(actionResponse, 'actionResponse should exist');
 		} else {
-	        var handler = player.eventHandlers['on' + clazz];
+            var eventName = 'on' + clazz;
+	        var handler = player.eventHandlers[eventName];
 			handler(json);
 		}
 		ok(true, 'eventHandler should run ok');
 	}
+});
+
+test('playerState correct after round', function() {  
+    equal(player.state.amount, 0, 'amount should be a 0 when losing game');  
+    equal(player.state.isTableDone, true, 'isTableDone should be a true when losing game');  
 });
 
 

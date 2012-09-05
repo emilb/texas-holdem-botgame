@@ -10,6 +10,12 @@ $(function () {
     var state = $('#state');
 
     var enableMessagelog = false; // TODO: checkbox value instead
+    var newMessages = [];
+
+    var playerStateUpdateEventHandlers;
+
+    var player = null;
+    var client;
 
     var spec = {
         url:'http://localhost:8080/poker',
@@ -32,14 +38,54 @@ $(function () {
         onMessage:function (clazz) {
             addMessage(clazz, "", 'blue', new Date());
         },
+        onUpdatePlayerState:function (eventJson, eventName) {
+            updatePlayerState(eventJson, eventName);
+        },
         onPlayerState:function (playerState) {
             state.text('amount: '+playerState.amount);
-            var msg = playerState.newMessages.pop();
+            var msg = newMessages.pop();
             if (msg) {
                 content.html($('<p>', { text : msg }));
             }
         }
     };
+
+    function updatePlayerState (eventJson, eventName) {
+        var updatehandler = playerStateUpdateEventHandlers[eventName];
+        if (updatehandler) {
+            updatehandler(eventJson);
+        }
+    }
+
+    // handlers for updating basic player state from Events and RegisterForPlayResponse
+    playerStateUpdateEventHandlers = {
+
+        onRegisterForPlayResponse : function (playResponse) {
+            addViewMessage('Registered for play');
+        },
+        onPlayIsStartedEvent : function (event) {
+            //addViewMessage('new round: '+player.state.table.players.length+' players');
+        },
+        onServerIsShuttingDownEvent : function (event) {
+        },
+        onShowDownEvent : function (event) {
+        },
+        onTableChangedStateEvent : function (event) {
+        },
+        onTableIsDoneEvent : function (event) {
+            addViewMessage('Table is done');
+        },
+        onYouWonAmountEvent : function (event) {
+            if (parseInt(event.wonAmount) > 0) {
+                addViewMessage('You won '+event.wonAmount);
+            }
+        }
+    };
+
+    function addViewMessage(newMessage) {
+        newMessages.push(newMessage);
+    }
+
 
     function addMessage(author, message, color, datetime) {
         if (enableMessagelog) {
@@ -51,8 +97,7 @@ $(function () {
     }
 
 
-    var player = null;
-    var client = pokerClient(spec); // från pokerClient.js
+    client = pokerClient(spec); // från pokerClient.js
 
     $('#button').click(function () {
         // starta

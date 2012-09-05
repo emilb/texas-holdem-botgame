@@ -80,10 +80,12 @@ var pokerClient = function (spec) {
                     }
                 } else {
                     // else it's a *Event or RegisterForPlayResponse
-                    var handler = player.eventHandlers['on' + clazz];
+                    var eventName = 'on' + clazz;
+                    var handler = player.eventHandlers[eventName];
                     if (!handler) {
                         console.log('Player eventhandler for ' + clazz + ' is missing.');
                     } else {
+                        spec.onUpdatePlayerState && spec.onUpdatePlayerState(json, eventName);
                         handler(json);
                         spec.onPlayerState && spec.onPlayerState(player.state);
                     }

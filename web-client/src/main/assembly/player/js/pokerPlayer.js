@@ -5,13 +5,19 @@ var pokerPlayer = function (name) {
     var playerState = {
         isPlaying : false,
         isTableDone : false,
-        newMessages : [],
-        amount : 0
+        amount : 0,
+        table : { 
+            state : '',
+            players : [],
+            smallBlindAmount : 0,
+            bigBlindAmount : 0,
+            dealer : null, 
+            smallBlindPlayer : null,
+            bigBlindPlayer : null
+        }
     };
 
-    function addViewMessage(newMessage) {
-        playerState.newMessages.push(newMessage);
-    }
+    var updater = playerStateUpdater(playerState);
 
     var player = {
          name : name,
@@ -61,56 +67,8 @@ var pokerPlayer = function (name) {
         // public state for view
         state : playerState,
 
-        // Event handlers - should not return a value, only collect information about the game
-        eventHandlers : {
-
-            onRegisterForPlayResponse : function (playResponse) {
-                playerState.isPlaying = true;
-                addViewMessage('Registered for play');
-            },
-
-            onCommunityHasBeenDealtACardEvent : function (event) {
-            },
-            onPlayerBetBigBlindEvent : function (event) {
-            },
-            onPlayerBetSmallBlindEvent : function (event) {
-            },
-            onPlayerCalledEvent : function (event) {
-            },
-            onPlayerCheckedEvent : function (event) {
-            },
-            onPlayerFoldedEvent : function (event) {
-            },
-            onPlayerQuitEvent : function (event) {
-            },
-            onPlayerRaisedEvent : function (event) {
-            },
-            onPlayerWentAllInEvent : function (event) {
-            },
-            onPlayIsStartedEvent : function (event) {
-            },
-            onServerIsShuttingDownEvent : function (event) {
-            },
-            onShowDownEvent : function (event) {
-            },
-            onTableChangedStateEvent : function (event) {
-            },
-            onTableIsDoneEvent : function (event) {
-                playerState.isTableDone = true;
-                addViewMessage('Table is done');
-            },
-            onYouHaveBeenDealtACardEvent : function (event) {
-            },
-            onYouWonAmountEvent : function (event) {
-                playerState.amount = parseInt(event.yourChipAmount);
-                if (parseInt(event.wonAmount) > 0) {
-                    addViewMessage('You won '+event.wonAmount);
-                }
-            }
-        }
-
+        eventHandlers : updater.eventHandlers // playerStateUpdater.js
     };
 
     return player;
 };
-
