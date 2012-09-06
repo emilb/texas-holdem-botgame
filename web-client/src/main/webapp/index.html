@@ -1,82 +1,68 @@
 <!DOCTYPE html>
 
-<script type="text/javascript" src="jquery/jquery-1.7.2.js"></script>
-<script type="text/javascript" src="jquery/jquery.atmosphere.js"></script>
-<script type="text/javascript" src="jquery/application.js"></script>
-
-
-<html>
+<html dir="ltr" lang="sv-SE">
 
 <head>
     <meta charset="utf-8">
-    <title>Atmosphere Chat</title>
+    <title>Cygni Texas Hold'em Poker</title>
 
-    <style>
-        * {
-            font-family: tahoma;
-            font-size: 12px;
-            padding: 0px;
-            margin: 0px;
-        }
+	<link rel="stylesheet" href="style.css" type="text/css" />
 
-        p {
-            line-height: 18px;
-        }
-
-        div {
-            width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        #detect {
-            padding: 5px;
-            background: #ffc0cb;
-            border-radius: 5px;
-            border: 1px solid #CCC;
-            margin-top: 10px;
-        }
-
-        #content {
-            padding: 5px;
-            background: #ddd;
-            border-radius: 5px;
-            border: 1px solid #CCC;
-            margin-top: 10px;
-        }
-
-        #header {
-            padding: 5px;
-            background: #f5deb3;
-            border-radius: 5px;
-            border: 1px solid #CCC;
-            margin-top: 10px;
-        }
-
-        #input {
-            border-radius: 2px;
-            border: 1px solid #ccc;
-            margin-top: 10px;
-            padding: 5px;
-            width: 400px;
-        }
-
-        #status {
-            width: 88px;
-            display: block;
-            float: left;
-            margin-top: 15px;
-        }
-    </style>
 </head>
+
 <body>
-<div id="header"><h3>Atmosphere Chat. Default transport is WebSocket, fallback is long-polling</h3></div>
-<div id="detect"><h3>Detecting what the browser and server are supporting</h3></div>
-<div id="content"></div>
-<div>
-    <span id="status">Connecting...</span>
-    <input type="text" id="input" disabled="disabled"/>
-</div>
+<body>
+	<div class="page">
+		<div class="w1">
+			<div class="w2">
+				<section id="wrapper">
+
+
+
+<header id="header">
+	<div class="header-holder">
+		<h2 id="site-title">
+			<a href="http://cygni.se/"><strong class="logo">Cygni</strong></a>
+		</h2>
+	</div>
+</header>
+
+<section id="main">
+	<section id="twocolumns">
+		<section id="maincontent">								
+			<div class="content-holder">
+				<header class="heading">
+					<div class="title_icon_stacktrace"></div>
+				    <h1>Cygni Texas Hold'em Poker</h1>
+            	</header>
+				    <img src="images/poker-texas-hold-em.jpeg">
+			</div>
+		</section>
+
+		<aside id="sidebars">
+
+			<ul id="sidebar-blogposts" class="sidebar sidebar-blogposts">
+				<li id="kb-advanced-rss-9" class="widget widget_kbrss">
+					<div class="heading">
+						<h2>Dagens meny</h2>
+					</div>
+					<ul>
+						<li><a class='kbrsswidget' href='/player/poker.html'>Poker</a></li>
+						<li><a class='kbrsswidget' href='/player/testPlayer.html'>QUnit test</a></li>
+						<li><a class='kbrsswidget' href='192.168.10.100:8080/'>Poker Server Status</a></li>
+					</ul>
+				</li>
+			</ul>
+
+		</aside>
+	</section>
+</section>
+
+				</section>
+			</div>
+		</div>
+	</div>
+
 
 </body>
 </html>
