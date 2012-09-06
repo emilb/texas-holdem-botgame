@@ -6,6 +6,10 @@ var pokerPlayer = function (name) {
         isPlaying : false,
         isTableDone : false,
         amount : 0,
+        myCards : [],
+        communityCards : [],
+        potTotal : 0,
+        winner : null,
         table : { 
             state : '',
             players : [],
@@ -20,8 +24,55 @@ var pokerPlayer = function (name) {
     var updater = playerStateUpdater(playerState);
 
     var player = {
-         name : name,
+        name : name,
 
+        isWinner : function() {
+            return playerState.winner && playerState.winner.name === name;
+        },
+        
+        hasPlayerFolded : updater.hasPlayerFolded,
+        hasPlayerGoneAllIn : updater.hasPlayerGoneAllIn,
+
+        // Event handlers - should not return a value, only collect information about the game
+        // updater.eventHandlers calls these at the end
+        playerEventHandlers : {
+
+            onRegisterForPlayResponse : function (playResponse) {
+            },
+
+            onCommunityHasBeenDealtACardEvent : function (event) {
+            },
+            onPlayerBetBigBlindEvent : function (event) {
+            },
+            onPlayerBetSmallBlindEvent : function (event) {
+            },
+            onPlayerCalledEvent : function (event) {
+            },
+            onPlayerCheckedEvent : function (event) {
+            },
+            onPlayerFoldedEvent : function (event) {
+            },
+            onPlayerQuitEvent : function (event) {
+            },
+            onPlayerRaisedEvent : function (event) {
+            },
+            onPlayerWentAllInEvent : function (event) {
+            },
+            onPlayIsStartedEvent : function (event) {
+            },
+            onServerIsShuttingDownEvent : function (event) {
+            },
+            onShowDownEvent : function (event) {
+            },
+            onTableChangedStateEvent : function (event) {
+            },
+            onTableIsDoneEvent : function (event) {
+            },
+            onYouHaveBeenDealtACardEvent : function (event) {
+            },
+            onYouWonAmountEvent : function (event) {
+            }
+        },
 
     /*
      The main function in the player - to respond with an actionType
@@ -67,6 +118,8 @@ var pokerPlayer = function (name) {
         // public state for view
         state : playerState,
 
+        // Event handlers seen from outside
+        // updater.eventHandlers calls this player's eventhandlers at the end
         eventHandlers : updater.eventHandlers // playerStateUpdater.js
     };
 

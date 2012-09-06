@@ -85,8 +85,9 @@ var pokerClient = function (spec) {
                     if (!handler) {
                         console.log('Player eventhandler for ' + clazz + ' is missing.');
                     } else {
-                        spec.onUpdatePlayerState && spec.onUpdatePlayerState(json, eventName);
                         handler(json);
+                        player.playerEventHandlers[eventName](json);
+                        spec.onUpdatePlayerState && spec.onUpdatePlayerState(json, eventName);
                         spec.onPlayerState && spec.onPlayerState(player.state);
                     }
                 }

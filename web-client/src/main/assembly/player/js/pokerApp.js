@@ -7,6 +7,7 @@ $(function () {
     var input = $('#input');
     var status = $('#status');
     var messagelog = $('#messagelog');
+    var leader = $('#leader');
     var state = $('#state');
 
     var enableMessagelog = false; // TODO: checkbox value instead
@@ -42,7 +43,6 @@ $(function () {
             updatePlayerState(eventJson, eventName);
         },
         onPlayerState:function (playerState) {
-            state.text('amount: '+playerState.amount);
             var msg = newMessages.pop();
             if (msg) {
                 content.html($('<p>', { text : msg }));
@@ -57,7 +57,7 @@ $(function () {
         }
     }
 
-    // handlers for updating basic player state from Events and RegisterForPlayResponse
+    // handlers for updating view from player state and Events
     playerStateUpdateEventHandlers = {
 
         onRegisterForPlayResponse : function (playResponse) {
@@ -69,14 +69,23 @@ $(function () {
         onServerIsShuttingDownEvent : function (event) {
         },
         onShowDownEvent : function (event) {
+            var leaderPlayer = player.state.table.players.sortBy('chipCount').last();
+            if (leaderPlayer) {
+                leader.text('leader: '+leaderPlayer.name+' : '+leaderPlayer.chipCount);
+            }
         },
         onTableChangedStateEvent : function (event) {
         },
         onTableIsDoneEvent : function (event) {
-            addViewMessage('Table is done');
+            if (player.isWinner()) {
+                addViewMessage('Table is done - You won');
+            } else {
+                addViewMessage('Table is done - '+player.state.winner.name+' won');
+            }
         },
         onYouWonAmountEvent : function (event) {
-            if (parseInt(event.wonAmount) > 0) {
+            state.text('Your chipCount: '+player.state.amount);
+            if (event.wonAmount > 0) {
                 addViewMessage('You won '+event.wonAmount);
             }
         }
