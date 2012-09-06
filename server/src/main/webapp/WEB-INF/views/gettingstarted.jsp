@@ -23,120 +23,123 @@
             <div class="span6">
                 <div class="well well-large">
                     <h2>Getting started with a Java client</h2>
+                    <p>First download the example project:
+                        <a href="http://192.168.10.100/download/texas-holdem-java-client.zip">texas-holdem-java-client.zip</a>
+                    </p>
+                    <p>
+                        Extract the zip and import in your favorite IDE. If you are missing any dependencies download
+                        this maven <a href="http://192.168.10.100/download/settings.xml">settings.xml</a> and place
+                        it in ~/.m2.
+                    </p>
+                    <p>
+                        The class SimplestPossibleBot is included in the project and shown below.
+                    </p>
                     <pre class="prettyprint">
-@Configuration
-public class SpringConfig {
+public class SimplestPossibleBot extends BasicPlayer {
 
-    public
-    @Bean
-    EventBus eventBus() {
+    private static Logger log = LoggerFactory
+            .getLogger(SimplestPossibleBot.class);
 
-        return new EventBus();
+    private final String serverHost;
+    private final int serverPort;
+    private final PlayerClient playerClient;
+
+    public SimplestPossibleBot(String serverHost, int serverPort) {
+        this.serverHost = serverHost;
+        this.serverPort = serverPort;
+
+        // Initialize the player client
+        playerClient = new PlayerClient(this, serverHost, serverPort);
     }
+
+    public void playATrainingGame() throws Exception {
+        playerClient.connect();
+        playerClient.registerForPlay(Room.TRAINING);
+    }
+
+    @Override
+    public String getName() {
+        throw new RuntimeException("Did you forget to specify a name for your bot?");
+    }
+
+    @Override
+    public Action actionRequired(ActionRequest request) {
+
+        Action callAction = null;
+        Action checkAction = null;
+        Action foldAction = null;
+
+        for (final Action action : request.getPossibleActions()) {
+            switch (action.getActionType()) {
+                case CALL:
+                    callAction = action;
+                    break;
+                case CHECK:
+                    checkAction = action;
+                    break;
+                case FOLD:
+                    foldAction = action;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        Action action = null;
+        if (callAction != null)
+            action = callAction;
+        else if (checkAction != null)
+            action = checkAction;
+        else
+            action = foldAction;
+
+        log.debug("{} returning action: {}", getName(), action);
+        return action;
+    }
+
+    @Override
+    public void connectionToGameServerLost() {
+        log.info("Connection to game server is lost. Exit time");
+        System.exit(0);
+    }
+
+    public static void main(String... args) {
+        SimplestPossibleBot bot = new SimplestPossibleBot("192.168.10.100", 4711);
+
+        try {
+            bot.playATrainingGame();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+    }
+}
+
 }</pre>
-                    <p>
-                        A table is played until either a winner has been established, all real players have quit
-                        or if a Player shuffle is decided from within a tournament.
-                    </p>
-                    <p>
-                        A game bout is played till either all players but one has folded or the game has
-                        entered the state SHOWDOWN. If the latter the pot is divided according to player hands,
-                        bet amounts etc.
-                    </p>
-                    <p>
-                        A maximum of ${gamePlan.maxNoofTurnsPerState} turns are allowed per player and state.
-                        This is to hinder raise races between players. It is always possible to go ALL-IN.
-                    </p>
-                    <p>
-                        Raises are always fixed to the current value of the big blind.
-                    </p>
-                    <p>
-                        A bot player that fails to respond in time (30 sec) or responds with non valid actions (i.e.
-                        trying to CHECK when a CALL or RAISE is needed) more than ${gamePlan.maxNoofActionRetries}
-                        times in a row will automatically be folded in the current game bout.
-                    </p>
-                    <p>
-                        Player names must be unique, if your name is taken you will not be able to connect and play.
-                    </p>
+                    <p>This class extends BasicPlayer which has dummy methods for most event calls.
+                        The methods getName() and actionRequired(...) must however be implemented.
+                        You can use this class as a starting point for you player.</p>
 
-                    <h2>Training</h2>
-                    <p>
-                        A bot player may train against a few server-bot players that are always alive and eager to play!
-                        This is done by joining the room TRAINING upon connection. The table stops playing as soon as
-                        the bot player has either won or lost all of its chips.
-                    </p>
 
-                    <h2>Tournament</h2>
-                    <p>
-                        When it is time for a tournament all interested players connect and join the room TOURNAMENT.
-                        An administrator starts the tournament manually and depending on how many players have joined
-                        (max 11 players per table) a suitable amount of tables are started and players are placed.
-                    </p>
-                    <p>
-                        Whenever a table has 3 or less players left all tables are stopped and the
-                        remaining players are shuffled and placed on new tables. This is to even the odds and keep
-                        the game balanced.
-                    </p>
-                    <p>
-                        Upon that time that only 11 players or less are remaining in play all tables are stopped and
-                        players are joined on one table. Showdown time!
-                    </p>
-                    <p>
-                        The ultimate winner of a tournament is the last standing player. The tournament keeps track of
-                        when a player becomes bankrupt and uses this timestamp for establishing the total rank between
-                        players (i.e the earlier a player is bankrupt the lower the score).
-                    </p>
                 </div>
             </div>
             <!--/span-->
 
             <div class="span6">
                 <div class="well well-large">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th colspan="2">Numbers</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>Starting chip amount</td>
-                            <td><div class="pull-right">$${gamePlan.startingChipsAmount}</div></td>
-                        </tr>
-                        <tr>
-                            <td>Big blind</td>
-                            <td><div class="pull-right">$${gamePlan.bigBlindStart}</div></td>
-                        </tr>
-                        <tr>
-                            <td>Small blind</td>
-                            <td><div class="pull-right">$${gamePlan.smallBlindStart}</div></td>
-                        </tr>
-                        <tr>
-                            <td>Blind raise strategy</td>
-                            <td><div class="pull-right">${gamePlan.blindRaiseStrategy}</div></td>
-                        </tr>
-                        <tr>
-                            <td>Big blind raise</td>
-                            <td><div class="pull-right">${gamePlan.bigBlindRaiseStrategyValue}</div></td>
-                        </tr>
-                        <tr>
-                            <td>Small blind raise</td>
-                            <td><div class="pull-right">${gamePlan.smallBlindRaiseStrategyValue}</div></td>
-                        </tr>
-                        <tr>
-                            <td># rounds between blind raise</td>
-                            <td><div class="pull-right">${gamePlan.playsBetweenBlindRaise}</div></td>
-                        </tr>
-                        <tr>
-                            <td>Max # turns per state</td>
-                            <td><div class="pull-right">${gamePlan.maxNoofTurnsPerState}</div></td>
-                        </tr>
-                        <tr>
-                            <td>Max # action retries</td>
-                            <td><div class="pull-right">${gamePlan.maxNoofActionRetries}</div></td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <h2>Getting started with a JavaScript client</h2>
+                    <p>First download the example project:
+                        <a href="http://192.168.10.100/download/texas-holdem-web-client.zip">texas-holdem-web-client.zip</a>
+                    </p>
+                    <p>Extract the zip and open a terminal window and run:</p>
+                    <pre class="prettyprint">
+start.sh
+                    </pre>
+                    <p>This starts a local web server which acts as a proxy to the real game server.</p>
+                    <p>Open <a href="http://localhost:8080" target="_blank">localhost</a> and try a test
+                    game by clicking on the Poker link.</p>
+                    <p>Files to edit to create your own player are located in the subdirectory player.</p>
                 </div>
             </div>
             <!--/span-->

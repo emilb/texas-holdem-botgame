@@ -67,6 +67,25 @@ public class TournamentController {
         return "tournament";
     }
 
+    @RequestMapping(value = "/tournament/subview", method = RequestMethod.GET)
+    public String updateSubview(@RequestParam(value = "id", required = false) String tournamentId, Locale locale, Model model) {
+        log.info("Rendering subview");
+        TournamentLog latest = null;
+
+        if (tournamentId != null) {
+            TournamentLog currentTournament = TournamentUtil.createTournamentLog(sessionManager.getTournament(tournamentId));
+
+            if (currentTournament != null) {
+                latest = currentTournament;
+            }
+        }
+
+        model.addAttribute(TOURNAMENT_CURRENT, latest);
+        model.addAttribute(TOURNAMENT_CURRENT_START, new StartTournament(latest.getId()));
+
+        return "tournament_ajax_update";
+    }
+
     @RequestMapping(value = "/startTournament", method = RequestMethod.POST)
     public String start(@ModelAttribute StartTournament startTournament, Model model) {
         Tournament tournament = sessionManager.getTournament(startTournament.getId());

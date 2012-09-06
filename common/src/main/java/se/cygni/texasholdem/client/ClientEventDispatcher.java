@@ -13,10 +13,11 @@ import java.util.Map.Entry;
 
 /**
  * This ClientEventDispatcher uses reflection to notify a player of incoming events.
+ *
  * Upon instantiation of this class the target object is analyzed for methods
  * that take an event class as argument (and also has that same method declared
  * in the interface).
- * <p/>
+ *
  * The matching methods are stored in a map for quick lookups.
  *
  * @author emil
@@ -103,6 +104,12 @@ public class ClientEventDispatcher {
         return false;
     }
 
+    /**
+     * Invokes the corresponding method for the Player matching
+     * the current event.
+     *
+     * @param event
+     */
     public void onEvent(final TexasEvent event) {
 
         if (event == null)

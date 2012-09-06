@@ -96,8 +96,6 @@ public class PerformanceTournamentTestPlayer extends BasicPlayer {
         } else {
             lastNewGame = System.currentTimeMillis();
         }
-
-//        log.info("Play is starting. My table id is: " + event.getTableId());
     }
 
     @Override

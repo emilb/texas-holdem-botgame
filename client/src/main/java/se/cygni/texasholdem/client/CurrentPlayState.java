@@ -9,24 +9,29 @@ import se.cygni.texasholdem.game.PlayerShowDown;
 import se.cygni.texasholdem.game.definitions.PlayState;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * A helper for keeping tabs on the current state of a game round
+ */
 public class CurrentPlayState {
 
-    // Resetable values per Table
-    private List<Card> myCards = new ArrayList<Card>(2);
-    private List<Card> communityCards = new ArrayList<Card>(5);
+    // Values are reset per GameRound
+    private List<Card> myCards = Collections.synchronizedList(new ArrayList<Card>(2));
+    private List<Card> communityCards = Collections.synchronizedList(new ArrayList<Card>(5));
     private PlayState currentPlayState = PlayState.PRE_FLOP;
-    private Set<GamePlayer> foldedPlayers = new HashSet<GamePlayer>();
-    private Set<GamePlayer> allInPlayers = new HashSet<GamePlayer>();
-    private Set<GamePlayer> players = new HashSet<GamePlayer>();
+    private Set<GamePlayer> foldedPlayers = Collections.synchronizedSet(new HashSet<GamePlayer>());
+    private Set<GamePlayer> allInPlayers = Collections.synchronizedSet(new HashSet<GamePlayer>());
+    private Set<GamePlayer> players = Collections.synchronizedSet(new HashSet<GamePlayer>());
     private long potTotal;
-    private HashMap<GamePlayer, Long> potInvestmentPerPlayer = new HashMap<GamePlayer, Long>();
+    private Map<GamePlayer, Long> potInvestmentPerPlayer = new ConcurrentHashMap<GamePlayer, Long>();
     private long smallBlind;
     private long bigBlind;
     private GamePlayer dealerPlayer;
     private GamePlayer smallBlindPlayer;
     private GamePlayer bigBlindPlayer;
-    
+
+    // Values that are kept between GameRounds
     private long myCurrentChipAmount = 0;
     private String myPlayersName;
 
@@ -58,6 +63,19 @@ public class CurrentPlayState {
      */
     public List<Card> getCommunityCards() {
         return new ArrayList<Card>(communityCards);
+    }
+
+    /**
+     * The list of your two cards and the available community
+     * cards.
+     *
+     * @return List<Card> of your cards and the currently played community cards
+     * @see Card
+     */
+    public List<Card> getMyCardsAndCommunityCards() {
+        List<Card> cards = new ArrayList<Card>(myCards);
+        cards.addAll(communityCards);
+        return cards;
     }
 
     /**

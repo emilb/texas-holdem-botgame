@@ -33,6 +33,9 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * This class handles the communication between client and server.
+ */
 public class PlayerClient extends SimpleChannelHandler {
 
     private static final long RESPONSE_TIMEOUT_MS = 80000;
@@ -52,6 +55,11 @@ public class PlayerClient extends SimpleChannelHandler {
     private final CurrentPlayState currentPlayState;
 
 
+    /**
+     * @param player the Player in game
+     * @param serverHost the host name or IP adr to the server
+     * @param serverPort the port at which the server is accepting connections
+     */
     public PlayerClient(final Player player, final String serverHost, final int serverPort) {
 
         this.player = player;
@@ -64,6 +72,12 @@ public class PlayerClient extends SimpleChannelHandler {
         currentPlayStateEventDispatcher = new ClientEventDispatcher(currentPlayState.getPlayerImpl());
     }
 
+    /**
+     * The reference to the CurrentPlayState is valid through the whole session and can
+     * safely be referenced.
+     *
+     * @return the CurrentPlayState
+     */
     public CurrentPlayState getCurrentPlayState() {
         return currentPlayState;
     }
@@ -105,6 +119,7 @@ public class PlayerClient extends SimpleChannelHandler {
 
                     isConnected = true;
                     channel = future.getChannel();
+                    player.connectionToGameServerEstablished();
                 }
             }
         });

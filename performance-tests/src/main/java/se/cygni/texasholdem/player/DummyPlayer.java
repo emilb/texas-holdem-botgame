@@ -8,6 +8,7 @@ import se.cygni.texasholdem.communication.message.event.PlayIsStartedEvent;
 import se.cygni.texasholdem.communication.message.event.TableIsDoneEvent;
 import se.cygni.texasholdem.communication.message.request.ActionRequest;
 import se.cygni.texasholdem.game.Action;
+import se.cygni.texasholdem.game.ActionType;
 import se.cygni.texasholdem.game.Room;
 import se.cygni.texasholdem.game.exception.GameException;
 
