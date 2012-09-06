@@ -94,13 +94,13 @@ public class DummyPlayer extends BasicPlayer {
 
         for (final Action action : request.getPossibleActions()) {
             switch (action.getActionType()) {
-                case CALL:
+                case ActionType.CALL:
                     callAction = action;
                     break;
-                case CHECK:
+                case ActionType.CHECK:
                     checkAction = action;
                     break;
-                case FOLD:
+                case ActionType.FOLD:
                     foldAction = action;
                     break;
                 default:

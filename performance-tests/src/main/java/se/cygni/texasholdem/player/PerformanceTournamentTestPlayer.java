@@ -1,6 +1,7 @@
 package se.cygni.texasholdem.player;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import se.cygni.texasholdem.client.PlayerClient;
@@ -15,15 +16,15 @@ import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class PerformanceTestPlayer extends BasicPlayer {
+public class PerformanceTournamentTestPlayer extends BasicPlayer {
 
     private static Logger log = LoggerFactory
-            .getLogger(PerformanceTestPlayer.class);
+            .getLogger(PerformanceTournamentTestPlayer.class);
 
     private static final String DEFAULT_HOST = "localhost";
     private static final int DEFAULT_PORT = 4711;
     private static final String DEFAULT_NAME = "perftest";
-    private static final int DEFAULT_NOOF_PLAYERS = 3;
+    private static final int DEFAULT_NOOF_PLAYERS = 25;
 
     private static final AtomicInteger counter = new AtomicInteger(0);
 
@@ -41,7 +42,7 @@ public class PerformanceTestPlayer extends BasicPlayer {
 
     private long lastNewGame;
 
-    public PerformanceTestPlayer() {
+    public PerformanceTournamentTestPlayer() {
         name = getSystemProperty(NAME_PROPERTY, DEFAULT_NAME) + "_" + counter.getAndIncrement();
         playerClient = new PlayerClient(this, getSystemProperty(HOST_PROPERTY, DEFAULT_HOST), getSystemProperty(PORT_PROPERTY, DEFAULT_PORT));
     }
@@ -71,7 +72,7 @@ public class PerformanceTestPlayer extends BasicPlayer {
     public void playAGame() {
         try {
             playerClient.connect();
-            playerClient.registerForPlay(Room.TRAINING);
+            playerClient.registerForPlay(Room.TOURNAMENT);
 
         } catch (Exception e) {
 
@@ -105,17 +106,21 @@ public class PerformanceTestPlayer extends BasicPlayer {
         Action callAction = null;
         Action checkAction = null;
         Action foldAction = null;
+        Action raiseAction = null;
 
         for (final Action action : request.getPossibleActions()) {
             switch (action.getActionType()) {
-                case CALL:
+                case ActionType.CALL:
                     callAction = action;
                     break;
-                case CHECK:
+                case ActionType.CHECK:
                     checkAction = action;
                     break;
-                case FOLD:
+                case ActionType.FOLD:
                     foldAction = action;
+                    break;
+                case ActionType.RAISE:
+                    raiseAction = action;
                     break;
                 default:
                     break;
@@ -123,14 +128,33 @@ public class PerformanceTestPlayer extends BasicPlayer {
         }
 
         Action action = null;
-        if (callAction != null)
+
+        double randomVal = RandomUtils.nextDouble();
+
+        // 60% chance of check
+        if (checkAction != null && randomVal < 0.60)
+            action = checkAction;
+
+            // 90% chance of call
+        else if (callAction != null && raiseAction != null) {
+            if (randomVal < 0.90)
+                action = callAction;
+            else
+                action = raiseAction;
+        }
+
+        else if (raiseAction != null)
+            action = raiseAction;
+
+        else if (callAction != null)
             action = callAction;
+
         else if (checkAction != null)
             action = checkAction;
+
         else
             action = foldAction;
 
-//        log.debug("{} returning action: {}", getName(), action);
         return action;
     }
 
@@ -138,7 +162,7 @@ public class PerformanceTestPlayer extends BasicPlayer {
     public void connectionToGameServerLost() {
 //        log.info("I've lost my connection to the game server!");
 //        log.info("Connecting for another game!");
-        playAGame();
+        //playAGame();
     }
 
     @Override
@@ -156,12 +180,13 @@ public class PerformanceTestPlayer extends BasicPlayer {
             Thread t = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    PerformanceTestPlayer player = new PerformanceTestPlayer();
+                    PerformanceTournamentTestPlayer player = new PerformanceTournamentTestPlayer();
                     player.playAGame();
                 }
             });
 
             t.start();
+            log.info("Started player {}", i);
 
             try {
                 Thread.sleep(1200);
