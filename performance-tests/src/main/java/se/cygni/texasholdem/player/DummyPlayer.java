@@ -8,6 +8,7 @@ import se.cygni.texasholdem.communication.message.event.PlayIsStartedEvent;
 import se.cygni.texasholdem.communication.message.event.TableIsDoneEvent;
 import se.cygni.texasholdem.communication.message.request.ActionRequest;
 import se.cygni.texasholdem.game.Action;
+import se.cygni.texasholdem.game.ActionType;
 import se.cygni.texasholdem.game.Room;
 import se.cygni.texasholdem.game.exception.GameException;
 
@@ -94,13 +95,13 @@ public class DummyPlayer extends BasicPlayer {
 
         for (final Action action : request.getPossibleActions()) {
             switch (action.getActionType()) {
-                case ActionType.CALL:
+                case CALL:
                     callAction = action;
                     break;
-                case ActionType.CHECK:
+                case CHECK:
                     checkAction = action;
                     break;
-                case ActionType.FOLD:
+                case FOLD:
                     foldAction = action;
                     break;
                 default:

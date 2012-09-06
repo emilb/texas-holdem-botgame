@@ -8,6 +8,22 @@
     <title>Cygni Texas Hold'em</title>
 
     <%@ include file="/WEB-INF/views/includes/head.jsp" %>
+
+    <script>
+        function loadTournament(id) {
+            clearTimeout(reloadTimer);
+
+            $.ajax({
+                type: "GET",
+                url: "/tournament/subview?id=" + id,
+                success: function(response) {
+                    $("#tournament_status").html( response );
+                }
+            });
+        }
+
+        var reloadTimer;
+    </script>
 </head>
 <body>
 
@@ -30,7 +46,9 @@
                             <c:forEach var="tournamentLog" items="${tournamentList}">
                             <tr>
                                 <td>${tournamentLog.tournamentCounter}</td>
-                                <td><a href="?id=${tournamentLog.id}">${tournamentLog.createdDate} (players: ${fn:length(tournamentLog.playerRanking)})</a></td>
+                                <td><a href="#" onclick="loadTournament('${tournamentLog.id}');">
+                                        ${tournamentLog.createdDate} (players: ${fn:length(tournamentLog.playerRanking)})
+                                    </a></td>
                             </tr>
                             </c:forEach>
                         </tbody>
@@ -39,7 +57,7 @@
             </div>
             <!--/span-->
 
-            <div class="span9">
+            <div class="span9" id="tournament_status">
 
                     <h2>Tournament #${tournamentCurrent.tournamentCounter}</h2>
 

@@ -96,8 +96,6 @@ public class PerformanceTournamentTestPlayer extends BasicPlayer {
         } else {
             lastNewGame = System.currentTimeMillis();
         }
-
-//        log.info("Play is starting. My table id is: " + event.getTableId());
     }
 
     @Override
@@ -110,16 +108,16 @@ public class PerformanceTournamentTestPlayer extends BasicPlayer {
 
         for (final Action action : request.getPossibleActions()) {
             switch (action.getActionType()) {
-                case ActionType.CALL:
+                case CALL:
                     callAction = action;
                     break;
-                case ActionType.CHECK:
+                case CHECK:
                     checkAction = action;
                     break;
-                case ActionType.FOLD:
+                case FOLD:
                     foldAction = action;
                     break;
-                case ActionType.RAISE:
+                case RAISE:
                     raiseAction = action;
                     break;
                 default:

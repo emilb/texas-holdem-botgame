@@ -8,6 +8,13 @@ import se.cygni.texasholdem.game.PlayerShowDown;
 
 import java.util.Formatter;
 
+/**
+ * A convenience class to extend if you don't want to implement the whole
+ * Player interface. Most methods just log at DEBUG level what event was
+ * received.
+ *
+ * @see Player
+ */
 public abstract class BasicPlayer implements Player {
 
     private static Logger log = LoggerFactory
@@ -15,12 +22,12 @@ public abstract class BasicPlayer implements Player {
 
     @Override
     public void serverIsShuttingDown(final ServerIsShuttingDownEvent event) {
-
+        log.debug("Server is shutting down");
     }
 
     @Override
     public void onPlayIsStarted(final PlayIsStartedEvent event) {
-
+       log.debug("Play is started");
     }
 
     @Override
@@ -40,7 +47,6 @@ public abstract class BasicPlayer implements Player {
             final CommunityHasBeenDealtACardEvent event) {
 
         log.debug("Community got a card: {}", event.getCard());
-
     }
 
     @Override
@@ -65,42 +71,36 @@ public abstract class BasicPlayer implements Player {
     public void onPlayerCalled(final PlayerCalledEvent event) {
 
         log.debug("{} called with amount {}", event.getPlayer().getName(), event.getCallBet());
-
     }
 
     @Override
     public void onPlayerRaised(final PlayerRaisedEvent event) {
 
         log.debug("{} raised with bet {}", event.getPlayer().getName(), event.getRaiseBet());
-
     }
 
     @Override
     public void onTableIsDone(TableIsDoneEvent event) {
 
         log.debug("Table is done!");
-
     }
 
     @Override
     public void onPlayerWentAllIn(final PlayerWentAllInEvent event) {
 
         log.debug("{} went all in with amount {}", event.getPlayer().getName(), event.getAllInAmount());
-
     }
 
     @Override
     public void onPlayerChecked(final PlayerCheckedEvent event) {
 
         log.debug("{} checked", event.getPlayer().getName());
-
     }
 
     @Override
     public void onYouWonAmount(final YouWonAmountEvent event) {
 
         log.debug("I, {}, won: {}", getName(), event.getWonAmount());
-
     }
 
     @Override
@@ -133,16 +133,19 @@ public abstract class BasicPlayer implements Player {
     @Override
     public void onPlayerQuit(final PlayerQuitEvent event) {
 
+        log.debug("Player {} has quit", event.getPlayer());
     }
 
     @Override
     public void connectionToGameServerLost() {
 
+        log.debug("Lost connection to game server");
     }
 
     @Override
     public void connectionToGameServerEstablished() {
 
+        log.debug("Connection to game server established");
     }
 
 }

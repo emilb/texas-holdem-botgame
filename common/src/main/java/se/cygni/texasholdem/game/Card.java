@@ -9,8 +9,6 @@ import se.cygni.texasholdem.game.definitions.Suit;
 import java.util.EnumMap;
 import java.util.Map;
 
-//@JsonSerialize(using = CardSerializer.class)
-//@JsonDeserialize(using = CardDeserializer.class)
 public class Card {
 
     private final Rank rank;

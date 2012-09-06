@@ -16,10 +16,10 @@
 
 <c:set var="ctx" value="${pageContext['request'].contextPath}"/>
 
-<spring:url scope="page" var="jqueryJavascriptUrl" value="/resources/js/jquery-1.7.1.js"/>
+<spring:url scope="page" var="jqueryJavascriptUrl" value="/resources/js/jquery-1.8.1.min.js"/>
 <spring:url scope="page" var="jqueryTmplJavascriptUrl" value="/resources/js/jquery.tmpl.min.js"/>
 <spring:url scope="page" var="prettifyJavascriptUrl" value="/resources/js/prettify/prettify.js"/>
-<spring:url scope="page" var="bootstrapUrl" value="/resources/js/bootstrap.js"/>
-<spring:url scope="page" var="bootstrapCssUrl" value="/resources/css/bootstrap.css"/>
+<spring:url scope="page" var="bootstrapUrl" value="/resources/js/bootstrap.min.js"/>
+<spring:url scope="page" var="bootstrapCssUrl" value="/resources/css/bootstrap.min.css"/>
 <spring:url scope="page" var="prettifyCssUrl" value="/resources/css/prettify.css"/>
-<spring:url scope="page" var="bootstrapResponsiveCssUrl" value="/resources/css/bootstrap-responsive.css"/>
+<spring:url scope="page" var="bootstrapResponsiveCssUrl" value="/resources/css/bootstrap-responsive.min.css"/>

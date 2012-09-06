@@ -10,21 +10,6 @@
     		 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 	    	 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-    <context:component-scan base-package="se.cygni"/>
-
-    <!-- Configures the @Controller programming model -->
-    <mvc:annotation-driven />
-
-    <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
-    <mvc:resources mapping="/resources/**" location="/resources/"/>
-    <mvc:resources mapping="/favicon.ico" location="/resources/img/favicon.ico"/>
-
-    <!-- Resolves view names to protected .jsp resources within the /WEB-INF/views directory -->
-    <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <beans:property name="prefix" value="/WEB-INF/views/" />
-        <beans:property name="suffix" value=".jsp" />
-    </beans:bean>
-
     <sec:http auto-config="true">
         <sec:intercept-url pattern="/tournament*" access="ROLE_ADMIN"/>
         <sec:http-basic/>
@@ -33,7 +18,8 @@
     <sec:authentication-manager>
         <sec:authentication-provider>
             <sec:user-service>
-                <sec:user name="emil" password="123456" authorities="ROLE_ADMIN"/>
+                <sec:user name="emil" password="lime" authorities="ROLE_ADMIN"/>
+                <sec:user name="jonas" password="sanoj" authorities="ROLE_ADMIN"/>
             </sec:user-service>
         </sec:authentication-provider>
     </sec:authentication-manager>
