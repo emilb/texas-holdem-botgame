@@ -35,7 +35,7 @@
                 <div class="well">
 
                     <form class="form-horizontal">
-                    <div class="span3">
+                    <div class="span4">
                         <div class="control-group">
                             <label class="control-label" for="inputTable">Table id</label>
                             <div class="controls">
@@ -47,7 +47,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="span3">
+                    <div class="span4">
                         <div class="control-group">
                             <label class="control-label" for="inputGameRound">Game round</label>
                             <div class="controls">
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="span3">
+                    <div class="span4">
                         <button type="button" class="btn btn-primary" id="btn_update">Update</button>
                     </div>
 
