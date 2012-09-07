@@ -114,6 +114,7 @@ $(function () {
         var room = $('#room').val();
         player = pokerPlayer(name); // från pokerPlayer.js
         client.register(player, room);
+        $('#button').attr('disabled', 'disabled');
     });
 
 

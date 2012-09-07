@@ -24,11 +24,11 @@
                 <div class="well well-large">
                     <h2>Getting started with a Java client</h2>
                     <p>First download the example project:
-                        <a href="http://192.168.10.100/download/texas-holdem-java-client.zip">texas-holdem-java-client.zip</a>
+                        <a href="/download/texas-holdem-java-client.zip">texas-holdem-java-client.zip</a>
                     </p>
                     <p>
                         Extract the zip and import in your favorite IDE. If you are missing any dependencies download
-                        this maven <a href="http://192.168.10.100/download/settings.xml">settings.xml</a> and place
+                        this maven <a href="/download/settings.xml">settings.xml</a> and place
                         it in ~/.m2.
                     </p>
                     <p>
@@ -130,7 +130,7 @@ public class SimplestPossibleBot extends BasicPlayer {
                 <div class="well well-large">
                     <h2>Getting started with a JavaScript client</h2>
                     <p>First download the example project:
-                        <a href="http://192.168.10.100/download/texas-holdem-web-client.zip">texas-holdem-web-client.zip</a>
+                        <a href="/download/texas-holdem-web-client.zip">texas-holdem-web-client.zip</a>
                     </p>
                     <p>Extract the zip and open a terminal window and run:</p>
                     <pre class="prettyprint">

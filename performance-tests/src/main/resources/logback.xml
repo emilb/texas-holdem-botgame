@@ -10,8 +10,8 @@
         </encoder>
     </appender>
 
-    <logger name="org.jboss" level="debug"/>
-    <logger name="se" level="DEBUG"/>
+    <logger name="org.jboss" level="INFO"/>
+    <logger name="se" level="INFO"/>
     <root level="WARN">
         <appender-ref ref="STDOUT"/>
     </root>

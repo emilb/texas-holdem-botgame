@@ -219,8 +219,8 @@ public class WebPlayerClient extends SimpleChannelHandler {
                 texasEventJson = TexasMessageParser.encodeMessage(message);
                 respondAndFlush(texasEventJson);
             } catch (Exception e) {
-                // TODO felhantering
-                throw new RuntimeException("Error on forwarding TexasEvent to client", e);
+                log.warn("Failed to transfer message to web client. Disconnecting.");
+                disconnect();
             }
             return;
         }
@@ -234,8 +234,8 @@ public class WebPlayerClient extends SimpleChannelHandler {
                 String actionRequestJson = TexasMessageParser.encodeMessage(message);
                 respondAndFlush(actionRequestJson);
             } catch (IOException e) {
-                // TODO felhantering
-                throw new RuntimeException("Error on forwarding ActionRequest to client", e);
+                log.warn("Failed to transfer message to web client. Disconnecting.");
+                disconnect();
             }
         }
 
@@ -264,8 +264,19 @@ public class WebPlayerClient extends SimpleChannelHandler {
 //        }
     }
 
+    private void disconnect() {
+        try {
+            channel.disconnect();
+            atmosphereResource.session().invalidate();
+        } catch (Exception e) { }
+    }
 
     private void respondAndFlush(String jsonResponse) throws IOException {
+        if (atmosphereResource.isCancelled()) {
+            log.info("My web client is gone. Terminating poker server session");
+            disconnect();
+            return;
+        }
         atmosphereResource.getResponse().getWriter().write(jsonResponse);
         atmosphereResource.getResponse().getWriter().flush();
     }

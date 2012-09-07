@@ -69,7 +69,6 @@ public class TournamentController {
 
     @RequestMapping(value = "/tournament/subview", method = RequestMethod.GET)
     public String updateSubview(@RequestParam(value = "id", required = false) String tournamentId, Locale locale, Model model) {
-        log.info("Rendering subview");
         TournamentLog latest = null;
 
         if (tournamentId != null) {

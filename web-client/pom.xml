@@ -36,7 +36,7 @@
                         <!--
                         <systemProperty>
                             <name>remote.host</name>
-                            <value>doot.se</value>
+                            <value>192.168.10.192</value>
                         </systemProperty>
                         <systemProperty>
                             <name>remote.port</name>
