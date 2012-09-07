@@ -76,7 +76,7 @@
                             <descriptors>
                                 <descriptor>src/main/assembly/kit.xml</descriptor>
                             </descriptors>
-                            <finalName>${pom.artifactId}-${pom.version}</finalName>
+                            <finalName>${project.artifactId}-${project.version}</finalName>
                             <outputDirectory>target</outputDirectory>
                         </configuration>
                     </execution>
