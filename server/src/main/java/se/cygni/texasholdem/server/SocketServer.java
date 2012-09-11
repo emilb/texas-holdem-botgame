@@ -107,6 +107,7 @@ public class SocketServer {
             super.messageReceived(context, e);
 
             String message = (String) e.getMessage();
+            System.out.println(message);
             receiver.onRequest(context, TexasMessageParser.decodeMessage(message));
         }
     }
