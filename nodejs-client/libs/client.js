@@ -8,7 +8,7 @@ var client = new net.Socket();
 client.connect(PORT, HOST, function() {
 
     console.log('CONNECTED TO: ' + HOST + ':' + PORT);
-    // Write a message to the socket as soon as the client is connected, the server will receive it as message from the client
+    // okidoki Write a message to the socket as soon as the client is connected, the server will receive it as message from the client
     client.write('{"type":"se.cygni.texasholdem.communication.message.request.RegisterForPlayRequest","sessionId":null,"requestId":"39b9fda8-8807-4ac7-aa22-95fab0783ac6","name":"nodejs","room":"TRAINING"}_-^emil^-_');
 
 });
