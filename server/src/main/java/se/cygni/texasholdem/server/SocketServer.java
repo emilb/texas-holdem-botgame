@@ -5,6 +5,9 @@ import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBuffers;
 import org.jboss.netty.channel.*;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
+import org.jboss.netty.handler.codec.compression.ZlibDecoder;
+import org.jboss.netty.handler.codec.compression.ZlibEncoder;
+import org.jboss.netty.handler.codec.compression.ZlibWrapper;
 import org.jboss.netty.handler.codec.frame.DelimiterBasedFrameDecoder;
 import org.jboss.netty.handler.codec.string.StringDecoder;
 import org.jboss.netty.handler.codec.string.StringEncoder;
@@ -61,6 +64,8 @@ public class SocketServer {
         bootstrap.setPipelineFactory(new ChannelPipelineFactory() {
             public ChannelPipeline getPipeline() throws Exception {
                 return Channels.pipeline(
+                        new ZlibEncoder(ZlibWrapper.GZIP),
+                        new ZlibDecoder(ZlibWrapper.GZIP),
                         new DelimiterBasedFrameDecoder(4096, true, new ChannelBuffer[]{
                                 ChannelBuffers.wrappedBuffer(JsonDelimiter.delimiter())}),
                         new StringDecoder(CharsetUtil.UTF_8),
@@ -107,7 +112,6 @@ public class SocketServer {
             super.messageReceived(context, e);
 
             String message = (String) e.getMessage();
-            System.out.println(message);
             receiver.onRequest(context, TexasMessageParser.decodeMessage(message));
         }
     }
