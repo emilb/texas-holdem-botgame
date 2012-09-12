@@ -30,16 +30,18 @@ public class GameUtil {
         for (int currIx = ix + 1; currIx < players.size(); currIx++) {
             final BotPlayer nextPlayer = players.get(currIx);
             if ((pot != null && pot.isAbleToBet(nextPlayer)) ||
-                    (pot == null && playerHasChips(nextPlayer)))
+                    (pot == null && playerHasChips(nextPlayer))) {
                 return nextPlayer;
+            }
         }
 
         // Didn't find a player, start from beginning
         for (int currIx = 0; currIx < ix + 1; currIx++) {
             final BotPlayer nextPlayer = players.get(currIx);
             if ((pot != null && pot.isAbleToBet(nextPlayer)) ||
-                    (pot == null && playerHasChips(nextPlayer)))
+                    (pot == null && playerHasChips(nextPlayer))) {
                 return nextPlayer;
+            }
         }
 
         return null;
