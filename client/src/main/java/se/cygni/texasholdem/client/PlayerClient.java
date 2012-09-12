@@ -110,6 +110,8 @@ public class PlayerClient extends SimpleChannelHandler {
         };
         ClientBootstrap bootstrap = new ClientBootstrap(channelFactory);
         bootstrap.setPipelineFactory(pipelineFactory);
+        bootstrap.setOption("child.tcpNoDelay", true);
+        bootstrap.setOption("child.keepAlive", true);
 
         InetSocketAddress addressToConnectTo = new InetSocketAddress(serverHost, serverPort);
         ChannelFuture cf = bootstrap.connect(addressToConnectTo);
