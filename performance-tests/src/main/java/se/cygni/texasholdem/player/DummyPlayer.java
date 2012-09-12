@@ -17,7 +17,7 @@ public class DummyPlayer extends BasicPlayer {
     private static Logger log = LoggerFactory
             .getLogger(DummyPlayer.class);
 
-    private static final String DEFAULT_HOST = "localhost";
+    private static final String DEFAULT_HOST = "poker.cygni.se";
     private static final int DEFAULT_PORT = 4711;
 
     private static final String HOST_PROPERTY = "host";

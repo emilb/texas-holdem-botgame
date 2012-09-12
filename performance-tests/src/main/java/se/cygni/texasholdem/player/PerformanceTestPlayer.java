@@ -20,7 +20,7 @@ public class PerformanceTestPlayer extends BasicPlayer {
     private static Logger log = LoggerFactory
             .getLogger(PerformanceTestPlayer.class);
 
-    private static final String DEFAULT_HOST = "localhost";
+    private static final String DEFAULT_HOST = "poker.cygni.se";
     private static final int DEFAULT_PORT = 4711;
     private static final String DEFAULT_NAME = "perftest";
     private static final int DEFAULT_NOOF_PLAYERS = 3;

@@ -258,7 +258,10 @@ public class PlayerClient extends SimpleChannelHandler {
             public void run() {
                 if (!channel.isConnected() || !channel.isOpen()) {
                     cancel();
-                    channel.disconnect();
+                    try {
+                        channel.disconnect();
+                    } catch (Exception e) {
+                    }
                     player.connectionToGameServerLost();
                 }
             }

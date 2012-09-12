@@ -77,6 +77,9 @@ public class SocketServer {
             ;
         });
 
+        bootstrap.setOption("child.tcpNoDelay", true);
+        bootstrap.setOption("child.keepAlive", true);
+
         bootstrap.bind(new InetSocketAddress("0.0.0.0", systemSettings.getPort()));
 
         log.info("Poker socket server listening on port {}", systemSettings.getPort());
