@@ -23,7 +23,7 @@ public class PerformanceTestPlayer extends BasicPlayer {
     private static final String DEFAULT_HOST = "poker.cygni.se";
     private static final int DEFAULT_PORT = 4711;
     private static final String DEFAULT_NAME = "perftest";
-    private static final int DEFAULT_NOOF_PLAYERS = 3;
+    private static final int DEFAULT_NOOF_PLAYERS = 25;
 
     private static final AtomicInteger counter = new AtomicInteger(0);
 
@@ -164,7 +164,7 @@ public class PerformanceTestPlayer extends BasicPlayer {
             t.start();
 
             try {
-                Thread.sleep(1200);
+                Thread.sleep(75);
             } catch (Exception w) {}
         }
 
