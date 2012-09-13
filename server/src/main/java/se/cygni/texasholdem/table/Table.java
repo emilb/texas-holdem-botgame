@@ -118,7 +118,7 @@ public class Table implements Runnable {
     }
 
     public void stopGame() {
-         stopTable = true;
+        stopTable = true;
     }
 
     protected void notifyPlayersOfTableIsDone() {
@@ -211,18 +211,24 @@ public class Table implements Runnable {
     @Override
     public boolean equals(final Object obj) {
 
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         final Table other = (Table) obj;
         if (tableId == null) {
-            if (other.tableId != null)
+            if (other.tableId != null) {
                 return false;
-        } else if (!tableId.equals(other.tableId))
+            }
+        }
+        else if (!tableId.equals(other.tableId)) {
             return false;
+        }
         return true;
     }
 

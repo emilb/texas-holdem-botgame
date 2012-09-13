@@ -19,13 +19,13 @@ public class TableUtil {
             return partitionedPlayers;
         }
 
-        int noofTablesNeeded = (int)Math.ceil((double)players.size() / (double)Table.MAX_NOOF_PLAYERS);
+        int noofTablesNeeded = (int) Math.ceil((double) players.size() / (double) Table.MAX_NOOF_PLAYERS);
 
         int minPlayersPerTable = players.size() / noofTablesNeeded;
 
         for (int i = 0; i < noofTablesNeeded; i++) {
             List<BotPlayer> playersForCurrentTable = new ArrayList<BotPlayer>();
-            playersForCurrentTable.addAll(shuffledPlayers.subList(i*minPlayersPerTable, i*minPlayersPerTable + minPlayersPerTable));
+            playersForCurrentTable.addAll(shuffledPlayers.subList(i * minPlayersPerTable, i * minPlayersPerTable + minPlayersPerTable));
 
             partitionedPlayers.add(playersForCurrentTable);
         }

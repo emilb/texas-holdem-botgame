@@ -26,8 +26,9 @@ public class PotSplitter {
             final BotPlayer player,
             final long amount) {
 
-        if (amount == 0)
+        if (amount == 0) {
             return;
+        }
 
         playersWinAmount.add(new PlayerWinAmount(player, amount));
 
@@ -40,8 +41,9 @@ public class PotSplitter {
      */
     private void calculateSplit() {
 
-        if (playersWinAmount.size() == 0)
+        if (playersWinAmount.size() == 0) {
             return;
+        }
 
         calculatedPlayerWinAmount.clear();
 
@@ -104,8 +106,9 @@ public class PotSplitter {
      */
     private void resetCalculatedWin() {
 
-        for (final PlayerWinAmount pwa : playersWinAmount)
+        for (final PlayerWinAmount pwa : playersWinAmount) {
             pwa.calculatedAmount = pwa.amount;
+        }
     }
 
     /**
@@ -113,12 +116,14 @@ public class PotSplitter {
      * registered in this split 0 (zero) is returned.
      *
      * @param player
+     *
      * @return The splitted win amount for player
      */
     public long getWinAmountFor(final BotPlayer player) {
 
-        if (!calculatedPlayerWinAmount.containsKey(player))
+        if (!calculatedPlayerWinAmount.containsKey(player)) {
             return 0;
+        }
 
         return calculatedPlayerWinAmount.get(player);
     }

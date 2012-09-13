@@ -16,9 +16,11 @@ public class Deck {
 
     // Initialize prototype deck
     static {
-        for (final Suit suit : Suit.values())
-            for (final Rank rank : Rank.values())
+        for (final Suit suit : Suit.values()) {
+            for (final Rank rank : Rank.values()) {
                 protoDeck.add(Card.valueOf(rank, suit));
+            }
+        }
     }
 
     private Deck(final List<Card> cards) {

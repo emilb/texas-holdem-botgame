@@ -5,7 +5,7 @@ var PORT = 4711;
 var jsonDelimiter = '_-^emil^-_';
 
 var client = new net.Socket();
-client.connect(PORT, HOST, function() {
+client.connect(PORT, HOST, function () {
 
     console.log('CONNECTED TO: ' + HOST + ':' + PORT);
     // Last time! Write a message to the socket as soon as the client is connected, the server will receive it as message from the client
@@ -15,7 +15,7 @@ client.connect(PORT, HOST, function() {
 
 // Add a 'data' event handler for the client socket
 // data is what the server sent to this socket
-client.on('data', function(data) {
+client.on('data', function (data) {
     console.log('data: ' + data);
 
     var d1 = data.toString();
@@ -25,10 +25,10 @@ client.on('data', function(data) {
 });
 
 // Add a 'close' event handler for the client socket
-client.on('close', function() {
+client.on('close', function () {
     console.log('Connection closed');
 });
 
-client.on('error', function() {
+client.on('error', function () {
     console.log('Error');
 })

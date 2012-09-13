@@ -21,70 +21,71 @@
 
 <div class="container">
 
-        <div class="hero-unit">
-            <h1>Server Status</h1>
+    <div class="hero-unit">
+        <h1>Server Status</h1>
 
-            <p>Shows some statistics and connected players</p>
-        </div>
+        <p>Shows some statistics and connected players</p>
+    </div>
 
-        <div class="row">
-            <div class="span6">
-                <div class="well well-large">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th colspan="2">Statistics</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>Uptime</td>
-                            <td>${uptime}</td>
-                        </tr>
-                        <tr>
-                            <td>Connected players</td>
-                            <td>${noofPlayers}</td>
-                        </tr>
-                        <tr>
-                            <td>Total clients served</td>
-                            <td>${totalNoofConnections}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+    <div class="row">
+        <div class="span6">
+            <div class="well well-large">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th colspan="2">Statistics</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Uptime</td>
+                        <td>${uptime}</td>
+                    </tr>
+                    <tr>
+                        <td>Connected players</td>
+                        <td>${noofPlayers}</td>
+                    </tr>
+                    <tr>
+                        <td>Total clients served</td>
+                        <td>${totalNoofConnections}</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-            <!--/span-->
-
-            <div class="span6">
-                <div class="well well-large">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th colspan="2">Players</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach var="player" items="${players}">
-                            <tr>
-                                <td>${player.name}</td>
-                                <td>$ ${player.chipCount}</td>
-                            </tr>
-                        </c:forEach>
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <!--/span-->
         </div>
+        <!--/span-->
 
-<hr>
+        <div class="span6">
+            <div class="well well-large">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th colspan="2">Players</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="player" items="${players}">
+                        <tr>
+                            <td>${player.name}</td>
+                            <td>$ ${player.chipCount}</td>
+                        </tr>
+                    </c:forEach>
 
-<footer>
-    <p> &copy; Cygni AB 2012</p>
-</footer>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--/span-->
+    </div>
 
-</div><!--/.fluid-container-->
+    <hr>
+
+    <footer>
+        <p> &copy; Cygni AB 2012</p>
+    </footer>
+
+</div>
+<!--/.fluid-container-->
 
 
 </body>

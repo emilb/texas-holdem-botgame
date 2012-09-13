@@ -46,8 +46,9 @@ public class PhilHellmuthPlayer extends TrainingPlayer {
             }
         }
 
-        if (event.getBigBlindPlayer().getName().equals(getName()))
+        if (event.getBigBlindPlayer().getName().equals(getName())) {
             amIBigBlind = true;
+        }
 
     }
 
@@ -122,26 +123,32 @@ public class PhilHellmuthPlayer extends TrainingPlayer {
         PokerHandUtil handUtil = new PokerHandUtil(communityCards, myCards);
         PokerHand currentPokerHand = handUtil.getBestHand().getPokerHand();
 
-        if (currentPokerHand.getOrderValue() > 5 && allInAction != null)
+        if (currentPokerHand.getOrderValue() > 5 && allInAction != null) {
             return allInAction;
+        }
 
         // Always fold if unranked start
-        if (getMyCardsTopTenRank() == 0 && currentPokerHand == PokerHand.HIGH_HAND && !amIBigBlind)
+        if (getMyCardsTopTenRank() == 0 && currentPokerHand == PokerHand.HIGH_HAND && !amIBigBlind) {
             return foldAction;
+        }
 
         if (raiseAction != null && (
                 (currentPokerHand.getOrderValue() >= 3) ||
-                        (getMyCardsTopTenRank() > 5)))
+                        (getMyCardsTopTenRank() > 5))) {
             return raiseAction;
+        }
 
-        if (amIBigBlind && checkAction != null)
+        if (amIBigBlind && checkAction != null) {
             return checkAction;
+        }
 
-        if (checkAction != null)
+        if (checkAction != null) {
             return checkAction;
+        }
 
-        if (callAction != null)
+        if (callAction != null) {
             return callAction;
+        }
 
         return foldAction;
     }
@@ -154,44 +161,54 @@ public class PhilHellmuthPlayer extends TrainingPlayer {
     private int getMyCardsTopTenRank() {
 
         // 10: A - A
-        if (doMyCardsContain(Rank.ACE, Rank.ACE))
+        if (doMyCardsContain(Rank.ACE, Rank.ACE)) {
             return 10;
+        }
 
         //  9: K - K
-        if (doMyCardsContain(Rank.KING, Rank.KING))
+        if (doMyCardsContain(Rank.KING, Rank.KING)) {
             return 9;
+        }
 
         //  8: Q - Q
-        if (doMyCardsContain(Rank.QUEEN, Rank.QUEEN))
+        if (doMyCardsContain(Rank.QUEEN, Rank.QUEEN)) {
             return 8;
+        }
 
         //  7: A - K
-        if (doMyCardsContain(Rank.ACE, Rank.KING))
+        if (doMyCardsContain(Rank.ACE, Rank.KING)) {
             return 7;
+        }
 
         //  6: J - J
-        if (doMyCardsContain(Rank.JACK, Rank.JACK))
+        if (doMyCardsContain(Rank.JACK, Rank.JACK)) {
             return 6;
+        }
 
         //  5: 10 - 10
-        if (doMyCardsContain(Rank.TEN, Rank.TEN))
+        if (doMyCardsContain(Rank.TEN, Rank.TEN)) {
             return 5;
+        }
 
         //  4: 9 - 9
-        if (doMyCardsContain(Rank.NINE, Rank.NINE))
+        if (doMyCardsContain(Rank.NINE, Rank.NINE)) {
             return 4;
+        }
 
         //  3: 8 - 8
-        if (doMyCardsContain(Rank.EIGHT, Rank.EIGHT))
+        if (doMyCardsContain(Rank.EIGHT, Rank.EIGHT)) {
             return 3;
+        }
 
         //  2: A - Q
-        if (doMyCardsContain(Rank.ACE, Rank.QUEEN))
+        if (doMyCardsContain(Rank.ACE, Rank.QUEEN)) {
             return 2;
+        }
 
         //  1: 7 - 7
-        if (doMyCardsContain(Rank.SEVEN, Rank.SEVEN))
+        if (doMyCardsContain(Rank.SEVEN, Rank.SEVEN)) {
             return 1;
+        }
 
         return 0;
     }

@@ -27,7 +27,7 @@ public class ResponseLock {
         if (!StringUtils.equals(requestId, response.getRequestId())) {
             throw new IllegalArgumentException("Response has wrong request ID");
         }
-        
+
         this.response = response;
     }
 
@@ -44,18 +44,26 @@ public class ResponseLock {
     @Override
     public boolean equals(final Object obj) {
 
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
+
         final ResponseLock other = (ResponseLock) obj;
         if (requestId == null) {
-            if (other.requestId != null)
+            if (other.requestId != null) {
                 return false;
-        } else if (!requestId.equals(other.requestId))
+            }
+        }
+        else if (!requestId.equals(other.requestId)) {
             return false;
+        }
+
         return true;
     }
 }

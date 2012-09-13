@@ -35,11 +35,10 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Client for web player.
- * 
+ * <p/>
  * TODO: merge common code with PlayerClient
- * 
- * @author jonas
  *
+ * @author jonas
  */
 public class WebPlayerClient extends SimpleChannelHandler {
 
@@ -59,11 +58,11 @@ public class WebPlayerClient extends SimpleChannelHandler {
     private Channel channel;
     private boolean isConnected = false;
     private String playerName;
-	private Room room;
+    private Room room;
 
     public WebPlayerClient(final String playerName, final Room room, final AtmosphereResource atmosphereResource) throws Exception {
         this.playerName = playerName;
-		this.room = room;
+        this.room = room;
         responseManager = new SyncMessageResponseManager();
         this.atmosphereResource = atmosphereResource;
         connect();
@@ -99,12 +98,12 @@ public class WebPlayerClient extends SimpleChannelHandler {
         cf.awaitUninterruptibly(2000, TimeUnit.MILLISECONDS);
         cf.addListener(new ChannelFutureListener() {
             public void operationComplete(ChannelFuture future) throws Exception {
-            // chek to see if we succeeded
-            if (future.isSuccess()) {
+                // chek to see if we succeeded
+                if (future.isSuccess()) {
 
-                isConnected = true;
-                channel = future.getChannel();
-            }
+                    isConnected = true;
+                    channel = future.getChannel();
+                }
             }
         });
 
@@ -173,8 +172,9 @@ public class WebPlayerClient extends SimpleChannelHandler {
                 Thread.sleep(5);
             } catch (InterruptedException e) {
             }
-            if (System.currentTimeMillis() > startTime + CONNECT_WAIT_MS)
+            if (System.currentTimeMillis() > startTime + CONNECT_WAIT_MS) {
                 throw new RuntimeException("Connection to server timed out, is it alive?");
+            }
         }
     }
 
@@ -195,8 +195,9 @@ public class WebPlayerClient extends SimpleChannelHandler {
             }
         }
 
-        if (lock.getResponse() == null)
+        if (lock.getResponse() == null) {
             throw new RuntimeException("Did not get response in time");
+        }
 
         return lock.getResponse();
     }
@@ -242,7 +243,7 @@ public class WebPlayerClient extends SimpleChannelHandler {
             final TexasResponse response = (TexasResponse) message;
             final String requestId = response.getRequestId();
 
-            log.info("onEvent: TexasRepsponse: "+message);
+            log.info("onEvent: TexasRepsponse: " + message);
             final ResponseLock lock = responseManager.pop(requestId);
             lock.setResponse(response);
 
@@ -267,7 +268,8 @@ public class WebPlayerClient extends SimpleChannelHandler {
         try {
             channel.disconnect();
             atmosphereResource.session().invalidate();
-        } catch (Exception e) { }
+        } catch (Exception e) {
+        }
     }
 
     private void respondAndFlush(String jsonResponse) throws IOException {

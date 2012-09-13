@@ -14,8 +14,9 @@ public class SyncMessageResponseManager {
 
         final ResponseLock lock = new ResponseLock(requestId);
 
-        if (responseLocks.containsKey(requestId))
+        if (responseLocks.containsKey(requestId)) {
             throw new IllegalArgumentException("Request ID is already in use");
+        }
 
         synchronized (mapLock) {
             responseLocks.put(requestId, lock);
@@ -26,8 +27,9 @@ public class SyncMessageResponseManager {
 
     public ResponseLock pop(final String requestId) {
 
-        if (!responseLocks.containsKey(requestId))
+        if (!responseLocks.containsKey(requestId)) {
             throw new IllegalArgumentException("Unknown Request ID");
+        }
 
         ResponseLock lock = null;
 

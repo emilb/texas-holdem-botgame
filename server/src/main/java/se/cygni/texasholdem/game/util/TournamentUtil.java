@@ -9,8 +9,9 @@ import java.util.List;
 public class TournamentUtil {
 
     public static TournamentLog createTournamentLog(Tournament tournament) {
-        if (tournament == null)
+        if (tournament == null) {
             return null;
+        }
 
         return new TournamentLog(
                 tournament.getTournamentId(),
@@ -24,8 +25,9 @@ public class TournamentUtil {
 
     public static List<TournamentLog> createTournamentLogs(List<Tournament> tournaments) {
         List<TournamentLog> tournamentLogs = new ArrayList<TournamentLog>();
-        for (Tournament t : tournaments)
+        for (Tournament t : tournaments) {
             tournamentLogs.add(createTournamentLog(t));
+        }
 
         return tournamentLogs;
     }

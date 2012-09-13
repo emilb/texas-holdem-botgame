@@ -94,14 +94,16 @@ public class SystemFieldPopulator {
 
         final String val = getStringPropertyFromSystem(property);
 
-        if (StringUtils.isEmpty(val))
+        if (StringUtils.isEmpty(val)) {
             return null;
+        }
 
         final Object[] constants = type.getEnumConstants();
 
         // This enum has no types!
-        if (constants == null || constants.length == 0)
+        if (constants == null || constants.length == 0) {
             return null;
+        }
 
         // Just get the first enum type and use the static method valueOf(..)
         try {
@@ -119,8 +121,9 @@ public class SystemFieldPopulator {
     private Float getFloatPropertyFromSystem(final String property) {
 
         final String val = getStringPropertyFromSystem(property);
-        if (val == null)
+        if (val == null) {
             return null;
+        }
 
         Float floatVal = null;
 
@@ -134,8 +137,9 @@ public class SystemFieldPopulator {
     private Double getDoublePropertyFromSystem(final String property) {
 
         final String val = getStringPropertyFromSystem(property);
-        if (val == null)
+        if (val == null) {
             return null;
+        }
 
         Double doubleVal = null;
 
@@ -164,8 +168,9 @@ public class SystemFieldPopulator {
     private Boolean getBooleanPropertyFromSystem(final String property) {
 
         final String sysVal = System.getProperty(propertyPrefix + property);
-        if (sysVal == null)
+        if (sysVal == null) {
             return null;
+        }
 
         return Boolean.valueOf(sysVal.toLowerCase());
     }

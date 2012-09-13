@@ -122,8 +122,9 @@ public class SessionManagerRemote implements SessionManager {
         ChannelHandlerContext context = sessionChannelHandlerContextMap.remove(sessionId);
         sessionPlayerMap.remove(sessionId);
 
-        if (context == null)
+        if (context == null) {
             return;
+        }
 
         try {
             context.getChannel().disconnect();
@@ -216,8 +217,9 @@ public class SessionManagerRemote implements SessionManager {
         List<Tournament> finishedTournaments = new ArrayList<Tournament>();
 
         for (Tournament tournament : tournaments) {
-            if (tournament.tournamentHasStarted() || tournament.tournamentHasEnded())
+            if (tournament.tournamentHasStarted() || tournament.tournamentHasEnded()) {
                 finishedTournaments.add(tournament);
+            }
         }
 
         return finishedTournaments;
@@ -247,8 +249,9 @@ public class SessionManagerRemote implements SessionManager {
 
     public Tournament getTournament(String id) {
         for (Tournament tournament : tournaments) {
-            if (tournament.getTournamentId().equals(id))
+            if (tournament.getTournamentId().equals(id)) {
                 return tournament;
+            }
         }
 
         return null;
@@ -301,8 +304,9 @@ public class SessionManagerRemote implements SessionManager {
                     }
                 }
 
-                for (BotPlayer player : disconnectedPlayers)
+                for (BotPlayer player : disconnectedPlayers) {
                     eventBus.post(new PlayerQuitEvent(player));
+                }
             }
         }, 50, 500);
         // delay, repeat every ms

@@ -80,8 +80,9 @@ public class TournamentTable extends Table {
         eventBus.post(new TableDoneEvent(this));
 
         int noofActivePlayersLeft = GameUtil.getActivePlayersWithChipsLeft(players).size();
-        if (noofActivePlayersLeft == 1 || noofActivePlayersLeft <= playTillNoofPlayersLeft)
+        if (noofActivePlayersLeft == 1 || noofActivePlayersLeft <= playTillNoofPlayersLeft) {
             room.onTableGameDone(this);
+        }
 
     }
 

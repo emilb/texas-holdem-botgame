@@ -12,7 +12,8 @@ import java.util.List;
 
 public class EventBusUtil {
 
-    private EventBusUtil() {}
+    private EventBusUtil() {
+    }
 
     public static void postToEventBus(
             final EventBus eventBus,
@@ -20,7 +21,7 @@ public class EventBusUtil {
             final BotPlayer... players) {
 
         final List<BotPlayer> recipients = new ArrayList<BotPlayer>();
-        
+
         for (final BotPlayer player : players) {
             recipients.add(player);
         }

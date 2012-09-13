@@ -40,8 +40,9 @@ public class Card {
 
             final Map<Rank, Card> suitTable = new EnumMap<Rank, Card>(
                     Rank.class);
-            for (final Rank rank : Rank.values())
+            for (final Rank rank : Rank.values()) {
                 suitTable.put(rank, new Card(rank, suit));
+            }
 
             table.put(suit, suitTable);
         }
@@ -65,17 +66,22 @@ public class Card {
     @Override
     public boolean equals(final Object obj) {
 
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         final Card other = (Card) obj;
-        if (rank != other.rank)
+        if (rank != other.rank) {
             return false;
-        if (suit != other.suit)
+        }
+        if (suit != other.suit) {
             return false;
+        }
         return true;
     }
 

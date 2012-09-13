@@ -47,23 +47,27 @@ public class BestHand implements Comparable<BestHand> {
     @Override
     public int compareTo(final BestHand other) {
 
-        if (pokerHand.getOrderValue() < other.getPokerHand().getOrderValue())
+        if (pokerHand.getOrderValue() < other.getPokerHand().getOrderValue()) {
             return 1;
+        }
 
-        if (pokerHand.getOrderValue() > other.getPokerHand().getOrderValue())
+        if (pokerHand.getOrderValue() > other.getPokerHand().getOrderValue()) {
             return -1;
+        }
 
         // Must be equal pokerhands, let the one with the highest card win
         for (int i = 0; i < cards.size(); i++) {
             final Card card = cards.get(i);
             final Card otherCard = other.getCards().get(i);
 
-            if (card.getRank() == otherCard.getRank())
+            if (card.getRank() == otherCard.getRank()) {
                 continue;
+            }
 
             if (card.getRank().getOrderValue() < otherCard.getRank()
-                    .getOrderValue())
+                    .getOrderValue()) {
                 return 1;
+            }
 
             return -1;
         }

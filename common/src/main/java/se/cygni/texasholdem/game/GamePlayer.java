@@ -34,12 +34,18 @@ public class GamePlayer {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         GamePlayer player = (GamePlayer) o;
 
-        if (!name.equals(player.name)) return false;
+        if (!name.equals(player.name)) {
+            return false;
+        }
 
         return true;
     }

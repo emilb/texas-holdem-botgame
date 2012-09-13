@@ -49,16 +49,18 @@ public class PerformanceTournamentTestPlayer extends BasicPlayer {
 
     private static String getSystemProperty(String name, String defaultValue) {
         String hostFromSystemProp = System.getProperty(name);
-        if (StringUtils.isEmpty(hostFromSystemProp))
+        if (StringUtils.isEmpty(hostFromSystemProp)) {
             return defaultValue;
+        }
 
         return hostFromSystemProp;
     }
 
     private static int getSystemProperty(String name, int defaultValue) {
         String portFromSystemProp = System.getProperty(name);
-        if (StringUtils.isEmpty(portFromSystemProp))
+        if (StringUtils.isEmpty(portFromSystemProp)) {
             return defaultValue;
+        }
 
         try {
             return Integer.parseInt(portFromSystemProp);
@@ -93,7 +95,8 @@ public class PerformanceTournamentTestPlayer extends BasicPlayer {
             totalLengthOfPlays.addAndGet(System.currentTimeMillis() - lastNewGame);
             lastNewGame = System.currentTimeMillis();
             noofNewPlays.incrementAndGet();
-        } else {
+        }
+        else {
             lastNewGame = System.currentTimeMillis();
         }
     }
@@ -130,28 +133,35 @@ public class PerformanceTournamentTestPlayer extends BasicPlayer {
         double randomVal = RandomUtils.nextDouble();
 
         // 60% chance of check
-        if (checkAction != null && randomVal < 0.60)
+        if (checkAction != null && randomVal < 0.60) {
             action = checkAction;
-
-            // 90% chance of call
-        else if (callAction != null && raiseAction != null) {
-            if (randomVal < 0.90)
-                action = callAction;
-            else
-                action = raiseAction;
         }
 
-        else if (raiseAction != null)
+        // 90% chance of call
+        else if (callAction != null && raiseAction != null) {
+            if (randomVal < 0.90) {
+                action = callAction;
+            }
+            else {
+                action = raiseAction;
+            }
+        }
+
+        else if (raiseAction != null) {
             action = raiseAction;
+        }
 
-        else if (callAction != null)
+        else if (callAction != null) {
             action = callAction;
+        }
 
-        else if (checkAction != null)
+        else if (checkAction != null) {
             action = checkAction;
+        }
 
-        else
+        else {
             action = foldAction;
+        }
 
         return action;
     }
@@ -188,15 +198,17 @@ public class PerformanceTournamentTestPlayer extends BasicPlayer {
 
             try {
                 Thread.sleep(1200);
-            } catch (Exception w) {}
+            } catch (Exception w) {
+            }
         }
 
         final Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                if (noofNewPlays.longValue() < 1)
+                if (noofNewPlays.longValue() < 1) {
                     return;
+                }
 
                 log.info("Noof plays: {}, average game bout time (ms) {}", noofNewPlays.longValue(), totalLengthOfPlays.longValue() / noofNewPlays.longValue());
 

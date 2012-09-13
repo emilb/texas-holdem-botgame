@@ -58,7 +58,8 @@ public class PokerHandRankUtil {
                 final List<BotPlayer> currPos = new ArrayList<BotPlayer>();
                 currPos.add(bestHand.getPlayer());
                 playerRankings.add(currPos);
-            } else if (previousBestHand.compareTo(bestHand) == 0) {
+            }
+            else if (previousBestHand.compareTo(bestHand) == 0) {
                 playerRankings.get(playerRankings.size() - 1).add(
                         bestHand.getPlayer());
             }

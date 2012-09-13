@@ -13,11 +13,11 @@ import java.util.Map.Entry;
 
 /**
  * This ClientEventDispatcher uses reflection to notify a player of incoming events.
- *
+ * <p/>
  * Upon instantiation of this class the target object is analyzed for methods
  * that take an event class as argument (and also has that same method declared
  * in the interface).
- *
+ * <p/>
  * The matching methods are stored in a map for quick lookups.
  *
  * @author emil
@@ -94,6 +94,7 @@ public class ClientEventDispatcher {
      * Returns true if the Method m is also declared in the interface.
      *
      * @param m
+     *
      * @return
      */
     private boolean isDeclaredInInterface(final Method m) {
@@ -104,7 +105,8 @@ public class ClientEventDispatcher {
             if (ifaceMethod != null) {
                 return true;
             }
-        } catch (final Exception e) { }
+        } catch (final Exception e) {
+        }
 
         return false;
     }
@@ -117,8 +119,9 @@ public class ClientEventDispatcher {
      */
     public void onEvent(final TexasEvent event) {
 
-        if (event == null)
+        if (event == null) {
             return;
+        }
 
         final Class<? extends TexasEvent> eventClass = event.getClass();
         log.trace("onEvent, looking for matching method for argument: {}",
@@ -130,7 +133,8 @@ public class ClientEventDispatcher {
             } catch (final Exception e) {
                 log.error("Failed to invoke target method", e);
             }
-        } else {
+        }
+        else {
             log.warn(
                     "Could not dispatch event of type: {}, no matching method found",
                     eventClass.getSimpleName());

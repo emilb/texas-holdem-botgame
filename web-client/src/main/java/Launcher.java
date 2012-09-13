@@ -98,7 +98,7 @@ public final class Launcher {
         // Set remote host and port as system variables
         // ToDo: validate remote host and port
         System.setProperty("remote.host", remoteHost);
-        System.setProperty("remote.port", remotePort+"");
+        System.setProperty("remote.port", remotePort + "");
 
         System.out.println("Starting local web server...");
 
@@ -125,7 +125,8 @@ public final class Launcher {
     private static boolean isHostReachable(String host) {
         try {
             return InetAddress.getByName(host).isReachable(500);
-        } catch (IOException e) { }
+        } catch (IOException e) {
+        }
 
         return false;
     }

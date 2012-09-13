@@ -5,7 +5,7 @@ var pokerClient = function (spec) {
 
     var player = null;
 
-    function validateJson (json) {
+    function validateJson(json) {
         if (!json.type) {
             console.log("JSON must contain type: \n" + jQuery.stringifyJSON(json));
             alert("JSON must contain type: \n" + jQuery.stringifyJSON(json));
@@ -21,7 +21,9 @@ var pokerClient = function (spec) {
         }
 
         return true;
-    };
+    }
+
+    ;
 
     // Below is code that can be re-used -->
 

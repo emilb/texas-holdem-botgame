@@ -19,8 +19,9 @@ public class TexasHoldem {
 
         for (final String arg : args) {
             final String[] propVal = StringUtils.split(arg, '=');
-            if (propVal.length != 2)
+            if (propVal.length != 2) {
                 continue;
+            }
 
             System.setProperty(
                     SystemSettings.PREFIX_PROPERTY + propVal[0],

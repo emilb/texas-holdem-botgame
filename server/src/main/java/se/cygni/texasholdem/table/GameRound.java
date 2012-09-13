@@ -54,8 +54,8 @@ public class GameRound {
                      final List<BotPlayer> players,
                      final BotPlayer dealerPlayer, final long smallBlind,
                      final long bigBlind,
-                     final int  maxNoofTurnsPerState,
-                     final int  maxNoofActionRetries,
+                     final int maxNoofTurnsPerState,
+                     final int maxNoofActionRetries,
                      final EventBus eventBus,
                      final SessionManager sessionManager) {
 
@@ -204,8 +204,8 @@ public class GameRound {
 
         int noofTurns = 1;
         boolean isFirstRound = true;
-        while ( !pot.isCurrentPlayStateBalanced()
-                || (isFirstRound && !pot.isInPlayState(PlayState.PRE_FLOP)) ) {
+        while (!pot.isCurrentPlayStateBalanced()
+                || (isFirstRound && !pot.isInPlayState(PlayState.PRE_FLOP))) {
             for (BotPlayer currentPlayer : playersInOrder) {
                 log.debug("Current player is {}", currentPlayer);
 
@@ -306,7 +306,8 @@ public class GameRound {
                 if (player.getChipAmount() == 0) {
                     log.debug("{} went all in with amount {}", player.getName(), action.getAmount());
                     EventBusUtil.postPlayerWentAllIn(eventBus, player, action.getAmount(), players);
-                } else {
+                }
+                else {
                     log.debug("{} raised with amount {}", player.getName(), action.getAmount());
                     EventBusUtil.postPlayerRaised(eventBus, player, action.getAmount(), players);
                 }

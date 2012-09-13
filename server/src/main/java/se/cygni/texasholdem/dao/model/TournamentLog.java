@@ -65,10 +65,12 @@ public class TournamentLog {
     }
 
     public String getStatus() {
-        if (!tournamentHasStarted)
+        if (!tournamentHasStarted) {
             return "Accepting players";
-        if (tournamentHasStarted && !tournamentHasEnded)
+        }
+        if (tournamentHasStarted && !tournamentHasEnded) {
             return "Running";
+        }
         return "Finished";
     }
 }

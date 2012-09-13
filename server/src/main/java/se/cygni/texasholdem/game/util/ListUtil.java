@@ -16,12 +16,14 @@ import java.util.Map.Entry;
  */
 public class ListUtil {
 
-    private ListUtil() {}
+    private ListUtil() {
+    }
 
     /**
      * Creates a map where cards are organized according to their Rank.
      *
      * @param cards
+     *
      * @return a map where cards are organized according to their Rank
      */
     protected static Map<Rank, List<Card>> getRankDistribution(
@@ -31,7 +33,8 @@ public class ListUtil {
         for (final Card c : cards) {
             if (distribution.containsKey(c.getRank())) {
                 distribution.get(c.getRank()).add(c);
-            } else {
+            }
+            else {
                 final ArrayList<Card> l = new ArrayList<Card>();
                 l.add(c);
                 distribution.put(c.getRank(), l);
@@ -44,6 +47,7 @@ public class ListUtil {
      * Creates a map where cards are organized according to their Suit.
      *
      * @param cards
+     *
      * @return a map where cards are organized according to their Suit
      */
     protected static Map<Suit, List<Card>> getSuitDistribution(
@@ -53,7 +57,8 @@ public class ListUtil {
         for (final Card c : cards) {
             if (distribution.containsKey(c.getSuit())) {
                 distribution.get(c.getSuit()).add(c);
-            } else {
+            }
+            else {
                 final ArrayList<Card> l = new ArrayList<Card>();
                 l.add(c);
                 distribution.put(c.getSuit(), l);
@@ -68,6 +73,7 @@ public class ListUtil {
      *
      * @param first
      * @param second
+     *
      * @return The merge of the lists first and second
      */
     protected static List<Card> merge(
@@ -94,6 +100,7 @@ public class ListUtil {
      *
      * @param target
      * @param remove
+     *
      * @return A copy of the target list with all elements from remove removed.
      */
     protected static List<Card> remove(
@@ -126,6 +133,7 @@ public class ListUtil {
      * @param noof    The max length of the resulting list of cards
      * @param cards
      * @param exclude A list of cards to exclude from the result
+     *
      * @return A descending (by Rank) list of cards
      */
     protected static List<Card> getHighestSortedAndExclude(
@@ -149,6 +157,7 @@ public class ListUtil {
      *
      * @param sort
      * @param cards
+     *
      * @return A new List sorted by Rank och Suit.
      */
     protected static List<Card> sortBy(
@@ -170,6 +179,7 @@ public class ListUtil {
      * Returns: {Ad, 2c, 3s, 4c, 5h}
      *
      * @param cards
+     *
      * @return The longest consecutive sublist of cards found or the empty list
      *         if none found.
      */
@@ -206,8 +216,9 @@ public class ListUtil {
                 // check if it is longer than the previously
                 // known one.
                 if (currStartPos < i - 1
-                        && i - currStartPos > largestConsecutive.size() - 1)
+                        && i - currStartPos > largestConsecutive.size() - 1) {
                     largestConsecutive = sortedCards.subList(currStartPos, i);
+                }
 
                 currStartPos = i;
             }
@@ -234,6 +245,7 @@ public class ListUtil {
      * Returns: {3s, 5d, Jd}
      *
      * @param cards
+     *
      * @return A sorted list of Cards with no duplicate Ranks.
      */
     protected static List<Card> removeDuplicatesByRankAndSortByRank(
@@ -261,7 +273,9 @@ public class ListUtil {
      * @param noof         The minimum number of cards of same rank
      * @param cards        The list of cards available
      * @param excludedRank A rank to exclude from the result
+     *
      * @return A list of cards of noof length of the highest rank.
+     *
      * @see #getHighestOfSameRank(int, List)
      */
     protected static List<Card> getHighestOfSameRankExcluding(
@@ -287,6 +301,7 @@ public class ListUtil {
      *
      * @param noof  The minimum number of cards of same rank
      * @param cards The list of cards available
+     *
      * @return A list of cards of noof length of the highest rank.
      */
     protected static List<Card> getHighestOfSameRank(
@@ -307,8 +322,9 @@ public class ListUtil {
             }
         }
         Collections.sort(result, CardSortBy.SUIT.getComparator());
-        if (result.size() > noof)
+        if (result.size() > noof) {
             result = result.subList(0, noof);
+        }
 
         return result;
     }

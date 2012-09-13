@@ -98,8 +98,9 @@ public class CrazyPlayer extends TrainingPlayer {
     public Action actionRequired(ActionRequest request) {
         final List<ActionTypeWeigth> actionWeights = new ArrayList<ActionTypeWeigth>();
         for (final ActionTypeWeigth w : actionWeight) {
-            if (hasActionType(request.getPossibleActions(), w.getType()))
+            if (hasActionType(request.getPossibleActions(), w.getType())) {
                 actionWeights.add(w);
+            }
         }
 
         Collections.sort(actionWeights);
@@ -111,8 +112,10 @@ public class CrazyPlayer extends TrainingPlayer {
             if (randomNumber < w.getWeight()) {
                 choosenActionType = w.getType();
                 break;
-            } else
+            }
+            else {
                 randomNumber -= w.getWeight();
+            }
         }
 
         Action action = getActionOfType(request.getPossibleActions(),
@@ -133,8 +136,9 @@ public class CrazyPlayer extends TrainingPlayer {
     private int getTotalActionWeight(final List<ActionTypeWeigth> actionWeights) {
 
         int sum = 0;
-        for (final ActionTypeWeigth w : actionWeights)
+        for (final ActionTypeWeigth w : actionWeights) {
             sum += w.getWeight();
+        }
         return sum;
     }
 
@@ -143,8 +147,9 @@ public class CrazyPlayer extends TrainingPlayer {
             final ActionType type) {
 
         for (final Action action : actions) {
-            if (action.getActionType() == type)
+            if (action.getActionType() == type) {
                 return true;
+            }
         }
 
         return false;
@@ -155,8 +160,9 @@ public class CrazyPlayer extends TrainingPlayer {
             final ActionType type) {
 
         for (final Action action : actions) {
-            if (action.getActionType() == type)
+            if (action.getActionType() == type) {
                 return action;
+            }
         }
 
         return null;

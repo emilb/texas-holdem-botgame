@@ -200,10 +200,14 @@ public class Tournament extends Room {
                     allStopped = false;
                 }
             }
-            if (allStopped)
+            if (allStopped) {
                 return;
+            }
 
-            try { Thread.currentThread().sleep(125); } catch (Exception e) {}
+            try {
+                Thread.currentThread().sleep(125);
+            } catch (Exception e) {
+            }
         }
 
     }

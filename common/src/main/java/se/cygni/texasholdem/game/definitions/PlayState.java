@@ -23,9 +23,10 @@ public enum PlayState {
     public static PlayState getNextState(final PlayState givenState) {
 
         final PlayState[] allStates = PlayState.values();
-        if (givenState.ordinal() == allStates.length - 1)
+        if (givenState.ordinal() == allStates.length - 1) {
             throw new IllegalStateException("Already at last PlayState: "
                     + givenState);
+        }
 
         return allStates[givenState.ordinal() + 1];
     }
@@ -33,9 +34,10 @@ public enum PlayState {
     public static PlayState getPreviousState(final PlayState givenState) {
 
         final PlayState[] allStates = PlayState.values();
-        if (givenState.ordinal() == 0)
+        if (givenState.ordinal() == 0) {
             throw new IllegalStateException("Already at first PlayState: "
                     + givenState);
+        }
 
         return allStates[givenState.ordinal() - 1];
     }

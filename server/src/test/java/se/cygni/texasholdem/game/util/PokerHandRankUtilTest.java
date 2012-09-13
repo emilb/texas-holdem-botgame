@@ -31,7 +31,7 @@ public class PokerHandRankUtilTest {
         List<List<BotPlayer>> playerRankings = pokerHandRankUtil.getPlayerRankings();
 
         assertEquals(2, playerRankings.size());
-        assertEquals(player1,  playerRankings.get(0).get(0));
+        assertEquals(player1, playerRankings.get(0).get(0));
         assertEquals(-1, pokerHandRankUtil.getBestHand(player1).compareTo(pokerHandRankUtil.getBestHand(player2)));
     }
 }

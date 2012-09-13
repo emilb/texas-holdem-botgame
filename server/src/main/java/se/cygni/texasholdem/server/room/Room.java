@@ -49,10 +49,12 @@ public abstract class Room {
         final BotPlayer player = playerQuitEvent.getPlayer();
         log.debug("Player {} has quit, ordering Table to remove her", player);
         final Table table = getTableForPlayer(player);
-        if (table != null)
+        if (table != null) {
             table.removePlayer(player);
-        else
+        }
+        else {
             log.debug("Couldn't find table for user!?");
+        }
 
     }
 
@@ -65,8 +67,9 @@ public abstract class Room {
 
         for (final Table table : tables) {
             for (final BotPlayer player : table.getPlayers()) {
-                if (player.getSessionId().equals(sessionId))
+                if (player.getSessionId().equals(sessionId)) {
                     return table;
+                }
             }
         }
         return null;
@@ -79,10 +82,12 @@ public abstract class Room {
     }
 
     protected TrainingPlayer getTrainingPlayer() {
-        if (RandomUtils.nextBoolean())
+        if (RandomUtils.nextBoolean()) {
             return new RaiserPlayer("Raiser_" + PlayerTrainerCounter++, UUID.randomUUID().toString(), gamePlan.getStartingChipsAmount());
-        else
+        }
+        else {
             return new CrazyPlayer("Crazy_" + PlayerTrainerCounter++, UUID.randomUUID().toString(), gamePlan.getStartingChipsAmount());
+        }
     }
 
     protected TrainingPlayer getPhilHellmuthPlayer() {

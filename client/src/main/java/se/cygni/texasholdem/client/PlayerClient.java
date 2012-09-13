@@ -61,7 +61,7 @@ public class PlayerClient extends SimpleChannelHandler {
 
 
     /**
-     * @param player the Player in game
+     * @param player     the Player in game
      * @param serverHost the host name or IP adr to the server
      * @param serverPort the port at which the server is accepting connections
      */
@@ -145,8 +145,9 @@ public class PlayerClient extends SimpleChannelHandler {
                 Thread.sleep(5);
             } catch (InterruptedException e) {
             }
-            if (System.currentTimeMillis() > startTime + CONNECT_WAIT_MS)
+            if (System.currentTimeMillis() > startTime + CONNECT_WAIT_MS) {
                 throw new RuntimeException("Connection to server timed out, is it alive?");
+            }
         }
         connectionChecker = initConnectionStatusTimer();
     }
@@ -207,8 +208,9 @@ public class PlayerClient extends SimpleChannelHandler {
 
         final TexasMessage resp = sendAndWaitForResponse(request);
 
-        if (resp instanceof RegisterForPlayResponse)
+        if (resp instanceof RegisterForPlayResponse) {
             return true;
+        }
 
         if (resp instanceof TexasException) {
             final TexasException ge = (TexasException) resp;
@@ -235,8 +237,9 @@ public class PlayerClient extends SimpleChannelHandler {
             }
         }
 
-        if (lock.getResponse() == null)
+        if (lock.getResponse() == null) {
             throw new RuntimeException("Did not get response in time");
+        }
 
         return lock.getResponse();
     }

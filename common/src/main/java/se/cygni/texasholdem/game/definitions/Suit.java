@@ -39,8 +39,9 @@ public enum Suit {
     private static final Map<String, Suit> lookup = new HashMap<String, Suit>();
 
     static {
-        for (final Suit s : EnumSet.allOf(Suit.class))
+        for (final Suit s : EnumSet.allOf(Suit.class)) {
             lookup.put(s.getShortName(), s);
+        }
     }
 
     public static Suit get(final String name) {

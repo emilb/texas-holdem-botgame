@@ -21,8 +21,9 @@ public class DomainUtil {
 
     public static Card card() {
 
-        if (deck.getCardsLeft() == 0)
+        if (deck.getCardsLeft() == 0) {
             reshuffleDeck();
+        }
 
         return deck.getNextCard();
     }

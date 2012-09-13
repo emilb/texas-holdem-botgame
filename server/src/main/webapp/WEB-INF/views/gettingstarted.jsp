@@ -14,26 +14,30 @@
 <h:navbar section="gettingstarted"/>
 
 <div class="container">
-        <div class="hero-unit">
-            <h1>Getting started</h1>
-            <p>and code samples</p>
-        </div>
+    <div class="hero-unit">
+        <h1>Getting started</h1>
 
-        <div class="row">
-            <div class="span6">
-                <div class="well well-large">
-                    <h2>Getting started with a Java client</h2>
-                    <p>First download the example project:
-                        <a href="/download/texas-holdem-java-client.zip">texas-holdem-java-client.zip</a>
-                    </p>
-                    <p>
-                        Extract the zip and import in your favorite IDE. If you are missing any dependencies download
-                        this maven <a href="/download/settings.xml">settings.xml</a> and place
-                        it in ~/.m2.
-                    </p>
-                    <p>
-                        The class SimplestPossibleBot is included in the project and shown below.
-                    </p>
+        <p>and code samples</p>
+    </div>
+
+    <div class="row">
+        <div class="span6">
+            <div class="well well-large">
+                <h2>Getting started with a Java client</h2>
+
+                <p>First download the example project:
+                    <a href="/download/texas-holdem-java-client.zip">texas-holdem-java-client.zip</a>
+                </p>
+
+                <p>
+                    Extract the zip and import in your favorite IDE. If you are missing any dependencies download
+                    this maven <a href="/download/settings.xml">settings.xml</a> and place
+                    it in ~/.m2.
+                </p>
+
+                <p>
+                    The class SimplestPossibleBot is included in the project and shown below.
+                </p>
                     <pre class="prettyprint">
 public class SimplestPossibleBot extends BasicPlayer {
 
@@ -117,44 +121,49 @@ public class SimplestPossibleBot extends BasicPlayer {
 }
 
 }</pre>
-                    <p>This class extends BasicPlayer which has dummy methods for most event calls.
-                        The methods getName() and actionRequired(...) must however be implemented.
-                        You can use this class as a starting point for you player.</p>
+                <p>This class extends BasicPlayer which has dummy methods for most event calls.
+                    The methods getName() and actionRequired(...) must however be implemented.
+                    You can use this class as a starting point for you player.</p>
 
 
-                </div>
             </div>
-            <!--/span-->
+        </div>
+        <!--/span-->
 
-            <div class="span6">
-                <div class="well well-large">
-                    <h2>Getting started with a JavaScript client</h2>
-                    <p>First download the example project:
-                        <a href="/download/texas-holdem-web-client.zip">texas-holdem-web-client.zip</a>
-                    </p>
-                    <p>Extract the zip and open a terminal window and run:</p>
+        <div class="span6">
+            <div class="well well-large">
+                <h2>Getting started with a JavaScript client</h2>
+
+                <p>First download the example project:
+                    <a href="/download/texas-holdem-web-client.zip">texas-holdem-web-client.zip</a>
+                </p>
+
+                <p>Extract the zip and open a terminal window and run:</p>
                     <pre class="prettyprint">
 start.sh
                     </pre>
-                    <p>This starts a local web server which acts as a proxy to the real game server.</p>
-                    <p>Open <a href="http://localhost:8080" target="_blank">localhost</a> and try a test
+                <p>This starts a local web server which acts as a proxy to the real game server.</p>
+
+                <p>Open <a href="http://localhost:8080" target="_blank">localhost</a> and try a test
                     game by clicking on the Poker link.</p>
-                    <p>Files to edit to create your own player are located in the subdirectory player.</p>
-                </div>
+
+                <p>Files to edit to create your own player are located in the subdirectory player.</p>
             </div>
-            <!--/span-->
         </div>
+        <!--/span-->
+    </div>
 
     <!--/span-->
-<!--/row-->
+    <!--/row-->
 
-<hr>
+    <hr>
 
-<footer>
-    <p> &copy; Cygni AB 2012</p>
-</footer>
+    <footer>
+        <p> &copy; Cygni AB 2012</p>
+    </footer>
 
-</div><!--/.fluid-container-->
+</div>
+<!--/.fluid-container-->
 
 
 </body>

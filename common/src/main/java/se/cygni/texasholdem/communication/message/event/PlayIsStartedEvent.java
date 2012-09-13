@@ -26,7 +26,7 @@ public class PlayIsStartedEvent extends TexasEvent {
             @JsonProperty("dealer") final GamePlayer dealer,
             @JsonProperty("smallBlindPlayer") final GamePlayer smallBlindPlayer,
             @JsonProperty("bigBlindPlayer") final GamePlayer bigBlindPlayer,
-            @JsonProperty("tableId") final long tableId ) {
+            @JsonProperty("tableId") final long tableId) {
 
         this.players = players;
         this.smallBlindAmount = smallBlindAmount;

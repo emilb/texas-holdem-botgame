@@ -43,8 +43,9 @@ public class MessageSender {
             final TexasRequest request) {
 
 
-        if (context == null || !context.getChannel().isConnected())
+        if (context == null || !context.getChannel().isConnected()) {
             throw new RuntimeException("Client context not valid");
+        }
 
         final ResponseLock lock = responseLockManager.push(request
                 .getRequestId());
@@ -62,8 +63,9 @@ public class MessageSender {
             }
         }
 
-        if (lock.getResponse() == null)
+        if (lock.getResponse() == null) {
             throw new RuntimeException("Did not get response in time");
+        }
 
         // log.debug("It took {}ms to get reply from client",
         // (System.currentTimeMillis() - startTime));

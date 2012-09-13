@@ -45,8 +45,8 @@ public class TexasEventParserTest extends AbstractEventParserTestUtil {
 
     @Test
     public void testPlayerCalledEvent() throws JsonParseException,
-            JsonMappingException,
-            IOException {
+                                               JsonMappingException,
+                                               IOException {
 
         final PlayerCalledEvent event = new PlayerCalledEvent(
                 DomainUtil.player(), DomainUtil.randomLong());
@@ -59,8 +59,8 @@ public class TexasEventParserTest extends AbstractEventParserTestUtil {
 
     @Test
     public void testPlayerCheckedEvent() throws JsonParseException,
-            JsonMappingException,
-            IOException {
+                                                JsonMappingException,
+                                                IOException {
 
         final PlayerCheckedEvent event = new PlayerCheckedEvent(
                 DomainUtil.player());
@@ -72,8 +72,8 @@ public class TexasEventParserTest extends AbstractEventParserTestUtil {
 
     @Test
     public void testPlayerFoldedEvent() throws JsonParseException,
-            JsonMappingException,
-            IOException {
+                                               JsonMappingException,
+                                               IOException {
 
         final PlayerFoldedEvent event = new PlayerFoldedEvent(
                 DomainUtil.player(), DomainUtil.randomLong());
@@ -87,8 +87,8 @@ public class TexasEventParserTest extends AbstractEventParserTestUtil {
 
     @Test
     public void testPlayerQuitEvent() throws JsonParseException,
-            JsonMappingException,
-            IOException {
+                                             JsonMappingException,
+                                             IOException {
 
         final PlayerQuitEvent event = new PlayerQuitEvent(
                 DomainUtil.player());
@@ -100,8 +100,8 @@ public class TexasEventParserTest extends AbstractEventParserTestUtil {
 
     @Test
     public void testPlayerRaisedEvent() throws JsonParseException,
-            JsonMappingException,
-            IOException {
+                                               JsonMappingException,
+                                               IOException {
 
         final PlayerRaisedEvent event = new PlayerRaisedEvent(
                 DomainUtil.player(),
@@ -116,8 +116,8 @@ public class TexasEventParserTest extends AbstractEventParserTestUtil {
 
     @Test
     public void testPlayerWentAllInEvent() throws JsonParseException,
-            JsonMappingException,
-            IOException {
+                                                  JsonMappingException,
+                                                  IOException {
 
         final PlayerWentAllInEvent event = new PlayerWentAllInEvent(
                 DomainUtil.player(), DomainUtil.randomLong());
@@ -131,8 +131,8 @@ public class TexasEventParserTest extends AbstractEventParserTestUtil {
 
     @Test
     public void testPlayIsStartedEvent() throws JsonParseException,
-            JsonMappingException,
-            IOException {
+                                                JsonMappingException,
+                                                IOException {
 
         final List<GamePlayer> players = DomainUtil.players(5);
 
@@ -164,8 +164,8 @@ public class TexasEventParserTest extends AbstractEventParserTestUtil {
 
     @Test
     public void testServerIsShuttingDownEvent() throws JsonParseException,
-            JsonMappingException,
-            IOException {
+                                                       JsonMappingException,
+                                                       IOException {
 
         final ServerIsShuttingDownEvent event = new ServerIsShuttingDownEvent(
                 DomainUtil.randomString(25));
@@ -178,8 +178,8 @@ public class TexasEventParserTest extends AbstractEventParserTestUtil {
 
     @Test
     public void testShowDownEvent() throws JsonParseException,
-            JsonMappingException,
-            IOException {
+                                           JsonMappingException,
+                                           IOException {
 
         final ShowDownEvent event = new ShowDownEvent(
                 DomainUtil.playerShowdowns(5));
@@ -194,8 +194,8 @@ public class TexasEventParserTest extends AbstractEventParserTestUtil {
 
     @Test
     public void testYouHaveBeenDealtACardEvent() throws JsonParseException,
-            JsonMappingException,
-            IOException {
+                                                        JsonMappingException,
+                                                        IOException {
 
         final YouHaveBeenDealtACardEvent event = new YouHaveBeenDealtACardEvent(
                 DomainUtil.card());
@@ -208,8 +208,8 @@ public class TexasEventParserTest extends AbstractEventParserTestUtil {
 
     @Test
     public void testYouWonAmountEvent() throws JsonParseException,
-            JsonMappingException,
-            IOException {
+                                               JsonMappingException,
+                                               IOException {
 
         final YouWonAmountEvent event = new YouWonAmountEvent(
                 DomainUtil.randomLong(), DomainUtil.randomLong());

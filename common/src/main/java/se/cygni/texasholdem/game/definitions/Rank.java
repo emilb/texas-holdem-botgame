@@ -48,8 +48,9 @@ public enum Rank {
     private static final Map<String, Rank> lookup = new HashMap<String, Rank>();
 
     static {
-        for (final Rank r : EnumSet.allOf(Rank.class))
+        for (final Rank r : EnumSet.allOf(Rank.class)) {
             lookup.put(r.getName(), r);
+        }
     }
 
     public static Rank get(final String name) {

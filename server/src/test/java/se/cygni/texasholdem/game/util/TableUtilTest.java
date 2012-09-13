@@ -21,8 +21,9 @@ public class TableUtilTest {
         for (List<BotPlayer> table : partitions) {
             sum += table.size();
 
-            for (BotPlayer player : table)
+            for (BotPlayer player : table) {
                 players.remove(player);
+            }
         }
 
         Assert.assertEquals("Total player count wrong", 36, sum);
@@ -40,8 +41,9 @@ public class TableUtilTest {
         for (List<BotPlayer> table : partitions) {
             sum += table.size();
 
-            for (BotPlayer player : table)
+            for (BotPlayer player : table) {
                 players.remove(player);
+            }
         }
 
         Assert.assertEquals("Total player count wrong", 42, sum);
@@ -102,8 +104,9 @@ public class TableUtilTest {
         boolean everyPositionIsSame = true;
 
         for (int i = 0; i < originalList.size(); i++) {
-            if (!originalList.get(i).equals(shuffledList.get(i)))
+            if (!originalList.get(i).equals(shuffledList.get(i))) {
                 everyPositionIsSame = false;
+            }
         }
 
         Assert.assertFalse(everyPositionIsSame);

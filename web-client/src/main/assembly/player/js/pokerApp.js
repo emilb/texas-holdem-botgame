@@ -45,12 +45,12 @@ $(function () {
         onPlayerState:function (playerState) {
             var msg = newMessages.pop();
             if (msg) {
-                content.html($('<p>', { text : msg }));
+                content.html($('<p>', { text:msg }));
             }
         }
     };
 
-    function updatePlayerState (eventJson, eventName) {
+    function updatePlayerState(eventJson, eventName) {
         var updatehandler = playerStateUpdateEventHandlers[eventName];
         if (updatehandler) {
             updatehandler(eventJson);
@@ -60,33 +60,33 @@ $(function () {
     // handlers for updating view from player state and Events
     playerStateUpdateEventHandlers = {
 
-        onRegisterForPlayResponse : function (playResponse) {
+        onRegisterForPlayResponse:function (playResponse) {
             addViewMessage('Registered for play');
         },
-        onPlayIsStartedEvent : function (event) {
+        onPlayIsStartedEvent:function (event) {
             //addViewMessage('new round: '+player.state.table.players.length+' players');
         },
-        onServerIsShuttingDownEvent : function (event) {
+        onServerIsShuttingDownEvent:function (event) {
         },
-        onShowDownEvent : function (event) {
+        onShowDownEvent:function (event) {
             var leaderPlayer = player.state.table.players.sortBy('chipCount').last();
             if (leaderPlayer) {
-                leader.text('leader: '+leaderPlayer.name+' : '+leaderPlayer.chipCount);
+                leader.text('leader: ' + leaderPlayer.name + ' : ' + leaderPlayer.chipCount);
             }
         },
-        onTableChangedStateEvent : function (event) {
+        onTableChangedStateEvent:function (event) {
         },
-        onTableIsDoneEvent : function (event) {
+        onTableIsDoneEvent:function (event) {
             if (player.isWinner()) {
                 addViewMessage('Table is done - You won');
             } else {
-                addViewMessage('Table is done - '+player.state.winner.name+' won');
+                addViewMessage('Table is done - ' + player.state.winner.name + ' won');
             }
         },
-        onYouWonAmountEvent : function (event) {
-            state.text('Your chipCount: '+player.state.amount);
+        onYouWonAmountEvent:function (event) {
+            state.text('Your chipCount: ' + player.state.amount);
             if (event.wonAmount > 0) {
-                addViewMessage('You won '+event.wonAmount);
+                addViewMessage('You won ' + event.wonAmount);
             }
         }
     };
@@ -101,7 +101,7 @@ $(function () {
             messagelog.append('<p><span style="color:' + color + '">' + author + '</span> @ ' +
                 +datetime.getMinutes() + ':' + datetime.getSeconds()
                 + ': ' + message + '</p>');
-                
+
         }
     }
 

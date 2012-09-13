@@ -35,16 +35,18 @@ public class DummyPlayer extends BasicPlayer {
 
     private String getServerHost() {
         String hostFromSystemProp = System.getProperty(HOST_PROPERTY);
-        if (StringUtils.isEmpty(hostFromSystemProp))
+        if (StringUtils.isEmpty(hostFromSystemProp)) {
             return DEFAULT_HOST;
+        }
 
         return hostFromSystemProp;
     }
 
     private int getServerPort() {
         String portFromSystemProp = System.getProperty(PORT_PROPERTY);
-        if (StringUtils.isEmpty(portFromSystemProp))
+        if (StringUtils.isEmpty(portFromSystemProp)) {
             return DEFAULT_PORT;
+        }
 
         try {
             return Integer.parseInt(portFromSystemProp);
@@ -108,12 +110,15 @@ public class DummyPlayer extends BasicPlayer {
         }
 
         Action action = null;
-        if (callAction != null)
+        if (callAction != null) {
             action = callAction;
-        else if (checkAction != null)
+        }
+        else if (checkAction != null) {
             action = checkAction;
-        else
+        }
+        else {
             action = foldAction;
+        }
 
         log.debug("{} returning action: {}", getName(), action);
         return action;

@@ -65,8 +65,9 @@ public class StatisticsCollector {
     @Subscribe
     public void tableDone(final TableDoneEvent tableDoneEvent) {
         TableHistory tableHistory = getTableHistory(tableDoneEvent.getTable().getTableCounter());
-        if (tableHistory != null)
+        if (tableHistory != null) {
             tableHistory.setGameEnded(true);
+        }
     }
 
     public long getTotalNoofConnectionsMade() {
@@ -111,31 +112,36 @@ public class StatisticsCollector {
     public GameLog getLastGameLog() {
         try {
             return tableHistories.getLast().getLastGameLog();
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
         return null;
     }
 
     public GameLog getLastGameLog(final long tableId) {
         try {
             return getTableHistory(tableId).getLastGameLog();
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
         return null;
     }
 
     public GameLog getGameLogAtPos(final long tableId, int position) {
-        if (position < 0)
+        if (position < 0) {
             return getLastGameLog(tableId);
+        }
 
         try {
             return getTableHistory(tableId).get(position);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
         return null;
     }
 
     public int getNoofGameLogs(final long tableId) {
         TableHistory tableHistory = getTableHistory(tableId);
-        if (tableHistory == null)
+        if (tableHistory == null) {
             return 0;
+        }
 
         return tableHistory.size();
     }
@@ -171,22 +177,25 @@ public class StatisticsCollector {
         }
 
         public GameLog getFirstGameLog() {
-            if (gameLogs.isEmpty())
+            if (gameLogs.isEmpty()) {
                 return null;
+            }
 
             return gameLogs.get(0);
         }
 
         public GameLog getLastGameLog() {
-            if (gameLogs.isEmpty())
+            if (gameLogs.isEmpty()) {
                 return null;
+            }
 
             return gameLogs.get(gameLogs.size() - 1);
         }
 
         public GameLog get(int position) {
-            if (position >= gameLogs.size())
+            if (position >= gameLogs.size()) {
                 return getLastGameLog();
+            }
 
             return gameLogs.get(position);
         }
@@ -197,7 +206,7 @@ public class StatisticsCollector {
 
         public void addGameLog(GameLog gameLog) {
             gameLogs.add(gameLog);
-            gameLog.logPosition = gameLogs.size()-1;
+            gameLog.logPosition = gameLogs.size() - 1;
         }
     }
 }

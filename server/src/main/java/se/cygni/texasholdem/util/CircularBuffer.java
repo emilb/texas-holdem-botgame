@@ -9,12 +9,11 @@ import java.util.concurrent.atomic.AtomicReferenceArray;
 
 /**
  * A lock-free thread safe circular fixed length buffer.
- *
+ * <p/>
  * Uses an AtomicInteger as index counter and an AtomicReferenceArray
  * to hold the references to the values.
- *
+ * <p/>
  * When the buffer is full, the oldest item is overwritten.
- *
  */
 public class CircularBuffer<T> {
 
@@ -31,9 +30,10 @@ public class CircularBuffer<T> {
     }
 
     public void add(T item) {
-        if (index.compareAndSet(size-1, 0)) {
+        if (index.compareAndSet(size - 1, 0)) {
             buffer.set(0, item);
-        } else {
+        }
+        else {
             buffer.set(index.incrementAndGet(), item);
         }
 
@@ -42,10 +42,10 @@ public class CircularBuffer<T> {
 
     /**
      * Get contents of buffer, as a list.
-     *
+     * <p/>
      * Note that the list always has the size of the buffer,
      * no matter how many elements there actually are.
-     *
+     * <p/>
      * The ordering is defined by the comparator.
      *
      * @return contents
@@ -54,8 +54,9 @@ public class CircularBuffer<T> {
         List<T> list = new ArrayList<T>(size);
         for (int i = 0; i < size; i++) {
             T obj = buffer.get(i);
-            if (obj != null)
+            if (obj != null) {
                 list.add(buffer.get(i));
+            }
         }
 
         Collections.sort(list, comparator);
@@ -69,8 +70,9 @@ public class CircularBuffer<T> {
     public T get(ObjectMatcher<T> matcher) {
         for (int i = 0; i < size; i++) {
             T obj = buffer.get(i);
-            if (obj != null && matcher.matches(obj))
+            if (obj != null && matcher.matches(obj)) {
                 return buffer.get(i);
+            }
         }
 
         return null;

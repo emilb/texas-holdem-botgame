@@ -49,6 +49,7 @@ public class CurrentPlayState {
      * A list of your current cards
      *
      * @return your List<Card> of cards
+     *
      * @see Card
      */
     public List<Card> getMyCards() {
@@ -59,6 +60,7 @@ public class CurrentPlayState {
      * The list of cards played to the community so far.
      *
      * @return List<Card> of currently played community cards
+     *
      * @see Card
      */
     public List<Card> getCommunityCards() {
@@ -70,6 +72,7 @@ public class CurrentPlayState {
      * cards.
      *
      * @return List<Card> of your cards and the currently played community cards
+     *
      * @see Card
      */
     public List<Card> getMyCardsAndCommunityCards() {
@@ -80,7 +83,9 @@ public class CurrentPlayState {
 
     /**
      * The current state the game play is in.
+     *
      * @return PlayState
+     *
      * @see CurrentPlayState
      */
     public PlayState getCurrentPlayState() {
@@ -89,6 +94,7 @@ public class CurrentPlayState {
 
     /**
      * The sum of all bets placed during this round
+     *
      * @return The long value of the sum of all bets placed
      */
     public long getPotTotal() {
@@ -97,6 +103,7 @@ public class CurrentPlayState {
 
     /**
      * The small blind bet this game round
+     *
      * @return The long value of the current small blind bet
      */
     public long getSmallBlind() {
@@ -105,6 +112,7 @@ public class CurrentPlayState {
 
     /**
      * The big blind bet this game round
+     *
      * @return The long value of the current big blind bet
      */
     public long getBigBlind() {
@@ -113,7 +121,9 @@ public class CurrentPlayState {
 
     /**
      * The player that acts as dealer during this game round
+     *
      * @return the Dealer player
+     *
      * @see GamePlayer
      */
     public GamePlayer getDealerPlayer() {
@@ -122,7 +132,9 @@ public class CurrentPlayState {
 
     /**
      * The player that is small blind better during this game round
+     *
      * @return the small blind player
+     *
      * @see GamePlayer
      */
     public GamePlayer getSmallBlindPlayer() {
@@ -131,7 +143,9 @@ public class CurrentPlayState {
 
     /**
      * The player that big blind better during this game round
+     *
      * @return the big blind player
+     *
      * @see GamePlayer
      */
     public GamePlayer getBigBlindPlayer() {
@@ -140,6 +154,7 @@ public class CurrentPlayState {
 
     /**
      * The amount of chips you have left
+     *
      * @return the long value of your current amount of chips
      */
     public long getMyCurrentChipAmount() {
@@ -147,8 +162,8 @@ public class CurrentPlayState {
     }
 
     /**
-     *
      * @param player
+     *
      * @return True if player has folded this game round
      */
     public boolean hasPlayerFolded(GamePlayer player) {
@@ -156,8 +171,8 @@ public class CurrentPlayState {
     }
 
     /**
-     *
      * @param player
+     *
      * @return True if player has gone all in this game round
      */
     public boolean hasPlayerGoneAllIn(GamePlayer player) {
@@ -167,7 +182,9 @@ public class CurrentPlayState {
     /**
      * Gives the total amount a player has invested in the pot
      * during this game round.
+     *
      * @param player
+     *
      * @return the long value of the chip amount this player has invested in the pot
      */
     public long getInvestmentInPotFor(GamePlayer player) {
@@ -179,7 +196,6 @@ public class CurrentPlayState {
     }
 
     /**
-     *
      * @return A List<GamePlayer> participating in this game round
      */
     public List<GamePlayer> getPlayers() {
@@ -212,7 +228,6 @@ public class CurrentPlayState {
         Long prevInv = potInvestmentPerPlayer.get(player);
         potInvestmentPerPlayer.put(player, new Long(prevInv + amount));
     }
-
 
 
     private class CurrentPlayStatePlayer implements se.cygni.texasholdem.player.Player {

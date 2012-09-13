@@ -48,16 +48,18 @@ public class PerformanceTestPlayer extends BasicPlayer {
 
     private static String getSystemProperty(String name, String defaultValue) {
         String hostFromSystemProp = System.getProperty(name);
-        if (StringUtils.isEmpty(hostFromSystemProp))
+        if (StringUtils.isEmpty(hostFromSystemProp)) {
             return defaultValue;
+        }
 
         return hostFromSystemProp;
     }
 
     private static int getSystemProperty(String name, int defaultValue) {
         String portFromSystemProp = System.getProperty(name);
-        if (StringUtils.isEmpty(portFromSystemProp))
+        if (StringUtils.isEmpty(portFromSystemProp)) {
             return defaultValue;
+        }
 
         try {
             return Integer.parseInt(portFromSystemProp);
@@ -92,7 +94,8 @@ public class PerformanceTestPlayer extends BasicPlayer {
             totalLengthOfPlays.addAndGet(System.currentTimeMillis() - lastNewGame);
             lastNewGame = System.currentTimeMillis();
             noofNewPlays.incrementAndGet();
-        } else {
+        }
+        else {
             lastNewGame = System.currentTimeMillis();
         }
 
@@ -123,12 +126,15 @@ public class PerformanceTestPlayer extends BasicPlayer {
         }
 
         Action action = null;
-        if (callAction != null)
+        if (callAction != null) {
             action = callAction;
-        else if (checkAction != null)
+        }
+        else if (checkAction != null) {
             action = checkAction;
-        else
+        }
+        else {
             action = foldAction;
+        }
 
 //        log.debug("{} returning action: {}", getName(), action);
         return action;
@@ -165,15 +171,17 @@ public class PerformanceTestPlayer extends BasicPlayer {
 
             try {
                 Thread.sleep(75);
-            } catch (Exception w) {}
+            } catch (Exception w) {
+            }
         }
 
         final Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                if (noofNewPlays.longValue() < 1)
+                if (noofNewPlays.longValue() < 1) {
                     return;
+                }
 
                 log.info("Noof plays: {}, average game bout time (ms) {}", noofNewPlays.longValue(), totalLengthOfPlays.longValue() / noofNewPlays.longValue());
 

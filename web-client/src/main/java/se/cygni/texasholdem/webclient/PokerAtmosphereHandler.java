@@ -45,7 +45,8 @@ public class PokerAtmosphereHandler implements AtmosphereHandler {
             // GET is used for server-to-client events so suspend.
             log.info("poker: onRequest: GET");
             r.suspend();
-        } else if (req.getMethod().equalsIgnoreCase("POST")) {
+        }
+        else if (req.getMethod().equalsIgnoreCase("POST")) {
             // POST => ActionRequest or RegisterForPlayRequest
             String body = getRequestBody(r);
             String connectionId = req.getHeader("connectionId");
@@ -62,11 +63,13 @@ public class PokerAtmosphereHandler implements AtmosphereHandler {
             if (texasMessage instanceof ActionResponse) {
                 ActionResponse actionResponse = ((ActionResponse) texasMessage);
                 webclient.sendMessage(actionResponse);
-            } else {
+            }
+            else {
                 log.error("error: illegal web client request, body:" + body);
             }
 
-        } else if (req.getMethod().equalsIgnoreCase("DELETE")) {
+        }
+        else if (req.getMethod().equalsIgnoreCase("DELETE")) {
             // close / destroy
             clients.remove(r.uuid());
             destroy();
@@ -102,7 +105,8 @@ public class PokerAtmosphereHandler implements AtmosphereHandler {
                     e.printStackTrace();
                 }
                 clients.put(connectionId, webclient);
-            } else {
+            }
+            else {
                 String errorMsg = "First request must be a RegisterForPlayRequest but was: " + body;
                 log.error(errorMsg);
                 r.getResponse().getWriter().write("error: " + errorMsg);
@@ -130,7 +134,8 @@ public class PokerAtmosphereHandler implements AtmosphereHandler {
         if (event.isSuspended()) {
             String msg = event.getMessage().toString();
             log.info("onStateChange: event.getMessage():" + msg);
-        } else if (!event.isResuming()) {
+        }
+        else if (!event.isResuming()) {
             log.info("onStateChange: notSuspended and not resuming - closing");
         }
     }

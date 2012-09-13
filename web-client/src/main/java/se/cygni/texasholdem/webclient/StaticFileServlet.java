@@ -58,7 +58,9 @@ public class StaticFileServlet extends HttpServlet {
 
         } finally {
             output.close();
-            if (input != null) input.close();
+            if (input != null) {
+                input.close();
+            }
         }
     }
 
@@ -67,21 +69,26 @@ public class StaticFileServlet extends HttpServlet {
      * or is a directory attempts are made to get index.htm(l) under the same path instead.
      *
      * @param filePath
+     *
      * @return File to requested path
+     *
      * @throws FileNotFoundException
      */
     private File getBestFileMatch(String filePath) throws FileNotFoundException {
         try {
             return getFile(filePath);
-        } catch (FileNotFoundException e) { }
+        } catch (FileNotFoundException e) {
+        }
 
         try {
             return getFile(filePath + File.separator + "index.html");
-        } catch (FileNotFoundException e) { }
+        } catch (FileNotFoundException e) {
+        }
 
         try {
             return getFile(filePath + File.separator + "index.htm");
-        } catch (FileNotFoundException e) { }
+        } catch (FileNotFoundException e) {
+        }
 
         throw new FileNotFoundException("Could not find " + filePath);
     }
@@ -90,8 +97,9 @@ public class StaticFileServlet extends HttpServlet {
 
         File f = new File(filePath);
 
-        if (!f.exists() || !f.canRead() || !f.isFile())
+        if (!f.exists() || !f.canRead() || !f.isFile()) {
             throw new FileNotFoundException("Could not find " + filePath);
+        }
 
         return f;
     }
@@ -107,8 +115,9 @@ public class StaticFileServlet extends HttpServlet {
         super.init();
         basePath = System.getProperty(SYS_PROP_STATIC_DIR);
 
-        if (!StringUtils.endsWith(basePath, File.separator))
+        if (!StringUtils.endsWith(basePath, File.separator)) {
             basePath = basePath + File.separator;
+        }
 
         log.info("StaticFileServlet initialized, static directory: {}", basePath);
     }

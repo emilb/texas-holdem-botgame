@@ -101,8 +101,9 @@ public class PokerHandUtil {
         int counter = 4;
         for (final Rank r : EnumSet.range(Rank.TEN, Rank.ACE)) {
             final Card c = potentialRoyalFlush.get(counter--);
-            if (r != c.getRank())
+            if (r != c.getRank()) {
                 throw new RuntimeException("No Royal Flush found");
+            }
         }
 
         return new BestHand(potentialRoyalFlush, PokerHand.ROYAL_FLUSH);
@@ -173,7 +174,7 @@ public class PokerHandUtil {
 
         final List<Card> highestTwoOfAKind = getHighestOfSameRankExcluding(2,
                 cards, highestThreeOfAKind.get(0).getRank());
-        
+
         if (CollectionUtils.isEmpty(highestTwoOfAKind)) {
             throw new RuntimeException("No two of a kind found in Full House");
         }
@@ -236,9 +237,11 @@ public class PokerHandUtil {
                 // the highest ranking one.
                 if (potentialThreeOfAKind != null) {
                     if (potentialThreeOfAKind.get(0).getRank().getOrderValue() < threeOfAKind
-                            .get(0).getRank().getOrderValue())
+                            .get(0).getRank().getOrderValue()) {
                         potentialThreeOfAKind = threeOfAKind;
-                } else {
+                    }
+                }
+                else {
 
                     potentialThreeOfAKind = entry.getValue();
                 }
@@ -292,7 +295,8 @@ public class PokerHandUtil {
                 }
 
                 potentialOnePair = entry.getValue();
-            } else if (entry.getValue().size() > 2) {
+            }
+            else if (entry.getValue().size() > 2) {
                 throw new RuntimeException(
                         "There exists a better match than one pair");
             }

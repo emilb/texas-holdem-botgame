@@ -20,8 +20,9 @@ public class ResponseLockManager {
 
         final ResponseLock lock = new ResponseLock(requestId);
 
-        if (responseLocks.containsKey(requestId))
+        if (responseLocks.containsKey(requestId)) {
             throw new IllegalArgumentException("Request ID is already in use");
+        }
 
         responseLocks.put(requestId, lock);
 
@@ -30,8 +31,9 @@ public class ResponseLockManager {
 
     public ResponseLock pop(final String requestId) {
 
-        if (!responseLocks.containsKey(requestId))
+        if (!responseLocks.containsKey(requestId)) {
             throw new IllegalArgumentException("Unknown Request ID");
+        }
 
         return responseLocks.remove(requestId);
     }

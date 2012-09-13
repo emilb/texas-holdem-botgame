@@ -75,10 +75,12 @@ public class TexasMessageParser {
 
             if (typeNode == null
                     || StringUtils.isEmpty(typeNode.getTextValue()))
-                // Nothing found
+            // Nothing found
+            {
                 throw new IllegalArgumentException("Could not find [" +
                         TYPE_IDENTIFIER
                         + "] in message: " + message);
+            }
 
             return getClassForIdentifier(typeNode.getTextValue());
 
@@ -87,11 +89,12 @@ public class TexasMessageParser {
             throw new IllegalArgumentException("Could not parse message: "
                     + message, e);
         } finally {
-            if (parser != null)
+            if (parser != null) {
                 try {
                     parser.close();
                 } catch (final IOException e) {
                 }
+            }
         }
 
     }
@@ -99,8 +102,9 @@ public class TexasMessageParser {
     public static Class<? extends TexasMessage> getClassForIdentifier(
             final String identifier) {
 
-        if (typeToClass.containsKey(identifier))
+        if (typeToClass.containsKey(identifier)) {
             return typeToClass.get(identifier);
+        }
 
         throw new IllegalArgumentException("Unknown identifier: " + identifier);
     }

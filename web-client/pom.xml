@@ -94,7 +94,7 @@
                             <tasks>
                                 <move todir="${project.build.directory}/${project.artifactId}-${project.version}/">
                                     <fileset dir="${project.build.directory}/classes/">
-                                        <include name="Launcher.class" />
+                                        <include name="Launcher.class"/>
                                     </fileset>
                                 </move>
                             </tasks>

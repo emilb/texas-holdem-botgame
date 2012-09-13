@@ -27,7 +27,7 @@ public abstract class BasicPlayer implements Player {
 
     @Override
     public void onPlayIsStarted(final PlayIsStartedEvent event) {
-       log.debug("Play is started");
+        log.debug("Play is started");
     }
 
     @Override
@@ -106,8 +106,9 @@ public abstract class BasicPlayer implements Player {
     @Override
     public void onShowDown(final ShowDownEvent event) {
 
-        if (!log.isDebugEnabled())
+        if (!log.isDebugEnabled()) {
             return;
+        }
 
         final StringBuilder sb = new StringBuilder();
         final Formatter formatter = new Formatter(sb);
@@ -116,9 +117,9 @@ public abstract class BasicPlayer implements Player {
 
         for (final PlayerShowDown psd : event.getPlayersShowDown()) {
             formatter.format("%-13s won: %6s  hand: %-15s ",
-                psd.getPlayer().getName(),
-                psd.getHand().isFolded() ? "Fold" : psd.getWonAmount(),
-                psd.getHand().getPokerHand().getName());
+                    psd.getPlayer().getName(),
+                    psd.getHand().isFolded() ? "Fold" : psd.getWonAmount(),
+                    psd.getHand().getPokerHand().getName());
 
             sb.append(" cards: | ");
             for (final Card card : psd.getHand().getCards()) {

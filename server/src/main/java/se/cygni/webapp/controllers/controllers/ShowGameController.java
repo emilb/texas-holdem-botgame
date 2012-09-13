@@ -66,9 +66,9 @@ public class ShowGameController {
 
         if (gameLog != null) {
             position.setTableId(gameLog.tableCounter);
-            position.setNext(gameLog.logPosition < statisticsCollector.getNoofGameLogs(gameLog.tableCounter)-1 ? gameLog.logPosition+1 : gameLog.logPosition);
+            position.setNext(gameLog.logPosition < statisticsCollector.getNoofGameLogs(gameLog.tableCounter) - 1 ? gameLog.logPosition + 1 : gameLog.logPosition);
             position.setPosition(gameLog.logPosition);
-            position.setPrevious(gameLog.logPosition > 1 ? gameLog.logPosition-1 : 0);
+            position.setPrevious(gameLog.logPosition > 1 ? gameLog.logPosition - 1 : 0);
         }
 
         return position;

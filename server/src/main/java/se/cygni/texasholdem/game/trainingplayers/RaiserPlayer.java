@@ -110,28 +110,35 @@ public class RaiserPlayer extends TrainingPlayer {
         double randomVal = RandomUtils.nextDouble();
 
         // 60% chance of check
-        if (checkAction != null && randomVal < 0.60)
+        if (checkAction != null && randomVal < 0.60) {
             action = checkAction;
+        }
 
         // 90% chance of call
         else if (callAction != null && raiseAction != null) {
-            if (randomVal < 0.90)
+            if (randomVal < 0.90) {
                 action = callAction;
-            else
+            }
+            else {
                 action = raiseAction;
+            }
         }
 
-        else if (raiseAction != null)
+        else if (raiseAction != null) {
             action = raiseAction;
+        }
 
-        else if (callAction != null)
+        else if (callAction != null) {
             action = callAction;
+        }
 
-        else if (checkAction != null)
+        else if (checkAction != null) {
             action = checkAction;
+        }
 
-        else
+        else {
             action = foldAction;
+        }
 
         return action;
     }

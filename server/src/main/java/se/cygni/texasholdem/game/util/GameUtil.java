@@ -11,13 +11,15 @@ import java.util.*;
 
 public class GameUtil {
 
-    private GameUtil() {}
+    private GameUtil() {
+    }
 
     /**
      * Returns the next player that still has chips to play for.
      *
      * @param players
      * @param startingFromPlayer
+     *
      * @return
      */
     public static BotPlayer getNextPlayerInPlay(
@@ -159,8 +161,9 @@ public class GameUtil {
 
     public static boolean isThereAWinner(List<BotPlayer> players) {
 
-        if (players.size() <= 1)
+        if (players.size() <= 1) {
             return true;
+        }
 
         int noofPlayersWithChipsLeft = 0;
         for (final BotPlayer player : players) {
@@ -207,8 +210,9 @@ public class GameUtil {
     }
 
     public static boolean isActionValid(List<Action> possibleActions, Action playerAction) {
-        if (playerAction == null)
+        if (playerAction == null) {
             return false;
+        }
 
         if (playerAction.getActionType() == null) {
             return false;
@@ -222,22 +226,25 @@ public class GameUtil {
                 return containsActionType(possibleActions, ActionType.CHECK);
 
             case CALL:
-                if (!containsActionType(possibleActions, ActionType.CALL))
+                if (!containsActionType(possibleActions, ActionType.CALL)) {
                     return false;
+                }
 
                 Action allowedCall = getActionOfType(possibleActions, ActionType.CALL);
                 return (playerAction.getAmount() == allowedCall.getAmount());
 
             case RAISE:
-                if (!containsActionType(possibleActions, ActionType.RAISE))
+                if (!containsActionType(possibleActions, ActionType.RAISE)) {
                     return false;
+                }
 
                 Action allowedRaise = getActionOfType(possibleActions, ActionType.RAISE);
                 return (playerAction.getAmount() == allowedRaise.getAmount());
 
             case ALL_IN:
-                if (!containsActionType(possibleActions, ActionType.ALL_IN))
+                if (!containsActionType(possibleActions, ActionType.ALL_IN)) {
                     return false;
+                }
 
                 Action allowedAllIn = getActionOfType(possibleActions, ActionType.ALL_IN);
                 return (playerAction.getAmount() == allowedAllIn.getAmount());
@@ -262,9 +269,9 @@ public class GameUtil {
     }
 
     public static GameLog createGameLog(long smallBlind, long bigBlind,
-                                           BotPlayer dealerPlayer, BotPlayer bigBlindPlayer, BotPlayer smallBlindPlayer,
-                                           List<BotPlayer> players, List<Card> communityCards,
-                                           Pot pot, Map<BotPlayer, Long> payoutResult, PokerHandRankUtil rankUtil) {
+                                        BotPlayer dealerPlayer, BotPlayer bigBlindPlayer, BotPlayer smallBlindPlayer,
+                                        List<BotPlayer> players, List<Card> communityCards,
+                                        Pot pot, Map<BotPlayer, Long> payoutResult, PokerHandRankUtil rankUtil) {
 
         GameLog gameLog = new GameLog();
         gameLog.smallBlind = smallBlind;
@@ -293,9 +300,9 @@ public class GameUtil {
             }
 
             pg.preflopBet = pot.getTotalBetAmountForPlayerInPlayState(player, PlayState.PRE_FLOP);
-            pg.flopBet =  pot.getTotalBetAmountForPlayerInPlayState(player, PlayState.FLOP);
-            pg.turnBet =  pot.getTotalBetAmountForPlayerInPlayState(player, PlayState.TURN);
-            pg.riverBet =  pot.getTotalBetAmountForPlayerInPlayState(player, PlayState.RIVER);
+            pg.flopBet = pot.getTotalBetAmountForPlayerInPlayState(player, PlayState.FLOP);
+            pg.turnBet = pot.getTotalBetAmountForPlayerInPlayState(player, PlayState.TURN);
+            pg.riverBet = pot.getTotalBetAmountForPlayerInPlayState(player, PlayState.RIVER);
 
             pg.allIn = pot.isAllIn(player);
 
@@ -305,7 +312,7 @@ public class GameUtil {
                     case PRE_FLOP:
                         pg.preflopAllIn = true;
                         break;
-                    case  FLOP:
+                    case FLOP:
                         pg.flopAllIn = true;
                         break;
                     case TURN:
@@ -323,7 +330,7 @@ public class GameUtil {
                     case PRE_FLOP:
                         pg.preflopFolded = true;
                         break;
-                    case  FLOP:
+                    case FLOP:
                         pg.flopFolded = true;
                         break;
                     case TURN:
@@ -384,7 +391,8 @@ public class GameUtil {
                             trans.getPlayer().getName(),
                             trans.getAmount(), trans.isAllIn());
                 }
-            } else {
+            }
+            else {
                 sb.append("No transactions\n");
             }
         }
