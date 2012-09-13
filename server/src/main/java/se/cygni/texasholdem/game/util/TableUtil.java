@@ -9,6 +9,8 @@ import java.util.List;
 
 public class TableUtil {
 
+    private TableUtil() {}
+
     public static List<List<BotPlayer>> partitionPlayers(List<BotPlayer> players) {
         List<List<BotPlayer>> partitionedPlayers = new ArrayList<List<BotPlayer>>();
 

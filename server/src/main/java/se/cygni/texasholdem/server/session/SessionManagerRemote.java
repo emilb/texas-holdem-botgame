@@ -88,9 +88,6 @@ public class SessionManagerRemote implements SessionManager {
     @Override
     public void notifyPlayerOfEvent(final EventWrapper eventWrapper) {
 
-        // log.debug("Notifying players {} of event: {}",
-        // eventWrapper.getReceivers(), eventWrapper.getEvent());
-
         for (final BotPlayer player : eventWrapper.getReceivers()) {
             if (player instanceof TrainingPlayer) {
                 TrainingPlayer trainingPlayer = (TrainingPlayer) player;
@@ -116,7 +113,6 @@ public class SessionManagerRemote implements SessionManager {
 
     @Override
     public void terminateSession(BotPlayer player) {
-        log.info("//// Terminating connection to player: {} \\\\\\\\", player);
         final String sessionId = player.getSessionId();
 
         ChannelHandlerContext context = sessionChannelHandlerContextMap.remove(sessionId);
@@ -151,8 +147,7 @@ public class SessionManagerRemote implements SessionManager {
         final RegisterForPlayRequest request = (RegisterForPlayRequest) requestWrapper
                 .getRequest();
 
-        // Store client ip, max 5 connections per ip
-        //clientContext.getChannel().getRemoteAddress()
+        // TODO: Store client ip, max 5 connections per ip by using clientContext.getChannel().getRemoteAddress()
 
         // Check that user name is not already in use
         if (!isNameUnique(request.name)) {
@@ -188,9 +183,6 @@ public class SessionManagerRemote implements SessionManager {
 
         log.info("New client connection registered. sessionId: {} name: {}",
                 sessionId, player.getName());
-
-        // Store the sessionId in the context
-//        clientContext.getSessionData().put(SESSION_ID, sessionId);
 
         // Send login response to client
         messageSender.sendMessage(clientContext, response);

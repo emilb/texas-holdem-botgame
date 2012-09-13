@@ -13,32 +13,32 @@ import java.util.List;
 
 public interface SessionManager {
 
-    public static final String SESSION_ID = "SESSION_ID";
+     static final String SESSION_ID = "SESSION_ID";
 
-    public abstract TexasResponse sendAndWaitForResponse(
+     abstract TexasResponse sendAndWaitForResponse(
             final BotPlayer player,
             final TexasRequest request);
 
-    public abstract void terminateSession(final BotPlayer player);
+     abstract void terminateSession(final BotPlayer player);
 
     @Subscribe
-    public abstract void notifyPlayerOfEvent(final EventWrapper eventWrapper);
+     abstract void notifyPlayerOfEvent(final EventWrapper eventWrapper);
 
     @Subscribe
-    public abstract void onPlayerQuit(final PlayerQuitEvent playerQuitEvent);
+     abstract void onPlayerQuit(final PlayerQuitEvent playerQuitEvent);
 
     @Subscribe
-    public abstract void onRegisterForPlay(
+     abstract void onRegisterForPlay(
             final RegisterForPlayWrapper requestWrapper);
 
-    public int getNoofPlayers();
+     int getNoofPlayers();
 
-    public List<BotPlayer> listPlayers();
+     List<BotPlayer> listPlayers();
 
-    public Tournament getAvailableTournament();
+     Tournament getAvailableTournament();
 
-    public List<Tournament> listFinishedOrStartedTournaments();
+     List<Tournament> listFinishedOrStartedTournaments();
 
-    public Tournament getTournament(String id);
+     Tournament getTournament(String id);
 
 }

@@ -24,18 +24,15 @@ import java.util.Locale;
 @Controller
 public class TournamentController {
 
-    private static Logger log = LoggerFactory
-            .getLogger(TournamentController.class);
-
     @Autowired
     SessionManager sessionManager;
 
     @Autowired
     StatisticsCollector statisticsCollector;
 
-    public static String TOURNAMENT_LIST = "tournamentList";
-    public static String TOURNAMENT_CURRENT = "tournamentCurrent";
-    public static String TOURNAMENT_CURRENT_START = "tournamentCurrentStart";
+    public static final String TOURNAMENT_LIST = "tournamentList";
+    public static final String TOURNAMENT_CURRENT = "tournamentCurrent";
+    public static final String TOURNAMENT_CURRENT_START = "tournamentCurrentStart";
 
     @RequestMapping(value = "/tournament", method = RequestMethod.GET)
     public String home(@RequestParam(value = "id", required = false) String tournamentId, Locale locale, Model model) {

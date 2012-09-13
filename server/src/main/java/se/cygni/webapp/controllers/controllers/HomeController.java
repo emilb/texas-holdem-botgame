@@ -13,9 +13,6 @@ import java.util.Locale;
 @RequestMapping(value = "/")
 public class HomeController {
 
-    private static Logger log = LoggerFactory
-            .getLogger(HomeController.class);
-
     @RequestMapping(method = RequestMethod.GET)
     public String home(Locale locale, Model model) {
 

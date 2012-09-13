@@ -15,9 +15,6 @@ import se.cygni.texasholdem.server.eventbus.RegisterForPlayWrapper;
 @Service
 public class MessageReceiver {
 
-    private static Logger log = LoggerFactory
-            .getLogger(MessageReceiver.class);
-
     private final ResponseLockManager responseLockManager;
     private final EventBus eventBus;
 
@@ -32,8 +29,6 @@ public class MessageReceiver {
     public void onRequest(
             final ChannelHandlerContext context,
             final TexasMessage message) {
-
-        // log.debug("Received a message: " + message.getType());
 
         if (message instanceof RegisterForPlayRequest) {
             eventBus.post(new RegisterForPlayWrapper(context,

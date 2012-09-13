@@ -20,7 +20,7 @@ public class TexasMessageParser {
     private static ObjectMapper mapper = new ObjectMapper();
 
     private static JsonFactory factory = new JsonFactory();
-    private static String TYPE_IDENTIFIER = "type";
+    private static final String TYPE_IDENTIFIER = "type";
 
     private static Map<String, Class<? extends TexasMessage>> typeToClass = new HashMap<String, Class<? extends TexasMessage>>();
 
@@ -42,8 +42,10 @@ public class TexasMessageParser {
         }
     }
 
+    private TexasMessageParser() {}
+
     public static TexasMessage decodeMessage(final String msg)
-            throws JsonParseException, JsonMappingException, IOException {
+            throws IOException {
         try {
             final TexasMessage message = mapper
                     .readValue(msg,
@@ -57,7 +59,7 @@ public class TexasMessageParser {
     }
 
     public static String encodeMessage(final TexasMessage message)
-            throws JsonGenerationException, JsonMappingException, IOException {
+            throws IOException {
 
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
         mapper.writeValue(out, message);

@@ -8,6 +8,8 @@ import java.util.List;
 
 public class TournamentUtil {
 
+    private TournamentUtil() {}
+
     public static TournamentLog createTournamentLog(Tournament tournament) {
         if (tournament == null) {
             return null;

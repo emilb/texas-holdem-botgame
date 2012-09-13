@@ -18,27 +18,20 @@ import java.util.Locale;
 @Controller
 public class ServerStatusController {
 
-    private static Logger log = LoggerFactory
-            .getLogger(ServerStatusController.class);
-
     @Autowired
     SessionManager sessionManager;
 
     @Autowired
     StatisticsCollector statisticsCollector;
 
-
     @RequestMapping(value = "/serverstatus", method = RequestMethod.GET)
     public String home(Locale locale, Model model) {
-
-
         model.addAttribute("uptime", statisticsCollector.getUpTimeAsText());
         model.addAttribute("noofPlayers", sessionManager.getNoofPlayers());
         model.addAttribute("totalNoofConnections", statisticsCollector.getTotalNoofConnectionsMade());
 
         List<GamePlayer> players = PlayerTypeConverter.listOfBotPlayers(sessionManager.listPlayers());
         model.addAttribute("players", players);
-
 
         return "serverstatus";
     }

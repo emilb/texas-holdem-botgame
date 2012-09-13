@@ -27,14 +27,11 @@ public class StatisticsCollector {
 
     private AtomicLong noofConnections = new AtomicLong();
 
-    private EventBus eventBus;
-
     private CircularBuffer<TableHistory> tableHistories;
 
     @Autowired
     public StatisticsCollector(EventBus eventBus) {
-        this.eventBus = eventBus;
-        this.eventBus.register(this);
+        eventBus.register(this);
         tableHistories = new CircularBuffer<TableHistory>(MAX_HISTORY_TABLES, new Comparator<TableHistory>() {
             @Override
             public int compare(TableHistory first, TableHistory second) {

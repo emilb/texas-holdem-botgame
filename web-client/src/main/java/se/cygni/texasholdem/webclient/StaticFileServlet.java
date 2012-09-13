@@ -14,7 +14,7 @@ import java.io.*;
 public class StaticFileServlet extends HttpServlet {
 
     // Warning! If this value is changed be sure to update Launcher as well.
-    public static String SYS_PROP_STATIC_DIR = "static.dir";
+    public static final String SYS_PROP_STATIC_DIR = "static.dir";
 
     private static Logger log = LoggerFactory
             .getLogger(StaticFileServlet.class);

@@ -98,7 +98,7 @@ public class SocketServer {
 
         } catch (Exception e) {
             log.error("Failed to send message", e);
-            throw new RuntimeException(e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 

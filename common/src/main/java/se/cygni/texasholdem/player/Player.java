@@ -6,44 +6,44 @@ import se.cygni.texasholdem.game.Action;
 
 public interface Player {
 
-    public String getName();
+     String getName();
 
-    public void serverIsShuttingDown(ServerIsShuttingDownEvent event);
+     void serverIsShuttingDown(ServerIsShuttingDownEvent event);
 
-    public void onPlayIsStarted(PlayIsStartedEvent event);
+     void onPlayIsStarted(PlayIsStartedEvent event);
 
-    public void onTableChangedStateEvent(TableChangedStateEvent event);
+     void onTableChangedStateEvent(TableChangedStateEvent event);
 
-    public void onYouHaveBeenDealtACard(YouHaveBeenDealtACardEvent event);
+     void onYouHaveBeenDealtACard(YouHaveBeenDealtACardEvent event);
 
-    public void onCommunityHasBeenDealtACard(
+     void onCommunityHasBeenDealtACard(
             CommunityHasBeenDealtACardEvent event);
 
-    public void onPlayerBetBigBlind(PlayerBetBigBlindEvent event);
+     void onPlayerBetBigBlind(PlayerBetBigBlindEvent event);
 
-    public void onPlayerBetSmallBlind(PlayerBetSmallBlindEvent event);
+     void onPlayerBetSmallBlind(PlayerBetSmallBlindEvent event);
 
-    public void onPlayerFolded(PlayerFoldedEvent event);
+     void onPlayerFolded(PlayerFoldedEvent event);
 
-    public void onPlayerCalled(PlayerCalledEvent event);
+     void onPlayerCalled(PlayerCalledEvent event);
 
-    public void onPlayerRaised(PlayerRaisedEvent event);
+     void onPlayerRaised(PlayerRaisedEvent event);
 
-    public void onPlayerWentAllIn(PlayerWentAllInEvent event);
+     void onPlayerWentAllIn(PlayerWentAllInEvent event);
 
-    public void onPlayerChecked(PlayerCheckedEvent event);
+     void onPlayerChecked(PlayerCheckedEvent event);
 
-    public void onYouWonAmount(YouWonAmountEvent event);
+     void onYouWonAmount(YouWonAmountEvent event);
 
-    public void onShowDown(ShowDownEvent event);
+     void onShowDown(ShowDownEvent event);
 
-    public void onTableIsDone(TableIsDoneEvent event);
+     void onTableIsDone(TableIsDoneEvent event);
 
-    public void onPlayerQuit(PlayerQuitEvent event);
+     void onPlayerQuit(PlayerQuitEvent event);
 
-    public Action actionRequired(ActionRequest request);
+     Action actionRequired(ActionRequest request);
 
-    public void connectionToGameServerLost();
+     void connectionToGameServerLost();
 
-    public void connectionToGameServerEstablished();
+     void connectionToGameServerEstablished();
 }

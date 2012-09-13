@@ -16,12 +16,6 @@ import java.util.Locale;
 @RequestMapping(value = "/")
 public class HouseRulesController {
 
-    private static Logger log = LoggerFactory
-            .getLogger(HouseRulesController.class);
-
-    @Autowired
-    SessionManager sessionManager;
-
     @Autowired
     GamePlan gamePlan;
 

@@ -16,12 +16,6 @@ import java.util.Locale;
 @RequestMapping(value = "/gettingstarted")
 public class GettingStartedController {
 
-    private static Logger log = LoggerFactory
-            .getLogger(GettingStartedController.class);
-
-    @Autowired
-    SessionManager sessionManager;
-
     @Autowired
     GamePlan gamePlan;
 

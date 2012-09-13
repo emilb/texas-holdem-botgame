@@ -16,9 +16,6 @@ public class MessageSender {
 
     private static final long RESPONSE_TIMEOUT = 3000;
 
-    private static Logger log = LoggerFactory
-            .getLogger(MessageSender.class);
-
     private final SocketServer socketServer;
     private final ResponseLockManager responseLockManager;
 
@@ -67,8 +64,6 @@ public class MessageSender {
             throw new RuntimeException("Did not get response in time");
         }
 
-        // log.debug("It took {}ms to get reply from client",
-        // (System.currentTimeMillis() - startTime));
         return lock.getResponse();
     }
 }

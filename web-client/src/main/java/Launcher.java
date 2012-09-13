@@ -11,30 +11,30 @@ import java.security.ProtectionDomain;
 
 public final class Launcher {
 
-    final static OptionParser parser = new OptionParser();
+    private static final OptionParser parser = new OptionParser();
 
-    final static OptionSpec<Integer> localPort = parser.accepts("p", "The port for the local webserver to listen to")
+    private static final OptionSpec<Integer> localPort = parser.accepts("p", "The port for the local webserver to listen to")
             .withRequiredArg()
             .ofType(Integer.class)
             .describedAs("local-port").defaultsTo(8080);
 
-    final static OptionSpec<Integer> remotePort = parser.accepts("r", "Remote port for the Poker server")
+    private static final OptionSpec<Integer> remotePort = parser.accepts("r", "Remote port for the Poker server")
             .withRequiredArg()
             .ofType(Integer.class)
             .describedAs("remote-port").defaultsTo(4711);
 
-    final static OptionSpec<String> remoteHost = parser
+    private static final OptionSpec<String> remoteHost = parser
             .accepts("h", "Remote host for the Poker server").withRequiredArg()
             .ofType(String.class)
             .describedAs("remote-host").defaultsTo("localhost");
 
-    final static OptionSpec<String> directory = parser
+    private static final OptionSpec<String> directory = parser
             .accepts("d",
                     "Full path to the directory containing static files, are served under the context /player/")
             .withRequiredArg().ofType(String.class)
             .describedAs("directory").required();
 
-    final static OptionSpec<Void> help = parser.accepts("?", "show help");
+    private static final OptionSpec<Void> help = parser.accepts("?", "show help");
 
     public static void main(String[] args) throws Exception {
 

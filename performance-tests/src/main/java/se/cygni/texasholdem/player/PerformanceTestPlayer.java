@@ -136,22 +136,18 @@ public class PerformanceTestPlayer extends BasicPlayer {
             action = foldAction;
         }
 
-//        log.debug("{} returning action: {}", getName(), action);
         return action;
     }
 
     @Override
     public void connectionToGameServerLost() {
-//        log.info("I've lost my connection to the game server!");
-//        log.info("Connecting for another game!");
+
         playAGame();
     }
 
     @Override
     public void onTableIsDone(TableIsDoneEvent event) {
 
-        //playerClient.disconnect();
-        //System.exit(0);
     }
 
     public static void main(String[] args) {

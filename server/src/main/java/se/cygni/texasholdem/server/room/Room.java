@@ -32,7 +32,7 @@ public abstract class Room {
     protected GamePlan gamePlan;
     protected final SessionManager sessionManager;
 
-    private static long PlayerTrainerCounter = 0;
+    private static long playerTrainerCounter = 0;
 
     public Room(final EventBus eventBus, final GamePlan gamePlan,
                 final SessionManager sessionManager) {
@@ -83,15 +83,15 @@ public abstract class Room {
 
     protected TrainingPlayer getTrainingPlayer() {
         if (RandomUtils.nextBoolean()) {
-            return new RaiserPlayer("Raiser_" + PlayerTrainerCounter++, UUID.randomUUID().toString(), gamePlan.getStartingChipsAmount());
+            return new RaiserPlayer("Raiser_" + playerTrainerCounter++, UUID.randomUUID().toString(), gamePlan.getStartingChipsAmount());
         }
         else {
-            return new CrazyPlayer("Crazy_" + PlayerTrainerCounter++, UUID.randomUUID().toString(), gamePlan.getStartingChipsAmount());
+            return new CrazyPlayer("Crazy_" + playerTrainerCounter++, UUID.randomUUID().toString(), gamePlan.getStartingChipsAmount());
         }
     }
 
     protected TrainingPlayer getPhilHellmuthPlayer() {
-        return new PhilHellmuthPlayer("Hellmuth_" + PlayerTrainerCounter++, UUID.randomUUID().toString(), gamePlan.getStartingChipsAmount());
+        return new PhilHellmuthPlayer("Hellmuth_" + playerTrainerCounter++, UUID.randomUUID().toString(), gamePlan.getStartingChipsAmount());
     }
 
     public abstract void addPlayer(BotPlayer player);

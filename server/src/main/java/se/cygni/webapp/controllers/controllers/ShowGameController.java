@@ -20,15 +20,11 @@ import java.util.Locale;
 @Controller
 public class ShowGameController {
 
-    private static Logger log = LoggerFactory
-            .getLogger(ShowGameController.class);
-
     @Autowired
     SessionManager sessionManager;
 
     @Autowired
     StatisticsCollector statisticsCollector;
-
 
     @RequestMapping(value = "/showgame", method = RequestMethod.GET)
     public String home(Locale locale, Model model) {
@@ -59,7 +55,6 @@ public class ShowGameController {
 
         return reversedListOfTableIds;
     }
-
 
     private GameNavigation getGameNavigation(GameLog gameLog) {
         GameNavigation position = new GameNavigation();

@@ -8,6 +8,8 @@ import java.util.List;
 
 public class PlayerTypeConverter {
 
+    private PlayerTypeConverter() {}
+
     public static List<GamePlayer> listOfBotPlayers(final List<BotPlayer> bots) {
         List<GamePlayer> players = new ArrayList<GamePlayer>(bots.size());
         for (BotPlayer bot : bots) {

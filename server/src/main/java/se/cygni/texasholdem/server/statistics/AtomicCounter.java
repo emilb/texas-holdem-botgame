@@ -6,7 +6,9 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class AtomicCounter {
 
-    static final ConcurrentMap<String, AtomicLong> counterMap = new ConcurrentHashMap<String, AtomicLong>();
+    private static final ConcurrentMap<String, AtomicLong> counterMap = new ConcurrentHashMap<String, AtomicLong>();
+
+    private AtomicCounter() {}
 
     public static long value(String key) {
         if (!counterMap.containsKey(key)) {
