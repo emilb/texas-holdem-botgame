@@ -16,7 +16,10 @@ import se.cygni.texasholdem.server.session.SessionManager;
 import se.cygni.texasholdem.server.statistics.StatisticsCollector;
 import se.cygni.webapp.controllers.controllers.model.StartTournament;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Locale;
 
 @Controller
 public class TournamentController {

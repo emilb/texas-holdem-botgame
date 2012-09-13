@@ -2,7 +2,6 @@ package se.cygni.texasholdem;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.springframework.util.StopWatch;
 
 public class SystemSettingsTest {
 

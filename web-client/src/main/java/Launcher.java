@@ -3,8 +3,6 @@ import joptsimple.OptionSet;
 import joptsimple.OptionSpec;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
-import se.cygni.texasholdem.webclient.StaticFileServlet;
-import se.cygni.texasholdem.webclient.WebPlayerClient;
 
 import java.io.File;
 import java.io.IOException;

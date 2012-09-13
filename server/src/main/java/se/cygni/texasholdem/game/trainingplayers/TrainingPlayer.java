@@ -1,7 +1,6 @@
 package se.cygni.texasholdem.game.trainingplayers;
 
 import se.cygni.texasholdem.client.ClientEventDispatcher;
-import se.cygni.texasholdem.communication.message.TexasMessage;
 import se.cygni.texasholdem.communication.message.event.TexasEvent;
 import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.player.Player;

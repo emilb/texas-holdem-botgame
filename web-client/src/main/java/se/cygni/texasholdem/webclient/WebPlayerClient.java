@@ -12,7 +12,6 @@ import org.jboss.netty.handler.codec.string.StringEncoder;
 import org.jboss.netty.util.CharsetUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import se.cygni.texasholdem.client.SyncMessageResponseManager;
 import se.cygni.texasholdem.communication.lock.ResponseLock;
 import se.cygni.texasholdem.communication.message.TexasMessage;

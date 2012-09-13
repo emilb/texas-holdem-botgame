@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import se.cygni.texasholdem.communication.message.event.TableIsDoneEvent;
 import se.cygni.texasholdem.dao.model.GameLog;
 import se.cygni.texasholdem.game.BotPlayer;
-import se.cygni.texasholdem.game.Card;
 import se.cygni.texasholdem.game.trainingplayers.TrainingPlayer;
 import se.cygni.texasholdem.game.util.GameUtil;
 import se.cygni.texasholdem.server.eventbus.EventBusUtil;

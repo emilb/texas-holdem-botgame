@@ -1,7 +1,6 @@
 package se.cygni.texasholdem;
 
 import org.springframework.stereotype.Component;
-import org.springframework.util.StopWatch;
 import se.cygni.texasholdem.util.SystemFieldPopulator;
 
 /**

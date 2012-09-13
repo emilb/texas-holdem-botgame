@@ -642,7 +642,7 @@
     </issueManagement>
 
     <ciManagement>
-        <url>https://texas-holdem.ci.cloudbees.com/job/texas-holdem-botgame/</url>
+        <url>https://poker.cygni.se/jenkins</url>
         <system>Jenkins</system>
     </ciManagement>
 

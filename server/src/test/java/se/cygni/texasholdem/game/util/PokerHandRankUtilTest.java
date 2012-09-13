@@ -1,17 +1,12 @@
 package se.cygni.texasholdem.game.util;
 
-import junit.framework.TestCase;
 import org.junit.Test;
-import se.cygni.texasholdem.game.BestHand;
 import se.cygni.texasholdem.game.BotPlayer;
-import se.cygni.texasholdem.game.Card;
-import se.cygni.texasholdem.game.definitions.PokerHand;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static se.cygni.texasholdem.test.util.TestUtil.createPokerHandUtil;
 import static se.cygni.texasholdem.test.util.TestUtil.getCard;
 import static se.cygni.texasholdem.test.util.TestUtil.getCards;
 

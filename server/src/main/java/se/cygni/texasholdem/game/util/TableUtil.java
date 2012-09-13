@@ -1,7 +1,5 @@
 package se.cygni.texasholdem.game.util;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.ListUtils;
 import org.apache.commons.lang.math.RandomUtils;
 import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.table.Table;
