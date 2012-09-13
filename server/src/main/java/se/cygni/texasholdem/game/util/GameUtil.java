@@ -11,6 +11,8 @@ import java.util.*;
 
 public class GameUtil {
 
+    private GameUtil() {}
+
     /**
      * Returns the next player that still has chips to play for.
      *
@@ -60,15 +62,17 @@ public class GameUtil {
         for (int currIx = startPos + 1; currIx < players.size(); currIx++) {
             final BotPlayer nextPlayer = players.get(currIx);
             if ((pot != null && pot.isAbleToBet(nextPlayer)) ||
-                    (pot == null && playerHasChips(nextPlayer)))
+                    (pot == null && playerHasChips(nextPlayer))) {
                 result.add(nextPlayer);
+            }
         }
 
         for (int currIx = 0; currIx < startPos + 1; currIx++) {
             final BotPlayer nextPlayer = players.get(currIx);
             if ((pot != null && pot.isAbleToBet(nextPlayer)) ||
-                    (pot == null && playerHasChips(nextPlayer)))
+                    (pot == null && playerHasChips(nextPlayer))) {
                 result.add(nextPlayer);
+            }
         }
 
         return result;
@@ -110,8 +114,9 @@ public class GameUtil {
         final Iterator<BotPlayer> iter = players.iterator();
         while (iter.hasNext()) {
             final BotPlayer player = iter.next();
-            if (GameUtil.playerHasChips(player))
+            if (GameUtil.playerHasChips(player)) {
                 playersWithChipsLeft.add(player);
+            }
         }
 
         return playersWithChipsLeft;
@@ -129,8 +134,9 @@ public class GameUtil {
         final Iterator<BotPlayer> iter = players.iterator();
         while (iter.hasNext()) {
             final BotPlayer player = iter.next();
-            if (!GameUtil.playerHasChips(player))
+            if (!GameUtil.playerHasChips(player)) {
                 playersWithoutChipsLeft.add(player);
+            }
         }
 
         return playersWithoutChipsLeft;
@@ -158,11 +164,13 @@ public class GameUtil {
 
         int noofPlayersWithChipsLeft = 0;
         for (final BotPlayer player : players) {
-            if (player.getChipAmount() > 0)
+            if (player.getChipAmount() > 0) {
                 noofPlayersWithChipsLeft++;
+            }
 
-            if (noofPlayersWithChipsLeft > 1)
+            if (noofPlayersWithChipsLeft > 1) {
                 return false;
+            }
         }
 
         return true;
@@ -176,9 +184,9 @@ public class GameUtil {
 
         // Check is Ok as long as this player is even with the pot
         long amountNeededToCall = pot.getAmountNeededToCall(player);
-        if (amountNeededToCall == 0)
+        if (amountNeededToCall == 0) {
             actions.add(new Action(ActionType.CHECK, 0));
-
+        }
 
         // If player has enough money to CALL
         if (amountNeededToCall > 0 && player.getChipAmount() >= amountNeededToCall) {
@@ -202,8 +210,9 @@ public class GameUtil {
         if (playerAction == null)
             return false;
 
-        if (playerAction.getActionType() == null)
+        if (playerAction.getActionType() == null) {
             return false;
+        }
 
         switch (playerAction.getActionType()) {
             case FOLD:
@@ -244,8 +253,9 @@ public class GameUtil {
     private static Action getActionOfType(final List<Action> possibleActions, ActionType actionType) {
 
         for (Action possibleAction : possibleActions) {
-            if (possibleAction.getActionType() == actionType)
+            if (possibleAction.getActionType() == actionType) {
                 return possibleAction;
+            }
         }
 
         return null;
@@ -262,21 +272,25 @@ public class GameUtil {
         gameLog.communityCards.addAll(communityCards);
 
         for (BotPlayer player : players) {
-            if (pot.getTotalBetAmountForPlayer(player) == 0 && !pot.hasFolded(player))
+            if (pot.getTotalBetAmountForPlayer(player) == 0 && !pot.hasFolded(player)) {
                 continue;
+            }
 
             PlayerInGame pg = new PlayerInGame();
 
             pg.name = player.getName();
 
-            if (player == dealerPlayer)
+            if (player == dealerPlayer) {
                 pg.dealer = true;
+            }
 
-            if (player == smallBlindPlayer)
+            if (player == smallBlindPlayer) {
                 pg.smallBlind = true;
+            }
 
-            if (player == bigBlindPlayer)
+            if (player == bigBlindPlayer) {
                 pg.bigBlind = true;
+            }
 
             pg.preflopBet = pot.getTotalBetAmountForPlayerInPlayState(player, PlayState.PRE_FLOP);
             pg.flopBet =  pot.getTotalBetAmountForPlayerInPlayState(player, PlayState.FLOP);

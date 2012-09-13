@@ -42,8 +42,9 @@ public class Tournament extends Room {
 
     @Override
     public void addPlayer(BotPlayer player) {
-        if (!tournamentHasStarted)
+        if (!tournamentHasStarted) {
             playerPool.add(player);
+        }
     }
 
     public GamePlan getGamePlan() {
@@ -83,19 +84,22 @@ public class Tournament extends Room {
 
         // Add all current active players
         for (BotPlayer player : playerPool) {
-            if (GameUtil.playerHasChips(player))
+            if (GameUtil.playerHasChips(player)) {
                 currentPlayerRank.add(PlayerTypeConverter.fromBotPlayer(player));
+            }
         }
 
         // Sort descending
         Collections.sort(currentPlayerRank, new Comparator<GamePlayer>() {
             @Override
             public int compare(GamePlayer player, GamePlayer player1) {
-                if (player.getChipCount() == player1.getChipCount())
+                if (player.getChipCount() == player1.getChipCount()) {
                     return 0;
+                }
 
-                if (player.getChipCount() > player1.getChipCount())
+                if (player.getChipCount() > player1.getChipCount()) {
                     return -1;
+                }
 
                 return 1;
             }
@@ -108,8 +112,9 @@ public class Tournament extends Room {
     public void startTournament() {
 
         // Already started
-        if (tournamentHasStarted)
+        if (tournamentHasStarted) {
             return;
+        }
 
         tournamentHasStarted = true;
 
@@ -123,12 +128,14 @@ public class Tournament extends Room {
 
     private BotPlayer getWinner() {
 
-        if (!isThereAWinner())
+        if (!isThereAWinner()) {
             return null;
+        }
 
         for (BotPlayer player : playerPool) {
-            if (GameUtil.playerHasChips(player))
+            if (GameUtil.playerHasChips(player)) {
                 return player;
+            }
         }
 
         return null;
@@ -189,8 +196,9 @@ public class Tournament extends Room {
         while (true) {
             boolean allStopped = true;
             for (Table table : tables) {
-                if (!table.gameHasStopped())
+                if (!table.gameHasStopped()) {
                     allStopped = false;
+                }
             }
             if (allStopped)
                 return;
@@ -211,8 +219,9 @@ public class Tournament extends Room {
     @Override
     public void onTableGameDone(Table table) {
 
-        if (!tables.contains(table))
+        if (!tables.contains(table)) {
             return;
+        }
 
         if (isThereAWinner()) {
             log.info("This tournament has a winner, ending!");

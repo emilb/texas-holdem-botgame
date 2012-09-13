@@ -171,8 +171,9 @@ public class CurrentPlayState {
      * @return the long value of the chip amount this player has invested in the pot
      */
     public long getInvestmentInPotFor(GamePlayer player) {
-        if (!potInvestmentPerPlayer.containsKey(player))
+        if (!potInvestmentPerPlayer.containsKey(player)) {
             return 0;
+        }
 
         return potInvestmentPerPlayer.get(player);
     }
@@ -269,15 +270,17 @@ public class CurrentPlayState {
         @Override
         public void onPlayerCalled(PlayerCalledEvent event) {
             addPotInvestmentToPlayer(event.getPlayer(), event.getCallBet());
-            if (event.getPlayer().getChipCount() == 0)
+            if (event.getPlayer().getChipCount() == 0) {
                 allInPlayers.add(event.getPlayer());
+            }
         }
 
         @Override
         public void onPlayerRaised(PlayerRaisedEvent event) {
             addPotInvestmentToPlayer(event.getPlayer(), event.getRaiseBet());
-            if (event.getPlayer().getChipCount() == 0)
+            if (event.getPlayer().getChipCount() == 0) {
                 allInPlayers.add(event.getPlayer());
+            }
         }
 
         @Override

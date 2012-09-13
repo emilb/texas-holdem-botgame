@@ -91,8 +91,9 @@ public class PokerHandUtil {
             }
         }
 
-        if (potentialRoyalFlush == null)
+        if (potentialRoyalFlush == null) {
             throw new RuntimeException("No Royal Flush found");
+        }
 
         potentialRoyalFlush = getHighestSortedAndExclude(5,
                 potentialRoyalFlush, null);
@@ -118,14 +119,16 @@ public class PokerHandUtil {
             }
         }
 
-        if (potentialStraightFlush == null)
+        if (potentialStraightFlush == null) {
             throw new RuntimeException("No Straight Flush found");
+        }
 
         potentialStraightFlush = getLongestConsecutiveSubset(potentialStraightFlush);
 
-        if (potentialStraightFlush.size() < 5)
+        if (potentialStraightFlush.size() < 5) {
             throw new RuntimeException(
                     "No Straight Flush of sufficient length found");
+        }
 
         final int size = potentialStraightFlush.size();
         if (size > 5) {
@@ -149,8 +152,9 @@ public class PokerHandUtil {
             }
         }
 
-        if (potentialFourOfAKind == null)
+        if (potentialFourOfAKind == null) {
             throw new RuntimeException("No Four of a kind found");
+        }
 
         // Sort by suit
         Collections.sort(potentialFourOfAKind, CardSortBy.SUIT.getComparator());
@@ -163,13 +167,16 @@ public class PokerHandUtil {
     protected BestHand isFullHouse() {
 
         final List<Card> highestThreeOfAKind = getHighestOfSameRank(3, cards);
-        if (CollectionUtils.isEmpty(highestThreeOfAKind))
+        if (CollectionUtils.isEmpty(highestThreeOfAKind)) {
             throw new RuntimeException("No three of a kind found in Full House");
+        }
 
         final List<Card> highestTwoOfAKind = getHighestOfSameRankExcluding(2,
                 cards, highestThreeOfAKind.get(0).getRank());
-        if (CollectionUtils.isEmpty(highestTwoOfAKind))
+        
+        if (CollectionUtils.isEmpty(highestTwoOfAKind)) {
             throw new RuntimeException("No two of a kind found in Full House");
+        }
 
         final List<Card> fullHouse = new ArrayList<Card>();
         fullHouse.addAll(highestThreeOfAKind);
@@ -188,8 +195,9 @@ public class PokerHandUtil {
             }
         }
 
-        if (potentialFlush == null)
+        if (potentialFlush == null) {
             throw new RuntimeException("No Flush found");
+        }
 
         potentialFlush = getHighestSortedAndExclude(5, potentialFlush, null);
 
@@ -201,8 +209,9 @@ public class PokerHandUtil {
 
         List<Card> potentialStraight = getLongestConsecutiveSubset(cards);
 
-        if (potentialStraight.size() < 5)
+        if (potentialStraight.size() < 5) {
             throw new RuntimeException("No straight found");
+        }
 
         final int size = potentialStraight.size();
         if (size > 5) {
@@ -236,8 +245,9 @@ public class PokerHandUtil {
             }
         }
 
-        if (CollectionUtils.isEmpty(potentialThreeOfAKind))
+        if (CollectionUtils.isEmpty(potentialThreeOfAKind)) {
             throw new RuntimeException("No Three of a kind found");
+        }
 
         Collections
                 .sort(potentialThreeOfAKind, CardSortBy.SUIT.getComparator());
@@ -250,14 +260,16 @@ public class PokerHandUtil {
     protected BestHand isTwoPairs() {
 
         final List<Card> highestTwoOfAKind = getHighestOfSameRank(2, cards);
-        if (CollectionUtils.isEmpty(highestTwoOfAKind))
+        if (CollectionUtils.isEmpty(highestTwoOfAKind)) {
             throw new RuntimeException("No two of a kind found in Two pairs");
+        }
 
         final List<Card> nextHighestTwoOfAKind = getHighestOfSameRankExcluding(
                 2, cards, highestTwoOfAKind.get(0).getRank());
-        if (CollectionUtils.isEmpty(nextHighestTwoOfAKind))
+        if (CollectionUtils.isEmpty(nextHighestTwoOfAKind)) {
             throw new RuntimeException(
                     "No second two of a kind found in Two pairs");
+        }
 
         final List<Card> twoPairs = new ArrayList<Card>();
         twoPairs.addAll(highestTwoOfAKind);
@@ -274,9 +286,10 @@ public class PokerHandUtil {
         for (final Entry<Rank, List<Card>> entry : rankDistribution.entrySet()) {
             if (entry.getValue().size() == 2) {
 
-                if (potentialOnePair != null)
+                if (potentialOnePair != null) {
                     throw new RuntimeException(
                             "Already found a pair, this hand contains two pairs");
+                }
 
                 potentialOnePair = entry.getValue();
             } else if (entry.getValue().size() > 2) {
@@ -285,8 +298,9 @@ public class PokerHandUtil {
             }
         }
 
-        if (potentialOnePair == null)
+        if (potentialOnePair == null) {
             throw new RuntimeException("No One pair found");
+        }
 
         // The best hand is the one pair plus the highest other cards.
         final List<Card> restOfCards = getHighestSortedAndExclude(3, cards,

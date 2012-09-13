@@ -12,14 +12,18 @@ import java.util.List;
 
 public class EventBusUtil {
 
+    private EventBusUtil() {}
+
     public static void postToEventBus(
             final EventBus eventBus,
             final TexasEvent event,
             final BotPlayer... players) {
 
         final List<BotPlayer> recipients = new ArrayList<BotPlayer>();
-        for (final BotPlayer player : players)
+        
+        for (final BotPlayer player : players) {
             recipients.add(player);
+        }
 
         postToEventBus(eventBus, event, recipients);
     }

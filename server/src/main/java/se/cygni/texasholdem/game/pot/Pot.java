@@ -45,8 +45,9 @@ public class Pot {
      */
     public long getMinimumBetForPlayerToCall(final BotPlayer player) {
 
-        if (hasFolded(player) || isAllIn(player))
+        if (hasFolded(player) || isAllIn(player)) {
             return 0L;
+        }
 
         final long max = getMaxTotalBetInCurrentPlayState();
         final long playerBet = getTotalBetAmountForPlayerInPlayState(player,
@@ -65,24 +66,29 @@ public class Pot {
      */
     public long bet(final BotPlayer player, final long amount) {
 
-        if (!canPlaceBetInCurrentPlayState())
+        if (!canPlaceBetInCurrentPlayState()) {
             throw new IllegalStateException("Pot is in state: "
                     + currentPlayState.getName() + ", no more bets allowed");
+        }
 
-        if (foldedPlayers.contains(player))
+        if (foldedPlayers.contains(player)) {
             throw new IllegalStateException("Player: " + player
                     + " has folded, cannot bet");
+        }
 
-        if (amount < 0)
+        if (amount < 0) {
             throw new IllegalArgumentException("Player: " + player
                     + " tried to place negative bet");
+        }
 
-        if (amount == 0)
+        if (amount == 0) {
             return 0;
+        }
 
-        if (player.getChipAmount() <= 0)
+        if (player.getChipAmount() <= 0) {
             throw new IllegalStateException("Player: " + player
                     + " has run out of chips, cannot bet");
+        }
 
         if (!transactionTable.containsKey(currentPlayState)) {
             transactionTable.put(currentPlayState,
@@ -181,9 +187,10 @@ public class Pot {
      */
     public PlayState nextPlayState() {
 
-        if (!isCurrentPlayStateBalanced())
+        if (!isCurrentPlayStateBalanced()) {
             throw new IllegalStateException(
                     "Current state is not balanced, cannot enter next state");
+        }
 
         currentPlayState = PlayState.getNextState(currentPlayState);
         return currentPlayState;
@@ -228,8 +235,9 @@ public class Pot {
         long highest = 0;
 
         for (final BotPlayer player : allPlayers) {
-            if (foldedPlayers.contains(player))
+            if (foldedPlayers.contains(player)) {
                 continue;
+            }
 
             final long playerTotal = getTotalBetAmountForPlayerInPlayState(
                     player, currentPlayState);
@@ -274,13 +282,15 @@ public class Pot {
 
         final List<PotTransaction> transactions = transactionTable
                 .get(playState);
-        if (CollectionUtils.isEmpty(transactions))
+        if (CollectionUtils.isEmpty(transactions)) {
             return 0L;
+        }
 
         long total = 0;
         for (final PotTransaction transaction : transactions) {
-            if (transaction.getPlayer().equals(player))
+            if (transaction.getPlayer().equals(player)) {
                 total += transaction.getAmount();
+            }
         }
 
         return total;
@@ -288,14 +298,17 @@ public class Pot {
 
     public long getAmountNeededToCall(final BotPlayer player) {
 
-        if (foldedPlayers.contains(player))
+        if (foldedPlayers.contains(player)) {
             return 0;
+        }
 
-        if (allInPlayers.contains(player))
+        if (allInPlayers.contains(player)) {
             return 0;
+        }
 
-        if (isCurrentPlayStateBalanced())
+        if (isCurrentPlayStateBalanced()) {
             return 0;
+        }
 
         final long maxPlayersTotalInCurrentPlayState = getMaxTotalBetInCurrentPlayState();
 
@@ -316,8 +329,9 @@ public class Pot {
     public List<PotTransaction> getTransactionsForState(final PlayState state) {
 
         final List<PotTransaction> transactions = new ArrayList<PotTransaction>();
-        if (transactionTable.containsKey(state))
+        if (transactionTable.containsKey(state)) {
             transactions.addAll(transactionTable.get(state));
+        }
 
         return transactions;
     }
@@ -333,17 +347,20 @@ public class Pot {
         final long maxPlayersTotalInCurrentPlayState = getMaxTotalBetInCurrentPlayState();
 
         for (final BotPlayer player : allPlayers) {
-            if (foldedPlayers.contains(player))
+            if (foldedPlayers.contains(player)) {
                 continue;
+            }
 
-            if (allInPlayers.contains(player))
+            if (allInPlayers.contains(player)) {
                 continue;
+            }
 
             final long playerTotal = getTotalBetAmountForPlayerInPlayState(
                     player, currentPlayState);
 
-            if (maxPlayersTotalInCurrentPlayState != playerTotal)
+            if (maxPlayersTotalInCurrentPlayState != playerTotal) {
                 return false;
+            }
         }
 
         return true;
@@ -400,8 +417,9 @@ public class Pot {
      */
     protected long getTotalMaxWinnings(final BotPlayer player) {
 
-        if (hasFolded(player))
+        if (hasFolded(player)) {
             return 0;
+        }
 
         if (!isAllIn(player)) {
             return getTotalPotAmount();
@@ -412,14 +430,16 @@ public class Pot {
         final long thisPlayersTotalBet = getTotalBetAmountForPlayer(player);
 
         // Simplest case, no player has folded, and only this player went all in
-        if (foldedPlayers.isEmpty() && allInPlayers.size() == 1)
+        if (foldedPlayers.isEmpty() && allInPlayers.size() == 1) {
             return thisPlayersTotalBet * allPlayers.size();
+        }
 
         // Otherwise, calculate the side-pot value for this player's all in.
         long total = thisPlayersTotalBet;
         for (final BotPlayer p : allPlayers) {
-            if (p.equals(player))
+            if (p.equals(player)) {
                 continue;
+            }
 
             final long otherPlayersTotalBet = getTotalBetAmountForPlayer(p);
             total += otherPlayersTotalBet > thisPlayersTotalBet ? thisPlayersTotalBet
@@ -440,8 +460,9 @@ public class Pot {
 
         // Init result
         final Map<BotPlayer, Long> result = new HashMap<BotPlayer, Long>();
-        for (final BotPlayer player : allPlayers)
+        for (final BotPlayer player : allPlayers) {
             result.put(player, Long.valueOf(0));
+        }
 
         long totalPotLeft = getTotalPotAmount();
 
@@ -462,8 +483,9 @@ public class Pot {
             for (final BotPlayer player : sameRank) {
 
                 final long maxWin = getTotalMaxWinnings(player);
-                if (maxWin == 0)
+                if (maxWin == 0) {
                     continue;
+                }
 
                 final long winAmount = maxWin <= totalPotLeft ? maxWin
                         : totalPotLeft;
@@ -493,8 +515,9 @@ public class Pot {
             List<BotPlayer> playersWithPayout = new ArrayList<BotPlayer>();
 
             for (BotPlayer player : result.keySet()) {
-                if (result.get(player) > 0)
+                if (result.get(player) > 0) {
                     playersWithPayout.add(player);
+                }
             }
 
             if (playersWithPayout.size() == 1) {
@@ -526,8 +549,9 @@ public class Pot {
 
     private boolean allPlayersFolded() {
         for (final BotPlayer player : allPlayers) {
-            if (!hasFolded(player))
+            if (!hasFolded(player)) {
                 return false;
+            }
         }
 
         return true;

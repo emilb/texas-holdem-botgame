@@ -189,8 +189,9 @@ public class GameRound {
 
     protected void getBetsTillPotBalanced() {
 
-        if (pot.isInPlayState(PlayState.PRE_FLOP))
+        if (pot.isInPlayState(PlayState.PRE_FLOP)) {
             doInitialBettingRound();
+        }
 
         log.debug("Starting normal betting round pot is balanced: {}", pot.isCurrentPlayStateBalanced());
 
