@@ -16,6 +16,8 @@ import java.util.Map.Entry;
  */
 public class ListUtil {
 
+    private ListUtil() {}
+
     /**
      * Creates a map where cards are organized according to their Rank.
      *
@@ -74,11 +76,13 @@ public class ListUtil {
 
         final List<Card> result = new ArrayList<Card>();
 
-        if (first != null)
+        if (first != null) {
             result.addAll(first);
+        }
 
-        if (second != null)
+        if (second != null) {
             result.addAll(second);
+        }
 
         return result;
     }
@@ -133,8 +137,9 @@ public class ListUtil {
         Collections.sort(removed, CardSortBy.RANK.getComparator());
         Collections.reverse(removed);
 
-        if (noof > removed.size())
+        if (noof > removed.size()) {
             return removed;
+        }
 
         return removed.subList(0, noof);
     }
@@ -213,9 +218,10 @@ public class ListUtil {
         // In case the end is part of the largest consecutive sublist
         if (currStartPos < sortedCards.size() - 1
                 && sortedCards.size() - 1 - currStartPos > largestConsecutive
-                .size() - 1)
+                .size() - 1) {
             largestConsecutive = sortedCards.subList(currStartPos,
                     sortedCards.size());
+        }
 
         return largestConsecutive;
     }
@@ -238,8 +244,9 @@ public class ListUtil {
         Card previousCard = null;
 
         for (final Card c : sortedCards) {
-            if (previousCard == null || previousCard.getRank() != c.getRank())
+            if (previousCard == null || previousCard.getRank() != c.getRank()) {
                 result.add(c);
+            }
 
             previousCard = c;
         }
@@ -264,8 +271,9 @@ public class ListUtil {
 
         final List<Card> activeCardList = new ArrayList<Card>();
         for (final Card c : cards) {
-            if (c.getRank() != excludedRank)
+            if (c.getRank() != excludedRank) {
                 activeCardList.add(c);
+            }
         }
 
         return getHighestOfSameRank(noof, activeCardList);

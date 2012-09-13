@@ -47,17 +47,21 @@ public class ClientEventDispatcher {
 
         final Method ms[] = target.getClass().getMethods();
         for (final Method m : ms) {
-            if (m.getReturnType() != void.class)
+            if (m.getReturnType() != void.class) {
                 continue;
+            }
 
-            if (m.getParameterTypes().length != 1)
+            if (m.getParameterTypes().length != 1) {
                 continue;
+            }
 
-            if (!Modifier.isPublic(m.getModifiers()))
+            if (!Modifier.isPublic(m.getModifiers())) {
                 continue;
+            }
 
-            if (!isDeclaredInInterface(m))
+            if (!isDeclaredInInterface(m)) {
                 continue;
+            }
 
             // Has to be only one
             final Class<?> parameter = m.getParameterTypes()[0];
@@ -67,8 +71,9 @@ public class ClientEventDispatcher {
             }
         }
 
-        if (log.isTraceEnabled())
+        if (log.isTraceEnabled()) {
             printInvokeMap();
+        }
     }
 
     /**
@@ -96,10 +101,10 @@ public class ClientEventDispatcher {
         try {
             final Method ifaceMethod = Player.class.getMethod(
                     m.getName(), m.getParameterTypes());
-            if (ifaceMethod != null)
+            if (ifaceMethod != null) {
                 return true;
-        } catch (final Exception e) {
-        }
+            }
+        } catch (final Exception e) { }
 
         return false;
     }

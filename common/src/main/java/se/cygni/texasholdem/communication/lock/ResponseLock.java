@@ -20,12 +20,14 @@ public class ResponseLock {
 
     public void setResponse(final TexasResponse response) {
 
-        if (response == null)
+        if (response == null) {
             throw new IllegalArgumentException("Response is null");
+        }
 
-        if (!StringUtils.equals(requestId, response.getRequestId()))
+        if (!StringUtils.equals(requestId, response.getRequestId())) {
             throw new IllegalArgumentException("Response has wrong request ID");
-
+        }
+        
         this.response = response;
     }
 

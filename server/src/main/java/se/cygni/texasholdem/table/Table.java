@@ -110,8 +110,9 @@ public class Table implements Runnable {
     protected boolean atLeastOnePlayerIsReal() {
         for (BotPlayer player : players) {
             if (!(player instanceof TrainingPlayer) &&
-                    player.getChipAmount() > 0)
+                    player.getChipAmount() > 0) {
                 return true;
+            }
         }
 
         return false;
@@ -154,8 +155,9 @@ public class Table implements Runnable {
         final Iterator<BotPlayer> iter = players.iterator();
         while (iter.hasNext()) {
             final BotPlayer player = iter.next();
-            if (player.getChipAmount() > 0)
+            if (player.getChipAmount() > 0) {
                 return player;
+            }
         }
 
         return null;
@@ -184,39 +186,15 @@ public class Table implements Runnable {
 
         log.info("Removing player {}", player);
         players.remove(player);
-        if (currentGameRound != null)
+        if (currentGameRound != null) {
             currentGameRound.removePlayerFromGame(player);
+        }
     }
-//
-//    public List<Card> getCardsForPlayer(final BotPlayer player) {
-//
-//        return player.getCards();
-//    }
-//
-//    public long getSmallBlind() {
-//
-//        return smallBlind;
-//    }
-//
-//    public long getBigBlind() {
-//
-//        return bigBlind;
-//    }
 
     public List<BotPlayer> getPlayers() {
 
         return new ArrayList<BotPlayer>(players);
     }
-
-//    public int getNoofPlayers() {
-//
-//        return players.size();
-//    }
-//
-//    public BotPlayer getDealerPlayer() {
-//
-//        return dealerPlayer;
-//    }
 
     public long getTableCounter() {
         return tableCounter;
