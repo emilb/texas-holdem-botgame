@@ -25,6 +25,11 @@ public class Hand {
         this.pokerHand = folded ? PokerHand.NOTHING : pokerHand;
     }
 
+    public Hand(final List<Card> cards,
+                final PokerHand pokerHand) {
+        this(cards, pokerHand, false);
+    }
+
     public List<Card> getCards() {
 
         return cards;

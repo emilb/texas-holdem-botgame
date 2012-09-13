@@ -1,11 +1,11 @@
 package se.cygni.texasholdem.game.util;
 
+import static se.cygni.texasholdem.test.util.PlayerTestUtil.*;
 import junit.framework.Assert;
 import org.junit.Test;
 import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.table.Table;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TableUtilTest {
@@ -89,14 +89,7 @@ public class TableUtilTest {
 
     }
 
-    private List<BotPlayer> createRandomListOfPlayers(int length) {
-        List<BotPlayer> players = new ArrayList<BotPlayer>();
-        for (int i = 0; i < length; i++) {
-            players.add(new BotPlayer("player" + i, "jkjk" + i));
-        }
 
-        return players;
-    }
 
     private void assertListShuffled(List<BotPlayer> originalList, List<BotPlayer> shuffledList) {
         Assert.assertEquals(originalList.size(), shuffledList.size());

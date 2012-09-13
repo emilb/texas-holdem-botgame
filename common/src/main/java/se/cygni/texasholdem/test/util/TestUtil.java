@@ -9,7 +9,6 @@ import se.cygni.texasholdem.game.util.PokerHandUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
 
 public class TestUtil {
 
@@ -50,7 +49,7 @@ public class TestUtil {
      */
     public static PokerHandUtil createPokerHandUtil(final String... shorthand) {
 
-        assertTrue(shorthand.length >= 2);
+        assert (shorthand.length >= 2);
 
         List<Card> communityCards = null;
         List<Card> playerCards = null;

@@ -1,7 +1,7 @@
 package se.cygni.texasholdem.game.util;
 
 import org.apache.commons.collections.CollectionUtils;
-import se.cygni.texasholdem.game.BestHand;
+import se.cygni.texasholdem.game.Hand;
 import se.cygni.texasholdem.game.Card;
 import se.cygni.texasholdem.game.definitions.CardSortBy;
 import se.cygni.texasholdem.game.definitions.PokerHand;
@@ -36,9 +36,9 @@ public class PokerHandUtil {
      * Extracts the best possible hand and returns the type of PokerHand and the
      * List of cards that make that hand.
      *
-     * @return The BestHand given the current list of cards
+     * @return The Best Hand given the current list of cards
      */
-    public BestHand getBestHand() {
+    public Hand getBestHand() {
 
         try {
             return isRoyalFlush();
@@ -80,7 +80,7 @@ public class PokerHandUtil {
         return isHighHand();
     }
 
-    protected BestHand isRoyalFlush() {
+    protected Hand isRoyalFlush() {
 
         // Is there a suit that contains 5 cards?
         List<Card> potentialRoyalFlush = null;
@@ -106,10 +106,10 @@ public class PokerHandUtil {
             }
         }
 
-        return new BestHand(potentialRoyalFlush, PokerHand.ROYAL_FLUSH);
+        return new Hand(potentialRoyalFlush, PokerHand.ROYAL_FLUSH);
     }
 
-    protected BestHand isStraightFlush() {
+    protected Hand isStraightFlush() {
 
         // Is there a suit that contains 5 cards?
         List<Card> potentialStraightFlush = null;
@@ -139,10 +139,10 @@ public class PokerHandUtil {
 
         Collections.reverse(potentialStraightFlush);
 
-        return new BestHand(potentialStraightFlush, PokerHand.STRAIGHT_FLUSH);
+        return new Hand(potentialStraightFlush, PokerHand.STRAIGHT_FLUSH);
     }
 
-    protected BestHand isFourOfAKind() {
+    protected Hand isFourOfAKind() {
 
         // Is there a rank that contains 4 cards?
         List<Card> potentialFourOfAKind = null;
@@ -163,10 +163,10 @@ public class PokerHandUtil {
                 5 - PokerHand.FOUR_OF_A_KIND.getCardsRequired(), cards,
                 potentialFourOfAKind));
 
-        return new BestHand(potentialFourOfAKind, PokerHand.FOUR_OF_A_KIND);
+        return new Hand(potentialFourOfAKind, PokerHand.FOUR_OF_A_KIND);
     }
 
-    protected BestHand isFullHouse() {
+    protected Hand isFullHouse() {
 
         final List<Card> highestThreeOfAKind = getHighestOfSameRank(PokerHand.THREE_OF_A_KIND.getCardsRequired(), cards);
         if (CollectionUtils.isEmpty(highestThreeOfAKind)) {
@@ -184,10 +184,10 @@ public class PokerHandUtil {
         fullHouse.addAll(highestThreeOfAKind);
         fullHouse.addAll(highestTwoOfAKind);
 
-        return new BestHand(fullHouse, PokerHand.FULL_HOUSE);
+        return new Hand(fullHouse, PokerHand.FULL_HOUSE);
     }
 
-    protected BestHand isFlush() {
+    protected Hand isFlush() {
 
         List<Card> potentialFlush = null;
         for (final Entry<Suit, List<Card>> entry : suitDistribution.entrySet()) {
@@ -204,11 +204,11 @@ public class PokerHandUtil {
         potentialFlush = getHighestSortedAndExclude(
                 PokerHand.FLUSH.getCardsRequired(), potentialFlush, null);
 
-        return new BestHand(potentialFlush, PokerHand.FLUSH);
+        return new Hand(potentialFlush, PokerHand.FLUSH);
 
     }
 
-    protected BestHand isStraight() {
+    protected Hand isStraight() {
 
         List<Card> potentialStraight = getLongestConsecutiveSubset(cards);
 
@@ -224,10 +224,10 @@ public class PokerHandUtil {
 
         Collections.reverse(potentialStraight);
 
-        return new BestHand(potentialStraight, PokerHand.STRAIGHT);
+        return new Hand(potentialStraight, PokerHand.STRAIGHT);
     }
 
-    protected BestHand isThreeOfAKind() {
+    protected Hand isThreeOfAKind() {
 
         // Is there a rank that contains 3 cards?
         List<Card> potentialThreeOfAKind = null;
@@ -260,10 +260,10 @@ public class PokerHandUtil {
                 5 - PokerHand.THREE_OF_A_KIND.getCardsRequired(), cards,
                 potentialThreeOfAKind));
 
-        return new BestHand(potentialThreeOfAKind, PokerHand.THREE_OF_A_KIND);
+        return new Hand(potentialThreeOfAKind, PokerHand.THREE_OF_A_KIND);
     }
 
-    protected BestHand isTwoPairs() {
+    protected Hand isTwoPairs() {
 
         final List<Card> highestTwoOfAKind = getHighestOfSameRank(
                 PokerHand.ONE_PAIR.getCardsRequired(), cards);
@@ -286,10 +286,10 @@ public class PokerHandUtil {
         twoPairs.addAll(getHighestSortedAndExclude(
                 5 - PokerHand.TWO_PAIRS.getCardsRequired(), cards, twoPairs));
 
-        return new BestHand(twoPairs, PokerHand.TWO_PAIRS);
+        return new Hand(twoPairs, PokerHand.TWO_PAIRS);
     }
 
-    protected BestHand isOnePair() {
+    protected Hand isOnePair() {
 
         // Is there a rank that contains 2 cards and not 3 or 4?
         List<Card> potentialOnePair = null;
@@ -322,12 +322,12 @@ public class PokerHandUtil {
         Collections.sort(potentialOnePair, CardSortBy.SUIT.getComparator());
         potentialOnePair.addAll(restOfCards);
 
-        return new BestHand(potentialOnePair, PokerHand.ONE_PAIR);
+        return new Hand(potentialOnePair, PokerHand.ONE_PAIR);
     }
 
-    protected BestHand isHighHand() {
+    protected Hand isHighHand() {
 
-        return new BestHand(getHighestSortedAndExclude(5, cards, null),
+        return new Hand(getHighestSortedAndExclude(5, cards, null),
                 PokerHand.HIGH_HAND);
     }
 

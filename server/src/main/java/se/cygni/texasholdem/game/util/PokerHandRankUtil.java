@@ -1,18 +1,13 @@
 package se.cygni.texasholdem.game.util;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import se.cygni.texasholdem.game.BestHand;
 import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.game.Card;
+import se.cygni.texasholdem.game.Hand;
 
 import java.util.*;
 
 public class PokerHandRankUtil {
-
-    @SuppressWarnings("unused")
-    private static Logger log = LoggerFactory
-            .getLogger(PokerHandRankUtil.class);
 
     private final List<Card> communityCards;
     private final List<BotPlayer> players;
@@ -40,8 +35,8 @@ public class PokerHandRankUtil {
             final PokerHandUtil phu = new PokerHandUtil(communityCards,
                     player.getCards());
 
-            final BestHand bestHand = phu.getBestHand();
-            bestHand.setPlayer(player);
+            final Hand hand = phu.getBestHand();
+            final BestHand bestHand = new BestHand(hand.getCards(), hand.getPokerHand(), player);
 
             bestHands.add(bestHand);
             playerBestHandMap.put(player, bestHand);
