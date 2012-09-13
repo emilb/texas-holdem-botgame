@@ -11,7 +11,7 @@ import se.cygni.texasholdem.game.definitions.Suit;
 import java.util.*;
 import java.util.Map.Entry;
 
-import static se.cygni.texasholdem.game.util.ListUtil.*;
+import static se.cygni.texasholdem.game.util.CardsUtil.*;
 
 /**
  * PokerHandUtil extracts the best possible hand for a Player.

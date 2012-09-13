@@ -14,9 +14,9 @@ import java.util.Map.Entry;
  *
  * @author emil
  */
-public class ListUtil {
+public class CardsUtil {
 
-    private ListUtil() {
+    private CardsUtil() {
     }
 
     /**
