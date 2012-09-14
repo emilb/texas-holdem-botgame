@@ -45,8 +45,9 @@
     </distributionManagement>
 
     <scm>
-        <connection>scm:git:git://github.com/emilb/texas-holdem-botgame.git</connection>
-        <developerConnection>scm:git:https://emilb@github.com/emilb/texas-holdem-botgame.git</developerConnection>
+        <connection>scm:git:git@github.com:emilb/texas-holdem-botgame.git</connection>
+        <url>scm:git:git@github.com:emilb/texas-holdem-botgame.git</url>
+        <developerConnection>scm:git:git@github.com:emilb/texas-holdem-botgame.git</developerConnection>
     </scm>
 
     <prerequisites>
