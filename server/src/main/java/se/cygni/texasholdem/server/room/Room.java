@@ -47,6 +47,9 @@ public abstract class Room {
     @Subscribe
     public void onPlayerQuit(final PlayerQuitEvent playerQuitEvent) {
         final BotPlayer player = playerQuitEvent.getPlayer();
+
+        playerPool.remove(player);
+
         log.debug("Player {} has quit, ordering Table to remove her", player);
         final Table table = getTableForPlayer(player);
         if (table != null) {
@@ -94,7 +97,7 @@ public abstract class Room {
         return new PhilHellmuthPlayer("Hellmuth_" + playerTrainerCounter++, UUID.randomUUID().toString(), gamePlan.getStartingChipsAmount());
     }
 
-    public abstract void addPlayer(BotPlayer player);
+    public abstract boolean addPlayer(BotPlayer player);
 
     public abstract void onTableGameDone(Table table);
 

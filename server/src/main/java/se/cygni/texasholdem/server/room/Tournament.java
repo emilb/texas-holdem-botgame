@@ -41,10 +41,13 @@ public class Tournament extends Room {
     }
 
     @Override
-    public void addPlayer(BotPlayer player) {
+    public boolean addPlayer(BotPlayer player) {
         if (!tournamentHasStarted) {
             playerPool.add(player);
+            return true;
         }
+
+        return false;
     }
 
     public GamePlan getGamePlan() {
