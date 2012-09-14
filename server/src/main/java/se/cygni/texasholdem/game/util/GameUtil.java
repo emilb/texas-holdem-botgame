@@ -80,6 +80,7 @@ public class GameUtil {
         return result;
     }
 
+    /*
     public static List<BotPlayer> getOrderedListOfPlayers(
             final List<BotPlayer> players,
             final BotPlayer startingFromPlayer) {
@@ -101,6 +102,7 @@ public class GameUtil {
 
         return result;
     }
+    */
 
     /**
      * Creates a list of players still active in current game (i.e. has not
