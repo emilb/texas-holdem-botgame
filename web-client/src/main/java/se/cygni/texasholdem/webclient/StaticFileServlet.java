@@ -57,7 +57,13 @@ public class StaticFileServlet extends HttpServlet {
             }
 
         } finally {
-            output.close();
+            
+            try {
+                output.close();
+            } catch (Exception e) {
+                log.trace("Failed to close output stream", e);
+            }
+
             if (input != null) {
                 input.close();
             }
