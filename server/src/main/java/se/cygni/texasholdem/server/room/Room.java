@@ -6,10 +6,7 @@ import org.apache.commons.lang.math.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import se.cygni.texasholdem.game.BotPlayer;
-import se.cygni.texasholdem.game.trainingplayers.CrazyPlayer;
-import se.cygni.texasholdem.game.trainingplayers.PhilHellmuthPlayer;
-import se.cygni.texasholdem.game.trainingplayers.RaiserPlayer;
-import se.cygni.texasholdem.game.trainingplayers.TrainingPlayer;
+import se.cygni.texasholdem.game.trainingplayers.*;
 import se.cygni.texasholdem.server.eventbus.PlayerQuitEvent;
 import se.cygni.texasholdem.server.session.SessionManager;
 import se.cygni.texasholdem.table.GamePlan;
@@ -95,6 +92,10 @@ public abstract class Room {
 
     protected TrainingPlayer getPhilHellmuthPlayer() {
         return new PhilHellmuthPlayer("Hellmuth_" + playerTrainerCounter++, UUID.randomUUID().toString(), gamePlan.getStartingChipsAmount());
+    }
+
+    protected TrainingPlayer getCautiousPlayer() {
+        return new CautiousPlayer("Catious_" + playerTrainerCounter++, UUID.randomUUID().toString(), gamePlan.getStartingChipsAmount());
     }
 
     public abstract boolean addPlayer(BotPlayer player);

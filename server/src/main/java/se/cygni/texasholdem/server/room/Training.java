@@ -35,7 +35,7 @@ public class Training extends Room {
         table.addPlayer(getTrainingPlayer());
         table.addPlayer(getTrainingPlayer());
         table.addPlayer(getTrainingPlayer());
-        table.addPlayer(getTrainingPlayer());
+        table.addPlayer(getCautiousPlayer());
         table.addPlayer(getPhilHellmuthPlayer());
         table.addPlayer(player);
 

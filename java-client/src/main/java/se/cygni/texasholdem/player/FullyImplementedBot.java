@@ -1,23 +1,47 @@
-package se.cygni.texasholdem.game.trainingplayers;
+package se.cygni.texasholdem.player;
 
-import org.apache.commons.lang.math.RandomUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import se.cygni.texasholdem.client.CurrentPlayState;
+import se.cygni.texasholdem.client.PlayerClient;
 import se.cygni.texasholdem.communication.message.event.*;
 import se.cygni.texasholdem.communication.message.request.ActionRequest;
-import se.cygni.texasholdem.game.Action;
-import se.cygni.texasholdem.game.Hand;
+import se.cygni.texasholdem.game.*;
 import se.cygni.texasholdem.game.definitions.PlayState;
 import se.cygni.texasholdem.game.definitions.PokerHand;
+import se.cygni.texasholdem.game.definitions.Rank;
 import se.cygni.texasholdem.game.util.PokerHandUtil;
 
-public class CautiousPlayer extends TrainingPlayer {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
-    public CautiousPlayer(String name, String sessionId, long chipAmount) {
-        super(name, sessionId, chipAmount);
+public class FullyImplementedBot implements Player {
+
+    private static Logger log = LoggerFactory
+            .getLogger(FullyImplementedBot.class);
+
+    private final String serverHost;
+    private final int serverPort;
+    private final PlayerClient playerClient;
+
+    public FullyImplementedBot(String serverHost, int serverPort) {
+        this.serverHost = serverHost;
+        this.serverPort = serverPort;
+
+        // Initialize the player client
+        playerClient = new PlayerClient(this, serverHost, serverPort);
     }
 
-    public CautiousPlayer(String name, String sessionId) {
-        super(name, sessionId);
+    public void playATrainingGame() throws Exception {
+        playerClient.connect();
+        playerClient.registerForPlay(Room.TRAINING);
+    }
+
+    @Override
+    public String getName() {
+        throw new RuntimeException("Did you forget to specify a name for your bot?");
     }
 
     @Override
@@ -53,10 +77,6 @@ public class CautiousPlayer extends TrainingPlayer {
     }
 
     @Override
-    public void onTableIsDone(TableIsDoneEvent event) {
-    }
-
-    @Override
     public void onPlayerCalled(PlayerCalledEvent event) {
     }
 
@@ -81,11 +101,23 @@ public class CautiousPlayer extends TrainingPlayer {
     }
 
     @Override
+    public void onTableIsDone(TableIsDoneEvent event) {
+        log.debug("Table is done, I'm leaving the table with ${}", playerClient.getCurrentPlayState().getMyCurrentChipAmount());
+    }
+
+    @Override
     public void onPlayerQuit(PlayerQuitEvent event) {
     }
 
     @Override
     public Action actionRequired(ActionRequest request) {
+
+        Action response = getBestAction(request);
+        log.info("I'm returning {}", response);
+        return response;
+    }
+
+    private Action getBestAction(ActionRequest request) {
         Action callAction = null;
         Action checkAction = null;
         Action raiseAction = null;
@@ -115,7 +147,7 @@ public class CautiousPlayer extends TrainingPlayer {
 
         // The current play state is accessible through this class. It
         // keeps track of basic events and other players.
-        CurrentPlayState playState = getCurrentPlayState();
+        CurrentPlayState playState = playerClient.getCurrentPlayState();
         long currentBB = playState.getBigBlind();
 
         // PokerHandUtil is a hand classifier that returns the best hand given
@@ -126,9 +158,7 @@ public class CautiousPlayer extends TrainingPlayer {
 
 
         // Let's go ALL IN if ROYAL FLUSH or STRAIGHT FLUSH
-        if (allInAction != null && (
-                myBestPokerHand == PokerHand.STRAIGHT_FLUSH ||
-                        myBestPokerHand == PokerHand.ROYAL_FLUSH)) {
+        if (allInAction != null && isHandBetterThan(myBestPokerHand, PokerHand.FOUR_OF_A_KIND)) {
             return allInAction;
         }
 
@@ -140,31 +170,17 @@ public class CautiousPlayer extends TrainingPlayer {
         long callAmount = callAction == null ? -1 : callAction.getAmount();
         long raiseAmount = raiseAction == null ? -1 : raiseAction.getAmount();
 
-        // Do I have something better than ONE_PAIR and can RAISE?
-        if (isHandBetterThan(myBestPokerHand, PokerHand.ONE_PAIR) && raiseAction != null) {
-            // This is a big raise... only RAISE if better than THREE_OF_A_KIND
-            if (raiseAmount - currentBB > currentBB * 2 && isHandBetterThan(myBestPokerHand, PokerHand.THREE_OF_A_KIND))
-                return raiseAction;
-            else if (raiseAmount == currentBB)
-                return raiseAction;
-        }
-
         // Only call if ONE_PAIR or better
         if (isHandBetterThan(myBestPokerHand, PokerHand.ONE_PAIR) && callAction != null) {
-            // This was an expensive CALL... only do if better than THREE_OF_A_KIND
-            if (callAmount - currentBB > currentBB * 2 && isHandBetterThan(myBestPokerHand, PokerHand.ONE_PAIR))
-                return callAction;
-            else if (callAmount <= currentBB)
-                return callAction;
+            return callAction;
         }
 
-        if (playState.getCurrentPlayState() == PlayState.PRE_FLOP && isHandBetterThan(myBestPokerHand, PokerHand.HIGH_HAND)) {
-            if (callAction != null)
-                return callAction;
-            if (raiseAction != null && raiseAction.getAmount() < currentBB * 4)
-                return raiseAction;
+        // Do I have something better than TWO_PAIR and can RAISE?
+        if (isHandBetterThan(myBestPokerHand, PokerHand.TWO_PAIRS) && raiseAction != null) {
+            return raiseAction;
         }
 
+        // I'm small blind and we're in PRE_FLOP, might just as well call
         if (playState.getCurrentPlayState() == PlayState.PRE_FLOP) {
             if (callAction != null && callAction.getAmount() < currentBB)
                 return callAction;
@@ -181,9 +197,23 @@ public class CautiousPlayer extends TrainingPlayer {
 
     @Override
     public void connectionToGameServerLost() {
+        log.info("Connection to game server is lost. Exit time");
+        System.exit(0);
     }
 
     @Override
     public void connectionToGameServerEstablished() {
+    }
+
+    public static void main(String... args) {
+        FullyImplementedBot bot = new FullyImplementedBot("poker.cygni.se", 4711);
+
+        try {
+            bot.playATrainingGame();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
 }

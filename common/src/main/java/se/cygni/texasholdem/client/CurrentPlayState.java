@@ -41,7 +41,7 @@ public class CurrentPlayState {
         this.myPlayersName = myPlayersName;
     }
 
-    protected se.cygni.texasholdem.player.Player getPlayerImpl() {
+    public se.cygni.texasholdem.player.Player getPlayerImpl() {
         return dummy;
     }
 
