@@ -80,9 +80,7 @@
 
     <hr>
 
-    <footer>
-        <p> &copy; Cygni AB 2012</p>
-    </footer>
+    <%@ include file="/WEB-INF/views/includes/footer.jsp" %>
 
 </div>
 <!--/.fluid-container-->

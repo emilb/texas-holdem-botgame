@@ -30,9 +30,7 @@
                 </p>
 
                 <p>
-                    Extract the zip and import in your favorite IDE. If you are missing any dependencies download
-                    this maven <a href="/download/settings.xml">settings.xml</a> and place
-                    it in ~/.m2.
+                    Extract the zip and import in your favorite IDE.
                 </p>
 
                 <p>
@@ -149,6 +147,33 @@ start.sh
 
                 <p>Files to edit to create your own player are located in the subdirectory player.</p>
             </div>
+
+            <div class="well well-large">
+                <h2>Documentation and links</h2>
+
+                <p>The Maven site for this project is here:
+                    <a href="/mavensite">Cygni Texas Hold'em Maven site</a>
+                </p>
+
+                <p>Download directory can be viewed here:
+                    <a href="/download">Downloads</a>
+                </p>
+
+                <p>Maven repo:
+                    <a href="/maven2">Cygni Texas Hold'em Maven repo</a>
+                </p>
+                <p>Add to your pom.xml to enable this repo:
+                    <pre class="prettyprint">
+&lt;repositories&gt;
+    &lt;repository&gt;
+        &lt;id&gt;poker.cygni.s&lt;/id&gt;
+        &lt;url&gt;http://poker.cygni.se/maven2&lt;/url&gt;
+    &lt;/repository&gt;
+&lt;/repositories&gt;
+                    </pre>
+
+                </p>
+            </div>
         </div>
         <!--/span-->
     </div>
@@ -158,9 +183,7 @@ start.sh
 
     <hr>
 
-    <footer>
-        <p> &copy; Cygni AB 2012</p>
-    </footer>
+    <%@ include file="/WEB-INF/views/includes/footer.jsp" %>
 
 </div>
 <!--/.fluid-container-->

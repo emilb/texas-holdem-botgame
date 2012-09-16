@@ -63,6 +63,14 @@
                     the bot player has either won or lost all of its chips.
                 </p>
 
+                <h2>Free play</h2>
+
+                <p>
+                    If you'd rather play against other bot players, or battle different versions of your own bot
+                    join the room FREEPLAY. Whenever 3 or more players are connected to a room in FREEPLAY the
+                    game starts (after an extra minute of wait to let latecomers join).
+                </p>
+
                 <h2>Tournament</h2>
 
                 <p>
@@ -166,9 +174,7 @@
 
     <hr>
 
-    <footer>
-        <p> &copy; Cygni AB 2012</p>
-    </footer>
+    <%@ include file="/WEB-INF/views/includes/footer.jsp" %>
 
 </div>
 <!--/.fluid-container-->
