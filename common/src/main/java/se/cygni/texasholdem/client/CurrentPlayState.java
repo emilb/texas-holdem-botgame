@@ -171,12 +171,26 @@ public class CurrentPlayState {
     }
 
     /**
+     * @return True if you have folded this game round
+     */
+    public boolean haveIFolded() {
+        return hasPlayerFolded(new GamePlayer(myPlayersName, 0));
+    }
+
+    /**
      * @param player
      *
      * @return True if player has gone all in this game round
      */
     public boolean hasPlayerGoneAllIn(GamePlayer player) {
         return allInPlayers.contains(player);
+    }
+
+    /**
+     * @return True if you have gone all in this game round
+     */
+    public boolean haveIGoneAllIn() {
+        return hasPlayerFolded(new GamePlayer(myPlayersName, 0));
     }
 
     /**
@@ -193,6 +207,16 @@ public class CurrentPlayState {
         }
 
         return potInvestmentPerPlayer.get(player);
+    }
+
+    /**
+     * Gives the total amount you have invested in the pot
+     * during this game round.
+     *
+     * @return the long value of the chip amount you have invested in the pot
+     */
+    public long getMyInvestmentInPot() {
+        return getInvestmentInPotFor(new GamePlayer(myPlayersName, 0));
     }
 
     /**
