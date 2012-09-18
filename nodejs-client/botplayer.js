@@ -3,7 +3,7 @@ var playerClient = require('./modules/playerclient.js');
 var player = {
 
     getName : function() {
-        throw new Error('Did you forget to specify your name?');
+        throw new Error('Did you forget to specify your name? A good idea is to use your e-mail as username!');
     },
 
     onRegisterForPlayResponse : function (playResponse) {
