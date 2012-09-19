@@ -20,6 +20,8 @@
     <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
     <script src="<c:url value="/resources/js/prettify/prettify.js" />"></script>
     <script src="<c:url value="/resources/js/underscore-min.js" />"></script>
+    <script src="<c:url value="/resources/js/ICanHaz.min.js" />"></script>
+
 </head>
 
 <body>

@@ -5,9 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import se.cygni.texasholdem.dao.model.GameLog;
 import se.cygni.texasholdem.server.session.SessionManager;
 import se.cygni.texasholdem.server.statistics.StatisticsCollector;
@@ -47,6 +45,18 @@ public class ShowGameController {
         model.addAttribute("tableIds", getReversedListOfTableIds());
 
         return "showgame";
+    }
+
+    @RequestMapping(value = "/timemachine/table/{tableId}/gameround/{gameRound}", method = RequestMethod.GET)
+    public @ResponseBody GameLog getGameLog(
+            @PathVariable long tableId,
+            @PathVariable int gameRound) {
+
+        if (tableId < 0 || gameRound < 0) {
+            return statisticsCollector.getLastGameLog();
+        }
+
+        return statisticsCollector.getGameLogAtPos(tableId, gameRound);
     }
 
     private List<Long> getReversedListOfTableIds() {
