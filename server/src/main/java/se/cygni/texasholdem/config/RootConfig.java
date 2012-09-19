@@ -9,18 +9,16 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
 @Configuration
-public class SpringConfig {
+public class RootConfig {
 
-    public
     @Bean
-    EventBus eventBus() {
+    public EventBus eventBus() {
 
         return new EventBus();
     }
 
-    public
     @Bean(name = "applicationProperties")
-    PropertiesFactoryBean properties() {
+    public PropertiesFactoryBean properties() {
 
         PropertiesFactoryBean pfb =
                 new PropertiesFactoryBean();

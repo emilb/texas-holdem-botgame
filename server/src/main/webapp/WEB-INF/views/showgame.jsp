@@ -1,25 +1,6 @@
-<%@ include file="/WEB-INF/views/includes/taglibs.jsp" %>
-
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
-<spring:url scope="page" var="jqueryJavascriptUrl" value="/resources/js/jquery-1.7.1.js"/>
-<spring:url scope="page" var="jqueryTmplJavascriptUrl" value="/resources/js/jquery.tmpl.min.js"/>
-<spring:url scope="page" var="jqueryAtmosphereUrl" value="/resources/js/jquery.atmosphere.js"/>
-<spring:url scope="page" var="bootstrapUrl" value="/resources/js/bootstrap.js"/>
-<spring:url scope="page" var="bootstrapCssUrl" value="/resources/css/bootstrap.css"/>
-<spring:url scope="page" var="bootstrapResponsiveCssUrl" value="/resources/css/bootstrap-responsive.css"/>
-
-<!DOCTYPE HTML>
-<html>
-<head>
-
-    <title>Cygni Texas Hold'em</title>
-
-    <%@ include file="/WEB-INF/views/includes/head.jsp" %>
-</head>
-<body>
-
-<h:navbar section="showgame"/>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="h" %>
 
 <div class="container">
     <div class="hero-unit">
@@ -171,10 +152,6 @@
 
         </div>
     </div>
-    <hr>
-
-    <%@ include file="/WEB-INF/views/includes/footer.jsp" %>
-
 </div>
 
 <script>
@@ -212,6 +189,3 @@
     });
 
 </script>
-
-</body>
-</html>
