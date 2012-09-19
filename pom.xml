@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>se.cygni</groupId>
@@ -39,8 +40,8 @@
         <connection>scm:git:git@github.com:emilb/texas-holdem-botgame.git</connection>
         <url>scm:git:git@github.com:emilb/texas-holdem-botgame.git</url>
         <developerConnection>scm:git:git@github.com:emilb/texas-holdem-botgame.git</developerConnection>
-      <tag>texas-holdem-botgame-1.1</tag>
-  </scm>
+        <tag>texas-holdem-botgame-1.1</tag>
+    </scm>
 
     <prerequisites>
         <maven>3.0.0</maven>
@@ -346,6 +347,7 @@
         <atmosphere.version>1.0.0</atmosphere.version>
         <jetty.version>8.1.7.v20120910</jetty.version>
         <targetJdk>1.6</targetJdk>
+        <org.apache.tiles-version>2.2.2</org.apache.tiles-version>
     </properties>
 
     <dependencyManagement>
@@ -444,6 +446,19 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context-support</artifactId>
                 <version>${org.springframework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tiles</groupId>
+                <artifactId>tiles-jsp</artifactId>
+                <version>${org.apache.tiles-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>jstl</groupId>
+                <artifactId>jstl</artifactId>
+                <version>1.2</version>
+                <scope>provided</scope>
             </dependency>
 
             <dependency>

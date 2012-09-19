@@ -1,5 +1,5 @@
-<%@ include file="/WEB-INF/views/includes/taglibs.jsp" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <h2>Tournament #${tournamentCurrent.tournamentCounter}</h2>
 

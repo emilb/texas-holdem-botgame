@@ -20,17 +20,20 @@ import org.springframework.web.servlet.view.tiles2.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles2.TilesViewResolver;
 
 @Configuration
-@ComponentScan(basePackages = { "my.groupid.web" })
+@ComponentScan(basePackages = { "se.cygni.webapp" })
 @ImportResource("classpath:spring-global-method-security.xml")
 public class WebMvcConfig extends WebMvcConfigurationSupport {
 	
-	private static final String MESSAGE_SOURCE = "/WEB-INF/classes/messages";
+	private static final String MESSAGE_SOURCE = "/WEB-INF/classes/application";
 	private static final String TILES = "/WEB-INF/tiles/tiles.xml";
 	private static final String VIEWS = "/WEB-INF/views/**/views.xml";
 	
 	private static final String RESOURCES_HANDLER = "/resources/";
 	private static final String RESOURCES_LOCATION = RESOURCES_HANDLER + "**";
-	
+
+    private static final String RESOURCES_FAVICON_HANDLER = "/resources/img/favicon.ico";
+    private static final String RESOURCES_FAVICON_LOCATION = "/favicon.ico";
+
 	@Override
 	public RequestMappingHandlerMapping requestMappingHandlerMapping() {
 		RequestMappingHandlerMapping requestMappingHandlerMapping = super.requestMappingHandlerMapping();
@@ -59,16 +62,17 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 		return configurer;
 	}
 	
-	@Override
-	public Validator getValidator() {
-		LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
-		validator.setValidationMessageSource(configureMessageSource());
-		return validator;
-	}
+//	@Override
+//	public Validator getValidator() {
+//		LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
+//		validator.setValidationMessageSource(configureMessageSource());
+//		return validator;
+//	}
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler(RESOURCES_HANDLER).addResourceLocations(RESOURCES_LOCATION);
+		registry.addResourceHandler(RESOURCES_FAVICON_HANDLER).addResourceLocations(RESOURCES_FAVICON_LOCATION);
 	}
 
 	@Override
@@ -76,22 +80,4 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 		configurer.enable();
 	}
 	
-	@Override
-	protected void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-		argumentResolvers.add(new UserDetailsHandlerMethodArgumentResolver());
-	}
-	
-	// custom argument resolver inner classes
-
-	private static class UserDetailsHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
-
-		public boolean supportsParameter(MethodParameter parameter) {
-			return UserDetails.class.isAssignableFrom(parameter.getParameterType());
-		}
-
-		public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
-			Authentication auth = (Authentication) webRequest.getUserPrincipal();
-			return auth != null && auth.getPrincipal() instanceof UserDetails ? auth.getPrincipal() : null;
-		}
-	}
 }
