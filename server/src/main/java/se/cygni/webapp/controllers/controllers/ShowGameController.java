@@ -34,7 +34,7 @@ public class ShowGameController {
         model.addAttribute("position", getGameNavigation(gamelog));
         model.addAttribute("tableIds", getReversedListOfTableIds());
 
-        return "showgame_vertical";
+        return "showgame";
     }
 
     @RequestMapping(value = "/timemachine", method = RequestMethod.GET)
@@ -46,7 +46,7 @@ public class ShowGameController {
         model.addAttribute("position", getGameNavigation(gamelog));
         model.addAttribute("tableIds", getReversedListOfTableIds());
 
-        return "showgame_vertical";
+        return "showgame";
     }
 
     private List<Long> getReversedListOfTableIds() {

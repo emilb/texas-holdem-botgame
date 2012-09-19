@@ -1,18 +1,3 @@
-<%@ include file="/WEB-INF/views/includes/taglibs.jsp" %>
-
-
-<!DOCTYPE HTML>
-<html>
-<head>
-
-    <title>Cygni Texas Hold'em</title>
-
-    <%@ include file="/WEB-INF/views/includes/head.jsp" %>
-</head>
-<body>
-
-<h:navbar section="rules"/>
-
 <div class="container">
     <div class="hero-unit">
         <h1>House Rules</h1>
@@ -171,14 +156,5 @@
 
     <!--/span-->
     <!--/row-->
-
-    <hr>
-
-    <%@ include file="/WEB-INF/views/includes/footer.jsp" %>
-
 </div>
 <!--/.fluid-container-->
-
-
-</body>
-</html>

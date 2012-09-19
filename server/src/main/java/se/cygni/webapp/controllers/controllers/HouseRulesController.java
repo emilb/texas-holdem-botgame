@@ -13,7 +13,6 @@ import se.cygni.texasholdem.table.GamePlan;
 import java.util.Locale;
 
 @Controller
-@RequestMapping(value = "/")
 public class HouseRulesController {
 
     @Autowired

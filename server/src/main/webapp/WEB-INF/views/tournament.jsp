@@ -1,33 +1,22 @@
-<%@ include file="/WEB-INF/views/includes/taglibs.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+<script>
+    function loadTournament(id) {
+        clearTimeout(reloadTimer);
 
-<!DOCTYPE HTML>
-<html>
-<head>
+        $.ajax({
+            type:"GET",
+            url:"/tournament/subview?id=" + id,
+            success:function (response) {
+                $("#tournament_status").html(response);
+            }
+        });
+    }
 
-    <title>Cygni Texas Hold'em</title>
-
-    <%@ include file="/WEB-INF/views/includes/head.jsp" %>
-
-    <script>
-        function loadTournament(id) {
-            clearTimeout(reloadTimer);
-
-            $.ajax({
-                type:"GET",
-                url:"/tournament/subview?id=" + id,
-                success:function (response) {
-                    $("#tournament_status").html(response);
-                }
-            });
-        }
-
-        var reloadTimer;
-    </script>
-</head>
-<body>
-
-<h:navbar section="tournament"/>
+    var reloadTimer;
+</script>
 
 <div class="container">
     <div class="hero-unit">
@@ -104,18 +93,5 @@
         </div>
         <!--/span-->
     </div>
-
-
-    <!--/span-->
-    <!--/row-->
-
-    <hr>
-
-    <%@ include file="/WEB-INF/views/includes/footer.jsp" %>
-
 </div>
 <!--/.fluid-container-->
-
-
-</body>
-</html>

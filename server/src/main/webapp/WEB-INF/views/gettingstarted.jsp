@@ -1,17 +1,9 @@
-<%@ include file="/WEB-INF/views/includes/taglibs.jsp" %>
 
-
-<!DOCTYPE HTML>
-<html>
-<head>
-
-    <title>Cygni Texas Hold'em</title>
-
-    <%@ include file="/WEB-INF/views/includes/head.jsp" %>
-</head>
-<body onload="prettyPrint()">
-
-<h:navbar section="gettingstarted"/>
+<script type="text/javascript">
+    $(document).ready(function() {
+        prettyPrint();
+    });
+</script>
 
 <div class="container">
     <div class="hero-unit">
@@ -180,14 +172,5 @@ start.sh
 
     <!--/span-->
     <!--/row-->
-
-    <hr>
-
-    <%@ include file="/WEB-INF/views/includes/footer.jsp" %>
-
 </div>
 <!--/.fluid-container-->
-
-
-</body>
-</html>

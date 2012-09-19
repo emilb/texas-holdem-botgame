@@ -9,6 +9,35 @@
         <p>Inspect games played</p>
     </div>
 
+    <div class="row show-grid">
+        <div class="span4">
+            <form class="form-inline">
+                <input type="text" class="input-small" placeholder="Table Id">
+                <input type="text" class="input-small" placeholder="Game round">
+                <label class="checkbox">
+                    <input type="checkbox"> Auto forward
+                </label>
+            </form>
+        </div>
+
+        <div class="span4">
+            <ul class="pager">
+                <li>
+                    <a href="#" id="nav_first">&larr; First</a>
+                </li>
+                <li>
+                    <a href="#" id="nav_previous">&larr; Previous</a>
+                </li>
+                <li>
+                    <a href="#" id="nav_next">Next &rarr;</a>
+                </li>
+                <li>
+                    <a href="#" id="nav_last">Last &rarr;</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
 
     <div class="row">
         <div class="span12">

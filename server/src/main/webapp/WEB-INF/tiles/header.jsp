@@ -1,2 +1,3 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<p>== Header ==</p>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="h" %>
+
+<h:navbar />

@@ -5,15 +5,19 @@
 http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 http://www.springframework.org/schema/security
 http://www.springframework.org/schema/security/spring-security-3.1.xsd">
-	
-	<security:http auto-config="true" disable-url-rewriting="true" use-expressions="true">
-		<security:logout logout-url="/logout" />
-		<security:intercept-url pattern="/" access="permitAll" />
-		<security:intercept-url pattern="/**" access="isAuthenticated()" />
-	</security:http>
-	
-	<security:authentication-manager erase-credentials="true" >
-		<security:authentication-provider user-service-ref="userService" />
-	</security:authentication-manager>
+
+    <security:http auto-config="true">
+        <security:intercept-url pattern="/tournament*" access="ROLE_ADMIN"/>
+        <security:http-basic/>
+    </security:http>
+
+    <security:authentication-manager>
+        <security:authentication-provider>
+            <security:user-service>
+                <security:user name="emil" password="lime" authorities="ROLE_ADMIN"/>
+                <security:user name="jonas" password="sanoj" authorities="ROLE_ADMIN"/>
+            </security:user-service>
+        </security:authentication-provider>
+    </security:authentication-manager>
 
 </beans>

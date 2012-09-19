@@ -95,7 +95,7 @@ public abstract class Room {
     }
 
     protected TrainingPlayer getCautiousPlayer() {
-        return new CautiousPlayer("Catious_" + playerTrainerCounter++, UUID.randomUUID().toString(), gamePlan.getStartingChipsAmount());
+        return new CautiousPlayer("Cautious_" + playerTrainerCounter++, UUID.randomUUID().toString(), gamePlan.getStartingChipsAmount());
     }
 
     public abstract boolean addPlayer(BotPlayer player);
