@@ -94,12 +94,12 @@
                 if ($("[rel=tooltip]").length) {
                     $("[rel=tooltip]").tooltip();
                 }
+
+                console.log(response);
             }
         });
 
         if ($("[rel=tooltip]").length) {
-            $("[rel=tooltip]").tooltip();
-        }if ($("[rel=tooltip]").length) {
             $("[rel=tooltip]").tooltip();
         }
 
@@ -165,31 +165,50 @@
                             {{/cards}}
                             <h:cardToImage cards="${player.cards}"/>
                         </td>
-                        <td>$ ${player.preflopBet}
-                            <c:if test="${player.preflopFolded}"><br/>Folded</c:if>
-                            <c:if test="${player.preflopAllIn}"><br/>All In</c:if>
+                        <td>$ {{preflopBet}}
+                            {{#preflopFolded}}
+                            <br/>Folded
+                            {{/preflopFolded}}
+                            {{#preflopAllIn}}
+                            <br/>All In
+                            {{/preflopAllIn}}
                         </td>
-                        <td>$ ${player.flopBet}
-                            <c:if test="${player.flopFolded}"><br/>Folded</c:if>
-                            <c:if test="${player.flopAllIn}"><br/>All In</c:if>
+                        <td>$ {{flopBet}}
+                            {{#flopFolded}}
+                            <br/>Folded
+                            {{/flopFolded}}
+                            {{#flopAllIn}}
+                            <br/>All In
+                            {{/flopAllIn}}
                         </td>
-                        <td>$ ${player.turnBet}
-                            <c:if test="${player.turnFolded}"><br/>Folded</c:if>
-                            <c:if test="${player.turnAllIn}"><br/>All In</c:if>
+                        <td>$ {{turnBet}}
+                            {{#turnFolded}}
+                            <br/>Folded
+                            {{/turnFolded}}
+                            {{#turnAllIn}}
+                            <br/>All In
+                            {{/turnAllIn}}
                         </td>
-                        <td>$ ${player.riverBet}
-                            <c:if test="${player.riverFolded}"><br/>Folded</c:if>
-                            <c:if test="${player.riverAllIn}"><br/>All In</c:if>
+                        <td>$ {{riverBet}}
+                            {{#riverFolded}}
+                            <br/>Folded
+                            {{/riverFolded}}
+                            {{#riverAllIn}}
+                            <br/>All In
+                            {{/riverAllIn}}
                         </td>
                         <td>
-                            <h:cardToImage cards="${player.cardsBestHand}"/> <br/>
+                            {{#cardsBestHand}}
+                            <img src="/resources/img/cards/{{rank}}_{{suit}}_small.png" alt="${card}" width="36" height="50" rel="tooltip" data-placement="top" data-original-title="{{rank}} of {{suit}}" />
+                            {{/cardsBestHand}}
+                            <br/>
                         </td>
-                        <td>${player.pokerHand}</td>
+                        <td>{{pokerHand}}</td>
                         <td>
-                            <c:if test="${player.winnings > 0}">
-                                <b>Won: $ ${player.winnings}</b> <br/>
-                            </c:if>
-                            Chips: $ ${player.chipsAfterGame}
+                            {{#winnings}}
+                                <b>Won: $ {{winnings}}</b> <br/>
+                            {{/winnings}}
+                            Chips: $ {{chipsAfterGame}}
                         </td>
 
                     </tr>
