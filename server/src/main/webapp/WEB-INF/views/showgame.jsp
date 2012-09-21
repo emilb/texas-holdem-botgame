@@ -111,6 +111,18 @@
             }
         });
 
+        $('#tableId').keypress(function (e) {
+            if (e.which == 13) {
+                updateGameView();
+            }
+        });
+
+        $('#gameRoundNo').keypress(function (e) {
+            if (e.which == 13) {
+                updateGameView();
+            }
+        });
+
         $('#tableId').focusout(function () {
             updateGameView();
         });
