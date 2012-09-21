@@ -35,28 +35,25 @@ public class ShowGameController {
         return "showgame";
     }
 
-    @RequestMapping(value = "/timemachine", method = RequestMethod.GET)
-    public String change(@ModelAttribute GameNavigation navigation, Model model) {
-
-        GameLog gamelog = statisticsCollector.getGameLogAtPos(navigation.getTableId(), navigation.getPosition());
-
-        model.addAttribute("gameLog", gamelog);
-        model.addAttribute("position", getGameNavigation(gamelog));
-        model.addAttribute("tableIds", getReversedListOfTableIds());
-
-        return "showgame";
-    }
-
     @RequestMapping(value = "/timemachine/table/{tableId}/gameround/{gameRound}", method = RequestMethod.GET)
     public @ResponseBody GameLog getGameLog(
             @PathVariable long tableId,
             @PathVariable int gameRound) {
 
-        if (tableId < 0 || gameRound < 0) {
-            return statisticsCollector.getLastGameLog();
+        GameLog gameLog = null;
+
+        if (tableId < 0 && gameRound < 0) {
+            gameLog = statisticsCollector.getLastGameLog();
+        } else if (tableId >= 0 && gameRound < 0) {
+            gameLog = statisticsCollector.getLastGameLog(tableId);
+        } else {
+            gameLog = statisticsCollector.getGameLogAtPos(tableId, gameRound);
         }
 
-        return statisticsCollector.getGameLogAtPos(tableId, gameRound);
+        if (gameLog != null)
+            return gameLog;
+
+        return statisticsCollector.getLastGameLog();
     }
 
     private List<Long> getReversedListOfTableIds() {

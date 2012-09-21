@@ -123,15 +123,12 @@ public class StatisticsCollector {
     }
 
     public GameLog getGameLogAtPos(final long tableId, int position) {
-        if (position < 0) {
-            return getLastGameLog(tableId);
-        }
-
         try {
             return getTableHistory(tableId).get(position);
         } catch (Exception e) {
         }
-        return null;
+
+        return getLastGameLog(tableId);
     }
 
     public int getNoofGameLogs(final long tableId) {
