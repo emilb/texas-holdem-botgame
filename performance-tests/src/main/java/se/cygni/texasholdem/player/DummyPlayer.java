@@ -4,8 +4,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import se.cygni.texasholdem.client.PlayerClient;
-import se.cygni.texasholdem.communication.message.event.PlayIsStartedEvent;
-import se.cygni.texasholdem.communication.message.event.TableIsDoneEvent;
+import se.cygni.texasholdem.communication.message.event.*;
 import se.cygni.texasholdem.communication.message.request.ActionRequest;
 import se.cygni.texasholdem.game.Action;
 import se.cygni.texasholdem.game.Room;
@@ -15,7 +14,7 @@ public class DummyPlayer extends BasicPlayer {
     private static Logger log = LoggerFactory
             .getLogger(DummyPlayer.class);
 
-    private static final String DEFAULT_HOST = "poker.cygni.se";
+    private static final String DEFAULT_HOST = "localhost";
     private static final int DEFAULT_PORT = 4711;
 
     private static final String HOST_PROPERTY = "host";
@@ -80,6 +79,21 @@ public class DummyPlayer extends BasicPlayer {
     }
 
     @Override
+    public void onTableChangedStateEvent(TableChangedStateEvent event) {
+        log.info("Table state: {}", event.getState());
+    }
+
+    @Override
+    public void onCommunityHasBeenDealtACard(CommunityHasBeenDealtACardEvent event) {
+        log.info("Community got card: {}", event.getCard());
+    }
+
+    @Override
+    public void onYouHaveBeenDealtACard(YouHaveBeenDealtACardEvent event) {
+        log.info("I got a card: {}", event.getCard());
+    }
+
+    @Override
     public void onPlayIsStarted(PlayIsStartedEvent event) {
         log.info("Play is starting. My table id is: " + event.getTableId());
     }
@@ -119,7 +133,7 @@ public class DummyPlayer extends BasicPlayer {
         else {
             action = foldAction;
         }
-
+        log.info("My time to act. Going to {} in state {}", action,  playerClient.getCurrentPlayState().getCurrentPlayState());
         log.debug("{} returning action: {}", getName(), action);
         return action;
     }

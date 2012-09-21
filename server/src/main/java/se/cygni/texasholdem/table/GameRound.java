@@ -91,11 +91,11 @@ public class GameRound {
                 dealerPlayer, smallBlindPlayer, bigBlindPlayer, tableId,
                 players, players);
 
+        EventBusUtil.postToEventBus(eventBus, new TableChangedStateEvent(pot.getCurrentPlayState()), players);
+
         // The OPEN
         dealACardToAllParticipatingPlayers(deck);
         dealACardToAllParticipatingPlayers(deck);
-
-        EventBusUtil.postToEventBus(eventBus, new TableChangedStateEvent(pot.getCurrentPlayState()), players);
 
         long smallBlindAmount = pot.bet(smallBlindPlayer, smallBlind);
         EventBusUtil.postPlayerBetSmallBlind(eventBus, smallBlindPlayer, smallBlindAmount, players);

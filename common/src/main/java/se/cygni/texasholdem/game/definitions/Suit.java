@@ -7,7 +7,7 @@ import java.util.Map;
 public enum Suit {
 
     CLUBS("c", "Clubs"),
-    DIAMONDS("d", "Diamomds"),
+    DIAMONDS("d", "Diamonds"),
     HEARTS("h", "Hearts"),
     SPADES("s", "Spades");
 
