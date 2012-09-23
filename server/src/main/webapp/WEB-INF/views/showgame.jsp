@@ -1,4 +1,4 @@
-<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="h" %>
 
@@ -136,9 +136,13 @@
             $(this).val($(this).val().replace(/[^\d]/, ''));
         });
 
+        updateGameViewWith(-1, -1);
+    });
+
+    function updateGameViewWith(tableId, gameRoundNo) {
         $.ajax({
             type:"GET",
-            url:"/timemachine/table/-1/gameround/-1",
+            url:"/timemachine/table/" + tableId + "/gameround/" + gameRoundNo,
             success:function (response) {
                 result = ich.gameRoundTemplate(response);
                 $("#placeHolderGame").html(result);
@@ -150,32 +154,13 @@
                 }
             }
         });
-
-        if ($("[rel=tooltip]").length) {
-            $("[rel=tooltip]").tooltip();
-        }
-
-
-    });
+    }
 
     function updateGameView() {
         var tableId = $("#tableId").val();
-        var gameRound = $("#gameRoundNo").val();
+        var gameRoundNo = $("#gameRoundNo").val();
 
-        $.ajax({
-            type:"GET",
-            url:"/timemachine/table/" + tableId + "/gameround/" + gameRound,
-            success:function (response) {
-                result = ich.gameRoundTemplate(response);
-                $("#placeHolderGame").html(result);
-                $("#tableId").val(response.tableCounter);
-                $("#gameRoundNo").val(response.roundNumber);
-
-                if ($("[rel=tooltip]").length) {
-                    $("[rel=tooltip]").tooltip();
-                }
-            }
-        });
+        updateGameViewWith(tableId, gameRoundNo);
     }
 </script>
 

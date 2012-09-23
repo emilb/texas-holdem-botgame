@@ -31,9 +31,6 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 	private static final String RESOURCES_HANDLER = "/resources/";
 	private static final String RESOURCES_LOCATION = RESOURCES_HANDLER + "**";
 
-    private static final String RESOURCES_FAVICON_HANDLER = "/resources/img/favicon.ico";
-    private static final String RESOURCES_FAVICON_LOCATION = "/favicon.ico";
-
 	@Override
 	public RequestMappingHandlerMapping requestMappingHandlerMapping() {
 		RequestMappingHandlerMapping requestMappingHandlerMapping = super.requestMappingHandlerMapping();
@@ -72,7 +69,6 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler(RESOURCES_HANDLER).addResourceLocations(RESOURCES_LOCATION);
-		registry.addResourceHandler(RESOURCES_FAVICON_HANDLER).addResourceLocations(RESOURCES_FAVICON_LOCATION);
 	}
 
 	@Override
