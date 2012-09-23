@@ -140,19 +140,30 @@
     });
 
     function updateGameViewWith(tableId, gameRoundNo) {
-        $.ajax({
-            type:"GET",
-            url:"/timemachine/table/" + tableId + "/gameround/" + gameRoundNo,
-            success:function (response) {
-                result = ich.gameRoundTemplate(response);
-                $("#placeHolderGame").html(result);
-                $("#tableId").val(response.tableCounter);
-                $("#gameRoundNo").val(response.roundNumber);
+        $("#placeHolderGame").fadeOut('fast', function() {
+            $.ajax({
+                type:"GET",
+                url:"/timemachine/table/" + tableId + "/gameround/" + gameRoundNo,
+                success:function (response) {
+                    result = ich.gameRoundTemplate(response);
+                    $("#placeHolderGame").html(result).fadeIn('fast');
 
-                if ($("[rel=tooltip]").length) {
-                    $("[rel=tooltip]").tooltip();
+                    $("#tableId").val(response.tableCounter);
+
+                    // If gameRoundNo hasn't been incremented stop the auto forward
+                    var previousGameRoundNo = $("#gameRoundNo").val();
+                    if (previousGameRoundNo > response.roundNumber) {
+                        $('#autoForward').prop('checked', false);
+                        clearTimeout(reloadTimer);
+                    }
+
+                    $("#gameRoundNo").val(response.roundNumber);
+
+                    if ($("[rel=tooltip]").length) {
+                        $("[rel=tooltip]").tooltip();
+                    }
                 }
-            }
+            });
         });
     }
 
@@ -223,7 +234,6 @@
                         <img src="/resources/img/cards/{{rank}}_{{suit}}_small.png" alt="${card}" width="36" height="50"
                              rel="tooltip" data-placement="top" data-original-title="{{rank}} of {{suit}}"/>
                         {{/cards}}
-                        <h:cardToImage cards="${player.cards}"/>
                     </td>
                     <td>$ {{preflopBet}}
                         {{#preflopFolded}}
@@ -274,8 +284,6 @@
 
                 </tr>
                 {{/players}}
-
-
                 </tbody>
             </table>
         </div>
