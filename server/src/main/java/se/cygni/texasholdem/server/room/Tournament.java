@@ -31,6 +31,7 @@ public class Tournament extends Room {
 
     private List<BotPlayer> playerRank = Collections.synchronizedList(new ArrayList<BotPlayer>());
 
+    private List<List<Long>> tablePartitions = new ArrayList<List<Long>>();
     private List<Long> tablesPlayedIds = new ArrayList<Long>();
 
     public Tournament(EventBus eventBus, GamePlan gamePlan, SessionManager sessionManager) {
@@ -152,6 +153,7 @@ public class Tournament extends Room {
 
     private void partitionActivePlayersOnTables() {
         tables.clear();
+        tablesPlayedIds.clear();
 
         List<List<BotPlayer>> partitionedPlayers = TableUtil.partitionPlayers(GameUtil.getActivePlayersWithChipsLeft(getPlayers()));
 
@@ -168,6 +170,8 @@ public class Tournament extends Room {
             tablesPlayedIds.add(table.getTableCounter());
             tables.add(table);
         }
+
+        tablePartitions.add(new ArrayList<Long>(tablesPlayedIds));
     }
 
     private void shutdown() {
@@ -250,6 +254,15 @@ public class Tournament extends Room {
     }
 
     public List<Long> getTablesPlayedIds() {
-        return new ArrayList<Long>(tablesPlayedIds);
+        List<Long> tableIds = new ArrayList<Long>();
+        for (List<Long> pTableIds : tablePartitions) {
+            tableIds.addAll(pTableIds);
+        }
+
+        return tableIds;
+    }
+
+    public List<List<Long>> getTablePartitions() {
+        return tablePartitions;
     }
 }

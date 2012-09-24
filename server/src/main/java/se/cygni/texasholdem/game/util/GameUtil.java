@@ -203,7 +203,7 @@ public class GameUtil {
             actions.add(new Action(ActionType.ALL_IN, player.getChipAmount()));
         }
 
-        // Raise is done in increments of the bigBlind
+        // Raise is done in increments of the bigBlindValue
         if (raiseAllowed && player.getChipAmount() >= amountNeededToCall + bigBlind) {
             actions.add(new Action(ActionType.RAISE, amountNeededToCall + bigBlind));
         }
@@ -276,8 +276,8 @@ public class GameUtil {
                                         Pot pot, Map<BotPlayer, Long> payoutResult, PokerHandRankUtil rankUtil) {
 
         GameLog gameLog = new GameLog();
-        gameLog.smallBlind = smallBlind;
-        gameLog.bigBlind = bigBlind;
+        gameLog.smallBlindValue = smallBlind;
+        gameLog.bigBlindValue = bigBlind;
         gameLog.communityCards.addAll(communityCards);
 
         for (BotPlayer player : players) {
@@ -307,6 +307,9 @@ public class GameUtil {
             pg.riverBet = pot.getTotalBetAmountForPlayerInPlayState(player, PlayState.RIVER);
 
             pg.allIn = pot.isAllIn(player);
+
+            pg.noofCalls = pot.getNoofCallsFor(player);
+            pg.noofRaises = pot.getNoofRaisesFor(player);
 
             if (pot.isAllIn(player)) {
 

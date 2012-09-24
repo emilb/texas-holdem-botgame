@@ -1,6 +1,7 @@
 package se.cygni.texasholdem.game.pot;
 
 import org.apache.commons.collections.CollectionUtils;
+import se.cygni.texasholdem.game.ActionType;
 import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.game.definitions.PlayState;
 
@@ -107,9 +108,20 @@ public class Pot {
 
         final boolean isAllIn = player.getChipAmount() == 0;
 
+        ActionType derivedActionType = null;
+        long amountNeededToCall = getAmountNeededToCall(player);
+        if (isAllIn) {
+            derivedActionType = ActionType.ALL_IN;
+        } else if (realAmount == amountNeededToCall) {
+            derivedActionType = ActionType.CALL;
+        } else if (realAmount > amountNeededToCall) {
+            derivedActionType = ActionType.RAISE;
+        }
+
         final PotTransaction transaction = new PotTransaction(
                 transactionCounter.getAndIncrement(), player, realAmount,
-                isAllIn);
+                isAllIn, derivedActionType);
+
         transactionTable.get(currentPlayState).add(transaction);
 
         if (isAllIn) {
@@ -567,5 +579,25 @@ public class Pot {
         }
 
         return true;
+    }
+
+    public int getNoofCallsFor(BotPlayer player) {
+        int noofCalls = 0;
+        for (PotTransaction transaction : getAllTransactionsInOrder()) {
+            if (transaction.getPlayer().equals(player))
+                noofCalls += transaction.getActionType() == ActionType.CALL ? 1 : 0;
+        }
+
+        return noofCalls;
+    }
+
+    public int getNoofRaisesFor(BotPlayer player) {
+        int noofCalls = 0;
+        for (PotTransaction transaction : getAllTransactionsInOrder()) {
+            if (transaction.getPlayer().equals(player))
+                noofCalls += transaction.getActionType() == ActionType.RAISE ? 1 : 0;
+        }
+
+        return noofCalls;
     }
 }

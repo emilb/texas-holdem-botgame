@@ -1,12 +1,13 @@
 package se.cygni.texasholdem.game.util;
 
-import static se.cygni.texasholdem.test.util.PlayerTestUtil.*;
 import junit.framework.Assert;
 import org.junit.Test;
 import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.table.Table;
 
 import java.util.List;
+
+import static se.cygni.texasholdem.test.util.PlayerTestUtil.createRandomListOfPlayers;
 
 public class TableUtilTest {
 

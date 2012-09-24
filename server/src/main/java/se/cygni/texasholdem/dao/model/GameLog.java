@@ -8,8 +8,8 @@ import java.util.List;
 public class GameLog {
 
     public List<PlayerInGame> players = new ArrayList<PlayerInGame>();
-    public long bigBlind;
-    public long smallBlind;
+    public long bigBlindValue;
+    public long smallBlindValue;
     public List<Card> communityCards = new ArrayList<Card>();
     public int logPosition;
     public long tableCounter;
@@ -19,12 +19,12 @@ public class GameLog {
         return players;
     }
 
-    public long getBigBlind() {
-        return bigBlind;
+    public long getBigBlindValue() {
+        return bigBlindValue;
     }
 
-    public long getSmallBlind() {
-        return smallBlind;
+    public long getSmallBlindValue() {
+        return smallBlindValue;
     }
 
     public List<Card> getCommunityCards() {

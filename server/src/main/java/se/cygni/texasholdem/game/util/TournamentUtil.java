@@ -22,6 +22,7 @@ public class TournamentUtil {
                 tournament.tournamentHasStarted(),
                 tournament.tournamentHasEnded(),
                 tournament.getPlayerRanking(),
+                tournament.getTablePartitions(),
                 tournament.getTablesPlayedIds());
     }
 

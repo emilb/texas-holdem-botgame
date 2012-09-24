@@ -1,17 +1,49 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <script>
+
+    var reloadTimer;
+
     function loadTournament(id) {
         clearTimeout(reloadTimer);
 
         $.ajax({
-            type:"GET",
-            url:"/tournament/subview?id=" + id,
-            success:function (response) {
-                $("#tournament_status").html(response);
+            type: "GET",
+            url: "/tournament/details/" + id,
+            success: function (response) {
+                var result = "Nothing to show";
+                var shouldReload = true;
+
+                if (!response.tournamentHasStarted && !response.tournamentHasEnded) {
+                    result = ich.tournamentNotStarted(response);
+                }
+
+                if (response.tournamentHasStarted && !response.tournamentHasEnded) {
+                    result = ich.tournamentStarted(response);
+                }
+
+                if (response.tournamentHasEnded) {
+                    result = ich.tournamentEnded(response);
+                    shouldReload = false;
+                }
+
+                $("#placeHolderTournament").html(result);
+
+                if (shouldReload) {
+                    reloadTimer = setInterval(function () {
+                        loadTournament(id);
+                    }, 1000);
+                }
             }
+        });
+    }
+
+    function startTournament(id) {
+        console.log('Starting tournament with id: ' + id);
+        $.ajax({
+            type: "GET",
+            url: "/tournament/start/" + id
         });
     }
 
@@ -45,53 +77,133 @@
                 </table>
             </div>
         </div>
-        <!--/span-->
 
-        <div class="span9" id="tournament_status">
-
-            <h2>Tournament #${tournamentCurrent.tournamentCounter}</h2>
-
-            <h3>Status: ${tournamentCurrent.status}</h3>
-
-            <c:if test="${tournamentCurrent.canStart}">
-                <div class="pagination-centered">
-
-                    <form:form cssClass="form-horizontal" action="startTournament" commandName="tournamentCurrentStart"
-                               method="POST">
-                        <form:hidden id="id" path="id"/>
-                        <button type="submit" class="btn btn-large btn-primary">START</button>
-                    </form:form>
-
-                </div>
-            </c:if>
-
-            <div class="span4">
-                <h3>Tables</h3>
-
-                <c:forEach var="tableId" items="${tournamentCurrent.tableIds}">
-                    <a href="/timemachine?tableId=${tableId}&position=0" class="btn btn-success">${tableId}</a>
-                </c:forEach>
-            </div>
-
-            <div class="span4">
-                <h3>Players</h3>
-
-                <table class="table table-striped">
-                    <tbody>
-                    <c:forEach var="player" items="${tournamentCurrent.playerRanking}">
-                        <tr>
-                            <td>${player.name}</td>
-                            <td>
-                                <div class="pull-right">$ ${player.chipCount}</div>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            </div>
+        <div id="placeHolderTournament">
 
         </div>
-        <!--/span-->
+
     </div>
 </div>
-<!--/.fluid-container-->
+
+<script>
+
+
+</script>
+
+<script id="tournamentNotStarted" type="text/html">
+    <div class="span9">
+        <h2>Tournament # {{tournamentCounter}} </h2>
+
+        <h3>Status: {{status}}</h3>
+
+        <div class="span12">
+        {{#canStart}}<button type="button" class="btn btn-large btn-primary" onclick="startTournament('{{id}}')">START</button>{{/canStart}}
+        </div>
+        <div class="span3">
+            <h3>Connected Players</h3>
+
+            <table class="table table-striped">
+                <tbody>
+                {{#playerRanking}}
+                    <tr>
+                        <td>{{name}}</td>
+                        <td>
+                            <div class="pull-right">$ {{chipCount}}</div>
+                        </td>
+                    </tr>
+                {{/playerRanking}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</script>
+
+<script id="tournamentStarted" type="text/html">
+    <div class="span9">
+        <h2>Tournament # {{tournamentCounter}} </h2>
+
+        <h3>Status: {{status}}</h3>
+
+
+        <div class="span4">
+            <h3>Tables</h3>
+
+            <table class="table table-striped">
+                <tbody>
+                {{#tablePartitions}}
+                <tr>
+                    <td>Partition {{index}}</td>
+                    <td>
+                        {{#tableIds}}
+                        <a class="btn btn-info btn-mini" href="/showgame/table/{{.}}">{{.}}</a>
+                        {{/tableIds}}
+                    </td>
+                </tr>
+                {{/tablePartitions}}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="span4">
+            <h3>Ranking for Players</h3>
+
+            <table class="table table-striped">
+                <tbody>
+                {{#playerRanking}}
+                <tr>
+                    <td>{{name}}</td>
+                    <td>
+                        <div class="pull-right">$ {{chipCount}}</div>
+                    </td>
+                </tr>
+                {{/playerRanking}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</script>
+
+<script id="tournamentEnded" type="text/html">
+    <div class="span9">
+        <h2>Tournament # {{tournamentCounter}} </h2>
+
+        <h3>Status: {{status}}</h3>
+
+
+        <div class="span4">
+            <h3>Tables</h3>
+
+            <table class="table table-striped">
+                <tbody>
+                {{#tablePartitions}}
+                <tr>
+                    <td>Partition {{index}}</td>
+                    <td>
+                    {{#tableIds}}
+                        <a class="btn btn-info btn-mini" href="/showgame/table/{{.}}">{{.}}</a>
+                    {{/tableIds}}
+                    </td>
+                </tr>
+                {{/tablePartitions}}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="span4">
+            <h3>Ranking for Players</h3>
+
+            <table class="table table-striped">
+                <tbody>
+                {{#playerRanking}}
+                <tr>
+                    <td>{{name}}</td>
+                    <td>
+                        <div class="pull-right">$ {{chipCount}}</div>
+                    </td>
+                </tr>
+                {{/playerRanking}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</script>

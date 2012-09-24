@@ -1,19 +1,13 @@
 package se.cygni.webapp.controllers.controllers;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import se.cygni.texasholdem.dao.model.TournamentLog;
 import se.cygni.texasholdem.game.util.TournamentUtil;
 import se.cygni.texasholdem.server.room.Tournament;
 import se.cygni.texasholdem.server.session.SessionManager;
-import se.cygni.texasholdem.server.statistics.StatisticsCollector;
 import se.cygni.webapp.controllers.controllers.model.StartTournament;
 
 import java.util.Collections;
@@ -26,9 +20,6 @@ public class TournamentController {
 
     @Autowired
     SessionManager sessionManager;
-
-    @Autowired
-    StatisticsCollector statisticsCollector;
 
     public static final String TOURNAMENT_LIST = "tournamentList";
     public static final String TOURNAMENT_CURRENT = "tournamentCurrent";
@@ -67,6 +58,15 @@ public class TournamentController {
         return "tournament";
     }
 
+    @RequestMapping(value = "/tournament/details/{tournamentId}", method = RequestMethod.GET)
+    public @ResponseBody
+    TournamentLog getTournamentLog(
+            @PathVariable String tournamentId) {
+
+        return TournamentUtil.createTournamentLog(sessionManager.getTournament(tournamentId));
+    }
+
+
     @RequestMapping(value = "/tournament/subview", method = RequestMethod.GET)
     public String updateSubview(@RequestParam(value = "id", required = false) String tournamentId, Locale locale, Model model) {
         TournamentLog latest = null;
@@ -85,12 +85,13 @@ public class TournamentController {
         return "tournament_ajax_update";
     }
 
-    @RequestMapping(value = "/startTournament", method = RequestMethod.POST)
-    public String start(@ModelAttribute StartTournament startTournament, Model model) {
-        Tournament tournament = sessionManager.getTournament(startTournament.getId());
+    @RequestMapping(value = "/tournament/start/{tournamentId}", method = RequestMethod.GET)
+    public @ResponseBody
+        String start(
+            @PathVariable String tournamentId) {
 
+        Tournament tournament = sessionManager.getTournament(tournamentId);
         tournament.startTournament();
-
-        return "redirect:/tournament?id=" + startTournament.getId();
+        return "OK";
     }
 }

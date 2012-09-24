@@ -1,5 +1,6 @@
 package se.cygni.texasholdem.game.pot;
 
+import se.cygni.texasholdem.game.ActionType;
 import se.cygni.texasholdem.game.BotPlayer;
 
 public class PotTransaction {
@@ -8,14 +9,16 @@ public class PotTransaction {
     private final BotPlayer player;
     private final long amount;
     private final boolean allIn;
+    private final ActionType actionType;
 
     public PotTransaction(final long transactionNumber, final BotPlayer player,
-                          final long amount, final boolean allIn) {
+                          final long amount, final boolean allIn, ActionType actionType) {
 
         this.transactionNumber = transactionNumber;
         this.player = player;
         this.amount = amount;
         this.allIn = allIn;
+        this.actionType = actionType;
     }
 
     public long getTransactionNumber() {
@@ -36,6 +39,10 @@ public class PotTransaction {
     public boolean isAllIn() {
 
         return allIn;
+    }
+
+    public ActionType getActionType() {
+        return actionType;
     }
 
     @Override

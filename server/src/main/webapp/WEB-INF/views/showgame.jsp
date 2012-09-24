@@ -49,16 +49,32 @@
         </div>
     </div>
 
-    <div id="placeHolderGame">
+    <div id="placeHolderGame"> </div>
 
+    <hr />
+
+    <div class="row">
+        <div class="span6">
+            <div id="statActionsGraph"></div>
+        </div>
+        <div class="span6">
+            <div id="statChipsGraph"></div>
+        </div>
+        <div class="span12">
+            <button id="btnResetChipsGraph" class="btn btn-small pull-right" type="button" onclick="">Reset</button>
+        </div>
     </div>
+
 
 </div>
 
 <script>
     var reloadTimer;
+    var actionsGraph;
+    var chipsGraph;
 
     $(document).ready(function () {
+
         $('#nav_first').click(function (event) {
             event.stopPropagation();
             event.preventDefault();
@@ -136,15 +152,31 @@
             $(this).val($(this).val().replace(/[^\d]/, ''));
         });
 
-        updateGameViewWith(-1, -1);
+        $('#btnResetChipsGraph').click(function() {
+            if (chipsGraph) {
+                chipsGraph.resetZoom();
+            }
+        });
+
+        var requestedTableId = '${tableId}';
+        if (requestedTableId) {
+            updateGameViewWith(requestedTableId, -1);
+        } else {
+            updateGameViewWith(-1, -1);
+        }
     });
 
     function updateGameViewWith(tableId, gameRoundNo) {
+
+        if (chipsGraph) { chipsGraph.destroy(); }
+        if (actionsGraph) { actionsGraph.destroy(); }
+
         $("#placeHolderGame").fadeOut('fast', function() {
+
             $.ajax({
-                type:"GET",
-                url:"/timemachine/table/" + tableId + "/gameround/" + gameRoundNo,
-                success:function (response) {
+                type: "GET",
+                url: "/timemachine/table/" + tableId + "/gameround/" + gameRoundNo,
+                success: function (response) {
                     result = ich.gameRoundTemplate(response);
                     $("#placeHolderGame").html(result).fadeIn('fast');
 
@@ -162,10 +194,154 @@
                     if ($("[rel=tooltip]").length) {
                         $("[rel=tooltip]").tooltip();
                     }
+
+                    updateActionStatistics(response.tableCounter, response.roundNumber);
+                    updateChipsStatistics(response.tableCounter, response.roundNumber);
                 }
             });
         });
+
+
     }
+
+    function updateActionStatistics(tableId, gameRoundNo) {
+
+        if (actionsGraph) {
+            actionsGraph.destroy();
+        }
+
+        $.ajax({
+            type: "GET",
+            url: "/timemachine/statsAction/table/" + tableId + "/gameround/" + gameRoundNo,
+            success: function (response) {
+
+                // Can specify a custom tick Array.
+                // Ticks should match up one for each y value (category) in the series.
+                var ticks = response.players;
+
+                actionsGraph = $.jqplot('statActionsGraph', [
+                    response.foldedStat,
+                    response.calledStat,
+                    response.raisedStat,
+                    response.allInStat], {
+
+                    title : 'Actions per player and type',
+
+                    // The "seriesDefaults" option is an options object that will
+                    // be applied to all series in the chart.
+                    seriesDefaults:{
+                        renderer:$.jqplot.BarRenderer,
+                        rendererOptions: {fillToZero: true},
+                        pointLabels: { show:true }
+                    },
+                    // Custom labels for the series are specified with the "label"
+                    // option on the series option.  Here a series option object
+                    // is specified for each series.
+                    series:[
+                        {label:'Folded'},
+                        {label:'Called'},
+                        {label:'Raised'},
+                        {label:'All-in'}
+                    ],
+                    // Show the legend and put it outside the grid, but inside the
+                    // plot container, shrinking the grid to accomodate the legend.
+                    // A value of "outside" would not shrink the grid and allow
+                    // the legend to overflow the container.
+                    legend: {
+                        show: true,
+                        placement: 'outsideGrid'
+                    },
+                    axes: {
+                        // Use a category axis on the x axis and use our custom ticks.
+                        xaxis: {
+                            renderer: $.jqplot.CategoryAxisRenderer,
+                            ticks: ticks
+                        },
+                        // Pad the y axis just a little so bars can get close to, but
+                        // not touch, the grid boundaries.  1.2 is the default padding.
+                        yaxis: {
+                            pad: 1.05,
+                            padMin : 0,
+                            tickOptions: {formatString: '%d'},
+                            autoscale : true
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    function updateChipsStatistics(tableId, gameRoundNo) {
+
+        if (chipsGraph) {
+            chipsGraph.destroy();
+        }
+
+        $.ajax({
+            type: "GET",
+            url: "/timemachine/statsChip/table/" + tableId + "/gameround/" + gameRoundNo,
+            success: function (response) {
+                // Can specify a custom tick Array.
+                // Ticks should match up one for each y value (category) in the series.
+                //var ticks = response.players;
+
+                var data = new Array();
+                var seriesData = new Array();
+
+                for (var i = 0; i < response.players.length; i++) {
+                    data.push(response.chipsPerPlayerPerRound[response.players[i]]);
+                    seriesData.push(
+                            {
+                                label : response.players[i],
+                                lineWidth : 2,
+                                showMarker : false,
+                                shadow : false
+                            });
+                }
+
+                //console.log(data);
+
+                chipsGraph = $.jqplot('statChipsGraph', data, {
+
+                    title : 'Chips per player and round',
+
+                    // Custom labels for the series are specified with the "label"
+                    // option on the series option.  Here a series option object
+                    // is specified for each series.
+                    series: seriesData,
+
+                    // Show the legend and put it outside the grid, but inside the
+                    // plot container, shrinking the grid to accomodate the legend.
+                    // A value of "outside" would not shrink the grid and allow
+                    // the legend to overflow the container.
+                    legend: {
+                        show: true,
+                        placement: 'outsideGrid'
+                    },
+
+                    axes: {
+                        xaxis: {
+                            padMin : 0
+                        },
+                        // Pad the y axis just a little so bars can get close to, but
+                        // not touch, the grid boundaries.  1.2 is the default padding.
+                        yaxis: {
+                            pad: 1.05,
+                            padMin : 0,
+                            tickOptions: {formatString: '$%d'},
+                            autoscale : true
+                        }
+                    },
+                    cursor:{
+                        show: true,
+                        zoom:true,
+                        showTooltip:false
+                    }
+                });
+            }
+        });
+    }
+
 
     function updateGameView() {
         var tableId = $("#tableId").val();
@@ -200,19 +376,19 @@
                     <td></td>
                     <td>
                         {{#flopCards}}
-                        <img src="/resources/img/cards/{{rank}}_{{suit}}_small.png" alt="${card}" width="36" height="50"
+                        <img src="/resources/img/cards/{{rank}}_{{suit}}_small.png" alt="{{rank}} of {{suit}}" width="36" height="50"
                              rel="tooltip" data-placement="top" data-original-title="{{rank}} of {{suit}}"/>
                         {{/flopCards}}
                     </td>
                     <td>
                         {{#turnCards}}
-                        <img src="/resources/img/cards/{{rank}}_{{suit}}_small.png" alt="${card}" width="36" height="50"
+                        <img src="/resources/img/cards/{{rank}}_{{suit}}_small.png" alt="{{rank}} of {{suit}}" width="36" height="50"
                              rel="tooltip" data-placement="top" data-original-title="{{rank}} of {{suit}}"/>
                         {{/turnCards}}
                     </td>
                     <td>
                         {{#riverCards}}
-                        <img src="/resources/img/cards/{{rank}}_{{suit}}_small.png" alt="${card}" width="36" height="50"
+                        <img src="/resources/img/cards/{{rank}}_{{suit}}_small.png" alt="{{rank}} of {{suit}}" width="36" height="50"
                              rel="tooltip" data-placement="top" data-original-title="{{rank}} of {{suit}}"/>
                         {{/riverCards}}
                     </td>
@@ -225,13 +401,13 @@
                 <tr>
                     <td>
                         {{name}} <br/>
-                        <c:if test="${player.dealer}">Dealer</c:if>
-                        <c:if test="${player.bigBlind}">Big Blind ($${gameLog.bigBlind})</c:if>
-                        <c:if test="${player.smallBlind}">Small Blind ($${gameLog.smallBlind})</c:if>
+                        {{#dealer}}Dealer{{/dealer}}
+                        {{#bigBlind}}Big Blind ($ {{bigBlindValue}}){{/bigBlind}}
+                        {{#smallBlind}}Small Blind ($ {{smallBlindValue}}){{/smallBlind}}
                     </td>
                     <td>
                         {{#cards}}
-                        <img src="/resources/img/cards/{{rank}}_{{suit}}_small.png" alt="${card}" width="36" height="50"
+                        <img src="/resources/img/cards/{{rank}}_{{suit}}_small.png" alt="{{rank}} of {{suit}}" width="36" height="50"
                              rel="tooltip" data-placement="top" data-original-title="{{rank}} of {{suit}}"/>
                         {{/cards}}
                     </td>
@@ -289,3 +465,18 @@
         </div>
     </div>
 </script>
+
+<script id="statFoldsTemplate" type="text/html">
+
+
+</script>
+
+<script src="<c:url value="/resources/js/jquery.jqplot.min.js" />"></script>
+<script src="<c:url value="/resources/js/jqplot-plugins/jqplot.barRenderer.min.js" />"></script>
+<script src="<c:url value="/resources/js/jqplot-plugins/jqplot.categoryAxisRenderer.min.js" />"></script>
+<script src="<c:url value="/resources/js/jqplot-plugins/jqplot.pointLabels.min.js" />"></script>
+<script src="<c:url value="/resources/js/jqplot-plugins/jqplot.canvasTextRenderer.min.js" />"></script>
+<script src="<c:url value="/resources/js/jqplot-plugins/jqplot.canvasAxisLabelRenderer.min.js" />"></script>
+<script src="<c:url value="/resources/js/jqplot-plugins/jqplot.cursor.min.js" />"></script>
+
+

@@ -144,7 +144,7 @@ public class Table implements Runnable {
                     break;
             }
 
-            log.debug("Updated blinds, smallBlind: {}, bigBlind: {}",
+            log.debug("Updated blinds, smallBlindValue: {}, bigBlindValue: {}",
                     smallBlind, bigBlind);
         }
     }

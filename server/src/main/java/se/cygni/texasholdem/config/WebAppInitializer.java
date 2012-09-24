@@ -1,15 +1,14 @@
 package se.cygni.texasholdem.config;
 
-import java.util.EnumSet;
-import java.util.Set;
-
-import javax.servlet.*;
-
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
+
+import javax.servlet.*;
+import java.util.EnumSet;
+import java.util.Set;
 
 public class WebAppInitializer implements WebApplicationInitializer {
 

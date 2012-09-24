@@ -8,6 +8,8 @@ import org.joda.time.format.PeriodFormatterBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.cygni.texasholdem.dao.model.GameLog;
+import se.cygni.texasholdem.dao.model.stats.StatsActions;
+import se.cygni.texasholdem.dao.model.stats.StatsChips;
 import se.cygni.texasholdem.server.eventbus.RegisterForPlayWrapper;
 import se.cygni.texasholdem.server.eventbus.TableDoneEvent;
 import se.cygni.texasholdem.util.CircularBuffer;
@@ -112,6 +114,34 @@ public class StatisticsCollector {
         } catch (Exception e) {
         }
         return null;
+    }
+
+    public StatsActions getStatsActions(final long tableId, final int position) {
+        TableHistory tableHistory = getTableHistory(tableId);
+
+        StatsActions sa = new StatsActions();
+
+        if (position < 0 || position > tableHistory.gameLogs.size()) {
+            sa.recordsGameLogs(tableHistory.gameLogs);
+        } else {
+            sa.recordsGameLogs(tableHistory.gameLogs.subList(0, position+1));
+        }
+
+        return sa;
+    }
+
+    public StatsChips getStatsChips(final long tableId, final int position) {
+        TableHistory tableHistory = getTableHistory(tableId);
+
+        StatsChips sc = new StatsChips();
+
+        if (position < 0 || position > tableHistory.gameLogs.size()) {
+            sc.recordGameLogs(tableHistory.gameLogs);
+        } else {
+            sc.recordGameLogs(tableHistory.gameLogs.subList(0, position + 1));
+        }
+
+        return sc;
     }
 
     public GameLog getLastGameLog(final long tableId) {

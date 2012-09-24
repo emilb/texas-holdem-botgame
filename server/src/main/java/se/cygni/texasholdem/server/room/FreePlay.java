@@ -6,13 +6,10 @@ import org.slf4j.LoggerFactory;
 import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.game.GamePlayer;
 import se.cygni.texasholdem.game.util.GameUtil;
-import se.cygni.texasholdem.game.util.TableUtil;
-import se.cygni.texasholdem.server.eventbus.PlayerQuitEvent;
 import se.cygni.texasholdem.server.session.SessionManager;
 import se.cygni.texasholdem.server.statistics.AtomicCounter;
 import se.cygni.texasholdem.table.GamePlan;
 import se.cygni.texasholdem.table.Table;
-import se.cygni.texasholdem.table.TournamentTable;
 import se.cygni.texasholdem.util.PlayerTypeConverter;
 
 import java.util.*;

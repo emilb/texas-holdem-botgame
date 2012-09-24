@@ -21,10 +21,10 @@ public class PerformanceTournamentTestPlayer extends BasicPlayer {
     private static Logger log = LoggerFactory
             .getLogger(PerformanceTournamentTestPlayer.class);
 
-    private static final String DEFAULT_HOST = "192.168.10.192";
+    private static final String DEFAULT_HOST = "localhost";
     private static final int DEFAULT_PORT = 4711;
     private static final String DEFAULT_NAME = "perftest";
-    private static final int DEFAULT_NOOF_PLAYERS = 9;
+    private static final int DEFAULT_NOOF_PLAYERS = 55;
 
     private static final AtomicInteger counter = new AtomicInteger(0);
 
@@ -197,7 +197,7 @@ public class PerformanceTournamentTestPlayer extends BasicPlayer {
             log.info("Started player {}", i);
 
             try {
-                Thread.sleep(1200);
+                Thread.sleep(100);
             } catch (Exception w) {
             }
         }

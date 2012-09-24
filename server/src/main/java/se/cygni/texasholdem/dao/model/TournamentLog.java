@@ -3,6 +3,7 @@ package se.cygni.texasholdem.dao.model;
 import se.cygni.texasholdem.game.GamePlayer;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,22 +16,40 @@ public class TournamentLog {
     private final boolean tournamentHasEnded;
 
     private final List<GamePlayer> playerRanking;
-    private final List<Long> tableIds;
+    private final List<Long> allTableIds;
+    private final List<TablePartition> tablePartitions;
 
     private final Date created;
     private final SimpleDateFormat sdf;
 
-    public TournamentLog(String id, long tournamentCounter, Date created, boolean tournamentHasStarted, boolean tournamentHasEnded, List<GamePlayer> playerRanking, List<Long> tableIds) {
+    public TournamentLog(
+            String id,
+            long tournamentCounter,
+            Date created,
+            boolean tournamentHasStarted,
+            boolean tournamentHasEnded,
+            List<GamePlayer> playerRanking,
+            List<List<Long>> tablePartitions,
+            List<Long> tableIds) {
+
         this.id = id;
         this.tournamentCounter = tournamentCounter;
         this.created = created;
         this.tournamentHasStarted = tournamentHasStarted;
         this.tournamentHasEnded = tournamentHasEnded;
         this.playerRanking = playerRanking;
-        this.tableIds = tableIds;
+
+        this.tablePartitions = new ArrayList<TablePartition>();
+        int counter = 1;
+        for (List<Long> tablePartition : tablePartitions) {
+            this.tablePartitions.add(new TablePartition(tablePartition, counter));
+            counter++;
+        }
+        this.allTableIds = tableIds;
 
         sdf = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
     }
+
 
     public String getId() {
         return id;
@@ -52,8 +71,12 @@ public class TournamentLog {
         return playerRanking;
     }
 
-    public List<Long> getTableIds() {
-        return tableIds;
+    public List<Long> getAllTableIds() {
+        return allTableIds;
+    }
+
+    public List<TablePartition> getTablePartitions() {
+        return tablePartitions;
     }
 
     public String getCreatedDate() {

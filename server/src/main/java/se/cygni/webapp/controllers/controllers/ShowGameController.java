@@ -1,12 +1,16 @@
 package se.cygni.webapp.controllers.controllers;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import se.cygni.texasholdem.dao.model.GameLog;
+import se.cygni.texasholdem.dao.model.stats.StatsActions;
+import se.cygni.texasholdem.dao.model.stats.StatsChips;
 import se.cygni.texasholdem.server.session.SessionManager;
 import se.cygni.texasholdem.server.statistics.StatisticsCollector;
 import se.cygni.webapp.controllers.controllers.model.GameNavigation;
@@ -35,6 +39,19 @@ public class ShowGameController {
         return "showgame";
     }
 
+    @RequestMapping(value = "/showgame/table/{tableId}", method = RequestMethod.GET)
+    public String showTable(@PathVariable long tableId, Model model) {
+
+        GameLog gamelog = statisticsCollector.getLastGameLog(tableId);
+        model.addAttribute("tableId", tableId);
+        model.addAttribute("gameLog", gamelog);
+        model.addAttribute("position", getGameNavigation(gamelog));
+        model.addAttribute("tableIds", getReversedListOfTableIds());
+
+        return "showgame";
+    }
+
+    @Cacheable("gamelog")
     @RequestMapping(value = "/timemachine/table/{tableId}/gameround/{gameRound}", method = RequestMethod.GET)
     public @ResponseBody GameLog getGameLog(
             @PathVariable long tableId,
@@ -54,6 +71,24 @@ public class ShowGameController {
             return gameLog;
 
         return statisticsCollector.getLastGameLog();
+    }
+
+    @Cacheable("statistics-actions")
+    @RequestMapping(value = "/timemachine/statsAction/table/{tableId}/gameround/{gameRound}", method = RequestMethod.GET)
+    public @ResponseBody StatsActions getStatsActions(
+            @PathVariable long tableId,
+            @PathVariable int gameRound) {
+
+        return statisticsCollector.getStatsActions(tableId, gameRound);
+    }
+
+    @Cacheable("statistics-chips")
+    @RequestMapping(value = "/timemachine/statsChip/table/{tableId}/gameround/{gameRound}", method = RequestMethod.GET)
+    public @ResponseBody StatsChips getStatsChips(
+            @PathVariable long tableId,
+            @PathVariable int gameRound) {
+
+        return statisticsCollector.getStatsChips(tableId, gameRound);
     }
 
     private List<Long> getReversedListOfTableIds() {

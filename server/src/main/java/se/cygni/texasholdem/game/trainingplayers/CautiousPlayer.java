@@ -1,6 +1,5 @@
 package se.cygni.texasholdem.game.trainingplayers;
 
-import org.apache.commons.lang.math.RandomUtils;
 import se.cygni.texasholdem.client.CurrentPlayState;
 import se.cygni.texasholdem.communication.message.event.*;
 import se.cygni.texasholdem.communication.message.request.ActionRequest;

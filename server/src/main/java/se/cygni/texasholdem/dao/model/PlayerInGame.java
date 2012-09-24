@@ -37,6 +37,9 @@ public class PlayerInGame {
 
     public boolean allIn;
 
+    public int noofRaises;
+    public int noofCalls;
+
     public String getName() {
         return name;
     }
@@ -71,6 +74,10 @@ public class PlayerInGame {
 
     public String getPokerHand() {
         return pokerHand.getName();
+    }
+
+    public boolean isFolded() {
+        return isPreflopFolded() || isFlopFolded() || isTurnFolded() || isRiverFolded();
     }
 
     public boolean isPreflopFolded() {
