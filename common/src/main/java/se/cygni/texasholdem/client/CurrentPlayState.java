@@ -144,6 +144,16 @@ public class CurrentPlayState {
     }
 
     /**
+     * Convenience method for finding out if the bot
+     * is acting dealer.
+     *
+     * @return TRUE if this bot is dealer this round.
+     */
+    public boolean amIDealerPlayer() {
+        return myPlayersName.equals(getDealerPlayer().getName());
+    }
+
+    /**
      * The player that is small blind better during this game round
      *
      * @return the small blind player
@@ -155,6 +165,16 @@ public class CurrentPlayState {
     }
 
     /**
+     * Convenience method for finding out if the bot
+     * is playing Small Blind this round.
+     *
+     * @return TRUE if this bot is Small Blind this round.
+     */
+    public boolean amISmallBlindPlayer() {
+        return myPlayersName.equals(getSmallBlindPlayer().getName());
+    }
+
+    /**
      * The player that big blind better during this game round
      *
      * @return the big blind player
@@ -163,6 +183,16 @@ public class CurrentPlayState {
      */
     public GamePlayer getBigBlindPlayer() {
         return bigBlindPlayer;
+    }
+
+    /**
+     * Convenience method for finding out if the bot
+     * is playing Big Blind this round.
+     *
+     * @return TRUE if this bot is Big Blind this round.
+     */
+    public boolean amIBigBlindPlayer() {
+        return myPlayersName.equals(getBigBlindPlayer().getName());
     }
 
     /**

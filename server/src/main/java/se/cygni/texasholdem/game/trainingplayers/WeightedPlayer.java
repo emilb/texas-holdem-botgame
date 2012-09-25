@@ -1,7 +1,6 @@
 package se.cygni.texasholdem.game.trainingplayers;
 
 import org.apache.commons.lang.math.RandomUtils;
-import se.cygni.texasholdem.communication.message.event.*;
 import se.cygni.texasholdem.communication.message.request.ActionRequest;
 import se.cygni.texasholdem.game.Action;
 import se.cygni.texasholdem.game.ActionType;
@@ -10,9 +9,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class CrazyPlayer extends TrainingPlayer {
+public class WeightedPlayer extends TrainingPlayer {
 
-    private static final List<ActionTypeWeigth> actionWeight = new ArrayList<CrazyPlayer.ActionTypeWeigth>();
+    private static final List<ActionTypeWeigth> actionWeight = new ArrayList<WeightedPlayer.ActionTypeWeigth>();
 
     static {
         actionWeight.add(new ActionTypeWeigth(800, ActionType.CHECK));
@@ -22,76 +21,12 @@ public class CrazyPlayer extends TrainingPlayer {
         actionWeight.add(new ActionTypeWeigth(10, ActionType.ALL_IN));
     }
 
-    public CrazyPlayer(String name, String sessionId, long chipAmount) {
+    public WeightedPlayer(String name, String sessionId, long chipAmount) {
         super(name, sessionId, chipAmount);
     }
 
-    public CrazyPlayer(String name, String sessionId) {
+    public WeightedPlayer(String name, String sessionId) {
         super(name, sessionId);
-    }
-
-    @Override
-    public void serverIsShuttingDown(ServerIsShuttingDownEvent event) {
-    }
-
-    @Override
-    public void onPlayIsStarted(PlayIsStartedEvent event) {
-    }
-
-    @Override
-    public void onTableChangedStateEvent(TableChangedStateEvent event) {
-    }
-
-    @Override
-    public void onYouHaveBeenDealtACard(YouHaveBeenDealtACardEvent event) {
-    }
-
-    @Override
-    public void onCommunityHasBeenDealtACard(CommunityHasBeenDealtACardEvent event) {
-    }
-
-    @Override
-    public void onPlayerBetBigBlind(PlayerBetBigBlindEvent event) {
-    }
-
-    @Override
-    public void onPlayerBetSmallBlind(PlayerBetSmallBlindEvent event) {
-    }
-
-    @Override
-    public void onPlayerFolded(PlayerFoldedEvent event) {
-    }
-
-    @Override
-    public void onPlayerCalled(PlayerCalledEvent event) {
-    }
-
-    @Override
-    public void onPlayerRaised(PlayerRaisedEvent event) {
-    }
-
-    @Override
-    public void onPlayerWentAllIn(PlayerWentAllInEvent event) {
-    }
-
-    @Override
-    public void onPlayerChecked(PlayerCheckedEvent event) {
-    }
-
-    @Override
-    public void onYouWonAmount(YouWonAmountEvent event) {
-    }
-
-    @Override
-    public void onShowDown(ShowDownEvent event) {
-    }
-
-    @Override
-    public void onTableIsDone(TableIsDoneEvent event) {
-    }
-
-    @Override
-    public void onPlayerQuit(PlayerQuitEvent event) {
     }
 
     @Override
@@ -166,14 +101,6 @@ public class CrazyPlayer extends TrainingPlayer {
         }
 
         return null;
-    }
-
-    @Override
-    public void connectionToGameServerLost() {
-    }
-
-    @Override
-    public void connectionToGameServerEstablished() {
     }
 
     public static final class ActionTypeWeigth implements

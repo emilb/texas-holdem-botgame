@@ -16,70 +16,6 @@ public class RaiserPlayer extends TrainingPlayer {
     }
 
     @Override
-    public void serverIsShuttingDown(ServerIsShuttingDownEvent event) {
-    }
-
-    @Override
-    public void onPlayIsStarted(PlayIsStartedEvent event) {
-    }
-
-    @Override
-    public void onTableChangedStateEvent(TableChangedStateEvent event) {
-    }
-
-    @Override
-    public void onYouHaveBeenDealtACard(YouHaveBeenDealtACardEvent event) {
-    }
-
-    @Override
-    public void onCommunityHasBeenDealtACard(CommunityHasBeenDealtACardEvent event) {
-    }
-
-    @Override
-    public void onPlayerBetBigBlind(PlayerBetBigBlindEvent event) {
-    }
-
-    @Override
-    public void onPlayerBetSmallBlind(PlayerBetSmallBlindEvent event) {
-    }
-
-    @Override
-    public void onPlayerFolded(PlayerFoldedEvent event) {
-    }
-
-    @Override
-    public void onTableIsDone(TableIsDoneEvent event) {
-    }
-
-    @Override
-    public void onPlayerCalled(PlayerCalledEvent event) {
-    }
-
-    @Override
-    public void onPlayerRaised(PlayerRaisedEvent event) {
-    }
-
-    @Override
-    public void onPlayerWentAllIn(PlayerWentAllInEvent event) {
-    }
-
-    @Override
-    public void onPlayerChecked(PlayerCheckedEvent event) {
-    }
-
-    @Override
-    public void onYouWonAmount(YouWonAmountEvent event) {
-    }
-
-    @Override
-    public void onShowDown(ShowDownEvent event) {
-    }
-
-    @Override
-    public void onPlayerQuit(PlayerQuitEvent event) {
-    }
-
-    @Override
     public Action actionRequired(ActionRequest request) {
         Action callAction = null;
         Action checkAction = null;
@@ -109,45 +45,19 @@ public class RaiserPlayer extends TrainingPlayer {
 
         double randomVal = RandomUtils.nextDouble();
 
-        // 60% chance of check
-        if (checkAction != null && randomVal < 0.60) {
-            action = checkAction;
+        // 70% chance of raise
+        if (raiseAction != null && randomVal < 0.70) {
+            return raiseAction;
         }
 
-        // 90% chance of call
-        else if (callAction != null && raiseAction != null) {
-            if (randomVal < 0.90) {
-                action = callAction;
-            }
-            else {
-                action = raiseAction;
-            }
+        if (callAction != null) {
+            return callAction;
         }
 
-        else if (raiseAction != null) {
-            action = raiseAction;
+        if (checkAction != null) {
+            return checkAction;
         }
 
-        else if (callAction != null) {
-            action = callAction;
-        }
-
-        else if (checkAction != null) {
-            action = checkAction;
-        }
-
-        else {
-            action = foldAction;
-        }
-
-        return action;
-    }
-
-    @Override
-    public void connectionToGameServerLost() {
-    }
-
-    @Override
-    public void connectionToGameServerEstablished() {
+        return foldAction;
     }
 }

@@ -1,24 +1,14 @@
 package se.cygni.texasholdem.game.trainingplayers;
 
-import se.cygni.texasholdem.communication.message.event.*;
+import se.cygni.texasholdem.client.CurrentPlayState;
 import se.cygni.texasholdem.communication.message.request.ActionRequest;
 import se.cygni.texasholdem.game.Action;
 import se.cygni.texasholdem.game.Card;
-import se.cygni.texasholdem.game.GamePlayer;
 import se.cygni.texasholdem.game.definitions.PokerHand;
 import se.cygni.texasholdem.game.definitions.Rank;
 import se.cygni.texasholdem.game.util.PokerHandUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class PhilHellmuthPlayer extends TrainingPlayer {
-
-    private List<Card> myCards = new ArrayList<Card>(2);
-    private List<Card> communityCards = new ArrayList<Card>(5);
-    private long totalPotValue = 0;
-    private boolean amIBigBlind = false;
-    private long myCash = 0;
 
 
     public PhilHellmuthPlayer(String name, String sessionId, long chipAmount) {
@@ -27,64 +17,6 @@ public class PhilHellmuthPlayer extends TrainingPlayer {
 
     public PhilHellmuthPlayer(String name, String sessionId) {
         super(name, sessionId);
-    }
-
-    @Override
-    public void serverIsShuttingDown(ServerIsShuttingDownEvent event) {
-    }
-
-    @Override
-    public void onPlayIsStarted(PlayIsStartedEvent event) {
-        myCards.clear();
-        communityCards.clear();
-        totalPotValue = 0;
-        amIBigBlind = false;
-
-        for (GamePlayer player : event.getPlayers()) {
-            if (player.getName().equals(getName())) {
-                myCash = player.getChipCount();
-            }
-        }
-
-        if (event.getBigBlindPlayer().getName().equals(getName())) {
-            amIBigBlind = true;
-        }
-
-    }
-
-    @Override
-    public void onTableChangedStateEvent(TableChangedStateEvent event) {
-    }
-
-    @Override
-    public void onYouHaveBeenDealtACard(YouHaveBeenDealtACardEvent event) {
-        myCards.add(event.getCard());
-    }
-
-    @Override
-    public void onCommunityHasBeenDealtACard(CommunityHasBeenDealtACardEvent event) {
-        communityCards.add(event.getCard());
-    }
-
-
-    @Override
-    public void onPlayerCalled(PlayerCalledEvent event) {
-        totalPotValue += event.getCallBet();
-    }
-
-    @Override
-    public void onPlayerRaised(PlayerRaisedEvent event) {
-        totalPotValue += event.getRaiseBet();
-    }
-
-    @Override
-    public void onPlayerWentAllIn(PlayerWentAllInEvent event) {
-        totalPotValue += event.getAllInAmount();
-    }
-
-    @Override
-    public void onShowDown(ShowDownEvent event) {
-
     }
 
     @Override
@@ -120,7 +52,9 @@ public class PhilHellmuthPlayer extends TrainingPlayer {
 
         Action action = null;
 
-        PokerHandUtil handUtil = new PokerHandUtil(communityCards, myCards);
+        CurrentPlayState playState = getCurrentPlayState();
+
+        PokerHandUtil handUtil = new PokerHandUtil(playState.getCommunityCards(), playState.getMyCards());
         PokerHand currentPokerHand = handUtil.getBestHand().getPokerHand();
 
         if (currentPokerHand.getOrderValue() > 5 && allInAction != null) {
@@ -128,7 +62,7 @@ public class PhilHellmuthPlayer extends TrainingPlayer {
         }
 
         // Always fold if unranked start
-        if (getMyCardsTopTenRank() == 0 && currentPokerHand == PokerHand.HIGH_HAND && !amIBigBlind) {
+        if (getMyCardsTopTenRank() == 0 && currentPokerHand == PokerHand.HIGH_HAND && !playState.amIBigBlindPlayer()) {
             return foldAction;
         }
 
@@ -138,7 +72,7 @@ public class PhilHellmuthPlayer extends TrainingPlayer {
             return raiseAction;
         }
 
-        if (amIBigBlind && checkAction != null) {
+        if (playState.amIBigBlindPlayer() && checkAction != null) {
             return checkAction;
         }
 
@@ -214,46 +148,10 @@ public class PhilHellmuthPlayer extends TrainingPlayer {
     }
 
     private boolean doMyCardsContain(Rank rank1, Rank rank2) {
-        Card c1 = myCards.get(0);
-        Card c2 = myCards.get(1);
+        Card c1 = getCurrentPlayState().getMyCards().get(0);
+        Card c2 = getCurrentPlayState().getMyCards().get(1);
 
         return (c1.getRank() == rank1 && c2.getRank() == rank2) ||
                 (c1.getRank() == rank2 && c2.getRank() == rank1);
-    }
-
-    @Override
-    public void connectionToGameServerLost() {
-    }
-
-    @Override
-    public void connectionToGameServerEstablished() {
-    }
-
-    @Override
-    public void onPlayerQuit(PlayerQuitEvent event) {
-    }
-
-    @Override
-    public void onPlayerChecked(PlayerCheckedEvent event) {
-    }
-
-    @Override
-    public void onYouWonAmount(YouWonAmountEvent event) {
-    }
-
-    @Override
-    public void onPlayerBetBigBlind(PlayerBetBigBlindEvent event) {
-    }
-
-    @Override
-    public void onPlayerBetSmallBlind(PlayerBetSmallBlindEvent event) {
-    }
-
-    @Override
-    public void onPlayerFolded(PlayerFoldedEvent event) {
-    }
-
-    @Override
-    public void onTableIsDone(TableIsDoneEvent event) {
     }
 }

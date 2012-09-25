@@ -33,9 +33,9 @@ public class Training extends Room {
 
         table = new Table(gamePlan, this, eventBus, sessionManager);
         table.addPlayer(player);
-        table.addPlayer(getTrainingPlayer());
-        table.addPlayer(getTrainingPlayer());
-        table.addPlayer(getTrainingPlayer());
+        table.addPlayer(getWeightedPlayer());
+        table.addPlayer(getRaiserPlayer());
+        table.addPlayer(getSensiblePlayer());
         table.addPlayer(getCautiousPlayer());
         table.addPlayer(getPhilHellmuthPlayer());
 

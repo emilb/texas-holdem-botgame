@@ -4,18 +4,24 @@ import se.cygni.texasholdem.client.CurrentPlayState;
 import se.cygni.texasholdem.communication.message.event.*;
 import se.cygni.texasholdem.communication.message.request.ActionRequest;
 import se.cygni.texasholdem.game.Action;
+import se.cygni.texasholdem.game.Card;
+import se.cygni.texasholdem.game.GamePlayer;
 import se.cygni.texasholdem.game.Hand;
 import se.cygni.texasholdem.game.definitions.PlayState;
 import se.cygni.texasholdem.game.definitions.PokerHand;
+import se.cygni.texasholdem.game.definitions.Rank;
 import se.cygni.texasholdem.game.util.PokerHandUtil;
 
-public class CautiousPlayer extends TrainingPlayer {
+import java.util.ArrayList;
+import java.util.List;
 
-    public CautiousPlayer(String name, String sessionId, long chipAmount) {
+public class SensiblePlayer extends TrainingPlayer {
+
+    public SensiblePlayer(String name, String sessionId, long chipAmount) {
         super(name, sessionId, chipAmount);
     }
 
-    public CautiousPlayer(String name, String sessionId) {
+    public SensiblePlayer(String name, String sessionId) {
         super(name, sessionId);
     }
 
@@ -51,6 +57,8 @@ public class CautiousPlayer extends TrainingPlayer {
         // The current play state is accessible through this class. It
         // keeps track of basic events and other players.
         CurrentPlayState playState = getCurrentPlayState();
+
+        // The current BigBlind
         long currentBB = playState.getBigBlind();
 
         // PokerHandUtil is a hand classifier that returns the best hand given
@@ -59,11 +67,8 @@ public class CautiousPlayer extends TrainingPlayer {
         Hand myBestHand = pokerHandUtil.getBestHand();
         PokerHand myBestPokerHand = myBestHand.getPokerHand();
 
-
-        // Let's go ALL IN if ROYAL FLUSH or STRAIGHT FLUSH
-        if (allInAction != null && (
-                myBestPokerHand == PokerHand.STRAIGHT_FLUSH ||
-                        myBestPokerHand == PokerHand.ROYAL_FLUSH)) {
+        // Let's go ALL IN if hand is better than or equal to THREE_OF_A_KIND
+        if (allInAction != null && isHandBetterThan(myBestPokerHand, PokerHand.TWO_PAIRS)) {
             return allInAction;
         }
 
@@ -71,54 +76,41 @@ public class CautiousPlayer extends TrainingPlayer {
         if (checkAction != null)
             return checkAction;
 
-        // Okay, either CALL or RAISE
+        // Okay, we have either CALL or RAISE left
         long callAmount = callAction == null ? -1 : callAction.getAmount();
         long raiseAmount = raiseAction == null ? -1 : raiseAction.getAmount();
 
-        // Do I have something better than ONE_PAIR and can RAISE?
-        if (isHandBetterThan(myBestPokerHand, PokerHand.ONE_PAIR) && raiseAction != null) {
-            // This is a big raise... only RAISE if better than THREE_OF_A_KIND
-            if (raiseAmount - currentBB > currentBB * 2 && isHandBetterThan(myBestPokerHand, PokerHand.THREE_OF_A_KIND))
-                return raiseAction;
-            else if (raiseAmount == currentBB)
-                return raiseAction;
-        }
-
         // Only call if ONE_PAIR or better
         if (isHandBetterThan(myBestPokerHand, PokerHand.ONE_PAIR) && callAction != null) {
-            // This was an expensive CALL... only do if better than THREE_OF_A_KIND
-            if (callAmount - currentBB > currentBB * 2 && isHandBetterThan(myBestPokerHand, PokerHand.ONE_PAIR))
-                return callAction;
-            else if (callAmount <= currentBB)
-                return callAction;
+            return callAction;
         }
 
-        if (playState.getCurrentPlayState() == PlayState.PRE_FLOP && isHandBetterThan(myBestPokerHand, PokerHand.HIGH_HAND)) {
-            if (callAction != null)
-                return callAction;
-            if (raiseAction != null && raiseAction.getAmount() < currentBB * 4)
-                return raiseAction;
+        // Do I have something better than ONE_PAIR and can RAISE?
+        if (isHandBetterThan(myBestPokerHand, PokerHand.ONE_PAIR) && raiseAction != null) {
+            return raiseAction;
         }
 
-        if (playState.getCurrentPlayState() == PlayState.PRE_FLOP) {
-            if (callAction != null && callAction.getAmount() < currentBB)
-                return callAction;
+        // I'm small blind and we're in PRE_FLOP, might just as well call
+        if (playState.amISmallBlindPlayer() &&
+                playState.getCurrentPlayState() == PlayState.PRE_FLOP &&
+                callAction != null) {
+            return callAction;
         }
-
 
         // failsafe
         return foldAction;
     }
 
+    /**
+     * Compares two pokerhands.
+     *
+     * @param myPokerHand
+     * @param otherPokerHand
+     * @return TRUE if myPokerHand is valued higher than otherPokerHand
+     */
     private boolean isHandBetterThan(PokerHand myPokerHand, PokerHand otherPokerHand) {
         return myPokerHand.getOrderValue() > otherPokerHand.getOrderValue();
     }
-
-    @Override
-    public void connectionToGameServerLost() {
-    }
-
-    @Override
-    public void connectionToGameServerEstablished() {
-    }
 }
+
+

@@ -81,21 +81,25 @@ public abstract class Room {
         return players;
     }
 
-    protected TrainingPlayer getTrainingPlayer() {
-        if (RandomUtils.nextBoolean()) {
-            return new RaiserPlayer("Raiser_" + playerTrainerCounter++, UUID.randomUUID().toString(), gamePlan.getStartingChipsAmount());
-        }
-        else {
-            return new CrazyPlayer("Crazy_" + playerTrainerCounter++, UUID.randomUUID().toString(), gamePlan.getStartingChipsAmount());
-        }
+
+    protected BotPlayer getWeightedPlayer() {
+        return new WeightedPlayer("Weighted", UUID.randomUUID().toString(), gamePlan.getStartingChipsAmount());
+    }
+
+    protected BotPlayer getRaiserPlayer() {
+        return new RaiserPlayer("Raiser", UUID.randomUUID().toString(), gamePlan.getStartingChipsAmount());
+    }
+
+    protected BotPlayer getSensiblePlayer() {
+        return new RaiserPlayer("Sensible", UUID.randomUUID().toString(), gamePlan.getStartingChipsAmount());
     }
 
     protected TrainingPlayer getPhilHellmuthPlayer() {
-        return new PhilHellmuthPlayer("Hellmuth_" + playerTrainerCounter++, UUID.randomUUID().toString(), gamePlan.getStartingChipsAmount());
+        return new PhilHellmuthPlayer("Hellmuth", UUID.randomUUID().toString(), gamePlan.getStartingChipsAmount());
     }
 
     protected TrainingPlayer getCautiousPlayer() {
-        return new CautiousPlayer("Cautious_" + playerTrainerCounter++, UUID.randomUUID().toString(), gamePlan.getStartingChipsAmount());
+        return new CautiousPlayer("Cautious", UUID.randomUUID().toString(), gamePlan.getStartingChipsAmount());
     }
 
     public abstract boolean addPlayer(BotPlayer player);

@@ -1,17 +1,16 @@
 <configuration>
 
-    <contextName>texas-holdem-web-client</contextName>
+    <contextName>texas-holdem-javabot</contextName>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
             by default -->
         <encoder>
-            <pattern>%date{HH:mm:ss.SSS} %-5level %logger{0} - %msg \(%t\) %n</pattern>
+            <pattern>%date{HH:mm:ss.SSS} %-5level %logger{0} - %msg %n</pattern>
         </encoder>
     </appender>
 
     <logger name="se" level="DEBUG"/>
-    <logger name="se.cygni.texasholdem.player.BasicPlayer" level="DEBUG" />
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
     </root>
