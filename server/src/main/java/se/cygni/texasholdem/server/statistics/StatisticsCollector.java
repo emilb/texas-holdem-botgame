@@ -6,6 +6,7 @@ import org.joda.time.Period;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import se.cygni.texasholdem.dao.model.GameLog;
 import se.cygni.texasholdem.dao.model.stats.StatsActions;
@@ -108,14 +109,7 @@ public class StatisticsCollector {
         return tableIds;
     }
 
-    public GameLog getLastGameLog() {
-        try {
-            return tableHistories.getLast().getLastGameLog();
-        } catch (Exception e) {
-        }
-        return null;
-    }
-
+    @Cacheable("statistics-actions")
     public StatsActions getStatsActions(final long tableId, final int position) {
         TableHistory tableHistory = getTableHistory(tableId);
 
@@ -130,6 +124,7 @@ public class StatisticsCollector {
         return sa;
     }
 
+    @Cacheable("statistics-chips")
     public StatsChips getStatsChips(final long tableId, final int position) {
         TableHistory tableHistory = getTableHistory(tableId);
 
@@ -144,6 +139,14 @@ public class StatisticsCollector {
         return sc;
     }
 
+    public GameLog getLastGameLog() {
+        try {
+            return tableHistories.getLast().getLastGameLog();
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
     public GameLog getLastGameLog(final long tableId) {
         try {
             return getTableHistory(tableId).getLastGameLog();
@@ -152,6 +155,7 @@ public class StatisticsCollector {
         return null;
     }
 
+    @Cacheable("gamelog")
     public GameLog getGameLogAtPos(final long tableId, int position) {
         try {
             return getTableHistory(tableId).get(position);

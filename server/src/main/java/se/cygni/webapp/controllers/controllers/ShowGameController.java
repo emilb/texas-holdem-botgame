@@ -1,7 +1,6 @@
 package se.cygni.webapp.controllers.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,7 +50,6 @@ public class ShowGameController {
         return "showgame";
     }
 
-    @Cacheable("gamelog")
     @RequestMapping(value = "/timemachine/table/{tableId}/gameround/{gameRound}", method = RequestMethod.GET)
     public @ResponseBody GameLog getGameLog(
             @PathVariable long tableId,
@@ -73,7 +71,6 @@ public class ShowGameController {
         return statisticsCollector.getLastGameLog();
     }
 
-    @Cacheable("statistics-actions")
     @RequestMapping(value = "/timemachine/statsAction/table/{tableId}/gameround/{gameRound}", method = RequestMethod.GET)
     public @ResponseBody StatsActions getStatsActions(
             @PathVariable long tableId,
@@ -82,7 +79,6 @@ public class ShowGameController {
         return statisticsCollector.getStatsActions(tableId, gameRound);
     }
 
-    @Cacheable("statistics-chips")
     @RequestMapping(value = "/timemachine/statsChip/table/{tableId}/gameround/{gameRound}", method = RequestMethod.GET)
     public @ResponseBody StatsChips getStatsChips(
             @PathVariable long tableId,
