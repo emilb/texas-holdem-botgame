@@ -276,4 +276,11 @@ public class PlayerClient extends SimpleChannelHandler {
         return timer;
         // delay, repeat every ms
     }
+
+    public void exceptionCaught(
+            ChannelHandlerContext ctx, ExceptionEvent e) throws Exception {
+
+        log.info("Client exception: {} (Don't worry this can happen if for example the server disconnects you just before you " +
+                "disconnect yourself)", e.getCause() != null ? e.getCause().getClass().getCanonicalName() : e.getClass().getCanonicalName());
+    }
 }

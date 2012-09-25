@@ -117,5 +117,12 @@ public class SocketServer {
             String message = (String) e.getMessage();
             receiver.onRequest(context, TexasMessageParser.decodeMessage(message));
         }
+
+        public void exceptionCaught(
+                ChannelHandlerContext ctx, ExceptionEvent e) throws Exception {
+
+            log.info("Message handler exception: {}",
+                    e.getCause() != null ? e.getCause().getClass().getCanonicalName() : e.getClass().getCanonicalName());
+        }
     }
 }
