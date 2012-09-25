@@ -32,9 +32,9 @@ public class StatisticsCollector {
 
     private CircularBuffer<TableHistory> tableHistories;
 
-    @Autowired
-    public StatisticsCollector(EventBus eventBus) {
-        eventBus.register(this);
+
+    public StatisticsCollector() {
+
         tableHistories = new CircularBuffer<TableHistory>(MAX_HISTORY_TABLES, new Comparator<TableHistory>() {
             @Override
             public int compare(TableHistory first, TableHistory second) {
@@ -42,6 +42,11 @@ public class StatisticsCollector {
                         compareTo(Long.valueOf(second.getTableId()));
             }
         });
+    }
+
+    @Autowired
+    public void setEventBus(EventBus eventBus) {
+        eventBus.register(this);
     }
 
     @Subscribe
@@ -83,10 +88,10 @@ public class StatisticsCollector {
         PeriodFormatter daysHoursMinutes = new PeriodFormatterBuilder()
                 .appendDays()
                 .appendSuffix(" day", " days")
-                .appendSeparator(" and ")
+                .appendSeparator(", ")
                 .appendHours()
                 .appendSuffix(" hour", " hours")
-                .appendSeparator(" and ")
+                .appendSeparator(", ")
                 .appendMinutes()
                 .appendSuffix(" minute", " minutes")
                 .appendSeparator(" and ")
