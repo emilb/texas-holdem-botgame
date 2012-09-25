@@ -17,6 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class CurrentPlayState {
 
     // Values are reset per GameRound
+    private long tableId;
     private List<Card> myCards = Collections.synchronizedList(new ArrayList<Card>(2));
     private List<Card> communityCards = Collections.synchronizedList(new ArrayList<Card>(5));
     private PlayState currentPlayState = PlayState.PRE_FLOP;
@@ -37,12 +38,24 @@ public class CurrentPlayState {
 
     private CurrentPlayStatePlayer dummy = new CurrentPlayStatePlayer();
 
+
     public CurrentPlayState(String myPlayersName) {
         this.myPlayersName = myPlayersName;
     }
 
     public se.cygni.texasholdem.player.Player getPlayerImpl() {
         return dummy;
+    }
+
+    /**
+     * The tableId is used to identify the table you are playing on. If you
+     * want to inspect a game afterwards the whole game is available for viewing
+     * here: http://poker.cygni.se/showgame/table/{tableId}
+     *
+     * @return The tableId for the current game
+     */
+    public long getTableId() {
+        return tableId;
     }
 
     /**
@@ -240,6 +253,7 @@ public class CurrentPlayState {
         dealerPlayer = null;
         smallBlindPlayer = null;
         bigBlindPlayer = null;
+        tableId = 0;
     }
 
     private void addPotInvestmentToPlayer(GamePlayer player, long amount) {
@@ -274,6 +288,7 @@ public class CurrentPlayState {
             bigBlindPlayer = event.getBigBlindPlayer();
             smallBlind = event.getSmallBlindAmount();
             bigBlind = event.getBigBlindAmount();
+            tableId = event.getTableId();
         }
 
         @Override
