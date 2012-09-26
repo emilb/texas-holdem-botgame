@@ -101,8 +101,8 @@ public class PlayerClient extends SimpleChannelHandler {
         ChannelPipelineFactory pipelineFactory = new ChannelPipelineFactory() {
             public ChannelPipeline getPipeline() throws Exception {
                 return Channels.pipeline(
-                        new ZlibEncoder(ZlibWrapper.GZIP),
-                        new ZlibDecoder(ZlibWrapper.GZIP),
+                        // new ZlibEncoder(ZlibWrapper.GZIP),
+                        // new ZlibDecoder(ZlibWrapper.GZIP),
                         new DelimiterBasedFrameDecoder(4096, true, new ChannelBuffer[]{
                                 ChannelBuffers.wrappedBuffer(JsonDelimiter.delimiter())}),
                         new StringDecoder(CharsetUtil.UTF_8),
