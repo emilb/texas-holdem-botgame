@@ -50,8 +50,9 @@
         <module>common</module>
         <module>server</module>
         <module>client</module>
-        <module>web-client</module>
+        <!-- <module>web-client</module> (can be removed once nodjs-client works) -->
         <module>java-client</module>
+        <module>nodejs-client</module>
         <module>performance-tests</module>
     </modules>
 

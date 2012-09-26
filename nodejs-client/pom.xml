@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>se.cygni</groupId>
+        <artifactId>texas-holdem-botgame</artifactId>
+        <version>1.1.8-SNAPSHOT</version>
+    </parent>
+
+    <groupId>se.cygni</groupId>
+    <artifactId>texas-holdem-nodejs-client</artifactId>
+    <packaging>jar</packaging>
+    <name>texas-holdem-nodejs-client</name>
+
+    <build>
+        
+    </build>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <targetJdk>1.6</targetJdk>
+    </properties>
+
+    <dependencies>
+    </dependencies>
+
+    <!--
+         This profile is just for packaging and deploying on
+         the CI-server. If you are developing a java-bot you
+         can disregard this section. It is only activated by
+         the profile: production
+     -->
+    <profiles>
+        <profile>
+            <id>production</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <!-- Packages this project in a zip for download -->
+                                <id>copy-downloadable-artifacts</id>
+                                <phase>deploy</phase>
+                                <configuration>
+                                    <target>
+                                        <mkdir dir="${basedir}/target/zip/${project.name}-${project.version}" />
+                                        <copy todir="${basedir}/target/zip/${project.name}-${project.version}">
+                                            <fileset dir="${basedir}">
+                                                <include name="**" />
+                                                <exclude name="**/.idea/**" />
+                                                <exclude name="**/.git/**" />
+                                                <exclude name="**/target/**" />
+                                                <exclude name="**/*.iml" />
+                                                <exclude name="**/pom.xml" />
+                                            </fileset>
+                                        </copy>
+
+                                        <zip destfile="${public.web.dir}/download/${project.name}-${project.version}.zip" encoding="UTF-8">
+                                            <fileset dir="${basedir}/target/zip">
+                                                <include name="**" />
+                                            </fileset>
+                                        </zip>
+                                    </target>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+
+        </profile>
+
+    </profiles>
+
+</project>

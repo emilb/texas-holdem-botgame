@@ -9,9 +9,9 @@
     </parent>
 
     <groupId>se.cygni</groupId>
-    <artifactId>texas-holdem-javabot</artifactId>
+    <artifactId>texas-holdem-java-client</artifactId>
     <packaging>jar</packaging>
-    <name>texas-holdem-javabot</name>
+    <name>texas-holdem-java-client</name>
 
     <build>
         <plugins>
@@ -161,8 +161,8 @@
                                 <phase>deploy</phase>
                                 <configuration>
                                     <target>
-                                        <mkdir dir="${basedir}/target/zip/texas-holdem-javabot" />
-                                        <copy todir="${basedir}/target/zip/texas-holdem-javabot">
+                                        <mkdir dir="${basedir}/target/zip/${project.name}-${project.version}" />
+                                        <copy todir="${basedir}/target/zip/${project.name}-${project.version}">
                                             <fileset dir="${basedir}">
                                                 <include name="**" />
                                                 <exclude name="**/.idea/**" />
@@ -172,7 +172,7 @@
                                             </fileset>
                                         </copy>
 
-                                        <zip destfile="${public.web.dir}/download/texas-holdem-java-client.zip" encoding="UTF-8">
+                                        <zip destfile="${public.web.dir}/download/${project.name}-${project.version}.zip" encoding="UTF-8">
                                             <fileset dir="${basedir}/target/zip">
                                                 <include name="**" />
                                             </fileset>

@@ -1,3 +1,4 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <script type="text/javascript">
     $(document).ready(function() {
@@ -18,7 +19,7 @@
                 <h2>Getting started with a Java client</h2>
 
                 <p>First download the example project:
-                    <a href="/download/texas-holdem-java-client.zip">texas-holdem-java-client.zip</a>
+                    <a href="/download/texas-holdem-java-client-<spring:eval expression="@applicationProperties.getProperty('application.version')" />.zip">texas-holdem-java-client-<spring:eval expression="@applicationProperties.getProperty('application.version')" /></a>
                 </p>
 
                 <p>
@@ -125,7 +126,7 @@ public class SimplestPossibleBot extends BasicPlayer {
                 <h2>Getting started with a JavaScript client</h2>
 
                 <p>First download the example project:
-                    <a href="/download/texas-holdem-web-client.zip">texas-holdem-web-client.zip</a>
+                    <a href="/download/texas-holdem-nodejs-client-<spring:eval expression="@applicationProperties.getProperty('application.version')" />.zip">texas-holdem-nodejs-client-<spring:eval expression="@applicationProperties.getProperty('application.version')" />.zip</a>
                 </p>
 
                 <p>Extract the zip and open a terminal window and run:</p>
