@@ -54,10 +54,10 @@
     <hr />
 
     <div class="row">
-        <div class="span6">
+        <div id="actionsGraphContainer" class="span6">
             <div id="statActionsGraph"></div>
         </div>
-        <div class="span6">
+        <div id="chipsGraphContainer" class="span6">
             <div id="statChipsGraph"></div>
         </div>
         <div class="span12">
@@ -72,6 +72,11 @@
     var reloadTimer;
     var actionsGraph;
     var chipsGraph;
+
+    var currentView = {
+        lastTableId : 0,
+        lastGameRound : 0
+    };
 
     $(document).ready(function () {
 
@@ -166,10 +171,24 @@
         }
     });
 
+    function updateGameView() {
+        var tableId = $("#tableId").val();
+        var gameRoundNo = $("#gameRoundNo").val();
+
+        updateGameViewWith(tableId, gameRoundNo);
+    }
+
     function updateGameViewWith(tableId, gameRoundNo) {
+
+        if (tableId == currentView.lastTableId &&
+                gameRoundNo == currentView.lastGameRound) {
+            return;
+        }
 
         if (chipsGraph) { chipsGraph.destroy(); }
         if (actionsGraph) { actionsGraph.destroy(); }
+
+
 
         $("#placeHolderGame").fadeOut('fast', function() {
 
@@ -177,18 +196,21 @@
                 type: "GET",
                 url: "/timemachine/table/" + tableId + "/gameround/" + gameRoundNo,
                 success: function (response) {
-                    result = ich.gameRoundTemplate(response);
-                    $("#placeHolderGame").html(result).fadeIn('fast');
+                    console.log(response);
 
-                    $("#tableId").val(response.tableCounter);
+                    currentView.lastGameRound = response.roundNumber;
+                    currentView.lastTableId = response.tableCounter;
 
-                    // If gameRoundNo hasn't been incremented stop the auto forward
-                    var previousGameRoundNo = $("#gameRoundNo").val();
-                    if (previousGameRoundNo > response.roundNumber) {
+                    // If last game on table, stop auto forward
+                    if (response.lastGame) {
                         $('#autoForward').prop('checked', false);
                         clearTimeout(reloadTimer);
                     }
 
+                    result = ich.gameRoundTemplate(response);
+                    $("#placeHolderGame").html(result).fadeIn('fast');
+
+                    $("#tableId").val(response.tableCounter);
                     $("#gameRoundNo").val(response.roundNumber);
 
                     if ($("[rel=tooltip]").length) {
@@ -214,6 +236,12 @@
             type: "GET",
             url: "/timemachine/statsAction/table/" + tableId + "/gameround/" + gameRoundNo,
             success: function (response) {
+
+                if (response.players.length > 4) {
+                    $('#actionsGraphContainer').attr('class', 'span12');
+                } else {
+                    $('#actionsGraphContainer').attr('class', 'span6');
+                }
 
                 // Can specify a custom tick Array.
                 // Ticks should match up one for each y value (category) in the series.
@@ -281,9 +309,12 @@
             type: "GET",
             url: "/timemachine/statsChip/table/" + tableId + "/gameround/" + gameRoundNo,
             success: function (response) {
-                // Can specify a custom tick Array.
-                // Ticks should match up one for each y value (category) in the series.
-                //var ticks = response.players;
+
+                if (response.players.length > 4) {
+                    $('#chipsGraphContainer').attr('class', 'span12');
+                } else {
+                    $('#chipsGraphContainer').attr('class', 'span6');
+                }
 
                 var data = new Array();
                 var seriesData = new Array();
@@ -341,16 +372,7 @@
             }
         });
     }
-
-
-    function updateGameView() {
-        var tableId = $("#tableId").val();
-        var gameRoundNo = $("#gameRoundNo").val();
-
-        updateGameViewWith(tableId, gameRoundNo);
-    }
 </script>
-
 
 <script id="gameRoundTemplate" type="text/html">
     <div class="row">
@@ -464,11 +486,6 @@
             </table>
         </div>
     </div>
-</script>
-
-<script id="statFoldsTemplate" type="text/html">
-
-
 </script>
 
 <script src="<c:url value="/resources/js/jquery.jqplot.min.js" />"></script>

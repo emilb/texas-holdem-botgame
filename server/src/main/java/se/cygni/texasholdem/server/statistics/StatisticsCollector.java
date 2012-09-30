@@ -146,7 +146,7 @@ public class StatisticsCollector {
 
     public GameLog getLastGameLog() {
         try {
-            return tableHistories.getLast().getLastGameLog();
+            return getLastGameLog(tableHistories.getLast().tableId);
         } catch (Exception e) {
         }
         return null;
@@ -154,8 +154,15 @@ public class StatisticsCollector {
 
     public GameLog getLastGameLog(final long tableId) {
         try {
-            return getTableHistory(tableId).getLastGameLog();
+            TableHistory th =  getTableHistory(tableId);
+            GameLog gl = th.getLastGameLog();
+
+            gl.knownNoofRounds = gl.roundNumber;
+            gl.lastGame = th.gameEnded;
+
+            return gl;
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }
@@ -163,8 +170,17 @@ public class StatisticsCollector {
     @Cacheable("gamelog")
     public GameLog getGameLogAtPos(final long tableId, int position) {
         try {
-            return getTableHistory(tableId).get(position);
+            TableHistory th = getTableHistory(tableId);
+            GameLog gl = th.get(position);
+
+            GameLog glLast = th.getLastGameLog();
+
+            gl.knownNoofRounds = glLast.roundNumber;
+            gl.lastGame = gl.roundNumber == glLast.roundNumber && th.gameEnded;
+
+            return gl;
         } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return getLastGameLog(tableId);

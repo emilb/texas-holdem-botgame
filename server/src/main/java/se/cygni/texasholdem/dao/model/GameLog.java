@@ -14,6 +14,8 @@ public class GameLog {
     public int logPosition;
     public long tableCounter;
     public int roundNumber;
+    public boolean lastGame;
+    public int knownNoofRounds;
 
     public List<PlayerInGame> getPlayers() {
         return players;
@@ -53,5 +55,13 @@ public class GameLog {
 
     public int getRoundNumber() {
         return roundNumber;
+    }
+
+    public boolean isLastGame() {
+        return lastGame;
+    }
+
+    public int getKnownNoofRounds() {
+        return knownNoofRounds;
     }
 }
