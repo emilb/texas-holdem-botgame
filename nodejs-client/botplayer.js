@@ -1,4 +1,3 @@
-var playerClient = require('./modules/playerclient.js');
 require('./modules/sugar-1.3.min.js');
 var playerStateUpdaterModule = require('./modules/playerStateUpdater.js');
 
@@ -22,12 +21,20 @@ var playerState = {
 };
 
 var stateUpdater = playerStateUpdaterModule.playerStateUpdater(playerState);
-    
-var player = {
 
+var playerName = null;
+
+var player = {
+	
     getName : function() {
+    	if (playerName) {
+    		return playerName;
+    	}
         throw new Error('Did you forget to specify your name? A good idea is to use your e-mail as username!');
-    	//return 'MyBot';
+    },
+    
+    setName : function(name) {
+    	playerName = name;
     },
 
     state : playerState,  // now state can be accessed with player.state
@@ -129,6 +136,6 @@ var player = {
     	this['on' + clazz](event);
     }
 }
+exports.botplayer = player;
 
-playerClient.connect('localhost', 4711, player);
-playerClient.playAGame(playerClient.ROOM_TRAINING());
+
