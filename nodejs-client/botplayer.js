@@ -1,27 +1,7 @@
 require('./modules/sugar-1.3.min.js');
-var playerStateUpdaterModule = require('./modules/playerStateUpdater.js');
+var stateUpdater = require('./modules/playerStateUpdater.js').playerStateUpdater();
 
-var playerState = {
-    isPlaying:false,
-    isTableDone:false,
-    amount:0,
-    myCards:[],
-    communityCards:[],
-    potTotal:0,
-    winner:null,
-    table:{
-        state:'',
-        players:[],
-        smallBlindAmount:0,
-        bigBlindAmount:0,
-        dealer:null,
-        smallBlindPlayer:null,
-        bigBlindPlayer:null
-    }
-};
-
-var stateUpdater = playerStateUpdaterModule.playerStateUpdater(playerState);
-
+var playerState = stateUpdater.playerState; // private object ref. that can't be changed via player
 var playerName = null;
 
 var player = {
@@ -32,23 +12,41 @@ var player = {
     	}
         throw new Error('Did you forget to specify your name? A good idea is to use your e-mail as username!');
     },
-    
     setName : function(name) {
     	playerName = name;
     },
+    state : playerState,  // property "state" can be accessed with player.state
 
-    state : playerState,  // now state can be accessed with player.state
-
-    isWinner:function () {
+    isWinner : function () {
         return playerState.winner && playerState.winner.name === this.getName();
     },
+    amIDealerPlayer : function() {
+    	return playerState.table.dealer === this.getName();
+    },
+    amISmallBlindPlayer : function() {
+    	return playerState.table.smallBlindPlayer === this.getName();
+    },
+    amIBigBlindPlayer : function() {
+    	return playerState.table.bigBlindPlayer === this.getName();
+    },
+    haveIFolded : function () {
+        return stateUpdater.hasPlayerFolded(this.getName());
+    },
+    haveIGoneAllIn : function () {
+        return stateUpdater.hasPlayerGoneAllIn(this.getName());
+    },
+    getMyInvestmentInPot : function () {
+        return stateUpdater.getInvestmentInPotFor(this.getName());
+    },
 
+
+    // Event handlers
 
     onRegisterForPlayResponse : function (playResponse) {
     },
 
     onPlayIsStartedEvent : function (event) {
-        console.log("I got a PlayIsStartedEvent!");
+        console.log("I got a PlayIsStartedEvent, tableId:"+playerState.tableId);
         console.log("I got chips: "+playerState.amount);        
     },
 

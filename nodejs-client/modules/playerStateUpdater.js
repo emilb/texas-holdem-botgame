@@ -1,8 +1,25 @@
-var playerStateUpdater = function (thePlayerState) {
+exports.playerStateUpdater = function() {
     "use strict";
 
-
-    var playerState = thePlayerState;
+    var playerState = {
+	    isPlaying:false,
+	    isTableDone:false,
+	    tableId:0,
+	    amount:0,
+	    myCards:[],
+	    communityCards:[],
+	    potTotal:0,
+	    winner:null,
+	    table:{
+	        state:'',
+	        players:[],
+	        smallBlindAmount:0,
+	        bigBlindAmount:0,
+	        dealer:null,
+	        smallBlindPlayer:null,
+	        bigBlindPlayer:null
+	    }
+    };
 
     function createPlayersForTable(players) {
         return players.map(function (p) {
@@ -14,9 +31,7 @@ var playerStateUpdater = function (thePlayerState) {
                 allIn:false
             };
         });
-    }
-
-    ;
+    };
 
     function addPotInvestmentToPlayer(name, amount) {
         playerState.potTotal = playerState.potTotal + amount;
@@ -27,22 +42,20 @@ var playerStateUpdater = function (thePlayerState) {
             return;
         }
         p.potInvestment = p.potInvestment + amount;
-    }
-
-    ;
+    };
 
     function getTablePlayer(name) {
         return playerState.table.players.find(function (p) {
             return p.name === name;
         });
-    }
-
-    ;
+    };
 
 
     var updater = {
 
-        getTablePlayer:getTablePlayer,
+   		playerState : playerState,
+   		
+        getTablePlayer : getTablePlayer,
 
         hasPlayerFolded:function (name) {
             return playerState.table.players.count(function (p) {
@@ -60,6 +73,10 @@ var playerStateUpdater = function (thePlayerState) {
                 return p.potInvestment;
             }
             return 0;
+        },
+        
+        getMyCardsAndCommunityCards : function() {
+        	return myCards.add(communityCards);
         },
 
         // handlers for updating basic player state from Events and RegisterForPlayResponse
@@ -103,6 +120,7 @@ var playerStateUpdater = function (thePlayerState) {
             onPlayIsStartedEvent:function (event) {
                 playerState.isPlaying = true;
                 playerState.isTableDone = false;
+                playerState.tableId = event.tableId;
                 playerState.myCards = [];
                 playerState.communityCards = [];
                 playerState.potTotal = 0;
@@ -143,4 +161,3 @@ var playerStateUpdater = function (thePlayerState) {
     return updater;
 };
 
-exports.playerStateUpdater = playerStateUpdater;

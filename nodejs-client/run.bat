@@ -1,1 +1,1 @@
-node.exe botplayer.js
+node.exe play.js
