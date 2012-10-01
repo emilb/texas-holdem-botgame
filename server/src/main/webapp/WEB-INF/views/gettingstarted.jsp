@@ -14,35 +14,6 @@
     </div>
 
     <div class="row">
-        <div class="span12">
-            <div class="well well-large">
-                <h2>Documentation and links</h2>
-
-                <p>The Maven site for this project is here:
-                    <a href="/mavensite">Cygni Texas Hold'em Maven site</a>
-                </p>
-
-                <p>Download directory can be viewed here:
-                    <a href="/download">Downloads</a>
-                </p>
-
-                <p>Maven repo:
-                    <a href="/maven2">Cygni Texas Hold'em Maven repo</a>
-                </p>
-                <p>Add to your pom.xml to enable this repo:
-                        <pre class="prettyprint">
-&lt;repositories&gt;
-    &lt;repository&gt;
-        &lt;id&gt;poker.cygni.s&lt;/id&gt;
-        &lt;url&gt;http://poker.cygni.se/maven2&lt;/url&gt;
-    &lt;/repository&gt;
-&lt;/repositories&gt;</pre>
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
         <div class="span6">
             <div class="well well-large">
                 <h2>Getting started with a Java client</h2>
@@ -78,55 +49,44 @@ OS name: "linux", version: "3.5.2-linode45", arch: "i386", family: "unix"</pre>
                     <pre class="prettyprint">
 > cd texas-holdem-java-client-<spring:eval expression="@applicationProperties.getProperty('application.version')" />
 > mvn compile exec:java -Dexec.mainClass="se.cygni.texasholdem.player.FullyImplementedBot"
+
 [INFO] Scanning for projects...
 [INFO]
-[INFO] ------------------------------------------------------------------------
-[INFO] Building texas-holdem-java-client 1.1.9
-[INFO] ------------------------------------------------------------------------
-[INFO]
-[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ texas-holdem-java-client ---
-[INFO] Using 'UTF-8' encoding to copy filtered resources.
-[INFO] Copying 1 resource
-[INFO]
-[INFO] --- maven-compiler-plugin:2.5.1:compile (default-compile) @ texas-holdem-java-client ---
-[INFO] Compiling 1 source file to /Users/emil/Downloads/texas-holdem-java-client-1.1.9/target/classes
-[INFO]
-[INFO] >>> exec-maven-plugin:1.2.1:java (default-cli) @ texas-holdem-java-client >>>
-[INFO]
-[INFO] <<< exec-maven-plugin:1.2.1:java (default-cli) @ texas-holdem-java-client <<<
+[INFO] -------------------------------------------------------
+[INFO] Building texas-holdem-java-client 1.1.10
+[INFO] -------------------------------------------------------
+
+    ...
 [INFO]
 [INFO] --- exec-maven-plugin:1.2.1:java (default-cli) @ texas-holdem-java-client ---
 [WARNING]
 java.lang.reflect.InvocationTargetException
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:601)
-	at org.codehaus.mojo.exec.ExecJavaMojo$1.run(ExecJavaMojo.java:297)
-	at java.lang.Thread.run(Thread.java:722)
-Caused by: java.lang.RuntimeException: Did you forget to specify a name for your bot (hint: your email address is a good idea)?
+	...
+Caused by: java.lang.RuntimeException:
+        Did you forget to specify a name for your bot (hint: your email address is a good idea)?
 	at se.cygni.texasholdem.player.FullyImplementedBot.getName(FullyImplementedBot.java:85)
 	at se.cygni.texasholdem.client.PlayerClient.(PlayerClient.java:74)
         at se.cygni.texasholdem.player.FullyImplementedBot.(FullyImplementedBot.java:52)
             at se.cygni.texasholdem.player.FullyImplementedBot.main(FullyImplementedBot.java:66)
             ... 6 more
-            [INFO] ------------------------------------------------------------------------
-            [INFO] BUILD FAILURE
-            [INFO] ------------------------------------------------------------------------
-            [INFO] Total time: 18.871s
-            [INFO] Finished at: Sun Sep 30 01:44:27 CEST 2012
-            [INFO] Final Memory: 28M/260M
-            [INFO] ------------------------------------------------------------------------
-            [ERROR] Failed to execute goal org.codehaus.mojo:exec-maven-plugin:1.2.1:java (default-cli) on project texas-holdem-java-client: An exception occured while executing the Java class. null: InvocationTargetException: Did you forget to specify a name for your bot (hint: your email address is a good idea)? -> [Help 1]
-            [ERROR]
-            [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
-            [ERROR] Re-run Maven using the -X switch to enable full debug logging.
-            [ERROR]
-            [ERROR] For more information about the errors and possible solutions, please read the following articles:
-            [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+[INFO] -------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] -------------------------------------------------------
+[INFO] Total time: 18.871s
+[INFO] Finished at: Sun Sep 30 01:44:27 CEST 2012
+[INFO] Final Memory: 28M/260M
+[INFO] -------------------------------------------------------
+[ERROR] Failed to execute goal org.codehaus.mojo:exec-maven-plugin:1.2.1:java (default-cli) on project texas-holdem-java-client: An exception occured while executing the Java class. null: InvocationTargetException: Did you forget to specify a name for your bot (hint: your email address is a good idea)? -> [Help 1]
+[ERROR]
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR]
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
 </pre>
-                <p>OOOPPs! You need to implement the method getName() properly. Get started and create the best Poker
+                <p>OOOPs! You need to implement the method getName() properly. Get started and create the best Poker
                 playing Bot possible!</p>
+                <p>Hint: The class se.cygni.texasholdem.player.FullyImplementedBot is an example bot that you can use as a starting point.</p>
 
 
             </div>
@@ -135,11 +95,14 @@ Caused by: java.lang.RuntimeException: Did you forget to specify a name for your
 
         <div class="span6">
             <div class="well well-large">
-                <h2>Getting started with a JavaScript client</h2>
+                <h2>Getting started with a node.js client</h2>
 
-                <p>First download and install Node.js:
-                    <a href="http://nodejs.org/" target="_blank">node.js</a>
-                </p>
+                <p>The commands below illustrate how to run the example bot in node.js. See <a href="#nodejs_client_prereq">prerequisites</a> if
+                something is missing in your setup.</p>
+                <p>The texas-holdem-nodejs-client is verified to work with node.js v0.8.8. Older and newer versions may be okay.</p>
+                <pre class="prettyprint">
+> node -v
+v0.8.8</pre>
 
                 <p>Download the example project: <a href="/download/texas-holdem-nodejs-client-<spring:eval expression="@applicationProperties.getProperty('application.version')" />.zip">texas-holdem-nodejs-client-<spring:eval expression="@applicationProperties.getProperty('application.version')" />.zip</a>
                 </p>
@@ -148,41 +111,80 @@ Caused by: java.lang.RuntimeException: Did you forget to specify a name for your
                     <pre class="prettyprint">
 > unzip texas-holdem-nodejs-client-<spring:eval expression="@applicationProperties.getProperty('application.version')" />.zip</pre>
 
-                <p>
+                <p>Do a test run:
+
                     <pre class="prettyprint">
-> sh run.sh
+> node play.js
         throw new Error('Did you forget to specify your name? A good idea is t
               ^
 Error: Did you forget to specify your name? A good idea is to use your e-mail as username! </pre>
                 </p>
+
+                <p>OOOPs! You need to specify a value for the variable playerName in botplayer.js!</p>
+                <p>Hint: The file botplayer.js is an example bot that you can use as a starting point.</p>
         </div>
         <!--/span-->
     </div>
 
-    <div class="row">
-        <div class="span6">
-            <h2>Java prerequisites<a name="java_client_prereq">&nbsp;</a></h2>
+    <div class="span6">
+        <div class="well well-large">
+            <h2>Documentation and links</h2>
 
-            <p>
-                You need a Java JDK of version 6 or above: <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank">download Java</a>
-            </p>
-            <p>
-                You need to install Maven: <a href="http://maven.apache.org/download.html" target="_blank">download Maven</a> </br>
-                Installation instructions: <a href="http://maven.apache.org/download.html#Installation" target="_blank">Maven installation</a>
-            </p>
-            <p>
-                <h4>IDE (Integated Development Environment)<a name="java_ide">&nbsp;</a></h4>
-                At Cygni we mainly use Eclipse, IntelliJ or NetBeans but you may choose any development enviroment you want. Here are a few suggestions: </br>
-                <a href="http://www.eclipse.org/downloads/">Eclipse</a> (Also add the M2Eclipse plugin for Maven support)</br>
-                <a href="http://www.jetbrains.com/idea/download/index.html">IntelliJ</a> (Out of the box support for Maven)</br>
-                <a href="http://netbeans.org/downloads/">NetBeans</a> (Out of the box support for Maven)</br>
-                <a href="http://www.sublimetext.com/2">Sublime Text 2</a> (A good text editor)</br>
-
+            <p>The Maven site for this project is here:
+                <a href="/mavensite">Cygni Texas Hold'em Maven site</a>
             </p>
 
+            <p>Download directory can be viewed here:
+                <a href="/download">Downloads</a>
+            </p>
+
+            <p>Maven repo:
+                <a href="/maven2">Cygni Texas Hold'em Maven repo</a>
+            </p>
+            <p>Add to your pom.xml to enable this repo:
+                <pre class="prettyprint">
+&lt;repositories&gt;
+    &lt;repository&gt;
+        &lt;id&gt;poker.cygni.s&lt;/id&gt;
+        &lt;url&gt;http://poker.cygni.se/maven2&lt;/url&gt;
+    &lt;/repository&gt;
+&lt;/repositories&gt;</pre>
+            </p>
         </div>
+    </div>
+
+    <div class="span6">
+        <a name="java_client_prereq"></a>
+        <h2>Java prerequisites</h2>
+        <p>
+            You need a Java JDK of version 6 or above: <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank">download Java</a>
+        </p>
+        <p>
+            You need to install Maven: <a href="http://maven.apache.org/download.html" target="_blank">download Maven</a> </br>
+            Installation instructions: <a href="http://maven.apache.org/download.html#Installation" target="_blank">Maven installation</a>
+        </p>
+
+        <a name="nodejs_client_prereq"></a>
+        <h2>node.js prerequisites</h2>
+        <p>
+            Download and install node.js: <a href="http://nodejs.org/" target="_blank">node.js</a>
+        </p>
+
+        <a name="java_ide"></a>
+        <h2>IDE (Integated Development Environment)</h2>
+        <p>
+            At Cygni we mainly use Eclipse, IntelliJ or NetBeans but you may choose any development enviroment you want. Here are a few suggestions:
+        </p>
+        <p>
+            <a href="http://www.eclipse.org/downloads/">Eclipse</a> (Also add the M2Eclipse plugin for Maven support)</br>
+            <a href="http://www.jetbrains.com/idea/download/index.html">IntelliJ</a> (Out of the box support for Maven)</br>
+            <a href="http://netbeans.org/downloads/">NetBeans</a> (Out of the box support for Maven)</br>
+            <a href="http://www.sublimetext.com/2">Sublime Text 2</a> (A good text editor)</br>
+        </p>
 
     </div>
+
+</div>
 
     <!--/span-->
     <!--/row-->

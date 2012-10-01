@@ -196,7 +196,6 @@
                 type: "GET",
                 url: "/timemachine/table/" + tableId + "/gameround/" + gameRoundNo,
                 success: function (response) {
-                    console.log(response);
 
                     currentView.lastGameRound = response.roundNumber;
                     currentView.lastTableId = response.tableCounter;
@@ -330,8 +329,6 @@
                             });
                 }
 
-                //console.log(data);
-
                 chipsGraph = $.jqplot('statChipsGraph', data, {
 
                     title : 'Chips per player and round',
@@ -363,6 +360,12 @@
                             autoscale : true
                         }
                     },
+                    highlighter: {
+                        show: true,
+                        sizeAdjust: 7.5,
+                        fadeTooltip: true,
+                        tooltipAxes: 'y'
+                    },
                     cursor:{
                         show: true,
                         zoom:true,
@@ -380,7 +383,7 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th></th>
+                    <th>{{executionDate}}</th>
                     <th></th>
                     <th>Pre Flop</th>
                     <th>Flop</th>
@@ -495,5 +498,6 @@
 <script src="<c:url value="/resources/js/jqplot-plugins/jqplot.canvasTextRenderer.min.js" />"></script>
 <script src="<c:url value="/resources/js/jqplot-plugins/jqplot.canvasAxisLabelRenderer.min.js" />"></script>
 <script src="<c:url value="/resources/js/jqplot-plugins/jqplot.cursor.min.js" />"></script>
+<script src="<c:url value="/resources/js/jqplot-plugins/jqplot.highlighter.js" />"></script>
 
 

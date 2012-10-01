@@ -2,10 +2,14 @@ package se.cygni.texasholdem.dao.model;
 
 import se.cygni.texasholdem.game.Card;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class GameLog {
+
+    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public List<PlayerInGame> players = new ArrayList<PlayerInGame>();
     public long bigBlindValue;
@@ -16,6 +20,7 @@ public class GameLog {
     public int roundNumber;
     public boolean lastGame;
     public int knownNoofRounds;
+    public Date executionDate;
 
     public List<PlayerInGame> getPlayers() {
         return players;
@@ -63,5 +68,9 @@ public class GameLog {
 
     public int getKnownNoofRounds() {
         return knownNoofRounds;
+    }
+
+    public String getExecutionDate() {
+        return sdf.format(executionDate);
     }
 }

@@ -332,6 +332,7 @@
             // extra data for the point.
             str = opts.tooltipContentEditor(str, neighbor.seriesIndex, neighbor.pointIndex, plot);
         }
+        str = series.label + ': ' + str;
         elem.html(str);
         var gridpos = {x:neighbor.gridData[0], y:neighbor.gridData[1]};
         var ms = 0;

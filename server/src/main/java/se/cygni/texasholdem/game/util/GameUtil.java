@@ -276,6 +276,7 @@ public class GameUtil {
                                         Pot pot, Map<BotPlayer, Long> payoutResult, PokerHandRankUtil rankUtil) {
 
         GameLog gameLog = new GameLog();
+        gameLog.executionDate = new Date();
         gameLog.smallBlindValue = smallBlind;
         gameLog.bigBlindValue = bigBlind;
         gameLog.communityCards.addAll(communityCards);
