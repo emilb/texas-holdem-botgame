@@ -21,6 +21,7 @@ exports.playerStateUpdater = function() {
 	    }
     };
 
+    // Private functions
     function createPlayersForTable(players) {
         return players.map(function (p) {
             return {
@@ -32,13 +33,13 @@ exports.playerStateUpdater = function() {
             };
         });
     };
-
+    
     function addPotInvestmentToPlayer(name, amount) {
         playerState.potTotal = playerState.potTotal + amount;
 
         var p = getTablePlayer(name);
         if (p === null) {
-            alert('no player by name ' + name);
+            console('*** error, addPotInvestmentToPlayer(): no player by name ' + name);
             return;
         }
         p.potInvestment = p.potInvestment + amount;
@@ -50,12 +51,42 @@ exports.playerStateUpdater = function() {
         });
     };
 
+    function getMyPlayer() {
+    	return getTablePlayer(getMyPlayerName());
+    };
+    function getMyPlayerName() {
+    	return updater.playerName;
+    };
 
     var updater = {
 
    		playerState : playerState,
+   		playerName : '', // set when play starts
    		
-        getTablePlayer : getTablePlayer,
+        getTablePlayer : getTablePlayer, // Make getTablePlayer() public
+        getMyPlayer : getMyPlayer,
+
+        amIWinner : function () {
+            return playerState.winner && playerState.winner.name === getMyPlayerName();
+        },
+        amIDealerPlayer : function() {
+        	return playerState.table.dealer === getMyPlayerName();
+        },
+        amISmallBlindPlayer : function() {
+        	return playerState.table.smallBlindPlayer === getMyPlayerName();
+        },
+        amIBigBlindPlayer : function() {
+        	return playerState.table.bigBlindPlayer === getMyPlayerName();
+        },
+        haveIFolded : function () {
+            return this.hasPlayerFolded(getMyPlayerName());
+        },
+        haveIGoneAllIn : function () {
+            return this.hasPlayerGoneAllIn(getMyPlayerName());
+        },
+        getMyInvestmentInPot : function () {
+            return this.getInvestmentInPotFor(getMyPlayerName());
+        },
 
         hasPlayerFolded:function (name) {
             return playerState.table.players.count(function (p) {
@@ -133,6 +164,9 @@ exports.playerStateUpdater = function() {
                 playerState.table.dealer = event.dealer;
                 playerState.table.smallBlindPlayer = event.smallBlindPlayer;
                 playerState.table.bigBlindPlayer = event.bigBlindPlayer;
+
+                playerState.amount = getMyPlayer().chipCount;
+
             },
             onServerIsShuttingDownEvent:function (event) {
             },
@@ -140,6 +174,7 @@ exports.playerStateUpdater = function() {
                 event.playersShowDown.map('player').forEach(function (p) {
                     getTablePlayer(p.name).chipCount = p.chipCount;
                 });
+                playerState.amount = getMyPlayer().chipCount;
             },
             onTableChangedStateEvent:function (event) {
                 playerState.table.state = event.state;

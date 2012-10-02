@@ -1,44 +1,19 @@
 require('./modules/sugar-1.3.min.js');
+
+function getName() {
+	//return 'Nisse@manpower';
+    throw new Error('Did you forget to specify your name? A good idea is to use your e-mail as username!');
+};
+
 var stateUpdater = require('./modules/playerStateUpdater.js').playerStateUpdater();
+stateUpdater.playerName = getName();
 
 var playerState = stateUpdater.playerState; // private object ref. that can't be changed via player
-var playerName = null;
 
 var player = {
 	
-    getName : function() {
-    	if (playerName) {
-    		return playerName;
-    	}
-        throw new Error('Did you forget to specify your name? A good idea is to use your e-mail as username!');
-    },
-    setName : function(name) {
-    	playerName = name;
-    },
+    getName : getName,
     state : playerState,  // property "state" can be accessed with player.state
-
-    isWinner : function () {
-        return playerState.winner && playerState.winner.name === this.getName();
-    },
-    amIDealerPlayer : function() {
-    	return playerState.table.dealer === this.getName();
-    },
-    amISmallBlindPlayer : function() {
-    	return playerState.table.smallBlindPlayer === this.getName();
-    },
-    amIBigBlindPlayer : function() {
-    	return playerState.table.bigBlindPlayer === this.getName();
-    },
-    haveIFolded : function () {
-        return stateUpdater.hasPlayerFolded(this.getName());
-    },
-    haveIGoneAllIn : function () {
-        return stateUpdater.hasPlayerGoneAllIn(this.getName());
-    },
-    getMyInvestmentInPot : function () {
-        return stateUpdater.getInvestmentInPotFor(this.getName());
-    },
-
 
     // Event handlers
 
@@ -87,7 +62,7 @@ var player = {
     },
 
     onTableIsDoneEvent : function (event) {
-    	console.log("I'am the winner: "+this.isWinner());
+    	console.log("I'am the winner: "+stateUpdater.amIWinner());
     },
 
     onYouHaveBeenDealtACardEvent : function (event) {
@@ -124,7 +99,7 @@ var player = {
         }
 
         var chosenAction = checkAction || callAction || raiseAction || foldAction || allInAction;
-        console.log('I chose action: ' + chosenAction.actionType);
+        //console.log('I chose action: ' + chosenAction.actionType);
         return chosenAction;
     },
     
@@ -135,5 +110,4 @@ var player = {
     }
 }
 exports.botplayer = player;
-
 
