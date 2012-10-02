@@ -319,6 +319,12 @@ public class CurrentPlayState {
             smallBlind = event.getSmallBlindAmount();
             bigBlind = event.getBigBlindAmount();
             tableId = event.getTableId();
+
+            for (GamePlayer gamePlayer : event.getPlayers()) {
+                if (myPlayersName.equals(gamePlayer.getName())) {
+                    myCurrentChipAmount = gamePlayer.getChipCount();
+                }
+            }
         }
 
         @Override
