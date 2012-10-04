@@ -20,7 +20,7 @@ public class StatisticalBot extends BasicPlayer {
     private static Logger log = LoggerFactory
             .getLogger(StatisticalBot.class);
 
-    private static final String DEFAULT_HOST = "localhost";
+    private static final String DEFAULT_HOST = "poker.cygni.se";
     private static final int DEFAULT_PORT = 4711;
 
     private PlayerClient playerClient;
@@ -95,7 +95,7 @@ public class StatisticalBot extends BasicPlayer {
         Map<PokerHand, AtomicInteger> distribution = new HashMap<PokerHand, AtomicInteger>();
         for (PokerHand hand : PokerHand.values()) { distribution.put(hand, new AtomicInteger(0)); }
 
-        int noofIterations = 100000;
+        int noofIterations = 300;
 
         CurrentPlayState ps = getCurrentPlayState();
         int noofOtherPlayers = ps.getPlayers().size()-1;
