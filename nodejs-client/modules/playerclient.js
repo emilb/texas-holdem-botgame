@@ -3,6 +3,9 @@ require('./uuid.js'); // Adds Math.uuid()
 
 var jsonDelimiter = '_-^emil^-_';
 var client = new net.Socket();
+client.setNoDelay(true);
+client.setKeepAlive(true, 0);
+
 var player;
 
 /**
