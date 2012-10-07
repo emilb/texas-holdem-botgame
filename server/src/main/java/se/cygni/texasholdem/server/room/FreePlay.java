@@ -26,7 +26,7 @@ public class FreePlay extends Room {
             .getLogger(FreePlay.class);
 
     public static final String COUNTER_ID = "freeplay";
-    public static final int MIN_NOOF_PLAYERS = 5;
+    public static final int MIN_NOOF_PLAYERS = 3;
     public static final int TIME_TILL_START_AFTER_NOOF_PLAYERS_CONNECTED_IN_MS = 1 * 60 * 1000; // 1 minute
 
     protected final String freePlayId = UUID.randomUUID().toString();

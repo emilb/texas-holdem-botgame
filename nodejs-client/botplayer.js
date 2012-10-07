@@ -98,7 +98,7 @@ var player = {
             }
         }
 
-        var chosenAction = checkAction || callAction || raiseAction || foldAction || allInAction;
+        var chosenAction = checkAction || callAction || raiseAction || foldAction || allInAction;
         //console.log('I chose action: ' + chosenAction.actionType);
         return chosenAction;
     },

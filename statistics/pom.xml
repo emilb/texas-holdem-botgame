@@ -5,13 +5,13 @@
     <parent>
         <groupId>se.cygni</groupId>
         <artifactId>texas-holdem-botgame</artifactId>
-        <version>1.1.14-SNAPSHOT</version>
+        <version>1.1.12-SNAPSHOT</version>
     </parent>
 
     <groupId>se.cygni</groupId>
-    <artifactId>texas-holdem-java-client</artifactId>
+    <artifactId>texas-holdem-statistics</artifactId>
     <packaging>jar</packaging>
-    <name>texas-holdem-java-client</name>
+    <name>texas-holdem-statistics</name>
 
     <build>
         <plugins>
@@ -139,58 +139,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <!--
-         This profile is just for packaging and deploying on
-         the CI-server. If you are developing a java-bot you
-         can disregard this section. It is only activated by
-         the profile: production
-     -->
-    <profiles>
-        <profile>
-            <id>production</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <!-- Packages this project in a zip for download -->
-                                <id>copy-downloadable-artifacts</id>
-                                <phase>deploy</phase>
-                                <configuration>
-                                    <target>
-                                        <mkdir dir="${basedir}/target/zip/${project.name}-${project.version}" />
-                                        <copy todir="${basedir}/target/zip/${project.name}-${project.version}">
-                                            <fileset dir="${basedir}">
-                                                <include name="**" />
-                                                <exclude name="**/.idea/**" />
-                                                <exclude name="**/.git/**" />
-                                                <exclude name="**/target/**" />
-                                                <exclude name="**/*.iml" />
-                                            </fileset>
-                                        </copy>
-
-                                        <zip destfile="${public.web.dir}/download/${project.name}-${project.version}.zip" encoding="UTF-8">
-                                            <fileset dir="${basedir}/target/zip">
-                                                <include name="**" />
-                                            </fileset>
-                                        </zip>
-                                    </target>
-                                </configuration>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-
-        </profile>
-
-    </profiles>
 
     <repositories>
         <repository>

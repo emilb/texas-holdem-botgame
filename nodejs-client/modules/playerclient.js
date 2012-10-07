@@ -120,13 +120,12 @@ function createRegisterForPlayRequest(room) {
  */
 function routeEvent(event) {
     var type = event.type;
-    var clazz = type.split('.').pop();
+    var parts = type.split('.');
+    var clazz = parts.pop();
+    var pkg = parts.pop(); // last part of Java package; events,request,exception
 
     //console.log('Routing event of type: ' + clazz);
 
-    if (!player['on' + clazz]) {
-        throw new Error('Could not find method on' + clazz);
-    }
 
     if (clazz === 'ActionRequest') {
         var chosenAction = player.onActionRequest(event.possibleActions);
@@ -138,7 +137,15 @@ function routeEvent(event) {
 
         client.write(JSON.stringify(actionResponse) + jsonDelimiter);
     } else {
-        player.dispatchEvent(event);
+    	if (pkg === 'event') {
+	        if (!player['on' + clazz]) {
+	            throw new Error('Could not find player method on' + clazz);
+	        }
+            player.dispatchEvent(event);
+    	}
+    	if (pkg === 'exception') {
+            throw new Error('Got Exception from server: '+clazz+', ' + event.message);
+    	}
     }
 }
 

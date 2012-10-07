@@ -4,6 +4,8 @@ import org.apache.commons.lang.StringUtils;
 import org.codehaus.jackson.*;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
@@ -13,9 +15,14 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 @SuppressWarnings("unchecked")
 public class TexasMessageParser {
+
+    private static Logger log = LoggerFactory.getLogger(TexasMessageParser.class);
+
+    private static String currentVersion = null;
 
     private static ObjectMapper mapper = new ObjectMapper();
 
@@ -24,6 +31,7 @@ public class TexasMessageParser {
 
     private static Map<String, Class<? extends TexasMessage>> typeToClass = new HashMap<String, Class<? extends TexasMessage>>();
 
+    // Init typeToClass map
     static {
         final ClassPathScanningCandidateComponentProvider scanner = new ClassPathScanningCandidateComponentProvider(
                 true);
@@ -37,8 +45,22 @@ public class TexasMessageParser {
                         (Class<? extends TexasMessage>) Class.forName(bd
                                 .getBeanClassName()));
             } catch (final ClassNotFoundException e) {
-                e.printStackTrace();
+                log.warn("Error in caching class in Type to Class map", e);
             }
+        }
+    }
+
+    // Init currentVersion
+    static {
+        try {
+            Properties properties = new Properties();
+            properties.load(TexasMessageParser.class.getResourceAsStream("/application.properties"));
+            currentVersion = properties.getProperty("application.version");
+            log.info("texas-holdem-common version: {}", currentVersion);
+
+        } catch (Exception ioe) {
+            log.error("Failed to read application.properties", ioe);
+            currentVersion = "unkown";
         }
     }
 
@@ -51,9 +73,15 @@ public class TexasMessageParser {
                     .readValue(msg,
                             TexasMessageParser.parseAndGetClassForMessage(msg));
 
+            if (!currentVersion.equals(message.getVersion())) {
+                log.warn("The node you are communicating with is at version: [{}] and this client is at version: [{}]",
+                        message.getVersion(),
+                        currentVersion);
+            }
+
             return message;
         } catch (final IllegalStateException e) {
-            System.out.println(msg);
+            log.error(msg);
             throw e;
         }
     }
@@ -61,6 +89,7 @@ public class TexasMessageParser {
     public static String encodeMessage(final TexasMessage message)
             throws IOException {
 
+        message.setVersion(currentVersion);
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
         mapper.writeValue(out, message);
         return out.toString();
@@ -98,7 +127,6 @@ public class TexasMessageParser {
                 }
             }
         }
-
     }
 
     public static Class<? extends TexasMessage> getClassForIdentifier(

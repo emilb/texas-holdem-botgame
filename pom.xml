@@ -4,7 +4,7 @@
 
     <groupId>se.cygni</groupId>
     <artifactId>texas-holdem-botgame</artifactId>
-    <version>1.1.11-SNAPSHOT</version>
+    <version>1.1.14-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>texas-holdem-botgame</name>
     <url>http://emilb.github.com/texas-holdem-botgame</url>
@@ -54,6 +54,7 @@
         <module>java-client</module>
         <module>nodejs-client</module>
         <module>performance-tests</module>
+        <!-- <module>statistics</module> -->
     </modules>
 
     <build>
