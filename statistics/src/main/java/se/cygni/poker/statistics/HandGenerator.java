@@ -79,7 +79,7 @@ public class HandGenerator {
         PrintWriter out = getPrintWriter(k, n);
 
         long noofCombinations = calculateNoofCombinations(k, n);
-        binaryCardsToHandMap = new TLongLongHashMap((int)noofCombinations);
+//        binaryCardsToHandMap = new TLongLongHashMap((int)noofCombinations);
 
         System.out.println("Calculating " + noofCombinations + " combinations...");
 
@@ -100,11 +100,9 @@ public class HandGenerator {
                 lastTStamp = System.currentTimeMillis();
                 out.flush();
             }
-            List<Card> cards = BinaryConverter.longToCards(currentVal);
-            PokerHandUtil phu = new PokerHandUtil(cards);
-            writeToFile(out, currentVal, phu.getBestHand().getPokerHand().getOrderValue());
+            writeToFile(out, currentVal, getPokerHandOrderValue(currentVal));
 
-            binaryCardsToHandMap.put(currentVal, phu.getBestHand().getPokerHand().getOrderValue());
+//            binaryCardsToHandMap.put(currentVal, phu.getBestHand().getPokerHand().getOrderValue());
 
             long newVal = moveLowestOneBitLeft(currentVal);
             if (newVal != currentVal) {
@@ -121,15 +119,23 @@ public class HandGenerator {
 
         }
 
-        List<Card> cards = BinaryConverter.longToCards(currentVal);
+        writeToFile(out, currentVal, getPokerHandOrderValue(currentVal));
         currentIteration ++;
 
         if (currentIteration != noofCombinations) {
             System.out.println("Warning, I didn't find all combinations, expected: " + noofCombinations + " but got: " + currentIteration + " Diff: " + (noofCombinations-currentIteration));
         }
 
-        System.out.println("Writing map to file...");
-        writeMapToFile(k, n);
+        closePrintWriter(out);
+//        System.out.println("Writing map to file...");
+//        writeMapToFile(k, n);
+    }
+
+    private static int getPokerHandOrderValue(long value) {
+
+        List<Card> cards = BinaryConverter.longToCards(value);
+        PokerHandUtil phu = new PokerHandUtil(cards);
+        return phu.getBestHand().getPokerHand().getOrderValue();
     }
 
     private static long getValueOfPositions(int[] positionArray) {
@@ -202,7 +208,7 @@ public class HandGenerator {
     private static void writeMapToFile(int k, int n) {
         try{
             //use buffering
-            OutputStream file = new FileOutputStream( "binaryCardsToHandMap_" + k + "_" + n + "_.ser" );
+            OutputStream file = new FileOutputStream( "binaryCardsToHandMap_" + k + "_" + n + ".ser" );
             OutputStream buffer = new BufferedOutputStream( file );
             ObjectOutput output = new ObjectOutputStream( buffer );
             try{
