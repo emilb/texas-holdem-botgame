@@ -37,6 +37,11 @@ public class Deck {
         return new Deck(copyOfProtoDec);
     }
 
+    public static List<Card> getOrderedListOfCards() {
+
+        return new ArrayList<Card>(protoDeck);
+    }
+
     public int getCardsLeft() {
 
         return cards.size();

@@ -54,7 +54,7 @@
         <module>java-client</module>
         <module>nodejs-client</module>
         <module>performance-tests</module>
-        <!-- <module>statistics</module> -->
+         <module>statistics</module>
     </modules>
 
     <build>

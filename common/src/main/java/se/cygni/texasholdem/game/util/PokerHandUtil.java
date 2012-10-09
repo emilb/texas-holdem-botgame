@@ -32,6 +32,13 @@ public class PokerHandUtil {
         suitDistribution = getSuitDistribution(cards);
     }
 
+    public PokerHandUtil(final List<Card> cards) {
+
+        this.cards = cards;
+        rankDistribution = getRankDistribution(cards);
+        suitDistribution = getSuitDistribution(cards);
+    }
+
     /**
      * Extracts the best possible hand and returns the type of PokerHand and the
      * List of cards that make that hand.
