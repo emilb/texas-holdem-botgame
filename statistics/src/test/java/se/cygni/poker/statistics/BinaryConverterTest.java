@@ -76,5 +76,6 @@ public class BinaryConverterTest {
     @Test
     public void testPrintBinaryValue() throws Exception {
 
+
     }
 }

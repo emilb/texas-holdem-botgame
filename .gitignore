@@ -1,4 +1,6 @@
 *.class
+*.data
+*.ser
 .settings
 .project
 .classpath
@@ -7,5 +9,4 @@ target
 *.iml
 web-client/.DS_Store
 web-client/overlays
-
 .DS_Store

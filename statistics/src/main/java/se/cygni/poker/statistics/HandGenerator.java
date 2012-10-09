@@ -17,7 +17,7 @@ public class HandGenerator {
     public static void main(String[] args) {
 
         long now = System.currentTimeMillis();
-        createCombination_K_of_N(5, 52);
+        createCombination_K_of_N(7, 52);
         System.out.println("Time taken: " + (System.currentTimeMillis() - now));
     }
 
@@ -49,9 +49,14 @@ public class HandGenerator {
 
         String cards = String.format("%52s", Long.toBinaryString(val)).replace(" ", "0");
         out.write(cards);
-        out.write(",");
-        out.write(pokerHandOrderValue + "\n");
-        out.flush();
+        out.write(" ");
+        out.write(pokerHandOrderValue + " ");
+        List<Card> cardsList = BinaryConverter.longToCards(val);
+        for (Card c : cardsList) {
+            out.write(c.toShortString());
+            out.write(" ");
+        }
+        out.write("\n");
     }
 
     private static PrintWriter getPrintWriter(int k, int n) {
@@ -80,6 +85,7 @@ public class HandGenerator {
 
         long noofCombinations = calculateNoofCombinations(k, n);
 //        binaryCardsToHandMap = new TLongLongHashMap((int)noofCombinations);
+                //readMapFromFile(k, n);
 
         System.out.println("Calculating " + noofCombinations + " combinations...");
 
@@ -101,8 +107,7 @@ public class HandGenerator {
                 out.flush();
             }
             writeToFile(out, currentVal, getPokerHandOrderValue(currentVal));
-
-//            binaryCardsToHandMap.put(currentVal, phu.getBestHand().getPokerHand().getOrderValue());
+//            binaryCardsToHandMap.put(currentVal, getPokerHandOrderValue(currentVal));
 
             long newVal = moveLowestOneBitLeft(currentVal);
             if (newVal != currentVal) {
@@ -120,6 +125,7 @@ public class HandGenerator {
         }
 
         writeToFile(out, currentVal, getPokerHandOrderValue(currentVal));
+//        binaryCardsToHandMap.put(currentVal, getPokerHandOrderValue(currentVal));
         currentIteration ++;
 
         if (currentIteration != noofCombinations) {
@@ -133,9 +139,11 @@ public class HandGenerator {
 
     private static int getPokerHandOrderValue(long value) {
 
-        List<Card> cards = BinaryConverter.longToCards(value);
-        PokerHandUtil phu = new PokerHandUtil(cards);
-        return phu.getBestHand().getPokerHand().getOrderValue();
+//        return (int)binaryCardsToHandMap.get(value);
+        return HandEvaluatorFromMap.getHandValue(value);
+//        List<Card> cards = BinaryConverter.longToCards(value);
+//        PokerHandUtil phu = new PokerHandUtil(cards);
+//        return phu.getBestHand().getPokerHand().getOrderValue();
     }
 
     private static long getValueOfPositions(int[] positionArray) {
@@ -221,5 +229,27 @@ public class HandGenerator {
         catch(IOException ex){
             ex.printStackTrace();
         }
+    }
+
+    private static TLongLongHashMap readMapFromFile(int k, int n) {
+        try {
+            //use buffering
+            InputStream file = new FileInputStream("binaryCardsToHandMap_" + k + "_" + n + ".ser");
+            InputStream buffer = new BufferedInputStream(file);
+            ObjectInput input = new ObjectInputStream(buffer);
+            try {
+                //deserialize the List
+                TLongLongHashMap recoveredMap = (TLongLongHashMap) input.readObject();
+                //display its data
+                System.out.println("Read map with " + recoveredMap.size() + " number of keys");
+                return recoveredMap;
+            } finally {
+                input.close();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
     }
 }
