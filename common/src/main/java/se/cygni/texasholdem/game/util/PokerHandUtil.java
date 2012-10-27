@@ -1,8 +1,8 @@
 package se.cygni.texasholdem.game.util;
 
 import org.apache.commons.collections.CollectionUtils;
-import se.cygni.texasholdem.game.Hand;
 import se.cygni.texasholdem.game.Card;
+import se.cygni.texasholdem.game.Hand;
 import se.cygni.texasholdem.game.definitions.CardSortBy;
 import se.cygni.texasholdem.game.definitions.PokerHand;
 import se.cygni.texasholdem.game.definitions.Rank;

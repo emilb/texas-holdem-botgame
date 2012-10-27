@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -14,7 +15,7 @@
     <name>texas-holdem-nodejs-client</name>
 
     <build>
-        
+
     </build>
 
     <properties>
@@ -47,21 +48,22 @@
                                 <phase>deploy</phase>
                                 <configuration>
                                     <target>
-                                        <mkdir dir="${basedir}/target/zip/${project.name}-${project.version}" />
+                                        <mkdir dir="${basedir}/target/zip/${project.name}-${project.version}"/>
                                         <copy todir="${basedir}/target/zip/${project.name}-${project.version}">
                                             <fileset dir="${basedir}">
-                                                <include name="**" />
-                                                <exclude name="**/.idea/**" />
-                                                <exclude name="**/.git/**" />
-                                                <exclude name="**/target/**" />
-                                                <exclude name="**/*.iml" />
-                                                <exclude name="**/pom.xml" />
+                                                <include name="**"/>
+                                                <exclude name="**/.idea/**"/>
+                                                <exclude name="**/.git/**"/>
+                                                <exclude name="**/target/**"/>
+                                                <exclude name="**/*.iml"/>
+                                                <exclude name="**/pom.xml"/>
                                             </fileset>
                                         </copy>
 
-                                        <zip destfile="${public.web.dir}/download/${project.name}-${project.version}.zip" encoding="UTF-8">
+                                        <zip destfile="${public.web.dir}/download/${project.name}-${project.version}.zip"
+                                             encoding="UTF-8">
                                             <fileset dir="${basedir}/target/zip">
-                                                <include name="**" />
+                                                <include name="**"/>
                                             </fileset>
                                         </zip>
                                     </target>

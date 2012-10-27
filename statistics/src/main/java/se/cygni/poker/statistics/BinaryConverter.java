@@ -57,10 +57,10 @@ public class BinaryConverter {
         long val = bc.cardToLong(new Card(Rank.ACE, Suit.CLUBS));
         printBinaryValue(val);
 
-        System.out.println(bc.longToCard((long)Math.pow(2, 12)));
+        System.out.println(bc.longToCard((long) Math.pow(2, 12)));
 
         List<Card> cards = bc.longToCards(3 + 4096);
-        for (Card c: cards) {
+        for (Card c : cards) {
             System.out.println(c);
         }
 

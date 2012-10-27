@@ -13,7 +13,7 @@ public class StatsChips {
     private Map<String, List<Long>> chipsPerPlayerPerRound = new HashMap<String, List<Long>>();
 
     public String[] getPlayers() {
-        return players.toArray(new String[] {});
+        return players.toArray(new String[]{});
     }
 
     public Map<String, List<Long>> getChipsPerPlayerPerRound() {

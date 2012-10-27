@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -93,7 +94,7 @@
                             <tasks>
                                 <move todir="${project.build.directory}/${project.artifactId}-${project.version}/">
                                     <fileset dir="${project.build.directory}/classes/">
-                                        <include name="Launcher.class" />
+                                        <include name="Launcher.class"/>
                                     </fileset>
                                 </move>
                             </tasks>
@@ -264,12 +265,13 @@
                                 <configuration>
                                     <tasks>
                                         <copy todir="${public.web.dir}/download">
-                                            <fileset dir="${project.build.directory}" includes="*.zip" />
+                                            <fileset dir="${project.build.directory}" includes="*.zip"/>
                                         </copy>
                                         <move todir="${public.web.dir}/download">
-                                            <fileset dir="${public.web.dir}/download" />
+                                            <fileset dir="${public.web.dir}/download"/>
                                             <mapper>
-                                                <mapper type="regexp" from=".*kit.zip" to="texas-holdem-web-client.zip" />
+                                                <mapper type="regexp" from=".*kit.zip"
+                                                        to="texas-holdem-web-client.zip"/>
                                             </mapper>
                                         </move>
                                     </tasks>

@@ -16,9 +16,8 @@ import java.util.*;
 
 /**
  * Room for real players, only one table.
- *
+ * <p/>
  * Starts when at least MIN_NOOF_PLAYERS have connected.
- *
  */
 public class FreePlay extends Room {
 

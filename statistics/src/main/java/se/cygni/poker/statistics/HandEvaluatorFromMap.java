@@ -1,9 +1,6 @@
 package se.cygni.poker.statistics;
 
 import gnu.trove.map.hash.TLongLongHashMap;
-import se.cygni.texasholdem.game.Card;
-import se.cygni.texasholdem.game.Hand;
-import se.cygni.texasholdem.game.util.PokerHandUtil;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -27,10 +24,11 @@ public class HandEvaluatorFromMap {
     }
 
     public static int getHandValueFiveCards(long cards) {
-        if (fiveCardLookupMap == null)
+        if (fiveCardLookupMap == null) {
             initMap();
+        }
 
-        return (int)fiveCardLookupMap.get(cards);
+        return (int) fiveCardLookupMap.get(cards);
     }
 
     public static long getCardsByRemoving(long cards, int[] removePositions) {
@@ -43,6 +41,7 @@ public class HandEvaluatorFromMap {
 
     /**
      * @param positions
+     *
      * @return a List containing all permutations for removals
      */
     public static List<int[]> getAllCombinationsOfRemovals(int positions[]) {
@@ -50,13 +49,14 @@ public class HandEvaluatorFromMap {
         List<int[]> result = new ArrayList<int[]>();
         int noofToRemove = positions.length - CARDS_TO_MATCH;
 
-        if (noofToRemove == 0)
+        if (noofToRemove == 0) {
             return result;
+        }
 
         // noofToRemove can be 1 or 2
         if (noofToRemove == 1) {
             for (int pos : positions) {
-                result.add(new int[] {pos});
+                result.add(new int[]{pos});
             }
             return result;
         }
@@ -64,7 +64,7 @@ public class HandEvaluatorFromMap {
         if (noofToRemove == 2) {
             for (int outer = 0; outer < positions.length; outer++) {
                 for (int inner = outer + 1; inner < positions.length; inner++) {
-                    result.add(new int[] {positions[outer], positions[inner]});
+                    result.add(new int[]{positions[outer], positions[inner]});
                 }
             }
 
@@ -83,9 +83,9 @@ public class HandEvaluatorFromMap {
         while (value > 0) {
             int firstPos = Long.numberOfTrailingZeros(value);
             positions[counter] = firstPos + lastPos;
-            value = value >> firstPos+1;
-            counter ++;
-            lastPos += firstPos+1;
+            value = value >> firstPos + 1;
+            counter++;
+            lastPos += firstPos + 1;
         }
 
         return positions;
@@ -95,8 +95,8 @@ public class HandEvaluatorFromMap {
         int counter = 0;
         while (value > 0) {
             int firstPos = Long.numberOfTrailingZeros(value);
-            value = value >> firstPos+1;
-            counter ++;
+            value = value >> firstPos + 1;
+            counter++;
         }
         return counter;
     }

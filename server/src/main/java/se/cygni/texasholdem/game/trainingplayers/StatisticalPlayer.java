@@ -2,12 +2,14 @@ package se.cygni.texasholdem.game.trainingplayers;
 
 import se.cygni.texasholdem.client.CurrentPlayState;
 import se.cygni.texasholdem.communication.message.request.ActionRequest;
-import se.cygni.texasholdem.game.*;
+import se.cygni.texasholdem.game.Action;
+import se.cygni.texasholdem.game.ActionType;
+import se.cygni.texasholdem.game.Card;
+import se.cygni.texasholdem.game.Hand;
 import se.cygni.texasholdem.game.definitions.PlayState;
 import se.cygni.texasholdem.game.definitions.PokerHand;
 import se.cygni.texasholdem.game.definitions.Rank;
 import se.cygni.texasholdem.game.definitions.Suit;
-import se.cygni.texasholdem.game.util.CardsUtil;
 import se.cygni.texasholdem.game.util.PokerHandUtil;
 
 import java.util.*;
@@ -45,28 +47,32 @@ public class StatisticalPlayer extends TrainingPlayer {
         int startingHandRank = getMyCardsTopTenRank();
 
         // Fold if rank is zero
-        if (startingHandRank == 0)
+        if (startingHandRank == 0) {
             return actionManager.getFoldAction();
+        }
 
         long myInvestment = ps.getMyInvestmentInPot();
 
         // Bet as long my investment will not be larger than rank * currentBigBlind
         if (actionManager.has(ActionType.RAISE)) {
             long raiseCost = actionManager.getRaiseAction().getAmount();
-            if (myInvestment + raiseCost < ps.getBigBlind() * startingHandRank)
+            if (myInvestment + raiseCost < ps.getBigBlind() * startingHandRank) {
                 return actionManager.getRaiseAction();
+            }
         }
 
         // Else see if we can call
         if (actionManager.has(ActionType.CALL)) {
             long callCost = actionManager.getCallAction().getAmount();
-            if (myInvestment + callCost < ps.getBigBlind() * startingHandRank)
+            if (myInvestment + callCost < ps.getBigBlind() * startingHandRank) {
                 return actionManager.getCallAction();
+            }
         }
 
         // Check if possible
-        if (actionManager.has(ActionType.CHECK))
+        if (actionManager.has(ActionType.CHECK)) {
             return actionManager.getCheckAction();
+        }
 
         return actionManager.getFoldAction();
     }
@@ -75,12 +81,14 @@ public class StatisticalPlayer extends TrainingPlayer {
 
         // init result
         Map<PokerHand, AtomicInteger> distribution = new HashMap<PokerHand, AtomicInteger>();
-        for (PokerHand hand : PokerHand.values()) { distribution.put(hand, new AtomicInteger(0)); }
+        for (PokerHand hand : PokerHand.values()) {
+            distribution.put(hand, new AtomicInteger(0));
+        }
 
         int noofIterations = 1000;
 
         CurrentPlayState ps = getCurrentPlayState();
-        int noofOtherPlayers = ps.getPlayers().size()-1;
+        int noofOtherPlayers = ps.getPlayers().size() - 1;
 
         for (int i = 0; i < noofIterations; i++) {
             InspectableDeck deck = new InspectableDeck(ps.getCurrentPlayState().ordinal(), noofOtherPlayers, ps.getMyCardsAndCommunityCards());
@@ -132,6 +140,7 @@ public class StatisticalPlayer extends TrainingPlayer {
      *
      * @param myPokerHand
      * @param otherPokerHand
+     *
      * @return TRUE if myPokerHand is valued higher than otherPokerHand
      */
     private boolean isHandBetterThan(PokerHand myPokerHand, PokerHand otherPokerHand) {
@@ -304,8 +313,9 @@ public class StatisticalPlayer extends TrainingPlayer {
                 for (final Rank rank : Rank.values()) {
                     Card card = Card.valueOf(rank, suit);
 
-                    if (!knownCards.contains(card))
+                    if (!knownCards.contains(card)) {
                         deck.add(Card.valueOf(rank, suit));
+                    }
                 }
             }
 

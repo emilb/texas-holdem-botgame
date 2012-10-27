@@ -16,18 +16,18 @@ import java.util.Formatter;
 /**
  * This is an example Poker bot player, you can use it as
  * a starting point when creating your own.
- *
+ * <p/>
  * If you choose to create your own class don't forget that
  * it must implement the interface Player
+ *
  * @see Player
- *
- * Javadocs for common utilities and classes used may be
- * found here:
- * http://poker.cygni.se/mavensite/texas-holdem-common/apidocs/index.html
- *
- * You can inspect the games you bot has played here:
- * http://poker.cygni.se/showgame
- *
+ *      <p/>
+ *      Javadocs for common utilities and classes used may be
+ *      found here:
+ *      http://poker.cygni.se/mavensite/texas-holdem-common/apidocs/index.html
+ *      <p/>
+ *      You can inspect the games you bot has played here:
+ *      http://poker.cygni.se/showgame
  */
 public class FullyImplementedBot implements Player {
 
@@ -87,23 +87,25 @@ public class FullyImplementedBot implements Player {
 
     /**
      * This is where you supply your bot with your special mojo!
-     *
+     * <p/>
      * The ActionRequest contains a list of all the possible actions
      * your bot can perform.
-     * @see ActionRequest
-     *
-     * Given the current situation you need to choose the best
-     * action. It is not allowed to change any values in the
-     * ActionRequest. The amount you may RAISE or CALL is already
-     * predermined by the poker server.
-     *
-     * If an invalid Action is returned the server will ask two
-     * more times. Failure to comply (i.e. returning an incorrect
-     * or non valid Action) will result in a forced FOLD for the
-     * current Game Round.
      *
      * @param request The list of Actions that the bot may perform.
+     *
      * @return The action the bot wants to perform.
+     *
+     * @see ActionRequest
+     *      <p/>
+     *      Given the current situation you need to choose the best
+     *      action. It is not allowed to change any values in the
+     *      ActionRequest. The amount you may RAISE or CALL is already
+     *      predermined by the poker server.
+     *      <p/>
+     *      If an invalid Action is returned the server will ask two
+     *      more times. Failure to comply (i.e. returning an incorrect
+     *      or non valid Action) will result in a forced FOLD for the
+     *      current Game Round.
      * @see Action
      */
     @Override
@@ -123,6 +125,7 @@ public class FullyImplementedBot implements Player {
      * to win.
      *
      * @param request
+     *
      * @return
      */
     private Action getBestAction(ActionRequest request) {
@@ -172,8 +175,9 @@ public class FullyImplementedBot implements Player {
         }
 
         // Otherwise, be more careful CHECK if possible.
-        if (checkAction != null)
+        if (checkAction != null) {
             return checkAction;
+        }
 
         // Okay, we have either CALL or RAISE left
         long callAmount = callAction == null ? -1 : callAction.getAmount();
@@ -205,26 +209,29 @@ public class FullyImplementedBot implements Player {
      *
      * @param myPokerHand
      * @param otherPokerHand
+     *
      * @return TRUE if myPokerHand is valued higher than otherPokerHand
      */
     private boolean isHandBetterThan(PokerHand myPokerHand, PokerHand otherPokerHand) {
         return myPokerHand.getOrderValue() > otherPokerHand.getOrderValue();
     }
 
-    /*************************************************************************
-     *
+    /**
+     * **********************************************************************
+     * <p/>
      * Event methods
-     *
+     * <p/>
      * These methods tells the bot what is happening around the Poker Table.
      * The methods must be implemented but it is not mandatory to act on the
      * information provided.
-     *
+     * <p/>
      * The helper class CurrentPlayState provides most of the book keeping
      * needed to keep track of the total picture around the table.
      *
      * @see CurrentPlayState
-     *
-     *************************************************************************/
+     *      <p/>
+     *      ***********************************************************************
+     */
 
     @Override
     public void onPlayIsStarted(final PlayIsStartedEvent event) {

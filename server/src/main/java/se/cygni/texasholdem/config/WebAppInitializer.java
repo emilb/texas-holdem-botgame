@@ -12,27 +12,27 @@ import java.util.Set;
 
 public class WebAppInitializer implements WebApplicationInitializer {
 
-	@Override
-	public void onStartup(ServletContext servletContext) throws ServletException {
+    @Override
+    public void onStartup(ServletContext servletContext) throws ServletException {
 
-		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-		rootContext.register(RootConfig.class);
-		
-		FilterRegistration.Dynamic securityFilter = servletContext.addFilter("securityFilter", new DelegatingFilterProxy("springSecurityFilterChain"));
-		securityFilter.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
-		
-		servletContext.addListener(new ContextLoaderListener(rootContext));
-		servletContext.setInitParameter("defaultHtmlEscape", "true");
-		
-		AnnotationConfigWebApplicationContext mvcContext = new AnnotationConfigWebApplicationContext();
-		mvcContext.register(WebMvcConfig.class);
+        AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+        rootContext.register(RootConfig.class);
 
-		ServletRegistration.Dynamic appServlet = servletContext.addServlet("appServlet", new DispatcherServlet(mvcContext));
-		appServlet.setLoadOnStartup(1);
-		Set<String> mappingConflicts = appServlet.addMapping("/");
+        FilterRegistration.Dynamic securityFilter = servletContext.addFilter("securityFilter", new DelegatingFilterProxy("springSecurityFilterChain"));
+        securityFilter.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
 
-		if (!mappingConflicts.isEmpty()) {
-			throw new IllegalStateException("'appServlet' cannot be mapped to '/' under Tomcat versions <= 7.0.14");
-		}
-	}
+        servletContext.addListener(new ContextLoaderListener(rootContext));
+        servletContext.setInitParameter("defaultHtmlEscape", "true");
+
+        AnnotationConfigWebApplicationContext mvcContext = new AnnotationConfigWebApplicationContext();
+        mvcContext.register(WebMvcConfig.class);
+
+        ServletRegistration.Dynamic appServlet = servletContext.addServlet("appServlet", new DispatcherServlet(mvcContext));
+        appServlet.setLoadOnStartup(1);
+        Set<String> mappingConflicts = appServlet.addMapping("/");
+
+        if (!mappingConflicts.isEmpty()) {
+            throw new IllegalStateException("'appServlet' cannot be mapped to '/' under Tomcat versions <= 7.0.14");
+        }
+    }
 }

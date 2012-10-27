@@ -9,9 +9,9 @@
         clearTimeout(reloadTimer);
 
         $.ajax({
-            type: "GET",
-            url: "/tournament/details/" + id,
-            success: function (response) {
+            type:"GET",
+            url:"/tournament/details/" + id,
+            success:function (response) {
                 var result = "Nothing to show";
                 var shouldReload = true;
 
@@ -42,8 +42,8 @@
     function startTournament(id) {
         console.log('Starting tournament with id: ' + id);
         $.ajax({
-            type: "GET",
-            url: "/tournament/start/" + id
+            type:"GET",
+            url:"/tournament/start/" + id
         });
     }
 
@@ -97,7 +97,9 @@
         <h3>Status: {{status}}</h3>
 
         <div class="span12">
-        {{#canStart}}<button type="button" class="btn btn-large btn-primary" onclick="startTournament('{{id}}')">START</button>{{/canStart}}
+            {{#canStart}}
+            <button type="button" class="btn btn-large btn-primary" onclick="startTournament('{{id}}')">START</button>
+            {{/canStart}}
         </div>
         <div class="span3">
             <h3>Connected Players</h3>
@@ -105,12 +107,12 @@
             <table class="table table-striped">
                 <tbody>
                 {{#playerRanking}}
-                    <tr>
-                        <td>{{name}}</td>
-                        <td>
-                            <div class="pull-right">$ {{chipCount}}</div>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>{{name}}</td>
+                    <td>
+                        <div class="pull-right">$ {{chipCount}}</div>
+                    </td>
+                </tr>
                 {{/playerRanking}}
                 </tbody>
             </table>
@@ -179,9 +181,9 @@
                 <tr>
                     <td>Partition {{index}}</td>
                     <td>
-                    {{#tableIds}}
+                        {{#tableIds}}
                         <a class="btn btn-info btn-mini" href="/showgame/table/{{.}}">{{.}}</a>
-                    {{/tableIds}}
+                        {{/tableIds}}
                     </td>
                 </tr>
                 {{/tablePartitions}}

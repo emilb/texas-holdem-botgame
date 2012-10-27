@@ -16,7 +16,7 @@ import java.util.Arrays;
 
 @Configuration
 @EnableCaching
-@ComponentScan(basePackages = { "se.cygni.texasholdem" })
+@ComponentScan(basePackages = {"se.cygni.texasholdem"})
 public class RootConfig {
 
     @Bean
@@ -32,7 +32,7 @@ public class RootConfig {
                 new PropertiesFactoryBean();
 
         Resource[] resources = new ClassPathResource[]
-                { new ClassPathResource("application.properties") };
+                {new ClassPathResource("application.properties")};
 
         pfb.setLocations(resources);
 
@@ -49,7 +49,7 @@ public class RootConfig {
                         new ConcurrentMapCache("gamelog"),
                         new ConcurrentMapCache("statistics-actions"),
                         new ConcurrentMapCache("statistics-chips")
-                        ));
+                             ));
         return cacheManager;
     }
 }

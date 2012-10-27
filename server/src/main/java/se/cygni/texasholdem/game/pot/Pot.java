@@ -112,9 +112,11 @@ public class Pot {
         long amountNeededToCall = getAmountNeededToCall(player);
         if (isAllIn) {
             derivedActionType = ActionType.ALL_IN;
-        } else if (realAmount == amountNeededToCall) {
+        }
+        else if (realAmount == amountNeededToCall) {
             derivedActionType = ActionType.CALL;
-        } else if (realAmount > amountNeededToCall) {
+        }
+        else if (realAmount > amountNeededToCall) {
             derivedActionType = ActionType.RAISE;
         }
 
@@ -584,8 +586,9 @@ public class Pot {
     public int getNoofCallsFor(BotPlayer player) {
         int noofCalls = 0;
         for (PotTransaction transaction : getAllTransactionsInOrder()) {
-            if (transaction.getPlayer().equals(player))
+            if (transaction.getPlayer().equals(player)) {
                 noofCalls += transaction.getActionType() == ActionType.CALL ? 1 : 0;
+            }
         }
 
         return noofCalls;
@@ -594,8 +597,9 @@ public class Pot {
     public int getNoofRaisesFor(BotPlayer player) {
         int noofCalls = 0;
         for (PotTransaction transaction : getAllTransactionsInOrder()) {
-            if (transaction.getPlayer().equals(player))
+            if (transaction.getPlayer().equals(player)) {
                 noofCalls += transaction.getActionType() == ActionType.RAISE ? 1 : 0;
+            }
         }
 
         return noofCalls;

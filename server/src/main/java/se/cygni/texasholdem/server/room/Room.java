@@ -2,7 +2,6 @@ package se.cygni.texasholdem.server.room;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
-import org.apache.commons.lang.math.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import se.cygni.texasholdem.game.BotPlayer;

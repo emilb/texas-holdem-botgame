@@ -3,7 +3,6 @@ package se.cygni.texasholdem.server.statistics;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import org.joda.time.Period;
-import org.joda.time.PeriodType;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -124,8 +123,9 @@ public class StatisticsCollector {
 
         if (position < 0 || position > tableHistory.gameLogs.size()) {
             sa.recordsGameLogs(tableHistory.gameLogs);
-        } else {
-            sa.recordsGameLogs(tableHistory.gameLogs.subList(0, position+1));
+        }
+        else {
+            sa.recordsGameLogs(tableHistory.gameLogs.subList(0, position + 1));
         }
 
         return sa;
@@ -139,7 +139,8 @@ public class StatisticsCollector {
 
         if (position < 0 || position > tableHistory.gameLogs.size()) {
             sc.recordGameLogs(tableHistory.gameLogs);
-        } else {
+        }
+        else {
             sc.recordGameLogs(tableHistory.gameLogs.subList(0, position + 1));
         }
 
@@ -156,7 +157,7 @@ public class StatisticsCollector {
 
     public GameLog getLastGameLog(final long tableId) {
         try {
-            TableHistory th =  getTableHistory(tableId);
+            TableHistory th = getTableHistory(tableId);
             GameLog gl = th.getLastGameLog();
 
             gl.knownNoofRounds = gl.roundNumber;

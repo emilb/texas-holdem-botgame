@@ -12,7 +12,7 @@ public class HandEvaluatorFromMapTest {
         long cardsBefore = 20026L;
         long expectedCards = 3640L;
 
-        int[] removals = new int[] {1, 14};
+        int[] removals = new int[]{1, 14};
         long resultingCards = HandEvaluatorFromMap.getCardsByRemoving(cardsBefore, removals);
 
         Assert.assertEquals(expectedCards, resultingCards);
@@ -23,7 +23,7 @@ public class HandEvaluatorFromMapTest {
         long cardsBefore = 19514L;
         long expectedCards = 3130L;
 
-        int[] removals = new int[] {14};
+        int[] removals = new int[]{14};
         long resultingCards = HandEvaluatorFromMap.getCardsByRemoving(cardsBefore, removals);
 
         Assert.assertEquals(expectedCards, resultingCards);
@@ -34,7 +34,7 @@ public class HandEvaluatorFromMapTest {
         long cardsBefore = 4433230883192832L;
         long expectedCards = 4292493394837504L;
 
-        int[] removals = new int[] {47};
+        int[] removals = new int[]{47};
         long resultingCards = HandEvaluatorFromMap.getCardsByRemoving(cardsBefore, removals);
 
         Assert.assertEquals(expectedCards, resultingCards);
@@ -42,7 +42,7 @@ public class HandEvaluatorFromMapTest {
 
     @Test
     public void testGetAllCombinationsOfRemovals_6() throws Exception {
-        int[] positions = new int[] {0, 3, 8, 22, 34, 51};
+        int[] positions = new int[]{0, 3, 8, 22, 34, 51};
         List<int[]> removalPermutations = HandEvaluatorFromMap.getAllCombinationsOfRemovals(positions);
 
         Assert.assertEquals(6, removalPermutations.size());
@@ -56,7 +56,7 @@ public class HandEvaluatorFromMapTest {
 
     @Test
     public void testGetAllCombinationsOfRemovals_7() throws Exception {
-        int[] positions = new int[] {2, 3, 8, 22, 34, 49, 50};
+        int[] positions = new int[]{2, 3, 8, 22, 34, 49, 50};
         List<int[]> removalPermutations = HandEvaluatorFromMap.getAllCombinationsOfRemovals(positions);
 
         Assert.assertEquals(21, removalPermutations.size());
@@ -67,7 +67,7 @@ public class HandEvaluatorFromMapTest {
 
     @Test
     public void testGetPositionsForOneBits() throws Exception {
-        int[] expected = new int[] {1, 3, 4, 5, 9, 14};
+        int[] expected = new int[]{1, 3, 4, 5, 9, 14};
         int[] result = HandEvaluatorFromMap.getPositionsForOneBits(16954L);
 
         Assert.assertEquals(expected.length, result.length);
@@ -75,7 +75,7 @@ public class HandEvaluatorFromMapTest {
             Assert.assertEquals(expected[i], result[i]);
         }
 
-        expected = new int[] {0};
+        expected = new int[]{0};
         result = HandEvaluatorFromMap.getPositionsForOneBits(1L);
         Assert.assertEquals(expected.length, result.length);
         for (int i = 0; i < expected.length; i++) {

@@ -3,7 +3,6 @@ package se.cygni.poker.statistics;
 import junit.framework.Assert;
 import org.junit.Test;
 import se.cygni.texasholdem.game.Card;
-import se.cygni.texasholdem.game.Deck;
 import se.cygni.texasholdem.game.definitions.Rank;
 import se.cygni.texasholdem.game.definitions.Suit;
 
@@ -30,7 +29,7 @@ public class BinaryConverterTest {
         int counter = 0;
 
         while (cards > 0) {
-            counter ++;
+            counter++;
             cards = cards ^ (1L << Long.numberOfTrailingZeros(cards));
         }
 
@@ -42,7 +41,7 @@ public class BinaryConverterTest {
 
         long cards = 0;
         for (int i = 0; i < 7; i++) {
-            cards = cards | 1L << (int)(Math.pow(i, 2));
+            cards = cards | 1L << (int) (Math.pow(i, 2));
         }
 
         List<Card> cardList = BinaryConverter.longToCards(cards);

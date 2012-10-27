@@ -59,7 +59,8 @@ public class TournamentController {
     }
 
     @RequestMapping(value = "/tournament/details/{tournamentId}", method = RequestMethod.GET)
-    public @ResponseBody
+    public
+    @ResponseBody
     TournamentLog getTournamentLog(
             @PathVariable String tournamentId) {
 
@@ -86,8 +87,9 @@ public class TournamentController {
     }
 
     @RequestMapping(value = "/tournament/start/{tournamentId}", method = RequestMethod.GET)
-    public @ResponseBody
-        String start(
+    public
+    @ResponseBody
+    String start(
             @PathVariable String tournamentId) {
 
         Tournament tournament = sessionManager.getTournament(tournamentId);

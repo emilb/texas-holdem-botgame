@@ -1,8 +1,9 @@
 package se.cygni.texasholdem.communication.message;
 
 import org.apache.commons.lang.StringUtils;
-import org.codehaus.jackson.*;
-import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.JsonFactory;
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,7 +65,8 @@ public class TexasMessageParser {
         }
     }
 
-    private TexasMessageParser() {}
+    private TexasMessageParser() {
+    }
 
     public static TexasMessage decodeMessage(final String msg)
             throws IOException {

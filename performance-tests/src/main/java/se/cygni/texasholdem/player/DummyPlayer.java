@@ -133,7 +133,7 @@ public class DummyPlayer extends BasicPlayer {
         else {
             action = foldAction;
         }
-        log.info("My time to act. Going to {} in state {}", action,  playerClient.getCurrentPlayState().getCurrentPlayState());
+        log.info("My time to act. Going to {} in state {}", action, playerClient.getCurrentPlayState().getCurrentPlayState());
         log.debug("{} returning action: {}", getName(), action);
         return action;
     }

@@ -1,7 +1,6 @@
 package se.cygni.texasholdem.game.trainingplayers;
 
 import se.cygni.texasholdem.client.CurrentPlayState;
-import se.cygni.texasholdem.communication.message.event.*;
 import se.cygni.texasholdem.communication.message.request.ActionRequest;
 import se.cygni.texasholdem.game.Action;
 import se.cygni.texasholdem.game.Hand;
@@ -68,8 +67,9 @@ public class CautiousPlayer extends TrainingPlayer {
         }
 
         // Otherwise, be more careful CHECK if possible.
-        if (checkAction != null)
+        if (checkAction != null) {
             return checkAction;
+        }
 
         // Okay, either CALL or RAISE
         long callAmount = callAction == null ? -1 : callAction.getAmount();
@@ -78,31 +78,38 @@ public class CautiousPlayer extends TrainingPlayer {
         // Do I have something better than ONE_PAIR and can RAISE?
         if (isHandBetterThan(myBestPokerHand, PokerHand.ONE_PAIR) && raiseAction != null) {
             // This is a big raise... only RAISE if better than THREE_OF_A_KIND
-            if (raiseAmount - currentBB > currentBB * 2 && isHandBetterThan(myBestPokerHand, PokerHand.THREE_OF_A_KIND))
+            if (raiseAmount - currentBB > currentBB * 2 && isHandBetterThan(myBestPokerHand, PokerHand.THREE_OF_A_KIND)) {
                 return raiseAction;
-            else if (raiseAmount == currentBB)
+            }
+            else if (raiseAmount == currentBB) {
                 return raiseAction;
+            }
         }
 
         // Only call if ONE_PAIR or better
         if (isHandBetterThan(myBestPokerHand, PokerHand.ONE_PAIR) && callAction != null) {
             // This was an expensive CALL... only do if better than THREE_OF_A_KIND
-            if (callAmount - currentBB > currentBB * 2 && isHandBetterThan(myBestPokerHand, PokerHand.ONE_PAIR))
+            if (callAmount - currentBB > currentBB * 2 && isHandBetterThan(myBestPokerHand, PokerHand.ONE_PAIR)) {
                 return callAction;
-            else if (callAmount <= currentBB)
+            }
+            else if (callAmount <= currentBB) {
                 return callAction;
+            }
         }
 
         if (playState.getCurrentPlayState() == PlayState.PRE_FLOP && isHandBetterThan(myBestPokerHand, PokerHand.HIGH_HAND)) {
-            if (callAction != null)
+            if (callAction != null) {
                 return callAction;
-            if (raiseAction != null && raiseAction.getAmount() < currentBB * 4)
+            }
+            if (raiseAction != null && raiseAction.getAmount() < currentBB * 4) {
                 return raiseAction;
+            }
         }
 
         if (playState.getCurrentPlayState() == PlayState.PRE_FLOP) {
-            if (callAction != null && callAction.getAmount() < currentBB)
+            if (callAction != null && callAction.getAmount() < currentBB) {
                 return callAction;
+            }
         }
 
 

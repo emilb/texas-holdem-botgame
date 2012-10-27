@@ -51,7 +51,9 @@ public class ShowGameController {
     }
 
     @RequestMapping(value = "/timemachine/table/{tableId}/gameround/{gameRound}", method = RequestMethod.GET)
-    public @ResponseBody GameLog getGameLog(
+    public
+    @ResponseBody
+    GameLog getGameLog(
             @PathVariable long tableId,
             @PathVariable int gameRound) {
 
@@ -59,20 +61,25 @@ public class ShowGameController {
 
         if (tableId < 0 && gameRound < 0) {
             gameLog = statisticsCollector.getLastGameLog();
-        } else if (tableId >= 0 && gameRound < 0) {
+        }
+        else if (tableId >= 0 && gameRound < 0) {
             gameLog = statisticsCollector.getLastGameLog(tableId);
-        } else {
+        }
+        else {
             gameLog = statisticsCollector.getGameLogAtPos(tableId, gameRound);
         }
 
-        if (gameLog != null)
+        if (gameLog != null) {
             return gameLog;
+        }
 
         return statisticsCollector.getLastGameLog();
     }
 
     @RequestMapping(value = "/timemachine/statsAction/table/{tableId}/gameround/{gameRound}", method = RequestMethod.GET)
-    public @ResponseBody StatsActions getStatsActions(
+    public
+    @ResponseBody
+    StatsActions getStatsActions(
             @PathVariable long tableId,
             @PathVariable int gameRound) {
 
@@ -80,7 +87,9 @@ public class ShowGameController {
     }
 
     @RequestMapping(value = "/timemachine/statsChip/table/{tableId}/gameround/{gameRound}", method = RequestMethod.GET)
-    public @ResponseBody StatsChips getStatsChips(
+    public
+    @ResponseBody
+    StatsChips getStatsChips(
             @PathVariable long tableId,
             @PathVariable int gameRound) {
 

@@ -91,7 +91,6 @@ public class TableUtilTest {
     }
 
 
-
     private void assertListShuffled(List<BotPlayer> originalList, List<BotPlayer> shuffledList) {
         Assert.assertEquals(originalList.size(), shuffledList.size());
 

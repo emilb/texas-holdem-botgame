@@ -19,7 +19,7 @@
     </custom>
 
     <body>
-        <menu name="Overview" />
+        <menu name="Overview"/>
         <menu ref="modules"/>
         <menu ref="reports"/>
     </body>

@@ -2,330 +2,345 @@
 <h1>Examples of events and request/response in JSON format.</h1>
 
 <p>
-RegisterForPlayRequest - Sent from client to register a player to play<br>
-ActionRequest - Sent from server to client to take next action<br>
-ActionResponse - Sent from client to server as the action response, see above<br>
-<br>
-Others are Events that server sends to inform client of game events.
+    RegisterForPlayRequest - Sent from client to register a player to play<br>
+    ActionRequest - Sent from server to client to take next action<br>
+    ActionResponse - Sent from client to server as the action response, see above<br>
+    <br>
+    Others are Events that server sends to inform client of game events.
 </p>
 
 <h3>PlayIsStartedEvent</h3>
+
 <p>Information on table state before each round</p>
 <code>
-{<br>
-&nbsp;&nbsp;"players" : [<br>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name"      : "Raiser_10",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 0<br>
-&nbsp;&nbsp;&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name"      : "Crazy_11",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 0<br>
-&nbsp;&nbsp;&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name"      : "Raiser_12",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 0<br>
-&nbsp;&nbsp;&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name"      : "Crazy_13",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 0<br>
-&nbsp;&nbsp;&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name"      : "Hellmuth_14",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 59977<br>
-&nbsp;&nbsp;&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name"      : "emil",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 23<br>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-&nbsp;&nbsp;],<br>
-&nbsp;&nbsp;"smallBlindAmount" : 135,<br>
-&nbsp;&nbsp;"bigBlindAmount"   : 270,<br>
-&nbsp;&nbsp;"dealer" : {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"name"      : "emil",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 23<br>
-&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;"smallBlindPlayer" : {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"name"      : "Hellmuth_14",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 59977<br>
-&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;"bigBlindPlayer" : {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"name"      : "emil",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 23<br>
-&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;"tableId"          : 3,<br>
-&nbsp;&nbsp;"type"             : "se.cygni.texasholdem.communication.message.event.PlayIsStartedEvent"<br>
-}<br>
+    {<br>
+    &nbsp;&nbsp;"players" : [<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name" : "Raiser_10",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 0<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name" : "Crazy_11",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 0<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name" : "Raiser_12",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 0<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name" : "Crazy_13",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 0<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name" : "Hellmuth_14",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 59977<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name" : "emil",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 23<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;],<br>
+    &nbsp;&nbsp;"smallBlindAmount" : 135,<br>
+    &nbsp;&nbsp;"bigBlindAmount" : 270,<br>
+    &nbsp;&nbsp;"dealer" : {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"name" : "emil",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 23<br>
+    &nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;"smallBlindPlayer" : {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"name" : "Hellmuth_14",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 59977<br>
+    &nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;"bigBlindPlayer" : {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"name" : "emil",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 23<br>
+    &nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;"tableId" : 3,<br>
+    &nbsp;&nbsp;"type" : "se.cygni.texasholdem.communication.message.event.PlayIsStartedEvent"<br>
+    }<br>
 </code>
 
 <h3>YouHaveBeenDealtACardEvent</h3>
 <code>
-{<br>
-&nbsp;&nbsp;"card" : {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"rank" : "FIVE",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"suit" : "CLUBS"<br>
-&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;"type" : "se.cygni.texasholdem.communication.message.event.YouHaveBeenDealtACardEvent"<br>
-}<br>
+    {<br>
+    &nbsp;&nbsp;"card" : {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"rank" : "FIVE",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"suit" : "CLUBS"<br>
+    &nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;"type" : "se.cygni.texasholdem.communication.message.event.YouHaveBeenDealtACardEvent"<br>
+    }<br>
 </code><br>
 <br>
+
 <h3>PlayerBetSmallBlindEvent</h3>
 <code>
-{<br>
-&nbsp;&nbsp;"player" : {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"name"      : "Hellmuth_14",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 59842<br>
-&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;"smallBlind" : 135,<br>
-&nbsp;&nbsp;"type"       : "se.cygni.texasholdem.communication.message.event.PlayerBetSmallBlindEvent"<br>
-}<br>
+    {<br>
+    &nbsp;&nbsp;"player" : {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"name" : "Hellmuth_14",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 59842<br>
+    &nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;"smallBlind" : 135,<br>
+    &nbsp;&nbsp;"type" : "se.cygni.texasholdem.communication.message.event.PlayerBetSmallBlindEvent"<br>
+    }<br>
 </code><br>
 <br>
+
 <h3>PlayerBetBigBlindEvent</h3>
 <code>
-{<br>
-&nbsp;&nbsp;"player" : {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"name"      : "emil",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 0<br>
-&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;"bigBlind" : 23,<br>
-&nbsp;&nbsp;"type"     : "se.cygni.texasholdem.communication.message.event.PlayerBetBigBlindEvent"<br>
-}<br>
+    {<br>
+    &nbsp;&nbsp;"player" : {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"name" : "emil",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 0<br>
+    &nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;"bigBlind" : 23,<br>
+    &nbsp;&nbsp;"type" : "se.cygni.texasholdem.communication.message.event.PlayerBetBigBlindEvent"<br>
+    }<br>
 </code><br>
 <br>
+
 <h3>TableChangedStateEvent</h3>
 <code>
-{<br>
-&nbsp;&nbsp;"state" : "RIVER",<br>
-&nbsp;&nbsp;"type"  : "se.cygni.texasholdem.communication.message.event.TableChangedStateEvent"<br>
-}<br>
+    {<br>
+    &nbsp;&nbsp;"state" : "RIVER",<br>
+    &nbsp;&nbsp;"type" : "se.cygni.texasholdem.communication.message.event.TableChangedStateEvent"<br>
+    }<br>
 </code><br>
 <br>
+
 <h3>CommunityHasBeenDealtACardEvent</h3>
 <code>
-{<br>
-&nbsp;&nbsp;"card" : {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"rank" : "SEVEN",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"suit" : "CLUBS"<br>
-&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;"type" : "se.cygni.texasholdem.communication.message.event.CommunityHasBeenDealtACardEvent"<br>
-}<br>
+    {<br>
+    &nbsp;&nbsp;"card" : {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"rank" : "SEVEN",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"suit" : "CLUBS"<br>
+    &nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;"type" : "se.cygni.texasholdem.communication.message.event.CommunityHasBeenDealtACardEvent"<br>
+    }<br>
 </code><br>
 <br>
+
 <h3>ActionRequest</h3>
 <code>
-{<br>
-&nbsp;&nbsp;"type"            : "se.cygni.texasholdem.communication.message.request.ActionRequest",<br>
-&nbsp;&nbsp;"sessionId"       : null,<br>
-&nbsp;&nbsp;"requestId"       : "80becedc-317c-45c2-9bd8-8b6b248a0067",<br>
-&nbsp;&nbsp;"possibleActions" : [<br>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"actionType" : "FOLD",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"amount"     : 0<br>
-&nbsp;&nbsp;&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"actionType" : "CALL",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"amount"     : 110<br>
-&nbsp;&nbsp;&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"actionType" : "ALL_IN",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"amount"     : 21553<br>
-&nbsp;&nbsp;&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"actionType" : "RAISE",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"amount"     : 220<br>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-&nbsp;&nbsp;]<br>
-}<br>
+    {<br>
+    &nbsp;&nbsp;"type" : "se.cygni.texasholdem.communication.message.request.ActionRequest",<br>
+    &nbsp;&nbsp;"sessionId" : null,<br>
+    &nbsp;&nbsp;"requestId" : "80becedc-317c-45c2-9bd8-8b6b248a0067",<br>
+    &nbsp;&nbsp;"possibleActions" : [<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"actionType" : "FOLD",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"amount" : 0<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"actionType" : "CALL",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"amount" : 110<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"actionType" : "ALL_IN",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"amount" : 21553<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"actionType" : "RAISE",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"amount" : 220<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;]<br>
+    }<br>
 </code><br>
 <br>
+
 <h3>ActionResponse</h3>
 <code>
-{<br>
-&nbsp;&nbsp;"type"      : "se.cygni.texasholdem.communication.message.response.ActionResponse",<br>
-&nbsp;&nbsp;"requestId" : "80becedc-317c-45c2-9bd8-8b6b248a0067",<br>
-&nbsp;&nbsp;"action" : {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"actionType" : "CALL",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"amount"     : 110<br>
-&nbsp;&nbsp;}<br>
-}<br>
+    {<br>
+    &nbsp;&nbsp;"type" : "se.cygni.texasholdem.communication.message.response.ActionResponse",<br>
+    &nbsp;&nbsp;"requestId" : "80becedc-317c-45c2-9bd8-8b6b248a0067",<br>
+    &nbsp;&nbsp;"action" : {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"actionType" : "CALL",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"amount" : 110<br>
+    &nbsp;&nbsp;}<br>
+    }<br>
 </code><br>
 <br>
 <br>
+
 <h3>PlayerFoldedEvent</h3>
 <code>
-{<br>
-&nbsp;&nbsp;"player" : {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"name"      : "Hellmuth_14",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 28687<br>
-&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;"investmentInPot" : 55,<br>
-&nbsp;&nbsp;"type"            : "se.cygni.texasholdem.communication.message.event.PlayerFoldedEvent"<br>
-}<br>
+    {<br>
+    &nbsp;&nbsp;"player" : {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"name" : "Hellmuth_14",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 28687<br>
+    &nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;"investmentInPot" : 55,<br>
+    &nbsp;&nbsp;"type" : "se.cygni.texasholdem.communication.message.event.PlayerFoldedEvent"<br>
+    }<br>
 </code><br>
 <br>
+
 <h3>PlayerCheckedEvent</h3>
 <code>
-{<br>
-&nbsp;&nbsp;"player" : {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"name"      : "Hellmuth_14",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 47282<br>
-&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;"type"   : "se.cygni.texasholdem.communication.message.event.PlayerCheckedEvent"<br>
-}<br>
+    {<br>
+    &nbsp;&nbsp;"player" : {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"name" : "Hellmuth_14",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 47282<br>
+    &nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;"type" : "se.cygni.texasholdem.communication.message.event.PlayerCheckedEvent"<br>
+    }<br>
 </code><br>
 <br>
+
 <h3>PlayerCalledEvent</h3>
 <code>
-{<br>
-&nbsp;&nbsp;"player" : {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"name"      : "Raiser_10",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 7725<br>
-&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;"callBet" : 110,<br>
-&nbsp;&nbsp;"type"    : "se.cygni.texasholdem.communication.message.event.PlayerCalledEvent"<br>
-}<br>
+    {<br>
+    &nbsp;&nbsp;"player" : {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"name" : "Raiser_10",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 7725<br>
+    &nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;"callBet" : 110,<br>
+    &nbsp;&nbsp;"type" : "se.cygni.texasholdem.communication.message.event.PlayerCalledEvent"<br>
+    }<br>
 </code><br>
 <br>
+
 <h3>PlayerRaisedEvent</h3>
 <code>
-{<br>
-&nbsp;&nbsp;"player" : {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"name"      : "Hellmuth_14",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 59572<br>
-&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;"raiseBet" : 270,<br>
-&nbsp;&nbsp;"type"     : "se.cygni.texasholdem.communication.message.event.PlayerRaisedEvent"<br>
-}<br>
+    {<br>
+    &nbsp;&nbsp;"player" : {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"name" : "Hellmuth_14",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 59572<br>
+    &nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;"raiseBet" : 270,<br>
+    &nbsp;&nbsp;"type" : "se.cygni.texasholdem.communication.message.event.PlayerRaisedEvent"<br>
+    }<br>
 </code><br>
 <br>
+
 <h3>PlayerWentAllInEvent</h3>
 <code>
-{<br>
-&nbsp;&nbsp;"player" : {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"name"      : "Hellmuth_14",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 0<br>
-&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;"allInAmount" : 37082,<br>
-&nbsp;&nbsp;"type"        : "se.cygni.texasholdem.communication.message.event.PlayerWentAllInEvent"<br>
-}<br>
+    {<br>
+    &nbsp;&nbsp;"player" : {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"name" : "Hellmuth_14",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 0<br>
+    &nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;"allInAmount" : 37082,<br>
+    &nbsp;&nbsp;"type" : "se.cygni.texasholdem.communication.message.event.PlayerWentAllInEvent"<br>
+    }<br>
 </code><br>
 <br>
+
 <h3>YouWonAmountEvent</h3>
 <code>
-{<br>
-&nbsp;&nbsp;"wonAmount"      : 0,<br>
-&nbsp;&nbsp;"yourChipAmount" : 23,<br>
-&nbsp;&nbsp;"type"           : "se.cygni.texasholdem.communication.message.event.YouWonAmountEvent"<br>
-}<br>
+    {<br>
+    &nbsp;&nbsp;"wonAmount" : 0,<br>
+    &nbsp;&nbsp;"yourChipAmount" : 23,<br>
+    &nbsp;&nbsp;"type" : "se.cygni.texasholdem.communication.message.event.YouWonAmountEvent"<br>
+    }<br>
 </code><br>
 <br>
+
 <h3>ShowDownEvent</h3>
 <code>
-{<br>
-&nbsp;&nbsp;"playersShowDown" : [<br>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"player" : {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name"      : "Hellmuth_14",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 60000<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"hand" : {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"cards" : [<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"rank" : "KING",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"suit" : "DIAMONDS"<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"rank" : "KING",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"suit" : "SPADES"<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"rank" : "ACE",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"suit" : "CLUBS"<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"rank" : "QUEEN",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"suit" : "HEARTS"<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"rank" : "NINE",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"suit" : "HEARTS"<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"pokerHand" : "ONE_PAIR",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"folded"    : false<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"wonAmount" : 428<br>
-&nbsp;&nbsp;&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"player" : {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name"      : "emil",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 0<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"hand" : {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"cards" : [<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"rank" : "FIVE",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"suit" : "CLUBS"<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"rank" : "FIVE",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"suit" : "SPADES"<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"rank" : "KING",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"suit" : "DIAMONDS"<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"rank" : "QUEEN",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"suit" : "HEARTS"<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"rank" : "NINE",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"suit" : "HEARTS"<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"pokerHand" : "ONE_PAIR",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"folded"    : false<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"wonAmount" : 0<br>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-&nbsp;&nbsp;],<br>
-&nbsp;&nbsp;"type"            : "se.cygni.texasholdem.communication.message.event.ShowDownEvent"<br>
-}<br>
+    {<br>
+    &nbsp;&nbsp;"playersShowDown" : [<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"player" : {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name" : "Hellmuth_14",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 60000<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"hand" : {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"cards" : [<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"rank" : "KING",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"suit" : "DIAMONDS"<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"rank" : "KING",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"suit" : "SPADES"<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"rank" : "ACE",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"suit" : "CLUBS"<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"rank" : "QUEEN",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"suit" : "HEARTS"<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"rank" : "NINE",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"suit" : "HEARTS"<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"pokerHand" : "ONE_PAIR",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"folded" : false<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"wonAmount" : 428<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"player" : {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name" : "emil",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 0<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"hand" : {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"cards" : [<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"rank" : "FIVE",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"suit" : "CLUBS"<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"rank" : "FIVE",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"suit" : "SPADES"<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"rank" : "KING",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"suit" : "DIAMONDS"<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"rank" : "QUEEN",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"suit" : "HEARTS"<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"rank" : "NINE",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"suit" : "HEARTS"<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"pokerHand" : "ONE_PAIR",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"folded" : false<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"wonAmount" : 0<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;],<br>
+    &nbsp;&nbsp;"type" : "se.cygni.texasholdem.communication.message.event.ShowDownEvent"<br>
+    }<br>
 </code><br>
 <br>
+
 <h3>TableIsDoneEvent</h3>
 <code>
-{<br>
-&nbsp;&nbsp;"players" : [<br>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name"      : "Raiser_10",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 0<br>
-&nbsp;&nbsp;&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name"      : "Crazy_11",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 0<br>
-&nbsp;&nbsp;&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name"      : "Raiser_12",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 0<br>
-&nbsp;&nbsp;&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name"      : "Crazy_13",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 0<br>
-&nbsp;&nbsp;&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name"      : "Hellmuth_14",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 60000<br>
-&nbsp;&nbsp;&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name"      : "emil",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 0<br>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-&nbsp;&nbsp;],<br>
-&nbsp;&nbsp;"type"    : "se.cygni.texasholdem.communication.message.event.TableIsDoneEvent"<br>
-}<br>
+    {<br>
+    &nbsp;&nbsp;"players" : [<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name" : "Raiser_10",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 0<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name" : "Crazy_11",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 0<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name" : "Raiser_12",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 0<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name" : "Crazy_13",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 0<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name" : "Hellmuth_14",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 60000<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name" : "emil",<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"chipCount" : 0<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;],<br>
+    &nbsp;&nbsp;"type" : "se.cygni.texasholdem.communication.message.event.TableIsDoneEvent"<br>
+    }<br>
 </code><br>
 
 </html>

@@ -57,7 +57,7 @@ public class StaticFileServlet extends HttpServlet {
             }
 
         } finally {
-            
+
             try {
                 output.close();
             } catch (Exception e) {

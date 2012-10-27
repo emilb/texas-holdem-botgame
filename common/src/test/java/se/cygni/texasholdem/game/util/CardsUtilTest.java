@@ -5,11 +5,11 @@ import org.junit.Test;
 import org.springframework.util.CollectionUtils;
 import se.cygni.texasholdem.game.Card;
 import se.cygni.texasholdem.game.definitions.Rank;
-import static se.cygni.texasholdem.test.util.TestUtil.*;
 
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static se.cygni.texasholdem.test.util.TestUtil.getCards;
 
 public class CardsUtilTest {
 

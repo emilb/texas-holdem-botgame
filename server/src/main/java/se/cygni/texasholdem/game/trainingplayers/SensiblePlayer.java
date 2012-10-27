@@ -1,19 +1,12 @@
 package se.cygni.texasholdem.game.trainingplayers;
 
 import se.cygni.texasholdem.client.CurrentPlayState;
-import se.cygni.texasholdem.communication.message.event.*;
 import se.cygni.texasholdem.communication.message.request.ActionRequest;
 import se.cygni.texasholdem.game.Action;
-import se.cygni.texasholdem.game.Card;
-import se.cygni.texasholdem.game.GamePlayer;
 import se.cygni.texasholdem.game.Hand;
 import se.cygni.texasholdem.game.definitions.PlayState;
 import se.cygni.texasholdem.game.definitions.PokerHand;
-import se.cygni.texasholdem.game.definitions.Rank;
 import se.cygni.texasholdem.game.util.PokerHandUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SensiblePlayer extends TrainingPlayer {
 
@@ -73,8 +66,9 @@ public class SensiblePlayer extends TrainingPlayer {
         }
 
         // Otherwise, be more careful CHECK if possible.
-        if (checkAction != null)
+        if (checkAction != null) {
             return checkAction;
+        }
 
         // Okay, we have either CALL or RAISE left
         long callAmount = callAction == null ? -1 : callAction.getAmount();
@@ -106,6 +100,7 @@ public class SensiblePlayer extends TrainingPlayer {
      *
      * @param myPokerHand
      * @param otherPokerHand
+     *
      * @return TRUE if myPokerHand is valued higher than otherPokerHand
      */
     private boolean isHandBetterThan(PokerHand myPokerHand, PokerHand otherPokerHand) {

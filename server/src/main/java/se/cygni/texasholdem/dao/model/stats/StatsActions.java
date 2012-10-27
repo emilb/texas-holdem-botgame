@@ -9,12 +9,15 @@ public class StatsActions {
 
     private Set<String> players = new HashSet<String>();
     private Map<String, Integer> playerFoldedStat = new HashMap<String, Integer>();
-    private Map<String, Integer> playerRaisedStat = new HashMap<String, Integer>();;
-    private Map<String, Integer> playerCalledStat = new HashMap<String, Integer>();;
-    private Map<String, Integer> playerAllInStat = new HashMap<String, Integer>();;
+    private Map<String, Integer> playerRaisedStat = new HashMap<String, Integer>();
+    ;
+    private Map<String, Integer> playerCalledStat = new HashMap<String, Integer>();
+    ;
+    private Map<String, Integer> playerAllInStat = new HashMap<String, Integer>();
+    ;
 
     public String[] getPlayers() {
-        return players.toArray(new String[] {});
+        return players.toArray(new String[]{});
     }
 
     public int[] getFoldedStat() {
@@ -76,16 +79,18 @@ public class StatsActions {
     private void increment(Map<String, Integer> map, String key) {
         if (!map.containsKey(key)) {
             map.put(key, Integer.valueOf(1));
-        } else {
-            map.put(key, Integer.valueOf(map.get(key)+1));
+        }
+        else {
+            map.put(key, Integer.valueOf(map.get(key) + 1));
         }
     }
 
     private void increment(Map<String, Integer> map, String key, int incrementWith) {
         if (!map.containsKey(key)) {
             map.put(key, Integer.valueOf(incrementWith));
-        } else {
-            map.put(key, Integer.valueOf(map.get(key)+incrementWith));
+        }
+        else {
+            map.put(key, Integer.valueOf(map.get(key) + incrementWith));
         }
     }
 }

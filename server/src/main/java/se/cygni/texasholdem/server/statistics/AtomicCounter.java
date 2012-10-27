@@ -8,7 +8,8 @@ public class AtomicCounter {
 
     private static final ConcurrentMap<String, AtomicLong> counterMap = new ConcurrentHashMap<String, AtomicLong>();
 
-    private AtomicCounter() {}
+    private AtomicCounter() {
+    }
 
     public static long value(String key) {
         if (!counterMap.containsKey(key)) {

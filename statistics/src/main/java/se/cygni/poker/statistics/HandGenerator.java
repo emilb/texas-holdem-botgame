@@ -3,12 +3,9 @@ package se.cygni.poker.statistics;
 import gnu.trove.map.hash.TLongLongHashMap;
 import org.apache.commons.math.util.MathUtils;
 import se.cygni.texasholdem.game.Card;
-import se.cygni.texasholdem.game.util.PokerHandUtil;
 
 import java.io.*;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class HandGenerator {
 
@@ -24,8 +21,9 @@ public class HandGenerator {
     public static long moveLowestOneBitLeft(long val) {
         long lowestBitVal = Long.lowestOneBit(val);
 
-        if (lowestBitVal == 1)
+        if (lowestBitVal == 1) {
             return val;
+        }
 
         long restVal = val ^ lowestBitVal;
 
@@ -38,7 +36,6 @@ public class HandGenerator {
         String binaryVal = String.format("%52s", Long.toBinaryString(l)).replace(" ", "0");
         System.out.println(binaryVal + " " + l);
     }
-
 
 
     public static long calculateNoofCombinations(int k, int n) {
@@ -85,7 +82,7 @@ public class HandGenerator {
 
         long noofCombinations = calculateNoofCombinations(k, n);
 //        binaryCardsToHandMap = new TLongLongHashMap((int)noofCombinations);
-                //readMapFromFile(k, n);
+        //readMapFromFile(k, n);
 
         System.out.println("Calculating " + noofCombinations + " combinations...");
 
@@ -112,24 +109,24 @@ public class HandGenerator {
             long newVal = moveLowestOneBitLeft(currentVal);
             if (newVal != currentVal) {
                 currentVal = newVal;
-                currentIteration ++;
-                positionArray[k-1] = positionArray[k-1] - 1;
+                currentIteration++;
+                positionArray[k - 1] = positionArray[k - 1] - 1;
                 continue;
             }
             else {
                 positionArray = updateIndices(positionArray);
                 currentVal = getValueOfPositions(positionArray);
-                currentIteration ++;
+                currentIteration++;
             }
 
         }
 
         writeToFile(out, currentVal, getPokerHandOrderValue(currentVal));
 //        binaryCardsToHandMap.put(currentVal, getPokerHandOrderValue(currentVal));
-        currentIteration ++;
+        currentIteration++;
 
         if (currentIteration != noofCombinations) {
-            System.out.println("Warning, I didn't find all combinations, expected: " + noofCombinations + " but got: " + currentIteration + " Diff: " + (noofCombinations-currentIteration));
+            System.out.println("Warning, I didn't find all combinations, expected: " + noofCombinations + " but got: " + currentIteration + " Diff: " + (noofCombinations - currentIteration));
         }
 
         closePrintWriter(out);
@@ -159,8 +156,9 @@ public class HandGenerator {
 
     private static int[] updateIndices(int[] positionArray) {
 
-        if (positionArray[positionArray.length-1] != 0)
+        if (positionArray[positionArray.length - 1] != 0) {
             throw new RuntimeException("Last position was not 0");
+        }
 
         int[] newPositionArray = new int[positionArray.length];
         for (int i = 0; i < positionArray.length; i++) {
@@ -169,8 +167,8 @@ public class HandGenerator {
 
         // Find which index to move
         int ixToMove = -1;
-        for (int i = positionArray.length-1; i >= 0; i--) {
-            if (positionArray[i] > positionArray.length-1-i) {
+        for (int i = positionArray.length - 1; i >= 0; i--) {
+            if (positionArray[i] > positionArray.length - 1 - i) {
                 ixToMove = i;
                 break;
             }
@@ -184,8 +182,8 @@ public class HandGenerator {
         // Update the array from ixToMove
         newPositionArray[ixToMove] = positionArray[ixToMove] - 1;
 
-        for (int i = ixToMove+1; i < positionArray.length; i++) {
-            newPositionArray[i] = newPositionArray[i-1] - 1;
+        for (int i = ixToMove + 1; i < positionArray.length; i++) {
+            newPositionArray[i] = newPositionArray[i - 1] - 1;
         }
 
         return newPositionArray;
@@ -194,7 +192,7 @@ public class HandGenerator {
     private static int[] createStartPositionArray(int k, int n) {
         int positionArray[] = new int[k];
         for (int i = 0; i < k; i++) {
-            positionArray[i] = n-i-1; // Zero based indexes
+            positionArray[i] = n - i - 1; // Zero based indexes
         }
         return positionArray;
     }
@@ -214,19 +212,17 @@ public class HandGenerator {
     }
 
     private static void writeMapToFile(int k, int n) {
-        try{
+        try {
             //use buffering
-            OutputStream file = new FileOutputStream( "binaryCardsToHandMap_" + k + "_" + n + ".ser" );
-            OutputStream buffer = new BufferedOutputStream( file );
-            ObjectOutput output = new ObjectOutputStream( buffer );
-            try{
+            OutputStream file = new FileOutputStream("binaryCardsToHandMap_" + k + "_" + n + ".ser");
+            OutputStream buffer = new BufferedOutputStream(file);
+            ObjectOutput output = new ObjectOutputStream(buffer);
+            try {
                 output.writeObject(binaryCardsToHandMap);
-            }
-            finally{
+            } finally {
                 output.close();
             }
-        }
-        catch(IOException ex){
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }

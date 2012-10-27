@@ -6,44 +6,44 @@ import se.cygni.texasholdem.game.Action;
 
 public interface Player {
 
-     String getName();
+    String getName();
 
-     void serverIsShuttingDown(ServerIsShuttingDownEvent event);
+    void serverIsShuttingDown(ServerIsShuttingDownEvent event);
 
-     void onPlayIsStarted(PlayIsStartedEvent event);
+    void onPlayIsStarted(PlayIsStartedEvent event);
 
-     void onTableChangedStateEvent(TableChangedStateEvent event);
+    void onTableChangedStateEvent(TableChangedStateEvent event);
 
-     void onYouHaveBeenDealtACard(YouHaveBeenDealtACardEvent event);
+    void onYouHaveBeenDealtACard(YouHaveBeenDealtACardEvent event);
 
-     void onCommunityHasBeenDealtACard(
+    void onCommunityHasBeenDealtACard(
             CommunityHasBeenDealtACardEvent event);
 
-     void onPlayerBetBigBlind(PlayerBetBigBlindEvent event);
+    void onPlayerBetBigBlind(PlayerBetBigBlindEvent event);
 
-     void onPlayerBetSmallBlind(PlayerBetSmallBlindEvent event);
+    void onPlayerBetSmallBlind(PlayerBetSmallBlindEvent event);
 
-     void onPlayerFolded(PlayerFoldedEvent event);
+    void onPlayerFolded(PlayerFoldedEvent event);
 
-     void onPlayerCalled(PlayerCalledEvent event);
+    void onPlayerCalled(PlayerCalledEvent event);
 
-     void onPlayerRaised(PlayerRaisedEvent event);
+    void onPlayerRaised(PlayerRaisedEvent event);
 
-     void onPlayerWentAllIn(PlayerWentAllInEvent event);
+    void onPlayerWentAllIn(PlayerWentAllInEvent event);
 
-     void onPlayerChecked(PlayerCheckedEvent event);
+    void onPlayerChecked(PlayerCheckedEvent event);
 
-     void onYouWonAmount(YouWonAmountEvent event);
+    void onYouWonAmount(YouWonAmountEvent event);
 
-     void onShowDown(ShowDownEvent event);
+    void onShowDown(ShowDownEvent event);
 
-     void onTableIsDone(TableIsDoneEvent event);
+    void onTableIsDone(TableIsDoneEvent event);
 
-     void onPlayerQuit(PlayerQuitEvent event);
+    void onPlayerQuit(PlayerQuitEvent event);
 
-     Action actionRequired(ActionRequest request);
+    Action actionRequired(ActionRequest request);
 
-     void connectionToGameServerLost();
+    void connectionToGameServerLost();
 
-     void connectionToGameServerEstablished();
+    void connectionToGameServerEstablished();
 }

@@ -1,8 +1,8 @@
 package se.cygni.texasholdem.game.util;
 
 import org.junit.Test;
-import se.cygni.texasholdem.game.Hand;
 import se.cygni.texasholdem.game.Card;
+import se.cygni.texasholdem.game.Hand;
 import se.cygni.texasholdem.game.definitions.PokerHand;
 
 import java.util.List;

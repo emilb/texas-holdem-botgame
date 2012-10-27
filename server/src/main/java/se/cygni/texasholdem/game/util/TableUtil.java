@@ -9,7 +9,8 @@ import java.util.List;
 
 public class TableUtil {
 
-    private TableUtil() {}
+    private TableUtil() {
+    }
 
     public static List<List<BotPlayer>> partitionPlayers(List<BotPlayer> players) {
         List<List<BotPlayer>> partitionedPlayers = new ArrayList<List<BotPlayer>>();
@@ -45,6 +46,10 @@ public class TableUtil {
     }
 
     public static List<BotPlayer> shufflePlayers(List<BotPlayer> players) {
+        if (players.size() <= 1) {
+            return players;
+        }
+
         List<BotPlayer> playersQueue = new ArrayList<BotPlayer>(players);
         List<BotPlayer> shuffledPlayers = new ArrayList<BotPlayer>(players.size());
 
@@ -55,6 +60,24 @@ public class TableUtil {
 
         }
 
+        if (!isListShuffled(players, shuffledPlayers)) {
+            return shufflePlayers(players);
+        }
+
         return shuffledPlayers;
+    }
+
+    private static boolean isListShuffled(List<BotPlayer> originalList, List<BotPlayer> shuffledList) {
+        if (originalList.size() != shuffledList.size()) {
+            return false;
+        }
+
+        for (int i = 0; i < originalList.size(); i++) {
+            if (!originalList.get(i).equals(shuffledList.get(i))) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

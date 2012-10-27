@@ -103,7 +103,7 @@ public class GameUtilTest {
                 first.size(), second.size());
 
         for (Object o : first) {
-            Assert.assertTrue("Missing value: " + o,  second.contains(o));
+            Assert.assertTrue("Missing value: " + o, second.contains(o));
         }
     }
 }

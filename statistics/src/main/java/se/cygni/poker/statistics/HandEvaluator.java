@@ -24,8 +24,8 @@ public class HandEvaluator {
         int factor = 10;
         for (Card c : bestHand.getCards()) {
             rankSum += c.getRank().getOrderValue() * factor;
-            factor --;
-            factor --;
+            factor--;
+            factor--;
         }
 
         return bestHand.getPokerHand().getOrderValue() * HAND_FACTOR + rankSum;

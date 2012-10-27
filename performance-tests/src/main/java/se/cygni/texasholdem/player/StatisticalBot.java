@@ -40,7 +40,6 @@ public class StatisticalBot extends BasicPlayer {
         CurrentPlayState ps = getCurrentPlayState();
 
 
-
         log.info("My cards: {}", ps.getMyCards());
         log.info("Community cards: {}", ps.getCommunityCards());
 
@@ -63,28 +62,32 @@ public class StatisticalBot extends BasicPlayer {
         int startingHandRank = getMyCardsTopTenRank();
 
         // Fold if rank is zero
-        if (startingHandRank == 0)
+        if (startingHandRank == 0) {
             return actionManager.getFoldAction();
+        }
 
         long myInvestment = ps.getMyInvestmentInPot();
 
         // Bet as long my investment will not be larger than rank * currentBigBlind
         if (actionManager.has(ActionType.RAISE)) {
             long raiseCost = actionManager.getRaiseAction().getAmount();
-            if (myInvestment + raiseCost < ps.getBigBlind() * startingHandRank)
+            if (myInvestment + raiseCost < ps.getBigBlind() * startingHandRank) {
                 return actionManager.getRaiseAction();
+            }
         }
 
         // Else see if we can call
         if (actionManager.has(ActionType.CALL)) {
             long callCost = actionManager.getCallAction().getAmount();
-            if (myInvestment + callCost < ps.getBigBlind() * startingHandRank)
+            if (myInvestment + callCost < ps.getBigBlind() * startingHandRank) {
                 return actionManager.getCallAction();
+            }
         }
 
         // Check if possible
-        if (actionManager.has(ActionType.CHECK))
+        if (actionManager.has(ActionType.CHECK)) {
             return actionManager.getCheckAction();
+        }
 
         return actionManager.getFoldAction();
     }
@@ -93,12 +96,14 @@ public class StatisticalBot extends BasicPlayer {
 
         // init result
         Map<PokerHand, AtomicInteger> distribution = new HashMap<PokerHand, AtomicInteger>();
-        for (PokerHand hand : PokerHand.values()) { distribution.put(hand, new AtomicInteger(0)); }
+        for (PokerHand hand : PokerHand.values()) {
+            distribution.put(hand, new AtomicInteger(0));
+        }
 
         int noofIterations = 300;
 
         CurrentPlayState ps = getCurrentPlayState();
-        int noofOtherPlayers = ps.getPlayers().size()-1;
+        int noofOtherPlayers = ps.getPlayers().size() - 1;
 
         for (int i = 0; i < noofIterations; i++) {
             InspectableDeck deck = new InspectableDeck(ps.getCurrentPlayState().ordinal(), noofOtherPlayers, ps.getMyCardsAndCommunityCards());
@@ -150,6 +155,7 @@ public class StatisticalBot extends BasicPlayer {
      *
      * @param myPokerHand
      * @param otherPokerHand
+     *
      * @return TRUE if myPokerHand is valued higher than otherPokerHand
      */
     private boolean isHandBetterThan(PokerHand myPokerHand, PokerHand otherPokerHand) {
@@ -326,8 +332,9 @@ public class StatisticalBot extends BasicPlayer {
                 for (final Rank rank : Rank.values()) {
                     Card card = Card.valueOf(rank, suit);
 
-                    if (!knownCards.contains(card))
+                    if (!knownCards.contains(card)) {
                         deck.add(Card.valueOf(rank, suit));
+                    }
                 }
             }
 
