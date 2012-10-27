@@ -269,6 +269,20 @@ public class CurrentPlayState {
         return new ArrayList<GamePlayer>(players);
     }
 
+    /**
+     * @return The number of folded players this game round
+     */
+    public int getNumberOfFoldedPlayers() {
+        return foldedPlayers.size();
+    }
+
+    /**
+     * @return The total numbers players in this game round
+     */
+    public int getNumberOfPlayers() {
+        return players.size();
+    }
+
     private void reset() {
         myCards.clear();
         communityCards.clear();

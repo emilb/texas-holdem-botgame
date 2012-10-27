@@ -3,6 +3,7 @@ package se.cygni.texasholdem.server.statistics;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import org.joda.time.Period;
+import org.joda.time.PeriodType;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class StatisticsCollector {
 
     private static final int MAX_HISTORY_TABLES = 250;
 
-    private long startUp = System.currentTimeMillis();
+    protected long startUp = System.currentTimeMillis();
 
     private AtomicLong noofConnections = new AtomicLong();
 
@@ -86,6 +87,9 @@ public class StatisticsCollector {
     public String getUpTimeAsText() {
 
         PeriodFormatter daysHoursMinutes = new PeriodFormatterBuilder()
+                .appendWeeks()
+                .appendSuffix(" week", " weeks")
+                .appendSeparator(", ")
                 .appendDays()
                 .appendSuffix(" day", " days")
                 .appendSeparator(", ")
@@ -99,9 +103,7 @@ public class StatisticsCollector {
                 .appendSuffix(" second", " seconds")
                 .toFormatter();
 
-        Period period = new Period();
-        period = period.plusMillis((int) getUpTime());
-
+        Period period = new Period(getUpTime());
         return daysHoursMinutes.print(period.normalizedStandard());
     }
 
