@@ -24,7 +24,7 @@ import java.util.concurrent.atomic.AtomicLong;
 @Service
 public class StatisticsCollector {
 
-    private static final int MAX_HISTORY_TABLES = 250;
+    private static final int MAX_HISTORY_TABLES = 500;
 
     protected long startUp = System.currentTimeMillis();
 
@@ -115,7 +115,7 @@ public class StatisticsCollector {
         return tableIds;
     }
 
-    @Cacheable("statistics-actions")
+//    @Cacheable("statistics-actions")
     public StatsActions getStatsActions(final long tableId, final int position) {
         TableHistory tableHistory = getTableHistory(tableId);
 
@@ -131,7 +131,7 @@ public class StatisticsCollector {
         return sa;
     }
 
-    @Cacheable("statistics-chips")
+//    @Cacheable("statistics-chips")
     public StatsChips getStatsChips(final long tableId, final int position) {
         TableHistory tableHistory = getTableHistory(tableId);
 
@@ -170,7 +170,7 @@ public class StatisticsCollector {
         return null;
     }
 
-    @Cacheable("gamelog")
+//    @Cacheable("gamelog")
     public GameLog getGameLogAtPos(final long tableId, int position) {
         try {
             TableHistory th = getTableHistory(tableId);

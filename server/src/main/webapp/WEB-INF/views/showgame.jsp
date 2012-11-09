@@ -63,6 +63,7 @@
             <div id="statChipsGraph"></div>
         </div>
         <div class="span12">
+            <p>Click in graph shows chosen game.</p>
             <button id="btnResetChipsGraph" class="btn btn-small pull-right" type="button" onclick="">Reset</button>
         </div>
     </div>
@@ -81,6 +82,13 @@ var currentView = {
 };
 
 $(document).ready(function () {
+
+    $("#statChipsGraph").bind("jqplotClick", function(ev, gridpos, datapos, neighbor) {
+        if (neighbor) {
+            $("#gameRoundNo").val(neighbor.data[0]);
+            updateGameView();
+        }
+    });
 
     $('#nav_first').click(function (event) {
         event.stopPropagation();
@@ -322,6 +330,7 @@ function updateChipsStatistics(tableId, gameRoundNo) {
 
             var data = new Array();
             var seriesData = new Array();
+
 
             for (var i = 0; i < response.players.length; i++) {
                 data.push(response.chipsPerPlayerPerRound[response.players[i]]);

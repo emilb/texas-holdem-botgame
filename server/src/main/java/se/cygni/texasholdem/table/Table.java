@@ -83,6 +83,8 @@ public class Table implements Runnable {
                     gamePlan.getMaxNoofTurnsPerState(), gamePlan.getMaxNoofActionRetries(),
                     eventBus, sessionManager);
 
+            log.info("Table {} is starting game round {}", tableCounter, roundCounter);
+
             currentGameRound.playGameRound();
 
             GameLog gameLog = currentGameRound.getGameLog();
