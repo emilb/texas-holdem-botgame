@@ -25,6 +25,8 @@ public interface Player {
 
     void onPlayerFolded(PlayerFoldedEvent event);
 
+    void onPlayerForcedFolded(PlayerForcedFoldedEvent event);
+
     void onPlayerCalled(PlayerCalledEvent event);
 
     void onPlayerRaised(PlayerRaisedEvent event);

@@ -372,6 +372,11 @@ public class CurrentPlayState {
         }
 
         @Override
+        public void onPlayerForcedFolded(PlayerForcedFoldedEvent event) {
+            foldedPlayers.add(event.getPlayer());
+        }
+
+        @Override
         public void onPlayerCalled(PlayerCalledEvent event) {
             addPotInvestmentToPlayer(event.getPlayer(), event.getCallBet());
             if (event.getPlayer().getChipCount() == 0) {

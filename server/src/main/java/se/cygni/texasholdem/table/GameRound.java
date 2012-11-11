@@ -254,6 +254,7 @@ public class GameRound {
         if (!GameUtil.isActionValid(possibleActions, userAction)) {
             log.debug("{} did not reply with a valid action, auto-folding", player);
             userAction = new Action(ActionType.FOLD, 0);
+            EventBusUtil.postPlayerForcedFolded(eventBus, player, pot.getTotalBetAmountForPlayer(player));
         }
 
         return userAction;
@@ -270,6 +271,7 @@ public class GameRound {
         } catch (final Exception e) {
             log.info("Player failed to respond, folding for this round", e);
             pot.fold(player);
+            EventBusUtil.postPlayerForcedFolded(eventBus, player, pot.getTotalBetAmountForPlayer(player));
             return new Action(ActionType.FOLD, 0);
         }
     }

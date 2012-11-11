@@ -125,6 +125,17 @@ public class EventBusUtil {
                 recipients);
     }
 
+    public static void postPlayerForcedFolded(
+            final EventBus eventBus,
+            final BotPlayer player,
+            final long investmentInPot) {
+
+        postToEventBus(
+                eventBus,
+                new PlayerForcedFoldedEvent(PlayerTypeConverter.fromBotPlayer(player), investmentInPot),
+                player);
+    }
+
     public static void postPlayerQuit(
             final EventBus eventBus,
             final BotPlayer player,

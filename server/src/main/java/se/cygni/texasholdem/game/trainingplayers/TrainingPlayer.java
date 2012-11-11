@@ -64,6 +64,10 @@ public abstract class TrainingPlayer extends BotPlayer implements Player {
     }
 
     @Override
+    public void onPlayerForcedFolded(PlayerForcedFoldedEvent event) {
+    }
+
+    @Override
     public void onPlayerCalled(PlayerCalledEvent event) {
     }
 

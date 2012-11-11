@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import se.cygni.texasholdem.client.CurrentPlayState;
 import se.cygni.texasholdem.client.PlayerClient;
+import se.cygni.texasholdem.communication.message.event.PlayerForcedFoldedEvent;
 import se.cygni.texasholdem.communication.message.request.ActionRequest;
 import se.cygni.texasholdem.game.*;
 import se.cygni.texasholdem.game.definitions.PlayState;
@@ -20,7 +21,7 @@ public class StatisticalBot extends BasicPlayer {
     private static Logger log = LoggerFactory
             .getLogger(StatisticalBot.class);
 
-    private static final String DEFAULT_HOST = "poker.cygni.se";
+    private static final String DEFAULT_HOST = "localhost";
     private static final int DEFAULT_PORT = 4711;
 
     private PlayerClient playerClient;
@@ -42,6 +43,12 @@ public class StatisticalBot extends BasicPlayer {
 
         log.info("My cards: {}", ps.getMyCards());
         log.info("Community cards: {}", ps.getCommunityCards());
+
+//        try {
+//            Thread.sleep(3500);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+//        }
 
         Map<PokerHand, Double> distribution = getPossibleHandsStatisticalDistribution();
 
@@ -148,6 +155,11 @@ public class StatisticalBot extends BasicPlayer {
         }
 
         return distributionPercentage;
+    }
+
+    @Override
+    public void onPlayerForcedFolded(PlayerForcedFoldedEvent event) {
+        log.warn("holy shit, I took too much time calculating my next action!");
     }
 
     /**
@@ -369,7 +381,7 @@ public class StatisticalBot extends BasicPlayer {
     public void playAGame() {
         try {
             playerClient.connect();
-            playerClient.registerForPlay(Room.TRAINING);
+            playerClient.registerForPlay(Room.TOURNAMENT);
 
         } catch (Exception e) {
 

@@ -74,6 +74,12 @@ public abstract class BasicPlayer implements Player {
     }
 
     @Override
+    public void onPlayerForcedFolded(PlayerForcedFoldedEvent event) {
+
+        log.warn("Holy crap, your bot has exceeded the time-limit and been forced to fold! {} called with amount {}", event.getPlayer().getName(), event.getInvestmentInPot());
+    }
+
+    @Override
     public void onPlayerRaised(final PlayerRaisedEvent event) {
 
         log.debug("{} raised with bet {}", event.getPlayer().getName(), event.getRaiseBet());

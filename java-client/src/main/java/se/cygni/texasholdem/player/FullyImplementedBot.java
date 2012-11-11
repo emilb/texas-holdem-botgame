@@ -276,6 +276,12 @@ public class FullyImplementedBot implements Player {
     }
 
     @Override
+    public void onPlayerForcedFolded(PlayerForcedFoldedEvent event) {
+
+        log.debug("NOT GOOD! {} was forced to fold after putting {} in the pot because exceeding the time limit", event.getPlayer().getName(), event.getInvestmentInPot());
+    }
+
+    @Override
     public void onPlayerCalled(final PlayerCalledEvent event) {
 
         log.debug("{} called with amount {}", event.getPlayer().getName(), event.getCallBet());
