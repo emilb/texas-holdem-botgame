@@ -158,7 +158,7 @@ Error: Did you forget to specify your name? A good idea is to use your e-mail as
                 <pre class="prettyprint">
 &lt;repositories&gt;
     &lt;repository&gt;
-        &lt;id&gt;poker.cygni.s&lt;/id&gt;
+        &lt;id&gt;poker.cygni.se&lt;/id&gt;
         &lt;url&gt;http://poker.cygni.se/maven2&lt;/url&gt;
     &lt;/repository&gt;
 &lt;/repositories&gt;</pre>

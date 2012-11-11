@@ -1,6 +1,9 @@
 package se.cygni.texasholdem.server.communication;
 
+import org.jboss.netty.channel.ChannelFuture;
 import org.jboss.netty.channel.ChannelHandlerContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.cygni.texasholdem.communication.lock.ResponseLock;
@@ -14,6 +17,9 @@ public class MessageSender {
 
     private static final long RESPONSE_TIMEOUT = 3000;
 
+    private static Logger log = LoggerFactory
+            .getLogger(MessageSender.class);
+
     private final SocketServer socketServer;
     private final ResponseLockManager responseLockManager;
 
@@ -26,11 +32,11 @@ public class MessageSender {
 
     }
 
-    public void sendMessage(
+    public ChannelFuture sendMessage(
             final ChannelHandlerContext context,
             final TexasMessage message) {
 
-        socketServer.sendMessage(context, message);
+        return socketServer.sendMessage(context, message);
     }
 
     public TexasResponse sendAndWaitForResponse(
@@ -45,8 +51,24 @@ public class MessageSender {
         final ResponseLock lock = responseLockManager.push(request
                 .getRequestId());
 
-        System.currentTimeMillis();
-        sendMessage(context, request);
+        long sendMessageTStamp = System.currentTimeMillis();
+        ChannelFuture future = sendMessage(context, request);
+
+        try {
+            future.await();
+        } catch (InterruptedException e) {
+            log.info("ChannelFuture was interrupted");
+        }
+
+        if (!future.isDone() || !future.isSuccess()) {
+            log.warn("Failed to send message to client {}, cause: ",
+                    context.getChannel().getRemoteAddress(),
+                    future.getCause());
+        }
+
+        log.info("Took {}ms to send message to client at {}",
+                (System.currentTimeMillis() - sendMessageTStamp),
+                context.getChannel().getRemoteAddress());
 
         synchronized (lock) {
             if (lock.getResponse() == null) {

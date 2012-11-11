@@ -83,7 +83,7 @@ public class SocketServer {
 
     }
 
-    public void sendMessage(ChannelHandlerContext context, TexasMessage message) {
+    public ChannelFuture sendMessage(ChannelHandlerContext context, TexasMessage message) {
 
         try {
             String msgStr = TexasMessageParser.encodeMessage(message) + new String(JsonDelimiter.delimiter());
@@ -92,6 +92,7 @@ public class SocketServer {
             ChannelFuture channelFuture = Channels.future(channel);
             ChannelEvent responseEvent = new DownstreamMessageEvent(channel, channelFuture, msgStr, channel.getRemoteAddress());
             context.sendDownstream(responseEvent);
+            return channelFuture;
 
         } catch (Exception e) {
             log.error("Failed to send message", e);

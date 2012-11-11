@@ -47,7 +47,7 @@ public class StatisticalBot extends BasicPlayer {
 //        try {
 //            Thread.sleep(3500);
 //        } catch (InterruptedException e) {
-//            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+//            e.printStackTrace();
 //        }
 
         Map<PokerHand, Double> distribution = getPossibleHandsStatisticalDistribution();
@@ -381,7 +381,7 @@ public class StatisticalBot extends BasicPlayer {
     public void playAGame() {
         try {
             playerClient.connect();
-            playerClient.registerForPlay(Room.TOURNAMENT);
+            playerClient.registerForPlay(Room.TRAINING);
 
         } catch (Exception e) {
 
