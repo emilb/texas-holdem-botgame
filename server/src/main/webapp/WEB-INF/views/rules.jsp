@@ -33,7 +33,7 @@
                 </p>
 
                 <p>
-                    A bot player that fails to respond in time (30 sec) or responds with non valid actions (i.e.
+                    A bot player that <em>fails to respond in time (3 sec)</em> or responds with non valid actions (i.e.
                     trying to CHECK when a CALL or RAISE is needed) more than ${gamePlan.maxNoofActionRetries}
                     times in a row will automatically be folded in the current game bout.
                 </p>
