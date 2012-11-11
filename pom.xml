@@ -4,7 +4,7 @@
 
     <groupId>se.cygni</groupId>
     <artifactId>texas-holdem-botgame</artifactId>
-    <version>1.1.15-SNAPSHOT</version>
+    <version>1.1.15</version>
     <packaging>pom</packaging>
     <name>texas-holdem-botgame</name>
     <url>http://emilb.github.com/texas-holdem-botgame</url>
@@ -39,7 +39,7 @@
         <connection>scm:git:git@github.com:emilb/texas-holdem-botgame.git</connection>
         <url>scm:git:git@github.com:emilb/texas-holdem-botgame.git</url>
         <developerConnection>scm:git:git@github.com:emilb/texas-holdem-botgame.git</developerConnection>
-        <tag>texas-holdem-botgame-1.1</tag>
+        <tag>v1.1.15</tag>
     </scm>
 
     <prerequisites>
