@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.Properties;
 
 @SuppressWarnings("unchecked")
-public class TexasMessageParser {
+public final class TexasMessageParser {
 
     private static Logger log = LoggerFactory.getLogger(TexasMessageParser.class);
 

@@ -9,7 +9,7 @@ import se.cygni.texasholdem.game.pot.PotTransaction;
 
 import java.util.*;
 
-public class GameUtil {
+public final class GameUtil {
 
     private GameUtil() {
     }
@@ -79,30 +79,6 @@ public class GameUtil {
 
         return result;
     }
-
-    /*
-    public static List<BotPlayer> getOrderedListOfPlayers(
-            final List<BotPlayer> players,
-            final BotPlayer startingFromPlayer) {
-
-        final List<BotPlayer> result = new ArrayList<BotPlayer>();
-
-        final int startPos = startingFromPlayer == null ? -1 : players
-                .indexOf(startingFromPlayer);
-
-        for (int currIx = startPos + 1; currIx < players.size(); currIx++) {
-            final BotPlayer nextPlayer = players.get(currIx);
-            result.add(nextPlayer);
-        }
-
-        for (int currIx = 0; currIx < startPos + 1; currIx++) {
-            final BotPlayer nextPlayer = players.get(currIx);
-            result.add(nextPlayer);
-        }
-
-        return result;
-    }
-    */
 
     /**
      * Creates a list of players still active in current game (i.e. has not

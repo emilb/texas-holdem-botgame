@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import se.cygni.texasholdem.communication.lock.ResponseLock;
 import se.cygni.texasholdem.communication.message.TexasMessage;
 import se.cygni.texasholdem.communication.message.TexasMessageParser;
-import se.cygni.texasholdem.communication.message.event.PlayerForcedFoldedEvent;
 import se.cygni.texasholdem.communication.message.event.TexasEvent;
 import se.cygni.texasholdem.communication.message.exception.TexasException;
 import se.cygni.texasholdem.communication.message.request.ActionRequest;
@@ -171,8 +170,6 @@ public class PlayerClient extends SimpleChannelHandler {
         if (message instanceof TexasEvent) {
             currentPlayStateEventDispatcher.onEvent((TexasEvent) message);
             clientEventDispatcher.onEvent((TexasEvent) message);
-            if (message instanceof PlayerForcedFoldedEvent)
-                log.debug("Player in forced fold");
             return;
         }
 

@@ -1,6 +1,6 @@
 package se.cygni.texasholdem.communication.netty;
 
-public class JsonDelimiter {
+public final class JsonDelimiter {
 
     private JsonDelimiter() {
     }

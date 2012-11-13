@@ -6,7 +6,7 @@ import se.cygni.texasholdem.server.room.Tournament;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TournamentUtil {
+public final class TournamentUtil {
 
     private TournamentUtil() {
     }

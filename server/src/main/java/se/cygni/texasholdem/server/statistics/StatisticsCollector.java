@@ -6,7 +6,6 @@ import org.joda.time.Period;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import se.cygni.texasholdem.dao.model.GameLog;
 import se.cygni.texasholdem.dao.model.stats.StatsActions;
@@ -22,7 +21,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Service
-public class StatisticsCollector {
+public final class StatisticsCollector {
 
     private static final int MAX_HISTORY_TABLES = 500;
 

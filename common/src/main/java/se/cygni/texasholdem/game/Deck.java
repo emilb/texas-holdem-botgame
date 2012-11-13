@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class Deck {
+public final class Deck {
 
     private static final List<Card> protoDeck = new ArrayList<Card>();
 

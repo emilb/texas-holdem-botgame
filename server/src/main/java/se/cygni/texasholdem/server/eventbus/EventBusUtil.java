@@ -10,7 +10,7 @@ import se.cygni.texasholdem.util.PlayerTypeConverter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventBusUtil {
+public final class EventBusUtil {
 
     private EventBusUtil() {
     }

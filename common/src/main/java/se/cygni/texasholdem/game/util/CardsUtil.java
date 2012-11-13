@@ -14,7 +14,7 @@ import java.util.Map.Entry;
  *
  * @author emil
  */
-public class CardsUtil {
+public final class CardsUtil {
 
     private CardsUtil() {
     }

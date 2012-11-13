@@ -7,7 +7,7 @@ import se.cygni.texasholdem.table.Table;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TableUtil {
+public final class TableUtil {
 
     private TableUtil() {
     }

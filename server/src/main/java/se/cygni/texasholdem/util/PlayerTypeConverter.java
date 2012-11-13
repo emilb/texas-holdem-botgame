@@ -6,7 +6,7 @@ import se.cygni.texasholdem.game.GamePlayer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayerTypeConverter {
+public final class PlayerTypeConverter {
 
     private PlayerTypeConverter() {
     }
