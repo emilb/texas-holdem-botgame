@@ -87,6 +87,8 @@ public class PerformanceTestPlayer extends BasicPlayer {
         return name;
     }
 
+    private int lastNoofPlayers = 0;
+
     @Override
     public void onPlayIsStarted(PlayIsStartedEvent event) {
         if (lastNewGame > 0) {
@@ -99,8 +101,15 @@ public class PerformanceTestPlayer extends BasicPlayer {
             lastNewGame = System.currentTimeMillis();
         }
 
-//        log.info("Play is starting. My table id is: " + event.getTableId());
+//        if (playerClient.getCurrentPlayState().getNumberOfPlayers() != lastNoofPlayers) {
+//            log.info("{} reports, noof players: {}", this.getName(), playerClient.getCurrentPlayState().getNumberOfPlayers());
+//            log.info(StringUtils.join(playerClient.getCurrentPlayState().getPlayers(), ","));
+//            lastNoofPlayers = playerClient.getCurrentPlayState().getNumberOfPlayers();
+//        }
+
     }
+
+
 
     @Override
     public Action actionRequired(final ActionRequest request) {
@@ -108,6 +117,7 @@ public class PerformanceTestPlayer extends BasicPlayer {
         Action callAction = null;
         Action checkAction = null;
         Action foldAction = null;
+
 
         for (final Action action : request.getPossibleActions()) {
             switch (action.getActionType()) {

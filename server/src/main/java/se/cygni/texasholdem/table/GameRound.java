@@ -89,7 +89,7 @@ public class GameRound {
         EventBusUtil.postPlayIsStarted(eventBus,
                 smallBlind, bigBlind,
                 dealerPlayer, smallBlindPlayer, bigBlindPlayer, tableId,
-                players, players);
+                GameUtil.getActivePlayersWithChipsLeft(players), players);
 
         EventBusUtil.postToEventBus(eventBus, new TableChangedStateEvent(pot.getCurrentPlayState()), players);
 
