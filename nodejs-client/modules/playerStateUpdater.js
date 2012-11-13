@@ -136,6 +136,8 @@ exports.playerStateUpdater = function() {
             },
             onPlayerFoldedEvent:function (event) {
             },
+            onPlayerForcedFoldedEvent:function (event) {
+            },
             onPlayerQuitEvent:function (event) {
             },
             onPlayerRaisedEvent:function (event) {

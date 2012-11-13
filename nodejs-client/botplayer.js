@@ -43,6 +43,10 @@ var player = {
     onPlayerFoldedEvent : function (event) {
     },
 
+    onPlayerForcedFoldedEvent : function (event) {
+        console.log("I got a PlayerForcedFoldedEvent, my onActionRequest() is too slow!!!");
+    },
+
     onPlayerQuitEvent : function (event) {
     },
 
