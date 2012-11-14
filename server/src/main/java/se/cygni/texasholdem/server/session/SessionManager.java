@@ -18,7 +18,9 @@ import se.cygni.texasholdem.communication.message.response.RegisterForPlayRespon
 import se.cygni.texasholdem.communication.message.response.TexasResponse;
 import se.cygni.texasholdem.game.Action;
 import se.cygni.texasholdem.game.BotPlayer;
+import se.cygni.texasholdem.game.exception.InvalidNameException;
 import se.cygni.texasholdem.game.trainingplayers.TrainingPlayer;
+import se.cygni.texasholdem.game.util.ValidPlayerNameVerifier;
 import se.cygni.texasholdem.server.communication.MessageSender;
 import se.cygni.texasholdem.server.eventbus.EventWrapper;
 import se.cygni.texasholdem.server.eventbus.PlayerQuitEvent;
@@ -149,6 +151,18 @@ public class SessionManager {
                 .getRequest();
 
         // TODO: Store client ip, max 5 connections per ip by using clientContext.getChannel().getRemoteAddress()
+
+        // Check that user name is valid
+        try {
+            ValidPlayerNameVerifier.verifyName(request.name);
+        } catch (InvalidNameException ine) {
+            final se.cygni.texasholdem.communication.message.exception.InvalidNameException e
+                    = new se.cygni.texasholdem.communication.message.exception.InvalidNameException();
+            e.message = ine.getMessage();
+            e.setRequestId(request.getRequestId());
+            messageSender.sendMessage(clientContext, e);
+            return;
+        }
 
         // Check that user name is not already in use
         if (!isNameUnique(request.name)) {

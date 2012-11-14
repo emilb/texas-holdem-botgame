@@ -1,6 +1,7 @@
 *.class
 *.data
 *.ser
+*.log
 .settings
 .project
 .classpath

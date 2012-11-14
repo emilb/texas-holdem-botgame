@@ -66,9 +66,12 @@ public class MessageSender {
                     future.getCause());
         }
 
-        log.info("Took {}ms to send message to client at {}",
-                (System.currentTimeMillis() - sendMessageTStamp),
+        long timeSpentSendingToClient = System.currentTimeMillis() - sendMessageTStamp;
+        if (timeSpentSendingToClient > 25) {
+            log.warn("Took {}ms to send message to client at {}",
+                timeSpentSendingToClient,
                 context.getChannel().getRemoteAddress());
+        }
 
         synchronized (lock) {
             if (lock.getResponse() == null) {

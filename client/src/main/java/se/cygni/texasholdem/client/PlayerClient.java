@@ -25,6 +25,7 @@ import se.cygni.texasholdem.communication.message.response.TexasResponse;
 import se.cygni.texasholdem.communication.netty.JsonDelimiter;
 import se.cygni.texasholdem.game.Action;
 import se.cygni.texasholdem.game.Room;
+import se.cygni.texasholdem.game.util.ValidPlayerNameVerifier;
 import se.cygni.texasholdem.player.Player;
 
 import java.net.InetSocketAddress;
@@ -202,6 +203,9 @@ public class PlayerClient extends SimpleChannelHandler {
         request.setRequestId(getUniqueRequestId());
         request.name = getPlayerName();
         request.room = room;
+
+        // Validate player name
+        ValidPlayerNameVerifier.verifyName(request.name);
 
         final TexasMessage resp = sendAndWaitForResponse(request);
 

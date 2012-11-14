@@ -23,7 +23,7 @@ public class PerformanceTestPlayer extends BasicPlayer {
     private static final String DEFAULT_HOST = "localhost";
     private static final int DEFAULT_PORT = 4711;
     private static final String DEFAULT_NAME = "perftest";
-    private static final int DEFAULT_NOOF_PLAYERS = 10;
+    private static final int DEFAULT_NOOF_PLAYERS = 1;
 
     private static final AtomicInteger counter = new AtomicInteger(0);
 
@@ -73,7 +73,7 @@ public class PerformanceTestPlayer extends BasicPlayer {
     public void playAGame() {
         try {
             playerClient.connect();
-            playerClient.registerForPlay(Room.FREEPLAY);
+            playerClient.registerForPlay(Room.TRAINING);
 
         } catch (Exception e) {
 
