@@ -32,11 +32,11 @@ public class MessageSender {
 
     }
 
-    public ChannelFuture sendMessage(
+    public void sendMessage(
             final ChannelHandlerContext context,
             final TexasMessage message) {
 
-        return socketServer.sendMessage(context, message);
+        socketServer.sendMessage(context, message);
     }
 
     public TexasResponse sendAndWaitForResponse(
@@ -51,27 +51,7 @@ public class MessageSender {
         final ResponseLock lock = responseLockManager.push(request
                 .getRequestId());
 
-        long sendMessageTStamp = System.currentTimeMillis();
-        ChannelFuture future = sendMessage(context, request);
-
-        try {
-            future.await();
-        } catch (InterruptedException e) {
-            log.info("ChannelFuture was interrupted");
-        }
-
-        if (!future.isDone() || !future.isSuccess()) {
-            log.warn("Failed to send message to client {}, cause: ",
-                    context.getChannel().getRemoteAddress(),
-                    future.getCause());
-        }
-
-        long timeSpentSendingToClient = System.currentTimeMillis() - sendMessageTStamp;
-        if (timeSpentSendingToClient > 25) {
-            log.warn("Took {}ms to send message to client at {}",
-                timeSpentSendingToClient,
-                context.getChannel().getRemoteAddress());
-        }
+        sendMessage(context, request);
 
         synchronized (lock) {
             if (lock.getResponse() == null) {
@@ -90,3 +70,4 @@ public class MessageSender {
         return lock.getResponse();
     }
 }
+
