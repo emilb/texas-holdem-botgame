@@ -10,8 +10,6 @@
     <div class="hero-unit">
         <h1>Getting started</h1>
 
-        <p class="pull-right"><a href="/registration">Register for contest</a></p>
-
         <p>and code samples</p>
     </div>
 

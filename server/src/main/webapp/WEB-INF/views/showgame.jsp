@@ -6,8 +6,6 @@
     <div class="hero-unit">
         <h1>Show games</h1>
 
-        <p class="pull-right"><a href="/registration">Register for contest</a></p>
-
         <p>Inspect games played</p>
     </div>
 

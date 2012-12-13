@@ -5,8 +5,6 @@
     <div class="hero-unit">
         <h1>Server Status</h1>
 
-        <p class="pull-right"><a href="/registration">Register for contest</a></p>
-
         <p>Shows some statistics and connected players</p>
     </div>
 

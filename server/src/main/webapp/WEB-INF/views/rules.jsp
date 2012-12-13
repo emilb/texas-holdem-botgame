@@ -2,8 +2,6 @@
     <div class="hero-unit">
         <h1>House Rules</h1>
 
-        <p class="pull-right"><a href="/registration">Register for contest</a></p>
-
         <p>and settings</p>
     </div>
 
