@@ -81,7 +81,7 @@ function ROOM_TRAINING() {
 exports.ROOM_TRAINING = ROOM_TRAINING;
 
 function ROOM_TOURNAMENT() {
-    return 'TRAINING';
+    return 'TOURNAMENT';
 }
 exports.ROOM_TOURNAMENT = ROOM_TOURNAMENT;
 
