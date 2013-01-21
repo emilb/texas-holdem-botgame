@@ -1,69 +1,14 @@
 Texas hold'em Botgame
 =====================
 
-ToDo:
+This is a server/client system for letting programmed bots play poker against each other.
 
-- Add optimized settings for Netty
-- Better sharing of code between client and web-client
-- Better handling of connection failures
-X Disconnect player after game in room finished
-X Implement Tournament room
-- Admin gui for starting and inspecting tournaments
-- Collect fun statistics
-- Create better and more real playing bots for training
-X Performance testing
+**Quickstart** &mdash; *Host your own server.*
 
+    git clone https://github.com/flatland/drip.git
+    cd texas-holdem-botgame
+    mvn clean install
 
-Thursday
+    mvn jetty:run
 
-X Disconnect clients after table done
-X On table start include table id (atomic counter)
-X Show Game view
-    X GET instead of POST
-    X Connect GameLogs with table ID
-    X (wont do) Do not publish GameLogs until table is done
-    X Ability to change table ID for shown games
-    X Store games i map instead (TableID -> List<GameLog>)
-X StatisticsCollector
-    X List table IDs
-    X Get GameLog for choosen tableID
-    X Throw away oldest tables (store only 250 tables)
-X Fix SLF4J warnings
-X Favicon
-
-Förbered paketering av jarar och webcliektn etc
-Kom igång instruktioner
-Förebered presentation
-Fundera på vilka sourcepaket som ska med
-Köra maven repo på servern
-Testramverket JS
-X Rensa i requests
-
-Serverpaketering web-client (och parametrar startup, local port, server host, server port, webdirectory)
-http://stackoverflow.com/questions/3718221/add-resources-to-jetty-programmatically
-http://wiki.eclipse.org/Jetty/Tutorial/Embedding_Jetty#Setting_a_Web_Application_Context
-http://docs.codehaus.org/display/JETTY/Embedding+Jetty
-http://internna.blogspot.se/2011/08/step-by-step-executable-war-files.html
-http://eclipsesource.com/blogs/2009/10/02/executable-wars-with-jetty/
-
-Ta ut Json exempel på alla anrop och events
-
-MAX_NOOF_PLAYERS=5 per IP (new DeniedConnectionResponse)
-
-CurrentPlayState
-    - players (with current chip amount, and investment in pot)
-    - chips in pot total
-    - community cards
-    - my cards
-    - game state
-    - hasPlayerFolded('emil') or playerEmil.hasFolded()
-    - big/small blind amount
-    - dealer player, bigblind player, small blind player
-    -
-
-Ajax tournament status page (auto update ranklist)
-
-Bättre server-bot spelare med tydligare karaktär.
-
-
-
+Open browser to: http://localhost:8080
