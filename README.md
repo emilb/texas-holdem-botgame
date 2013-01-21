@@ -9,9 +9,13 @@ This is a server/client system for letting programmed bots play poker against ea
     cd texas-holdem-botgame
     mvn clean install
 
+    cd server
     mvn jetty:run
 
 Open browser to: http://localhost:8080
 
-Instructions for hacking a java-client: https://github.com/emilb/texas-holdem-botgame/java-client
-Instructions for hacking a nodejs-client: https://github.com/emilb/texas-holdem-botgame/nodejs-client
+Instructions for hacking a java-client:
+https://github.com/emilb/texas-holdem-botgame/tree/master/java-client
+
+Instructions for hacking a nodejs-client:
+https://github.com/emilb/texas-holdem-botgame/tree/master/nodejs-client
