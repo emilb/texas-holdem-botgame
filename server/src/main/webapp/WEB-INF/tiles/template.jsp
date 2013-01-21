@@ -9,18 +9,18 @@
     <title>Cygni Texas Hold'em</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <link href="<c:url value="/resources/css/bootstrap-2.1.1.min.css" />" rel="stylesheet" type="text/css"/>
-    <link href="<c:url value="/resources/css/bootstrap-responsive-2.1.1.min.css" />" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="/resources/css/bootstrap-2.2.2.min.css" />" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="/resources/css/bootstrap-responsive-2.2.2.min.css" />" rel="stylesheet" type="text/css"/>
     <link href="<c:url value="/resources/css/prettify.css" />" rel="stylesheet" type="text/css"/>
     <link href="<c:url value="/resources/css/jquery.jqplot.min.css" />" rel="stylesheet" type="text/css"/>
 
     <link rel="icon" href="<c:url value="/resources/img/favicon.ico" />" type="image/png">
     <link rel="shortcut icon" href="<c:url value="/resources/img/favicon.ico" />" type="image/png">
 
-    <script src="<c:url value="/resources/js/jquery-1.8.2.min.js" />"></script>
-    <script src="<c:url value="/resources/js/bootstrap-2.1.1.min.js" />"></script>
+    <script src="<c:url value="/resources/js/jquery-1.9.0.min.js" />"></script>
+    <script src="<c:url value="/resources/js/bootstrap-2.2.2.min.js" />"></script>
     <script src="<c:url value="/resources/js/prettify/prettify.js" />"></script>
-    <script src="<c:url value="/resources/js/underscore-1.3.3.min.js" />"></script>
+    <script src="<c:url value="/resources/js/underscore-1.4.3.min.js" />"></script>
     <script src="<c:url value="/resources/js/ICanHaz-0.10.min.js" />"></script>
 </head>
 
