@@ -1,0 +1,206 @@
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply from: "./libraries.gradle"
+
+def defaultSourceCompatibility = '1.7'
+def defaultTargetCompatibility = '1.7'
+
+
+buildscript {
+    repositories {
+        mavenCentral()
+
+        mavenRepo(name: 'zt-public-snapshots',
+                url: 'http://repos.zeroturnaround.com/nexus/content/groups/zt-public/')
+    }
+
+    dependencies {
+        classpath 'org.gradle.api.plugins:gradle-cargo-plugin:0.5.7'
+        classpath 'org.zeroturnaround:gradle-jrebel-plugin:1.0.3-SNAPSHOT'
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.4'
+}
+
+project('common') {
+    apply plugin: 'java'
+    apply plugin: 'rebel'
+
+    sourceCompatibility = defaultSourceCompatibility
+    targetCompatibility = defaultTargetCompatibility
+
+    group = 'se.cygni'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        compile(libraries.spring_context)
+        compile(libraries.commons_collections)
+        compile(libraries.commons_io)
+        compile(libraries.commons_lang)
+        compile(libraries.commons_math)
+        compile(libraries.jackson_core_lgpl)
+        compile(libraries.jackson_mapper_lgpl)
+
+        compile(libraries.logback_classic)
+        compile(libraries.slf4j_api)
+        compile(libraries.jcl_over_slf4j)
+        compile(libraries.log4j_over_slf4j)
+        compile(libraries.jul_to_slf4j)
+
+        testCompile(libraries.slf4j_nop)
+        testCompile(libraries.junit)
+    }
+
+}
+
+project('client') {
+    apply plugin: 'java'
+    apply plugin: 'rebel'
+    group = 'se.cygni'
+
+    sourceCompatibility = defaultSourceCompatibility
+    targetCompatibility = defaultTargetCompatibility
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        compile(project(':common'))
+        compile(libraries.commons_collections)
+        compile(libraries.commons_io)
+        compile(libraries.commons_lang)
+        compile(libraries.netty)
+
+        compile(libraries.logback_classic)
+        compile(libraries.slf4j_api)
+        compile(libraries.jcl_over_slf4j)
+        compile(libraries.log4j_over_slf4j)
+        compile(libraries.jul_to_slf4j)
+
+        testCompile(libraries.slf4j_nop)
+        testCompile(libraries.junit)
+    }
+
+}
+
+project('server') {
+    apply plugin: 'java'
+    apply plugin: 'rebel'
+    apply plugin: 'war'
+    apply plugin: 'cargo'
+
+    group = 'se.cygni'
+
+    sourceCompatibility = defaultSourceCompatibility
+    targetCompatibility = defaultTargetCompatibility
+
+    def jettyLoggingDir = "$buildDir/logs"
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        compile(project(':common'))
+        compile(libraries.commons_collections)
+        compile(libraries.commons_io)
+        compile(libraries.commons_lang)
+        compile(libraries.netty)
+        compile(libraries.jopt_simple)
+        compile(libraries.guava)
+        compile(libraries.joda_time)
+
+        compile(libraries.spring_core)
+        compile(libraries.spring_expression)
+        compile(libraries.spring_beans)
+        compile(libraries.spring_context)
+        compile(libraries.spring_context_support)
+        compile(libraries.spring_web)
+        compile(libraries.spring_security_web)
+        compile(libraries.spring_security_config)
+        compile(libraries.spring_webmvc)
+        compile(libraries.cglib)
+        compile(libraries.tiles_jsp)
+        providedCompile(libraries.jstl)
+        providedCompile(libraries.servlet)
+
+        compile(libraries.logback_classic)
+        compile(libraries.slf4j_api)
+        compile(libraries.jcl_over_slf4j)
+        compile(libraries.log4j_over_slf4j)
+        compile(libraries.jul_to_slf4j)
+
+        testCompile(libraries.spring_test)
+        testCompile(libraries.slf4j_nop)
+        testCompile(libraries.junit)
+        testCompile(libraries.mockito_all)
+        testCompile(libraries.hamcrest_all)
+
+        def cargoVersion = '1.3.2'
+        cargo "org.codehaus.cargo:cargo-core-uberjar:$cargoVersion",
+                "org.codehaus.cargo:cargo-ant:$cargoVersion"
+
+    }
+
+    // Project Config
+    task initConfig(type:Copy) {
+        from("$projectDir/config") {
+            include '**/*.xml'
+            expand(projectDir: projectDir) // TBD can we just pass down the context?
+        }
+        into "$buildDir/config"
+
+    }
+    processResources.dependsOn(initConfig)
+
+    task initLogDir << {
+        println("Trying to create jetty logging dir: $jettyLoggingDir")
+        def jLogDir = new File(jettyLoggingDir)
+        println("jetty logging dir creation succeeded: " + jLogDir.mkdirs())
+    }
+
+    cargo {
+        containerId = 'jetty8x'
+
+        def rebelHome = System.env.REBEL_HOME
+        def jvmArgz   = '-Xdebug -Xrunjdwp:transport=dt_socket,address=5555,server=y,suspend=n -XX:MaxPermSize=512m'
+
+        if (rebelHome) {
+            jvmArgz = "-noverify -javaagent:'$rebelHome/jrebel.jar' -Drebel.mustache_plugin=true -Drebel.log=true " + jvmArgz
+        }
+        else {
+            println 'REBEL_HOME not found, cargo will not use jRebel java agent'
+        }
+
+        local {
+            configFile {
+                file  = file("$buildDir/config/jetty-logging.xml")
+                toDir = file('etc') // workaround; file('etc') fails due cargo-gradle-plugin issue 18
+            }
+
+            output   = file("$jettyLoggingDir/startup.log")
+            log      = file("$jettyLoggingDir/cargo.log")
+            logLevel = 'medium'
+            jvmArgs  = jvmArgz
+            installer {
+                installUrl = 'http://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/8.1.9.v20130131/jetty-distribution-8.1.9.v20130131.zip'
+                downloadDir = file("$buildDir/download")
+                extractDir  = file("$buildDir/extract")
+            }
+        }
+
+        deployable {
+            context = ''
+        }
+
+    }
+    //cargoRunLocal.dependsOn(initLogDir)
+    //cargoRunLocal.dependsOn(war)
+
+}

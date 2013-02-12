@@ -11,3 +11,5 @@ target
 web-client/.DS_Store
 web-client/overlays
 .DS_Store
+build
+.gradle

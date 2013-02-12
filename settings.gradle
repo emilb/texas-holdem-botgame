@@ -1,0 +1,3 @@
+include 'common', 'client', 'server'
+
+//include 'common', 'server', 'client', 'java-client', 'nodejs-client'
