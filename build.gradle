@@ -2,6 +2,8 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply from: "./libraries.gradle"
 
+defaultTasks 'build'
+
 def defaultSourceCompatibility = '1.7'
 def defaultTargetCompatibility = '1.7'
 
@@ -22,6 +24,10 @@ buildscript {
 
 task wrapper(type: Wrapper) {
     gradleVersion = '1.4'
+}
+
+configurations.all {
+    exclude(group: 'commons-logging')
 }
 
 project('common') {
@@ -200,7 +206,9 @@ project('server') {
         }
 
     }
-    //cargoRunLocal.dependsOn(initLogDir)
-    //cargoRunLocal.dependsOn(war)
 
+    project.afterEvaluate {
+        cargoRunLocal.dependsOn(initLogDir)
+        cargoRunLocal.dependsOn(':server:war')
+    }
 }
