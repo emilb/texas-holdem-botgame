@@ -1,15 +1,24 @@
+# Generated stuff
 *.class
 *.data
 *.ser
 *.log
+
+# Eclipse
 .settings
 .project
 .classpath
 target
+
+# IntelliJ
 .idea
 *.iml
-web-client/.DS_Store
-web-client/overlays
+*.ipr
+*.iws
+
+# OSX
 .DS_Store
+
+# Gradle
 build
 .gradle

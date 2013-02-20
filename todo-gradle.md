@@ -19,6 +19,7 @@ x Hook in rebelGenerate, initLogDir etc in one of the build steps
 - Jenkins integration with tasks to copy resources for deployment, downloads etc
 - How to package non-java projects?
 - Install common artefacts in maven-repo
+- Figure out how to use profiles for different types of builds
 
 
 Structure changes
