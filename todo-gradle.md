@@ -4,8 +4,9 @@ Gradle conversion
 **ToDo**
 
 - Better organization for common sub project settings
-- Enable filtering
-- Hook in rebelGenerate, initLogDir etc in one of the build steps
+x Enable filtering
+x Hook in rebelGenerate, initLogDir etc in one of the build steps
+- Logging for Jetty is misplaced
 - Fix intellij and eclipse settings
 - Common versioning
 - Result artifact names (server.jar is not good)

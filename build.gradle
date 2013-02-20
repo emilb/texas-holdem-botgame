@@ -7,6 +7,57 @@ defaultTasks 'build'
 def defaultSourceCompatibility = '1.7'
 def defaultTargetCompatibility = '1.7'
 
+ext {
+    javaModules = ['common', 'client', 'server']
+}
+
+def javaProjects() {
+    subprojects.findAll { project -> javaModules.contains(project.name) }
+}
+
+
+
+configure(javaProjects()) {
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
+    apply plugin: 'findbugs'
+    apply plugin: 'java'
+    apply plugin: 'rebel'
+    //apply plugin: 'project-report'
+
+    sourceCompatibility = defaultSourceCompatibility
+    targetCompatibility = defaultTargetCompatibility
+
+    group = 'se.cygni'
+    version = '1.1.21-SNAPSHOT'
+
+    repositories {
+        mavenCentral()
+    }
+
+    jar.dependsOn('generateRebel')
+
+    findbugs {
+        toolVersion = "2.0.1"
+        ignoreFailures = true
+        sourceSets = [sourceSets.main]
+    }
+
+    findbugsMain {
+        reports {
+            html {
+                enabled = false
+            }
+
+            xml.enabled = !html.enabled
+        }
+    }
+
+    processResources {
+        filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: [version: project.version])
+    }
+    
+}
 
 buildscript {
     repositories {
@@ -31,18 +82,7 @@ configurations.all {
 }
 
 project('common') {
-    apply plugin: 'java'
-    apply plugin: 'rebel'
-
-    sourceCompatibility = defaultSourceCompatibility
-    targetCompatibility = defaultTargetCompatibility
-
-    group = 'se.cygni'
-
-    repositories {
-        mavenCentral()
-    }
-
+    
     dependencies {
         compile(libraries.spring_context)
         compile(libraries.commons_collections)
@@ -65,16 +105,6 @@ project('common') {
 }
 
 project('client') {
-    apply plugin: 'java'
-    apply plugin: 'rebel'
-    group = 'se.cygni'
-
-    sourceCompatibility = defaultSourceCompatibility
-    targetCompatibility = defaultTargetCompatibility
-
-    repositories {
-        mavenCentral()
-    }
 
     dependencies {
         compile(project(':common'))
@@ -96,21 +126,10 @@ project('client') {
 }
 
 project('server') {
-    apply plugin: 'java'
-    apply plugin: 'rebel'
     apply plugin: 'war'
     apply plugin: 'cargo'
-
-    group = 'se.cygni'
-
-    sourceCompatibility = defaultSourceCompatibility
-    targetCompatibility = defaultTargetCompatibility
-
+    
     def jettyLoggingDir = "$buildDir/logs"
-
-    repositories {
-        mavenCentral()
-    }
 
     dependencies {
         compile(project(':common'))
@@ -158,7 +177,7 @@ project('server') {
     task initConfig(type:Copy) {
         from("$projectDir/config") {
             include '**/*.xml'
-            expand(projectDir: projectDir) // TBD can we just pass down the context?
+            expand(projectDir: projectDir)
         }
         into "$buildDir/config"
 
@@ -187,7 +206,7 @@ project('server') {
         local {
             configFile {
                 file  = file("$buildDir/config/jetty-logging.xml")
-                toDir = file('etc') // workaround; file('etc') fails due cargo-gradle-plugin issue 18
+                toDir = file('etc') 
             }
 
             output   = file("$jettyLoggingDir/startup.log")
@@ -196,19 +215,23 @@ project('server') {
             jvmArgs  = jvmArgz
             installer {
                 installUrl = 'http://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/8.1.9.v20130131/jetty-distribution-8.1.9.v20130131.zip'
+                //installUrl = 'http://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/9.0.0.RC0/jetty-distribution-9.0.0.RC0.zip'
                 downloadDir = file("$buildDir/download")
                 extractDir  = file("$buildDir/extract")
             }
         }
 
         deployable {
-            context = ''
+            context = '/'
         }
 
     }
 
+    war.dependsOn('generateRebel')
+    
     project.afterEvaluate {
         cargoRunLocal.dependsOn(initLogDir)
         cargoRunLocal.dependsOn(':server:war')
     }
 }
+
