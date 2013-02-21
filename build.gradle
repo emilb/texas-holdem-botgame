@@ -1,5 +1,6 @@
 apply plugin: 'eclipse'
 apply plugin: 'idea'
+apply plugin: 'versions'
 apply from: "./libraries.gradle"
 apply from: "./idea_settings.gradle"
 
@@ -82,6 +83,7 @@ buildscript {
     dependencies {
         classpath 'org.gradle.api.plugins:gradle-cargo-plugin:0.5.7'
         classpath 'org.zeroturnaround:gradle-jrebel-plugin:1.0.3-SNAPSHOT'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.3'
     }
 }
 
