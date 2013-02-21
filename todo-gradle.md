@@ -7,7 +7,7 @@ x Better organization for common sub project settings
 x Enable filtering
 x Hook in rebelGenerate, initLogDir etc in one of the build steps
 - Logging for Jetty is misplaced
-- Fix intellij and eclipse settings
+- Fix (x)intellij and eclipse settings
 - Common versioning
 - Result artifact names (server.jar is not good)
 - Add help and info task
@@ -18,8 +18,12 @@ x Hook in rebelGenerate, initLogDir etc in one of the build steps
 x Organize common dependencies in lists, for example all Logging libs
 - Jenkins integration with tasks to copy resources for deployment, downloads etc
 - How to package non-java projects?
-- Install common artefacts in maven-repo
+- Install common artefacts in maven-repo (how to create pom.xml?)
 - Figure out how to use profiles for different types of builds
+- Build of client implementations (zip package)
+- How to increment version in java-client's pom?
+- Add jslint etc to nodejs-client
+- Build of projects in labs
 
 
 Structure changes
