@@ -12,6 +12,7 @@ import static org.junit.Assert.assertEquals;
 
 public abstract class AbstractEventParserTestUtil {
 
+    @SuppressWarnings("unchecked")
     protected <T extends TexasMessage> T assertEncodeDecode(final T message)
             throws JsonParseException, JsonMappingException, IOException {
 

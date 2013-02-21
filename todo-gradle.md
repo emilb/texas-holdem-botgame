@@ -3,7 +3,7 @@ Gradle conversion
 
 **ToDo**
 
-- Better organization for common sub project settings
+x Better organization for common sub project settings
 x Enable filtering
 x Hook in rebelGenerate, initLogDir etc in one of the build steps
 - Logging for Jetty is misplaced
@@ -15,7 +15,7 @@ x Hook in rebelGenerate, initLogDir etc in one of the build steps
 - Reporting
 - Site ála Maven reporting
 - Release management with version increment, github tagging etc
-- Organize common dependencies in lists, for example all Logging libs
+x Organize common dependencies in lists, for example all Logging libs
 - Jenkins integration with tasks to copy resources for deployment, downloads etc
 - How to package non-java projects?
 - Install common artefacts in maven-repo
@@ -25,7 +25,7 @@ x Hook in rebelGenerate, initLogDir etc in one of the build steps
 Structure changes
 ====================
 
-- Move client examples to separate folder
+x Move client examples to separate folder
 - Create new folder for: {integration-tests, performance-tests}
 - Create new project for static web
 - Add JSLint, CSS merge, JS minify etc to static web project

@@ -11,10 +11,6 @@ ext {
     junitVersion = '4.11'
 
     libraries = [
-
-            // texas_holdem_common: 'se.cygni:texas-holdem-common:${project.version}',
-            // texas_holdem_client: 'se.cygni:texas-holdem-client:${project.version}',
-
             // Spring
             spring_core:                "org.springframework:spring-core:$springframeworkVersion",
             spring_expression:          "org.springframework:spring-expression:$springframeworkVersion",
@@ -63,5 +59,11 @@ ext {
             mockito_all:    'org.mockito:mockito-all:1.9.5', //test
             hamcrest_all:   'org.hamcrest:hamcrest-all:1.3', //test
             slf4j_nop:      "org.slf4j:slf4j-nop:$slf4jVersion" //test
+    ]
+
+    libraries_grouped = [
+            logging: [libraries.logback_classic, libraries.slf4j_api, libraries.jcl_over_slf4j, libraries.log4j_over_slf4j, libraries.jul_to_slf4j],
+            test_basic: [libraries.junit, libraries.slf4j_nop],
+            test_full: [libraries.junit, libraries.slf4j_nop, libraries.spring_test, libraries.mockito_all, libraries.hamcrest_all]
     ]
 }
