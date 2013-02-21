@@ -6,7 +6,7 @@ ext {
     springframeworkVersion = '3.2.1.RELEASE'
     springsecurityVersion = '3.1.2.RELEASE'
     jacksonVersion = '1.9.12'
-    jettyVersion = '8.1.8.v20121106'
+    jettyVersion = '8.1.9.v20130131'
     tilesVersion = '2.2.2'
     junitVersion = '4.11'
 

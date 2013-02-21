@@ -1,6 +1,7 @@
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply from: "./libraries.gradle"
+apply from: "./idea_settings.gradle"
 
 defaultTasks 'build'
 
@@ -15,7 +16,12 @@ def javaProjects() {
     subprojects.findAll { project -> javaModules.contains(project.name) }
 }
 
-
+idea {
+    project {
+        jdkName = '1.7'
+        languageLevel = '1.7'
+    }
+}
 
 configure(javaProjects()) {
     apply plugin: 'eclipse'
@@ -56,7 +62,13 @@ configure(javaProjects()) {
     processResources {
         filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: [version: project.version])
     }
-    
+
+    idea {
+        module {
+            downloadJavadoc = true
+            downloadSources = true
+        }
+    }
 }
 
 buildscript {

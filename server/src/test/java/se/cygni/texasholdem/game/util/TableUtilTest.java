@@ -1,6 +1,6 @@
 package se.cygni.texasholdem.game.util;
 
-import junit.framework.Assert;
+import static org.junit.Assert.*;
 import org.junit.Test;
 import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.table.Table;
@@ -16,7 +16,7 @@ public class TableUtilTest {
         List<BotPlayer> players = createRandomListOfPlayers(36);
         List<List<BotPlayer>> partitions = TableUtil.partitionPlayers(players);
 
-        Assert.assertEquals(4, partitions.size());
+        assertEquals(4, partitions.size());
 
         int sum = 0;
         for (List<BotPlayer> table : partitions) {
@@ -27,8 +27,8 @@ public class TableUtilTest {
             }
         }
 
-        Assert.assertEquals("Total player count wrong", 36, sum);
-        Assert.assertEquals("Not all players were included in the partition", 0, players.size());
+        assertEquals("Total player count wrong", 36, sum);
+        assertEquals("Not all players were included in the partition", 0, players.size());
     }
 
     @Test
@@ -36,7 +36,7 @@ public class TableUtilTest {
         List<BotPlayer> players = createRandomListOfPlayers(42);
         List<List<BotPlayer>> partitions = TableUtil.partitionPlayers(players);
 
-        Assert.assertEquals(4, partitions.size());
+        assertEquals(4, partitions.size());
 
         int sum = 0;
         for (List<BotPlayer> table : partitions) {
@@ -47,8 +47,8 @@ public class TableUtilTest {
             }
         }
 
-        Assert.assertEquals("Total player count wrong", 42, sum);
-        Assert.assertEquals("Not all players were included in the partition", 0, players.size());
+        assertEquals("Total player count wrong", 42, sum);
+        assertEquals("Not all players were included in the partition", 0, players.size());
     }
 
     @Test
@@ -56,7 +56,7 @@ public class TableUtilTest {
         List<BotPlayer> players = createRandomListOfPlayers(Table.MAX_NOOF_PLAYERS);
         List<List<BotPlayer>> partitions = TableUtil.partitionPlayers(players);
 
-        Assert.assertEquals(1, partitions.size());
+        assertEquals(1, partitions.size());
         assertListShuffled(players, partitions.get(0));
     }
 
@@ -65,7 +65,7 @@ public class TableUtilTest {
         List<BotPlayer> players = createRandomListOfPlayers(5);
         List<List<BotPlayer>> partitions = TableUtil.partitionPlayers(players);
 
-        Assert.assertEquals(1, partitions.size());
+        assertEquals(1, partitions.size());
         assertListShuffled(players, partitions.get(0));
     }
 
@@ -82,17 +82,17 @@ public class TableUtilTest {
     public void testCreateRandomListOfPlayers() {
         List<BotPlayer> players = createRandomListOfPlayers(5);
 
-        Assert.assertNotNull(players);
-        Assert.assertEquals(5, players.size());
+        assertNotNull(players);
+        assertEquals(5, players.size());
         for (BotPlayer player : players) {
-            Assert.assertNotNull(player);
+            assertNotNull(player);
         }
 
     }
 
 
     private void assertListShuffled(List<BotPlayer> originalList, List<BotPlayer> shuffledList) {
-        Assert.assertEquals(originalList.size(), shuffledList.size());
+        assertEquals(originalList.size(), shuffledList.size());
 
         boolean everyPositionIsSame = true;
 
@@ -102,6 +102,6 @@ public class TableUtilTest {
             }
         }
 
-        Assert.assertFalse(everyPositionIsSame);
+        assertFalse(everyPositionIsSame);
     }
 }
