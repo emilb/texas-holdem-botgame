@@ -34,5 +34,6 @@ x Move client examples to separate folder
 - Create new project for static web
 - Add JSLint, CSS merge, JS minify etc to static web project
 - Let the server only expose RESTful interface
+- Let the server document RESTful services via https://github.com/wordnik/swagger-ui
 - Let the server notify some things via websockets (tournament updates, current live game updates, server status etc)
 - Breakout java serverbots to own projects under folder: serverbots

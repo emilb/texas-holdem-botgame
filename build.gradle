@@ -10,7 +10,7 @@ def defaultSourceCompatibility = '1.7'
 def defaultTargetCompatibility = '1.7'
 
 ext {
-    javaModules = ['common', 'client', 'server']
+    javaModules = ['common', 'client', 'server', 'java-client', 'performance-tests', 'statistics']
 }
 
 def javaProjects() {
@@ -81,7 +81,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'org.gradle.api.plugins:gradle-cargo-plugin:0.5.7'
+        classpath 'org.gradle.api.plugins:gradle-cargo-plugin:0.5.8'
         classpath 'org.zeroturnaround:gradle-jrebel-plugin:1.0.3-SNAPSHOT'
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.3'
     }
@@ -110,7 +110,6 @@ project('common') {
 
         testCompile(libraries_grouped.test_basic)
     }
-
 }
 
 project('client') {
@@ -126,7 +125,6 @@ project('client') {
 
         testCompile(libraries_grouped.test_basic)
     }
-
 }
 
 project('server') {
@@ -163,7 +161,7 @@ project('server') {
 
         testCompile(libraries_grouped.test_full)
 
-        def cargoVersion = '1.3.2'
+        def cargoVersion = '1.3.3'
         cargo "org.codehaus.cargo:cargo-core-uberjar:$cargoVersion",
                 "org.codehaus.cargo:cargo-ant:$cargoVersion"
 
@@ -211,7 +209,7 @@ project('server') {
             jvmArgs  = jvmArgz
             installer {
                 installUrl = 'http://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/8.1.9.v20130131/jetty-distribution-8.1.9.v20130131.zip'
-                //installUrl = 'http://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/9.0.0.RC0/jetty-distribution-9.0.0.RC0.zip'
+                //installUrl = 'http://repo2.maven.org/maven2/org/eclipse/jetty/jetty-distribution/9.0.0.RC2/jetty-distribution-9.0.0.RC2.zip'
                 downloadDir = file("$buildDir/download")
                 extractDir  = file("$buildDir/extract")
             }
@@ -221,6 +219,15 @@ project('server') {
             context = '/'
         }
 
+        deployable {
+            file =  file("$projectDir/build/libs/$name-$version" + ".war")
+            context = "$name"
+        }
+
+        deployable {
+            file =  file("frontend/build/libs/frontend.war")
+            context = "frontend"
+        }
     }
 
     war.dependsOn('generateRebel')
@@ -228,6 +235,62 @@ project('server') {
     project.afterEvaluate {
         cargoRunLocal.dependsOn(initLogDir)
         cargoRunLocal.dependsOn(':server:war')
+    }
+}
+
+project('frontend') {
+    apply plugin: 'war'
+    apply plugin: 'rebel'
+
+    war.dependsOn('generateRebel')
+}
+
+project('client-implementations:java-client') {
+
+    dependencies {
+        compile(project(':common'))
+        compile(project(':client'))
+        compile(libraries.commons_collections)
+        compile(libraries.commons_io)
+        compile(libraries.commons_lang)
+        compile(libraries.netty)
+
+        compile(libraries_grouped.logging)
+
+        testCompile(libraries_grouped.test_basic)
+    }
+}
+
+project('labs:performance-tests') {
+
+    dependencies {
+        compile(project(':common'))
+        compile(project(':client'))
+        compile(libraries.commons_collections)
+        compile(libraries.commons_io)
+        compile(libraries.commons_lang)
+        compile(libraries.netty)
+
+        compile(libraries_grouped.logging)
+
+        testCompile(libraries_grouped.test_basic)
+    }
+}
+
+project('labs:statistics') {
+
+    dependencies {
+        compile(project(':common'))
+        compile(project(':client'))
+        compile(libraries.commons_collections)
+        compile(libraries.commons_io)
+        compile(libraries.commons_lang)
+        compile(libraries.netty)
+        compile(libraries.trove4j)
+
+        compile(libraries_grouped.logging)
+
+        testCompile(libraries_grouped.test_basic)
     }
 }
 

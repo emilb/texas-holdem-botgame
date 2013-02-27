@@ -1,3 +1,1 @@
-include 'common', 'client', 'server'
-
-//include 'common', 'server', 'client', 'java-client', 'nodejs-client'
+include 'common', 'client', 'server', 'frontend', 'client-implementations:java-client', 'labs:performance-tests', 'labs:statistics'

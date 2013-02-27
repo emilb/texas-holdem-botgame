@@ -1,6 +1,6 @@
 package se.cygni.poker.statistics;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 import se.cygni.texasholdem.game.Card;
 import se.cygni.texasholdem.game.definitions.Rank;

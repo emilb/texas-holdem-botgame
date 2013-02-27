@@ -1,6 +1,6 @@
 package se.cygni.poker.statistics;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
@@ -59,7 +59,6 @@ public class HandEvaluatorFromMapTest {
         int[] positions = new int[]{2, 3, 8, 22, 34, 49, 50};
         List<int[]> removalPermutations = HandEvaluatorFromMap.getAllCombinationsOfRemovals(positions);
 
-        Assert.assertEquals(21, removalPermutations.size());
         for (int[] removal : removalPermutations) {
             Assert.assertEquals(2, removal.length);
         }
