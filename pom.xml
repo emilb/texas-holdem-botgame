@@ -210,7 +210,7 @@
                   </container>
                   <deployables>
                     <deployable>
-                      <location>${project.basedir}/server/target/texas-holdem-server-${project.version}.war</location>
+                      <location>${basedir}/server/target/texas-holdem-server-${project.version}.war</location>
                       <type>war</type>
                       <properties>
                         <context>/</context>
