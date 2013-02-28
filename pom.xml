@@ -51,10 +51,10 @@
         <module>server</module>
         <module>client</module>
         <!-- <module>web-client</module> (can be removed once nodjs-client works) -->
-        <module>java-client</module>
-        <module>nodejs-client</module>
-        <module>performance-tests</module>
-        <module>statistics</module>
+        <module>client-implementations/java-client</module>
+        <module>client-implementations/nodejs-client</module>
+        <module>labs/performance-tests</module>
+        <module>labs/statistics</module>
     </modules>
 
     <build>
@@ -195,7 +195,37 @@
                     </reportPlugins>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven2-plugin</artifactId>
+                <version>1.3.3</version>
+                <configuration>
 
+                  <!-- Container configuration -->
+                  <container>
+                    <containerId>jetty8x</containerId>
+                    <zipUrlInstaller>
+                      <url>http://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/8.1.9.v20130131/jetty-distribution-8.1.9.v20130131.zip</url>
+                    </zipUrlInstaller>
+                  </container>
+                  <deployables>
+                    <deployable>
+                      <location>${project.basedir}/server/target/texas-holdem-server-${project.version}.war</location>
+                      <type>war</type>
+                      <properties>
+                        <context>/</context>
+                      </properties>
+                    </deployable>
+                    <!--
+                    <deployable>
+                      <groupId>ear group id</groupId>
+                      <artifactId>ear artifact id</artifactId>
+                      <type>ear</type>
+                    </deployable>
+                    -->
+                  </deployables>
+                </configuration>
+            </plugin>
             <!--
             <plugin>
                 <groupId>org.zeroturnaround</groupId>
@@ -327,6 +357,11 @@
                             </goals>
                         </execution>
                     </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.cargo</groupId>
+                    <artifactId>cargo-maven2-plugin</artifactId>
+                    <version>1.3.3</version>
                 </plugin>
             </plugins>
         </pluginManagement>
