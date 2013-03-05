@@ -36,6 +36,29 @@
                     <skip>true</skip>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>com.github.searls</groupId>
+                <artifactId>jasmine-maven-plugin</artifactId>
+                <extensions>true</extensions>
+                <executions>
+                  <execution>
+                    <goals>
+                      <goal>test</goal>
+                    </goals>
+                  </execution>
+                </executions>
+                <configuration>
+                    <!--
+                    <sourceIncludes>
+                      <include>${project.basedir}/src/main/webapp/**/*.js</include>
+                      <include>**/*.js</include>
+                    </sourceIncludes>
+                    <jsSrcDir>${project.basedir}/src/main/webapp/js</jsSrcDir>  
+                    -->
+                </configuration>
+            </plugin>
+
         </plugins>
 
     </build>
