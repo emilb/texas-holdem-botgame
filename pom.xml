@@ -49,8 +49,8 @@
     <modules>
         <module>common</module>
         <module>server</module>
+        <module>frontend</module>
         <module>client</module>
-        <!-- <module>web-client</module> (can be removed once nodjs-client works) -->
         <module>client-implementations/java-client</module>
         <module>client-implementations/nodejs-client</module>
         <module>labs/performance-tests</module>
@@ -195,38 +195,7 @@
                     </reportPlugins>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.codehaus.cargo</groupId>
-                <artifactId>cargo-maven2-plugin</artifactId>
-                <version>1.3.3</version>
-                <configuration>
-
-                  <!-- Container configuration -->
-                  <container>
-                    <containerId>jetty8x</containerId>
-                    <zipUrlInstaller>
-                      <url>http://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/8.1.9.v20130131/jetty-distribution-8.1.9.v20130131.zip</url>
-                    </zipUrlInstaller>
-                  </container>
-                  <deployables>
-                    <deployable>
-                      <location>${basedir}/server/target/texas-holdem-server-${project.version}.war</location>
-                      <type>war</type>
-                      <properties>
-                        <context>/</context>
-                      </properties>
-                    </deployable>
-                    <!--
-                    <deployable>
-                      <groupId>ear group id</groupId>
-                      <artifactId>ear artifact id</artifactId>
-                      <type>ear</type>
-                    </deployable>
-                    -->
-                  </deployables>
-                </configuration>
-            </plugin>
-            <!--
+            
             <plugin>
                 <groupId>org.zeroturnaround</groupId>
                 <artifactId>jrebel-maven-plugin</artifactId>
@@ -240,7 +209,40 @@
                     </execution>
                 </executions>
             </plugin>
-            -->
+
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven2-plugin</artifactId>
+                <version>1.3.3</version>
+                <configuration>
+
+                  <!-- Container configuration -->
+                  <container>
+                    <containerId>jetty8x</containerId>
+                    <zipUrlInstaller>
+                      <url>http://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/8.1.9.v20130131/jetty-distribution-8.1.9.v20130131.zip</url>
+                    </zipUrlInstaller>
+                  </container>
+
+                  <deployables>
+                    <deployable>
+                      <location>${basedir}/server/target/texas-holdem-server-${project.version}.war</location>
+                      <type>war</type>
+                      <properties>
+                        <context>/</context>
+                      </properties>
+                    </deployable>
+                    
+                    <deployable>
+                      <location>${basedir}/frontend/src/main/webapp</location>
+                      <type>war</type>
+                      <properties>
+                        <context>/front</context>
+                      </properties>
+                    </deployable>
+                  </deployables>
+                </configuration>
+            </plugin>
         </plugins>
 
         <pluginManagement>
@@ -334,6 +336,11 @@
                     <version>1.7</version>
                 </plugin>
                 <plugin>
+                    <groupId>org.codehaus.cargo</groupId>
+                    <artifactId>cargo-maven2-plugin</artifactId>
+                    <version>1.3.3</version>
+                </plugin>
+                <plugin>
                     <groupId>org.mortbay.jetty</groupId>
                     <artifactId>jetty-maven-plugin</artifactId>
                     <version>${jetty.version}</version>
@@ -357,11 +364,6 @@
                             </goals>
                         </execution>
                     </executions>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.cargo</groupId>
-                    <artifactId>cargo-maven2-plugin</artifactId>
-                    <version>1.3.3</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -744,6 +746,46 @@
 
         </profile>
 
+        <profile>
+            <id>local</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.cargo</groupId>
+                        <artifactId>cargo-maven2-plugin</artifactId>
+                        <version>1.3.3</version>
+                        <configuration>
+
+                          <!-- Container configuration -->
+                          <container>
+                            <containerId>jetty8x</containerId>
+                            <zipUrlInstaller>
+                              <url>http://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/8.1.9.v20130131/jetty-distribution-8.1.9.v20130131.zip</url>
+                            </zipUrlInstaller>
+                          </container>
+
+                          <deployables>
+                            <deployable>
+                              <location>${basedir}/server/target/texas-holdem-server-${project.version}.war</location>
+                              <type>war</type>
+                              <properties>
+                                <context>/</context>
+                              </properties>
+                            </deployable>
+                            
+                            <deployable>
+                              <location>${basedir}/frontend/src/main/webapp</location>
+                              <type>war</type>
+                              <properties>
+                                <context>/front</context>
+                              </properties>
+                            </deployable>
+                          </deployables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 
 </project>
