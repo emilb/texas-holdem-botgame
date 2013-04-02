@@ -24,10 +24,10 @@ public class WebAppInitializer implements WebApplicationInitializer {
         servletContext.addListener(new ContextLoaderListener(rootContext));
         servletContext.setInitParameter("defaultHtmlEscape", "true");
 
-        AnnotationConfigWebApplicationContext mvcContext = new AnnotationConfigWebApplicationContext();
-        mvcContext.register(WebMvcConfig.class);
+//        AnnotationConfigWebApplicationContext mvcContext = new AnnotationConfigWebApplicationContext();
+//        mvcContext.register(WebMvcConfig.class);
 
-        ServletRegistration.Dynamic appServlet = servletContext.addServlet("appServlet", new DispatcherServlet(mvcContext));
+        ServletRegistration.Dynamic appServlet = servletContext.addServlet("appServlet", new DispatcherServlet(rootContext));
         appServlet.setLoadOnStartup(1);
         Set<String> mappingConflicts = appServlet.addMapping("/");
 

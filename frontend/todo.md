@@ -1,0 +1,5 @@
+- angularui in combination with bootstrap
+- write some real tests (start with router in pokerfront.js
+- change to jetty 9x
+- get websockets working
+- locationProvider.html5Mode would be nice

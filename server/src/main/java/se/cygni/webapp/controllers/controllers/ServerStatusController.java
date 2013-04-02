@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import se.cygni.texasholdem.dao.model.ServerStatus;
 import se.cygni.texasholdem.game.GamePlayer;
 import se.cygni.texasholdem.server.session.SessionManager;
 import se.cygni.texasholdem.server.statistics.StatisticsCollector;
@@ -32,5 +34,15 @@ public class ServerStatusController {
         model.addAttribute("players", players);
 
         return "serverstatus";
+    }
+
+    @RequestMapping(value = "/serverstatus/json", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    ServerStatus getServerStatus() {
+        return new ServerStatus(
+                statisticsCollector.getUpTimeAsText(),
+                sessionManager.getNoofPlayers(),
+                statisticsCollector.getTotalNoofConnectionsMade());
     }
 }

@@ -20,7 +20,7 @@
             </plugin>
 
             <plugin>
-                <groupId>org.mortbay.jetty</groupId>
+                <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
             </plugin>
 
@@ -117,9 +117,21 @@
             <artifactId>jstl</artifactId>
         </dependency>
 
+        <!--
         <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib</artifactId>
+        </dependency>
+        -->
+
+        <dependency>
+            <groupId>org.eclipse.jetty.websocket</groupId>
+            <artifactId>websocket-server</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.jetty.websocket</groupId>
+            <artifactId>websocket-api</artifactId>
         </dependency>
 
         <dependency>
