@@ -1,6 +1,8 @@
 package se.cygni.texasholdem.game.util;
 
-import org.apache.commons.lang.math.RandomUtils;
+import org.apache.commons.math3.random.JDKRandomGenerator;
+import org.apache.commons.math3.random.RandomAdaptor;
+import org.apache.commons.math3.random.SynchronizedRandomGenerator;
 import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.table.Table;
 
@@ -8,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class TableUtil {
+
+    private static RandomAdaptor random = new RandomAdaptor(new SynchronizedRandomGenerator(new JDKRandomGenerator()));
 
     private TableUtil() {
     }
@@ -55,7 +59,7 @@ public final class TableUtil {
 
         while (playersQueue.size() > 0) {
 
-            int randomPos = RandomUtils.nextInt(playersQueue.size());
+            int randomPos = random.nextInt(playersQueue.size());
             shuffledPlayers.add(playersQueue.remove(randomPos));
 
         }

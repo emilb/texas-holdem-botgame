@@ -1,10 +1,13 @@
 package se.cygni.texasholdem.game.trainingplayers;
 
-import org.apache.commons.lang.math.RandomUtils;
+import org.apache.commons.math3.random.JDKRandomGenerator;
+import org.apache.commons.math3.random.RandomAdaptor;
 import se.cygni.texasholdem.communication.message.request.ActionRequest;
 import se.cygni.texasholdem.game.Action;
 
 public class RaiserPlayer extends TrainingPlayer {
+
+    private RandomAdaptor random = new RandomAdaptor(new JDKRandomGenerator());
 
     public RaiserPlayer(String name, String sessionId, long chipAmount) {
         super(name, sessionId, chipAmount);
@@ -42,7 +45,7 @@ public class RaiserPlayer extends TrainingPlayer {
 
         Action action = null;
 
-        double randomVal = RandomUtils.nextDouble();
+        double randomVal = random.nextDouble();
 
         // 70% chance of raise
         if (raiseAction != null && randomVal < 0.70) {

@@ -1,6 +1,6 @@
 package se.cygni.texasholdem.game.util;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 import se.cygni.texasholdem.game.BotPlayer;
 import se.cygni.texasholdem.table.Table;

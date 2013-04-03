@@ -1,7 +1,9 @@
 package se.cygni.texasholdem.player;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.math.RandomUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.math3.random.JDKRandomGenerator;
+import org.apache.commons.math3.random.RandomAdaptor;
+import org.apache.commons.math3.random.RandomGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import se.cygni.texasholdem.client.PlayerClient;
@@ -41,6 +43,7 @@ public class PerformanceTournamentTestPlayer extends BasicPlayer {
     private static AtomicLong totalLengthOfPlays = new AtomicLong(0);
 
     private long lastNewGame;
+    private RandomAdaptor random = new RandomAdaptor(new JDKRandomGenerator());
 
     public PerformanceTournamentTestPlayer() {
         name = getSystemProperty(NAME_PROPERTY, DEFAULT_NAME) + "_" + counter.getAndIncrement();
@@ -130,7 +133,7 @@ public class PerformanceTournamentTestPlayer extends BasicPlayer {
 
         Action action = null;
 
-        double randomVal = RandomUtils.nextDouble();
+        double randomVal = random.nextDouble();
 
         // 60% chance of check
         if (checkAction != null && randomVal < 0.60) {

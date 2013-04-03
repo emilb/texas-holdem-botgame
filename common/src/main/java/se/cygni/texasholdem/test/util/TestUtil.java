@@ -1,6 +1,6 @@
 package se.cygni.texasholdem.test.util;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import se.cygni.texasholdem.game.Card;
 import se.cygni.texasholdem.game.definitions.Rank;
 import se.cygni.texasholdem.game.definitions.Suit;

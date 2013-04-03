@@ -1,6 +1,6 @@
 package se.cygni.texasholdem.game.util;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import se.cygni.texasholdem.game.exception.InvalidNameException;
 
 public final class ValidPlayerNameVerifier {

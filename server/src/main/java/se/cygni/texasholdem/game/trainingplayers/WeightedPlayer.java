@@ -1,6 +1,7 @@
 package se.cygni.texasholdem.game.trainingplayers;
 
-import org.apache.commons.lang.math.RandomUtils;
+import org.apache.commons.math3.random.JDKRandomGenerator;
+import org.apache.commons.math3.random.RandomAdaptor;
 import se.cygni.texasholdem.communication.message.request.ActionRequest;
 import se.cygni.texasholdem.game.Action;
 import se.cygni.texasholdem.game.ActionType;
@@ -12,6 +13,7 @@ import java.util.List;
 public class WeightedPlayer extends TrainingPlayer {
 
     private static final List<ActionTypeWeigth> actionWeight = new ArrayList<WeightedPlayer.ActionTypeWeigth>();
+    private RandomAdaptor random = new RandomAdaptor(new JDKRandomGenerator());
 
     static {
         actionWeight.add(new ActionTypeWeigth(800, ActionType.CHECK));
@@ -40,7 +42,7 @@ public class WeightedPlayer extends TrainingPlayer {
 
         Collections.sort(actionWeights);
         final int totalActionWeight = getTotalActionWeight(actionWeights);
-        int randomNumber = RandomUtils.nextInt(totalActionWeight);
+        int randomNumber = random.nextInt(totalActionWeight);
 
         ActionType choosenActionType = null;
         for (final ActionTypeWeigth w : actionWeights) {

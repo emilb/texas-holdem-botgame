@@ -36,20 +36,6 @@
             <artifactId>texas-holdem-common</artifactId>
         </dependency>
 
-        <!-- Utils from commons -->
-        <dependency>
-            <groupId>commons-collections</groupId>
-            <artifactId>commons-collections</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-        </dependency>
-
         <!-- Socket client -->
         <dependency>
             <groupId>io.netty</groupId>

@@ -1,7 +1,7 @@
 package se.cygni.poker.statistics;
 
 import gnu.trove.map.hash.TLongLongHashMap;
-import org.apache.commons.math.util.MathUtils;
+import org.apache.commons.math3.util.ArithmeticUtils;
 import se.cygni.texasholdem.game.Card;
 
 import java.io.*;
@@ -39,7 +39,7 @@ public class HandGenerator {
 
 
     public static long calculateNoofCombinations(int k, int n) {
-        return MathUtils.binomialCoefficient(n, k);
+        return ArithmeticUtils.binomialCoefficient(n, k);
     }
 
     private static void writeToFile(PrintWriter out, long val, int pokerHandOrderValue) {

@@ -1,7 +1,6 @@
 package se.cygni.texasholdem.test.util;
 
-import org.apache.commons.math.random.RandomData;
-import org.apache.commons.math.random.RandomDataImpl;
+import org.apache.commons.math3.random.RandomDataGenerator;
 import se.cygni.texasholdem.game.*;
 import se.cygni.texasholdem.game.definitions.PokerHand;
 
@@ -11,7 +10,7 @@ import java.util.List;
 public class DomainUtil {
 
     private static Deck deck = Deck.getShuffledDeck();
-    private static final RandomData random = new RandomDataImpl();
+    private static final RandomDataGenerator random = new RandomDataGenerator();
 
     private static void reshuffleDeck() {
 
