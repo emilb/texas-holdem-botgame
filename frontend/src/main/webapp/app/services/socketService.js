@@ -33,9 +33,17 @@ pokerfront.factory('serverStatusSocket', function ($rootScope) {
 
     ws.onopen = function(ev) {
         console.log("connection is up");
-        ws.send("Hi from the client!");
+        ws.send('{ "command" : "options", "value" : "noop" }');
     };
+
     ws.onmessage = function(ev) {
         console.log(ev.data);
     };
+
+    ws.onclose = function(ev) {
+        console.log("Lost connection to websocket");
+    }
+
+
+
 });

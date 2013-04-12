@@ -13,8 +13,6 @@ pokerfront.controller('ServerStatusController', function ServerStatusController(
              $scope.noofPlayers = data.noofPlayers;
              $scope.totalNoofConnections = data.totalNoofConnections;
         });
-
-        //$timeout(updateServerStatus, 1000);
     }
 
     updateServerStatus();

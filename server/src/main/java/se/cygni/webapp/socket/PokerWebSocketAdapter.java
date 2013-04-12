@@ -2,29 +2,41 @@ package se.cygni.webapp.socket;
 
 
 import com.google.common.eventbus.EventBus;
-import org.eclipse.jetty.util.Callback;
-import org.eclipse.jetty.util.FutureCallback;
+import com.google.common.eventbus.Subscribe;
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.WebSocketAdapter;
-import org.eclipse.jetty.websocket.api.annotations.OnWebSocketConnect;
-import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
-import org.eclipse.jetty.websocket.api.annotations.WebSocket;
-import org.eclipse.jetty.websocket.api.WebSocketAdapter;
+import se.cygni.texasholdem.dao.model.GameLog;
+import se.cygni.webapp.controllers.controllers.model.WebSocketCommand;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class PokerWebSocketAdapter extends WebSocketAdapter {
 
+    private static ObjectMapper mapper = new ObjectMapper();
     private EventBus eventBus;
     private Timer timer;
     private Session session;
+
+    private long subscribeTableId;
+
+
 
     public PokerWebSocketAdapter(EventBus eventBus) {
 
         this.eventBus = eventBus;
 
+    }
+
+    @Subscribe
+    public void addGameLog(final GameLog gameLog) {
+        if (gameLog.tableCounter == subscribeTableId) {
+            System.out.println("gamelog is a match to current subscription!");
+        }
     }
 
     @Override
@@ -44,20 +56,50 @@ public class PokerWebSocketAdapter extends WebSocketAdapter {
 
     @Override
     public void onWebSocketText(String message) {
-        // Do something based om command in message
-        switch (message) {
-            case "listCommands" :
+        try {
+            WebSocketCommand cmd = toWebSocketCommand(message);
 
-                break;
+            // Do something based om command in message
+            switch (cmd.command) {
+                case "options" :
+                    sendAndForget("Good boy!");
+                    break;
 
-            case "subscribeToGame" :
+                case "subscribeToTable" :
 
-                break;
+                    break;
 
-            default:
-                sendAndForget("You did not specify a valid command!");
-                break;
+                case "subscribeToPlayers" :
+
+                    break;
+
+                default:
+                    sendAndForget(new WebSocketCommand("fail", "Failed to handle your request"));
+                    break;
+            }
         }
+        catch (Exception e) {
+            sendAndForget(new WebSocketCommand("fail", e.getMessage()   ));
+        }
+    }
+
+
+    private void sendAndForget(WebSocketCommand cmd) {
+        try {
+            sendAndForget(toJsonString(cmd));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String toJsonString(Object result) throws IOException {
+        final ByteArrayOutputStream out = new ByteArrayOutputStream();
+        mapper.writeValue(out, result);
+        return out.toString();
+    }
+
+    private WebSocketCommand toWebSocketCommand(String msg) throws IOException {
+        return mapper.readValue(msg, WebSocketCommand.class);
     }
 
     private void sendAndForget(String message) {
@@ -75,12 +117,6 @@ public class PokerWebSocketAdapter extends WebSocketAdapter {
             session.close();
             session = null;
         } catch (IOException e) {}
-    }
-
-    @Override
-    public void onWebSocketBinary(byte[] payload, int offset, int len) {
-        super.onWebSocketBinary(payload, offset, len);
-        System.out.println(new String(payload));
     }
 
     @Override
