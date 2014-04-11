@@ -14,8 +14,11 @@ This is a server/client system for letting programmed bots play poker against ea
 
 Open browser to: http://localhost:8080
 
+General client instructions:
+http://poker.cygni.se/gettingstarted
+
 Instructions for hacking a java-client:
-https://github.com/emilb/texas-holdem-botgame/tree/master/java-client
+https://github.com/emilb/texas-holdem-botgame/tree/master/client-implementations/java-client
 
 Instructions for hacking a nodejs-client:
-https://github.com/emilb/texas-holdem-botgame/tree/master/nodejs-client
+https://github.com/emilb/texas-holdem-botgame/tree/master/client-implementations/nodejs-client
