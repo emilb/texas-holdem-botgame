@@ -1,8 +1,8 @@
 package se.cygni.webapp.socket;
 
 import com.google.common.eventbus.EventBus;
-import org.eclipse.jetty.websocket.api.UpgradeRequest;
-import org.eclipse.jetty.websocket.api.UpgradeResponse;
+import org.eclipse.jetty.websocket.servlet.ServletUpgradeRequest;
+import org.eclipse.jetty.websocket.servlet.ServletUpgradeResponse;
 import org.eclipse.jetty.websocket.servlet.WebSocketCreator;
 import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
 import org.springframework.web.context.WebApplicationContext;
@@ -42,7 +42,7 @@ public class PokerWebSocketServlet extends org.eclipse.jetty.websocket.servlet.W
         */
         factory.setCreator(new WebSocketCreator() {
             @Override
-            public Object createWebSocket(UpgradeRequest req, UpgradeResponse resp) {
+            public Object createWebSocket(ServletUpgradeRequest req, ServletUpgradeResponse resp) {
                 return new PokerWebSocketAdapter(eventBus);
             }
         });

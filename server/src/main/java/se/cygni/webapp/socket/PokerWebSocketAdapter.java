@@ -3,7 +3,6 @@ package se.cygni.webapp.socket;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
-import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.WebSocketAdapter;
@@ -113,10 +112,8 @@ public class PokerWebSocketAdapter extends WebSocketAdapter {
         eventBus.unregister(this);
         eventBus = null;
         timer.cancel();
-        try {
             session.close();
             session = null;
-        } catch (IOException e) {}
     }
 
     @Override

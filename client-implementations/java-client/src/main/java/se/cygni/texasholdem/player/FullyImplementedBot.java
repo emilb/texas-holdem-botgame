@@ -63,7 +63,7 @@ public class FullyImplementedBot implements Player {
      * @param args
      */
     public static void main(String... args) {
-        FullyImplementedBot bot = new FullyImplementedBot("poker.cygni.se", 4711);
+        FullyImplementedBot bot = new FullyImplementedBot("cygni.poker.se", 4711);
 
         try {
             bot.playATrainingGame();

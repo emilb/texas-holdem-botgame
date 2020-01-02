@@ -413,21 +413,21 @@ function updateChipsStatistics(tableId, gameRoundNo) {
                     <td></td>
                     <td>
                         {{#flopCards}}
-                        <img src="/resources/img/cards/{{rank}}_{{suit}}_small.png" alt="{{rank}} of {{suit}}"
+                        <img src="/resources/img/cards/{{rank}}_{{suit}}_large.png" alt="{{rank}} of {{suit}}"
                              width="36" height="50"
                              rel="tooltip" data-placement="top" data-original-title="{{rank}} of {{suit}}"/>
                         {{/flopCards}}
                     </td>
                     <td>
                         {{#turnCards}}
-                        <img src="/resources/img/cards/{{rank}}_{{suit}}_small.png" alt="{{rank}} of {{suit}}"
+                        <img src="/resources/img/cards/{{rank}}_{{suit}}_large.png" alt="{{rank}} of {{suit}}"
                              width="36" height="50"
                              rel="tooltip" data-placement="top" data-original-title="{{rank}} of {{suit}}"/>
                         {{/turnCards}}
                     </td>
                     <td>
                         {{#riverCards}}
-                        <img src="/resources/img/cards/{{rank}}_{{suit}}_small.png" alt="{{rank}} of {{suit}}"
+                        <img src="/resources/img/cards/{{rank}}_{{suit}}_large.png" alt="{{rank}} of {{suit}}"
                              width="36" height="50"
                              rel="tooltip" data-placement="top" data-original-title="{{rank}} of {{suit}}"/>
                         {{/riverCards}}
@@ -447,7 +447,7 @@ function updateChipsStatistics(tableId, gameRoundNo) {
                     </td>
                     <td>
                         {{#cards}}
-                        <img src="/resources/img/cards/{{rank}}_{{suit}}_small.png" alt="{{rank}} of {{suit}}"
+                        <img src="/resources/img/cards/{{rank}}_{{suit}}_large.png" alt="{{rank}} of {{suit}}"
                              width="36" height="50"
                              rel="tooltip" data-placement="top" data-original-title="{{rank}} of {{suit}}"/>
                         {{/cards}}
@@ -486,7 +486,7 @@ function updateChipsStatistics(tableId, gameRoundNo) {
                     </td>
                     <td>
                         {{#cardsBestHand}}
-                        <img src="/resources/img/cards/{{rank}}_{{suit}}_small.png" alt="${card}" width="36" height="50"
+                        <img src="/resources/img/cards/{{rank}}_{{suit}}_large.png" alt="${card}" width="36" height="50"
                              rel="tooltip" data-placement="top" data-original-title="{{rank}} of {{suit}}"/>
                         {{/cardsBestHand}}
                         <br/>

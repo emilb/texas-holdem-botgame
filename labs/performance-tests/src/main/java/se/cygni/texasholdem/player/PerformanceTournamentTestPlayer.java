@@ -3,7 +3,6 @@ package se.cygni.texasholdem.player;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.math3.random.JDKRandomGenerator;
 import org.apache.commons.math3.random.RandomAdaptor;
-import org.apache.commons.math3.random.RandomGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import se.cygni.texasholdem.client.PlayerClient;
@@ -26,7 +25,7 @@ public class PerformanceTournamentTestPlayer extends BasicPlayer {
     private static final String DEFAULT_HOST = "localhost";
     private static final int DEFAULT_PORT = 4711;
     private static final String DEFAULT_NAME = "perftest";
-    private static final int DEFAULT_NOOF_PLAYERS = 3;
+    private static final int DEFAULT_NOOF_PLAYERS = 25;
 
     private static final AtomicInteger counter = new AtomicInteger(0);
 
